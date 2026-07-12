@@ -1,0 +1,317 @@
+:root {
+  --bg: #faf7ef;
+  --bg-card: #ffffff;
+  --green: #1f4a3c;
+  --green-dark: #163529;
+  --text: #2b2b28;
+  --text-muted: #55554f;
+  --border: #ded9c8;
+  --note-bg: #f3efe2;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 17px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic",
+    "Noto Sans JP", system-ui, sans-serif;
+  line-height: 1.9;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+a {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--green-dark);
+}
+
+h1 {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: var(--green);
+  margin: 1.5rem 0 1rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--green);
+  margin: 2.5rem 0 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--green);
+}
+
+h3 {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--green);
+  margin: 2rem 0 0.5rem;
+}
+
+p {
+  margin: 0.75rem 0;
+}
+
+ul {
+  margin: 0.75rem 0;
+  padding-left: 1.4rem;
+}
+
+li {
+  margin: 0.4rem 0;
+}
+
+strong {
+  color: var(--green-dark);
+}
+
+/* ---- ヘッダー ---- */
+
+.site-header {
+  background-color: var(--green);
+  color: #ffffff;
+}
+
+.site-header-inner {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.site-title {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.site-title:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.site-nav-desktop {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.site-nav-desktop a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.site-nav-desktop a:hover {
+  text-decoration: underline;
+  color: #ffffff;
+}
+
+.site-nav-mobile {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .site-nav-desktop {
+    display: none;
+  }
+
+  .site-nav-mobile {
+    display: block;
+    position: relative;
+  }
+
+  .site-nav-mobile summary {
+    list-style: none;
+    cursor: pointer;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.9rem;
+    user-select: none;
+  }
+
+  .site-nav-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .site-nav-mobile[open] summary {
+    background-color: var(--green-dark);
+  }
+
+  .site-nav-mobile ul {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.4rem);
+    z-index: 10;
+    list-style: none;
+    background-color: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    padding: 0.25rem 0;
+    min-width: 12rem;
+    margin: 0;
+  }
+
+  .site-nav-mobile li {
+    margin: 0;
+  }
+
+  .site-nav-mobile a {
+    display: block;
+    padding: 0.6rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .site-nav-mobile a:hover {
+    background-color: var(--note-bg);
+    color: var(--green-dark);
+  }
+}
+
+/* ---- フッター ---- */
+
+.site-footer {
+  background-color: var(--green);
+  color: #ffffff;
+  margin-top: auto;
+}
+
+.site-footer-inner {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+}
+
+.site-footer nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.site-footer a {
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.site-footer a:hover {
+  color: #ffffff;
+}
+
+.site-footer .copyright {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---- 汎用パーツ ---- */
+
+.lead {
+  font-size: 1.05rem;
+}
+
+.catchcopy {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin: 1.25rem 0 0.75rem;
+}
+
+.note-box {
+  background-color: var(--note-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+  font-size: 0.95rem;
+}
+
+.note-box p {
+  margin: 0.5rem 0;
+}
+
+.small-note {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.meta-line {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0.25rem 0;
+}
+
+.coming-soon {
+  display: inline-block;
+  background-color: var(--note-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+  margin: 1rem 0;
+}
+
+.store-button {
+  display: inline-block;
+  background-color: var(--green);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 0.85rem 1.75rem;
+  font-weight: 700;
+  margin: 1rem 0;
+}
+
+.store-button:hover {
+  background-color: var(--green-dark);
+  color: #ffffff;
+}
+
+.page-links {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+
+/* ---- 404 ---- */
+
+.not-found {
+  text-align: center;
+  padding-top: 3rem;
+}
