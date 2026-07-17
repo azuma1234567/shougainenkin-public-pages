@@ -2,9 +2,9 @@
 
 export const SITE_NAME = "障害年金サポート";
 
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://shougainenkin-note.net";
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://shougainenkin-note.net"
+).replace(/\/+$/, "");
 
 // アプリは現在App Store審査中。承認・公開されたらtrueに切り替える
 export const IS_APP_RELEASED = false;
