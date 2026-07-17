@@ -7,7 +7,9 @@ export default function SiteFooter() {
       <div className="site-footer-inner">
         <nav aria-label="フッターメニュー">
           <Link href="/">トップ</Link>
+          <Link href="/columns">コラム</Link>
           <Link href="/support">サポート</Link>
+          <Link href="/about">運営者情報</Link>
           <Link href="/privacy">プライバシーポリシー</Link>
           <Link href="/terms">利用規約</Link>
         </nav>

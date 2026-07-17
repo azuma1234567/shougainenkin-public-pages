@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { APP_STORE_URL, SITE_NAME } from "@/lib/constants";
+import { IS_APP_RELEASED, SITE_NAME, appStoreLink } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: `${SITE_NAME} — 障害年金の申請準備を、ひとつずつ。`,
@@ -20,11 +20,11 @@ export default function HomePage() {
         ログイン不要・記録は端末の中に。申請準備のための記録・整理アプリです。
       </p>
 
-      {APP_STORE_URL ? (
+      {IS_APP_RELEASED ? (
         <p>
           <a
             className="store-button"
-            href={APP_STORE_URL}
+            href={appStoreLink("top")}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -75,6 +75,10 @@ export default function HomePage() {
         初診日の確認、保険料納付要件、年金事務所への相談、書類の準備、提出、結果の記録まで。
         自分がいまどのステップにいて、何がまだ済んでいないのかが、ホーム画面でいつでも
         分かります。
+      </p>
+
+      <p className="small-note">
+        <Link href="/columns">コラム: 申請準備に役立つ記事</Link>
       </p>
 
       <h2>料金</h2>

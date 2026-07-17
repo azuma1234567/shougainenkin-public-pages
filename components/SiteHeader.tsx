@@ -3,7 +3,9 @@ import { SITE_NAME } from "@/lib/constants";
 
 const NAV_ITEMS = [
   { href: "/", label: "トップ" },
+  { href: "/columns", label: "コラム" },
   { href: "/support", label: "サポート" },
+  { href: "/about", label: "運営者情報" },
   { href: "/privacy", label: "プライバシーポリシー" },
   { href: "/terms", label: "利用規約" },
 ];

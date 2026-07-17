@@ -76,9 +76,18 @@ p {
   margin: 0.75rem 0;
 }
 
-ul {
+ul,
+ol {
   margin: 0.75rem 0;
   padding-left: 1.4rem;
+}
+
+blockquote {
+  margin: 0.75rem 0;
+  padding: 0.75rem 1.25rem;
+  border-left: 4px solid var(--green);
+  background-color: var(--note-bg);
+  border-radius: 0 6px 6px 0;
 }
 
 li {
@@ -307,6 +316,73 @@ strong {
   padding-top: 1rem;
   border-top: 1px solid var(--border);
   font-size: 0.95rem;
+}
+
+/* ---- コラム ---- */
+
+.column-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 1.5rem 0;
+}
+
+.column-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.column-card .meta-line {
+  margin: 0 0 0.25rem;
+}
+
+.column-card-title {
+  margin: 0 0 0.35rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.column-card .small-note {
+  margin: 0;
+}
+
+.app-cta {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  margin: 2.5rem 0;
+}
+
+.app-cta-title {
+  font-weight: 700;
+  color: var(--green-dark);
+  font-size: 1.05rem;
+  margin: 0 0 0.5rem;
+}
+
+.app-cta .coming-soon,
+.app-cta .store-button {
+  margin: 0.5rem 0 0;
+}
+
+.related-columns ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.related-columns li {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin: 0.6rem 0;
+}
+
+.related-columns a {
+  font-weight: 700;
 }
 
 /* ---- 404 ---- */
