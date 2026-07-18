@@ -86,6 +86,7 @@ export default function Page() {
       <ColumnFooter
         currentSlug={column.slug}
         relatedSlugs={[
+          "ninteibi-jigojusho",
           "shoshinbi-wakaranai",
           "nofu-yoken",
           "hatarakinagara",

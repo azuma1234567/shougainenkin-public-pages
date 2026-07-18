@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { COLUMNS, formatDate } from "@/lib/columns";
+import { COLUMNS_BY_DATE, formatDate } from "@/lib/columns";
 import { pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
@@ -22,7 +22,7 @@ export default function ColumnsPage() {
       </p>
 
       <ul className="column-list">
-        {COLUMNS.map((c) => (
+        {COLUMNS_BY_DATE.map((c) => (
           <li key={c.slug} className="column-card">
             <p className="meta-line">
               <time dateTime={c.datePublished}>
