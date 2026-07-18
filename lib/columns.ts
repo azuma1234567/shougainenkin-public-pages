@@ -10,6 +10,8 @@ export type Column = {
   // 検索結果用の短いtitle(全角32文字前後)。未指定ならtitleを使う。
   // h1・一覧・パンくずの表示はtitleのまま変えない。
   metaTitle?: string;
+  // 原稿でtitle全体が明示されている場合、layoutのサイト名テンプレートを重ねない。
+  absoluteMetaTitle?: boolean;
   description: string;
   datePublished: string; // YYYY-MM-DD
   dateModified: string; // YYYY-MM-DD
@@ -137,32 +139,38 @@ export const COLUMNS: Column[] = [
   {
     slug: "moushitatesho-kakikata",
     title:
-      "【うつ病などの精神疾患】病歴・就労状況等申立書の書き方 — 期間の区切り方から文例まで",
-    metaTitle: "病歴・就労状況等申立書の書き方【精神疾患】区切り方と文例",
+      "【うつ病などの精神疾患】病歴・就労状況等申立書の書き方 — 期間の区切り方から文例・フル記入例まで",
+    metaTitle:
+      "病歴・就労状況等申立書の書き方【精神疾患】期間の区切り方・文例・フル記入例｜障害年金申請サポート",
+    absoluteMetaTitle: true,
     description:
-      "障害年金の病歴・就労状況等申立書の書き方を、精神疾患(うつ病・双極性障害・発達障害など)の方向けに解説。期間の区切り方、各期間に書くべき4つの要素、伝わる文例と書き直し例を紹介します。",
+      "障害年金の病歴・就労状況等申立書の書き方を精神疾患(うつ病・双極性障害・発達障害など)向けに解説。期間の区切り方、書くべき4要素、NG例と書き直し例6組、発病から現在までのフル記入例、よくある質問まで。",
     datePublished: "2026-07-17",
-    dateModified: "2026-07-17",
+    dateModified: "2026-07-18",
   },
   {
     slug: "moushitatesho-a4-insatsu",
     title:
-      "病歴・就労状況等申立書はA4印刷で提出できる?用紙の入手方法と印刷のコツ",
-    metaTitle: "病歴・就労状況等申立書はA4印刷で提出できる?用紙と印刷のコツ",
+      "病歴・就労状況等申立書はA4印刷で提出できる? — 用紙の入手方法とコンビニ印刷の手順",
+    metaTitle:
+      "病歴・就労状況等申立書はA4で印刷できる?用紙のダウンロードとコンビニA3印刷の手順",
+    absoluteMetaTitle: true,
     description:
-      "障害年金の病歴・就労状況等申立書は原本がA3サイズ。自宅のA4プリンタで印刷して提出できるのか、用紙のダウンロード方法、コンビニでA3原寸印刷する手順まで解説します。",
+      "病歴・就労状況等申立書の原本はA3サイズ。自宅のA4プリンタでどう印刷するか、用紙のダウンロード方法、コンビニのマルチコピー機でA3原寸印刷する手順、拡大縮小の注意点、提出前の確認ポイントまで解説します。",
     datePublished: "2026-07-17",
-    dateModified: "2026-07-17",
+    dateModified: "2026-07-18",
   },
   {
     slug: "shinsatsu-mae-memo",
     title:
       "主治医に日常の大変さが伝わらないと感じたら — 診察前メモで生活の実態を伝える方法",
-    metaTitle: "診察前メモで主治医に生活の実態を伝える方法【障害年金】",
+    metaTitle:
+      "主治医に生活の大変さが伝わらない時の対処法 — 診察前メモの作り方・渡し方・文例【障害年金】",
+    absoluteMetaTitle: true,
     description:
-      "障害年金の診断書は、診察室で見えた様子をもとに書かれます。診察の短い時間で伝えきれない日常生活の実態を、メモにして主治医に渡す方法と、渡し方の実際、添え書きの文例を紹介します。",
+      "「診察では『変わりないです』と言ってしまう」を解決する診察前メモの作り方。診断書の日常生活7項目に沿ったメモの整理法、1週間分の記入例、渡し方3パターンと添え書き文例、渡せない場合の使い方まで解説。",
     datePublished: "2026-07-17",
-    dateModified: "2026-07-17",
+    dateModified: "2026-07-18",
   },
 ];
 
@@ -234,10 +242,12 @@ export function columnJsonLd(column: Column) {
 export function columnMetadata(column: Column): Metadata {
   const path = `/columns/${column.slug}`;
   const metaTitle = column.metaTitle ?? column.title;
-  const fullTitle = `${metaTitle}｜${SITE_NAME}`;
+  const fullTitle = column.absoluteMetaTitle
+    ? metaTitle
+    : `${metaTitle}｜${SITE_NAME}`;
 
   return {
-    title: metaTitle,
+    title: column.absoluteMetaTitle ? { absolute: metaTitle } : metaTitle,
     description: column.description,
     alternates: { canonical: `${SITE_URL}${path}` },
     openGraph: {
