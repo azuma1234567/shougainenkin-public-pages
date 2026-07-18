@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import AppCta from "@/components/AppCta";
+import ArticleToc from "@/components/ArticleToc";
+import Breadcrumb from "@/components/Breadcrumb";
 import ColumnFooter from "@/components/ColumnFooter";
-import { columnJsonLd, formatDate, getColumn } from "@/lib/columns";
+import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
 
 const column = getColumn("moushitatesho-a4-insatsu");
 
-export const metadata: Metadata = {
-  title: column.title,
-  description: column.description,
-};
+export const metadata: Metadata = columnMetadata(column);
 
 export default function Page() {
   return (
@@ -17,6 +16,8 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column)) }}
       />
+
+      <Breadcrumb current={column.title} />
 
       <h1>
         病歴・就労状況等申立書はA4印刷で提出できる?用紙の入手方法と印刷のコツ
@@ -27,6 +28,8 @@ export default function Page() {
         / 最終更新日:{" "}
         <time dateTime={column.dateModified}>{formatDate(column.dateModified)}</time>
       </p>
+
+      <ArticleToc />
 
       <p>
         障害年金の申請で自分が書く書類「病歴・就労状況等申立書」。いざ書こうと
@@ -165,7 +168,14 @@ export default function Page() {
         </p>
       </div>
 
-      <ColumnFooter currentSlug={column.slug} />
+      <ColumnFooter
+        currentSlug={column.slug}
+        relatedSlugs={[
+          "moushitatesho-kakikata",
+          "shinsatsu-mae-memo",
+          "shinsei-nagare",
+        ]}
+      />
     </article>
   );
 }

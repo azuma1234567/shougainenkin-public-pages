@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import AppCta from "@/components/AppCta";
+import ArticleToc from "@/components/ArticleToc";
+import Breadcrumb from "@/components/Breadcrumb";
 import ColumnFooter from "@/components/ColumnFooter";
-import { columnJsonLd, formatDate, getColumn } from "@/lib/columns";
+import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
 
 const column = getColumn("shinsatsu-mae-memo");
 
-export const metadata: Metadata = {
-  title: column.title,
-  description: column.description,
-};
+export const metadata: Metadata = columnMetadata(column);
 
 export default function Page() {
   return (
@@ -17,6 +16,8 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column)) }}
       />
+
+      <Breadcrumb current={column.title} />
 
       <h1>
         主治医に日常の大変さが伝わらないと感じたら —
@@ -28,6 +29,8 @@ export default function Page() {
         / 最終更新日:{" "}
         <time dateTime={column.dateModified}>{formatDate(column.dateModified)}</time>
       </p>
+
+      <ArticleToc />
 
       <p>
         「診察では『変わりないです』と言ってしまう」「診断書の内容が、実際の生活
@@ -167,7 +170,14 @@ export default function Page() {
         </p>
       </div>
 
-      <ColumnFooter currentSlug={column.slug} />
+      <ColumnFooter
+        currentSlug={column.slug}
+        relatedSlugs={[
+          "moushitatesho-kakikata",
+          "moushitatesho-a4-insatsu",
+          "shinsei-nagare",
+        ]}
+      />
     </article>
   );
 }

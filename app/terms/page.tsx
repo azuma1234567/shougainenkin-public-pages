@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
-import { CONTACT_EMAIL } from "@/lib/constants";
+import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const DESCRIPTION =
+  `「${SITE_NAME}」の利用規約です。本アプリの利用条件について定めています。`;
+
+export const metadata: Metadata = pageMetadata({
   title: "利用規約",
-  description:
-    "「障害年金サポート」の利用規約です。本アプリの利用条件について定めています。",
-};
+  description: DESCRIPTION,
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (
@@ -16,7 +20,7 @@ export default function TermsPage() {
       <p className="meta-line">運営者: あずまたいすけ(個人)</p>
 
       <p>
-        この利用規約(以下「本規約」)は、「障害年金サポート」(以下「本アプリ」)の
+        この利用規約(以下「本規約」)は、「{SITE_NAME}」(以下「本アプリ」)の
         利用条件を定めるものです。本アプリを利用することで、本規約に同意したものとみなします。
       </p>
 

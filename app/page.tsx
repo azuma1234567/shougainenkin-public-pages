@@ -1,41 +1,96 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { IS_APP_RELEASED, SITE_NAME, appStoreLink } from "@/lib/constants";
+import {
+  APP_STORE_URL,
+  AUTHOR_NAME,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `${SITE_NAME} — 障害年金の申請準備を、ひとつずつ。`,
-  description:
-    "障害年金の申請準備のための記録・整理アプリ。日々の記録が、診察で医師に渡せる資料になり、申立書の下書きになる。ログイン不要・記録は端末の中に。",
+const PAGE_TITLE = "障害年金申請サポート｜申請準備・記録・申立書の下書きを支援";
+const PAGE_DESCRIPTION =
+  "障害年金の申請準備を、ひとつずつ。日々の困りごとを記録し、診察で医師に見せる資料や病歴・就労状況等申立書の下書き作成を支援するiPhoneアプリです。";
+
+export const metadata: Metadata = pageMetadata({
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  path: "/",
+  absoluteTitle: true,
+});
+
+const homeJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: SITE_NAME,
+      url: `${SITE_URL}/`,
+      inLanguage: "ja-JP",
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${SITE_URL}/#application`,
+      name: SITE_NAME,
+      description: PAGE_DESCRIPTION,
+      operatingSystem: "iOS 15.1以降",
+      applicationCategory: "ProductivityApplication",
+      inLanguage: "ja-JP",
+      url: `${SITE_URL}/`,
+      downloadUrl: APP_STORE_URL,
+      sameAs: APP_STORE_URL,
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "JPY",
+      },
+      creator: {
+        "@type": "Person",
+        name: AUTHOR_NAME,
+      },
+    },
+  ],
 };
 
 export default function HomePage() {
   return (
     <>
-      <h1>障害年金サポート</h1>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
+      />
+      <section className="hero">
+        <h1>{SITE_NAME}</h1>
 
-      <p className="catchcopy">障害年金の申請準備を、ひとつずつ。</p>
+        <p className="catchcopy">障害年金の申請準備を、ひとつずつ。</p>
 
-      <p className="lead">
-        日々の記録が、診察で医師に渡せる資料になり、申立書の下書きになる。
-        ログイン不要・記録は端末の中に。申請準備のための記録・整理アプリです。
-      </p>
+        <p className="lead">
+          日々の記録が、診察で医師に渡せる資料になり、申立書の下書きになる。
+          ログイン不要・記録は端末の中に。申請準備のための記録・整理アプリです。
+        </p>
 
-      {IS_APP_RELEASED ? (
+      </section>
+
+      <section className="app-store-section" aria-labelledby="app-store-heading">
+        <h2 id="app-store-heading">障害年金申請サポートをApp Storeで公開中</h2>
+        <p>
+          日々の「困ったこと」を記録し、診察で医師に見せる資料や、
+          病歴・就労状況等申立書の下書きづくりにつなげられるiPhoneアプリです。
+        </p>
+        <p className="small-note">無料・アプリ内課金あり</p>
         <p>
           <a
             className="store-button"
-            href={appStoreLink("top")}
+            href={APP_STORE_URL}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer external"
+            aria-label="App Storeから障害年金申請サポートを無料でダウンロード（新しいタブで開きます）"
           >
-            App Storeでダウンロード
+            App Storeから無料でダウンロード
           </a>
         </p>
-      ) : (
-        <p>
-          <span className="coming-soon">App Storeで近日公開</span>
-        </p>
-      )}
+      </section>
 
       <h2>こんな方のためのアプリです</h2>
 
@@ -47,35 +102,52 @@ export default function HomePage() {
 
       <h2>できること</h2>
 
-      <h3>1. 毎回の診察で医師に渡せる、あなたの生活の記録</h3>
+      <div className="feature-cards">
+        <section className="feature-card">
+          <h3>
+            <span className="feature-num">1</span>
+            毎回の診察で医師に渡せる、あなたの生活の記録
+          </h3>
 
-      <p>
-        医師があなたを診られるのは、診察室にいる短い時間だけです。
-        このアプリでは、日々の煩わしかったこと・辛かったことを短いメモで残していくだけで、
-        診察のたびに医師へ渡せる1枚の資料ができあがります。
-      </p>
-      <p>
-        書けることが少ない日でも大丈夫。押さえておきたいところをAIが質問で引き出し、
-        事実を変えずに、伝わる文章へ整えます。整えた文章は、必ずあなた自身が内容を
-        確認してから保存される仕組みです。
-      </p>
+          <p>
+            医師があなたを診られるのは、診察室にいる短い時間だけです。
+            このアプリでは、日々の煩わしかったこと・辛かったことを短いメモで残していくだけで、
+            診察のたびに医師へ渡せる1枚の資料ができあがります。
+          </p>
+          <p>
+            書けることが少ない日でも大丈夫。押さえておきたいところをAIが質問で引き出し、
+            事実を変えずに、伝わる文章へ整えます。整えた文章は、必ずあなた自身が内容を
+            確認してから保存される仕組みです。
+          </p>
+        </section>
 
-      <h3>2. 記憶をたどる申立書づくりを、AIが手助け</h3>
+        <section className="feature-card">
+          <h3>
+            <span className="feature-num">2</span>
+            記憶をたどる申立書づくりを、AIが手助け
+          </h3>
 
-      <p>
-        病歴・就労状況等申立書は、発病から現在までの出来事を期間ごとに書いていく書類で、
-        1人で書き上げるのはとても大変です。忘れていることがあっても、AIが質問しながら
-        記憶をたどるお手伝いをします。アプリの質問に順番に答えていくだけで下書きが形になり、
-        提出を想定したフォーマットで印刷できます。
-      </p>
+          <p>
+            病歴・就労状況等申立書は、発病から現在までの出来事を期間ごとに書いていく書類で、
+            1人で書き上げるのはとても大変です。忘れていることがあっても、AIが質問しながら
+            記憶をたどるお手伝いをします。アプリの質問に順番に答えていくだけで下書きが形になり、
+            提出を想定したフォーマットで印刷できます。
+          </p>
+        </section>
 
-      <h3>3. いま自分がどの段階にいるか、一目でわかる</h3>
+        <section className="feature-card">
+          <h3>
+            <span className="feature-num">3</span>
+            いま自分がどの段階にいるか、一目でわかる
+          </h3>
 
-      <p>
-        初診日の確認、保険料納付要件、年金事務所への相談、書類の準備、提出、結果の記録まで。
-        自分がいまどのステップにいて、何がまだ済んでいないのかが、ホーム画面でいつでも
-        分かります。
-      </p>
+          <p>
+            初診日の確認、保険料納付要件、年金事務所への相談、書類の準備、提出、結果の記録まで。
+            自分がいまどのステップにいて、何がまだ済んでいないのかが、ホーム画面でいつでも
+            分かります。
+          </p>
+        </section>
+      </div>
 
       <p className="small-note">
         <Link href="/columns">コラム: 申請準備に役立つ記事</Link>
@@ -95,7 +167,7 @@ export default function HomePage() {
 
       <h2>安心して使えるように</h2>
 
-      <ul>
+      <ul className="check-list">
         <li>ログイン・本名・メールアドレスは不要です</li>
         <li>記録はお使いの端末の中に保存されます</li>
         <li>

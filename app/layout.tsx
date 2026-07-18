@@ -4,23 +4,34 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import {
   APP_STORE_ID,
-  IS_APP_RELEASED,
   SITE_NAME,
   SITE_URL,
 } from "@/lib/constants";
+import { OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — 障害年金の申請準備を、ひとつずつ。`,
-    template: `%s | ${SITE_NAME}`,
+    default: "障害年金申請サポート｜申請準備・記録・申立書の下書きを支援",
+    template: `%s｜${SITE_NAME}`,
   },
   description:
-    "障害年金の申請準備のための記録・整理アプリ。日々の記録が、診察で医師に渡せる資料になり、申立書の下書きになる。ログイン不要・記録は端末の中に。",
-  // Smart App Banner。App Store公開後(IS_APP_RELEASED = true)のみ出力する
-  other: IS_APP_RELEASED
-    ? { "apple-itunes-app": `app-id=${APP_STORE_ID}` }
-    : undefined,
+    "障害年金の申請準備を、ひとつずつ。日々の困りごとを記録し、診察で医師に見せる資料や病歴・就労状況等申立書の下書き作成を支援するiPhoneアプリです。",
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    title: "障害年金申請サポート｜申請準備・記録・申立書の下書きを支援",
+    description:
+      "障害年金の申請準備を、ひとつずつ。日々の困りごとを記録し、診察で医師に見せる資料や病歴・就労状況等申立書の下書き作成を支援するiPhoneアプリです。",
+    url: "/",
+    locale: "ja_JP",
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [OG_IMAGE],
+  },
+  other: { "apple-itunes-app": `app-id=${APP_STORE_ID}` },
 };
 
 export default function RootLayout({

@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SITE_NAME } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const DESCRIPTION = `「${SITE_NAME}」の運営者情報です。開発・運営の目的とお問い合わせ先をご案内します。`;
+
+export const metadata: Metadata = pageMetadata({
   title: "運営者情報",
-  description: `「${SITE_NAME}」の運営者情報です。開発・運営の目的とお問い合わせ先をご案内します。`,
-};
+  description: DESCRIPTION,
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

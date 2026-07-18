@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import { AUTHOR_NAME, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { OG_IMAGE } from "@/lib/seo";
 
 // コラム記事のメタデータ。一覧・sitemap・JSON-LDで共通利用する。
 // slugは計測用キャンペーンリンクのctにも使うため変更しないこと。
@@ -12,6 +14,49 @@ export type Column = {
 };
 
 export const COLUMNS: Column[] = [
+  {
+    slug: "jibun-de-shinsei",
+    title:
+      "障害年金は自分で申請できる?社労士に依頼する場合との違いと判断のポイント",
+    description:
+      "障害年金の申請は自分でできる手続きです。自分で進める場合と社会保険労務士に依頼する場合の違い、費用の考え方、専門家に相談したほうがよいケースの判断基準を解説します。",
+    datePublished: "2026-07-17",
+    dateModified: "2026-07-17",
+  },
+  {
+    slug: "shinsei-nagare",
+    title:
+      "障害年金の申請の流れと必要書類 — 何から始めればいいかを順番に解説",
+    description:
+      "精神疾患で障害年金を申請するときの流れを、初診日の確認から納付要件、診断書の依頼、病歴・就労状況等申立書の作成、提出・審査まで7つのステップで解説。必要書類の一覧つき。",
+    datePublished: "2026-07-17",
+    dateModified: "2026-07-17",
+  },
+  {
+    slug: "hatarakinagara",
+    title: "働きながら障害年金は受け取れる?精神疾患と就労の関係",
+    description:
+      "就労していると障害年金は受給できないのか。精神疾患の審査で就労状況がどう見られるか、障害者雇用や職場の配慮の扱い、診断書・申立書に働き方の実態を書くポイントを解説します。",
+    datePublished: "2026-07-17",
+    dateModified: "2026-07-17",
+  },
+  {
+    slug: "nofu-yoken",
+    title:
+      "障害年金の保険料納付要件とは — 未納があると受け取れない?3分の2要件と直近1年の特例",
+    description:
+      "障害年金には保険料納付要件があります。3分の2要件と直近1年特例のしくみ、免除・学生納付特例の扱い、初診日より後に納めても間に合わない理由、納付状況の確認方法を解説します。",
+    datePublished: "2026-07-17",
+    dateModified: "2026-07-17",
+  },
+  {
+    slug: "shoshinbi-wakaranai",
+    title: "障害年金の初診日がわからない・カルテがないときの調べ方",
+    description:
+      "障害年金の申請は初診日の特定から始まります。初診日の考え方(精神疾患では内科受診が初診になることも)、受診状況等証明書、カルテが破棄されていた場合の対処法を解説します。",
+    datePublished: "2026-07-17",
+    dateModified: "2026-07-17",
+  },
   {
     slug: "moushitatesho-kakikata",
     title:
@@ -52,21 +97,79 @@ export function getColumn(slug: string): Column {
 export function columnJsonLd(column: Column) {
   return {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: column.title,
+    "@graph": [
+      {
+        "@type": "Article",
+        headline: column.title,
+        description: column.description,
+        datePublished: column.datePublished,
+        dateModified: column.dateModified,
+        inLanguage: "ja-JP",
+        author: {
+          "@type": "Person",
+          name: AUTHOR_NAME,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: SITE_NAME,
+          url: SITE_URL,
+        },
+        mainEntityOfPage: `${SITE_URL}/columns/${column.slug}`,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "トップ",
+            item: `${SITE_URL}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "コラム",
+            item: `${SITE_URL}/columns`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: column.title,
+            item: `${SITE_URL}/columns/${column.slug}`,
+          },
+        ],
+      },
+    ],
+  };
+}
+
+// 記事ページ共通のメタデータ(title / description / OpenGraph)。
+export function columnMetadata(column: Column): Metadata {
+  const path = `/columns/${column.slug}`;
+  const fullTitle = `${column.title}｜${SITE_NAME}`;
+
+  return {
+    title: column.title,
     description: column.description,
-    datePublished: column.datePublished,
-    dateModified: column.dateModified,
-    author: {
-      "@type": "Person",
-      name: AUTHOR_NAME,
+    alternates: { canonical: `${SITE_URL}${path}` },
+    openGraph: {
+      title: fullTitle,
+      description: column.description,
+      type: "article",
+      siteName: SITE_NAME,
+      url: `${SITE_URL}${path}`,
+      locale: "ja_JP",
+      publishedTime: column.datePublished,
+      modifiedTime: column.dateModified,
+      images: [OG_IMAGE],
     },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_NAME,
-      url: SITE_URL,
+    twitter: {
+      card: "summary_large_image",
+      title: fullTitle,
+      description: column.description,
+      images: [OG_IMAGE],
     },
-    mainEntityOfPage: `${SITE_URL}/columns/${column.slug}`,
+    robots: { index: true, follow: true },
   };
 }
 

@@ -1,12 +1,19 @@
+/*
+ * デザイントークン。アプリ本体のブランドカラーと揃える。
+ * 背景: 生成り / メイン: 深緑 / カード: 白 + 深緑の細ボーダー + 角丸
+ */
 :root {
-  --bg: #faf7ef;
-  --bg-card: #ffffff;
-  --green: #1f4a3c;
-  --green-dark: #163529;
-  --text: #2b2b28;
-  --text-muted: #55554f;
-  --border: #ded9c8;
-  --note-bg: #f3efe2;
+  --bg: #f5f1e8;
+  --card: #ffffff;
+  --green: #2e6350;
+  --green-dark: #234c3d;
+  --text: #333333;
+  --text-muted: #5f5b52;
+  --border: #ddd6c8;
+  --card-border: rgba(46, 99, 80, 0.28);
+  --note-bg: #efe9da;
+  --radius: 14px;
+  --radius-sm: 10px;
 }
 
 * {
@@ -18,6 +25,23 @@
 html {
   font-size: 17px;
   -webkit-text-size-adjust: 100%;
+}
+
+/* 目次アンカーへの移動のみ。reduced-motion時は即時ジャンプ */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
@@ -36,7 +60,7 @@ main {
   width: 100%;
   max-width: 42rem;
   margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
+  padding: 1.75rem 1.25rem 4rem;
 }
 
 a {
@@ -49,49 +73,60 @@ a:hover {
   color: var(--green-dark);
 }
 
+:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 2px;
+}
+
+.site-header :focus-visible,
+.site-footer :focus-visible {
+  outline-color: #ffffff;
+}
+
 h1 {
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   line-height: 1.5;
-  color: var(--green);
-  margin: 1.5rem 0 1rem;
+  color: var(--green-dark);
+  margin: 1.25rem 0 1rem;
 }
 
 h2 {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   line-height: 1.5;
-  color: var(--green);
-  margin: 2.5rem 0 0.75rem;
-  padding-bottom: 0.35rem;
-  border-bottom: 2px solid var(--green);
+  color: var(--green-dark);
+  margin: 2.75rem 0 1rem;
+  padding: 0.1rem 0 0.1rem 0.75rem;
+  border-left: 5px solid var(--green);
+  scroll-margin-top: 1.5rem;
 }
 
 h3 {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   line-height: 1.6;
-  color: var(--green);
-  margin: 2rem 0 0.5rem;
+  color: var(--green-dark);
+  margin: 2rem 0 0.6rem;
 }
 
 p {
-  margin: 0.75rem 0;
+  margin: 0.8rem 0;
 }
 
 ul,
 ol {
-  margin: 0.75rem 0;
-  padding-left: 1.4rem;
-}
-
-blockquote {
-  margin: 0.75rem 0;
-  padding: 0.75rem 1.25rem;
-  border-left: 4px solid var(--green);
-  background-color: var(--note-bg);
-  border-radius: 0 6px 6px 0;
+  margin: 0.8rem 0;
+  padding-left: 1.5rem;
 }
 
 li {
-  margin: 0.4rem 0;
+  margin: 0.45rem 0;
+}
+
+blockquote {
+  margin: 1rem 0;
+  padding: 0.85rem 1.25rem;
+  border-left: 4px solid var(--green);
+  background-color: var(--card);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 strong {
@@ -102,25 +137,28 @@ strong {
 
 .site-header {
   background-color: var(--green);
-  color: #ffffff;
 }
 
 .site-header-inner {
   max-width: 42rem;
   margin: 0 auto;
-  padding: 0.75rem 1.25rem;
+  padding: 0.4rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  column-gap: 0.75rem;
 }
 
 .site-title {
   color: #ffffff;
   text-decoration: none;
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.2rem 0.25rem;
 }
 
 .site-title:hover {
@@ -128,86 +166,28 @@ strong {
   text-decoration: underline;
 }
 
-.site-nav-desktop {
+.site-nav {
   display: flex;
-  gap: 1rem;
   flex-wrap: wrap;
 }
 
-.site-nav-desktop a {
+.site-nav a {
   color: #ffffff;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.2rem 0.7rem;
+  border-radius: 8px;
 }
 
-.site-nav-desktop a:hover {
-  text-decoration: underline;
+.site-nav a:hover {
   color: #ffffff;
-}
-
-.site-nav-mobile {
-  display: none;
-}
-
-@media (max-width: 640px) {
-  .site-nav-desktop {
-    display: none;
-  }
-
-  .site-nav-mobile {
-    display: block;
-    position: relative;
-  }
-
-  .site-nav-mobile summary {
-    list-style: none;
-    cursor: pointer;
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 4px;
-    padding: 0.35rem 0.75rem;
-    font-size: 0.9rem;
-    user-select: none;
-  }
-
-  .site-nav-mobile summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .site-nav-mobile[open] summary {
-    background-color: var(--green-dark);
-  }
-
-  .site-nav-mobile ul {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 0.4rem);
-    z-index: 10;
-    list-style: none;
-    background-color: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-    padding: 0.25rem 0;
-    min-width: 12rem;
-    margin: 0;
-  }
-
-  .site-nav-mobile li {
-    margin: 0;
-  }
-
-  .site-nav-mobile a {
-    display: block;
-    padding: 0.6rem 1rem;
-    color: var(--text);
-    text-decoration: none;
-  }
-
-  .site-nav-mobile a:hover {
-    background-color: var(--note-bg);
-    color: var(--green-dark);
-  }
+  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 /* ---- フッター ---- */
@@ -225,45 +205,270 @@ strong {
   text-align: center;
 }
 
+.footer-site-name {
+  margin: 0 0 0.35rem;
+  font-weight: 700;
+}
+
 .site-footer nav {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
-  margin-bottom: 0.75rem;
+  gap: 0 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .site-footer a {
   color: #ffffff;
   font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.3rem;
 }
 
 .site-footer a:hover {
   color: #ffffff;
 }
 
+.analytics-settings-button {
+  appearance: none;
+  background: none;
+  border: 0;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem;
+  padding: 0.6rem 0.5rem;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.analytics-settings-button:hover,
+.analytics-settings-button:focus-visible {
+  color: #ffffff;
+}
+
 .site-footer .copyright {
   font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ---- アクセス解析の同意 ---- */
+
+.analytics-consent-banner {
+  position: fixed;
+  z-index: 100;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  color: var(--text);
+}
+
+.analytics-consent-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  width: min(100%, 58rem);
+  margin: 0 auto;
+  padding: 1rem 1.25rem;
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+  text-align: left;
+}
+
+.analytics-consent-copy {
+  min-width: 0;
+}
+
+.analytics-consent-title {
+  margin: 0 0 0.25rem;
+  padding: 0;
+  border: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.analytics-consent-copy p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.analytics-consent-actions {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 0.65rem;
+}
+
+.analytics-consent-actions button,
+.analytics-consent-actions a {
+  min-height: 44px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.analytics-consent-actions button {
+  padding: 0.65rem 1rem;
+}
+
+.analytics-consent-accept {
+  background-color: var(--green);
+  border: 1px solid var(--green);
+  color: #ffffff;
+}
+
+.analytics-consent-accept:hover {
+  background-color: var(--green-dark);
+}
+
+.analytics-consent-deny {
+  background-color: #ffffff;
+  border: 1px solid var(--green);
+  color: var(--green);
+}
+
+.analytics-consent-actions a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 0.25rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .analytics-consent-banner {
+    right: 0.5rem;
+    bottom: max(0.5rem, env(safe-area-inset-bottom));
+    left: 0.5rem;
+  }
+
+  .analytics-consent-inner {
+    display: block;
+    max-height: calc(100dvh - 1rem - env(safe-area-inset-bottom));
+    overflow-y: auto;
+    padding: 0.9rem 1rem;
+  }
+
+  .analytics-consent-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 0.75rem;
+  }
+
+  .analytics-consent-actions a {
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+}
+
+/* ---- トップページ ---- */
+
+.hero {
+  padding: 1rem 0 0.5rem;
+}
+
+/* トップのh1(サイト名)は控えめにし、キャッチコピーを主役にする */
+.hero h1 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--green);
+  margin: 0 0 0.75rem;
+}
+
+.catchcopy {
+  font-size: clamp(1.6rem, 5.5vw, 2.05rem);
+  font-weight: 700;
+  color: var(--green-dark);
+  line-height: 1.45;
+  margin: 0 0 1rem;
+}
+
+.lead {
+  font-size: 1.02rem;
+}
+
+.feature-cards {
+  display: grid;
+  gap: 1rem;
+  margin: 1.25rem 0;
+}
+
+.feature-card {
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.35rem;
+}
+
+.feature-card h3 {
+  margin: 0 0 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.feature-num {
+  flex: none;
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-top: 0.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--green);
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.feature-card p {
+  margin: 0.5rem 0 0;
+  font-size: 0.97rem;
+}
+
+.check-list {
+  list-style: none;
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.3rem;
+  margin: 1.25rem 0;
+}
+
+.check-list li {
+  margin: 0.55rem 0;
+  padding-left: 1.9rem;
+  position: relative;
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0.25rem;
+  top: 0;
+  color: var(--green);
+  font-weight: 700;
 }
 
 /* ---- 汎用パーツ ---- */
 
-.lead {
-  font-size: 1.05rem;
-}
-
-.catchcopy {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--green-dark);
-  margin: 1.25rem 0 0.75rem;
-}
-
 .note-box {
   background-color: var(--note-bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
   padding: 1rem 1.25rem;
   margin: 1.25rem 0;
   font-size: 0.95rem;
@@ -279,31 +484,35 @@ strong {
 }
 
 .meta-line {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
-  margin: 0.25rem 0;
+  margin: 0.25rem 0 1rem;
 }
 
-.coming-soon {
-  display: inline-block;
-  background-color: var(--note-bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text-muted);
-  padding: 0.75rem 1.5rem;
-  font-weight: 700;
-  margin: 1rem 0;
+.app-store-section {
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+.app-store-section h2 {
+  margin-top: 0;
 }
 
 .store-button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
   background-color: var(--green);
   color: #ffffff;
   text-decoration: none;
-  border-radius: 6px;
-  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 1.8rem;
   font-weight: 700;
-  margin: 1rem 0;
+  margin: 0.75rem 0;
 }
 
 .store-button:hover {
@@ -311,10 +520,103 @@ strong {
   color: #ffffff;
 }
 
+@media (max-width: 480px) {
+  .store-button {
+    width: 100%;
+    min-height: 52px;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    text-align: center;
+  }
+}
+
 .page-links {
   margin-top: 3rem;
-  padding-top: 1rem;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+
+/* ---- パンくず ---- */
+
+.breadcrumb {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0.25rem 0 0.5rem;
+}
+
+.breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.breadcrumb li {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb li + li::before {
+  content: "›";
+  margin: 0 0.5rem;
+  color: var(--text-muted);
+}
+
+.breadcrumb a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+}
+
+.breadcrumb [aria-current="page"] {
+  color: var(--text-muted);
+}
+
+/* ---- 記事の目次 ---- */
+
+.article-toc {
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.2rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.article-toc summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--green-dark);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 28px;
+}
+
+.article-toc summary::-webkit-details-marker {
+  display: none;
+}
+
+.article-toc summary::before {
+  content: "▸";
+  color: var(--green);
+}
+
+.article-toc[open] summary::before {
+  content: "▾";
+}
+
+.article-toc ol {
+  margin: 0.6rem 0 0.2rem;
+  padding-left: 1.5rem;
+}
+
+.article-toc li {
+  margin: 0.4rem 0;
   font-size: 0.95rem;
 }
 
@@ -327,19 +629,19 @@ strong {
 }
 
 .column-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 1rem 1.25rem;
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.3rem;
   margin: 1rem 0;
 }
 
 .column-card .meta-line {
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.3rem;
 }
 
 .column-card-title {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.4rem;
   font-weight: 700;
   line-height: 1.6;
 }
@@ -349,10 +651,10 @@ strong {
 }
 
 .app-cta {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 1.25rem 1.5rem;
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.3rem 1.5rem;
   margin: 2.5rem 0;
 }
 
@@ -363,7 +665,6 @@ strong {
   margin: 0 0 0.5rem;
 }
 
-.app-cta .coming-soon,
 .app-cta .store-button {
   margin: 0.5rem 0 0;
 }
@@ -374,10 +675,10 @@ strong {
 }
 
 .related-columns li {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1.1rem;
   margin: 0.6rem 0;
 }
 

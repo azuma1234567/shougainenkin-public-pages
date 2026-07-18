@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import AppCta from "@/components/AppCta";
+import ArticleToc from "@/components/ArticleToc";
+import Breadcrumb from "@/components/Breadcrumb";
 import ColumnFooter from "@/components/ColumnFooter";
-import { columnJsonLd, formatDate, getColumn } from "@/lib/columns";
+import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
 
 const column = getColumn("moushitatesho-kakikata");
 
-export const metadata: Metadata = {
-  title: column.title,
-  description: column.description,
-};
+export const metadata: Metadata = columnMetadata(column);
 
 export default function Page() {
   return (
@@ -17,6 +16,8 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column)) }}
       />
+
+      <Breadcrumb current={column.title} />
 
       <h1>
         【うつ病などの精神疾患】病歴・就労状況等申立書の書き方 —
@@ -28,6 +29,8 @@ export default function Page() {
         / 最終更新日:{" "}
         <time dateTime={column.dateModified}>{formatDate(column.dateModified)}</time>
       </p>
+
+      <ArticleToc />
 
       <p>
         病歴・就労状況等申立書は、障害年金の申請書類の中で、
@@ -231,7 +234,14 @@ export default function Page() {
         </p>
       </div>
 
-      <ColumnFooter currentSlug={column.slug} />
+      <ColumnFooter
+        currentSlug={column.slug}
+        relatedSlugs={[
+          "moushitatesho-a4-insatsu",
+          "shinsatsu-mae-memo",
+          "shinsei-nagare",
+        ]}
+      />
     </article>
   );
 }

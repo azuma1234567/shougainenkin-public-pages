@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { COLUMNS, formatDate } from "@/lib/columns";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "コラム",
-  description:
-    "障害年金の申請準備に役立つ情報をまとめたコラムです。病歴・就労状況等申立書の書き方、用紙の印刷方法、診察での伝え方などを解説します。",
-};
+const DESCRIPTION =
+  "障害年金の申請準備に役立つ情報をまとめたコラムです。病歴・就労状況等申立書の書き方、用紙の印刷方法、診察での伝え方などを解説します。";
+
+export const metadata: Metadata = pageMetadata({
+  title: "障害年金の申請準備コラム",
+  description: DESCRIPTION,
+  path: "/columns",
+});
 
 export default function ColumnsPage() {
   return (

@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CONTACT_EMAIL } from "@/lib/constants";
+import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+const DESCRIPTION =
+  `「${SITE_NAME}」のサポートページです。よくあるご質問とお問い合わせ先をご案内します。`;
+
+export const metadata: Metadata = pageMetadata({
   title: "サポート",
-  description:
-    "「障害年金サポート」のサポートページです。よくあるご質問とお問い合わせ先をご案内します。",
-};
+  description: DESCRIPTION,
+  path: "/support",
+});
 
 export default function SupportPage() {
   return (
@@ -14,7 +18,7 @@ export default function SupportPage() {
       <h1>サポート</h1>
 
       <p>
-        「障害年金サポート」をご利用いただきありがとうございます。
+        「{SITE_NAME}」をご利用いただきありがとうございます。
         お困りのことがあれば、このページをご確認のうえ、お気軽にお問い合わせください。
       </p>
 

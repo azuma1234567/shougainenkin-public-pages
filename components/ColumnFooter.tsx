@@ -1,9 +1,19 @@
 import Link from "next/link";
-import { COLUMNS } from "@/lib/columns";
+import { COLUMNS, type Column } from "@/lib/columns";
 
 // 記事末尾に置く「あわせて読みたい」(他記事への内部リンク)。
-export default function ColumnFooter({ currentSlug }: { currentSlug: string }) {
-  const others = COLUMNS.filter((c) => c.slug !== currentSlug);
+export default function ColumnFooter({
+  currentSlug,
+  relatedSlugs,
+}: {
+  currentSlug: string;
+  relatedSlugs?: string[];
+}) {
+  const others = relatedSlugs
+    ? relatedSlugs
+        .map((slug) => COLUMNS.find((column) => column.slug === slug))
+        .filter((column): column is Column => Boolean(column))
+    : COLUMNS.filter((column) => column.slug !== currentSlug);
   return (
     <>
       <section className="related-columns">
