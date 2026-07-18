@@ -5,14 +5,30 @@ import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
 import ColumnFooter from "@/components/ColumnFooter";
 import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
+import { faqJsonLd } from "@/lib/seo";
 
 const column = getColumn("shoubyou-teatekin");
 export const metadata: Metadata = columnMetadata(column);
+
+// 本文にある質問と回答のみを構造化データ化する(内容の追加はしない)
+const faq = faqJsonLd([
+  {
+    question: "傷病手当金と障害年金は両方もらえますか?",
+    answer:
+      "同じ傷病について傷病手当金と障害厚生年金の両方を受けられる場合は、併給調整が行われます。基本的には障害厚生年金が優先され、傷病手当金は年金額(日額換算)を上回る差額があればその分だけ支給されます。二重に全額もらえることはありません。別の傷病どうしであれば調整されない場合もあり、正確な扱いは健康保険組合・協会けんぽと年金事務所に確認してください。",
+  },
+  {
+    question: "障害年金への切り替えはいつ考えればよいですか?",
+    answer:
+      "傷病手当金は同じ傷病について支給開始から通算で最長1年6か月です。障害年金の障害認定日は原則初診日から1年6か月後で、傷病手当金の支給終了時期と重なることがあります。傷病手当金の支給が残り半年を切った頃に年金事務所へ相談し、準備を始めるのがおすすめです。",
+  },
+]);
 
 export default function Page() {
   return (
     <article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
       <Breadcrumb current={column.title} />
       <h1>傷病手当金と障害年金は両方もらえる?関係と切り替えのタイミング</h1>
       <p className="meta-line">公開日: <time dateTime={column.datePublished}>{formatDate(column.datePublished)}</time>{" "}/ 最終更新日: <time dateTime={column.dateModified}>{formatDate(column.dateModified)}</time></p>

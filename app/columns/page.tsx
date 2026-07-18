@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { COLUMNS_BY_DATE, formatDate } from "@/lib/columns";
-import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
   "障害年金の申請準備に役立つ情報をまとめたコラムです。病歴・就労状況等申立書の書き方、用紙の印刷方法、診察での伝え方などを解説します。";
@@ -12,9 +12,19 @@ export const metadata: Metadata = pageMetadata({
   path: "/columns",
 });
 
+const breadcrumb = breadcrumbJsonLd([
+  { name: "トップ", path: "/" },
+  { name: "障害年金の申請準備コラム", path: "/columns" },
+]);
+
 export default function ColumnsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+
       <h1>コラム</h1>
 
       <p className="lead">

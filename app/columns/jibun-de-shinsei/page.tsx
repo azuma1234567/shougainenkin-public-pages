@@ -5,15 +5,31 @@ import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
 import ColumnFooter from "@/components/ColumnFooter";
 import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
+import { faqJsonLd } from "@/lib/seo";
 
 const column = getColumn("jibun-de-shinsei");
 
 export const metadata: Metadata = columnMetadata(column);
 
+// 本文にある質問と回答のみを構造化データ化する(内容の追加はしない)
+const faq = faqJsonLd([
+  {
+    question: "障害年金は自分で申請できますか?",
+    answer:
+      "障害年金の申請は、本人(または家族)が自分で行える手続きです。年金事務所の相談も無料です。負担は費用ではなく手間と気力で、体調に波がある中で数か月かけて進めることになります。",
+  },
+  {
+    question: "社労士に依頼したほうがよいのはどんな場合ですか?",
+    answer:
+      "初診日の証明が難しい(カルテが破棄されている・廃院しているなど)、傷病が複数ある、遡及請求を検討している、一度不支給になり審査請求を考えている、体調的に手続きを進めること自体が難しい、といった場合は社労士への相談を検討する価値があります。契約前に料金体系と不支給だった場合の費用を必ず確認してください。",
+  },
+]);
+
 export default function Page() {
   return (
     <article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
       <Breadcrumb current={column.title} />
       <h1>障害年金は自分で申請できる?社労士に依頼する場合との違いと判断のポイント</h1>
       <p className="meta-line">

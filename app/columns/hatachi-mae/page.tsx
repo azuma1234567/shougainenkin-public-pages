@@ -3,7 +3,7 @@ import Link from "next/link";
 import AppCta from "@/components/AppCta";
 import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
-import ColumnFooter from "@/components/ColumnFooter";
+import ColumnFooter, { NENKIN_REFERENCES } from "@/components/ColumnFooter";
 import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
 
 const column = getColumn("hatachi-mae");
@@ -50,7 +50,7 @@ export default function Page() {
         <li>10代の受診記録は時間が経つほど証明が難しくなる。早めの確認と日々の記録を</li>
       </ul>
       <div className="note-box"><p>※本記事は一般的な情報提供であり、受給を保証するものではありません。支給制限の基準額など最新の制度内容は日本年金機構および年金事務所でご確認ください。(最終更新: {formatDate(column.dateModified)})</p></div>
-      <ColumnFooter currentSlug={column.slug} relatedSlugs={["hattatsu-shougai", "shoshinbi-wakaranai"]} />
+      <ColumnFooter currentSlug={column.slug} relatedSlugs={["hattatsu-shougai", "shoshinbi-wakaranai"]} references={[NENKIN_REFERENCES.jukyuYoken, NENKIN_REFERENCES.seido]} />
     </article>
   );
 }

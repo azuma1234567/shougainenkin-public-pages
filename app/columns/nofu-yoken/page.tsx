@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import AppCta from "@/components/AppCta";
 import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
-import ColumnFooter from "@/components/ColumnFooter";
+import ColumnFooter, { NENKIN_REFERENCES } from "@/components/ColumnFooter";
 import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
 
 const column = getColumn("nofu-yoken");
@@ -35,7 +36,13 @@ export default function Page() {
       </p>
 
       <h2>納付要件は2つ。どちらかを満たせばよい</h2>
-      <p>障害年金の保険料納付要件は、次のどちらかを満たせば足ります。判定の基準日は<strong>初診日の前日</strong>です。</p>
+      <p>
+        障害年金の保険料納付要件は、次のどちらかを満たせば足ります。判定の基準日は<strong>初診日の前日</strong>です(初診日の考え方は「
+        <Link href="/columns/shoshinbi-wakaranai">
+          初診日がわからない・カルテがないときの調べ方
+        </Link>
+        」をご覧ください)。
+      </p>
       <p><strong>① 3分の2要件(原則)</strong><br />初診日のある月の前々月までの被保険者期間のうち、保険料を納めた期間と免除された期間の合計が3分の2以上あること。</p>
       <p><strong>② 直近1年要件(特例)</strong><br />初診日において65歳未満で、初診日のある月の前々月までの直近1年間に保険料の未納がないこと。この特例は、初診日が令和18年3月末日までにある場合に適用されます。</p>
       <p>
@@ -61,7 +68,13 @@ export default function Page() {
         <li><strong>ねんきんネット</strong>(日本年金機構のWebサービス)で月ごとの納付状況を確認できます</li>
         <li><strong>年金事務所</strong>の窓口や電話でも確認できます。障害年金の相談に行くと、納付要件を満たしているかを最初に確認してもらえます</li>
       </ul>
-      <p>なお、<strong>20歳前に初診日がある場合</strong>(20歳前傷病)は、納付要件は問われません。</p>
+      <p>
+        なお、<strong>20歳前に初診日がある場合</strong>(20歳前傷病)は、納付要件は問われません。詳しくは「
+        <Link href="/columns/hatachi-mae">
+          20歳前傷病の障害基礎年金とは
+        </Link>
+        」で解説しています。
+      </p>
 
       <h2>要件を満たしているか不安なまま悩まない</h2>
       <p>納付要件は、自分で計算しようとすると複雑ですが、年金事務所に行けばその場で確認してもらえる事項です。「未納があるから無理だろう」と自己判断で諦めてしまう前に、まず確認だけしてみてください。</p>
@@ -85,6 +98,7 @@ export default function Page() {
       <ColumnFooter
         currentSlug={column.slug}
         relatedSlugs={["shoshinbi-wakaranai", "shinsei-nagare"]}
+        references={[NENKIN_REFERENCES.jukyuYoken, NENKIN_REFERENCES.seido]}
       />
     </article>
   );

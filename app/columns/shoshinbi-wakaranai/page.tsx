@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import AppCta from "@/components/AppCta";
 import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -30,7 +31,11 @@ export default function Page() {
       <ArticleToc />
 
       <p>
-        障害年金の申請は、「初診日をいつにするか」を確定するところから始まります。初診日は、納付要件の判定にも、障害基礎年金か障害厚生年金かの区別にも、障害認定日の計算にも使われる、申請全体の土台です。
+        障害年金の申請は、「初診日をいつにするか」を確定するところから始まります。初診日は、
+        <Link href="/columns/nofu-yoken">保険料納付要件</Link>
+        の判定にも、障害基礎年金か障害厚生年金かの区別にも、
+        <Link href="/columns/ninteibi-jigojusho">障害認定日</Link>
+        の計算にも使われる、申請全体の土台です。
       </p>
       <p>
         ところが、この初診日の特定でつまずく方がとても多いのです。「最初に病院にかかったのが何年も前で覚えていない」「当時の病院のカルテがもう残っていない」——この記事では、そんなときの調べ方と対処法を解説します。

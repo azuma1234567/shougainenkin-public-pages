@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import AppCta from "@/components/AppCta";
 import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -57,6 +58,14 @@ export default function Page() {
         いった、<strong>診察室の外の生活</strong>について医師が記入します。
         つまり、生活の実態が伝わっていないと、医師は判断材料がないまま書くことに
         なります。
+      </p>
+
+      <p>
+        書き上がった診断書を受け取ったあとの確認ポイントは「
+        <Link href="/columns/shindansho-kakunin">
+          障害年金の診断書を受け取ったら
+        </Link>
+        」で解説しています。
       </p>
 
       <h2>社労士も勧める「生活の記録を渡す」方法</h2>
@@ -137,7 +146,11 @@ export default function Page() {
 
       <p>
         日々の短いメモが溜まると、診察で渡せる資料の材料になり、そのまま病歴・
-        就労状況等申立書を書くときの記録にもなります。書けない日があっても
+        就労状況等申立書を書くときの記録にもなります(申立書の書き方は「
+        <Link href="/columns/moushitatesho-kakikata">
+          病歴・就労状況等申立書の書き方
+        </Link>
+        」で解説しています)。書けない日があっても
         構いません。書けた日の記録だけで、十分に意味があります。
       </p>
 

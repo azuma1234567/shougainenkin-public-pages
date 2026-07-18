@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
-import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
   `「${SITE_NAME}」のプライバシーポリシーです。OpenAI APIを利用するAI機能で送信する情報、送信先、利用目的、同意について説明します。`;
@@ -11,9 +11,19 @@ export const metadata: Metadata = pageMetadata({
   path: "/privacy",
 });
 
+const breadcrumb = breadcrumbJsonLd([
+  { name: "トップ", path: "/" },
+  { name: "プライバシーポリシー", path: "/privacy" },
+]);
+
 export default function PrivacyPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+
       <h1>プライバシーポリシー</h1>
 
       <p className="meta-line">制定日: 2026年7月12日</p>

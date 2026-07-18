@@ -35,16 +35,26 @@ const homeJsonLd = {
       name: SITE_NAME,
       description: PAGE_DESCRIPTION,
       operatingSystem: "iOS 15.1以降",
-      applicationCategory: "ProductivityApplication",
+      applicationCategory: "LifestyleApplication",
       inLanguage: "ja-JP",
       url: `${SITE_URL}/`,
       downloadUrl: APP_STORE_URL,
       sameAs: APP_STORE_URL,
-      offers: {
-        "@type": "Offer",
-        price: "0",
-        priceCurrency: "JPY",
-      },
+      // 基本機能は無料、プレミアムプランは月額600円のサブスクリプション
+      offers: [
+        {
+          "@type": "Offer",
+          name: "基本機能(無料)",
+          price: "0",
+          priceCurrency: "JPY",
+        },
+        {
+          "@type": "Offer",
+          name: "プレミアムプラン(月額・自動更新)",
+          price: "600",
+          priceCurrency: "JPY",
+        },
+      ],
       creator: {
         "@type": "Person",
         name: AUTHOR_NAME,

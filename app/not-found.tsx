@@ -9,7 +9,8 @@ export default function NotFound() {
         お手数ですが、トップページからご覧ください。
       </p>
       <p>
-        <Link href="/">トップページへ戻る</Link>
+        <Link href="/">トップページへ戻る</Link> ・{" "}
+        <Link href="/columns">コラム一覧を見る</Link>
       </p>
     </div>
   );

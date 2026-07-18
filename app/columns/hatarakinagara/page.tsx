@@ -5,15 +5,31 @@ import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
 import ColumnFooter from "@/components/ColumnFooter";
 import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
+import { faqJsonLd } from "@/lib/seo";
 
 const column = getColumn("hatarakinagara");
 
 export const metadata: Metadata = columnMetadata(column);
 
+// 本文にある質問と回答のみを構造化データ化する(内容の追加はしない)
+const faq = faqJsonLd([
+  {
+    question: "働きながら障害年金は受け取れますか?",
+    answer:
+      "就労していることだけを理由に不支給になるわけではなく、働きながら受給している方は実際にいます。ただし精神疾患の場合、就労の状況が審査で考慮されます。審査で見られるのは就労の有無そのものではなく、雇用形態・配慮・援助・欠勤の頻度といった働き方の実態です。",
+  },
+  {
+    question: "就労状況は障害年金の審査でどう見られますか?",
+    answer:
+      "どのような条件・支えのもとで働けているかという実態が判断材料になります。援助や配慮があってはじめて就労が成り立っている場合はその事実が考慮されます。一方、配慮のない一般雇用でフルタイム勤務を続けられている場合は、日常生活能力への支障は軽いと評価されやすくなります。実態は医師の診断書と病歴・就労状況等申立書で伝えます。",
+  },
+]);
+
 export default function Page() {
   return (
     <article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
       <Breadcrumb current={column.title} />
       <h1>働きながら障害年金は受け取れる?精神疾患と就労の関係</h1>
       <p className="meta-line">

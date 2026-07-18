@@ -1,13 +1,34 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import AppCta from "@/components/AppCta";
 import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
-import ColumnFooter from "@/components/ColumnFooter";
+import ColumnFooter, { NENKIN_REFERENCES } from "@/components/ColumnFooter";
 import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
+import { faqJsonLd } from "@/lib/seo";
 
 const column = getColumn("moushitatesho-a4-insatsu");
 
 export const metadata: Metadata = columnMetadata(column);
+
+// 本文にある質問と回答のみを構造化データ化する(内容の追加はしない)
+const faq = faqJsonLd([
+  {
+    question: "病歴・就労状況等申立書はA4サイズで印刷して提出できますか?",
+    answer:
+      "A4サイズで印刷したものも、実務では広く受け付けられています。日本年金機構自身が家庭のプリンタでの印刷を前提としたPDF・Excel様式を公開しています。枚数が複数になる場合はホチキスなどで留め、心配な場合は提出前に管轄の年金事務所へ確認しておくと安心です。",
+  },
+  {
+    question: "病歴・就労状況等申立書の用紙はどこで入手できますか?",
+    answer:
+      "年金事務所や街角の年金相談センターでもらうか、日本年金機構のホームページからPDF形式・Excel形式をダウンロードできます。記載要領も同じページにあります。",
+  },
+  {
+    question: "申立書は手書きでなければいけませんか?",
+    answer:
+      "手書きである必要はありません。Excel様式への入力や、パソコンで作成したものの印刷でも受け付けられています。",
+  },
+]);
 
 export default function Page() {
   return (
@@ -15,6 +36,10 @@ export default function Page() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
       />
 
       <Breadcrumb current={column.title} />
@@ -72,6 +97,14 @@ export default function Page() {
         」のページから行えます。記載要領(書き方の説明)も同じページにあります。
       </p>
 
+      <p>
+        年金事務所での相談から提出までの段取りは「
+        <Link href="/columns/shinsei-nagare">
+          障害年金の申請の流れと必要書類
+        </Link>
+        」にまとめています。
+      </p>
+
       <h2>原本はA3サイズ。A4で印刷して提出できる?</h2>
 
       <p>
@@ -114,6 +147,14 @@ export default function Page() {
         申立書は手書きである必要はありません。Excel様式への入力や、パソコンで
         作成したものの印刷でも受け付けられています。手の震えや集中の続きにくさが
         ある方は、無理に手書きにこだわらなくて大丈夫です。
+      </p>
+
+      <p>
+        なお、中身の書き方(期間の区切り方や文例)は「
+        <Link href="/columns/moushitatesho-kakikata">
+          病歴・就労状況等申立書の書き方
+        </Link>
+        」で詳しく解説しています。
       </p>
 
       <h2>自宅にプリンタがない・A3で原寸印刷したい場合</h2>
@@ -174,6 +215,10 @@ export default function Page() {
           "moushitatesho-kakikata",
           "shinsatsu-mae-memo",
           "shinsei-nagare",
+        ]}
+        references={[
+          NENKIN_REFERENCES.moushitatesho,
+          NENKIN_REFERENCES.seido,
         ]}
       />
     </article>

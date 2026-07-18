@@ -3,7 +3,7 @@ import Link from "next/link";
 import AppCta from "@/components/AppCta";
 import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
-import ColumnFooter from "@/components/ColumnFooter";
+import ColumnFooter, { NENKIN_REFERENCES } from "@/components/ColumnFooter";
 import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
 
 const column = getColumn("ninteibi-jigojusho");
@@ -47,7 +47,7 @@ export default function Page() {
         <li>事後重症は請求が遅れた分だけ受け取れない。先延ばしにしない</li>
       </ul>
       <div className="note-box"><p>※本記事は一般的な情報提供であり、受給や遡及の認定を保証するものではありません。個別の判断は年金事務所や社会保険労務士にご相談ください。(最終更新: {formatDate(column.dateModified)})</p></div>
-      <ColumnFooter currentSlug={column.slug} relatedSlugs={["shinsei-nagare", "shoubyou-teatekin"]} />
+      <ColumnFooter currentSlug={column.slug} relatedSlugs={["shinsei-nagare", "shoubyou-teatekin"]} references={[NENKIN_REFERENCES.jukyuYoken, NENKIN_REFERENCES.seido]} />
     </article>
   );
 }

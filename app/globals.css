@@ -669,6 +669,28 @@ strong {
   margin: 0.5rem 0 0;
 }
 
+.references ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.references li {
+  margin: 0.5rem 0;
+  padding-left: 1.4rem;
+  position: relative;
+}
+
+.references li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+}
+
+.references .small-note {
+  margin-top: 0.75rem;
+}
+
 .related-columns ul {
   list-style: none;
   padding-left: 0;

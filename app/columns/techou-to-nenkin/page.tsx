@@ -5,14 +5,30 @@ import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
 import ColumnFooter from "@/components/ColumnFooter";
 import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
+import { faqJsonLd } from "@/lib/seo";
 
 const column = getColumn("techou-to-nenkin");
 export const metadata: Metadata = columnMetadata(column);
+
+// 本文にある質問と回答のみを構造化データ化する(内容の追加はしない)
+const faq = faqJsonLd([
+  {
+    question: "障害者手帳が3級でも障害年金を受給できますか?",
+    answer:
+      "手帳の等級と年金の等級は連動しません。手帳が3級でも、障害年金の審査で2級と認定される場合はありますし、その逆もあります。年金の審査は、年金用の診断書と病歴・就労状況等申立書に書かれた日常生活と就労の実態に基づいて、年金制度の基準で行われます。",
+  },
+  {
+    question: "障害者手帳がなくても障害年金は申請できますか?",
+    answer:
+      "申請できます。障害年金の申請に障害者手帳は必要ありません。手帳を取得していない方でも、初診日・納付要件・障害状態の要件を満たせば申請できます。",
+  },
+]);
 
 export default function Page() {
   return (
     <article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }} />
       <Breadcrumb current={column.title} />
       <h1>障害者手帳と障害年金の違い — 手帳の等級と年金の等級は別物です</h1>
       <p className="meta-line">公開日: <time dateTime={column.datePublished}>{formatDate(column.datePublished)}</time>{" "}/ 最終更新日: <time dateTime={column.dateModified}>{formatDate(column.dateModified)}</time></p>

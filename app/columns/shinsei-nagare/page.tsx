@@ -3,7 +3,7 @@ import Link from "next/link";
 import AppCta from "@/components/AppCta";
 import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
-import ColumnFooter from "@/components/ColumnFooter";
+import ColumnFooter, { NENKIN_REFERENCES } from "@/components/ColumnFooter";
 import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
 
 const column = getColumn("shinsei-nagare");
@@ -95,6 +95,7 @@ export default function Page() {
           "moushitatesho-a4-insatsu",
           "shinsatsu-mae-memo",
         ]}
+        references={[NENKIN_REFERENCES.seido, NENKIN_REFERENCES.jukyuYoken]}
       />
     </article>
   );

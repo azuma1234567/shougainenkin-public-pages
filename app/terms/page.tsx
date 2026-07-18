@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
-import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
   `「${SITE_NAME}」の利用規約です。本アプリの利用条件について定めています。`;
@@ -11,9 +11,19 @@ export const metadata: Metadata = pageMetadata({
   path: "/terms",
 });
 
+const breadcrumb = breadcrumbJsonLd([
+  { name: "トップ", path: "/" },
+  { name: "利用規約", path: "/terms" },
+]);
+
 export default function TermsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+
       <h1>利用規約</h1>
 
       <p className="meta-line">制定日: 2026年7月12日</p>

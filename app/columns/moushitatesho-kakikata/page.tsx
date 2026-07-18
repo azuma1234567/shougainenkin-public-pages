@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import AppCta from "@/components/AppCta";
 import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
-import ColumnFooter from "@/components/ColumnFooter";
+import ColumnFooter, { NENKIN_REFERENCES } from "@/components/ColumnFooter";
 import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
 
 const column = getColumn("moushitatesho-kakikata");
@@ -53,6 +54,14 @@ export default function Page() {
         診断書に書かれた内容と申立書の内容が食い違っていると、審査でマイナスに
         働くことがあります。<strong>事実を、事実のとおりに、具体的に書く</strong>
         ——これが申立書の大原則です。
+      </p>
+
+      <p>
+        申立書が申請全体のどの段階で必要になるかは「
+        <Link href="/columns/shinsei-nagare">
+          障害年金の申請の流れと必要書類
+        </Link>
+        」をご覧ください。
       </p>
 
       <h2>書く前に用意するもの</h2>
@@ -129,6 +138,14 @@ export default function Page() {
         申立書でも同じ場面(食事、入浴、買い物、通院、人づきあい)について具体的に
         書いておくと、診断書と申立書が同じ生活を別の角度から描くことになり、審査に
         伝わりやすくなります。
+      </p>
+
+      <p>
+        生活の実態を医師に伝えておく方法は「
+        <Link href="/columns/shinsatsu-mae-memo">
+          診察前メモで生活の実態を伝える方法
+        </Link>
+        」で解説しています。
       </p>
 
       <h2>伝わる文例 — 書き直しでこう変わる</h2>
@@ -240,6 +257,10 @@ export default function Page() {
           "moushitatesho-a4-insatsu",
           "shinsatsu-mae-memo",
           "shinsei-nagare",
+        ]}
+        references={[
+          NENKIN_REFERENCES.moushitatesho,
+          NENKIN_REFERENCES.seido,
         ]}
       />
     </article>

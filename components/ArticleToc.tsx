@@ -14,7 +14,7 @@ export default function ArticleToc() {
     if (!article) return;
 
     const h2s = Array.from(article.querySelectorAll("h2")).filter(
-      (h) => !h.closest(".related-columns"),
+      (h) => !h.closest(".related-columns") && !h.closest(".references"),
     );
 
     setHeadings(

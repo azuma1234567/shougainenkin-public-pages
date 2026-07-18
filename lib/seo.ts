@@ -9,7 +9,7 @@ export const OG_IMAGE = {
 };
 
 // 下層ページ用のOpenGraph設定を組み立てる。
-// og:imageはサイト共通の /og.png を使う。
+// og:imageはサイト共通の /opengraph-image(記事ページは記事別画像)を使う。
 export function pageOpenGraph(
   title: string,
   description: string,
@@ -27,6 +27,36 @@ export function pageOpenGraph(
     url: `${SITE_URL}${path === "/" ? "/" : path}`,
     locale: "ja_JP",
     images: [OG_IMAGE],
+  };
+}
+
+// パンくずの構造化データ(BreadcrumbList)。
+export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path === "/" ? "/" : item.path}`,
+    })),
+  };
+}
+
+// FAQの構造化データ。質問・回答は必ず記事本文にある内容だけを使うこと。
+export function faqJsonLd(faqs: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
   };
 }
 

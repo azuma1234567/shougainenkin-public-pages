@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
-import { pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
   `「${SITE_NAME}」のサポートページです。よくあるご質問とお問い合わせ先をご案内します。`;
@@ -12,9 +12,19 @@ export const metadata: Metadata = pageMetadata({
   path: "/support",
 });
 
+const breadcrumb = breadcrumbJsonLd([
+  { name: "トップ", path: "/" },
+  { name: "サポート", path: "/support" },
+]);
+
 export default function SupportPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
+      />
+
       <h1>サポート</h1>
 
       <p>
