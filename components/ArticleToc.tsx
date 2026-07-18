@@ -2,15 +2,14 @@
 
 import { useEffect, useState } from "react";
 
-export type Heading = { id: string; text: string };
+type Heading = { id: string; text: string };
 
 // 記事本文のh2から目次を自動生成する(「あわせて読みたい」は除外)。
 // h2にidが無い場合はここで採番する。
-export default function ArticleToc({ headings: suppliedHeadings }: { headings?: Heading[] }) {
-  const [headings, setHeadings] = useState<Heading[]>(suppliedHeadings ?? []);
+export default function ArticleToc() {
+  const [headings, setHeadings] = useState<Heading[]>([]);
 
   useEffect(() => {
-    if (suppliedHeadings) return;
     const article = document.querySelector("article");
     if (!article) return;
 
@@ -26,7 +25,7 @@ export default function ArticleToc({ headings: suppliedHeadings }: { headings?: 
         return { id: h.id, text: h.textContent ?? "" };
       }),
     );
-  }, [suppliedHeadings]);
+  }, []);
 
   if (headings.length === 0) return null;
 
