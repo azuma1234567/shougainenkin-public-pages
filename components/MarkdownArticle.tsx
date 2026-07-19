@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import AppCta from "@/components/AppCta";
+import XPostEmbed from "@/components/XPostEmbed";
 
 function inlineContent(text: string): ReactNode[] {
   const nodes: ReactNode[] = [];
@@ -57,27 +58,15 @@ function inlineContent(text: string): ReactNode[] {
   return nodes;
 }
 
-function xReference(line: string, key: string) {
-  const url = line.match(/https:\/\/x\.com\/[^\]]+/)?.[0];
-  const isKishino = line.includes("岸野");
-  const href = url ??
-    (isKishino
-      ? "https://x.com/coco_ruuchan"
-      : "https://x.com/f1c3n4WE1KMklqQ");
-  const label = url
-    ? "Xの公開投稿を見る"
-    : `${isKishino ? "岸野さん" : "障害年金の呟き人さん"}のXアカウントを見る`;
+function xPostUrl(line: string): string | null {
+  const specifiedUrl = line.match(/https:\/\/x\.com\/[^\]]+/)?.[0];
+  if (specifiedUrl) return specifiedUrl;
 
-  return (
-    <blockquote key={key}>
-      <p>
-        参考：{" "}
-        <a href={href} target="_blank" rel="noopener noreferrer external">
-          {label}
-        </a>
-      </p>
-    </blockquote>
-  );
+  if (line.includes("岸野さんの障害者雇用の心得")) {
+    return "https://x.com/coco_ruuchan/status/2075183030982078880";
+  }
+
+  return null;
 }
 
 export default function MarkdownArticle({
@@ -111,7 +100,10 @@ export default function MarkdownArticle({
     }
 
     if (line.startsWith("[ツイート埋め込み:")) {
-      blocks.push(xReference(line, `x-${index}`));
+      const url = xPostUrl(line);
+      if (url) {
+        blocks.push(<XPostEmbed key={`x-${index}`} url={url} />);
+      }
       index += 1;
       continue;
     }

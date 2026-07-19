@@ -129,6 +129,22 @@ blockquote {
   border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
+.x-post-embed {
+  min-height: 260px;
+  margin: 1.5rem 0;
+}
+
+.x-post-embed .twitter-tweet {
+  max-width: 550px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.x-post-embed iframe {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
 strong {
   color: var(--green-dark);
 }
