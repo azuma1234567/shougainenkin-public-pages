@@ -69,6 +69,19 @@ function xPostUrl(line: string): string | null {
   return null;
 }
 
+function tableCells(line: string): string[] {
+  return line
+    .replace(/^\|/, "")
+    .replace(/\|$/, "")
+    .split("|")
+    .map((cell) => cell.trim());
+}
+
+function isTableDivider(line: string): boolean {
+  const cells = tableCells(line);
+  return cells.length > 1 && cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+}
+
 export default function MarkdownArticle({
   source,
   appCtaSlug,
@@ -105,6 +118,49 @@ export default function MarkdownArticle({
         blocks.push(<XPostEmbed key={`x-${index}`} url={url} />);
       }
       index += 1;
+      continue;
+    }
+
+    if (
+      line.startsWith("|") &&
+      index + 1 < lines.length &&
+      isTableDivider(lines[index + 1].trim())
+    ) {
+      const headers = tableCells(line);
+      const rows: string[][] = [];
+      index += 2;
+
+      while (index < lines.length && lines[index].trim().startsWith("|")) {
+        rows.push(tableCells(lines[index].trim()));
+        index += 1;
+      }
+
+      blocks.push(
+        <div className="article-table-wrap" key={`table-${index}`}>
+          <table>
+            <thead>
+              <tr>
+                {headers.map((header, cellIndex) => (
+                  <th key={cellIndex} scope="col">
+                    {inlineContent(header)}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  {headers.map((_, cellIndex) => (
+                    <td key={cellIndex}>
+                      {inlineContent(row[cellIndex] ?? "")}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>,
+      );
       continue;
     }
 

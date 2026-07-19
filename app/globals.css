@@ -198,6 +198,43 @@ blockquote {
   }
 }
 
+.article-table-wrap {
+  margin: 1.25rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.article-table-wrap table {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  background: var(--card);
+}
+
+.article-table-wrap th,
+.article-table-wrap td {
+  padding: 0.75rem;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.article-table-wrap th {
+  color: var(--green-dark);
+  background: var(--green-pale);
+}
+
+.article-table-wrap th:last-child,
+.article-table-wrap td:last-child {
+  border-right: 0;
+}
+
+.article-table-wrap tbody tr:last-child td {
+  border-bottom: 0;
+}
+
 strong {
   color: var(--green-dark);
 }
