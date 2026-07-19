@@ -517,10 +517,14 @@ strong {
   margin-top: 0;
 }
 
+.app-store-section .small-note {
+  text-align: center;
+}
+
 .app-store-badge-link {
-  display: inline-block;
+  display: block;
   width: min(100%, 280px);
-  margin: 0.75rem 0;
+  margin: 0.75rem auto;
   line-height: 0;
   transition: opacity 160ms ease, transform 160ms ease;
 }
@@ -677,7 +681,7 @@ strong {
 }
 
 .app-cta .app-store-badge-link {
-  margin: 0.5rem 0 0;
+  margin: 0.5rem auto 0;
 }
 
 .references ul {
