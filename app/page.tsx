@@ -197,12 +197,6 @@ export default function HomePage() {
           社会保険労務士などの専門家にご相談ください。
         </p>
       </div>
-
-      <p className="page-links">
-        <Link href="/support">サポート</Link> ・{" "}
-        <Link href="/privacy">プライバシーポリシー</Link> ・{" "}
-        <Link href="/terms">利用規約</Link>
-      </p>
     </>
   );
 }
