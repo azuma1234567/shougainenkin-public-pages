@@ -46,10 +46,6 @@ export default function ColumnsPage() {
           </li>
         ))}
       </ul>
-
-      <p className="page-links">
-        <Link href="/">トップへ戻る</Link>
-      </p>
     </>
   );
 }

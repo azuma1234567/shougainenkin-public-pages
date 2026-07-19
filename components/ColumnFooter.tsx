@@ -91,10 +91,6 @@ export default function ColumnFooter({
           ))}
         </ul>
       </section>
-      <p className="page-links">
-        <Link href="/columns">コラム一覧へ戻る</Link> ・{" "}
-        <Link href="/">トップへ戻る</Link>
-      </p>
     </>
   );
 }

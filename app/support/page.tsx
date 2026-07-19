@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -86,12 +85,6 @@ export default function SupportPage() {
           ※お問い合わせ内容に病歴などの記載は不要です。不具合の状況だけお知らせください。
         </p>
       </div>
-
-      <p className="page-links">
-        <Link href="/">トップへ戻る</Link> ・{" "}
-        <Link href="/privacy">プライバシーポリシー</Link> ・{" "}
-        <Link href="/terms">利用規約</Link>
-      </p>
     </>
   );
 }

@@ -67,12 +67,6 @@ export default function AboutPage() {
       <p className="small-note">
         ※個人で運営しているため、返信まで数日いただくことがあります。
       </p>
-
-      <p className="page-links">
-        <Link href="/">トップへ戻る</Link> ・{" "}
-        <Link href="/columns">コラム</Link> ・{" "}
-        <Link href="/support">サポート</Link>
-      </p>
     </>
   );
 }
