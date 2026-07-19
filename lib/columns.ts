@@ -39,11 +39,13 @@ export const COLUMNS: Column[] = [
   },
   {
     slug: "shindansho-kakunin",
-    title: "障害年金の診断書を受け取ったら — 提出前に確認したいポイント",
+    title:
+      "障害年金の診断書を受け取ったら確認すべき7つのポイント — 「実際より軽く書かれていた」を提出前に防ぐ",
+    metaTitle: "障害年金の診断書を受け取ったら確認すべき7つのポイント",
     description:
-      "医師に書いてもらった障害年金の診断書は、提出前に内容を確認できます。記入漏れや事実と異なる記載がないかを確認するポイントと、修正をお願いするときの伝え方を解説します。",
+      "障害年金の診断書が実際より軽いと感じる理由と、提出前に確認したい7つのポイントを解説。事実と異なる記載があったときの伝え方、更新時の注意も紹介します。",
     datePublished: NEW_COLUMN_DATES["shindansho-kakunin"],
-    dateModified: NEW_COLUMN_DATES["shindansho-kakunin"],
+    dateModified: "2026-07-19",
   },
   {
     slug: "techou-to-nenkin",
@@ -73,11 +75,13 @@ export const COLUMNS: Column[] = [
   },
   {
     slug: "hatachi-mae",
-    title: "20歳前傷病の障害基礎年金とは — 納付要件なし・所得制限ありのしくみ",
+    title:
+      "20歳前傷病の障害基礎年金 — 納付要件を問われない特例と、10代の記録が大切な理由",
+    metaTitle: "20歳前傷病の障害基礎年金 — 納付要件と10代の記録",
     description:
-      "20歳前に初診日がある場合の障害基礎年金を解説。保険料納付要件が問われない理由、20歳になったときの請求(障害認定日の特例)、所得制限があること、請求の進め方を説明します。",
+      "20歳前傷病による障害基礎年金を解説。納付要件が不要となる条件、請求時期、本人の所得による支給制限、10代の通院・学校記録を残す理由を紹介します。",
     datePublished: NEW_COLUMN_DATES["hatachi-mae"],
-    dateModified: NEW_COLUMN_DATES["hatachi-mae"],
+    dateModified: "2026-07-19",
   },
   {
     slug: "fushikyuu-shinsa-seikyu",
@@ -128,11 +132,13 @@ export const COLUMNS: Column[] = [
   },
   {
     slug: "shoshinbi-wakaranai",
-    title: "障害年金の初診日がわからない・カルテがないときの調べ方",
+    title:
+      "障害年金の初診日がわからない・証明できないときの調べ方 — カルテ破棄でも諦める前にやる5つのこと",
+    metaTitle: "障害年金の初診日がわからない・証明できないときの調べ方",
     description:
-      "障害年金の申請は初診日の特定から始まります。初診日の考え方(精神疾患では内科受診が初診になることも)、受診状況等証明書、カルテが破棄されていた場合の対処法を解説します。",
+      "障害年金の初診日がわからない、カルテが破棄されて証明できないときの調べ方を解説。受診状況等証明書、紹介状、第三者証明、家族へ委任する方法を順番に紹介します。",
     datePublished: "2026-07-17",
-    dateModified: "2026-07-17",
+    dateModified: "2026-07-19",
   },
   {
     slug: "moushitatesho-kakikata",

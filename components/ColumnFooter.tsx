@@ -17,6 +17,26 @@ export const NENKIN_REFERENCES = {
     label: "日本年金機構「病歴・就労状況等申立書を提出するとき」",
     href: "https://www.nenkin.go.jp/shinsei/jukyu/shougai/shindansho/20140516.html",
   },
+  diagnosis: {
+    label: "日本年金機構「障害年金の診断書を作成する医師の方へ」",
+    href: "https://www.nenkin.go.jp/shinsei/jukyu/shougai/shindansho/sakusei.html",
+  },
+  firstVisit: {
+    label: "日本年金機構「初診日」",
+    href: "https://www.nenkin.go.jp/service/yougo/sagyo/syosinbi.html",
+  },
+  thirdParty: {
+    label: "日本年金機構「障害年金を請求される皆様へ」",
+    href: "https://www.nenkin.go.jp/service/pamphlet/kyufu.files/0326.pdf",
+  },
+  beforeTwenty: {
+    label: "日本年金機構「20歳前の傷病による障害基礎年金にかかる支給制限等」",
+    href: "https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/jukyu-yoken/20200805.html",
+  },
+  firstVisitProof: {
+    label: "日本年金機構「20歳前障害基礎年金」",
+    href: "https://www.nenkin.go.jp/service/riyoushabetsu/cooperator/kakehashi/bessatu.files/bessatu02.pdf",
+  },
 } as const satisfies Record<string, Reference>;
 
 export const MHLW_REFERENCES = {
