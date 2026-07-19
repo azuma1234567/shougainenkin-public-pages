@@ -19,6 +19,13 @@ export const NENKIN_REFERENCES = {
   },
 } as const satisfies Record<string, Reference>;
 
+export const MHLW_REFERENCES = {
+  seishinGuideline: {
+    label: "厚生労働省「精神の障害に係る等級判定ガイドライン」",
+    href: "https://www.mhlw.go.jp/stf/houdou/0000130041.html",
+  },
+} as const satisfies Record<string, Reference>;
+
 // 記事末尾に置く「参考リンク」と「あわせて読みたい」。
 export default function ColumnFooter({
   currentSlug,
