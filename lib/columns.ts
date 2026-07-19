@@ -29,13 +29,12 @@ const NEW_COLUMN_DATES = {
 export const COLUMNS: Column[] = [
   {
     slug: "ninteibi-jigojusho",
-    title:
-      "障害認定日とは?事後重症との違いと、さかのぼり請求(遡及請求)の基本",
-    metaTitle: "障害認定日とは?事後重症との違いと遡及請求の基本",
+    title: "障害認定日請求と事後重症請求の違い｜最大5年さかのぼるための条件",
+    metaTitle: "障害認定日請求と事後重症請求の違い｜最大5年遡及の条件",
     description:
-      "障害年金の「障害認定日」は原則、初診日から1年6か月後。認定日請求と事後重症請求の違い、最大5年さかのぼれる遡及請求のしくみ、請求を先延ばしにしないほうがよい理由を解説します。",
+      "障害認定日請求と事後重症請求の違い、最大5年分の遡及、認定日頃の診断書が取れない場合の確認事項、額改定請求までわかりやすく解説します。",
     datePublished: NEW_COLUMN_DATES["ninteibi-jigojusho"],
-    dateModified: NEW_COLUMN_DATES["ninteibi-jigojusho"],
+    dateModified: "2026-07-19",
   },
   {
     slug: "shindansho-kakunin",
@@ -57,21 +56,22 @@ export const COLUMNS: Column[] = [
   },
   {
     slug: "shoubyou-teatekin",
-    title: "傷病手当金と障害年金は両方もらえる?関係と切り替えのタイミング",
+    title: "傷病手当金と障害年金は同時にもらえる？併給調整と申請準備の流れ",
+    metaTitle: "傷病手当金と障害年金は同時にもらえる？併給調整と申請準備",
     description:
-      "休職中に受け取る傷病手当金(最長1年6か月)と障害年金の関係を解説。同じ傷病では併給調整があること、傷病手当金の支給期間の終わりが障害年金を検討するタイミングになる理由を説明します。",
+      "傷病手当金と障害年金の併給調整、同じ傷病で受け取る場合の差額支給、遡及時の返還、休職中から始めたい障害年金の準備を解説します。",
     datePublished: NEW_COLUMN_DATES["shoubyou-teatekin"],
-    dateModified: NEW_COLUMN_DATES["shoubyou-teatekin"],
+    dateModified: "2026-07-19",
   },
   {
     slug: "hattatsu-shougai",
     title:
-      "発達障害(ADHD・ASD)で障害年金は受給できる?初診日の考え方と申請のポイント",
-    metaTitle: "発達障害(ADHD・ASD)の障害年金 — 初診日と申請のポイント",
+      "発達障害（ADHD・ASD）で障害年金を申請する方法｜初診日・診断書・申立書",
+    metaTitle: "発達障害（ADHD・ASD）の障害年金｜初診日・診断書・申立書",
     description:
-      "発達障害(ADHD・自閉スペクトラム症)は障害年金の対象です。大人になってから診断された場合の初診日の考え方、二次障害(うつ病など)がある場合、日常生活の実態の伝え方を解説します。",
+      "発達障害で障害年金を申請する際の初診日の分岐、診断書の確認点、出生から書く申立書、就労中の伝え方、遡及・更新まで具体例付きで解説します。",
     datePublished: NEW_COLUMN_DATES["hattatsu-shougai"],
-    dateModified: NEW_COLUMN_DATES["hattatsu-shougai"],
+    dateModified: "2026-07-19",
   },
   {
     slug: "hatachi-mae",
@@ -86,12 +86,12 @@ export const COLUMNS: Column[] = [
   {
     slug: "fushikyuu-shinsa-seikyu",
     title:
-      "障害年金が不支給・想定より低い等級だったとき — 審査請求と再請求という選択肢",
-    metaTitle: "障害年金が不支給・低い等級だったときの審査請求と再請求",
+      "障害年金が不支給になったら｜審査請求・再審査請求・再請求の選び方",
+    metaTitle: "障害年金が不支給になったときの審査請求・再審査請求・再請求",
     description:
-      "障害年金の結果に納得できないときの対処法を解説。3か月以内という審査請求の期限、再審査請求、あらためて請求し直す方法、まず不支給の理由を確認することの大切さを説明します。",
+      "障害年金の不支給後に選べる審査請求、再審査請求、再請求の違いと期限、不支給理由の確認方法、書類を立て直す手順を解説します。",
     datePublished: NEW_COLUMN_DATES["fushikyuu-shinsa-seikyu"],
-    dateModified: NEW_COLUMN_DATES["fushikyuu-shinsa-seikyu"],
+    dateModified: "2026-07-19",
   },
   {
     slug: "jibun-de-shinsei",
@@ -114,11 +114,12 @@ export const COLUMNS: Column[] = [
   },
   {
     slug: "hatarakinagara",
-    title: "働きながら障害年金は受け取れる?精神疾患と就労の関係",
+    title: "働きながら障害年金はもらえる？「働ける＝改善」と誤解されない伝え方",
+    metaTitle: "働きながら障害年金はもらえる？就労実態の伝え方",
     description:
-      "就労していると障害年金は受給できないのか。精神疾患の審査で就労状況がどう見られるか、障害者雇用や職場の配慮の扱い、診断書・申立書に働き方の実態を書くポイントを解説します。",
+      "働きながら障害年金を受給する際に、就労実態、職場の配慮、欠勤、帰宅後の生活を診断書・申立書へ反映する方法を具体例付きで解説します。",
     datePublished: "2026-07-17",
-    dateModified: "2026-07-17",
+    dateModified: "2026-07-19",
   },
   {
     slug: "nofu-yoken",
