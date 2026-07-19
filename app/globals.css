@@ -132,6 +132,7 @@ blockquote {
 .x-post-embed {
   min-height: 260px;
   margin: 1.5rem 0;
+  position: relative;
 }
 
 .x-post-embed .twitter-tweet {
@@ -143,6 +144,58 @@ blockquote {
 .x-post-embed iframe {
   margin-right: auto !important;
   margin-left: auto !important;
+}
+
+.x-post-embed[data-state="loading"]::before {
+  content: "";
+  display: block;
+  width: min(100%, 550px);
+  height: 210px;
+  margin: 0 auto;
+  border-radius: 14px;
+  background: linear-gradient(
+    100deg,
+    #f0eee8 30%,
+    #faf9f6 45%,
+    #f0eee8 60%
+  );
+  background-size: 200% 100%;
+  animation: x-post-loading 1.4s ease-in-out infinite;
+}
+
+.x-post-embed[data-state="loading"] > .twitter-tweet {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.x-post-embed[data-state="loaded"] {
+  min-height: 0;
+}
+
+.x-post-embed[data-state="fallback"] {
+  min-height: 0;
+}
+
+.x-post-fallback p {
+  margin-top: 0;
+}
+
+@keyframes x-post-loading {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .x-post-embed[data-state="loading"]::before {
+    animation: none;
+  }
 }
 
 strong {
