@@ -357,11 +357,6 @@ strong {
   color: #ffffff;
 }
 
-.site-footer .copyright {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.9);
-}
-
 /* ---- アクセス解析の同意 ---- */
 
 .analytics-consent-banner {

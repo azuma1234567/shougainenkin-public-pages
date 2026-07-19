@@ -29,6 +29,4 @@ export const appStoreLink = (_ct: string) => APP_STORE_URL;
 
 export const CONTACT_EMAIL = "shougainenkinsupport@gmail.com";
 
-export const COPYRIGHT = "© 2026 あずまたいすけ";
-
 export const AUTHOR_NAME = "あずまたいすけ";

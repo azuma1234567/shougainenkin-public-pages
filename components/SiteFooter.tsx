@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { COPYRIGHT, SITE_NAME } from "@/lib/constants";
+import { SITE_NAME } from "@/lib/constants";
 import AnalyticsConsent from "@/components/AnalyticsConsent";
 
 export default function SiteFooter() {
@@ -16,7 +16,6 @@ export default function SiteFooter() {
           <Link href="/terms">利用規約</Link>
         </nav>
         <AnalyticsConsent />
-        <p className="copyright">{COPYRIGHT}</p>
       </div>
     </footer>
   );
