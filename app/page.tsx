@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AppStoreBadge from "@/components/AppStoreBadge";
 import {
   APP_STORE_URL,
   AUTHOR_NAME,
@@ -90,15 +91,7 @@ export default function HomePage() {
         </p>
         <p className="small-note">無料・アプリ内課金あり</p>
         <p>
-          <a
-            className="store-button"
-            href={APP_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer external"
-            aria-label="App Storeから障害年金申請サポートを無料でダウンロード（新しいタブで開きます）"
-          >
-            App Storeから無料でダウンロード
-          </a>
+          <AppStoreBadge href={APP_STORE_URL} />
         </p>
       </section>
 

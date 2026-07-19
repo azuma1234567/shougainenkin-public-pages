@@ -1,4 +1,5 @@
 import { appStoreLink } from "@/lib/constants";
+import AppStoreBadge from "@/components/AppStoreBadge";
 
 // 記事に挿入する共通の「アプリ紹介」CTA。
 // ct には記事slugを渡す(App Storeキャンペーンリンクの計測用)。
@@ -12,15 +13,7 @@ export default function AppCta({ ct }: { ct: string }) {
         ログイン不要・記録は端末の中に。基本機能は無料です。
       </p>
       <p>
-        <a
-          className="store-button"
-          href={appStoreLink(ct)}
-          target="_blank"
-          rel="noopener noreferrer external"
-          aria-label="App Storeで障害年金申請サポートを見る（新しいタブで開きます）"
-        >
-          App Storeで見る
-        </a>
+        <AppStoreBadge href={appStoreLink(ct)} />
       </p>
     </aside>
   );

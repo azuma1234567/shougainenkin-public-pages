@@ -517,33 +517,28 @@ strong {
   margin-top: 0;
 }
 
-.store-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  background-color: var(--green);
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: var(--radius-sm);
-  padding: 0.7rem 1.8rem;
-  font-weight: 700;
+.app-store-badge-link {
+  display: inline-block;
+  width: min(100%, 280px);
   margin: 0.75rem 0;
+  line-height: 0;
+  transition: opacity 160ms ease, transform 160ms ease;
 }
 
-.store-button:hover {
-  background-color: var(--green-dark);
-  color: #ffffff;
+.app-store-badge-link:hover {
+  opacity: 0.86;
+  transform: translateY(-1px);
 }
 
-@media (max-width: 480px) {
-  .store-button {
-    width: 100%;
-    min-height: 52px;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    text-align: center;
-  }
+.app-store-badge-link:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 4px;
+}
+
+.app-store-badge-image {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .page-links {
@@ -681,7 +676,7 @@ strong {
   margin: 0 0 0.5rem;
 }
 
-.app-cta .store-button {
+.app-cta .app-store-badge-link {
   margin: 0.5rem 0 0;
 }
 
