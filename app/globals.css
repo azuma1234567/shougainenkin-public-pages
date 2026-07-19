@@ -247,23 +247,23 @@ strong {
   color: #ffffff;
 }
 
-.analytics-settings-button {
+.analytics-preference-button {
   appearance: none;
-  background: none;
-  border: 0;
-  color: #ffffff;
+  background: #ffffff;
+  border: 1px solid var(--green);
+  border-radius: var(--radius-sm);
+  color: var(--green);
   cursor: pointer;
   font: inherit;
   font-size: 0.85rem;
-  margin: 0 0 0.5rem;
-  padding: 0.6rem 0.5rem;
+  font-weight: 700;
+  padding: 0.65rem 1rem;
   min-height: 44px;
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
-.analytics-settings-button:hover,
-.analytics-settings-button:focus-visible {
+.analytics-preference-button:hover,
+.analytics-preference-button:focus-visible {
+  background: var(--green);
   color: #ffffff;
 }
 

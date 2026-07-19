@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AnalyticsConsentSettingsButton } from "@/components/AnalyticsConsent";
 import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -27,7 +28,7 @@ export default function PrivacyPage() {
       <h1>プライバシーポリシー</h1>
 
       <p className="meta-line">制定日: 2026年7月12日</p>
-      <p className="meta-line">最終改定日: 2026年7月17日</p>
+      <p className="meta-line">最終改定日: 2026年7月19日</p>
       <p className="meta-line">運営者: あずまたいすけ(個人)</p>
 
       <p>
@@ -191,8 +192,10 @@ export default function PrivacyPage() {
       <p>
         利用者は、初回訪問時の同意バナーからアクセス解析を許可または拒否できます。
         同意しない場合および拒否した場合は、Google Analyticsタグを読み込まず、
-        Google Analyticsへの通信を行いません。選択後も、フッターの
-        「アクセス解析設定」からいつでも変更できます。
+        Google Analyticsへの通信を行いません。選択後も、下のボタンからいつでも変更できます。
+      </p>
+      <p>
+        <AnalyticsConsentSettingsButton />
       </p>
       <p>
         Google Analyticsへ送信するページ情報からは、URLのクエリ文字列とハッシュを除外します。

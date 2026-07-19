@@ -7,6 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const CONSENT_STORAGE_KEY = "analytics-consent-v1";
 const GA_MEASUREMENT_ID = "G-PHHDYX0H53";
+const OPEN_SETTINGS_EVENT = "open-analytics-consent-settings";
 
 type ConsentChoice = "granted" | "denied";
 
@@ -128,6 +129,13 @@ export default function AnalyticsConsent() {
   }, [isBannerOpen]);
 
   useEffect(() => {
+    const openSettings = () => setIsBannerOpen(true);
+
+    window.addEventListener(OPEN_SETTINGS_EVENT, openSettings);
+    return () => window.removeEventListener(OPEN_SETTINGS_EVENT, openSettings);
+  }, []);
+
+  useEffect(() => {
     if (
       consent !== "granted" ||
       !analyticsInitialized ||
@@ -175,14 +183,6 @@ export default function AnalyticsConsent() {
 
   return (
     <>
-      <button
-        type="button"
-        className="analytics-settings-button"
-        onClick={() => setIsBannerOpen(true)}
-      >
-        アクセス解析設定
-      </button>
-
       {consent === "granted" ? (
         <Script
           id="google-analytics-gtag"
@@ -238,5 +238,22 @@ export default function AnalyticsConsent() {
         </section>
       ) : null}
     </>
+  );
+}
+
+export function AnalyticsConsentSettingsButton() {
+  const openSettings = () => {
+    window.dispatchEvent(new Event(OPEN_SETTINGS_EVENT));
+  };
+
+  return (
+    <button
+      type="button"
+      className="analytics-preference-button"
+      aria-haspopup="dialog"
+      onClick={openSettings}
+    >
+      アクセス解析の選択を変更
+    </button>
   );
 }
