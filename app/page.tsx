@@ -43,7 +43,7 @@ const FEATURES = [
   {
     title: "診察メモ",
     body:
-      "貯まったメモから、先生が約30秒で読める1枚を作成し、印刷して診察に持っていけます。日常が伝わるほど、診断書にあなたの実態が反映されます。",
+      "貯まったメモから、先生が約60〜90秒で読める1枚を作成し、印刷して診察に持っていけます。日常が伝わるほど、診断書にあなたの実態が反映されます。",
     image: SHOT.shinsatsuMemo,
     alt: "診察で見せられる1枚のメモを確認する画面",
   },
@@ -227,7 +227,7 @@ export default function HomePage() {
             </span>
             <span className="lp-step-body">
               <span className="lp-step-text">
-                診察前に、先生が約30秒で読める1枚に
+                診察前に、先生が約60〜90秒で読める1枚に
               </span>
               <span className="lp-step-note">印刷して持っていけます</span>
             </span>
