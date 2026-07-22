@@ -12,6 +12,9 @@
   --border: #ddd6c8;
   --card-border: rgba(46, 99, 80, 0.28);
   --note-bg: #efe9da;
+  /* ストア用スクリーンショットの金色アクセントと揃える */
+  --marker: rgba(226, 185, 92, 0.5);
+  --accent: #b3873a;
   --radius: 14px;
   --radius-sm: 10px;
 }
@@ -472,72 +475,10 @@ strong {
   }
 }
 
-/* ---- トップページ ---- */
-
-.hero {
-  padding: 1rem 0 0.5rem;
-}
-
-/* トップのh1(サイト名)は控えめにし、キャッチコピーを主役にする */
-.hero h1 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--green);
-  margin: 0 0 0.75rem;
-}
-
-.catchcopy {
-  font-size: clamp(1.6rem, 5.5vw, 2.05rem);
-  font-weight: 700;
-  color: var(--green-dark);
-  line-height: 1.45;
-  margin: 0 0 1rem;
-}
+/* ---- 汎用 ---- */
 
 .lead {
   font-size: 1.02rem;
-}
-
-.feature-cards {
-  display: grid;
-  gap: 1rem;
-  margin: 1.25rem 0;
-}
-
-.feature-card {
-  background-color: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius);
-  padding: 1.2rem 1.35rem;
-}
-
-.feature-card h3 {
-  margin: 0 0 0.5rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-}
-
-.feature-num {
-  flex: none;
-  width: 1.7rem;
-  height: 1.7rem;
-  margin-top: 0.15rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--green);
-  color: #ffffff;
-  border-radius: 50%;
-  font-size: 0.95rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.feature-card p {
-  margin: 0.5rem 0 0;
-  font-size: 0.97rem;
 }
 
 .check-list {
@@ -628,6 +569,8 @@ strong {
   display: block;
   width: 100%;
   height: auto;
+  /* 画像四隅の白地を、濃色背景の上でも見せないよう角丸でクリップ */
+  border-radius: 12px;
 }
 
 /* ---- パンくず ---- */
@@ -808,22 +751,39 @@ strong {
   padding-top: 3rem;
 }
 
-/* ---- アプリLP(/app) ---- */
+/* ---- トップページLP ----
+ * アプリのストア用スクリーンショットと同じデザイン言語で揃える。
+ * 生成り背景 / 深緑の見出し / 金色のマーカー下線がアクセント。
+ */
 
 /* スクリーンショットは端末フレーム・背景込みの完成画像。
-   追加のフレームは付けず、幅だけ抑えて表示する。 */
+   角丸と淡い影だけ足してカードとして見せる。 */
 .lp-shot-image {
   display: block;
   width: 100%;
   height: auto;
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(35, 76, 61, 0.16);
 }
 
+/* 金色のマーカー下線(ストア画像の下線アクセントと同じ) */
+.lp-marker {
+  background-image: linear-gradient(
+    transparent 68%,
+    var(--marker) 68%,
+    var(--marker) 94%,
+    transparent 94%
+  );
+  padding: 0 0.08em;
+}
+
+/* ヒーロー */
 .lp-hero {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1.25rem 1.75rem;
-  padding: 1.25rem 0 0.5rem;
+  gap: 1.5rem 2rem;
+  padding: 1.5rem 0 1rem;
 }
 
 .lp-hero-copy {
@@ -831,22 +791,31 @@ strong {
   min-width: 0;
 }
 
-.lp-hero-title {
-  font-size: clamp(1.5rem, 5.2vw, 1.95rem);
+.lp-eyebrow {
+  font-size: 0.85rem;
   font-weight: 700;
-  line-height: 1.5;
-  color: var(--green-dark);
+  letter-spacing: 0.1em;
+  color: var(--green);
   margin: 0 0 0.9rem;
+}
+
+.lp-hero-title {
+  font-size: clamp(1.65rem, 6vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  color: var(--green-dark);
+  margin: 0 0 1rem;
 }
 
 .lp-hero-sub {
   font-size: 1.02rem;
-  margin: 0 0 1.25rem;
+  margin: 0 0 1.5rem;
 }
 
 .lp-hero-shot {
   flex: 0 1 15rem;
-  width: min(60%, 15rem);
+  width: min(62%, 15rem);
   margin: 0 auto;
 }
 
@@ -865,30 +834,80 @@ strong {
   margin: 0.4rem 0 0;
 }
 
-/* 3ステップ */
+/* セクション共通 */
+.lp-section {
+  margin: 3.5rem 0;
+}
+
+.lp-section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--green);
+  margin: 0 0 0.5rem;
+}
+
+.lp-section-label::before {
+  content: "";
+  width: 1.4rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background-color: var(--marker);
+}
+
+/* セクション見出しはh2既定の左罫線をやめ、大きめの文字で見せる */
+.lp-heading {
+  margin: 0 0 1rem;
+  padding: 0;
+  border-left: 0;
+  font-size: clamp(1.35rem, 4.8vw, 1.65rem);
+  line-height: 1.55;
+  font-weight: 800;
+}
+
+/* 3ステップ: カードを「↓」でつなぐ */
 .lp-steps {
   list-style: none;
   padding: 0;
-  margin: 1.25rem 0;
-  display: grid;
-  gap: 0.85rem;
+  margin: 1.5rem 0 1rem;
 }
 
 .lp-step {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 1rem;
   margin: 0;
   background-color: var(--card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
-  padding: 0.95rem 1.15rem;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 3px 12px rgba(35, 76, 61, 0.07);
+}
+
+.lp-step:not(:last-child) {
+  margin-bottom: 2.1rem;
+}
+
+.lp-step:not(:last-child)::after {
+  content: "↓";
+  position: absolute;
+  left: 50%;
+  bottom: -1.95rem;
+  transform: translateX(-50%);
+  color: var(--green);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.7;
 }
 
 .lp-step-num {
   flex: none;
-  width: 2rem;
-  height: 2rem;
+  width: 2.2rem;
+  height: 2.2rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -899,10 +918,27 @@ strong {
   line-height: 1;
 }
 
+.lp-step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
 .lp-step-text {
   font-weight: 700;
   color: var(--green-dark);
   font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.lp-step-note {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.lp-steps-note {
+  text-align: center;
 }
 
 /* 機能紹介 */
@@ -916,11 +952,12 @@ strong {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem 1.5rem;
+  gap: 1rem 1.75rem;
   background-color: var(--card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
-  padding: 1.25rem 1.35rem;
+  padding: 1.4rem 1.5rem;
+  box-shadow: 0 3px 12px rgba(35, 76, 61, 0.07);
 }
 
 .lp-feature-shot {
@@ -936,6 +973,17 @@ strong {
 
 .lp-feature-copy h3 {
   margin: 0 0 0.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-size: 1.15rem;
+}
+
+.lp-feature-num {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
 }
 
 .lp-feature-copy p {
@@ -948,6 +996,78 @@ strong {
   .lp-feature:nth-child(even) .lp-feature-shot {
     order: 2;
   }
+}
+
+/* 料金カード */
+.lp-price-cards {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+@media (min-width: 560px) {
+  .lp-price-cards {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.lp-price-card {
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+  box-shadow: 0 3px 12px rgba(35, 76, 61, 0.07);
+}
+
+.lp-price-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--green);
+  margin: 0 0 0.3rem;
+}
+
+.lp-price-amount {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--green-dark);
+  margin: 0 0 0.6rem;
+  line-height: 1.4;
+}
+
+.lp-price-unit {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.lp-price-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lp-price-card li {
+  margin: 0.45rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.lp-price-card li::before {
+  content: "✓";
+  position: absolute;
+  left: 0.1rem;
+  top: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.lp-price-note {
+  margin: 0.7rem 0 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
 }
 
 /* FAQ */
@@ -968,35 +1088,81 @@ strong {
   font-weight: 700;
   color: var(--green-dark);
   margin-bottom: 0.35rem;
+  padding-left: 1.6rem;
+  position: relative;
+}
+
+.lp-faq-item dt::before {
+  content: "Q";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+  font-weight: 800;
 }
 
 .lp-faq-item dd {
   margin: 0;
   font-size: 0.97rem;
+  padding-left: 1.6rem;
 }
 
-/* 最終CTA */
+/* コラム導線 */
+.lp-column-list {
+  margin: 1.25rem 0 1rem;
+}
+
+.lp-columns-more {
+  text-align: center;
+  margin: 1.25rem 0 0;
+}
+
+.lp-columns-more-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.6rem 1.6rem;
+  border: 1.5px solid var(--green);
+  border-radius: 999px;
+  color: var(--green);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.lp-columns-more-link:hover {
+  background-color: var(--green);
+  color: #ffffff;
+}
+
+/* 最終CTA: 深緑の帯で締める */
 .lp-final-cta {
-  background-color: var(--card);
-  border: 1px solid var(--card-border);
+  background-color: var(--green);
   border-radius: var(--radius);
-  padding: 1.5rem 1.35rem;
-  margin: 2.5rem 0;
+  padding: 2rem 1.5rem;
+  margin: 3.5rem 0 2.5rem;
   text-align: center;
 }
 
 .lp-final-cta h2 {
-  margin-top: 0;
+  margin: 0;
   border-left: 0;
-  padding-left: 0;
+  padding: 0;
+  color: #ffffff;
+  font-size: clamp(1.25rem, 4.5vw, 1.5rem);
 }
 
 .lp-final-cta .app-store-badge-link {
-  margin: 0.75rem auto 0;
+  margin: 1.1rem auto 0;
 }
 
 .lp-final-cta .lp-cta-note {
   text-align: center;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.lp-final-cta :focus-visible {
+  outline-color: #ffffff;
 }
 
 /* モバイル追従フッターCTA */
@@ -1037,64 +1203,4 @@ strong {
   main:has(.lp-sticky-cta) {
     padding-bottom: 6rem;
   }
-}
-
-/* ---- トップページ: アプリ導線バナー ---- */
-
-.home-app-banner {
-  background-color: var(--green);
-  color: #ffffff;
-  border-radius: var(--radius);
-  padding: 1.4rem 1.5rem;
-  margin: 0.5rem 0 2rem;
-}
-
-.home-app-banner-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 0.4rem;
-  padding: 0;
-  border: 0;
-  line-height: 1.5;
-}
-
-.home-app-banner-lead {
-  margin: 0 0 1rem;
-  font-size: 0.98rem;
-  color: rgba(255, 255, 255, 0.92);
-}
-
-.home-app-banner-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.85rem 1rem;
-}
-
-.home-app-banner-link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0.6rem 1.2rem;
-  background-color: #ffffff;
-  color: var(--green-dark);
-  font-weight: 700;
-  text-decoration: none;
-  border-radius: var(--radius-sm);
-}
-
-.home-app-banner-link:hover {
-  color: var(--green-dark);
-  background-color: #f0ece1;
-  text-decoration: none;
-}
-
-.home-app-banner .app-store-badge-link {
-  width: min(100%, 220px);
-  margin: 0;
-}
-
-.home-app-banner :focus-visible {
-  outline-color: #ffffff;
 }

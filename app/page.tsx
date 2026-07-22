@@ -1,17 +1,20 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import AppStoreBadge from "@/components/AppStoreBadge";
+import { COLUMNS_BY_DATE, formatDate } from "@/lib/columns";
 import {
   APP_STORE_URL,
   AUTHOR_NAME,
   SITE_NAME,
   SITE_URL,
 } from "@/lib/constants";
-import { pageMetadata } from "@/lib/seo";
+import { faqJsonLd, pageMetadata } from "@/lib/seo";
 
-const PAGE_TITLE = "障害年金申請サポート｜申請準備・記録・申立書の下書きを支援";
+const PAGE_TITLE =
+  "障害年金申請サポート｜日々のメモが診察メモと申立書になるアプリ";
 const PAGE_DESCRIPTION =
-  "障害年金の申請準備を、ひとつずつ。日々の困りごとを記録し、診察で医師に見せる資料や病歴・就労状況等申立書の下書き作成を支援するiPhoneアプリです。";
+  "障害年金の申請準備を自分で進めるためのiOSアプリ。日々のひとことメモから、診察で見せられる1枚と申立書の下書きを作成。費用を抑えて、受給の可能性を高める準備を。";
 
 export const metadata: Metadata = pageMetadata({
   title: PAGE_TITLE,
@@ -19,6 +22,80 @@ export const metadata: Metadata = pageMetadata({
   path: "/",
   absoluteTitle: true,
 });
+
+// 差し替え可能なスクリーンショットのパス。画像は public/app/ 配下。
+const SHOT = {
+  home: "/app/screenshot-home.png",
+  hitokotoMemo: "/app/screenshot-hitokoto-memo.png",
+  shinsatsuMemo: "/app/screenshot-shinsatsu-memo.png",
+  moushitatesho: "/app/screenshot-moushitatesho.png",
+  kuichigai: "/app/screenshot-kuichigai.png",
+} as const;
+
+const FEATURES = [
+  {
+    title: "ひとことメモ",
+    body:
+      "単語ひとつでも保存できます。保存すると自動で日時が付き、記録した瞬間の日時がそのまま記録の力になります。",
+    image: SHOT.hitokotoMemo,
+    alt: "つらいことを短いメモで記録する画面",
+  },
+  {
+    title: "診察メモ",
+    body:
+      "貯まったメモから、先生が約30秒で読める1枚を作成し、印刷して診察に持っていけます。日常が伝わるほど、診断書にあなたの実態が反映されます。",
+    image: SHOT.shinsatsuMemo,
+    alt: "診察で見せられる1枚のメモを確認する画面",
+  },
+  {
+    title: "申立書",
+    body:
+      "病歴・就労状況等申立書を、記録をもとに公式様式で作成・印刷できます。診断書と食い違いのない内容に整えられます。",
+    image: SHOT.moushitatesho,
+    alt: "病歴・就労状況等申立書を順番に作成する画面",
+  },
+  {
+    title: "食い違いチェック",
+    body:
+      "診断書を受け取ったあと、申立書との間で食い違って見える箇所を確認できます。",
+    image: SHOT.kuichigai,
+    alt: "診断書と申立書の食い違いを確認する画面",
+  },
+  {
+    title: "申請ガイド",
+    body: "初診日の確認から提出までの手順を、順番に進められます。",
+    image: SHOT.home,
+    alt: "申請の流れとやることリストを表示するホーム画面",
+  },
+] as const;
+
+const FAQS = [
+  {
+    question: "無料で使えますか？",
+    answer: "無料で始められます。AIによる文章作成には月間の無料枠があります。",
+  },
+  {
+    question: "Androidには対応していますか？",
+    answer: "現在はiOSのみです。",
+  },
+  {
+    question: "記録した内容はどこに保存されますか？",
+    answer:
+      "記録は端末内に保存されます。AI機能の利用時のみ、同意のうえで対象の文章を送信します。",
+  },
+  {
+    question: "毎日記録しないといけませんか？",
+    answer:
+      "いいえ。書けない日があっても大丈夫です。単語ひとつのメモでも、日時つきの記録として残ります。",
+  },
+  {
+    question: "専門家に依頼するか迷っています。",
+    answer:
+      "初診日の証明が難しい場合や審査請求が必要な場合は、専門家への相談をおすすめします。まず自分で準備を進めたい方に、このアプリは向いています。",
+  },
+] as const;
+
+const LATEST_COLUMNS = COLUMNS_BY_DATE.slice(0, 4);
 
 const homeJsonLd = {
   "@context": "https://schema.org",
@@ -64,6 +141,10 @@ const homeJsonLd = {
   ],
 };
 
+const faq = faqJsonLd(
+  FAQS.map((f) => ({ question: f.question, answer: f.answer })),
+);
+
 export default function HomePage() {
   return (
     <>
@@ -71,139 +152,266 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
       />
-      <aside className="home-app-banner" aria-labelledby="home-app-banner-title">
-        <p id="home-app-banner-title" className="home-app-banner-title">
-          アプリで、申請の準備を始められます
-        </p>
-        <p className="home-app-banner-lead">
-          日々のひとことメモが、診察で見せる1枚と申立書になります。
-        </p>
-        <div className="home-app-banner-actions">
-          <Link href="/app" className="home-app-banner-link">
-            アプリについて詳しく見る
-          </Link>
-          <AppStoreBadge href={APP_STORE_URL} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
+      />
+
+      {/* 1. ヒーロー */}
+      <section className="lp-hero">
+        <div className="lp-hero-copy">
+          <p className="lp-eyebrow">{SITE_NAME}｜iOSアプリ</p>
+          <h1 className="lp-hero-title">
+            障害年金の申請、
+            <br />
+            <span className="lp-marker">ひとりで抱えていませんか。</span>
+          </h1>
+          <p className="lp-hero-sub">
+            専門家に頼むか、自分でやるか。費用を考えて迷っているなら——
+            日々のひとことメモから申請の準備を整えられるアプリがあります。
+          </p>
+          <div className="lp-cta">
+            <AppStoreBadge href={APP_STORE_URL} />
+            <p className="lp-cta-note">無料で始められます（iOS）</p>
+          </div>
         </div>
-      </aside>
-
-      <section className="hero">
-        <h1>{SITE_NAME}</h1>
-
-        <p className="catchcopy">障害年金の申請準備を、ひとつずつ。</p>
-
-        <p className="lead">
-          日々の記録が、診察で医師に渡せる資料になり、申立書の下書きになる。
-          ログイン不要・記録は端末の中に。申請準備のための記録・整理アプリです。
-        </p>
-
+        <div className="lp-hero-shot">
+          <Image
+            className="lp-shot-image"
+            src={SHOT.home}
+            alt="障害年金申請サポートのホーム画面"
+            width={1242}
+            height={2688}
+            sizes="(max-width: 720px) 70vw, 320px"
+            priority
+          />
+        </div>
       </section>
 
-      <section className="app-store-section" aria-labelledby="app-store-heading">
-        <h2 id="app-store-heading">障害年金申請サポートをApp Storeで公開中</h2>
+      {/* 2. 課題（審査のしくみ） */}
+      <section className="lp-section" aria-labelledby="lp-problem-heading">
+        <p className="lp-section-label">審査のしくみ</p>
+        <h2 id="lp-problem-heading" className="lp-heading">
+          審査で大切なのは、
+          <span className="lp-marker">日常の実態</span>
+          が書類に載ることです
+        </h2>
         <p>
-          日々の「困ったこと」を記録し、診察で医師に見せる資料や、
-          病歴・就労状況等申立書の下書きづくりにつなげられるiPhoneアプリです。
-        </p>
-        <p className="small-note">無料・アプリ内課金あり</p>
-        <p>
-          <AppStoreBadge href={APP_STORE_URL} />
+          障害年金の審査は、提出された書類で行われます。中心になるのは、
+          主治医が書く診断書です。診断書には日常生活について先生が記入する欄が
+          ありますが、先生が知っているのは診察室でのあなただけ。日常の様子は、
+          伝えなければ診断書に反映されません。ここが、受給の可能性を左右する
+          分かれ目になります。
         </p>
       </section>
 
-      <h2>こんな方のためのアプリです</h2>
-
-      <p>
-        障害年金の申請を考えているけれど、何から手をつければいいか分からない。
-        日々の大変さを、診察や書類でうまく伝えられない。
-        そんな方が、ひとりで抱え込まずに準備を進められるようにつくりました。
-      </p>
-
-      <h2>できること</h2>
-
-      <div className="feature-cards">
-        <section className="feature-card">
-          <h3>
-            <span className="feature-num">1</span>
-            毎回の診察で医師に渡せる、あなたの生活の記録
-          </h3>
-
-          <p>
-            医師があなたを診られるのは、診察室にいる短い時間だけです。
-            このアプリでは、日々の煩わしかったこと・辛かったことを短いメモで残していくだけで、
-            診察のたびに医師へ渡せる1枚の資料ができあがります。
-          </p>
-          <p>
-            書けることが少ない日でも大丈夫。押さえておきたいところをAIが質問で引き出し、
-            事実を変えずに、伝わる文章へ整えます。整えた文章は、必ずあなた自身が内容を
-            確認してから保存される仕組みです。
-          </p>
-        </section>
-
-        <section className="feature-card">
-          <h3>
-            <span className="feature-num">2</span>
-            記憶をたどる申立書づくりを、AIが手助け
-          </h3>
-
-          <p>
-            病歴・就労状況等申立書は、発病から現在までの出来事を期間ごとに書いていく書類で、
-            1人で書き上げるのはとても大変です。忘れていることがあっても、AIが質問しながら
-            記憶をたどるお手伝いをします。アプリの質問に順番に答えていくだけで下書きが形になり、
-            提出を想定したフォーマットで印刷できます。
-          </p>
-        </section>
-
-        <section className="feature-card">
-          <h3>
-            <span className="feature-num">3</span>
-            いま自分がどの段階にいるか、一目でわかる
-          </h3>
-
-          <p>
-            初診日の確認、保険料納付要件、年金事務所への相談、書類の準備、提出、結果の記録まで。
-            自分がいまどのステップにいて、何がまだ済んでいないのかが、ホーム画面でいつでも
-            分かります。
-          </p>
-        </section>
-      </div>
-
-      <p className="small-note">
-        <Link href="/columns">コラム: 申請準備に役立つ記事</Link>
-      </p>
-
-      <h2>料金</h2>
-
-      <p>
-        基本機能(記録、診察前メモ、申立書の下書き、書類の表示・印刷)は無料です。
-        AIによる文章の整えも、無料で月75回(1日25回)までご利用いただけます。
-      </p>
-      <p>
-        もっと使いたい方のために、プレミアムプラン(月額600円・自動更新)をご用意しています。
-        AIの利用が無制限になり、書類のPDF保存・共有、記録のバックアップが使えます。
-        いつでも解約できます。
-      </p>
-
-      <h2>安心して使えるように</h2>
-
-      <ul className="check-list">
-        <li>ログイン・本名・メールアドレスは不要です</li>
-        <li>記録はお使いの端末の中に保存されます</li>
-        <li>
-          AI機能を使うときだけ、対象の文章がサーバー経由でAIに送信されます
-          (サーバーには本文を残さない方針です)
-        </li>
-      </ul>
-
-      <h2>大切なお願い</h2>
-
-      <div className="note-box">
-        <p>
-          このアプリは、障害年金申請の準備を補助する記録・整理ツールです。
-          医療診断、治療方針の判断、年金受給の可否判断は行いません。
-          本アプリの利用により受給が保証されるものではありません。
-          申請内容は必ずご本人が確認し、必要に応じて医師・年金事務所・
-          社会保険労務士などの専門家にご相談ください。
+      {/* 3. 解決（3ステップ） */}
+      <section className="lp-section" aria-labelledby="lp-steps-heading">
+        <p className="lp-section-label">使い方</p>
+        <h2 id="lp-steps-heading" className="lp-heading">
+          日々のひとことが、申請の準備になります
+        </h2>
+        <ol className="lp-steps">
+          <li className="lp-step">
+            <span className="lp-step-num" aria-hidden="true">
+              1
+            </span>
+            <span className="lp-step-body">
+              <span className="lp-step-text">つらいとき、ひとことメモ</span>
+              <span className="lp-step-note">単語ひとつでも</span>
+            </span>
+          </li>
+          <li className="lp-step">
+            <span className="lp-step-num" aria-hidden="true">
+              2
+            </span>
+            <span className="lp-step-body">
+              <span className="lp-step-text">
+                診察前に、先生が約30秒で読める1枚に
+              </span>
+              <span className="lp-step-note">印刷して持っていけます</span>
+            </span>
+          </li>
+          <li className="lp-step">
+            <span className="lp-step-num" aria-hidden="true">
+              3
+            </span>
+            <span className="lp-step-body">
+              <span className="lp-step-text">
+                貯まった記録から、申立書の下書きに
+              </span>
+              <span className="lp-step-note">公式と同じ形式で印刷</span>
+            </span>
+          </li>
+        </ol>
+        <p className="small-note lp-steps-note">
+          毎日書く必要はありません。書けない日があっても大丈夫です。
         </p>
+      </section>
+
+      {/* 4. 機能紹介 */}
+      <section className="lp-section" aria-labelledby="lp-features-heading">
+        <p className="lp-section-label">機能</p>
+        <h2 id="lp-features-heading" className="lp-heading">
+          アプリでできること
+        </h2>
+        <div className="lp-features">
+          {FEATURES.map((f, i) => (
+            <article key={f.title} className="lp-feature">
+              <div className="lp-feature-shot">
+                <Image
+                  className="lp-shot-image"
+                  src={f.image}
+                  alt={f.alt}
+                  width={1242}
+                  height={2688}
+                  sizes="(max-width: 720px) 60vw, 280px"
+                />
+              </div>
+              <div className="lp-feature-copy">
+                <h3>
+                  <span className="lp-feature-num" aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  {f.title}
+                </h3>
+                <p>{f.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. 費用 */}
+      <section className="lp-section" aria-labelledby="lp-price-heading">
+        <p className="lp-section-label">費用</p>
+        <h2 id="lp-price-heading" className="lp-heading">
+          費用を抑えて、準備を進められます
+        </h2>
+        <p>
+          専門家への依頼には、まとまった費用がかかることがあります。
+          このアプリは無料で始められ、必要な準備の多くを自分のペースで
+          進められます。
+        </p>
+        <div className="lp-price-cards">
+          <div className="lp-price-card">
+            <p className="lp-price-name">基本機能</p>
+            <p className="lp-price-amount">無料</p>
+            <ul>
+              <li>記録・診察前メモ・申立書の下書き</li>
+              <li>書類の表示・印刷</li>
+              <li>AIの文章整理は月75回まで</li>
+            </ul>
+          </div>
+          <div className="lp-price-card">
+            <p className="lp-price-name">プレミアムプラン</p>
+            <p className="lp-price-amount">
+              月額600円
+              <span className="lp-price-unit">（自動更新）</span>
+            </p>
+            <ul>
+              <li>AIの文章整理が無制限</li>
+              <li>書類のPDF保存・共有</li>
+              <li>記録のバックアップ</li>
+            </ul>
+            <p className="lp-price-note">いつでも解約できます。</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. 安心して使えるように */}
+      <section className="lp-section" aria-labelledby="lp-safety-heading">
+        <p className="lp-section-label">プライバシー</p>
+        <h2 id="lp-safety-heading" className="lp-heading">
+          安心して使えるように
+        </h2>
+        <ul className="check-list">
+          <li>ログイン・本名・メールアドレスは不要です</li>
+          <li>記録はお使いの端末の中に保存されます</li>
+          <li>
+            AI機能を使うときだけ、同意のうえで対象の文章がサーバー経由で
+            AIに送信されます(サーバーには本文を残さない方針です)
+          </li>
+        </ul>
+      </section>
+
+      {/* 7. できないこと */}
+      <section className="lp-section" aria-labelledby="lp-cannot-heading">
+        <p className="lp-section-label">正直にお伝えします</p>
+        <h2 id="lp-cannot-heading" className="lp-heading">
+          このアプリにできないこと
+        </h2>
+        <div className="note-box">
+          <p>
+            初診日を証明する書類の取得代行や、不支給となった場合の審査請求の
+            支援は行いません。また、医療診断や、受給の可否・等級の判断を
+            したり、お約束したりするものではありません。これらが必要な場合は、
+            年金事務所や社会保険労務士などの専門家への相談をおすすめします。
+          </p>
+        </div>
+      </section>
+
+      {/* 8. FAQ */}
+      <section className="lp-section" aria-labelledby="lp-faq-heading">
+        <p className="lp-section-label">FAQ</p>
+        <h2 id="lp-faq-heading" className="lp-heading">
+          よくある質問
+        </h2>
+        <dl className="lp-faq">
+          {FAQS.map((f) => (
+            <div key={f.question} className="lp-faq-item">
+              <dt>{f.question}</dt>
+              <dd>{f.answer}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {/* 9. コラム */}
+      <section className="lp-section" aria-labelledby="lp-columns-heading">
+        <p className="lp-section-label">コラム</p>
+        <h2 id="lp-columns-heading" className="lp-heading">
+          制度を知りたい方へ、申請準備コラム
+        </h2>
+        <ul className="column-list lp-column-list">
+          {LATEST_COLUMNS.map((c) => (
+            <li key={c.slug} className="column-card">
+              <p className="meta-line">
+                <time dateTime={c.datePublished}>
+                  {formatDate(c.datePublished)}
+                </time>
+              </p>
+              <p className="column-card-title">
+                <Link href={`/columns/${c.slug}`}>{c.title}</Link>
+              </p>
+              <p className="small-note">{c.description}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="lp-columns-more">
+          <Link href="/columns" className="lp-columns-more-link">
+            コラム一覧を見る
+          </Link>
+        </p>
+      </section>
+
+      {/* 10. 最終CTA */}
+      <section className="lp-final-cta" aria-labelledby="lp-final-heading">
+        <h2 id="lp-final-heading">今日のひとことから、始められます</h2>
+        <AppStoreBadge href={APP_STORE_URL} />
+        <p className="lp-cta-note">無料で始められます（iOS）</p>
+      </section>
+
+      {/* モバイル追従フッターCTA */}
+      <div className="lp-sticky-cta">
+        <a
+          className="lp-sticky-cta-button"
+          href={APP_STORE_URL}
+          target="_blank"
+          rel="noopener noreferrer external"
+        >
+          App Storeで無料で始める
+        </a>
       </div>
     </>
   );

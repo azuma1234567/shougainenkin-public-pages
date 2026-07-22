@@ -5,7 +5,6 @@ import { COLUMNS_BY_DATE } from "@/lib/columns";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     "/",
-    "/app",
     "/columns",
     "/about",
     "/support",
