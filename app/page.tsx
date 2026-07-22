@@ -71,6 +71,21 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
       />
+      <aside className="home-app-banner" aria-labelledby="home-app-banner-title">
+        <p id="home-app-banner-title" className="home-app-banner-title">
+          アプリで、申請の準備を始められます
+        </p>
+        <p className="home-app-banner-lead">
+          日々のひとことメモが、診察で見せる1枚と申立書になります。
+        </p>
+        <div className="home-app-banner-actions">
+          <Link href="/app" className="home-app-banner-link">
+            アプリについて詳しく見る
+          </Link>
+          <AppStoreBadge href={APP_STORE_URL} />
+        </div>
+      </aside>
+
       <section className="hero">
         <h1>{SITE_NAME}</h1>
 

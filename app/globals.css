@@ -807,3 +807,294 @@ strong {
   text-align: center;
   padding-top: 3rem;
 }
+
+/* ---- アプリLP(/app) ---- */
+
+/* スクリーンショットは端末フレーム・背景込みの完成画像。
+   追加のフレームは付けず、幅だけ抑えて表示する。 */
+.lp-shot-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lp-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 1.75rem;
+  padding: 1.25rem 0 0.5rem;
+}
+
+.lp-hero-copy {
+  flex: 1 1 17rem;
+  min-width: 0;
+}
+
+.lp-hero-title {
+  font-size: clamp(1.5rem, 5.2vw, 1.95rem);
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--green-dark);
+  margin: 0 0 0.9rem;
+}
+
+.lp-hero-sub {
+  font-size: 1.02rem;
+  margin: 0 0 1.25rem;
+}
+
+.lp-hero-shot {
+  flex: 0 1 15rem;
+  width: min(60%, 15rem);
+  margin: 0 auto;
+}
+
+.lp-cta {
+  margin-top: 0.5rem;
+}
+
+.lp-cta .app-store-badge-link {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.lp-cta-note {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0.4rem 0 0;
+}
+
+/* 3ステップ */
+.lp-steps {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.lp-step {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 0;
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 0.95rem 1.15rem;
+}
+
+.lp-step-num {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--green);
+  color: #ffffff;
+  border-radius: 50%;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.lp-step-text {
+  font-weight: 700;
+  color: var(--green-dark);
+  font-size: 1.02rem;
+}
+
+/* 機能紹介 */
+.lp-features {
+  display: grid;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.lp-feature {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+}
+
+.lp-feature-shot {
+  flex: 0 0 auto;
+  width: min(45%, 11rem);
+  margin: 0 auto;
+}
+
+.lp-feature-copy {
+  flex: 1 1 14rem;
+  min-width: 0;
+}
+
+.lp-feature-copy h3 {
+  margin: 0 0 0.5rem;
+}
+
+.lp-feature-copy p {
+  margin: 0;
+  font-size: 0.97rem;
+}
+
+/* 偶数番目は画像を右に(デスクトップ幅のみ) */
+@media (min-width: 560px) {
+  .lp-feature:nth-child(even) .lp-feature-shot {
+    order: 2;
+  }
+}
+
+/* FAQ */
+.lp-faq {
+  margin: 1.25rem 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.lp-faq-item {
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+}
+
+.lp-faq-item dt {
+  font-weight: 700;
+  color: var(--green-dark);
+  margin-bottom: 0.35rem;
+}
+
+.lp-faq-item dd {
+  margin: 0;
+  font-size: 0.97rem;
+}
+
+/* 最終CTA */
+.lp-final-cta {
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.35rem;
+  margin: 2.5rem 0;
+  text-align: center;
+}
+
+.lp-final-cta h2 {
+  margin-top: 0;
+  border-left: 0;
+  padding-left: 0;
+}
+
+.lp-final-cta .app-store-badge-link {
+  margin: 0.75rem auto 0;
+}
+
+.lp-final-cta .lp-cta-note {
+  text-align: center;
+}
+
+/* モバイル追従フッターCTA */
+.lp-sticky-cta {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .lp-sticky-cta {
+    display: block;
+    position: fixed;
+    z-index: 90;
+    right: 0.75rem;
+    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    left: 0.75rem;
+  }
+
+  .lp-sticky-cta-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0.75rem 1rem;
+    background-color: var(--green);
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: var(--radius);
+    box-shadow: 0 6px 20px rgba(35, 76, 61, 0.35);
+  }
+
+  .lp-sticky-cta-button:hover {
+    background-color: var(--green-dark);
+    color: #ffffff;
+  }
+
+  /* 追従CTAの下に本文が隠れないよう余白を確保 */
+  main:has(.lp-sticky-cta) {
+    padding-bottom: 6rem;
+  }
+}
+
+/* ---- トップページ: アプリ導線バナー ---- */
+
+.home-app-banner {
+  background-color: var(--green);
+  color: #ffffff;
+  border-radius: var(--radius);
+  padding: 1.4rem 1.5rem;
+  margin: 0.5rem 0 2rem;
+}
+
+.home-app-banner-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.4rem;
+  padding: 0;
+  border: 0;
+  line-height: 1.5;
+}
+
+.home-app-banner-lead {
+  margin: 0 0 1rem;
+  font-size: 0.98rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.home-app-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1rem;
+}
+
+.home-app-banner-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.6rem 1.2rem;
+  background-color: #ffffff;
+  color: var(--green-dark);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+
+.home-app-banner-link:hover {
+  color: var(--green-dark);
+  background-color: #f0ece1;
+  text-decoration: none;
+}
+
+.home-app-banner .app-store-badge-link {
+  width: min(100%, 220px);
+  margin: 0;
+}
+
+.home-app-banner :focus-visible {
+  outline-color: #ffffff;
+}
