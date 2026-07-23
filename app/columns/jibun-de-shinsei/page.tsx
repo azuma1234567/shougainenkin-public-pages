@@ -53,7 +53,7 @@ export default function Page() {
         <li>書類を書く作業が、時間をかければできそう</li>
         <li>家族など、手伝ってくれる人がいる</li>
       </ul>
-      <p>進め方の全体像は「<Link href="/columns/shinsei-nagare">申請の流れと必要書類</Link>」にまとめています。</p>
+      <p>進め方の全体像は「<Link href="/">申請の流れと必要書類</Link>」にまとめています。</p>
 
       <h2>社労士に依頼する場合</h2>
       <p>障害年金を専門に扱う社労士は、書類の収集・作成・提出の代行や、医師への診断書依頼の際の資料づくりなどを支援してくれます。費用は事務所によって異なりますが、着手金(無料〜数万円程度)と、受給が決まった場合の成功報酬(年金額の数か月分などを基準とする例が多い)という料金体系が一般的です。契約前に、料金体系と、不支給だった場合の費用を必ず確認しましょう。</p>
@@ -86,7 +86,7 @@ export default function Page() {
 
       <div className="note-box"><p>※本記事は一般的な情報提供です。社労士の業務範囲・料金は事務所により異なります。依頼の判断はご自身でご確認のうえ行ってください。本記事および当アプリは受給を保証するものではありません。(最終更新: {formatDate(column.dateModified)})</p></div>
 
-      <ColumnFooter currentSlug={column.slug} relatedSlugs={["shinsei-nagare", "shoshinbi-wakaranai"]} />
+      <ColumnFooter currentSlug={column.slug} relatedSlugs={["shoshinbi-wakaranai", "nofu-yoken"]} />
     </article>
   );
 }

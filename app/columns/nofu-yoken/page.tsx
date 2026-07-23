@@ -97,7 +97,7 @@ export default function Page() {
 
       <ColumnFooter
         currentSlug={column.slug}
-        relatedSlugs={["shoshinbi-wakaranai", "shinsei-nagare"]}
+        relatedSlugs={["shoshinbi-wakaranai", "hatachi-mae"]}
         references={[NENKIN_REFERENCES.jukyuYoken, NENKIN_REFERENCES.seido]}
       />
     </article>

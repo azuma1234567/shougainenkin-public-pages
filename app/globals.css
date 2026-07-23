@@ -751,7 +751,416 @@ strong {
   padding-top: 3rem;
 }
 
-/* ---- トップページLP ----
+/* ---- トップページ: 申請ガイド(親ページ) ----
+ * 広告LPではなく「申請の地図」。深緑の見出し・カード・金色アクセントは維持。
+ */
+
+/* A. ファーストビュー */
+.guide-hero {
+  padding: 1.5rem 0 0.5rem;
+}
+
+.guide-eyebrow {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--green);
+  background-color: var(--note-bg);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  margin: 0 0 0.9rem;
+}
+
+.guide-h1 {
+  font-size: clamp(1.55rem, 5.6vw, 2.1rem);
+  line-height: 1.5;
+  font-weight: 800;
+  color: var(--green-dark);
+  margin: 0 0 1rem;
+}
+
+.guide-lead {
+  font-size: 1.02rem;
+  margin: 0.6rem 0;
+}
+
+.guide-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.guide-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.guide-btn-primary {
+  background-color: var(--green);
+  border: 1.5px solid var(--green);
+  color: #ffffff;
+}
+
+.guide-btn-primary:hover {
+  background-color: var(--green-dark);
+  color: #ffffff;
+}
+
+.guide-btn-secondary {
+  background-color: var(--card);
+  border: 1.5px solid var(--green);
+  color: var(--green);
+}
+
+.guide-btn-secondary:hover {
+  background-color: var(--green);
+  color: #ffffff;
+}
+
+/* セクション共通 */
+.guide-section {
+  margin: 3rem 0;
+}
+
+.guide-heading {
+  margin: 0 0 1rem;
+  padding: 0;
+  border-left: 0;
+  font-size: clamp(1.3rem, 4.6vw, 1.55rem);
+  line-height: 1.5;
+  font-weight: 800;
+  color: var(--green-dark);
+  scroll-margin-top: 1rem;
+}
+
+.guide-section-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--green);
+  margin: 0 0 0.5rem;
+}
+
+.guide-section-tag::before {
+  content: "";
+  width: 1.4rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background-color: var(--marker);
+}
+
+.guide-intro-list {
+  margin: 0;
+  padding-left: 1.3rem;
+}
+
+.guide-intro-list li {
+  margin: 0.4rem 0;
+}
+
+/* C. 8ステップ全体図 */
+.guide-overview {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+@media (min-width: 560px) {
+  .guide-overview {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.guide-overview a {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-height: 56px;
+  padding: 0.8rem 1rem;
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(35, 76, 61, 0.06);
+}
+
+.guide-overview a:hover {
+  border-color: var(--green);
+  background-color: var(--note-bg);
+}
+
+.guide-overview-num {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--green);
+  color: #ffffff;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.guide-overview-text {
+  font-weight: 700;
+  color: var(--green-dark);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+/* D. 各ステップ詳細 */
+.guide-steps {
+  margin: 1.5rem 0;
+}
+
+.guide-step {
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.5rem 1.4rem;
+  margin: 1.25rem 0;
+  box-shadow: 0 3px 12px rgba(35, 76, 61, 0.07);
+  scroll-margin-top: 1rem;
+}
+
+.guide-step-head {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.guide-step-num {
+  flex: none;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--green);
+  color: #ffffff;
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.guide-step-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--green);
+  margin: 0;
+}
+
+.guide-step-title {
+  margin: 0.1rem 0 0;
+  padding: 0;
+  border-left: 0;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--green-dark);
+}
+
+.guide-block {
+  margin: 1rem 0;
+}
+
+.guide-block-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  margin: 0 0 0.3rem;
+}
+
+.guide-block-label::before {
+  content: "";
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--accent);
+}
+
+.guide-block > p {
+  margin: 0.2rem 0 0;
+}
+
+.guide-block-list {
+  margin: 0.3rem 0 0;
+  padding-left: 1.4rem;
+}
+
+.guide-block-list li {
+  margin: 0.35rem 0;
+}
+
+.guide-links {
+  list-style: none;
+  padding: 0;
+  margin: 0.3rem 0 0;
+}
+
+.guide-links li {
+  margin: 0.35rem 0;
+  padding-left: 1.4rem;
+  position: relative;
+}
+
+.guide-links li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+}
+
+.guide-links a {
+  font-weight: 700;
+}
+
+.guide-links-note {
+  margin: 0.6rem 0 0;
+}
+
+.guide-inline-cta {
+  background-color: var(--note-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  margin: 1.25rem 0 0;
+}
+
+.guide-inline-cta p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+.guide-inline-cta-title {
+  font-weight: 700;
+  color: var(--green-dark);
+}
+
+.guide-next {
+  margin: 1.25rem 0 0;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border);
+}
+
+.guide-next a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--green);
+}
+
+.guide-next a::after {
+  content: "↓";
+}
+
+.guide-next a:hover {
+  text-decoration: underline;
+}
+
+/* アプリ導線(控えめに。主役は申請手順) */
+.guide-app {
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin: 3rem 0;
+  box-shadow: 0 3px 12px rgba(35, 76, 61, 0.07);
+}
+
+.guide-app .guide-heading {
+  margin-top: 0.2rem;
+}
+
+.guide-app-points {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.25rem;
+}
+
+.guide-app-points li {
+  position: relative;
+  margin: 0.5rem 0;
+  padding-left: 1.7rem;
+  font-size: 0.96rem;
+}
+
+.guide-app-points li::before {
+  content: "✓";
+  position: absolute;
+  left: 0.2rem;
+  top: 0;
+  color: var(--green);
+  font-weight: 700;
+}
+
+.guide-app .app-store-badge-link {
+  margin: 0.5rem auto 0;
+}
+
+.guide-app-note {
+  text-align: center;
+  margin-top: 0.6rem;
+}
+
+/* 関連コラムの横並びリンク */
+.guide-related-links {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.5rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.guide-related-links li {
+  margin: 0;
+}
+
+.guide-related-links a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0.65rem 1rem;
+  background-color: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.guide-related-links a:hover {
+  border-color: var(--green);
+  background-color: var(--note-bg);
+}
+
+/* ---- 旧トップページLP(未使用) ----
  * アプリのストア用スクリーンショットと同じデザイン言語で揃える。
  * 生成り背景 / 深緑の見出し / 金色のマーカー下線がアクセント。
  */

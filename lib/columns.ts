@@ -184,15 +184,6 @@ export const COLUMNS: Column[] = [
     dateModified: "2026-07-17",
   },
   {
-    slug: "shinsei-nagare",
-    title:
-      "障害年金の申請の流れと必要書類 — 何から始めればいいかを順番に解説",
-    description:
-      "精神疾患で障害年金を申請するときの流れを、初診日の確認から納付要件、診断書の依頼、病歴・就労状況等申立書の作成、提出・審査まで7つのステップで解説。必要書類の一覧つき。",
-    datePublished: "2026-07-17",
-    dateModified: "2026-07-17",
-  },
-  {
     slug: "hatarakinagara",
     title: "働きながら障害年金はもらえる？「働ける＝改善」と誤解されない伝え方",
     metaTitle: "働きながら障害年金はもらえる？就労実態の伝え方",

@@ -50,7 +50,7 @@ export default function Page() {
       <p>手帳の等級を理由に申請をあきらめる必要はありません。迷ったら、まず年金事務所に相談してみてください。</p>
 
       <h2>手帳を持っていなくても、年金は申請できる</h2>
-      <p>障害年金の申請に、障害者手帳は必要ありません。手帳を取得していない方でも、初診日・納付要件・障害状態の要件を満たせば申請できます(要件の全体像は「<Link href="/columns/shinsei-nagare">申請の流れと必要書類</Link>」をご覧ください)。</p>
+      <p>障害年金の申請に、障害者手帳は必要ありません。手帳を取得していない方でも、初診日・納付要件・障害状態の要件を満たせば申請できます(要件の全体像は「<Link href="/">申請の流れと必要書類</Link>」をご覧ください)。</p>
 
       <h2>逆方向の連携はある: 年金証書で手帳を申請できる</h2>
       <p>別制度ですが、一方向の連携はあります。<strong>障害年金(精神の障害)を受給している場合、年金証書等を添えることで、医師の診断書を省略して手帳を申請できる</strong>制度があります。この場合、手帳の等級は年金の等級に応じたものになります。年金2級を受給している方が、この方法で手帳2級を取得する、といった形です。</p>
@@ -68,7 +68,7 @@ export default function Page() {
         <li>年金受給者は年金証書で手帳を申請できる制度がある(診断書の省略)</li>
       </ul>
       <div className="note-box"><p>※本記事は一般的な情報提供であり、受給や等級の認定を保証するものではありません。手帳の手続きは市区町村、年金は年金事務所にご確認ください。(最終更新: {formatDate(column.dateModified)})</p></div>
-      <ColumnFooter currentSlug={column.slug} relatedSlugs={["shinsei-nagare", "nofu-yoken"]} />
+      <ColumnFooter currentSlug={column.slug} relatedSlugs={["nofu-yoken", "hatachi-mae"]} />
     </article>
   );
 }

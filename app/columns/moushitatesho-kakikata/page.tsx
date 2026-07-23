@@ -60,7 +60,7 @@ export default function Page() {
       relatedSlugs={[
         "moushitatesho-a4-insatsu",
         "shinsatsu-mae-memo",
-        "shinsei-nagare",
+        "moushitatesho-kikan-kugiri",
       ]}
       references={[
         NENKIN_REFERENCES.moushitatesho,

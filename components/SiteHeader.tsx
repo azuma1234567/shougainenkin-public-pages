@@ -4,7 +4,7 @@ import { SITE_NAME } from "@/lib/constants";
 // ヘッダーは主要3項目のみ(モバイルでも折りたたみ不要)。
 // 残りのページ(運営者情報・規約類)へのリンクはフッターに置く。
 const NAV_ITEMS = [
-  { href: "/", label: "トップ" },
+  { href: "/", label: "申請の流れ" },
   { href: "/columns", label: "コラム" },
   { href: "/support", label: "サポート" },
 ];

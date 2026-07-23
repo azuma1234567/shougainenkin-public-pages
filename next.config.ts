@@ -9,6 +9,12 @@ const nextConfig: NextConfig = {
         destination: "/",
         permanent: true,
       },
+      // 「申請の流れ」記事はトップページ(親ページ)へ統合したため恒久リダイレクト
+      {
+        source: "/columns/shinsei-nagare",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
 };
