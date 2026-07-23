@@ -104,10 +104,12 @@ const STEPS: Step[] = [
       "聞きたいことを整理せずに行き、確認漏れが出る",
     ],
     links: [
+      {
+        href: "/columns/nenkin-jimusho-soudan",
+        label: "初めて年金事務所へ相談に行く方へ — 予約・持ち物・質問",
+      },
       { href: "/columns/jibun-de-shinsei", label: "自分で申請するか、社会保険労務士に依頼するか" },
     ],
-    linksNote:
-      "年金事務所での相談そのものを扱う詳しい記事は準備中です。相談の予約方法や持ち物は、日本年金機構のホームページでもご確認いただけます。",
     next: "ステップ4: 必要書類をそろえる",
   },
   {
@@ -128,6 +130,14 @@ const STEPS: Step[] = [
       "マイナンバーの記載で省略できる書類を、重ねて取り寄せてしまう",
     ],
     links: [
+      {
+        href: "/columns/hitsuyou-shorui-seishin",
+        label: "精神疾患の必要書類チェックリスト — 入手先・費用・取得順序",
+      },
+      {
+        href: "/columns/jushinjokyo-shomeisho",
+        label: "受診状況等証明書のもらい方 — 取れなかったときの全ルート",
+      },
       { href: "/columns/shoshinbi-wakaranai", label: "受診状況等証明書・初診日の証明の集め方" },
     ],
     next: "ステップ5: 診断書の準備をする",
@@ -152,6 +162,10 @@ const STEPS: Step[] = [
       "受け取った診断書を確認せず、そのまま提出してしまう",
     ],
     links: [
+      {
+        href: "/columns/shindansho-irai-timing",
+        label: "障害年金の診断書はいつ頼む?依頼タイミングと準備",
+      },
       { href: "/columns/shinsatsu-mae-memo", label: "生活の実態を伝える診察前メモの作り方" },
       { href: "/columns/shindansho-kakunin", label: "診断書を受け取ったら確認すべき7つのポイント" },
       { href: "/columns/shindansho-kaitekurenai", label: "診断書を医師が書いてくれないときの対処法" },
@@ -230,6 +244,10 @@ const STEPS: Step[] = [
       "不支給の通知に、期限のある不服申立て(審査請求)ができることを知らずに諦める",
     ],
     links: [
+      {
+        href: "/columns/shinsei-kikan",
+        label: "障害年金は申請から結果まで何か月?初回振込までの期間",
+      },
       { href: "/columns/fushikyuu-shinsa-seikyu", label: "不支給になったら|審査請求・再審査請求・再請求" },
       { href: "/columns/ninteibi-jigojusho", label: "障害認定日請求と事後重症請求の違い" },
       { href: "/columns/sokyuu-seikyuu", label: "最大5年分をさかのぼる遡及請求の条件" },
