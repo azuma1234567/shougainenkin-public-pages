@@ -3,7 +3,7 @@ import Link from "next/link";
 import AppCta from "@/components/AppCta";
 import XPostEmbed from "@/components/XPostEmbed";
 
-function inlineContent(text: string): ReactNode[] {
+function inlineContent(text: string, keyPrefix = "inline"): ReactNode[] {
   const nodes: ReactNode[] = [];
   const tokenPattern = /(\*\*.+?\*\*|\[[^\]]+\]\([^)]+\))/g;
   let lastIndex = 0;
@@ -17,8 +17,11 @@ function inlineContent(text: string): ReactNode[] {
     const token = match[0];
     if (token.startsWith("**")) {
       nodes.push(
-        <strong key={`${match.index}-strong`}>
-          {token.slice(2, -2)}
+        <strong key={`${keyPrefix}-${match.index}-strong`}>
+          {inlineContent(
+            token.slice(2, -2),
+            `${keyPrefix}-${match.index}-strong-content`,
+          )}
         </strong>,
       );
     } else {
@@ -31,17 +34,26 @@ function inlineContent(text: string): ReactNode[] {
             : href;
         nodes.push(
           resolvedHref.startsWith("/") ? (
-            <Link key={`${match.index}-link`} href={resolvedHref}>
-              {label}
+            <Link
+              key={`${keyPrefix}-${match.index}-link`}
+              href={resolvedHref}
+            >
+              {inlineContent(
+                label,
+                `${keyPrefix}-${match.index}-link-label`,
+              )}
             </Link>
           ) : (
             <a
-              key={`${match.index}-link`}
+              key={`${keyPrefix}-${match.index}-link`}
               href={resolvedHref}
               target="_blank"
               rel="noopener noreferrer external"
             >
-              {label}
+              {inlineContent(
+                label,
+                `${keyPrefix}-${match.index}-link-label`,
+              )}
             </a>
           ),
         );
