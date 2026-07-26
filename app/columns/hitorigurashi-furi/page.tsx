@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
-import { NENKIN_REFERENCES } from "@/components/ColumnFooter";
-import articleSource, { faqs } from "@/content/columns/shoshinbi-wakaranai";
+import {
+  MHLW_REFERENCES,
+  NENKIN_REFERENCES,
+} from "@/components/ColumnFooter";
+import articleSource, { faqs } from "@/content/columns/hitorigurashi-furi";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
-const column = getColumn("shoshinbi-wakaranai");
+const column = getColumn("hitorigurashi-furi");
 export const metadata: Metadata = columnMetadata(column);
 
 export default function Page() {
@@ -14,14 +17,13 @@ export default function Page() {
       source={articleSource}
       faqs={faqs}
       relatedSlugs={[
-        "jushinjokyo-shomeisho",
-        "sokyuu-seikyuu",
-        "ninteibi-jigojusho",
+        "nichijo-seikatsu-7koumoku",
+        "shinsatsu-mae-memo",
+        "koushin-kakuninhodo",
       ]}
       references={[
-        NENKIN_REFERENCES.firstVisit,
-        NENKIN_REFERENCES.thirdParty,
-        NENKIN_REFERENCES.moushitatesho,
+        MHLW_REFERENCES.seishinGuideline,
+        NENKIN_REFERENCES.diagnosis,
       ]}
     />
   );

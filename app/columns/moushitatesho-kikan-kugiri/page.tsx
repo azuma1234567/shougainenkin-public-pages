@@ -12,7 +12,11 @@ export default function Page() {
       column={column}
       source={articleSource}
       faqs={faqs}
-      relatedSlugs={["moushitatesho-kakikata","moushitatesho-a4-insatsu","shoshinbi-wakaranai"]}
+      relatedSlugs={[
+        "moushitatesho-mijushin-kikan",
+        "moushitatesho-kakikata",
+        "moushitatesho-a4-insatsu",
+      ]}
       references={[
         {
                 "label": "日本年金機構「病歴・就労状況等申立書（続紙）」",

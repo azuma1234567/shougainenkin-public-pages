@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
 import { NENKIN_REFERENCES } from "@/components/ColumnFooter";
-import articleSource, { faqs } from "@/content/columns/shoshinbi-wakaranai";
+import articleSource, {
+  faqs,
+} from "@/content/columns/moushitatesho-mijushin-kikan";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
-const column = getColumn("shoshinbi-wakaranai");
+const column = getColumn("moushitatesho-mijushin-kikan");
 export const metadata: Metadata = columnMetadata(column);
 
 export default function Page() {
@@ -14,14 +16,13 @@ export default function Page() {
       source={articleSource}
       faqs={faqs}
       relatedSlugs={[
-        "jushinjokyo-shomeisho",
+        "moushitatesho-kikan-kugiri",
+        "moushitatesho-kakikata",
         "sokyuu-seikyuu",
-        "ninteibi-jigojusho",
       ]}
       references={[
-        NENKIN_REFERENCES.firstVisit,
-        NENKIN_REFERENCES.thirdParty,
         NENKIN_REFERENCES.moushitatesho,
+        NENKIN_REFERENCES.seido,
       ]}
     />
   );
