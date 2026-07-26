@@ -54,7 +54,7 @@ const STEPS: Step[] = [
       "数年前の受診が初診日と気づかず、証明を取り損ねる",
     ],
     links: [
-      { href: "/columns/shoshinbi-wakaranai", label: "初診日がわからない・証明できないときの調べ方" },
+      { href: "/columns/shoshinbi-wakaranai", label: "初診日がわからないときに確認する5つの方法" },
       { href: "/columns/hatachi-mae", label: "20歳前の傷病による障害基礎年金" },
       { href: "/columns/hattatsu-shougai", label: "発達障害(ADHD・ASD)の初診日の考え方" },
     ],
@@ -170,6 +170,7 @@ const STEPS: Step[] = [
       { href: "/columns/shindansho-kakunin", label: "診断書を受け取ったら確認すべき7つのポイント" },
       { href: "/columns/shindansho-kaitekurenai", label: "診断書を医師が書いてくれないときの対処法" },
       { href: "/columns/nichijo-seikatsu-7koumoku", label: "診断書裏面「日常生活能力の判定」7項目" },
+      { href: "/columns/hitorigurashi-furi", label: "障害年金は一人暮らしだと不利？日常生活能力の見られ方" },
       { href: "/columns/tokyu-hantei-guideline", label: "精神の等級判定ガイドラインと目安表の読み方" },
     ],
     appCta: true,
@@ -197,6 +198,7 @@ const STEPS: Step[] = [
     links: [
       { href: "/columns/moushitatesho-kakikata", label: "病歴・就労状況等申立書の書き方【精神疾患】" },
       { href: "/columns/moushitatesho-kikan-kugiri", label: "申立書「期間の区切り方」と続紙の使い方" },
+      { href: "/columns/moushitatesho-mijushin-kikan", label: "申立書の未受診期間はどう書く？理由と生活状況の伝え方" },
       { href: "/columns/moushitatesho-a4-insatsu", label: "申立書はA4で出せる?用紙・PDF・印刷の実際" },
       { href: "/columns/hatarakinagara", label: "働きながら申請する場合の伝え方" },
     ],
