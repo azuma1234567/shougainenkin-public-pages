@@ -12,7 +12,12 @@ export default function Page() {
       column={column}
       source={articleSource}
       faqs={faqs}
-      relatedSlugs={["shinsatsu-mae-memo","nichijo-seikatsu-7koumoku","fushikyuu-shinsa-seikyu"]}
+      relatedSlugs={[
+        "shinsatsu-mae-memo",
+        "nichijo-seikatsu-7koumoku",
+        "fushikyuu-shinsa-seikyu",
+        "shindansho-jittai-chigau",
+      ]}
       references={[
         {
                 "label": "日本年金機構「障害状態確認届（診断書）が届いたとき」",

@@ -61,6 +61,7 @@ export default function Page() {
         "moushitatesho-a4-insatsu",
         "shinsatsu-mae-memo",
         "moushitatesho-kikan-kugiri",
+        "shindansho-ishi-ni-tsutaeru",
       ]}
       references={[
         NENKIN_REFERENCES.moushitatesho,

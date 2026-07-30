@@ -53,6 +53,8 @@ export default function Page() {
         "shinsatsu-mae-memo",
         "moushitatesho-kakikata",
         "shoshinbi-wakaranai",
+        "shindansho-jittai-chigau",
+        "shindansho-ishi-ni-tsutaeru",
       ]}
       references={[
         NENKIN_REFERENCES.diagnosis,

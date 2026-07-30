@@ -12,7 +12,13 @@ export default function Page() {
       column={column}
       source={articleSource}
       faqs={faqs}
-      relatedSlugs={["moushitatesho-kakikata", "shinsatsu-mae-memo", "shindansho-kakunin"]}
+      relatedSlugs={[
+        "moushitatesho-kakikata",
+        "shinsatsu-mae-memo",
+        "shindansho-kakunin",
+        "shindansho-ishi-ni-tsutaeru",
+        "shindansho-jittai-chigau",
+      ]}
       references={[
         { label: "日本年金機構「障害基礎年金の受給要件・請求時期・年金額」", href: "https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/jukyu-yoken/20150514.html" },
         { label: "日本年金機構「精神の障害に係る等級判定ガイドライン」", href: "https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/ninteikijun/20160715.html" },

@@ -59,6 +59,7 @@ export default function Page() {
         "moushitatesho-kakikata",
         "moushitatesho-a4-insatsu",
         "shindansho-kakunin",
+        "shindansho-ishi-ni-tsutaeru",
       ]}
       references={[
         MHLW_REFERENCES.seishinGuideline,

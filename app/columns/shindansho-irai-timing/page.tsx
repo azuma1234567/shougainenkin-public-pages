@@ -12,7 +12,12 @@ export default function Page() {
       column={column}
       source={articleSource}
       faqs={faqs}
-      relatedSlugs={["shinsatsu-mae-memo","shindansho-kaitekurenai","shindansho-kakunin"]}
+      relatedSlugs={[
+        "shinsatsu-mae-memo",
+        "shindansho-kaitekurenai",
+        "shindansho-kakunin",
+        "shindansho-ishi-ni-tsutaeru",
+      ]}
       references={[
   {
     "label": "日本年金機構「障害年金の診断書を作成する医師の方へ」",

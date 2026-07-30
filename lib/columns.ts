@@ -28,6 +28,26 @@ const NEW_COLUMN_DATES = {
 
 export const COLUMNS: Column[] = [
   {
+    slug: "shindansho-ishi-ni-tsutaeru",
+    title:
+      "障害年金の診断書で医師に伝えること全リスト — 何を、どこまで、どう伝えるか(伝えてはいけないことも)",
+    metaTitle: "障害年金の診断書で医師に伝えること全リスト",
+    description:
+      "障害年金の診断書を書いてもらう前に、医師に伝えるべきことを全部リスト化。日常生活能力7項目・就労の実態・家族の援助・服薬しても残る症状・症状の波・危機対応の6分野を、伝える言葉の例つきで解説。伝えてはいけないこと、伝える順番、A4一枚にまとめる完成形、よくある質問まで。",
+    datePublished: "2026-07-31",
+    dateModified: "2026-07-31",
+  },
+  {
+    slug: "shindansho-jittai-chigau",
+    title:
+      "障害年金の診断書が実態と違う・軽く書かれた — 訂正はどこまで頼める?ケース別の対処と「出す/出さない」の判断",
+    metaTitle: "障害年金の診断書が実態と違う・軽く書かれたときの対処",
+    description:
+      "障害年金の診断書が実態と違う、軽く書かれたときの対処法。訂正を頼めること・頼めないことの線引き、事実の誤りと評価の軽さで分かれる対応、医師への伝え方の完成形、このまま提出するかの判断基準、提出後・受給後・不支給後にできること、更新で軽く書かれた場合まで解説。",
+    datePublished: "2026-07-31",
+    dateModified: "2026-07-31",
+  },
+  {
     slug: "tekio-shogai-shogai-nenkin",
     title:
       "適応障害でも障害年金は申請できる? — 確認する順番と、自分の状況を整理する4つのシート",
@@ -83,7 +103,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害年金の診断書を依頼するベストタイミングを解説。請求日前3か月以内という現症日ルール、認定日請求で2枚必要なときの順番、依頼前に準備する3点セット、医師への伝え方の3ステップ台本、作成期間と費用、受け取り後の確認、更新時の依頼まで。「頼む日」ではなく「回収する日」にするための逆算術。",
     datePublished: "2026-07-23",
-    dateModified: "2026-07-23",
+    dateModified: "2026-07-31",
   },
   {
     slug: "hitsuyou-shorui-seishin",
@@ -147,11 +167,11 @@ export const COLUMNS: Column[] = [
     slug: "nichijo-seikatsu-7koumoku",
     title:
       "診断書の裏面「日常生活能力の判定」7項目 — 精神の障害年金は、ほぼここで決まる",
-    metaTitle: "日常生活能力の判定7項目｜精神の障害年金と診断書",
+    metaTitle: "日常生活能力の判定7項目の具体例｜障害年金の診断書",
     description:
-      "精神の障害年金で重視される日常生活能力の判定7項目を解説。単身生活を想定する評価ルール、実態より軽く評価されやすい点、医師へ渡す本人・家族メモの作り方を紹介します。",
+      "障害年金(精神)の「日常生活能力の判定」7項目を具体例で解説。食事・清潔保持・金銭管理・通院と服薬・対人関係・危機対応・社会性の7項目それぞれについて、「できる」と評価されやすい言い方と、実態が伝わる言い方を対比。単身生活を想定する評価ルール、本人メモ・家族メモの完成形、よくある質問まで。",
     datePublished: "2026-07-20",
-    dateModified: "2026-07-20",
+    dateModified: "2026-07-31",
   },
   {
     slug: "tokyu-hantei-guideline",
@@ -171,7 +191,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害年金の更新時期、障害状態確認届の提出期限、就労中の注意点、支給停止や級落ちへの対応を解説。更新前から準備したい生活記録と診断書の確認事項も紹介します。",
     datePublished: "2026-07-20",
-    dateModified: "2026-07-20",
+    dateModified: "2026-07-31",
   },
   {
     slug: "shindansho-kaitekurenai",
@@ -181,7 +201,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害年金の診断書を主治医に断られた場合の対処法を5つの理由別に解説。口頭での頼み方、依頼文、家族や支援職への相談、転院前の注意点を紹介します。",
     datePublished: "2026-07-20",
-    dateModified: "2026-07-20",
+    dateModified: "2026-07-31",
   },
   {
     slug: "ninteibi-jigojusho",
@@ -200,7 +220,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害年金の診断書が実際より軽いと感じる理由と、提出前に確認したい7つのポイントを解説。事実と異なる記載があったときの伝え方、更新時の注意も紹介します。",
     datePublished: NEW_COLUMN_DATES["shindansho-kakunin"],
-    dateModified: "2026-07-19",
+    dateModified: "2026-07-31",
   },
   {
     slug: "techou-to-nenkin",
@@ -262,11 +282,11 @@ export const COLUMNS: Column[] = [
   {
     slug: "hatarakinagara",
     title: "働きながら障害年金はもらえる？「働ける＝改善」と誤解されない伝え方",
-    metaTitle: "働きながら障害年金はもらえる？就労実態の伝え方",
+    metaTitle: "働きながら障害年金｜就労中に医師へ伝えること",
     description:
-      "働きながら障害年金を受給する際に、就労実態、職場の配慮、欠勤、帰宅後の生活を診断書・申立書へ反映する方法を具体例付きで解説します。",
+      "働きながら障害年金を申請するとき、就労のどこを医師に伝えるかを解説。勤務形態・配慮・欠勤や早退・帰宅後の生活の4点を伝える言葉の例つきで整理し、診断書の就労欄と申立書への反映方法、就労開始・更新時の注意、よくある質問まで。",
     datePublished: "2026-07-17",
-    dateModified: "2026-07-19",
+    dateModified: "2026-07-31",
   },
   {
     slug: "nofu-yoken",
@@ -296,7 +316,7 @@ export const COLUMNS: Column[] = [
     description:
       "病歴・就労状況等申立書の書き方を、障害年金の受給者・実務者がXで発信し続けている「実際に差がつくポイント」の分析から解説。うつ病の発病から現在までの期間別フル記入例、就労欄の落とし穴、未受診期間の扱い、よくある質問まで。",
     datePublished: "2026-07-17",
-    dateModified: "2026-07-19",
+    dateModified: "2026-07-31",
   },
   {
     slug: "moushitatesho-a4-insatsu",
@@ -315,7 +335,7 @@ export const COLUMNS: Column[] = [
     description:
       "「診断書が実際より軽かった」は申請者が最も多く語る後悔のひとつ。診察の数分で生活実態を伝える診察前メモの作り方を、障害年金の当事者・実務者のX発信の分析から解説。A4一枚の完成形、渡し方、更新(障害状態確認届)での使い方まで。",
     datePublished: "2026-07-17",
-    dateModified: "2026-07-19",
+    dateModified: "2026-07-31",
   },
 ];
 

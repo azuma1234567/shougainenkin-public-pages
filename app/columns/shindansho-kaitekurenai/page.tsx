@@ -12,7 +12,12 @@ export default function Page() {
       column={column}
       source={articleSource}
       faqs={faqs}
-      relatedSlugs={["shinsatsu-mae-memo","nichijo-seikatsu-7koumoku","shindansho-kakunin"]}
+      relatedSlugs={[
+        "shinsatsu-mae-memo",
+        "nichijo-seikatsu-7koumoku",
+        "shindansho-kakunin",
+        "shindansho-ishi-ni-tsutaeru",
+      ]}
       references={[
         {
                 "label": "厚生労働省「医師法」",
