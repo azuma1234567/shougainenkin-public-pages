@@ -28,6 +28,16 @@ const NEW_COLUMN_DATES = {
 
 export const COLUMNS: Column[] = [
   {
+    slug: "tekio-shogai-shogai-nenkin",
+    title:
+      "適応障害でも障害年金は申請できる? — 確認する順番と、自分の状況を整理する4つのシート",
+    metaTitle: "適応障害でも障害年金は申請できる?｜確認する順番と4つのシート",
+    description:
+      "適応障害で障害年金を申請できるのか。病名だけで決まらない理由と、確認すべき順番を整理します。日常生活・就労・初診日・受診歴を書き出す4つのシート、記入例、休職中の人のタイムライン、並行して使える制度、主治医への3つの質問、よくある質問まで。",
+    datePublished: "2026-07-30",
+    dateModified: "2026-07-30",
+  },
+  {
     slug: "moushitatesho-mijushin-kikan",
     title:
       "病歴・就労状況等申立書の未受診期間はどう書く? — 空白を「軽快」と読ませないための書き方と、5パターンのフル記入例",
