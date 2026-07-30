@@ -12,7 +12,12 @@ export default function Page() {
       column={column}
       source={articleSource}
       faqs={faqs}
-      relatedSlugs={["shoshinbi-wakaranai","hitsuyou-shorui-seishin","jibun-de-shinsei"]}
+      relatedSlugs={[
+        "shoshinbi-wakaranai",
+        "jushinjokyo-shomeisho",
+        "hitsuyou-shorui-seishin",
+        "shindansho-irai-timing",
+      ]}
       references={[
   {
     "label": "日本年金機構「予約相談について」",

@@ -14,8 +14,9 @@ export default function Page() {
       faqs={faqs}
       relatedSlugs={[
         "moushitatesho-mijushin-kikan",
-        "moushitatesho-kakikata",
         "moushitatesho-a4-insatsu",
+        "hatarakinagara",
+        "hitorigurashi-furi",
       ]}
       references={[
         {

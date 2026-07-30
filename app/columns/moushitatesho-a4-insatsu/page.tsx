@@ -58,9 +58,10 @@ export default function Page() {
       source={articleSource}
       faqs={faqs}
       relatedSlugs={[
-        "moushitatesho-kakikata",
-        "shinsatsu-mae-memo",
         "moushitatesho-kikan-kugiri",
+        "moushitatesho-mijushin-kikan",
+        "moushitatesho-kakikata",
+        "shindansho-kakunin",
       ]}
       references={[
         NENKIN_REFERENCES.moushitatesho,

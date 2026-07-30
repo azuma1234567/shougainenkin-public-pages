@@ -12,7 +12,12 @@ export default function Page() {
       column={column}
       source={articleSource}
       faqs={faqs}
-      relatedSlugs={["hattatsu-shougai","nichijo-seikatsu-7koumoku","shoubyou-teatekin"]}
+      relatedSlugs={[
+        "tekio-shogai-shogai-nenkin",
+        "hattatsu-shougai",
+        "nichijo-seikatsu-7koumoku",
+        "shoubyou-teatekin",
+      ]}
       references={[
         {
                 "label": "日本年金機構「障害認定基準（精神の障害）」",

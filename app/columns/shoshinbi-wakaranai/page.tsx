@@ -15,6 +15,7 @@ export default function Page() {
       faqs={faqs}
       relatedSlugs={[
         "jushinjokyo-shomeisho",
+        "nenkin-jimusho-soudan",
         "sokyuu-seikyuu",
         "ninteibi-jigojusho",
       ]}

@@ -12,7 +12,12 @@ export default function Page() {
       column={column}
       source={articleSource}
       faqs={faqs}
-      relatedSlugs={["shoshinbi-wakaranai","shindansho-irai-timing","nenkin-jimusho-soudan"]}
+      relatedSlugs={[
+        "shoshinbi-wakaranai",
+        "nenkin-jimusho-soudan",
+        "hitsuyou-shorui-seishin",
+        "shindansho-irai-timing",
+      ]}
       references={[
   {
     "label": "日本年金機構「障害年金の請求手続き等に使用する診断書・関連書類」",

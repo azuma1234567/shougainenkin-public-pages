@@ -54,9 +54,16 @@ const STEPS: Step[] = [
       "数年前の受診が初診日と気づかず、証明を取り損ねる",
     ],
     links: [
-      { href: "/columns/shoshinbi-wakaranai", label: "初診日がわからないときに確認する5つの方法" },
+      {
+        href: "/columns/shoshinbi-wakaranai",
+        label: "障害年金の初診日がわからないときの調べ方",
+      },
       { href: "/columns/hatachi-mae", label: "20歳前の傷病による障害基礎年金" },
       { href: "/columns/hattatsu-shougai", label: "発達障害(ADHD・ASD)の初診日の考え方" },
+      {
+        href: "/columns/tekio-shogai-shogai-nenkin",
+        label: "適応障害と診断された場合の初診日の確認",
+      },
     ],
     next: "ステップ2: 保険料納付要件を確認する",
   },
@@ -106,7 +113,7 @@ const STEPS: Step[] = [
     links: [
       {
         href: "/columns/nenkin-jimusho-soudan",
-        label: "初めて年金事務所へ相談に行く方へ — 予約・持ち物・質問",
+        label: "年金事務所で相談するときの持ち物と、当日に聞かれること",
       },
       { href: "/columns/jibun-de-shinsei", label: "自分で申請するか、社会保険労務士に依頼するか" },
     ],
@@ -136,9 +143,12 @@ const STEPS: Step[] = [
       },
       {
         href: "/columns/jushinjokyo-shomeisho",
-        label: "受診状況等証明書のもらい方 — 取れなかったときの全ルート",
+        label: "受診状況等証明書とは — 病院への依頼方法と確認ポイント",
       },
-      { href: "/columns/shoshinbi-wakaranai", label: "受診状況等証明書・初診日の証明の集め方" },
+      {
+        href: "/columns/shoshinbi-wakaranai",
+        label: "障害年金の初診日がわからないときの調べ方",
+      },
     ],
     next: "ステップ5: 診断書の準備をする",
   },
@@ -197,9 +207,15 @@ const STEPS: Step[] = [
     ],
     links: [
       { href: "/columns/moushitatesho-kakikata", label: "病歴・就労状況等申立書の書き方【精神疾患】" },
-      { href: "/columns/moushitatesho-kikan-kugiri", label: "申立書「期間の区切り方」と続紙の使い方" },
+      {
+        href: "/columns/moushitatesho-kikan-kugiri",
+        label: "申立書の期間はどう区切る?通院・就労・症状変化の書き方",
+      },
       { href: "/columns/moushitatesho-mijushin-kikan", label: "申立書の未受診期間はどう書く？理由と生活状況の伝え方" },
-      { href: "/columns/moushitatesho-a4-insatsu", label: "申立書はA4で出せる?用紙・PDF・印刷の実際" },
+      {
+        href: "/columns/moushitatesho-a4-insatsu",
+        label: "申立書をA4で印刷する方法 — PDF・コンビニ印刷の手順",
+      },
       { href: "/columns/hatarakinagara", label: "働きながら申請する場合の伝え方" },
     ],
     appCta: true,
@@ -225,7 +241,10 @@ const STEPS: Step[] = [
     ],
     links: [
       { href: "/columns/shindansho-kakunin", label: "提出前に診断書を確認する7つのポイント" },
-      { href: "/columns/moushitatesho-a4-insatsu", label: "控えを残す理由と印刷のしかた" },
+      {
+        href: "/columns/moushitatesho-a4-insatsu",
+        label: "印刷後に確認するポイントと、控えを残す理由",
+      },
     ],
     next: "ステップ8: 結果を待つ",
   },
@@ -248,7 +267,7 @@ const STEPS: Step[] = [
     links: [
       {
         href: "/columns/shinsei-kikan",
-        label: "障害年金は申請から結果まで何か月?初回振込までの期間",
+        label: "障害年金の申請結果はいつ届く?審査期間と結果待ちの過ごし方",
       },
       { href: "/columns/fushikyuu-shinsa-seikyu", label: "不支給になったら|審査請求・再審査請求・再請求" },
       { href: "/columns/ninteibi-jigojusho", label: "障害認定日請求と事後重症請求の違い" },
@@ -271,6 +290,10 @@ const APP_POINTS = [
 const RELATED_COLUMNS = [
   { slug: "shoubyou-teatekin", label: "傷病手当金と障害年金は同時にもらえる?" },
   { slug: "techou-to-nenkin", label: "障害者手帳と障害年金の違い" },
+  {
+    slug: "tekio-shogai-shogai-nenkin",
+    label: "適応障害でも障害年金は申請できる?確認したいポイント",
+  },
   { slug: "taishou-shoubyou-kyoukai", label: "適応障害・不安障害・神経症は対象外?" },
   { slug: "shougaisha-koyou-nenkin", label: "障害者雇用で働きながら受給できる?" },
 ];
