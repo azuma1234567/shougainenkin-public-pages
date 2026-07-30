@@ -176,8 +176,16 @@ const STEPS: Step[] = [
         href: "/columns/shindansho-irai-timing",
         label: "障害年金の診断書はいつ頼む?依頼タイミングと準備",
       },
+      {
+        href: "/columns/shindansho-ishi-ni-tsutaeru",
+        label: "診断書で医師に伝えること全リスト — 6分野と言葉の例",
+      },
       { href: "/columns/shinsatsu-mae-memo", label: "生活の実態を伝える診察前メモの作り方" },
       { href: "/columns/shindansho-kakunin", label: "診断書を受け取ったら確認すべき7つのポイント" },
+      {
+        href: "/columns/shindansho-jittai-chigau",
+        label: "診断書が実態と違う・軽く書かれたときの対処",
+      },
       { href: "/columns/shindansho-kaitekurenai", label: "診断書を医師が書いてくれないときの対処法" },
       { href: "/columns/nichijo-seikatsu-7koumoku", label: "診断書裏面「日常生活能力の判定」7項目" },
       { href: "/columns/hitorigurashi-furi", label: "障害年金は一人暮らしだと不利？日常生活能力の見られ方" },
@@ -241,6 +249,10 @@ const STEPS: Step[] = [
     ],
     links: [
       { href: "/columns/shindansho-kakunin", label: "提出前に診断書を確認する7つのポイント" },
+      {
+        href: "/columns/shindansho-jittai-chigau",
+        label: "診断書が実態と違うとき — 出す/出さないの判断",
+      },
       {
         href: "/columns/moushitatesho-a4-insatsu",
         label: "印刷後に確認するポイントと、控えを残す理由",
