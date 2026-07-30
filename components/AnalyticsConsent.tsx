@@ -8,6 +8,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const CONSENT_STORAGE_KEY = "analytics-consent-v1";
 const GA_MEASUREMENT_ID = "G-PHHDYX0H53";
 const OPEN_SETTINGS_EVENT = "open-analytics-consent-settings";
+const APP_STORE_HOSTNAME = "apps.apple.com";
+const EVENT_SEND_TIMEOUT_MS = 1000;
 
 type ConsentChoice = "granted" | "denied";
 
@@ -60,6 +62,28 @@ function deleteGoogleAnalyticsCookies() {
       document.cookie = `${name}=; Max-Age=0; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${domain}`;
     }
   }
+}
+
+function getAppStoreLink(target: EventTarget | null): HTMLAnchorElement | null {
+  if (!(target instanceof Element)) return null;
+
+  const link = target.closest<HTMLAnchorElement>("a[href]");
+  if (!link) return null;
+
+  try {
+    return new URL(link.href).hostname === APP_STORE_HOSTNAME ? link : null;
+  } catch {
+    return null;
+  }
+}
+
+function getLinkText(link: HTMLAnchorElement): string {
+  return (
+    link.innerText ||
+    link.getAttribute("aria-label") ||
+    link.querySelector("img")?.getAttribute("alt") ||
+    ""
+  ).trim();
 }
 
 export default function AnalyticsConsent() {
@@ -133,6 +157,56 @@ export default function AnalyticsConsent() {
 
     window.addEventListener(OPEN_SETTINGS_EVENT, openSettings);
     return () => window.removeEventListener(OPEN_SETTINGS_EVENT, openSettings);
+  }, []);
+
+  useEffect(() => {
+    const trackAppStoreClick = (event: MouseEvent) => {
+      const link = getAppStoreLink(event.target);
+      if (!link || !window.gtag) return;
+
+      const opensInCurrentPage =
+        event.button === 0 &&
+        !event.metaKey &&
+        !event.ctrlKey &&
+        !event.shiftKey &&
+        !event.altKey &&
+        (!link.target || link.target === "_self");
+
+      let navigationTimeout: number | undefined;
+      let hasNavigated = false;
+      const continueNavigation = () => {
+        if (!opensInCurrentPage || hasNavigated) return;
+
+        hasNavigated = true;
+        if (navigationTimeout !== undefined) {
+          window.clearTimeout(navigationTimeout);
+        }
+        window.location.assign(link.href);
+      };
+
+      if (opensInCurrentPage) {
+        event.preventDefault();
+        navigationTimeout = window.setTimeout(
+          continueNavigation,
+          EVENT_SEND_TIMEOUT_MS,
+        );
+      }
+
+      window.gtag("event", "app_store_click", {
+        link_url: link.href,
+        link_text: getLinkText(link),
+        page_location: window.location.href,
+        page_path: window.location.pathname,
+        transport_type: "beacon",
+        event_callback: continueNavigation,
+        event_timeout: EVENT_SEND_TIMEOUT_MS,
+      });
+    };
+
+    document.addEventListener("click", trackAppStoreClick, true);
+    return () => {
+      document.removeEventListener("click", trackAppStoreClick, true);
+    };
   }, []);
 
   useEffect(() => {
