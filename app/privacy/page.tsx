@@ -27,7 +27,7 @@ export default function PrivacyPage() {
 
       <h1>プライバシーポリシー</h1>
 
-      <p className="meta-line">制定日: 2026年8月5日</p>
+      <p className="meta-line">制定日: 2026年8月6日</p>
       <p className="meta-line">運営者: あずまたいすけ(個人)</p>
 
       <p>
@@ -198,7 +198,7 @@ export default function PrivacyPage() {
 
       <h2>11. 課金情報について</h2>
       <p>
-        申請準備パックの購入・課金の処理は、App Storeなどのストアが行います。
+        伝えるプランの購入・更新・解約の処理は、App Storeなどのストアが行います。
         アプリや運営者がクレジットカード情報を受け取ることはありません。
       </p>
 

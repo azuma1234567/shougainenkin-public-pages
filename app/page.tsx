@@ -295,8 +295,8 @@ const APP_POINTS = [
   "いまの段階と、次にすることが分かる",
   "申請ガイドと日々の記録は無料。日々の記録は件数無制限",
   "診察メモは、主治医が約30秒で読めるまとめに",
-  "診察メモ・申立書PDF・AI文章整理・食い違いチェック・バックアップは申請準備パック(買い切り2,980円)",
-  "月額の支払いはありません",
+  "診察メモ・申立書PDF・AI文章整理・食い違いチェック・バックアップは伝えるプラン(月額・自動更新)",
+  "AI機能は1契約期間につき合計300回まで。価格はApp Storeの表示が優先されます",
 ];
 
 const RELATED_COLUMNS = [
@@ -344,7 +344,8 @@ const homeJsonLd = {
       url: `${SITE_URL}/`,
       downloadUrl: APP_STORE_URL,
       sameAs: APP_STORE_URL,
-      // 申請ガイドと日々の記録は無料。申請準備パックは買い切り(月額なし)。
+      // 申請ガイドと日々の記録は無料。伝えるプランは月額の自動更新サブスクリプション。
+      // 価格は storekit/Subscription.storekit の displayPrice と一致させること。
       offers: [
         {
           "@type": "Offer",
@@ -354,9 +355,17 @@ const homeJsonLd = {
         },
         {
           "@type": "Offer",
-          name: "申請準備パック(買い切り)",
-          price: "2980",
+          name: "伝えるプラン(月額・自動更新)",
+          price: "780",
           priceCurrency: "JPY",
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price: "780",
+            priceCurrency: "JPY",
+            billingDuration: 1,
+            billingIncrement: 1,
+            unitCode: "MON",
+          },
         },
       ],
     },

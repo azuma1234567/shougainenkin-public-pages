@@ -26,7 +26,7 @@ export default function TermsPage() {
 
       <h1>利用規約</h1>
 
-      <p className="meta-line">制定日: 2026年8月5日</p>
+      <p className="meta-line">制定日: 2026年8月6日</p>
       <p className="meta-line">運営者: あずまたいすけ(個人)</p>
 
       <p>
@@ -81,7 +81,7 @@ export default function TermsPage() {
         件数や保存期間の制限を設けていません。
       </p>
       <p>
-        申請準備プランは、App Storeに表示される価格で自動更新されるサブスクリプションです。
+        伝えるプランは、App Storeに表示される価格で自動更新されるサブスクリプションです。
         表示価格はApp Storeで確認された価格を優先します。診察メモと申立書のPDF出力・印刷、
         AIによるメモの整理と深掘り、診断書との食い違いチェック、記録のバックアップ書き出し、
         「これからの整理」を利用できます。
