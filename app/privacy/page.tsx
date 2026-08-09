@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { AnalyticsConsentSettingsButton } from "@/components/AnalyticsConsent";
-import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
+import { CONTACT_EMAIL, LEGAL_VERSION, SITE_NAME } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
 
       <h1>プライバシーポリシー</h1>
 
-      <p className="meta-line">制定日: 2026年8月6日</p>
+      <p className="meta-line">制定日: {LEGAL_VERSION}</p>
       <p className="meta-line">運営者: あずまたいすけ(個人)</p>
 
       <p>
@@ -71,9 +71,16 @@ export default function PrivacyPage() {
 
       <h2>5. 「これからの整理」の内容は残りません</h2>
       <p>
-        「これからの整理」のやり取りは、あなたの端末の中だけで進みます。画面を閉じると消え、
-        運営者のサーバーにも保存されません。過去のやり取りを一覧で見返す機能はありません。残しておきたいときは、
-        あなたが書いた言葉だけを、あなたの操作で「今日のメモ」へ移すことができます。AIが書いた文章は保存されません。
+        「これからの整理」のやり取りは、あなたの端末の中だけで進みます。運営者のサーバーには保存されません。
+      </p>
+      <p>
+        進行中のやり取りは、中断しても続きから戻れるように、あなたの端末の中だけに1件だけ保持されます。
+        「この相談を終える」を選んだとき、および相談窓口のご案内に切り替わったときに、その1件は端末から削除されます。
+        過去のやり取りを一覧で保存・検索する機能はありません。
+      </p>
+      <p>
+        残しておきたいときは、あなたが書いた言葉だけを、あなたの操作で「今日のメモ」へ移すことができます。
+        「これからの整理」のAIの返答が「今日のメモ」へ移ることはありません。
       </p>
 
       <h2>6. AI機能で送信する情報</h2>

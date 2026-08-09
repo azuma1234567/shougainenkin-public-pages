@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
+import { CONTACT_EMAIL, LEGAL_VERSION, SITE_NAME } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
@@ -26,7 +26,7 @@ export default function TermsPage() {
 
       <h1>利用規約</h1>
 
-      <p className="meta-line">制定日: 2026年8月6日</p>
+      <p className="meta-line">制定日: {LEGAL_VERSION}</p>
       <p className="meta-line">運営者: あずまたいすけ(個人)</p>
 
       <p>
@@ -74,10 +74,23 @@ export default function TermsPage() {
         日々のメモには件数や保存期間の制限を設けません。
       </p>
       <p>
+        購入前に、伝えるプランの一部を無料で試せます。AIによるメモの整理を10件、
+        診察メモの印刷・PDF保存を1回、「これからの整理」を5回まで利用できます。
+        「これからの整理」の1回は、相談を始めてから区切りまでを1回として数えます。
+        申立書の印刷・PDF保存はお試しの対象外で、伝えるプランの購入が必要です。
+        お試しに期限はありません。使い切ったあとも、無料で利用できる機能はそのまま使えます。
+      </p>
+      <p>
         伝えるプランは、App Storeに表示される価格で1か月ごとに自動更新される月額サブスクリプションです。
         価格はApp Storeの購入画面に表示されるものが適用されます(地域により異なります)。
         診察メモと申立書のPDF出力・印刷、AIによるメモの整理と深掘り、診断書との食い違いチェック、
         記録のバックアップ書き出し、「これからの整理」を利用できます。
+      </p>
+      <p>
+        はじめて購読する方には、最初の一定期間だけ割引価格が適用されることがあります。
+        適用の有無、割引価格、割引が続く期間、その後の通常価格は、いずれもApp Storeの購入画面に表示されます。
+        割引期間が終わると、通常価格での自動更新に切り替わります。
+        過去に本プランを購読したことがある方は対象外です。
       </p>
       <p>
         AI機能は1契約期間につき合計700回まで利用できます。この700回は、メモの整理、

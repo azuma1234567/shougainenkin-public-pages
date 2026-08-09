@@ -27,6 +27,15 @@ export const APP_STORE_URL = resolveAppStoreUrl();
 // ct = キャンペーン名(記事slugを渡す)
 export const appStoreLink = (_ct: string) => APP_STORE_URL;
 
+// 利用規約・プライバシーポリシーの制定日。
+// 次の4か所は常に同じ値・同じ文面にすること(原本は shougainenkin リポジトリの
+// docs/public-pages.md)。過去に公開サイトだけが古いまま取り残された実績がある。
+//   1. docs/public-pages.md               … 原本
+//   2. ここ(公開サイト /terms・/privacy)  … 利用者が実際に読むページ
+//   3. server/app/{terms,privacy}/page.tsx … LEGAL_VERSION
+//   4. src/MockupV4App 14.tsx             … LEGAL_VERSION(アプリ内表示)
+export const LEGAL_VERSION = "2026年8月8日";
+
 export const CONTACT_EMAIL = "shougainenkinsupport@gmail.com";
 
 export const AUTHOR_NAME = "あずまたいすけ";
