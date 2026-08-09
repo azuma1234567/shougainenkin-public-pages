@@ -6,9 +6,12 @@ import { APP_STORE_URL, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { pageMetadata } from "@/lib/seo";
 
 const PAGE_TITLE =
-  "障害年金の申請の流れと必要書類｜初めての方へ8ステップで解説";
+  "障害年金の申請の流れと必要書類｜初めての方へ8ステップで解説【2026年度対応】";
 const PAGE_DESCRIPTION =
-  "障害年金の申請を何から始めればよいか、初診日の確認、納付要件、年金事務所への相談、必要書類、診断書、申立書、提出、結果待ちまで8ステップで分かりやすく解説します。";
+  "障害年金の申請を何から始めればよいか、初診日の確認、納付要件、年金事務所への相談、必要書類、診断書、申立書、提出、結果待ちまで8ステップで解説します。令和8年度(2026年度)の年金額と、納付要件の特例が令和18年3月末まで延長された点にも対応。";
+
+// 制度の数値を更新したら、この日付も必ず更新する(構造化データの dateModified と共用)。
+const LAST_UPDATED = "2026-08-09";
 
 export const metadata: Metadata = pageMetadata({
   title: PAGE_TITLE,
@@ -74,8 +77,9 @@ const STEPS: Step[] = [
     why: "障害年金は、初診日の前日までの保険料の納め方が一定の条件を満たしている必要があります。症状が重くても、この要件を満たさないと受け取れないことがあります。",
     todo: [
       "初診日の前日時点で「3分の2要件」か「直近1年要件」のどちらかを満たしているか確認する。",
+      "直近1年要件(初診日の前々月までの1年間に未納がない)の特例は、初診日が令和18年(2036年)3月末日までで、初診日に65歳未満であることが条件です。以前は令和8年3月末までとされていましたが、10年延長されました。",
       "ねんきんネットや年金事務所で、これまでの納付状況を確認できます。",
-      "20歳前に初診日がある場合は、この要件は原則として問われません。",
+      "20歳前の、年金制度に加入していない期間に初診日がある場合は、納付要件は問われません。",
     ],
     prepare: [
       "基礎年金番号がわかるもの",
@@ -84,6 +88,7 @@ const STEPS: Step[] = [
     mistakes: [
       "初診日より後に未納分を納めても、要件の判定には反映されない",
       "免除や学生納付特例を「未納」と思い込んで諦めてしまう",
+      "「特例は令和8年3月で終わる」という古い情報のまま諦めてしまう(令和18年3月末まで延長されています)",
     ],
     links: [
       { href: "/columns/nofu-yoken", label: "保険料納付要件とは — 3分の2要件と直近1年の特例" },
@@ -264,9 +269,10 @@ const STEPS: Step[] = [
     id: "step-8",
     num: 8,
     title: "結果を待つ",
-    why: "提出後は日本年金機構で審査が行われます。結果が届くまでの目安は、おおむね3か月程度とされています(状況により前後します)。",
+    why: "提出後は日本年金機構で審査が行われます。日本年金機構が目標として公表している事務処理期間(サービススタンダード)は、障害基礎年金が約3か月、障害厚生年金が約3か月半です。書類の追加照会が入るとさらに時間がかかることがあります。",
     todo: [
-      "結果が届くのを待つ。結果は「年金証書」または「不支給決定通知書」などの形で届きます。",
+      "結果が届くのを待つ。結果は「年金証書・年金決定通知書」または「不支給決定通知書」などの形で届きます。",
+      "審査の途中で、日本年金機構から書類の追加や確認の連絡が来ることがあります。届いたら早めに対応する。",
       "不支給や等級に納得できない場合は、期限内であれば審査請求という不服申立ての制度があります。",
     ],
     prepare: [
@@ -289,14 +295,35 @@ const STEPS: Step[] = [
   },
 ];
 
+// 令和8年度(2026年度)の年金額。出典は日本年金機構(更新日 2026年4月1日)。
+// 令和8年4月分(令和8年6月支給分)から適用。数値を変えたら LAST_UPDATED も更新すること。
+const AMOUNT_ROWS: { grade: string; kiso: string; kousei: string }[] = [
+  {
+    grade: "1級",
+    kiso: "1,059,125円 + 子の加算額",
+    kousei: "報酬比例の年金額 × 1.25 + 配偶者の加給年金額",
+  },
+  {
+    grade: "2級",
+    kiso: "847,300円 + 子の加算額",
+    kousei: "報酬比例の年金額 + 配偶者の加給年金額",
+  },
+  {
+    grade: "3級",
+    kiso: "(対象外)",
+    kousei: "報酬比例の年金額(最低保障額 635,500円)",
+  },
+];
+
 // アプリの現行仕様に沿ったメリットの短い紹介。
+// AI上限は src/lib(アプリ本体)の定数が正。数値を変えるときは規約・サポートと同時に直すこと。
 const APP_POINTS = [
   "初めての障害年金申請を、ひとつずつガイド",
   "いまの段階と、次にすることが分かる",
   "申請ガイドと日々の記録は無料。日々の記録は件数無制限",
   "診察メモは、主治医が約30秒で読めるまとめに",
   "診察メモ・申立書PDF・AI文章整理・食い違いチェック・バックアップは伝えるプラン(月額・自動更新)",
-  "AI機能は1契約期間につき合計300回まで。価格はApp Storeの表示が優先されます",
+  "AI機能は1契約期間につき合計700回まで。価格はApp Storeの表示が優先されます",
 ];
 
 const RELATED_COLUMNS = [
@@ -311,6 +338,30 @@ const RELATED_COLUMNS = [
 ];
 
 const LATEST_COLUMNS = COLUMNS_BY_DATE.slice(0, 4);
+
+// 構造化データ(FAQPage)と画面表示の両方で使う。数値は本文と必ずそろえること。
+const FAQ_ITEMS: { q: string; a: string }[] = [
+  {
+    q: "障害年金の申請にはどのくらい時間がかかりますか?",
+    a: "書類をそろえる期間は人によって異なりますが、提出後の審査について日本年金機構が目標として公表している事務処理期間は、障害基礎年金が約3か月、障害厚生年金が約3か月半です。診断書の作成や初診日の証明に時間がかかると、準備段階だけで数か月かかることもあります。",
+  },
+  {
+    q: "保険料に未納があると障害年金は受けられませんか?",
+    a: "初診日の前日時点で、加入期間の3分の2以上が納付済み・免除済みであれば要件を満たします。これを満たさない場合でも、初診日が令和18年3月末日までで初診日に65歳未満であれば、初診日がある月の前々月までの直近1年間に未納がなければよいという特例があります。また、20歳前の年金制度に加入していない期間に初診日がある場合は、納付要件は問われません。",
+  },
+  {
+    q: "障害年金はいくら受け取れますか?",
+    a: "令和8年度(2026年度)の障害基礎年金は、1級が年額1,059,125円、2級が年額847,300円です(昭和31年4月2日以後生まれの方)。子がいる場合は2人目まで1人につき243,800円、3人目以降は1人につき81,300円が加算されます。障害厚生年金はこれに報酬比例の年金額が上乗せされ、金額は加入期間と報酬によって一人ひとり異なります。",
+  },
+  {
+    q: "病名が決まっていれば障害年金は受け取れますか?",
+    a: "受け取れるとは限りません。障害年金は病名だけで決まる制度ではなく、初診日、保険料の納付要件、障害認定日時点および現在の障害の状態という複数の条件で判断されます。とくに精神の障害では、日常生活能力がどの程度制限されているかが診断書でどう書かれるかが結果に影響します。",
+  },
+  {
+    q: "不支給になったらもう受け取れませんか?",
+    a: "決定に納得できない場合は、期限内であれば審査請求という不服申立ての制度があります。また、その後に症状が悪化した場合は、事後重症請求として改めて請求することもできます。事後重症請求の請求書は、65歳の誕生日の前々日までに提出する必要があります。",
+  },
+];
 
 const homeJsonLd = {
   "@context": "https://schema.org",
@@ -331,6 +382,17 @@ const homeJsonLd = {
       inLanguage: "ja-JP",
       isPartOf: { "@id": `${SITE_URL}/#website` },
       about: { "@type": "Thing", name: "障害年金の申請" },
+      dateModified: LAST_UPDATED,
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/#faq`,
+      inLanguage: "ja-JP",
+      mainEntity: FAQ_ITEMS.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
     },
     {
       "@type": "SoftwareApplication",
@@ -346,6 +408,7 @@ const homeJsonLd = {
       sameAs: APP_STORE_URL,
       // 申請ガイドと日々の記録は無料。伝えるプランは月額の自動更新サブスクリプション。
       // 価格は storekit/Subscription.storekit の displayPrice と一致させること。
+      // ここに入れるのは「はじめて割」の導入価格ではなく通常価格(880円)。
       offers: [
         {
           "@type": "Offer",
@@ -356,11 +419,11 @@ const homeJsonLd = {
         {
           "@type": "Offer",
           name: "伝えるプラン(月額・自動更新)",
-          price: "780",
+          price: "880",
           priceCurrency: "JPY",
           priceSpecification: {
             "@type": "UnitPriceSpecification",
-            price: "780",
+            price: "880",
             priceCurrency: "JPY",
             billingDuration: 1,
             billingIncrement: 1,
@@ -405,6 +468,34 @@ export default function HomePage() {
             無料の申請ガイドをアプリで使う
           </a>
         </div>
+        <dl className="guide-facts">
+          <div className="guide-fact">
+            <dt>ステップ</dt>
+            <dd className="guide-fact-value">
+              8<span className="guide-fact-unit">段階</span>
+            </dd>
+            <dd className="guide-fact-note">初診日の確認から結果が届くまで</dd>
+          </div>
+          <div className="guide-fact">
+            <dt>審査の目安</dt>
+            <dd className="guide-fact-value">
+              約3<span className="guide-fact-unit">か月</span>
+            </dd>
+            <dd className="guide-fact-note">障害厚生年金は約3か月半</dd>
+          </div>
+          <div className="guide-fact">
+            <dt>納付要件の特例</dt>
+            <dd className="guide-fact-value">
+              令和18<span className="guide-fact-unit">年3月末まで</span>
+            </dd>
+            <dd className="guide-fact-note">10年延長されました</dd>
+          </div>
+        </dl>
+        <p className="guide-updated small-note">
+          最終更新:{" "}
+          <time dateTime={LAST_UPDATED}>{formatDate(LAST_UPDATED)}</time>
+          ／令和8年度(2026年度)の年金額に対応
+        </p>
       </section>
 
       {/* B. 最初に知っておきたいこと */}
@@ -426,6 +517,56 @@ export default function HomePage() {
             </li>
           </ul>
         </div>
+      </section>
+
+      {/* B2. 受け取れる金額の目安 */}
+      <section className="guide-section" aria-labelledby="guide-amount-heading">
+        <p className="guide-section-tag">令和8年度(2026年度)</p>
+        <h2 id="guide-amount-heading" className="guide-heading">
+          受け取れる金額の目安
+        </h2>
+        <p>
+          令和8年4月分(令和8年6月支給分)からの金額です。
+          障害基礎年金は等級ごとに決まった額、障害厚生年金は加入期間と報酬に
+          応じて一人ひとり変わります。
+        </p>
+        <div className="article-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">等級</th>
+                <th scope="col">障害基礎年金(年額)</th>
+                <th scope="col">障害厚生年金(年額)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {AMOUNT_ROWS.map((row) => (
+                <tr key={row.grade}>
+                  <th scope="row">{row.grade}</th>
+                  <td>{row.kiso}</td>
+                  <td>{row.kousei}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <ul className="guide-block-list">
+          <li>
+            障害基礎年金の額は昭和31年4月2日以後生まれの方のものです。
+            それ以前に生まれた方は1級1,056,125円・2級844,900円になります。
+          </li>
+          <li>
+            子の加算額は、2人目まで1人につき243,800円、3人目以降は1人につき81,300円です。
+          </li>
+          <li>
+            障害厚生年金の配偶者加給年金額は243,800円、3級の最低保障額は635,500円
+            (昭和31年4月1日以前生まれの方は633,700円)です。
+          </li>
+        </ul>
+        <p className="small-note">
+          出典:
+          日本年金機構「障害基礎年金の受給要件・請求時期・年金額」「障害厚生年金の受給要件・請求時期・年金額」(2026年4月1日更新)
+        </p>
       </section>
 
       {/* C. 8ステップの全体図 */}
@@ -591,6 +732,21 @@ export default function HomePage() {
         <p className="guide-app-note small-note">
           iOS対応・ログイン不要。申請ガイドと日々の記録は無料で使えます。
         </p>
+      </section>
+
+      {/* よくある質問 */}
+      <section className="guide-section" aria-labelledby="guide-faq-heading">
+        <h2 id="guide-faq-heading" className="guide-heading">
+          よくある質問
+        </h2>
+        <dl className="guide-faq">
+          {FAQ_ITEMS.map((item) => (
+            <div key={item.q} className="guide-faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       {/* コラム導線 */}

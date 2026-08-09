@@ -18,7 +18,35 @@ export default function SiteHeader() {
           className="site-title"
           aria-label={`${SITE_NAME} トップページ`}
         >
-          {SITE_NAME}
+          {/* 8段階のうち3つ目を進んでいる、というマーク。装飾なので読み上げない */}
+          <svg
+            className="site-mark"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <circle
+              cx="16"
+              cy="16"
+              r="13"
+              fill="none"
+              stroke="rgba(255,255,255,0.28)"
+              strokeWidth="3"
+            />
+            <circle
+              cx="16"
+              cy="16"
+              r="13"
+              fill="none"
+              stroke="#e2b95c"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeDasharray="30.6 81.7"
+              transform="rotate(-90 16 16)"
+            />
+            <circle cx="16" cy="16" r="4.5" fill="#ffffff" />
+          </svg>
+          <span className="site-title-text">{SITE_NAME}</span>
         </Link>
         <nav className="site-nav" aria-label="サイト内メニュー">
           {NAV_ITEMS.map((item) => (
