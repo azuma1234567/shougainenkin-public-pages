@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { CONTACT_EMAIL, LEGAL_VERSION, SITE_NAME } from "@/lib/constants";
+import {
+  CONTACT_EMAIL,
+  LEGAL_UPDATED,
+  LEGAL_VERSION,
+  SITE_NAME,
+} from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
@@ -27,6 +32,7 @@ export default function TermsPage() {
       <h1>利用規約</h1>
 
       <p className="meta-line">制定日: {LEGAL_VERSION}</p>
+      <p className="meta-line">最終更新日: {LEGAL_UPDATED}</p>
       <p className="meta-line">運営者: あずまたいすけ(個人)</p>
 
       <p>
