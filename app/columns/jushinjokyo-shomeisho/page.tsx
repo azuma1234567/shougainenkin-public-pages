@@ -14,6 +14,8 @@ export default function Page() {
       faqs={faqs}
       relatedSlugs={[
         "shoshinbi-wakaranai",
+        "shoshinbi-karute-nashi",
+        "shoshinbi-haiin",
         "nenkin-jimusho-soudan",
         "hitsuyou-shorui-seishin",
         "shindansho-irai-timing",

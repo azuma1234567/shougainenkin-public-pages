@@ -16,6 +16,7 @@ export default function Page() {
         "shindansho-irai-timing",
         "shinsatsu-mae-memo",
         "shindansho-kakunin",
+        "shindansho-ishi-ni-tsutaeru",
       ]}
       references={[
         {
