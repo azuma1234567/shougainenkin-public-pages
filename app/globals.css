@@ -6,15 +6,19 @@
  * 既存クラスが参照する変数名(--bg 〜 --radius-sm)は互換のため残している。
  */
 :root {
-  --bg: #f5f1e8;
+  --bg: #f7f3ea;
+  --bg-deep: #f1ebdd;
   --card: #ffffff;
+  --card-warm: #fdfbf6;
   --green: #2e6350;
   --green-dark: #234c3d;
-  --green-deep: #1a3a2e;
+  --green-deep: #16352a;
   --green-softer: rgba(46, 99, 80, 0.045);
+  --green-tint: rgba(46, 99, 80, 0.06);
+  --green-tint-2: rgba(46, 99, 80, 0.12);
   --text: #333333;
   --text-muted: #5f5b52;
-  --border: #ddd6c8;
+  --border: #e2dbc9;
   --card-border: rgba(46, 99, 80, 0.22);
   --card-border-strong: rgba(46, 99, 80, 0.4);
   --note-bg: #efe9da;
@@ -24,21 +28,25 @@
   --marker: rgba(226, 185, 92, 0.5);
   --accent: #b3873a;
   --accent-soft: #e2b95c;
+  --gold-wash: rgba(226, 185, 92, 0.16);
 
   --radius: 14px;
   --radius-sm: 10px;
   --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-xl: 30px;
 
   /* 影は深緑を薄く重ねる。黒い影は生成り背景で濁って見える */
   --shadow-xs: 0 1px 2px rgba(35, 76, 61, 0.06);
-  --shadow-sm: 0 2px 8px rgba(35, 76, 61, 0.07);
-  --shadow-md: 0 6px 20px -6px rgba(35, 76, 61, 0.16);
-  --shadow-lg: 0 18px 44px -18px rgba(26, 58, 46, 0.32);
+  --shadow-sm: 0 2px 10px rgba(35, 76, 61, 0.07);
+  --shadow-md: 0 10px 30px -10px rgba(35, 76, 61, 0.18);
+  --shadow-lg: 0 24px 56px -20px rgba(22, 53, 42, 0.3);
 
   --content: 42rem;
   --gutter: 1.25rem;
   --ease: cubic-bezier(0.22, 0.72, 0.3, 1);
+
+  /* 見出し専用の明朝(layout.tsxでnext/fontから注入)。本文はシステムゴシックのまま。 */
+  --font-display: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
 }
 
 * {
@@ -83,7 +91,6 @@ body {
       rgba(46, 99, 80, 0.06) 0%,
       rgba(46, 99, 80, 0) 55%
     );
-  background-attachment: fixed;
   color: var(--text);
   font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic",
     "Noto Sans JP", system-ui, sans-serif;
@@ -143,6 +150,8 @@ a:hover {
 }
 
 h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 1.55rem;
   line-height: 1.5;
   color: var(--green-dark);
@@ -150,6 +159,8 @@ h1 {
 }
 
 h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 1.3rem;
   line-height: 1.5;
   color: var(--green-dark);
@@ -1056,7 +1067,21 @@ strong {
   font-weight: 800;
   letter-spacing: 0.005em;
   color: var(--green-deep);
-  margin: 0 0 1rem;
+  margin: 0 0 0.5rem;
+}
+
+.guide-h1-sub {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 3vw, 1.3rem);
+  line-height: 1.6;
+  color: var(--green-dark);
+  margin: 0 0 1.1rem;
+}
+
+.guide-h1-marker {
+  background: linear-gradient(transparent 62%, rgba(226, 185, 92, 0.42) 62%);
+  padding: 0 0.1em;
 }
 
 .guide-lead {
@@ -1166,9 +1191,10 @@ strong {
 }
 
 .guide-fact-value {
+  font-family: var(--font-display);
   margin: 0.15rem 0 0;
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.3;
   color: var(--green-deep);
 }
@@ -1190,6 +1216,81 @@ strong {
 .guide-updated {
   margin: 1.25rem 0 0;
   font-size: 0.85rem;
+}
+
+/* ---- 信頼ストリップ(ヒーロー直下) ---- */
+.guide-trust {
+  margin: 0 0 2.75rem;
+  background-color: var(--green-deep);
+  border-radius: var(--radius-lg);
+  padding: 1.15rem 1.35rem;
+  color: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow-sm);
+}
+
+.guide-trust-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.guide-trust-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.7;
+}
+
+.guide-trust-mark {
+  flex: none;
+  color: var(--accent-soft);
+  font-weight: 700;
+}
+
+.guide-trust a {
+  color: #ffffff;
+}
+
+.guide-trust a:hover {
+  color: #ffffff;
+  text-decoration-color: var(--accent-soft);
+}
+
+/* ---- しんどくなったら ---- */
+.guide-breather {
+  margin: 3rem 0;
+  background:
+    radial-gradient(
+      80% 120% at 100% 0%,
+      rgba(226, 185, 92, 0.18) 0%,
+      rgba(226, 185, 92, 0) 55%
+    ),
+    var(--card-warm);
+  border: 1px solid var(--accent-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 1.7rem 1.6rem;
+  text-align: center;
+}
+
+.guide-breather h2 {
+  margin: 0 0 0.7rem;
+  border-left: 0;
+  padding: 0;
+  font-size: 1.35rem;
+}
+
+.guide-breather p {
+  max-width: 34rem;
+  margin: 0.4rem auto;
+  font-size: 0.96rem;
+}
+
+/* セクション見出し直下の導入文 */
+.guide-heading-sub {
+  margin: -0.6rem 0 1rem;
 }
 
 /* セクション共通 */
@@ -1318,6 +1419,7 @@ strong {
   );
   color: #ffffff;
   border-radius: 50%;
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.95rem;
   line-height: 1;
@@ -1413,7 +1515,8 @@ strong {
   );
   color: #ffffff;
   border-radius: 50%;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-weight: 700;
   font-size: 1.2rem;
   line-height: 1;
   box-shadow:
@@ -1431,6 +1534,8 @@ strong {
 }
 
 .guide-step-title {
+  font-family: var(--font-display);
+  font-weight: 700;
   margin: 0.1rem 0 0;
   padding: 0;
   border-left: 0;
@@ -2130,9 +2235,10 @@ strong {
   background-color: var(--card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-lg);
-  padding: 1.15rem 1.35rem 1.2rem;
+  padding: 0;
   margin: 0.75rem 0;
   box-shadow: var(--shadow-xs);
+  overflow: hidden;
   transition:
     border-color 0.2s var(--ease),
     box-shadow 0.2s var(--ease);
@@ -2143,17 +2249,24 @@ strong {
   box-shadow: var(--shadow-sm);
 }
 
-.guide-faq-item dt {
+.guide-faq-item summary {
+  cursor: pointer;
+  list-style: none;
   display: flex;
   align-items: flex-start;
   gap: 0.6rem;
+  padding: 1.15rem 1.35rem 1.2rem;
   font-weight: 700;
   font-size: 1.02rem;
   line-height: 1.65;
   color: var(--green-deep);
 }
 
-.guide-faq-item dt::before {
+.guide-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.guide-faq-item summary::before {
   content: "Q";
   flex: none;
   width: 1.5rem;
@@ -2169,14 +2282,36 @@ strong {
     var(--green-deep) 100%
   );
   color: #ffffff;
+  font-family: var(--font-display);
   font-size: 0.78rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
 }
 
-.guide-faq-item dd {
-  margin: 0.55rem 0 0;
-  padding-left: 2.1rem;
+.guide-faq-item summary::after {
+  content: "+";
+  margin-left: auto;
+  flex: none;
+  color: var(--green);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 0.2s var(--ease);
+}
+
+.guide-faq-item[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.guide-faq-item summary:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: -3px;
+  border-radius: var(--radius-lg);
+}
+
+.guide-faq-a {
+  margin: 0 0 1.2rem;
+  padding: 0 1.35rem 0 2.1rem;
   font-size: 0.96rem;
   color: #45494b;
 }
@@ -2195,6 +2330,8 @@ strong {
 .article-table-wrap tbody th[scope="row"] {
   white-space: nowrap;
   color: var(--green-deep);
+  font-family: var(--font-display);
+  font-weight: 700;
 }
 
 /* ---- 関連リンクのカード ---- */

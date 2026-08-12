@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Zen_Old_Mincho } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -8,6 +9,14 @@ import {
   SITE_URL,
 } from "@/lib/constants";
 import { OG_IMAGE } from "@/lib/seo";
+
+// 見出し専用の明朝体。本文は現行のシステムゴシックスタックのまま(パフォーマンス優先)。
+const zenOldMincho = Zen_Old_Mincho({
+  weight: ["600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-display",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -40,7 +49,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="ja" className={zenOldMincho.variable}>
       <body>
         <SiteHeader />
         <main>{children}</main>

@@ -42,7 +42,7 @@ const STEPS: Step[] = [
     id: "step-1",
     num: 1,
     title: "初診日を確認する",
-    why: "初診日(その傷病で初めて医師にかかった日)は、保険料納付要件の判定期間も、障害基礎年金か障害厚生年金かも、障害認定日も決める起点です。ここがずれると、申請全体をやり直すことになる場合があります。",
+    why: "初診日(その傷病で初めて医師にかかった日)は、申請全体の「起点」です。保険料納付要件の判定期間も、障害基礎年金か障害厚生年金かも、障害認定日も、すべてここから決まります。ここがずれると申請をやり直すことになる場合があるので、最初にゆっくり確かめましょう。",
     todo: [
       "その傷病で初めて医師にかかった日を思い出す。",
       "転院している場合は、いちばん最初にかかった医療機関を確認する。",
@@ -60,6 +60,14 @@ const STEPS: Step[] = [
       {
         href: "/columns/shoshinbi-wakaranai",
         label: "障害年金の初診日がわからないときの調べ方",
+      },
+      {
+        href: "/columns/shoshinbi-karute-nashi",
+        label: "初診日のカルテがない・破棄されたときの証明方法と代替資料",
+      },
+      {
+        href: "/columns/shoshinbi-haiin",
+        label: "昔の病院が廃院しているときの調べ方と、行き先の探し方",
       },
       { href: "/columns/hatachi-mae", label: "20歳前の傷病による障害基礎年金" },
       { href: "/columns/hattatsu-shougai", label: "発達障害(ADHD・ASD)の初診日の考え方" },
@@ -100,7 +108,7 @@ const STEPS: Step[] = [
     id: "step-3",
     num: 3,
     title: "年金事務所へ相談・予約する",
-    why: "障害年金の申請書類一式は、年金事務所や街角の年金相談センターで受け取ります。納付要件の確認もその場でできます。相談は無料です。",
+    why: "申請書類一式は、年金事務所や街角の年金相談センターで受け取ります。納付要件の確認もその場でできます。相談は無料で、何度でも大丈夫です。「まだ何も分からない」段階で行っても、ちゃんと案内してもらえます。",
     todo: [
       "最寄りの年金事務所へ電話などで相談を予約する。",
       "初診日・通院歴・いまの生活の様子を伝えられるよう、簡単なメモを持っていく。",
@@ -128,7 +136,7 @@ const STEPS: Step[] = [
     id: "step-4",
     num: 4,
     title: "必要書類をそろえる",
-    why: "障害年金の申請には複数の書類が必要です。初診の医療機関と診断書を書く医療機関が違う場合などは、追加の書類が要ります。早めに全体像をつかむと、後戻りが減ります。",
+    why: "障害年金の申請には複数の書類が必要です。初診の医療機関と診断書を書く医療機関が違う場合などは、追加の書類が要ります。最初に全体像をつかんでおくと、後戻りが減って、気持ちにも余裕が生まれます。",
     todo: [
       "年金事務所の案内に沿って、自分に必要な書類を確認する。",
       "主な書類:年金請求書 / 医師の診断書 / 病歴・就労状況等申立書 / 受診状況等証明書(初診と診断書の医療機関が異なる場合) / 基礎年金番号がわかるもの / 戸籍・住民票関係 / 受け取り口座がわかるもの / 配偶者や子がいる場合の関係書類。",
@@ -161,7 +169,7 @@ const STEPS: Step[] = [
     id: "step-5",
     num: 5,
     title: "診断書の準備をする",
-    why: "診断書は審査の中心になる書類です。とくに精神の障害では、日常生活の様子が診断書にどう書かれるかで結果が大きく変わります。医師が診察室で見えているのは、あなたの一部だけです。",
+    why: "診断書は審査の中心になる書類です。とくに精神の障害では、日常生活の様子が診断書にどう書かれるかで結果が大きく変わります。医師が診察室で見えているのは、あなたの生活のごく一部です。だからこそ、ふだんの大変さを伝える準備に意味があります。",
     todo: [
       "年金事務所でもらった様式で、主治医に診断書を依頼する。",
       "障害認定日(原則、初診日から1年6か月を経過した日)時点、または現在の状態を書いてもらう。",
@@ -180,6 +188,10 @@ const STEPS: Step[] = [
       {
         href: "/columns/shindansho-irai-timing",
         label: "障害年金の診断書はいつ頼む?依頼タイミングと準備",
+      },
+      {
+        href: "/columns/shindansho-tanomikata",
+        label: "診断書を主治医にどう頼む?— 切り出し方の台本と渡すメモ",
       },
       {
         href: "/columns/shindansho-ishi-ni-tsutaeru",
@@ -203,7 +215,7 @@ const STEPS: Step[] = [
     id: "step-6",
     num: 6,
     title: "病歴・就労状況等申立書を作成する",
-    why: "申立書は、自分で書く唯一の書類です。発病から現在までの生活・通院・就労の実態を、あなた自身の言葉で伝えられます。診断書と食い違わないように整えることも大切です。",
+    why: "申立書は、自分で書く唯一の書類です。発病から現在までの生活・通院・就労の実態を、あなた自身の言葉で伝えられる大切な機会でもあります。診断書と食い違わないように整えることも忘れずに。",
     todo: [
       "発病から現在までを、期間ごとに区切る。",
       "それぞれの期間の通院状況・日常生活・就労の様子を書く。",
@@ -230,6 +242,10 @@ const STEPS: Step[] = [
         label: "申立書をA4で印刷する方法 — PDF・コンビニ印刷の手順",
       },
       { href: "/columns/hatarakinagara", label: "働きながら申請する場合の伝え方" },
+      {
+        href: "/columns/kazoku-enjo-kakikata",
+        label: "申立書に家族の援助をどう書く?— 具体例と書き分け",
+      },
     ],
     appCta: true,
     next: "ステップ7: 年金事務所へ提出する",
@@ -238,7 +254,7 @@ const STEPS: Step[] = [
     id: "step-7",
     num: 7,
     title: "年金事務所へ提出する",
-    why: "提出の前が、書類全体を見直せる最後の機会です。診断書と申立書の内容が食い違っていると、審査で不利になることがあります。",
+    why: "提出の前が、書類全体を見直せる最後の機会です。診断書と申立書の内容が食い違っていると、審査で不利になることがあります。ここまで来たら、あと少しです。",
     todo: [
       "診断書と申立書の内容に、食い違いがないか確認する。",
       "必要書類がそろっているか、年金事務所の案内と照らし合わせる。",
@@ -262,6 +278,10 @@ const STEPS: Step[] = [
         href: "/columns/moushitatesho-a4-insatsu",
         label: "印刷後に確認するポイントと、控えを残す理由",
       },
+      {
+        href: "/columns/teishutsusaki-yuusou",
+        label: "書類はどこに提出する?— 窓口・郵送の使い分けと最終チェック",
+      },
     ],
     next: "ステップ8: 結果を待つ",
   },
@@ -269,7 +289,7 @@ const STEPS: Step[] = [
     id: "step-8",
     num: 8,
     title: "結果を待つ",
-    why: "提出後は日本年金機構で審査が行われます。日本年金機構が目標として公表している事務処理期間(サービススタンダード)は、障害基礎年金が約3か月、障害厚生年金が約3か月半です。書類の追加照会が入るとさらに時間がかかることがあります。",
+    why: "提出後は日本年金機構で審査が行われます。日本年金機構が目標として公表している事務処理期間は、障害基礎年金が約3か月、障害厚生年金が約3か月半です。長く感じる期間ですが、ここまで来たら、待つことも「申請のうち」です。追加の照会が来たら、早めに対応しましょう。",
     todo: [
       "結果が届くのを待つ。結果は「年金証書・年金決定通知書」または「不支給決定通知書」などの形で届きます。",
       "審査の途中で、日本年金機構から書類の追加や確認の連絡が来ることがあります。届いたら早めに対応する。",
@@ -290,6 +310,10 @@ const STEPS: Step[] = [
       { href: "/columns/fushikyuu-shinsa-seikyu", label: "不支給になったら|審査請求・再審査請求・再請求" },
       { href: "/columns/ninteibi-jigojusho", label: "障害認定日請求と事後重症請求の違い" },
       { href: "/columns/sokyuu-seikyuu", label: "最大5年分をさかのぼる遡及請求の条件" },
+      {
+        href: "/columns/shinsa-shikumi-nintei-i",
+        label: "審査は誰がどう行う?— 認定医と書類審査の仕組み",
+      },
     ],
     next: "",
   },
@@ -385,6 +409,18 @@ const homeJsonLd = {
       dateModified: LAST_UPDATED,
     },
     {
+      "@type": "HowTo",
+      "@id": `${SITE_URL}/#howto`,
+      name: "障害年金の申請の流れ(8ステップ)",
+      inLanguage: "ja-JP",
+      step: STEPS.map((s) => ({
+        "@type": "HowToStep",
+        position: s.num,
+        name: s.title,
+        url: `${SITE_URL}/#${s.id}`,
+      })),
+    },
+    {
       "@type": "FAQPage",
       "@id": `${SITE_URL}/#faq`,
       inLanguage: "ja-JP",
@@ -445,19 +481,24 @@ export default function HomePage() {
 
       {/* A. ファーストビュー */}
       <section className="guide-hero">
-        <p className="guide-eyebrow">初めての障害年金申請ガイド</p>
+        <p className="guide-eyebrow">はじめての障害年金申請ガイド</p>
         <h1 className="guide-h1">障害年金の申請の流れと必要書類</h1>
-        <p className="guide-lead">
-          障害年金の申請は、初診日の確認、保険料納付要件、年金事務所への相談、
-          診断書、申立書など、複数の手続きを順番に進める必要があります。
+        <p className="guide-h1-sub">
+          <span className="guide-h1-marker">「いま、なにをすればいいか」</span>
+          がわかる<span style={{ whiteSpace: "nowrap" }}>8ステップ</span>
         </p>
         <p className="guide-lead">
-          初めて申請する方が「いま何をすればよいか」を確認できるように、
-          申請から結果が届くまでを8つの段階に分けて案内します。
+          体調がすぐれないなかで、慣れない制度や書類に向き合うのは、それだけで力のいることです。
+          このページは、はじめて障害年金を申請する方が「いま、なにをすればいいか」をひとつずつ確かめられるように、
+          初診日の確認から結果が届くまでを8つのステップに分けて案内します。
+        </p>
+        <p className="guide-lead">
+          むずかしい言葉はできるだけかみくだいて。内容は、日本年金機構の公表情報にもとづいて正確に。
+          一度に読み切る必要はありません。あなたのいまの段階から、あなたのペースでどうぞ。
         </p>
         <div className="guide-cta-row">
           <a className="guide-btn guide-btn-primary" href="#steps">
-            申請の流れを見る
+            8つのステップを見る
           </a>
           <a
             className="guide-btn guide-btn-secondary"
@@ -465,7 +506,7 @@ export default function HomePage() {
             target="_blank"
             rel="noopener noreferrer external"
           >
-            無料の申請ガイドをアプリで使う
+            無料アプリでガイドを使う
           </a>
         </div>
         <dl className="guide-facts">
@@ -498,22 +539,54 @@ export default function HomePage() {
         </p>
       </section>
 
-      {/* B. 最初に知っておきたいこと */}
+      {/* 信頼ストリップ */}
+      <div className="guide-trust" role="note" aria-label="このサイトについて">
+        <div className="guide-trust-inner">
+          <p className="guide-trust-item">
+            <span className="guide-trust-mark" aria-hidden="true">
+              ✓
+            </span>
+            数値・制度はすべて日本年金機構の公表情報にもとづき、出典を明記しています
+          </p>
+          <p className="guide-trust-item">
+            <span className="guide-trust-mark" aria-hidden="true">
+              ✓
+            </span>
+            受給を保証したり、不安をあおったりしません。正式な確認先も必ず案内します
+          </p>
+          <p className="guide-trust-item">
+            <span className="guide-trust-mark" aria-hidden="true">
+              ✓
+            </span>
+            当事者に伴走するために、個人で開発・運営しています(
+            <Link href="/about">運営者情報</Link>)
+          </p>
+        </div>
+      </div>
+
+      {/* B. はじめに、知っておいてほしいこと */}
       <section className="guide-section" aria-labelledby="guide-intro-heading">
         <h2 id="guide-intro-heading" className="guide-heading">
-          最初に知っておきたいこと
+          はじめに、知っておいてほしいこと
         </h2>
         <div className="note-box">
           <ul className="guide-intro-list">
-            <li>障害年金は、病名だけで決まる制度ではありません。</li>
             <li>
-              初診日・保険料の納付要件・障害の状態など、いくつかの条件を確認する
-              必要があります。
+              障害年金は、病名だけで決まる制度ではありません。
+              <strong>初診日・保険料の納付・障害の状態</strong>
+              という条件を、順番に確認していきます。
             </li>
-            <li>必要な書類は、一人ひとりの状況によって変わります。</li>
-            <li>正式な確認は、年金事務所や日本年金機構で行ってください。</li>
+            <li>
+              必要な書類は、一人ひとりの状況によって変わります。このページは、
+              迷わないための<strong>「全体の地図」</strong>としてお使いください。
+            </li>
+            <li>
+              正式な確認は、年金事務所や日本年金機構で行ってください。相談は無料で、
+              何度でもできます。
+            </li>
             <li>
               このサイトは一般的な情報提供であり、受給を保証するものではありません。
+              だからこそ、「知らなかった」で損をしないための情報を、ていねいにまとめています。
             </li>
           </ul>
         </div>
@@ -526,9 +599,9 @@ export default function HomePage() {
           受け取れる金額の目安
         </h2>
         <p>
-          令和8年4月分(令和8年6月支給分)からの金額です。
-          障害基礎年金は等級ごとに決まった額、障害厚生年金は加入期間と報酬に
-          応じて一人ひとり変わります。
+          これからの生活を考えるうえで、まず気になるところだと思います。
+          障害基礎年金は等級ごとに決まった額、障害厚生年金は加入期間と報酬に応じて
+          一人ひとり変わります(令和8年4月分・6月支給分から)。
         </p>
         <div className="article-table-wrap">
           <table>
@@ -575,7 +648,8 @@ export default function HomePage() {
           申請の流れ 8ステップ
         </h2>
         <p>
-          全体像です。各ステップをタップすると、下の詳しい説明へ移動します。
+          全体像です。いまの自分がどのあたりにいるか、確かめながら進めてください。
+          各ステップから詳しい説明へ移動できます。
         </p>
         <ol className="guide-overview">
           {STEPS.map((step) => (
@@ -693,6 +767,21 @@ export default function HomePage() {
         ))}
       </div>
 
+      {/* しんどくなったら */}
+      <section className="guide-breather" aria-labelledby="guide-breather-heading">
+        <h2 id="guide-breather-heading">申請の途中で、しんどくなったら</h2>
+        <p>
+          書類集めの途中で疲れてしまう日があるのは、あなただけではありません。
+          書類は逃げません。小さく分けて、休みながらで大丈夫です。
+        </p>
+        <p>
+          →{" "}
+          <Link href="/columns/shinsei-shindoi">
+            「障害年金の申請がしんどい」— 疲れ果てない小分けの進め方
+          </Link>
+        </p>
+      </section>
+
       {/* 受給後の案内(更新は結果待ちとは分けて案内する) */}
       <section className="guide-section" aria-labelledby="guide-after-heading">
         <h2 id="guide-after-heading" className="guide-heading">
@@ -700,8 +789,8 @@ export default function HomePage() {
         </h2>
         <div className="note-box">
           <p>
-            障害年金は、受け取り始めてからも、定期的な更新(障害状態確認届)が
-            あります。受給後の手続きについては、こちらをご覧ください。
+            障害年金は、受け取り始めてからも定期的な更新(障害状態確認届)があります。
+            落ち着いたころで構いませんので、更新の時期だけ頭の片隅に置いておいてください。
           </p>
           <p>
             →{" "}
@@ -716,12 +805,13 @@ export default function HomePage() {
       <section className="guide-app" aria-labelledby="guide-app-heading">
         <p className="guide-section-tag">申請準備の道具</p>
         <h2 id="guide-app-heading" className="guide-heading">
-          申請の現在地と次にすることを、アプリで
+          申請の現在地と、次の一歩を、いつでも手元に
         </h2>
         <p>
           「障害年金申請サポート」は、申請を代行するアプリではありません。
-          いまの段階と次にすることを確認しながら、日々の記録・診察メモ・
-          申立書の準備を、自分のペースで進めるための道具です。
+          いまの段階と次にすることを確かめながら、日々の記録・診察メモ・
+          申立書の準備を、自分のペースで進めるための道具です。ログイン不要で、
+          記録は端末の中に残ります。
         </p>
         <ul className="guide-app-points">
           {APP_POINTS.map((point) => (
@@ -739,21 +829,27 @@ export default function HomePage() {
         <h2 id="guide-faq-heading" className="guide-heading">
           よくある質問
         </h2>
-        <dl className="guide-faq">
+        <p className="guide-heading-sub small-note">
+          多くの方が最初に不安に感じるポイントをまとめました。
+        </p>
+        <div className="guide-faq">
           {FAQ_ITEMS.map((item) => (
-            <div key={item.q} className="guide-faq-item">
-              <dt>{item.q}</dt>
-              <dd>{item.a}</dd>
-            </div>
+            <details key={item.q} className="guide-faq-item">
+              <summary>{item.q}</summary>
+              <p className="guide-faq-a">{item.a}</p>
+            </details>
           ))}
-        </dl>
+        </div>
       </section>
 
       {/* コラム導線 */}
       <section className="guide-section" aria-labelledby="guide-columns-heading">
         <h2 id="guide-columns-heading" className="guide-heading">
-          制度をもっと知りたい方へ
+          もっと詳しく知りたいときに
         </h2>
+        <p className="guide-heading-sub small-note">
+          制度の境目や書類のつまずきどころは、コラムでひとつずつ掘り下げています。
+        </p>
         <ul className="guide-related-links">
           {RELATED_COLUMNS.map((c) => (
             <li key={c.slug}>
@@ -778,7 +874,7 @@ export default function HomePage() {
         </ul>
         <p className="lp-columns-more">
           <Link href="/columns" className="lp-columns-more-link">
-            コラム一覧を見る
+            コラム一覧を見る(全{COLUMNS_BY_DATE.length}本)
           </Link>
         </p>
       </section>
