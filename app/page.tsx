@@ -11,7 +11,7 @@ const PAGE_DESCRIPTION =
   "障害年金の申請を何から始めればよいか、初診日の確認、納付要件、年金事務所への相談、必要書類、診断書、申立書、提出、結果待ちまで8ステップで解説します。令和8年度(2026年度)の年金額と、納付要件の特例が令和18年3月末まで延長された点にも対応。";
 
 // 制度の数値を更新したら、この日付も必ず更新する(構造化データの dateModified と共用)。
-const LAST_UPDATED = "2026-08-09";
+const LAST_UPDATED = "2026-08-13";
 
 export const metadata: Metadata = pageMetadata({
   title: PAGE_TITLE,
