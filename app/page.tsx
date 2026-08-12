@@ -539,29 +539,13 @@ export default function HomePage() {
         </p>
       </section>
 
-      {/* 信頼ストリップ */}
-      <div className="guide-trust" role="note" aria-label="このサイトについて">
-        <div className="guide-trust-inner">
-          <p className="guide-trust-item">
-            <span className="guide-trust-mark" aria-hidden="true">
-              ✓
-            </span>
-            数値・制度はすべて日本年金機構の公表情報にもとづき、出典を明記しています
-          </p>
-          <p className="guide-trust-item">
-            <span className="guide-trust-mark" aria-hidden="true">
-              ✓
-            </span>
-            受給を保証したり、不安をあおったりしません。正式な確認先も必ず案内します
-          </p>
-          <p className="guide-trust-item">
-            <span className="guide-trust-mark" aria-hidden="true">
-              ✓
-            </span>
-            当事者に伴走するために、個人で開発・運営しています(
-            <Link href="/about">運営者情報</Link>)
-          </p>
-        </div>
+      {/* このサイトについて */}
+      <div className="note-box guide-about-note" role="note" aria-label="このサイトについて">
+        <p>
+          数値・制度は日本年金機構の公表情報にもとづき、出典を明記しています。
+          受給を保証するものではなく、正式な確認先もあわせてご案内しています。
+          個人開発者が運営しています(<Link href="/about">運営者情報</Link>)。
+        </p>
       </div>
 
       {/* B. はじめに、知っておいてほしいこと */}
