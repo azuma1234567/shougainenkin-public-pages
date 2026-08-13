@@ -37,11 +37,11 @@ export const appStoreLink = (_ct: string) => APP_STORE_URL;
 //
 // 制定日は、条文そのものを改定したときだけ動かす。文言を1文字も変えていない
 // 同期作業や表示の修正では動かさないこと。
-export const LEGAL_VERSION = "2026年8月8日";
+export const LEGAL_VERSION = "2026年8月13日";
 
 // 公開ページを更新した日。公開サイトだけに表示する項目で、同期先3か所には無い。
 // 制定日と違い、条文の改定を伴わない更新(同期・表記の修正など)でも動かしてよい。
-export const LEGAL_UPDATED = "2026年8月9日";
+export const LEGAL_UPDATED = "2026年8月13日";
 
 export const CONTACT_EMAIL = "shougainenkinsupport@gmail.com";
 

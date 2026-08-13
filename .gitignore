@@ -3,6 +3,7 @@
 
 # next.js
 /.next/
+/.next-stale-*/
 /out/
 
 # production
@@ -28,3 +29,4 @@ next-env.d.ts
 
 # claude code
 /.claude/
+/_to_delete/
