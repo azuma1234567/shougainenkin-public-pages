@@ -120,6 +120,23 @@ h3 {
   text-wrap: balance;
 }
 
+/*
+ * スマホでは本文の word-break: auto-phrase を無効にする。
+ * 1行が短い画面で文節単位に折り返すと、行末に文節ひとつ分の空きが毎行できて
+ * 右側が大きく余って見える(実測で平均充填率 86% / 最短70%)。
+ * 通常の禁則処理に戻すと 98% 前後まで埋まる。
+ * 見出しは行数が少なく、text-wrap: balance で意図的に均等割りしているので対象外。
+ */
+@media (max-width: 720px) {
+  p,
+  li,
+  dd {
+    word-break: normal;
+    line-break: strict;
+    overflow-wrap: break-word;
+  }
+}
+
 a {
   color: var(--green);
   text-decoration: underline;
