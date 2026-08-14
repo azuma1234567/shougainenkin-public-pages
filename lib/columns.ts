@@ -314,7 +314,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害認定日請求と事後重症請求の違い、最大5年分の遡及、認定日頃の診断書が取れない場合の確認事項、額改定請求までわかりやすく解説します。",
     datePublished: NEW_COLUMN_DATES["ninteibi-jigojusho"],
-    dateModified: "2026-07-19",
+    dateModified: "2026-08-14",
     category: "審査・結果・不服申立て",
   },
   {
@@ -325,7 +325,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害年金の診断書が実際より軽いと感じる理由と、提出前に確認したい7つのポイントを解説。事実と異なる記載があったときの伝え方、更新時の注意も紹介します。",
     datePublished: NEW_COLUMN_DATES["shindansho-kakunin"],
-    dateModified: "2026-07-31",
+    dateModified: "2026-08-14",
     category: "診断書",
   },
   {
@@ -334,7 +334,7 @@ export const COLUMNS: Column[] = [
     description:
       "精神障害者保健福祉手帳と障害年金は、別の制度・別の審査です。手帳3級でも年金を受給できる場合があること、手帳がなくても年金申請できること、年金証書で手帳を取得できる制度を解説します。",
     datePublished: NEW_COLUMN_DATES["techou-to-nenkin"],
-    dateModified: NEW_COLUMN_DATES["techou-to-nenkin"],
+    dateModified: "2026-08-14",
     category: "制度の知識",
   },
   {
@@ -344,7 +344,7 @@ export const COLUMNS: Column[] = [
     description:
       "傷病手当金と障害年金の併給調整、同じ傷病で受け取る場合の差額支給、遡及時の返還、休職中から始めたい障害年金の準備を解説します。",
     datePublished: NEW_COLUMN_DATES["shoubyou-teatekin"],
-    dateModified: "2026-07-19",
+    dateModified: "2026-08-14",
     category: "制度の知識",
   },
   {
@@ -355,7 +355,7 @@ export const COLUMNS: Column[] = [
     description:
       "発達障害で障害年金を申請する際の初診日の分岐、診断書の確認点、出生から書く申立書、就労中の伝え方、遡及・更新まで具体例付きで解説します。",
     datePublished: NEW_COLUMN_DATES["hattatsu-shougai"],
-    dateModified: "2026-07-19",
+    dateModified: "2026-08-14",
     category: "初診日",
   },
   {
@@ -377,7 +377,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害年金の不支給後に選べる審査請求、再審査請求、再請求の違いと期限、不支給理由の確認方法、書類を立て直す手順を解説します。",
     datePublished: NEW_COLUMN_DATES["fushikyuu-shinsa-seikyu"],
-    dateModified: "2026-07-19",
+    dateModified: "2026-08-14",
     category: "審査・結果・不服申立て",
   },
   {
@@ -409,7 +409,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害年金には保険料納付要件があります。3分の2要件と直近1年特例のしくみ、免除・学生納付特例の扱い、初診日より後に納めても間に合わない理由、納付状況の確認方法を解説します。",
     datePublished: "2026-07-17",
-    dateModified: "2026-07-17",
+    dateModified: "2026-08-14",
     category: "納付要件",
   },
   {
