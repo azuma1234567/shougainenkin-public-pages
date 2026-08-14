@@ -147,30 +147,47 @@ export default function MarkdownArticle({
         index += 1;
       }
 
+      // 3列以上の表はスマホで横スクロールが必要になる。切れていることが
+      // 分からないため、注記を添えたうえでスクロール領域をキーボード操作可能にする。
+      const isWide = headers.length >= 3;
+
       blocks.push(
-        <div className="article-table-wrap" key={`table-${index}`}>
-          <table>
-            <thead>
-              <tr>
-                {headers.map((header, cellIndex) => (
-                  <th key={cellIndex} scope="col">
-                    {inlineContent(header)}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((row, rowIndex) => (
-                <tr key={rowIndex}>
-                  {headers.map((_, cellIndex) => (
-                    <td key={cellIndex}>
-                      {inlineContent(row[cellIndex] ?? "")}
-                    </td>
+        <div
+          className={isWide ? "article-table-figure is-wide" : "article-table-figure"}
+          key={`table-${index}`}
+        >
+          {isWide ? (
+            <p className="article-table-hint">→ 横にスクロールできます</p>
+          ) : null}
+          <div
+            className="article-table-wrap"
+            role="region"
+            aria-label="表(横にスクロールできます)"
+            tabIndex={0}
+          >
+            <table>
+              <thead>
+                <tr>
+                  {headers.map((header, cellIndex) => (
+                    <th key={cellIndex} scope="col">
+                      {inlineContent(header)}
+                    </th>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {rows.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {headers.map((_, cellIndex) => (
+                      <td key={cellIndex}>
+                        {inlineContent(row[cellIndex] ?? "")}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>,
       );
       continue;

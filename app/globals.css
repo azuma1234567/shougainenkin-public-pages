@@ -276,11 +276,39 @@ blockquote {
   }
 }
 
-.article-table-wrap {
+.article-table-figure {
   margin: 1.25rem 0;
+}
+
+/*
+ * 3列以上の表はスマホで横スクロールが必要になる。右端が切れていること自体が
+ * 見た目では分からないため、表の直前に注記を出す。768px以上ではスクロールが
+ * 発生しないので隠す。
+ */
+.article-table-hint {
+  display: none;
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 720px) {
+  .article-table-figure.is-wide .article-table-hint {
+    display: block;
+  }
+}
+
+.article-table-wrap {
   overflow-x: auto;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
+}
+
+/* キーボードだけでも中身を読めるよう tabIndex を付けている。その分、
+   フォーカスが当たっていることが見えないと困るのでリングを明示する。 */
+.article-table-wrap:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 2px;
 }
 
 .article-table-wrap table {
@@ -750,10 +778,11 @@ strong {
   color: var(--text-muted);
 }
 
+/* タップ領域はAppleの推奨に合わせて44px確保する(WCAG 2.2の24pxは元から満たしている) */
 .breadcrumb a {
   display: inline-flex;
   align-items: center;
-  min-height: 2rem;
+  min-height: 44px;
 }
 
 .breadcrumb [aria-current="page"] {
@@ -778,7 +807,7 @@ strong {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  min-height: 28px;
+  min-height: 44px;
 }
 
 .article-toc summary::-webkit-details-marker {
