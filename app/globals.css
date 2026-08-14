@@ -290,6 +290,24 @@ blockquote {
   background: var(--card);
 }
 
+/*
+ * スマホでは table の min-width: 34rem(578px) を外す。
+ * 画面幅346pxに対して全36表が横スクロール必須になっており、2列の表でも
+ * 右列が画面外に切れていた。セル側に最小幅を持たせることで、2列の表(19件)は
+ * 横スクロールなしで収まり、3列以上だけがスクロールする。
+ */
+@media (max-width: 720px) {
+  .article-table-wrap table {
+    min-width: 0;
+  }
+
+  .article-table-wrap th,
+  .article-table-wrap td {
+    min-width: 7.5em;
+    padding: 0.6rem 0.5rem;
+  }
+}
+
 .article-table-wrap th,
 .article-table-wrap td {
   padding: 0.75rem;
