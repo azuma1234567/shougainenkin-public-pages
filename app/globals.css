@@ -121,11 +121,18 @@ h3 {
 }
 
 /*
- * スマホでは本文の word-break: auto-phrase を無効にする。
- * 1行が短い画面で文節単位に折り返すと、行末に文節ひとつ分の空きが毎行できて
- * 右側が大きく余って見える(実測で平均充填率 86% / 最短70%)。
- * 通常の禁則処理に戻すと 98% 前後まで埋まる。
- * 見出しは行数が少なく、text-wrap: balance で意図的に均等割りしているので対象外。
+ * スマホでは、行を短くする方向に働く指定をまとめて外す。
+ *
+ * 2026-08-14 の実測(390px / 記事5本 / Chromium + WebKit):
+ *   Chromium では本文 p 97.3% / li 96.6% に対して、見出しは h2 67.6% / h3 65.6% しかない。
+ *   見出しには word-break: auto-phrase と text-wrap: balance が重なっていて、
+ *   text-wrap を外すだけでは足りず、word-break も戻して 95% 前後になる。
+ *
+ * 本文の text-wrap: pretty も外す。Chromium ではほぼ効果がないが、
+ * WebKit の pretty は段落全体で行長を整える実装で、全行を短くする方向に働く。
+ * 実測でも WebKit だけ p 86.2% / li 81.2% と落ちていた。
+ * word-break: auto-phrase は Safari 非対応なので、ea988dc の修正は
+ * iPhone では効いていなかった。これが実機で空白が残っていた理由。
  */
 @media (max-width: 720px) {
   p,
@@ -134,6 +141,16 @@ h3 {
     word-break: normal;
     line-break: strict;
     overflow-wrap: break-word;
+    text-wrap: auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    word-break: normal;
+    line-break: strict;
+    overflow-wrap: break-word;
+    text-wrap: wrap;
   }
 }
 
