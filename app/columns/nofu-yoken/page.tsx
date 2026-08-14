@@ -7,6 +7,8 @@ import { columnMetadata, getColumn } from "@/lib/columns";
 const column = getColumn("nofu-yoken");
 export const metadata: Metadata = columnMetadata(column);
 
+// 記事末尾のQ&Aと同一の文字列。構造化データ(FAQPage)にも使う。
+// 本文を正とし、ここは本文からそのまま写す。片方だけ直さないこと。
 const faqs = [
   {
     question: "未納期間があると障害年金は受けられませんか?",

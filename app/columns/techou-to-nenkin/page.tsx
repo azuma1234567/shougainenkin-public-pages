@@ -7,6 +7,8 @@ import { columnMetadata, getColumn } from "@/lib/columns";
 const column = getColumn("techou-to-nenkin");
 export const metadata: Metadata = columnMetadata(column);
 
+// 記事末尾のQ&Aと同一の文字列。構造化データ(FAQPage)にも使う。
+// 本文を正とし、ここは本文からそのまま写す。片方だけ直さないこと。
 const faqs = [
   {
     question: "障害者手帳が3級でも障害年金を受給できますか?",
