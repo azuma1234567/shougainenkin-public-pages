@@ -18,7 +18,8 @@ export default function SiteHeader() {
           className="site-title"
           aria-label={`${SITE_NAME} トップページ`}
         >
-          {/* 8段階のうち3つ目を進んでいる、というマーク。装飾なので読み上げない */}
+          {/* 8段階のうち3つ目を進んでいる、というマーク。装飾なので読み上げない。
+              2026-08: 金色のアークを白に変更(サイト全体から金色を外したため) */}
           <svg
             className="site-mark"
             viewBox="0 0 32 32"
@@ -30,7 +31,7 @@ export default function SiteHeader() {
               cy="16"
               r="13"
               fill="none"
-              stroke="rgba(255,255,255,0.28)"
+              stroke="rgba(255,255,255,0.3)"
               strokeWidth="3"
             />
             <circle
@@ -38,7 +39,7 @@ export default function SiteHeader() {
               cy="16"
               r="13"
               fill="none"
-              stroke="#e2b95c"
+              stroke="#ffffff"
               strokeWidth="3"
               strokeLinecap="round"
               strokeDasharray="30.6 81.7"

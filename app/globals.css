@@ -1,45 +1,48 @@
 /*
- * デザイントークン。アプリ本体のブランドカラーと揃える。
- * 背景: 生成り / メイン: 深緑 / カード: 白 + 深緑の細ボーダー + 角丸
+ * デザイントークン。
+ * 背景: 中立のオフホワイト / メイン: 深い青緑 / カード: 白 + 細ボーダー
  *
- * 2026-08 リニューアル: 色は変えず、階調・余白・影・角丸のスケールを足した。
- * 既存クラスが参照する変数名(--bg 〜 --radius-sm)は互換のため残している。
+ * 2026-08 リニューアル(2): 金色アクセント・生成り背景・グラデーション・
+ * ピル型ボタンを全廃した。公的機関の案内ページに近い、装飾の少ない見た目に
+ * 寄せるための変更。「読ませたい情報」より装飾が前に出ないようにする。
+ * 既存クラスが参照する変数名(--marker/--accent/--accent-soft/--gold-wash を
+ * 含む)は互換のため残し、値だけ中立色に差し替えている。
  */
 :root {
-  --bg: #f7f3ea;
-  --bg-deep: #f1ebdd;
+  --bg: #f4f6f6;
+  --bg-deep: #e9eeed;
   --card: #ffffff;
-  --card-warm: #fdfbf6;
-  --green: #2e6350;
-  --green-dark: #234c3d;
-  --green-deep: #16352a;
-  --green-softer: rgba(46, 99, 80, 0.045);
-  --green-tint: rgba(46, 99, 80, 0.06);
-  --green-tint-2: rgba(46, 99, 80, 0.12);
-  --text: #333333;
-  --text-muted: #5f5b52;
-  --border: #e2dbc9;
-  --card-border: rgba(46, 99, 80, 0.22);
-  --card-border-strong: rgba(46, 99, 80, 0.4);
-  --note-bg: #efe9da;
-  /* 表のヘッダー行。以前は未定義のまま参照されていて透明になっていた */
-  --green-pale: #edf2ef;
-  /* ストア用スクリーンショットの金色アクセントと揃える */
-  --marker: rgba(226, 185, 92, 0.5);
-  --accent: #b3873a;
-  --accent-soft: #e2b95c;
-  --gold-wash: rgba(226, 185, 92, 0.16);
+  --card-warm: #fafbfb;
+  --green: #285d54;
+  --green-dark: #1e4b44;
+  --green-deep: #143530;
+  --green-softer: rgba(40, 93, 84, 0.045);
+  --green-tint: rgba(40, 93, 84, 0.06);
+  --green-tint-2: rgba(40, 93, 84, 0.12);
+  --text: #2f3335;
+  --text-muted: #5b6265;
+  --border: #dde2e2;
+  --card-border: rgba(40, 93, 84, 0.2);
+  --card-border-strong: rgba(40, 93, 84, 0.36);
+  --note-bg: #eef1f1;
+  /* 表のヘッダー行 */
+  --green-pale: #eaf0ef;
+  /* 旧・金色アクセント。中立色に置き換え済み(変数名のみ互換で残置) */
+  --marker: rgba(40, 93, 84, 0.13);
+  --accent: #4c706a;
+  --accent-soft: #9db3ae;
+  --gold-wash: rgba(40, 93, 84, 0.05);
 
-  --radius: 14px;
-  --radius-sm: 10px;
-  --radius-lg: 20px;
-  --radius-xl: 30px;
+  --radius: 10px;
+  --radius-sm: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 12px;
 
-  /* 影は深緑を薄く重ねる。黒い影は生成り背景で濁って見える */
-  --shadow-xs: 0 1px 2px rgba(35, 76, 61, 0.06);
-  --shadow-sm: 0 2px 10px rgba(35, 76, 61, 0.07);
-  --shadow-md: 0 10px 30px -10px rgba(35, 76, 61, 0.18);
-  --shadow-lg: 0 24px 56px -20px rgba(22, 53, 42, 0.3);
+  /* 影は最小限。浮き上がらせるためではなく、面の境目を示すためだけに使う */
+  --shadow-xs: 0 1px 1px rgba(20, 53, 48, 0.04);
+  --shadow-sm: 0 1px 3px rgba(20, 53, 48, 0.06);
+  --shadow-md: 0 2px 6px rgba(20, 53, 48, 0.07);
+  --shadow-lg: 0 4px 14px -4px rgba(20, 53, 48, 0.12);
 
   --content: 42rem;
   --gutter: 1.25rem;
@@ -79,18 +82,6 @@ html {
 
 body {
   background-color: var(--bg);
-  /* 生成りの一枚塗りだと平坦なので、上部に淡い光と地紋を重ねる */
-  background-image:
-    radial-gradient(
-      120% 60% at 50% -10%,
-      rgba(255, 255, 255, 0.85) 0%,
-      rgba(255, 255, 255, 0) 60%
-    ),
-    radial-gradient(
-      80% 50% at 100% 0%,
-      rgba(46, 99, 80, 0.06) 0%,
-      rgba(46, 99, 80, 0) 55%
-    );
   color: var(--text);
   font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic",
     "Noto Sans JP", system-ui, sans-serif;
@@ -225,9 +216,9 @@ blockquote {
   border-radius: 14px;
   background: linear-gradient(
     100deg,
-    #f0eee8 30%,
-    #faf9f6 45%,
-    #f0eee8 60%
+    #eaeeee 30%,
+    #f7f9f9 45%,
+    #eaeeee 60%
   );
   background-size: 200% 100%;
   animation: x-post-loading 1.4s ease-in-out infinite;
@@ -315,30 +306,7 @@ strong {
   position: sticky;
   top: 0;
   z-index: 50;
-  background-color: color-mix(in srgb, var(--green-dark) 92%, transparent);
-  background-image: linear-gradient(
-    100deg,
-    var(--green-deep) 0%,
-    var(--green-dark) 45%,
-    var(--green) 100%
-  );
-  backdrop-filter: saturate(140%) blur(10px);
-  -webkit-backdrop-filter: saturate(140%) blur(10px);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset;
-}
-
-/* 下端の金色ヘアライン。ブランドのアクセントを1本だけ通す */
-.site-header::after {
-  content: "";
-  display: block;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    rgba(226, 185, 92, 0) 0%,
-    var(--accent-soft) 35%,
-    rgba(226, 185, 92, 0.35) 70%,
-    rgba(226, 185, 92, 0) 100%
-  );
+  background-color: var(--green-dark);
 }
 
 .site-header-inner {
@@ -370,10 +338,6 @@ strong {
   text-decoration: none;
 }
 
-.site-title:hover .site-mark {
-  transform: rotate(-6deg) scale(1.06);
-}
-
 .site-title-text {
   position: relative;
 }
@@ -393,7 +357,6 @@ strong {
   flex: none;
   width: 26px;
   height: 26px;
-  transition: transform 0.35s var(--ease);
 }
 
 .site-nav {
@@ -414,33 +377,17 @@ strong {
   min-height: 44px;
   min-width: 44px;
   padding: 0.2rem 0.7rem;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   transition:
     background-color 0.2s var(--ease),
     color 0.2s var(--ease);
 }
 
-.site-nav a::after {
-  content: "";
-  position: absolute;
-  bottom: 0.5rem;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  border-radius: 2px;
-  background-color: var(--accent-soft);
-  transform: translateX(-50%);
-  transition: width 0.25s var(--ease);
-}
-
 .site-nav a:hover {
   color: #ffffff;
-  text-decoration: none;
+  text-decoration: underline;
+  text-underline-offset: 4px;
   background-color: rgba(255, 255, 255, 0.1);
-}
-
-.site-nav a:hover::after {
-  width: 1.1rem;
 }
 
 /* ---- フッター ---- */
@@ -448,26 +395,8 @@ strong {
 .site-footer {
   position: relative;
   background-color: var(--green-dark);
-  background-image: linear-gradient(
-    170deg,
-    var(--green) 0%,
-    var(--green-dark) 55%,
-    var(--green-deep) 100%
-  );
   color: #ffffff;
   margin-top: auto;
-}
-
-.site-footer::before {
-  content: "";
-  display: block;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    rgba(226, 185, 92, 0) 0%,
-    rgba(226, 185, 92, 0.55) 50%,
-    rgba(226, 185, 92, 0) 100%
-  );
 }
 
 .site-footer-inner {
@@ -482,16 +411,6 @@ strong {
   font-weight: 700;
   font-size: 1.02rem;
   letter-spacing: 0.04em;
-}
-
-.footer-site-name::after {
-  content: "";
-  display: block;
-  width: 2.25rem;
-  height: 2px;
-  margin: 0.6rem auto 0;
-  border-radius: 2px;
-  background-color: var(--accent-soft);
 }
 
 .site-footer nav {
@@ -510,7 +429,7 @@ strong {
   align-items: center;
   min-height: 44px;
   padding: 0 0.55rem;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   transition:
     color 0.2s var(--ease),
     background-color 0.2s var(--ease);
@@ -690,7 +609,7 @@ strong {
 
 .note-box {
   position: relative;
-  background-color: rgba(239, 233, 218, 0.75);
+  background-color: var(--note-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
   padding: 1.05rem 1.25rem 1.05rem 1.4rem;
@@ -865,17 +784,14 @@ strong {
   border-radius: var(--radius-lg);
   padding: 1.15rem 1.35rem;
   margin: 1rem 0;
-  box-shadow: var(--shadow-xs);
   transition:
-    transform 0.2s var(--ease),
-    box-shadow 0.2s var(--ease),
-    border-color 0.2s var(--ease);
+    background-color 0.15s var(--ease),
+    border-color 0.15s var(--ease);
 }
 
 .column-card:hover {
-  border-color: var(--card-border-strong);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  border-color: var(--green);
+  background-color: var(--card-warm);
 }
 
 .column-card .meta-line {
@@ -893,7 +809,7 @@ strong {
   width: 0.35rem;
   height: 0.35rem;
   border-radius: 50%;
-  background-color: var(--accent);
+  background-color: var(--accent-soft);
 }
 
 .column-card-title {
@@ -999,41 +915,10 @@ strong {
 .guide-hero {
   position: relative;
   isolation: isolate;
-  margin: -1.75rem calc(var(--gutter) * -1) 2.5rem;
-  padding: 2.75rem var(--gutter) 2.25rem;
-  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
-  overflow: hidden;
-  background-image:
-    radial-gradient(
-      90% 120% at 12% 0%,
-      rgba(46, 99, 80, 0.13) 0%,
-      rgba(46, 99, 80, 0) 62%
-    ),
-    radial-gradient(
-      70% 90% at 100% 20%,
-      rgba(226, 185, 92, 0.22) 0%,
-      rgba(226, 185, 92, 0) 60%
-    ),
-    linear-gradient(180deg, #fdfbf6 0%, rgba(253, 251, 246, 0) 100%);
-}
-
-/* 申請の段階を思わせる淡い縦の目盛り。装飾なので読み上げ対象外 */
-.guide-hero::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background-image: repeating-linear-gradient(
-    90deg,
-    rgba(46, 99, 80, 0.05) 0 1px,
-    transparent 1px 4.5rem
-  );
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 78%);
-  -webkit-mask-image: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.55),
-    transparent 78%
-  );
+  margin: -1.75rem calc(var(--gutter) * -1) 2.25rem;
+  padding: 2.25rem var(--gutter) 2rem;
+  background-color: var(--card);
+  border-bottom: 1px solid var(--border);
 }
 
 .guide-eyebrow {
@@ -1047,31 +932,29 @@ strong {
   background-color: rgba(255, 255, 255, 0.75);
   border: 1px solid var(--card-border);
   box-shadow: var(--shadow-xs);
-  border-radius: 999px;
-  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.7rem;
   margin: 0 0 1rem;
 }
 
 .guide-eyebrow::before {
   content: "";
-  width: 0.45rem;
-  height: 0.45rem;
+  width: 0.4rem;
+  height: 0.4rem;
   border-radius: 50%;
-  background-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(226, 185, 92, 0.3);
+  background-color: var(--green);
 }
 
 .guide-h1 {
-  font-size: clamp(1.7rem, 6.2vw, 2.35rem);
-  line-height: 1.42;
-  font-weight: 800;
+  font-size: clamp(1.55rem, 5.4vw, 2.05rem);
+  line-height: 1.45;
+  font-weight: 700;
   letter-spacing: 0.005em;
   color: var(--green-deep);
   margin: 0 0 0.5rem;
 }
 
 .guide-h1-sub {
-  font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(1.05rem, 3vw, 1.3rem);
   line-height: 1.6;
@@ -1079,14 +962,15 @@ strong {
   margin: 0 0 1.1rem;
 }
 
+/* 旧・黄色マーカー線。下罫線のみの控えめな強調に変更 */
 .guide-h1-marker {
-  background: linear-gradient(transparent 62%, rgba(226, 185, 92, 0.42) 62%);
-  padding: 0 0.1em;
+  border-bottom: 2px solid var(--card-border-strong);
+  padding-bottom: 0.05em;
 }
 
 .guide-lead {
   font-size: 1.02rem;
-  color: #40474a;
+  color: var(--text);
   margin: 0.6rem 0;
   max-width: 34rem;
 }
@@ -1103,61 +987,41 @@ strong {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  min-height: 52px;
-  padding: 0.75rem 1.6rem;
-  border-radius: 999px;
+  min-height: 50px;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-sm);
   font-weight: 700;
   text-decoration: none;
   text-align: center;
   line-height: 1.4;
   transition:
-    transform 0.2s var(--ease),
-    box-shadow 0.2s var(--ease),
-    background-color 0.2s var(--ease),
-    color 0.2s var(--ease);
-}
-
-.guide-btn:hover {
-  transform: translateY(-2px);
-}
-
-.guide-btn:active {
-  transform: translateY(0);
+    background-color 0.15s var(--ease),
+    color 0.15s var(--ease),
+    border-color 0.15s var(--ease);
 }
 
 .guide-btn-primary {
-  background-image: linear-gradient(
-    180deg,
-    var(--green) 0%,
-    var(--green-dark) 100%
-  );
-  border: 1.5px solid var(--green-dark);
+  background-color: var(--green);
+  border: 1px solid var(--green);
   color: #ffffff;
-  box-shadow: var(--shadow-md);
 }
 
 .guide-btn-primary:hover {
-  background-image: linear-gradient(
-    180deg,
-    var(--green-dark) 0%,
-    var(--green-deep) 100%
-  );
+  background-color: var(--green-dark);
+  border-color: var(--green-dark);
   color: #ffffff;
-  box-shadow: var(--shadow-lg);
 }
 
 .guide-btn-secondary {
-  background-color: rgba(255, 255, 255, 0.9);
-  border: 1.5px solid var(--card-border-strong);
+  background-color: var(--card);
+  border: 1px solid var(--card-border-strong);
   color: var(--green-dark);
-  box-shadow: var(--shadow-xs);
 }
 
 .guide-btn-secondary:hover {
-  background-color: #ffffff;
+  background-color: var(--green-pale);
   border-color: var(--green);
   color: var(--green-dark);
-  box-shadow: var(--shadow-sm);
 }
 
 /* ヒーロー内の要点3つ */
@@ -1175,11 +1039,10 @@ strong {
 }
 
 .guide-fact {
-  background-color: rgba(255, 255, 255, 0.78);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius);
-  padding: 0.85rem 1rem 0.9rem;
-  box-shadow: var(--shadow-xs);
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 0.95rem 0.85rem;
 }
 
 .guide-fact dt {
@@ -1191,11 +1054,10 @@ strong {
 }
 
 .guide-fact-value {
-  font-family: var(--font-display);
   margin: 0.15rem 0 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.4;
   color: var(--green-deep);
 }
 
@@ -1226,18 +1088,11 @@ strong {
 /* ---- しんどくなったら ---- */
 .guide-breather {
   margin: 3rem 0;
-  background:
-    radial-gradient(
-      80% 120% at 100% 0%,
-      rgba(226, 185, 92, 0.18) 0%,
-      rgba(226, 185, 92, 0) 55%
-    ),
-    var(--card-warm);
-  border: 1px solid var(--accent-soft);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-  padding: 1.7rem 1.6rem;
-  text-align: center;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--green);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem 1.5rem;
 }
 
 .guide-breather h2 {
@@ -1249,7 +1104,7 @@ strong {
 
 .guide-breather p {
   max-width: 34rem;
-  margin: 0.4rem auto;
+  margin: 0.4rem 0;
   font-size: 0.96rem;
 }
 
@@ -1282,8 +1137,7 @@ strong {
   left: 0;
   width: 2.5rem;
   height: 3px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, var(--green) 0%, var(--accent-soft) 100%);
+  background-color: var(--green);
 }
 
 .guide-section-tag {
@@ -1299,10 +1153,9 @@ strong {
 
 .guide-section-tag::before {
   content: "";
-  width: 1.4rem;
-  height: 0.45rem;
-  border-radius: 999px;
-  background-color: var(--marker);
+  width: 1.1rem;
+  height: 2px;
+  background-color: var(--green);
 }
 
 .guide-intro-list {
@@ -1338,13 +1191,11 @@ strong {
   padding: 0.8rem 2rem 0.8rem 1rem;
   background-color: var(--card);
   border: 1px solid var(--card-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   text-decoration: none;
-  box-shadow: var(--shadow-xs);
   transition:
-    transform 0.2s var(--ease),
-    box-shadow 0.2s var(--ease),
-    border-color 0.2s var(--ease);
+    background-color 0.15s var(--ease),
+    border-color 0.15s var(--ease);
 }
 
 .guide-overview a::after {
@@ -1360,9 +1211,8 @@ strong {
 }
 
 .guide-overview a:hover {
-  border-color: var(--card-border-strong);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  border-color: var(--green);
+  background-color: var(--green-pale);
 }
 
 .guide-overview a:hover::after {
@@ -1377,18 +1227,12 @@ strong {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(
-    145deg,
-    var(--green) 0%,
-    var(--green-deep) 100%
-  );
+  background-color: var(--green);
   color: #ffffff;
-  border-radius: 50%;
-  font-family: var(--font-display);
+  border-radius: var(--radius-sm);
   font-weight: 700;
   font-size: 0.95rem;
   line-height: 1;
-  box-shadow: 0 2px 6px rgba(26, 58, 46, 0.28);
 }
 
 .guide-overview-text {
@@ -1413,13 +1257,7 @@ strong {
   left: 1.45rem;
   width: 2px;
   border-radius: 2px;
-  background: linear-gradient(
-    180deg,
-    rgba(46, 99, 80, 0) 0%,
-    rgba(46, 99, 80, 0.22) 6%,
-    rgba(46, 99, 80, 0.22) 94%,
-    rgba(46, 99, 80, 0) 100%
-  );
+  background-color: var(--border);
 }
 
 @media (max-width: 30rem) {
@@ -1455,8 +1293,7 @@ strong {
   left: 1.5rem;
   width: 3rem;
   height: 3px;
-  border-radius: 0 0 3px 3px;
-  background: linear-gradient(90deg, var(--green) 0%, var(--accent-soft) 100%);
+  background-color: var(--green);
 }
 
 .guide-step-head {
@@ -1473,21 +1310,13 @@ strong {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(
-    145deg,
-    var(--green) 0%,
-    var(--green-deep) 100%
-  );
+  background-color: var(--green);
   color: #ffffff;
-  border-radius: 50%;
-  font-family: var(--font-display);
+  border-radius: var(--radius-sm);
   font-weight: 700;
   font-size: 1.2rem;
   line-height: 1;
-  box-shadow:
-    0 3px 10px rgba(26, 58, 46, 0.3),
-    0 0 0 5px var(--card),
-    0 0 0 6px rgba(46, 99, 80, 0.14);
+  box-shadow: 0 0 0 4px var(--card);
 }
 
 .guide-step-label {
@@ -1521,19 +1350,9 @@ strong {
   font-weight: 700;
   letter-spacing: 0.05em;
   color: var(--green-dark);
-  background-color: var(--green-softer);
-  border-radius: 999px;
-  padding: 0.22rem 0.75rem 0.22rem 0.6rem;
+  border-left: 3px solid var(--green);
+  padding: 0 0 0 0.55rem;
   margin: 0 0 0.45rem;
-}
-
-.guide-block-label::before {
-  content: "";
-  flex: none;
-  width: 0.42rem;
-  height: 0.42rem;
-  border-radius: 50%;
-  background-color: var(--accent);
 }
 
 .guide-block > p {
@@ -1578,13 +1397,9 @@ strong {
 
 .guide-inline-cta {
   position: relative;
-  background-image: linear-gradient(
-    135deg,
-    rgba(46, 99, 80, 0.07) 0%,
-    rgba(226, 185, 92, 0.12) 100%
-  );
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius);
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   padding: 1rem 1.2rem 1rem 1.35rem;
   margin: 1.25rem 0 0;
   overflow: hidden;
@@ -1597,7 +1412,7 @@ strong {
   bottom: 0;
   left: 0;
   width: 3px;
-  background: linear-gradient(180deg, var(--green) 0%, var(--accent-soft) 100%);
+  background-color: var(--green);
 }
 
 .guide-inline-cta p {
@@ -1639,17 +1454,11 @@ strong {
   position: relative;
   isolation: isolate;
   background-color: var(--card);
-  background-image: radial-gradient(
-    90% 120% at 100% 0%,
-    rgba(226, 185, 92, 0.16) 0%,
-    rgba(226, 185, 92, 0) 55%
-  );
   border: 1px solid var(--card-border);
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius);
   padding: 1.75rem 1.5rem;
   margin: 3rem 0;
   overflow: hidden;
-  box-shadow: var(--shadow-md);
 }
 
 .guide-app::before {
@@ -1659,12 +1468,7 @@ strong {
   right: 0;
   left: 0;
   height: 3px;
-  background: linear-gradient(
-    90deg,
-    var(--green) 0%,
-    var(--accent-soft) 55%,
-    rgba(226, 185, 92, 0) 100%
-  );
+  background-color: var(--green);
 }
 
 .guide-app .guide-heading {
@@ -1744,18 +1548,13 @@ strong {
   width: 100%;
   height: auto;
   border-radius: 18px;
-  box-shadow: 0 12px 32px rgba(35, 76, 61, 0.16);
+  box-shadow: var(--shadow-md);
 }
 
-/* 金色のマーカー下線(ストア画像の下線アクセントと同じ) */
+/* 旧・金色のマーカー下線。控えめな下罫線に変更 */
 .lp-marker {
-  background-image: linear-gradient(
-    transparent 68%,
-    var(--marker) 68%,
-    var(--marker) 94%,
-    transparent 94%
-  );
-  padding: 0 0.08em;
+  border-bottom: 2px solid var(--card-border-strong);
+  padding-bottom: 0.05em;
 }
 
 /* ヒーロー */
@@ -1833,10 +1632,9 @@ strong {
 
 .lp-section-label::before {
   content: "";
-  width: 1.4rem;
-  height: 0.45rem;
-  border-radius: 999px;
-  background-color: var(--marker);
+  width: 1.1rem;
+  height: 2px;
+  background-color: var(--green);
 }
 
 /* セクション見出しはh2既定の左罫線をやめ、大きめの文字で見せる */
@@ -1964,7 +1762,7 @@ strong {
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: var(--accent);
+  color: var(--green);
 }
 
 .lp-feature-copy p {
@@ -2078,7 +1876,7 @@ strong {
   position: absolute;
   left: 0;
   top: 0;
-  color: var(--accent);
+  color: var(--green);
   font-weight: 800;
 }
 
@@ -2104,8 +1902,8 @@ strong {
   justify-content: center;
   min-height: 44px;
   padding: 0.6rem 1.6rem;
-  border: 1.5px solid var(--green);
-  border-radius: 999px;
+  border: 1px solid var(--green);
+  border-radius: var(--radius-sm);
   color: var(--green);
   font-weight: 700;
   text-decoration: none;
@@ -2240,14 +2038,9 @@ strong {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background-image: linear-gradient(
-    145deg,
-    var(--green) 0%,
-    var(--green-deep) 100%
-  );
+  border-radius: 4px;
+  background-color: var(--green);
   color: #ffffff;
-  font-family: var(--font-display);
   font-size: 0.78rem;
   font-weight: 700;
   line-height: 1;
@@ -2324,28 +2117,13 @@ strong {
 }
 
 .guide-related-links a:hover {
-  background-color: var(--card);
-  border-color: var(--card-border-strong);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  background-color: var(--green-pale);
+  border-color: var(--green);
 }
 
 .guide-related-links a:hover::after {
   opacity: 1;
   transform: translateX(0);
-}
-
-/* ---- 「コラム一覧を見る」ボタン ---- */
-
-.lp-columns-more-link {
-  transition:
-    transform 0.2s var(--ease),
-    box-shadow 0.2s var(--ease);
-}
-
-.lp-columns-more-link:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
 }
 
 /* ---- 記事本文のリンクに下線アニメーション ---- */
@@ -2361,51 +2139,6 @@ main a:not([class]):hover {
   text-decoration-color: var(--green);
 }
 
-/* ---- 読み込み時のささやかな立ち上がり ---- */
-
-@media (prefers-reduced-motion: no-preference) {
-  .guide-hero > *,
-  .guide-facts {
-    animation: rise-in 0.55s var(--ease) both;
-  }
-
-  .guide-hero > .guide-eyebrow {
-    animation-delay: 0.02s;
-  }
-
-  .guide-hero > .guide-h1 {
-    animation-delay: 0.07s;
-  }
-
-  .guide-hero > .guide-lead {
-    animation-delay: 0.12s;
-  }
-
-  .guide-hero > .guide-cta-row {
-    animation-delay: 0.18s;
-  }
-
-  .guide-hero > .guide-facts {
-    animation-delay: 0.24s;
-  }
-
-  .guide-hero > .guide-updated {
-    animation-delay: 0.3s;
-  }
-}
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* ---- 画面上端に読了バーを出す(対応ブラウザのみ) ---- */
 
 @media (prefers-reduced-motion: no-preference) {
@@ -2417,13 +2150,9 @@ main a:not([class]):hover {
       top: 0;
       left: 0;
       width: 100%;
-      height: 3px;
+      height: 2px;
       transform-origin: 0 50%;
-      background: linear-gradient(
-        90deg,
-        var(--green) 0%,
-        var(--accent-soft) 100%
-      );
+      background-color: var(--green);
       animation: read-progress linear both;
       animation-timeline: scroll(root block);
     }
@@ -2462,4 +2191,324 @@ main a:not([class]):hover {
     box-shadow: none;
     break-inside: avoid;
   }
+}
+
+
+/* ============================================================
+ * 2026-08 追記: 経験ベースの解説ブロックと、リンクの折りたたみ
+ * ============================================================ */
+
+/* ---- ページ冒頭「最初につまずく3つのこと」 ---- */
+
+.guide-traps {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.guide-trap {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.15rem;
+}
+
+.guide-trap-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin: 0 0 0.35rem;
+  font-weight: 700;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--green-dark);
+}
+
+.guide-trap-no {
+  flex: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--green);
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+}
+
+.guide-trap p {
+  margin: 0.3rem 0 0;
+  font-size: 0.96rem;
+}
+
+.guide-trap-fix {
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+/* ---- 各ステップの「実際につまずくところ」 ---- */
+
+.guide-real {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 0.95rem 1.1rem;
+  margin: 1.1rem 0;
+}
+
+.guide-real-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--green-dark);
+  margin: 0 0 0.4rem;
+}
+
+.guide-real-list {
+  margin: 0;
+  padding-left: 1.3rem;
+}
+
+.guide-real-list li {
+  margin: 0.5rem 0;
+  font-size: 0.96rem;
+}
+
+.guide-real-list li strong {
+  color: var(--green-dark);
+}
+
+/* ---- 言い換えの例(before / after) ---- */
+
+.guide-swap {
+  list-style: none;
+  padding: 0;
+  margin: 0.7rem 0 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.guide-swap li {
+  display: grid;
+  gap: 0.15rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.94rem;
+  margin: 0;
+}
+
+.guide-swap-bad,
+.guide-swap-good {
+  display: block;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.guide-swap-bad {
+  color: var(--text-muted);
+}
+
+.guide-swap-bad::before {
+  content: "✕";
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
+
+.guide-swap-good {
+  color: var(--green-dark);
+  font-weight: 700;
+}
+
+.guide-swap-good::before {
+  content: "○";
+  position: absolute;
+  left: 0;
+}
+
+/* ---- リンクの折りたたみ ---- */
+
+.guide-more {
+  margin: 0.6rem 0 0;
+  border-top: 1px solid var(--border);
+  padding-top: 0.6rem;
+}
+
+.guide-more > summary {
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.guide-more > summary::-webkit-details-marker {
+  display: none;
+}
+
+.guide-more > summary::after {
+  content: "＋";
+  font-weight: 400;
+}
+
+.guide-more[open] > summary::after {
+  content: "−";
+}
+
+.guide-more > summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---- 自分で進めるか、専門家に頼むか ---- */
+
+.guide-choice {
+  display: grid;
+  gap: 0.85rem;
+  margin: 1.25rem 0 0;
+}
+
+@media (min-width: 34rem) {
+  .guide-choice {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.guide-choice-col {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.15rem;
+}
+
+.guide-choice-col h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.guide-choice-col ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.guide-choice-col li {
+  margin: 0.35rem 0;
+  font-size: 0.94rem;
+}
+
+/* ---- 悩み別インデックス(ページ末尾にリンクを集約する) ---- */
+
+.guide-index {
+  margin: 1.25rem 0 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.guide-index-group {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.guide-index-group > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 52px;
+  padding: 0.65rem 1rem;
+  font-weight: 700;
+  font-size: 0.98rem;
+  color: var(--green-dark);
+}
+
+.guide-index-group > summary::-webkit-details-marker {
+  display: none;
+}
+
+.guide-index-group > summary::after {
+  content: "＋";
+  margin-left: auto;
+  font-weight: 400;
+  color: var(--green);
+}
+
+.guide-index-group[open] > summary::after {
+  content: "−";
+}
+
+.guide-index-group[open] > summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.guide-index-count {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.guide-index-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.4rem 1rem 0.9rem;
+}
+
+.guide-index-list li {
+  margin: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.guide-index-list li:last-child {
+  border-bottom: 0;
+}
+
+.guide-index-list a {
+  display: block;
+  padding: 0.65rem 0.1rem;
+  font-size: 0.94rem;
+  line-height: 1.6;
+  text-decoration: none;
+}
+
+.guide-index-list a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---- 数字を落ち着いて置くための小さな表 ---- */
+
+.guide-deadlines {
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.guide-deadlines li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.75rem;
+  margin: 0;
+  padding: 0.6rem 0.85rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.94rem;
+}
+
+.guide-deadlines b {
+  flex: none;
+  color: var(--green-dark);
 }
