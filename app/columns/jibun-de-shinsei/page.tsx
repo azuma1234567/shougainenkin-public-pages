@@ -4,7 +4,13 @@ import AppCta from "@/components/AppCta";
 import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
 import ColumnFooter from "@/components/ColumnFooter";
-import { columnJsonLd, columnMetadata, formatDate, getColumn } from "@/lib/columns";
+import {
+  columnBreadcrumbParents,
+  columnJsonLd,
+  columnMetadata,
+  formatDate,
+  getColumn,
+} from "@/lib/columns";
 
 const column = getColumn("jibun-de-shinsei");
 
@@ -17,7 +23,10 @@ export default function Page() {
   return (
     <article>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column)) }} />
-      <Breadcrumb current={column.title} />
+      <Breadcrumb
+        current={column.title}
+        parents={columnBreadcrumbParents(column)}
+      />
       <h1>障害年金は自分で申請できる?社労士に依頼する場合との違いと判断のポイント</h1>
       <p className="meta-line">
         公開日: <time dateTime={column.datePublished}>{formatDate(column.datePublished)}</time>{" "}/ 最終更新日:{" "}

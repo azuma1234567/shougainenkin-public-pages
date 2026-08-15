@@ -70,6 +70,24 @@ function inlineContent(text: string, keyPrefix = "inline"): ReactNode[] {
   return nodes;
 }
 
+// 見出しからアンカー用のidを作る。本文から [表示](#見出し) で参照できるようにするため、
+// また目次のリンクが初回表示(JS実行前)から機能するために、サーバー側で振っておく。
+//
+// 記号(:「」、— など)は落とし、英数字・ひらがな・カタカナ・漢字だけを残す。
+// カタカナの長音符(ー)は語の一部なので残す。
+function headingId(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(
+      /[^0-9A-Za-zぁ-ゖァ-ヺー一-鿿ｦ-ﾟ\s-]/g,
+      "",
+    )
+    .trim()
+    .replace(/\s+/g, "-")
+    .toLowerCase();
+}
+
 function xPostUrl(line: string): string | null {
   const specifiedUrl = line.match(/https:\/\/x\.com\/[^\]]+/)?.[0];
   if (specifiedUrl) return specifiedUrl;
@@ -104,6 +122,20 @@ export default function MarkdownArticle({
   const lines = source.replace(/\r\n/g, "\n").split("\n");
   const blocks: ReactNode[] = [];
   let index = 0;
+
+  // 同じ見出しが2回出てくる記事でもidが重複しないようにする。
+  const usedHeadingIds = new Set<string>();
+  const uniqueHeadingId = (text: string, fallback: string): string => {
+    const base = headingId(text) || fallback;
+    let id = base;
+    let suffix = 2;
+    while (usedHeadingIds.has(id)) {
+      id = `${base}-${suffix}`;
+      suffix += 1;
+    }
+    usedHeadingIds.add(id);
+    return id;
+  };
 
   while (index < lines.length) {
     const line = lines[index].trim();
@@ -194,16 +226,22 @@ export default function MarkdownArticle({
     }
 
     if (line.startsWith("### ")) {
+      const text = line.slice(4);
       blocks.push(
-        <h3 key={`h3-${index}`}>{inlineContent(line.slice(4))}</h3>,
+        <h3 key={`h3-${index}`} id={uniqueHeadingId(text, `heading-${index}`)}>
+          {inlineContent(text)}
+        </h3>,
       );
       index += 1;
       continue;
     }
 
     if (line.startsWith("## ")) {
+      const text = line.slice(3);
       blocks.push(
-        <h2 key={`h2-${index}`}>{inlineContent(line.slice(3))}</h2>,
+        <h2 key={`h2-${index}`} id={uniqueHeadingId(text, `heading-${index}`)}>
+          {inlineContent(text)}
+        </h2>,
       );
       index += 1;
       continue;

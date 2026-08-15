@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 type Heading = { id: string; text: string };
 
 // 記事本文のh2から目次を自動生成する(「あわせて読みたい」は除外)。
-// h2にidが無い場合はここで採番する。
+// markdownの記事はMarkdownArticleが見出しにidを振っているのでそれを使う。
+// idが無い手書きの記事(jibun-de-shinseiなど)だけ、ここで採番する。
 export default function ArticleToc() {
   const [headings, setHeadings] = useState<Heading[]>([]);
 

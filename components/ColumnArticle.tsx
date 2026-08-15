@@ -3,6 +3,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ColumnFooter, { type Reference } from "@/components/ColumnFooter";
 import MarkdownArticle from "@/components/MarkdownArticle";
 import {
+  columnBreadcrumbParents,
   columnJsonLd,
   formatDate,
   type Column,
@@ -35,7 +36,10 @@ export default function ColumnArticle({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)) }}
       />
 
-      <Breadcrumb current={column.title} />
+      <Breadcrumb
+        current={column.title}
+        parents={columnBreadcrumbParents(column)}
+      />
       <h1>{column.title}</h1>
       <p className="meta-line">
         公開日: {" "}

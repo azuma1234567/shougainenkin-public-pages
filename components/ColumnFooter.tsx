@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { COLUMNS, type Column } from "@/lib/columns";
+import { getColumn, parentPillar, relatedColumns } from "@/lib/columns";
 
 export type Reference = { label: string; href: string };
 
@@ -46,7 +46,7 @@ export const MHLW_REFERENCES = {
   },
 } as const satisfies Record<string, Reference>;
 
-// 記事末尾に置く「参考リンク」と「あわせて読みたい」。
+// 記事末尾に置く「参考リンク」「このテーマの全体像」「あわせて読みたい」。
 export default function ColumnFooter({
   currentSlug,
   relatedSlugs,
@@ -56,11 +56,10 @@ export default function ColumnFooter({
   relatedSlugs?: string[];
   references?: Reference[];
 }) {
-  const others = relatedSlugs
-    ? relatedSlugs
-        .map((slug) => COLUMNS.find((column) => column.slug === slug))
-        .filter((column): column is Column => Boolean(column))
-    : COLUMNS.filter((column) => column.slug !== currentSlug);
+  // 記事ごとに手で選んだ relatedSlugs を先頭に、足りない分を同じクラスタの記事で補う。
+  const others = relatedColumns(currentSlug, relatedSlugs);
+  // 親(柱)ページへの導線。柱ページが未公開の間はnullで、何も表示しない。
+  const pillar = parentPillar(getColumn(currentSlug));
   return (
     <>
       {references.length > 0 && (
@@ -80,6 +79,13 @@ export default function ColumnFooter({
             年金事務所でご確認ください。
           </p>
         </section>
+      )}
+      {pillar && (
+        <p className="cluster-parent">
+          このテーマの全体像は「
+          <Link href={pillar.pillarPath}>{pillar.label}</Link>
+          」にまとめています。
+        </p>
       )}
       <section className="related-columns">
         <h2>あわせて読みたい</h2>

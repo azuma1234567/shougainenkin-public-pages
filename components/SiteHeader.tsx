@@ -1,10 +1,19 @@
 import Link from "next/link";
+import { availableClusters } from "@/lib/columns";
 import { SITE_NAME } from "@/lib/constants";
 
-// ヘッダーは主要3項目のみ(モバイルでも折りたたみ不要)。
+// ヘッダーは少数の項目だけ(モバイルでも折りたたみ不要)。
 // 残りのページ(運営者情報・規約類)へのリンクはフッターに置く。
+//
+// 柱ページは lib/clusters.ts で inHeader を立てたものだけがここに並ぶ。
+// 未公開のうちは何も増えないので、存在しないページへのリンクは出ない。
+const PILLAR_ITEMS = availableClusters()
+  .filter((cluster) => cluster.inHeader && cluster.pillarPath !== "/")
+  .map((cluster) => ({ href: cluster.pillarPath, label: cluster.navLabel }));
+
 const NAV_ITEMS = [
   { href: "/", label: "申請の流れ" },
+  ...PILLAR_ITEMS,
   { href: "/columns", label: "コラム" },
   { href: "/support", label: "サポート" },
 ];
