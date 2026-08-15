@@ -192,7 +192,20 @@ h2 {
   margin: 2.75rem 0 1rem;
   padding: 0.1rem 0 0.1rem 0.75rem;
   border-left: 5px solid var(--green);
-  scroll-margin-top: 1.5rem;
+}
+
+/* 目次や本文のアンカーで見出しへ飛んだとき、追従ヘッダーの下に隠れないようにする。
+   ヘッダーの高さはPCで56px、スマホはロゴ+ナビの2段になり約100px。 */
+h2,
+h3 {
+  scroll-margin-top: 4.5rem;
+}
+
+@media (max-width: 720px) {
+  h2,
+  h3 {
+    scroll-margin-top: 7rem;
+  }
 }
 
 h3 {
@@ -979,6 +992,101 @@ strong {
   font-weight: 700;
 }
 
+/* ---- トピッククラスタ(柱ページ)の導線 ---- */
+
+/* 記事末尾に置く、親テーマへの1行の導線。柱ページが公開されるまで出ない。 */
+.cluster-parent {
+  margin: 2.25rem 0 0;
+  padding: 0.85rem 1.1rem;
+  background-color: var(--green-softer);
+  border-left: 3px solid var(--green);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.cluster-parent a {
+  font-weight: 700;
+}
+
+/* コラム一覧「テーマから探す」の中身(.guide-index-group の内側)。 */
+.cluster-lead {
+  margin: 0.7rem 1rem 0;
+}
+
+.cluster-pillar-link {
+  margin: 0.55rem 1rem 0;
+  font-weight: 700;
+}
+
+/* コラム一覧「申請の段階から探す」のアンカー。 */
+.stage-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+}
+
+.stage-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.35rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background-color: var(--card);
+  color: var(--green-dark);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    border-color 0.15s var(--ease),
+    background-color 0.15s var(--ease);
+}
+
+.stage-nav a:hover {
+  border-color: var(--green);
+  background-color: var(--card-warm);
+}
+
+/* 「よくある悩みから探す」。段階でもテーマでもなく、読者の言葉から
+   記事1本へ直接つなぐショートカット(トップとコラム一覧で共用)。 */
+.worry-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.6rem;
+  margin: 1rem 0 0;
+}
+
+.worry-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background-color: var(--card);
+  color: var(--green-dark);
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.6;
+  text-decoration: none;
+  transition:
+    border-color 0.15s var(--ease),
+    background-color 0.15s var(--ease);
+}
+
+.worry-nav a:hover {
+  border-color: var(--green);
+  background-color: var(--card-warm);
+}
+
+/* フッターの主要ガイド。公開済みの柱ページが並ぶ。 */
+.footer-guides {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
 /* ---- 404 ---- */
 
 .not-found {
@@ -1504,6 +1612,30 @@ strong {
 .guide-inline-cta-title {
   font-weight: 700;
   color: var(--green-dark);
+}
+
+/* 各ステップから、コラム一覧の同じ段階へ。8ステップという地図を共有する。 */
+.guide-stage-columns {
+  margin: 1rem 0 0;
+}
+
+.guide-stage-columns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.guide-stage-columns a::after {
+  content: "→";
+}
+
+.guide-stage-columns a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .guide-next {

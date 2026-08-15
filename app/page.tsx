@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import AppStoreBadge from "@/components/AppStoreBadge";
-import { CATEGORY_ORDER, COLUMNS, formatDate } from "@/lib/columns";
+import {
+  availableClusters,
+  CATEGORY_ORDER,
+  COLUMNS,
+  columnsInCategory,
+  formatDate,
+  WORRY_SHORTCUTS,
+} from "@/lib/columns";
 import { APP_STORE_URL, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { pageMetadata } from "@/lib/seo";
 
@@ -12,6 +19,12 @@ const PAGE_DESCRIPTION =
 
 // 制度の数値を更新したら、この日付も必ず更新する(構造化データの dateModified と共用)。
 const LAST_UPDATED = "2026-08-14";
+
+// トップは「障害年金 申請」クラスタの柱ページそのものなので、自分自身は除く。
+// 残りの柱ページは、公開されたら自動でここに並ぶ(lib/clusters.ts の published)。
+const MORE_PILLARS = availableClusters().filter(
+  (cluster) => cluster.pillarPath !== "/",
+);
 
 export const metadata: Metadata = pageMetadata({
   title: PAGE_TITLE,
@@ -35,7 +48,12 @@ type Step = {
   // 常時表示するリンク。2〜3本まで。それ以上は moreLinks に回して折りたたむ。
   links: StepLink[];
   moreLinks?: StepLink[];
-  appCta?: boolean;
+  // この段階に対応するコラム一覧のカテゴリ(lib/columns.ts の CATEGORY_ANCHORS のid)。
+  // サイト全体で「8ステップ」という同じ地図を見せるための対応づけ。
+  columnsAnchor?: string;
+  // アプリに対応する実体機能があるステップだけに置く事実文。
+  // 等級や受給を約束する表現は書かないこと。
+  appNote?: string;
   next: string;
 };
 
@@ -87,6 +105,9 @@ const STEPS: Step[] = [
         label: "適応障害と診断された場合の初診日の確認",
       },
     ],
+    columnsAnchor: "columns-cat-shoshinbi",
+    appNote:
+      "無料の申請ガイドアプリでは、いくつかの質問に答えると、いま自分がどの段階にいて、最初に何をすればいいかが分かります。",
     next: "ステップ2: 保険料納付要件を確認する",
   },
   {
@@ -117,6 +138,7 @@ const STEPS: Step[] = [
         label: "納付要件が不要になる20歳前傷病の特例",
       },
     ],
+    columnsAnchor: "columns-cat-nofu",
     next: "ステップ3: 年金事務所へ相談・予約する",
   },
   {
@@ -151,6 +173,7 @@ const STEPS: Step[] = [
         label: "申請がしんどいときの、小分けの進め方",
       },
     ],
+    columnsAnchor: "columns-cat-soudan",
     next: "ステップ4: 必要書類をそろえる",
   },
   {
@@ -184,6 +207,7 @@ const STEPS: Step[] = [
         label: "受診状況等証明書とは — 病院への依頼方法と確認ポイント",
       },
     ],
+    columnsAnchor: "columns-cat-shorui",
     next: "ステップ5: 診断書の準備をする",
   },
   {
@@ -254,7 +278,9 @@ const STEPS: Step[] = [
         label: "精神の等級判定ガイドラインと目安表の読み方",
       },
     ],
-    appCta: true,
+    columnsAnchor: "columns-cat-shindansho",
+    appNote:
+      "診察で話せなくても紙なら伝わります。アプリには、ふだんの生活の記録から主治医に渡すメモを作る機能があります。",
     next: "ステップ6: 病歴・就労状況等申立書を作成する",
   },
   {
@@ -308,7 +334,8 @@ const STEPS: Step[] = [
         label: "申立書をA4で印刷する方法 — PDF・コンビニ印刷の手順",
       },
     ],
-    appCta: true,
+    columnsAnchor: "columns-cat-moushitatesho",
+    appNote: "アプリでは、記録した生活の様子を申立書の下書きに整理できます。",
     next: "ステップ7: 年金事務所へ提出する",
   },
   {
@@ -341,6 +368,7 @@ const STEPS: Step[] = [
         label: "提出前に診断書を確認する7つのポイント",
       },
     ],
+    columnsAnchor: "columns-cat-shorui",
     next: "ステップ8: 結果を待つ",
   },
   {
@@ -385,6 +413,9 @@ const STEPS: Step[] = [
         label: "審査は誰がどう行う? — 認定医と書類審査の仕組み",
       },
     ],
+    columnsAnchor: "columns-cat-shinsa",
+    appNote:
+      "結果を待つあいだにできることも、アプリのガイドが段階ごとに案内します。",
     next: "",
   },
 ];
@@ -937,15 +968,20 @@ export default function HomePage() {
               </details>
             )}
 
-            {step.appCta && (
+            {step.columnsAnchor && (
+              <p className="guide-stage-columns">
+                <Link href={`/columns#${step.columnsAnchor}`}>
+                  この段階の記事一覧を見る
+                </Link>
+              </p>
+            )}
+
+            {step.appNote && (
               <div className="guide-inline-cta">
                 <p className="guide-inline-cta-title">
                   アプリで準備を進められます
                 </p>
-                <p>
-                  この段階の準備は、無料の申請ガイドアプリでも進められます。
-                  日々の記録が診察メモや申立書の下書きになります。
-                </p>
+                <p>{step.appNote}</p>
                 <p>
                   <a
                     href={APP_STORE_URL}
@@ -970,6 +1006,24 @@ export default function HomePage() {
           </section>
         ))}
       </div>
+
+      {/* D2. 途中から来た人のためのショートカット。
+          コラム一覧と同じ WORRY_SHORTCUTS を使う(二重管理しない)。 */}
+      <section className="guide-section" aria-labelledby="guide-worries-heading">
+        <h2 id="guide-worries-heading" className="guide-heading">
+          よくある悩みから探す
+        </h2>
+        <p className="guide-heading-sub small-note">
+          申請の途中でつまずいたときは、ここから。
+        </p>
+        <nav className="worry-nav" aria-label="よくある悩み">
+          {WORRY_SHORTCUTS.map((worry) => (
+            <Link key={worry.slug} href={`/columns/${worry.slug}`}>
+              {worry.label}
+            </Link>
+          ))}
+        </nav>
+      </section>
 
       {/* E. 自分で進めるか、専門家に頼むか */}
       <section className="guide-section" aria-labelledby="guide-choice-heading">
@@ -1101,6 +1155,29 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 主要テーマの柱ページへの導線。公開済みのものだけが並び、
+          1本も無いうちはセクションごと出ない。 */}
+      {MORE_PILLARS.length > 0 && (
+        <section
+          className="guide-section"
+          aria-labelledby="guide-pillars-heading"
+        >
+          <h2 id="guide-pillars-heading" className="guide-heading">
+            もっと詳しく知る
+          </h2>
+          <p className="guide-heading-sub small-note">
+            申請の流れとは別に、テーマごとの全体像をまとめたページです。
+          </p>
+          <ul className="guide-links">
+            {MORE_PILLARS.map((cluster) => (
+              <li key={cluster.id}>
+                <Link href={cluster.pillarPath}>{cluster.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {/* 悩み別インデックス(サイト内リンクはここに集約する) */}
       <section className="guide-section" aria-labelledby="guide-index-heading">
         <h2 id="guide-index-heading" className="guide-heading">
@@ -1112,7 +1189,7 @@ export default function HomePage() {
         </p>
         <div className="guide-index">
           {CATEGORY_ORDER.map((category) => {
-            const items = COLUMNS.filter((c) => c.category === category);
+            const items = columnsInCategory(category);
             if (items.length === 0) return null;
             return (
               <details key={category} className="guide-index-group">
