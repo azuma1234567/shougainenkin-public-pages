@@ -207,7 +207,7 @@ export const COLUMNS: Column[] = [
     description:
       "令和8年度の障害基礎年金は1級1,059,125円、2級847,300円。子の加算・配偶者加給・3級の最低保障・障害手当金・生活者支援給付金までを実際の数字で整理し、モデルケース3人分の試算、初回入金までの4〜5か月の流れ、遡及でまとまった額が入ったときの扱い、非課税と扶養の誤解まで解説します。",
     datePublished: "2026-08-14",
-    dateModified: "2026-08-14",
+    dateModified: "2026-08-27",
     primaryCluster: "application",
     secondaryClusters: ["conditions"],
     category: "申請の前に",
@@ -373,7 +373,7 @@ export const COLUMNS: Column[] = [
     description:
       "病歴・就労状況等申立書の未受診期間(空白期間)の書き方を徹底解説。空白が「軽快」と読まれる理由、中断理由5パターン別のフル記入例、社会的治癒で初診日が動くリスク、証拠がないときの補強材料、認定日が未受診期間に重なる場合の対処、よくある質問まで。",
     datePublished: "2026-07-26",
-    dateModified: "2026-07-26",
+    dateModified: "2026-08-27",
     primaryCluster: "application",
     category: "申立書",
     orderInCategory: 30,
@@ -491,7 +491,7 @@ export const COLUMNS: Column[] = [
     description:
       "神経症が原則として認定対象外とされる基準と、精神病の病態を示す場合の扱いを解説。併存疾患、診断名の変化、診断書の確認点を整理します。",
     datePublished: "2026-07-21",
-    dateModified: "2026-07-21",
+    dateModified: "2026-08-27",
     primaryCluster: "conditions",
     secondaryClusters: ["mental", "depression"],
     category: "申請の前に",
@@ -547,7 +547,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害年金の更新時期、障害状態確認届の提出期限、就労中の注意点、支給停止や級落ちへの対応を解説。更新前から準備したい生活記録と診断書の確認事項も紹介します。",
     datePublished: "2026-07-20",
-    dateModified: "2026-07-31",
+    dateModified: "2026-08-27",
     primaryCluster: "application",
     secondaryClusters: ["medical-certificate"],
     category: "受給が始まってから",
@@ -574,7 +574,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害認定日請求と事後重症請求の違い、最大5年分の遡及、認定日頃の診断書が取れない場合の確認事項、額改定請求までわかりやすく解説します。",
     datePublished: NEW_COLUMN_DATES["ninteibi-jigojusho"],
-    dateModified: "2026-08-14",
+    dateModified: "2026-08-27",
     primaryCluster: "application",
     secondaryClusters: ["conditions"],
     category: "申請の前に",
@@ -600,7 +600,7 @@ export const COLUMNS: Column[] = [
     description:
       "精神障害者保健福祉手帳と障害年金は、別の制度・別の審査です。手帳3級でも年金を受給できる場合があること、手帳がなくても年金申請できること、年金証書で手帳を取得できる制度を解説します。",
     datePublished: NEW_COLUMN_DATES["techou-to-nenkin"],
-    dateModified: "2026-08-14",
+    dateModified: "2026-08-27",
     primaryCluster: "conditions",
     secondaryClusters: ["mental"],
     category: "申請の前に",
@@ -640,7 +640,7 @@ export const COLUMNS: Column[] = [
     description:
       "20歳前傷病による障害基礎年金を解説。納付要件が不要となる条件、請求時期、本人の所得による支給制限、10代の通院・学校記録を残す理由を紹介します。",
     datePublished: NEW_COLUMN_DATES["hatachi-mae"],
-    dateModified: "2026-07-19",
+    dateModified: "2026-08-27",
     primaryCluster: "conditions",
     category: "申請の前に",
     orderInCategory: 80,
@@ -653,7 +653,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害年金の不支給後に選べる審査請求、再審査請求、再請求の違いと期限、不支給理由の確認方法、書類を立て直す手順を解説します。",
     datePublished: NEW_COLUMN_DATES["fushikyuu-shinsa-seikyu"],
-    dateModified: "2026-08-14",
+    dateModified: "2026-08-27",
     primaryCluster: "application",
     category: "結果を待つ・不支給のとき",
   },
@@ -690,7 +690,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害年金には保険料納付要件があります。3分の2要件と直近1年特例のしくみ、免除・学生納付特例の扱い、初診日より後に納めても間に合わない理由、納付状況の確認方法を解説します。",
     datePublished: "2026-07-17",
-    dateModified: "2026-08-14",
+    dateModified: "2026-08-27",
     primaryCluster: "conditions",
     category: "納付要件",
   },
@@ -701,7 +701,7 @@ export const COLUMNS: Column[] = [
     description:
       "障害年金を申請したいものの初診日がわからない場合の調べ方を解説します。病院、診察券、お薬手帳、健康保険の記録など、確認の手がかりを順番に紹介します。",
     datePublished: "2026-07-17",
-    dateModified: "2026-07-30",
+    dateModified: "2026-08-27",
     primaryCluster: "conditions",
     category: "初診日",
     orderInCategory: 10,

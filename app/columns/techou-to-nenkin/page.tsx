@@ -59,6 +59,11 @@ export default function Page() {
         NENKIN_REFERENCES.seido,
         NENKIN_REFERENCES.jukyuYoken,
         MHLW_REFERENCES.seishinGuideline,
+        {
+          label:
+            "厚生労働省「年金証書等の写しによる精神障害者保健福祉手帳の障害等級の認定事務について」",
+          href: "https://www.mhlw.go.jp/web/t_doc?dataId=00ta4623&dataType=1&pageNo=1",
+        },
       ]}
     />
   );
