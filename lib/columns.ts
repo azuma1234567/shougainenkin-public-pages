@@ -144,6 +144,48 @@ const NEW_COLUMN_DATES = {
 
 export const COLUMNS: Column[] = [
   {
+    slug: "shakaiteki-chiyu",
+    title:
+      "社会的治癒 — 昔の通院があっても、初診日が動くことがある",
+    metaTitle: "障害年金の社会的治癒｜初診日が動く条件と整理のしかた",
+    description:
+      "社会的治癒は、治療が必要なくなり相当期間ふつうに社会生活を送れていた場合に、再発後の受診を新たな初診日として扱う考え方です。法律に明文の定義がないこと、年数の基準がないこと、見られる3つのポイント、初診日が動くと納付要件や基礎・厚生の別がどう変わるか、申立書と添付資料での主張のしかた、主張しないほうがよい場合まで解説します。",
+    datePublished: "2026-08-27",
+    dateModified: "2026-08-27",
+    primaryCluster: "conditions",
+    secondaryClusters: ["application"],
+    category: "初診日",
+    orderInCategory: 50,
+  },
+  {
+    slug: "hikazei-shuunyuu",
+    title:
+      "障害年金は非課税 — でも「収入ゼロ扱い」ではありません",
+    metaTitle: "障害年金は非課税?｜扶養で収入に数えられる場面",
+    description:
+      "障害年金に所得税・住民税はかかりません。ただし健康保険の被扶養者の認定では収入に数えます。130万円と180万円の線引き、令和8年度の年金額を当てた早見表、扶養から外れたときに連鎖する国保切替えと自立支援医療の変更、生活保護や年金生活者支援給付金での扱いの違いまで整理しました。",
+    datePublished: "2026-08-27",
+    dateModified: "2026-08-27",
+    primaryCluster: "application",
+    secondaryClusters: ["conditions"],
+    category: "受給が始まってから",
+    orderInCategory: 20,
+  },
+  {
+    slug: "jukyuugo-tetsuduki",
+    title:
+      "障害年金が決まったあとの手続きリスト — 年金証書が届いた日から動き出すもの",
+    metaTitle: "障害年金の受給決定後の手続き｜給付金・法定免除・扶養",
+    description:
+      "障害年金の受給が決まったあとに必要な手続きを一覧化。請求しないと受け取れない年金生活者支援給付金(令和8年度 1級 月7,025円・2級 月5,620円)、国民年金保険料の法定免除と老齢基礎年金への影響、健康保険の扶養の確認、20歳前傷病の所得制限、年金証書で申請できる障害者手帳、初回振込までの流れまで。",
+    datePublished: "2026-08-27",
+    dateModified: "2026-08-27",
+    primaryCluster: "application",
+    secondaryClusters: ["conditions"],
+    category: "受給が始まってから",
+    orderInCategory: 10,
+  },
+  {
     slug: "kiso-kousei-chigai",
     title:
       "障害基礎年金と障害厚生年金の違い — 初診日の1日で、生涯数百万円が変わる",
@@ -169,7 +211,7 @@ export const COLUMNS: Column[] = [
     primaryCluster: "application",
     secondaryClusters: ["conditions"],
     category: "申請の前に",
-    orderInCategory: 60,
+    orderInCategory: 50,
   },
   {
     slug: "daisansha-shomei",
@@ -183,6 +225,7 @@ export const COLUMNS: Column[] = [
     primaryCluster: "conditions",
     secondaryClusters: ["application"],
     category: "初診日",
+    orderInCategory: 40,
   },
   {
     slug: "gaku-kaitei-seikyuu",
@@ -196,6 +239,7 @@ export const COLUMNS: Column[] = [
     primaryCluster: "application",
     secondaryClusters: ["medical-certificate"],
     category: "受給が始まってから",
+    orderInCategory: 40,
   },
   {
     slug: "shikyuu-teishi-fukkatsu",
@@ -209,6 +253,7 @@ export const COLUMNS: Column[] = [
     primaryCluster: "application",
     secondaryClusters: ["conditions"],
     category: "受給が始まってから",
+    orderInCategory: 50,
   },
   {
     slug: "shinsei-shindoi",
@@ -436,7 +481,7 @@ export const COLUMNS: Column[] = [
     primaryCluster: "application",
     secondaryClusters: ["conditions"],
     category: "申請の前に",
-    orderInCategory: 50,
+    orderInCategory: 60,
   },
   {
     slug: "taishou-shoubyou-kyoukai",
@@ -506,6 +551,7 @@ export const COLUMNS: Column[] = [
     primaryCluster: "application",
     secondaryClusters: ["medical-certificate"],
     category: "受給が始まってから",
+    orderInCategory: 30,
   },
   {
     slug: "shindansho-kaitekurenai",
@@ -558,7 +604,7 @@ export const COLUMNS: Column[] = [
     primaryCluster: "conditions",
     secondaryClusters: ["mental"],
     category: "申請の前に",
-    orderInCategory: 90,
+    orderInCategory: 100,
   },
   {
     slug: "shoubyou-teatekin",
@@ -570,7 +616,7 @@ export const COLUMNS: Column[] = [
     dateModified: "2026-08-14",
     primaryCluster: "application",
     category: "申請の前に",
-    orderInCategory: 100,
+    orderInCategory: 90,
   },
   {
     slug: "hattatsu-shougai",
@@ -658,6 +704,7 @@ export const COLUMNS: Column[] = [
     dateModified: "2026-07-30",
     primaryCluster: "conditions",
     category: "初診日",
+    orderInCategory: 10,
   },
   {
     slug: "shoshinbi-karute-nashi",
@@ -671,6 +718,7 @@ export const COLUMNS: Column[] = [
     dateModified: "2026-08-11",
     primaryCluster: "conditions",
     category: "初診日",
+    orderInCategory: 20,
   },
   {
     slug: "shoshinbi-haiin",
@@ -684,6 +732,7 @@ export const COLUMNS: Column[] = [
     dateModified: "2026-08-11",
     primaryCluster: "conditions",
     category: "初診日",
+    orderInCategory: 30,
   },
   {
     slug: "moushitatesho-kakikata",
