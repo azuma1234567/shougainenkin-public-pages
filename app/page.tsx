@@ -4,10 +4,11 @@ import {
   Card,
   CaseCard,
   CheckIcon,
-  SearchIcon,
   SectionHeader,
   TopicIcon,
 } from "@/components/platform/Platform";
+import SiteSearch, { type SearchItem } from "@/components/platform/SiteSearch";
+import { COLUMNS } from "@/lib/columns";
 import { SITE_URL } from "@/lib/constants";
 import { findCases, SAIKETSU_COUNTS } from "@/lib/saiketsu";
 import { pageMetadata } from "@/lib/seo";
@@ -15,6 +16,51 @@ import { pageMetadata } from "@/lib/seo";
 const TITLE = "障害年金の疑問に、公的根拠と実例で答える";
 const DESCRIPTION = "障害年金がはじめての方へ。病気、申請の段階、いまの悩みから、公的資料の根拠と公開裁決例を使って自分に近い情報を探せます。";
 const SHOW_LISTINGS = false;
+
+const searchItems: SearchItem[] = [
+  {
+    href: "/hajimete",
+    title: "障害年金が、ゼロからわかる",
+    description: "障害年金の基本と、受給要件をやさしい言葉で確認できます。",
+    category: "はじめての方へ",
+    keywords: "もらえる 対象 条件 初心者 基礎 厚生",
+  },
+  {
+    href: "/byoki/utsu-soukyoku",
+    title: "うつ病・双極性障害の障害年金",
+    description: "精神の障害で審査されるポイント、実例、つまずきやすい場面をまとめています。",
+    category: "病気から探す",
+    keywords: "鬱 うつ 双極 躁うつ 精神 働きながら 日常生活",
+  },
+  {
+    href: "/shinsei",
+    title: "障害年金の申請の流れと必要書類",
+    description: "初診日の確認から提出、結果が届くまでを8ステップで案内します。",
+    category: "申請の流れ",
+    keywords: "手続き やり方 必要書類 診断書 申立書 年金事務所",
+  },
+  {
+    href: "/nayami/fushikyu",
+    title: "不支給と言われたとき",
+    description: "不支給通知を受け取った後の期限と、確認できる選択肢をまとめています。",
+    category: "悩みから探す",
+    keywords: "不服申立て 審査請求 再審査請求 却下 認められない",
+  },
+  {
+    href: "/jitsurei",
+    title: "結論が変わった実例",
+    description: "公的PDFを確認した実例を、精神・発達、初診日、結論から探せます。",
+    category: "実例と数字",
+    keywords: "裁決例 容認 棄却 不支給 初診日 原文 PDF",
+  },
+  ...COLUMNS.map((column) => ({
+    href: `/columns/${column.slug}`,
+    title: column.metaTitle ?? column.title,
+    description: column.description,
+    category: `コラム・${column.category}`,
+    keywords: column.title,
+  })),
+];
 
 export const metadata: Metadata = pageMetadata({
   title: TITLE,
@@ -104,11 +150,7 @@ export default function HomePage() {
           <p className="p-trust-pill"><CheckIcon size={15} />掲載情報はすべて公的資料の出典つき・確認日を明記しています</p>
           <h1 id="home-title">「自分の場合は<br className="p-title-break-mobile" />どうなる？」に、<br className="p-title-break-desktop" />根拠つきで答えます</h1>
           <p className="p-hero-copy">はじめての方にも、むずかしい言葉を使わずに案内します。<br />知識240項目と、原文を確認できた公開実例{SAIKETSU_COUNTS.all}件から、あなたに近い答えを探せます。</p>
-          <div className="p-search" role="search" aria-label="サイト内検索（準備中）">
-            <SearchIcon />
-            <span className="p-search-placeholder">例: うつ病 働きながら / 初診日 カルテがない / 不支給</span>
-            <span className="p-search-action" aria-disabled="true">調べる</span>
-          </div>
+          <SiteSearch items={searchItems} />
           <div className="p-stats" aria-label="掲載情報の件数">
             <div className="p-stat"><b>240</b><span>知識項目（全件出典つき）</span></div>
             <div className="p-stat"><b>{SAIKETSU_COUNTS.all}</b><span>原文確認済みの公開実例</span></div>
