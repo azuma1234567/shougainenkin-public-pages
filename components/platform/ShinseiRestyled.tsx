@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import AppStoreBadge from "@/components/AppStoreBadge";
+import { AMOUNT_ROWS, APP_POINTS, CONSIDER_PRO, FAQ_ITEMS, SELF_OK } from "@/components/ApplicationFlowPage";
 import { Breadcrumb, CheckIcon } from "@/components/platform/Platform";
+import { APP_STORE_URL, SITE_URL } from "@/lib/constants";
 import { pageMetadata } from "@/lib/seo";
 
 const TITLE = "障害年金の申請の流れと必要書類｜8つのステップ";
@@ -93,12 +96,30 @@ const STUMBLES = [
 ] as const;
 
 export default function ShinseiRestyled() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      { "@type": "HowTo", name: "障害年金の申請の流れ(8ステップ)", step: STEPS.map((step, index) => ({ "@type": "HowToStep", position: index + 1, name: step.title, url: `${SITE_URL}/shinsei#${step.id}` })) },
+      { "@type": "FAQPage", mainEntity: FAQ_ITEMS.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) },
+    ],
+  };
   return (
     <div className="platform shinsei-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <header className="p-page-hero shinsei-hero"><div className="p-container shinsei-reading-width"><Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "申請の流れ" }]} /><h1>申請の流れ — 8つのステップ</h1><p className="p-page-intro">初診日の確認から結果が届くまで。全体の地図を先に持つと、いま自分がどこにいるかで迷いにくくなります。1ステップずつ、必要なことだけを載せています。</p><nav className="shinsei-stepper" aria-label="8つのステップ">{STEPS.map((step, index) => <a href={`#${step.id}`} key={step.id}><span>{index + 1}</span><b>{step.short}</b></a>)}</nav></div></header>
       <div className="p-container shinsei-reading-width shinsei-content">
         <section className="shinsei-section" aria-labelledby="stumbles-heading"><h2 id="stumbles-heading">つまずくのは、たいてい同じ3か所です</h2><div className="p-grid p-grid-3 shinsei-stumbles">{STUMBLES.map((item) => <a className="p-card" href={item.href} key={item.title}><span className="p-label">{item.step}</span><strong>{item.title}</strong><p>{item.copy}</p></a>)}</div></section>
         <div className="shinsei-steps">{STEPS.map((step, index) => <section className="shinsei-step-card" id={step.id} aria-labelledby={`${step.id}-title`} key={step.id}><header><span className="shinsei-step-number">{index + 1}</span><div><span className="shinsei-step-label">STEP {index + 1}</span><h2 id={`${step.id}-title`}>{step.title}</h2><p>{step.oneLine}</p></div></header><p className="shinsei-step-body">{step.body}</p><div className="shinsei-tasks"><h3>この段階ですること</h3><ul>{step.tasks.map((task) => <li key={task}><CheckIcon size={16} /><span>{task}</span></li>)}</ul></div><aside className="shinsei-stumble"><strong>つまずきやすいところ</strong><p>{step.stumble}</p></aside><footer><nav aria-label={`ステップ${index + 1}の関連記事`}>{step.links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}</nav>{index < STEPS.length - 1 && <a className="shinsei-next" href={`#${STEPS[index + 1].id}`}>次へ: {STEPS[index + 1].title} →</a>}</footer></section>)}</div>
+
+        <section className="shinsei-section" aria-labelledby="amount-heading"><h2 id="amount-heading">受け取れる金額の目安</h2><p>障害基礎年金は等級ごとに決まった額、障害厚生年金は加入期間と報酬に応じて一人ひとり変わります（令和8年4月分から）。</p><div className="shinsei-table-card"><div className="article-table-wrap"><table><thead><tr><th scope="col">等級</th><th scope="col">障害基礎年金（年額）</th><th scope="col">障害厚生年金（年額）</th></tr></thead><tbody>{AMOUNT_ROWS.map((row) => <tr key={row.grade}><th scope="row">{row.grade}</th><td>{row.kiso}</td><td>{row.kousei}</td></tr>)}</tbody></table></div><p>子の加算額は2人目まで1人につき243,800円、3人目以降は81,300円です。障害厚生年金の配偶者加給年金額は243,800円、3級の最低保障額は635,500円です。</p><small>出典: 日本年金機構 ・ 確認日 2026-04-01</small></div></section>
+
+        <section className="shinsei-section" aria-labelledby="choice-heading"><h2 id="choice-heading">自分で進めるか、専門家に頼むか</h2><p>どちらが正しいということはありません。初診日の証明の難しさと、窓口とのやりとりを体調的にこなせるかを目安にできます。</p><div className="shinsei-choice"><article><h3>自分で進める</h3><ul>{SELF_OK.map((item) => <li key={item}><CheckIcon size={15} />{item}</li>)}</ul></article><article><h3>専門家に頼むことを考える</h3><ul>{CONSIDER_PRO.map((item) => <li key={item}><CheckIcon size={15} />{item}</li>)}</ul></article></div><Link className="p-card-link" href="/columns/jibun-de-shinsei">自分で申請するか、社会保険労務士に依頼するか →</Link></section>
+
+        <section className="shinsei-breather" aria-labelledby="breather-heading"><h2 id="breather-heading">申請の途中で、しんどくなったら</h2><p>全部を一度にやる必要はありません。今日は1つ思い出すだけ、書類の名前を確認するだけでも構いません。体調がいちばん優先です。止まることは失敗ではありません。</p><Link href="/columns/shinsei-shindoi">疲れ果てない小分けの進め方 →</Link></section>
+
+        <section className="shinsei-app" aria-labelledby="app-heading"><span className="p-label">申請準備の道具</span><h2 id="app-heading">申請の現在地と、次の一歩を、いつでも手元に</h2><p>「障害年金申請サポート」は、申請を代行するアプリではありません。日々の記録・診察メモ・申立書の準備を、自分のペースで進めるための道具です。</p><ul>{APP_POINTS.map((item) => <li key={item}><CheckIcon size={15} />{item}</li>)}</ul><AppStoreBadge href={APP_STORE_URL} /></section>
+
+        <section className="shinsei-section" aria-labelledby="faq-heading"><h2 id="faq-heading">よくある質問</h2><div className="shinsei-faq">{FAQ_ITEMS.map((item) => <details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div></section>
       </div>
     </div>
   );

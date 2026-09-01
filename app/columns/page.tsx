@@ -27,7 +27,7 @@ const THEME_LINKS = [
 ] as const;
 
 function ArticleCard({ column }: { column: (typeof COLUMNS)[number] }) {
-  return <li><Link className="columns-article-card" href={`/columns/${column.slug}`}><span className="columns-article-copy"><strong>{column.title}</strong><span>{column.description}</span></span><span className="columns-chevron" aria-hidden="true">›</span></Link></li>;
+  return <li><Link className="columns-article-card" data-column-slug={column.slug} href={`/columns/${column.slug}`}><span className="columns-article-copy"><strong>{column.title}</strong><span>{column.description}</span></span><span className="columns-chevron" aria-hidden="true">›</span></Link></li>;
 }
 
 export default function ColumnsPage() {

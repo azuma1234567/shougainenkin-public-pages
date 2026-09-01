@@ -442,7 +442,7 @@ const TRAPS: { title: string; body: string; fix: string }[] = [
 
 // 令和8年度(2026年度)の年金額。出典は日本年金機構(更新日 2026年4月1日)。
 // 令和8年4月分(令和8年6月支給分)から適用。数値を変えたら LAST_UPDATED も更新すること。
-const AMOUNT_ROWS: { grade: string; kiso: string; kousei: string }[] = [
+export const AMOUNT_ROWS: { grade: string; kiso: string; kousei: string }[] = [
   {
     grade: "1級",
     kiso: "1,059,125円 + 子の加算額",
@@ -462,14 +462,14 @@ const AMOUNT_ROWS: { grade: string; kiso: string; kousei: string }[] = [
 
 // 自分で進めるか、専門家に頼むか。どちらかを勧めるためではなく、
 // 判断材料を並べるために置く。運営者は社会保険労務士ではない。
-const SELF_OK = [
+export const SELF_OK = [
   "初診日がはっきりしていて、初診の病院がいまもある",
   "初診から現在まで、同じ病院にかかり続けている",
   "主治医が診断書の作成に協力的",
   "書類の取り寄せや窓口でのやりとりを、体調的にこなせる",
 ];
 
-const CONSIDER_PRO = [
+export const CONSIDER_PRO = [
   "初診日がわからない、またはカルテが破棄されている",
   "病院を何度も変わっていて、経過を追うのが難しい",
   "一度不支給になったことがある",
@@ -479,7 +479,7 @@ const CONSIDER_PRO = [
 
 // アプリの現行仕様に沿ったメリットの短い紹介。
 // AI上限は src/lib(アプリ本体)の定数が正。数値を変えるときは規約・サポートと同時に直すこと。
-const APP_POINTS = [
+export const APP_POINTS = [
   "初めての障害年金申請を、ひとつずつガイド",
   "いまの段階と、次にすることが分かる",
   "申請ガイドと日々の記録は無料。日々の記録は件数無制限",
@@ -489,7 +489,7 @@ const APP_POINTS = [
 ];
 
 // 構造化データ(FAQPage)と画面表示の両方で使う。数値は本文と必ずそろえること。
-const FAQ_ITEMS: { q: string; a: string }[] = [
+export const FAQ_ITEMS: { q: string; a: string }[] = [
   {
     q: "障害年金の申請にはどのくらい時間がかかりますか?",
     a: "書類をそろえる期間は人によって異なりますが、提出後の審査について日本年金機構が目標として公表している事務処理期間は、障害基礎年金が約3か月、障害厚生年金が約3か月半です。診断書の作成や初診日の証明に時間がかかると、準備段階だけで数か月かかることもあります。病院に頼む書類は2週間から1か月ほどかかるため、そこから先に動かすと全体が早く終わります。",
