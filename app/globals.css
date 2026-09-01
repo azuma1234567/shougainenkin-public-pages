@@ -1,6 +1,6 @@
 /*
  * デザイントークン。
- * 背景: 中立のオフホワイト / メイン: 深い青緑 / カード: 白 + 細ボーダー
+ * 背景: 薄青 / メイン: 青 / カード: 白 + 細ボーダー
  *
  * 2026-08 リニューアル(2): 金色アクセント・生成り背景・グラデーション・
  * ピル型ボタンを全廃した。公的機関の案内ページに近い、装飾の少ない見た目に
@@ -9,29 +9,30 @@
  * 含む)は互換のため残し、値だけ中立色に差し替えている。
  */
 :root {
-  --bg: #f4f6f6;
-  --bg-deep: #e9eeed;
+  --bg: #f7fbfe;
+  --bg-deep: #eef6fc;
   --card: #ffffff;
-  --card-warm: #fafbfb;
-  --green: #285d54;
-  --green-dark: #1e4b44;
-  --green-deep: #143530;
-  --green-softer: rgba(40, 93, 84, 0.045);
-  --green-tint: rgba(40, 93, 84, 0.06);
-  --green-tint-2: rgba(40, 93, 84, 0.12);
-  --text: #2f3335;
-  --text-muted: #5b6265;
-  --border: #dde2e2;
-  --card-border: rgba(40, 93, 84, 0.2);
-  --card-border-strong: rgba(40, 93, 84, 0.36);
-  --note-bg: #eef1f1;
+  --card-warm: #fbfdff;
+  /* 既存クラスとの互換のため変数名は維持し、値を新サイトの青系へ統一する。 */
+  --green: #0273ad;
+  --green-dark: #015d8c;
+  --green-deep: #14425e;
+  --green-softer: rgba(2, 132, 199, 0.045);
+  --green-tint: rgba(2, 132, 199, 0.06);
+  --green-tint-2: rgba(2, 132, 199, 0.12);
+  --text: #1e3a4d;
+  --text-muted: #4a6a80;
+  --border: #dcebf5;
+  --card-border: rgba(2, 115, 173, 0.2);
+  --card-border-strong: rgba(2, 115, 173, 0.36);
+  --note-bg: #eef6fc;
   /* 表のヘッダー行 */
-  --green-pale: #eaf0ef;
+  --green-pale: #e3f2fc;
   /* 旧・金色アクセント。中立色に置き換え済み(変数名のみ互換で残置) */
-  --marker: rgba(40, 93, 84, 0.13);
-  --accent: #4c706a;
-  --accent-soft: #9db3ae;
-  --gold-wash: rgba(40, 93, 84, 0.05);
+  --marker: rgba(2, 132, 199, 0.13);
+  --accent: #5b7a90;
+  --accent-soft: #a8c9dd;
+  --gold-wash: rgba(2, 132, 199, 0.05);
 
   --radius: 10px;
   --radius-sm: 8px;
@@ -39,10 +40,10 @@
   --radius-xl: 12px;
 
   /* 影は最小限。浮き上がらせるためではなく、面の境目を示すためだけに使う */
-  --shadow-xs: 0 1px 1px rgba(20, 53, 48, 0.04);
-  --shadow-sm: 0 1px 3px rgba(20, 53, 48, 0.06);
-  --shadow-md: 0 2px 6px rgba(20, 53, 48, 0.07);
-  --shadow-lg: 0 4px 14px -4px rgba(20, 53, 48, 0.12);
+  --shadow-xs: 0 1px 1px rgba(20, 66, 94, 0.04);
+  --shadow-sm: 0 1px 3px rgba(20, 66, 94, 0.06);
+  --shadow-md: 0 2px 6px rgba(20, 66, 94, 0.07);
+  --shadow-lg: 0 4px 14px -4px rgba(20, 66, 94, 0.12);
 
   --content: 42rem;
   --gutter: 1.25rem;

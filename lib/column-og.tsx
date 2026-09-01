@@ -18,8 +18,8 @@ export function columnOgImage(title: string) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#f5f1e8",
-          color: "#234c3d",
+          background: "#f7fbfe",
+          color: "#14425e",
           fontFamily: "sans-serif",
           padding: "54px",
         }}
@@ -31,7 +31,7 @@ export function columnOgImage(title: string) {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            border: "4px solid #2e6350",
+            border: "4px solid #0273ad",
             borderRadius: "28px",
             padding: "64px 70px",
           }}
@@ -57,10 +57,10 @@ export function columnOgImage(title: string) {
                 width: "56px",
                 height: "8px",
                 borderRadius: "8px",
-                background: "#2e6350",
+                background: "#0284c7",
               }}
             />
-            <div style={{ fontSize: 32, color: "#2e6350", fontWeight: 700 }}>
+            <div style={{ fontSize: 32, color: "#0273ad", fontWeight: 700 }}>
               {SITE_NAME}
             </div>
           </div>
