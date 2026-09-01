@@ -1,2 +1,2 @@
-export { metadata } from "@/components/ApplicationFlowPage";
-export { default } from "@/components/ApplicationFlowPage";
+export { shinseiMetadata as metadata } from "@/components/platform/ShinseiRestyled";
+export { default } from "@/components/platform/ShinseiRestyled";

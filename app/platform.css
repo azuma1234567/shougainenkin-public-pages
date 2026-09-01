@@ -484,3 +484,57 @@
   .columns-article-card { min-height: 96px; padding: 16px; }
   .columns-article-copy > span { display: -webkit-box; white-space: normal; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 }
+
+/* /shinsei — 8ステップを同じ型で読む */
+.shinsei-reading-width { max-width: 900px; }
+.shinsei-hero { padding-block: 38px 32px; }
+.shinsei-stepper { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); margin-top: 22px; }
+.shinsei-stepper a { position: relative; min-width: 0; display: grid; justify-items: center; align-content: start; gap: 8px; color: var(--platform-muted); text-align: center; text-decoration: none; }
+.shinsei-stepper a::before { content: ""; position: absolute; top: 17px; left: 0; right: 0; height: 2px; background: #cfe6f5; z-index: 0; }
+.shinsei-stepper a:first-child::before { left: 50%; }
+.shinsei-stepper a:last-child::before { right: 50%; }
+.shinsei-stepper a span { z-index: 1; width: 36px; height: 36px; display: grid; place-items: center; border: 2px solid #8cc8e8; border-radius: 50%; background: #ffffff; color: var(--platform-link); font-size: 13px; font-weight: 700; }
+.shinsei-stepper a:hover span { background: var(--platform-chip); }
+.shinsei-stepper b { max-width: 84px; font-size: 10.5px; font-weight: 600; line-height: 1.45; }
+.shinsei-content { display: grid; gap: 60px; padding-block: 52px 76px; }
+.shinsei-section { display: grid; gap: 20px; }
+.shinsei-section > h2 { color: var(--platform-heading); font-size: 25px; }
+.shinsei-stumbles { gap: 14px; }
+.shinsei-stumbles a { display: grid; align-content: start; gap: 10px; color: var(--platform-text); text-decoration: none; }
+.shinsei-stumbles strong { color: var(--platform-heading); font-size: 15px; }
+.shinsei-stumbles p { color: var(--platform-muted); font-size: 12px; line-height: 1.75; }
+.shinsei-steps { display: grid; gap: 40px; }
+.shinsei-step-card { scroll-margin-top: 86px; display: grid; gap: 22px; padding: 30px 32px; border: 1px solid var(--platform-border); border-radius: 16px; background: #ffffff; box-shadow: 0 4px 18px rgba(20, 66, 94, 0.045); }
+.shinsei-step-card > header { display: flex; align-items: flex-start; gap: 18px; }
+.shinsei-step-number { flex: 0 0 48px; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 50%; background: var(--platform-primary); color: #ffffff; font-size: 19px; font-weight: 700; }
+.shinsei-step-card header > div { display: grid; gap: 4px; }
+.shinsei-step-label { color: var(--platform-link); font-size: 10.5px; font-weight: 700; letter-spacing: .07em; }
+.shinsei-step-card h2 { color: var(--platform-heading); font-size: 23px; line-height: 1.45; }
+.shinsei-step-card header p { color: var(--platform-muted); font-size: 13px; line-height: 1.65; }
+.shinsei-step-body { color: var(--platform-text); font-size: 14px; line-height: 1.9; }
+.shinsei-tasks { display: grid; gap: 12px; }
+.shinsei-tasks h3 { color: var(--platform-heading); font-size: 13px; }
+.shinsei-tasks ul { display: grid; gap: 9px; list-style: none; }
+.shinsei-tasks li { display: flex; align-items: flex-start; gap: 9px; color: var(--platform-text); font-size: 13px; line-height: 1.65; }
+.shinsei-tasks svg { flex: 0 0 auto; margin-top: 3px; color: var(--platform-primary); }
+.shinsei-stumble { display: grid; gap: 7px; padding: 17px 19px; border-radius: 12px; background: #eef6fc; }
+.shinsei-stumble strong { color: var(--platform-heading); font-size: 12px; }
+.shinsei-stumble p { color: var(--platform-muted); font-size: 12.5px; line-height: 1.75; }
+.shinsei-step-card > footer { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; }
+.shinsei-step-card footer nav { display: flex; flex-wrap: wrap; gap: 7px; }
+.shinsei-step-card footer nav a { min-height: 36px; display: inline-flex; align-items: center; padding: 6px 12px; border: 1px solid #cfe6f5; border-radius: 999px; background: #ffffff; color: var(--platform-link); font-size: 11px; text-decoration: none; }
+.shinsei-next { flex: 0 0 auto; color: var(--platform-link); font-size: 12px; font-weight: 700; text-decoration: none; }
+
+@media (max-width: 720px) {
+  .shinsei-stepper { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 18px; }
+  .shinsei-stepper a:nth-child(4)::before { right: 50%; }
+  .shinsei-stepper a:nth-child(5)::before { left: 50%; }
+  .shinsei-stepper b { max-width: 68px; font-size: 9.5px; }
+  .shinsei-content { gap: 48px; padding-block: 40px 60px; }
+  .shinsei-step-card { gap: 19px; padding: 23px 20px; }
+  .shinsei-step-card > header { gap: 13px; }
+  .shinsei-step-number { flex-basis: 44px; width: 44px; height: 44px; }
+  .shinsei-step-card h2 { font-size: 20px; }
+  .shinsei-step-card > footer { align-items: flex-start; flex-direction: column; }
+  .shinsei-next { min-height: 44px; display: inline-flex; align-items: center; }
+}

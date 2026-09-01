@@ -1,0 +1,105 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Breadcrumb, CheckIcon } from "@/components/platform/Platform";
+import { pageMetadata } from "@/lib/seo";
+
+const TITLE = "障害年金の申請の流れと必要書類｜8つのステップ";
+const DESCRIPTION = "初診日の確認から結果が届くまで。障害年金の申請を8つのステップに分け、各段階ですること、つまずきやすいところ、関連記事を案内します。";
+
+export const shinseiMetadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: "/shinsei", absoluteTitle: true });
+
+type Step = {
+  id: string;
+  short: string;
+  title: string;
+  oneLine: string;
+  body: string;
+  tasks: string[];
+  stumble: string;
+  links: { href: string; label: string }[];
+};
+
+const STEPS: Step[] = [
+  {
+    id: "step-1", short: "初診日を確認", title: "初診日を確認する",
+    oneLine: "すべての起点。制度・納付要件・金額の見通しにつながります。",
+    body: "その症状で、いちばん最初に医師の診療を受けた日が初診日です。精神科とは限らず、不眠や体調不良で内科を受診した日になることもあります。",
+    tasks: ["最初に行った病院を、診察券やお薬手帳から確認する", "病院へ受診状況等証明書を依頼できるか確認する", "日付があいまいなときは、断定せず手がかりをメモする"],
+    stumble: "診断名がついた日が初診日とは限りません。カルテがなくても、診察券・薬袋・転院先の記録・第三者証明など、確認できる道が残る場合があります。",
+    links: [{ href: "/columns/shoshinbi-wakaranai", label: "初診日がわからないとき" }, { href: "/columns/shoshinbi-karute-nashi", label: "カルテがないとき" }],
+  },
+  {
+    id: "step-2", short: "納付要件を確認", title: "納付要件を確認する",
+    oneLine: "初診日の前日時点の、保険料の納め方を確認します。",
+    body: "3分の2要件か直近1年要件のどちらかを満たすか、年金記録で確かめます。免除・猶予の期間は、未納とは別に扱われます。",
+    tasks: ["基礎年金番号がわかるものを用意する", "ねんきんネットか年金事務所で納付記録を確認する", "免除・学生納付特例・猶予の期間も含めて確認する"],
+    stumble: "記憶だけで未納だと思い込み、確認前に結論を出さないことが大切です。判定されるのは初診日の前日時点で、初診日より後の納付は反映されません。",
+    links: [{ href: "/columns/nofu-yoken", label: "納付要件の確認" }, { href: "/columns/hatachi-mae", label: "20歳前に初診日があるとき" }],
+  },
+  {
+    id: "step-3", short: "年金事務所へ相談", title: "年金事務所へ相談する",
+    oneLine: "必要な様式を受け取り、確認する順番を整理します。",
+    body: "相談は準備が整う前でも利用できます。初診日や通院歴があいまいでも、わかる範囲のメモを持って予約すると話しやすくなります。",
+    tasks: ["最寄りの年金事務所へ相談を予約する", "通院した病院と時期を、わかる範囲でメモする", "自分の請求に必要な書類一式を確認する"],
+    stumble: "窓口での見立ては審査結果そのものではありません。説明がわかりにくいときは、日付と確認した内容をメモし、次回もう一度聞いても構いません。",
+    links: [{ href: "/columns/nenkin-jimusho-soudan", label: "初回相談の持ち物" }, { href: "/columns/shinsei-shindoi", label: "無理のない進め方" }],
+  },
+  {
+    id: "step-4", short: "必要書類をそろえる", title: "必要書類をそろえる",
+    oneLine: "自分の請求に必要な書類を、ひとつずつ集めます。",
+    body: "年金請求書、初診日の証明、診断書、申立書などを準備します。請求方法や家族構成によって追加書類があるため、一覧を窓口で確認します。",
+    tasks: ["年金事務所でもらった書類一覧に印をつける", "戸籍・住民票など取得期限のある書類は後半に取る", "届いた書類は提出前にコピーできるようまとめる"],
+    stumble: "すべてを同時に集める必要はありません。診断書など現症日の期限がある書類と、初診日の証明の進み具合を見ながら順番を決めます。",
+    links: [{ href: "/columns/hitsuyou-shorui-seishin", label: "精神の障害の必要書類" }, { href: "/columns/jushinjokyo-shomeisho", label: "受診状況等証明書" }],
+  },
+  {
+    id: "step-5", short: "診断書の準備", title: "診断書の準備をする",
+    oneLine: "診察室の外での生活が、主治医に伝わるように整えます。",
+    body: "診断書はカルテや診察で把握された内容をもとに作られます。食事・清潔・金銭管理など、普段の生活を具体例と頻度で整理します。",
+    tasks: ["日常生活の7項目を、支援がない場合で振り返る", "困った場面を頻度と具体例で短くまとめる", "依頼時に渡すメモと診断書様式を用意する"],
+    stumble: "診察では反射的に「大丈夫です」と答えることがあります。渡せなくても失敗ではありません。自分の手元でメモを見ながら話す方法でも十分です。",
+    links: [{ href: "/columns/shindansho-ishi-ni-tsutaeru", label: "主治医に伝えること" }, { href: "/columns/shindansho-tanomikata", label: "診断書の頼み方" }],
+  },
+  {
+    id: "step-6", short: "申立書を作成", title: "申立書を作成する",
+    oneLine: "病歴と生活・仕事の実態を、診断書と同じ方向で伝えます。",
+    body: "病歴・就労状況等申立書は、これまでの経過を本人側から説明する書類です。一気に文章にせず、期間を区切って事実を並べます。",
+    tasks: ["受診歴と生活の変化を時系列に並べる", "期間ごとに治療・仕事・生活の様子を書く", "診断書と日付や生活状況が食い違わないか確認する"],
+    stumble: "「つらかった」だけで終えず、入浴回数や家族の声かけなど、読み手が生活を想像できる事実に置き換えると伝わりやすくなります。",
+    links: [{ href: "/columns/moushitatesho-kakikata", label: "申立書の書き方" }, { href: "/columns/moushitatesho-kikan-kugiri", label: "期間の区切り方" }],
+  },
+  {
+    id: "step-7", short: "提出する", title: "年金事務所へ提出する",
+    oneLine: "控えを残し、受付日と不足書類の有無を確認します。",
+    body: "窓口または郵送で提出します。提出前に一式をコピーし、郵送なら追跡できる方法を選ぶと、あとで確認しやすくなります。",
+    tasks: ["書類一式をコピーして手元に残す", "署名・日付・添付漏れを最終確認する", "受付日と、追加提出が必要かを確認する"],
+    stumble: "診断書は封を開けて内容を確認して構いません。事実関係の誤りがあれば、提出前に医療機関へ確認します。評価そのものは医師の判断です。",
+    links: [{ href: "/columns/teishutsusaki-yuusou", label: "提出先と郵送方法" }, { href: "/columns/shindansho-kakunin", label: "診断書の提出前確認" }],
+  },
+  {
+    id: "step-8", short: "結果を待つ", title: "結果を待つ",
+    oneLine: "照会に対応しながら、届いた通知の内容を確認します。",
+    body: "審査中に追加書類の照会が届くことがあります。結果が届いたら、支給開始時期、等級、次回診断書提出年月などを確認します。",
+    tasks: ["追加照会が届いたら期限と内容を確認する", "通知書・年金証書を一緒に保管する", "不支給や想定と違う結果なら、通知日と選択肢を確認する"],
+    stumble: "不支給が生活の行き止まりになるわけではありません。不服申立てには期限があるため、通知を知った日を記録し、相談先と次の選択肢を確認します。",
+    links: [{ href: "/nayami/fushikyu", label: "不支給と言われたとき" }, { href: "/columns/shinsei-kikan", label: "審査期間と結果通知" }],
+  },
+];
+
+const STUMBLES = [
+  { step: "ステップ1で", title: "初診日の証明", copy: "昔のことで記録がない・病院が閉院した。ここで止まりそうなときにも、確認できる順番があります。", href: "#step-1" },
+  { step: "ステップ5で", title: "診断書に実態が載らない", copy: "診察で「大丈夫です」と答えてしまい、普段の大変さが伝わっていない。", href: "#step-5" },
+  { step: "ステップ6で", title: "申立書が書けない", copy: "何を書けばいいかわからず手が止まる。一気に書かなくて大丈夫です。", href: "#step-6" },
+] as const;
+
+export default function ShinseiRestyled() {
+  return (
+    <div className="platform shinsei-page">
+      <header className="p-page-hero shinsei-hero"><div className="p-container shinsei-reading-width"><Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "申請の流れ" }]} /><h1>申請の流れ — 8つのステップ</h1><p className="p-page-intro">初診日の確認から結果が届くまで。全体の地図を先に持つと、いま自分がどこにいるかで迷いにくくなります。1ステップずつ、必要なことだけを載せています。</p><nav className="shinsei-stepper" aria-label="8つのステップ">{STEPS.map((step, index) => <a href={`#${step.id}`} key={step.id}><span>{index + 1}</span><b>{step.short}</b></a>)}</nav></div></header>
+      <div className="p-container shinsei-reading-width shinsei-content">
+        <section className="shinsei-section" aria-labelledby="stumbles-heading"><h2 id="stumbles-heading">つまずくのは、たいてい同じ3か所です</h2><div className="p-grid p-grid-3 shinsei-stumbles">{STUMBLES.map((item) => <a className="p-card" href={item.href} key={item.title}><span className="p-label">{item.step}</span><strong>{item.title}</strong><p>{item.copy}</p></a>)}</div></section>
+        <div className="shinsei-steps">{STEPS.map((step, index) => <section className="shinsei-step-card" id={step.id} aria-labelledby={`${step.id}-title`} key={step.id}><header><span className="shinsei-step-number">{index + 1}</span><div><span className="shinsei-step-label">STEP {index + 1}</span><h2 id={`${step.id}-title`}>{step.title}</h2><p>{step.oneLine}</p></div></header><p className="shinsei-step-body">{step.body}</p><div className="shinsei-tasks"><h3>この段階ですること</h3><ul>{step.tasks.map((task) => <li key={task}><CheckIcon size={16} /><span>{task}</span></li>)}</ul></div><aside className="shinsei-stumble"><strong>つまずきやすいところ</strong><p>{step.stumble}</p></aside><footer><nav aria-label={`ステップ${index + 1}の関連記事`}>{step.links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}</nav>{index < STEPS.length - 1 && <a className="shinsei-next" href={`#${STEPS[index + 1].id}`}>次へ: {STEPS[index + 1].title} →</a>}</footer></section>)}</div>
+      </div>
+    </div>
+  );
+}
