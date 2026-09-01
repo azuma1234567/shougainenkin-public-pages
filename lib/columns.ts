@@ -885,8 +885,7 @@ export function columnBreadcrumbParents(
   column: Column,
 ): { name: string; path: string }[] {
   const pillar = parentPillar(column);
-  // トップは常にパンくずの先頭にあるので、申請クラスタでは階層を増やさない。
-  if (!pillar || pillar.pillarPath === "/") return [];
+  if (!pillar) return [];
   return [{ name: pillar.label, path: pillar.pillarPath }];
 }
 

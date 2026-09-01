@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Zen_Old_Mincho } from "next/font/google";
+import { Zen_Kaku_Gothic_New, Zen_Old_Mincho } from "next/font/google";
 import "./globals.css";
+import "./platform.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import {
@@ -18,20 +19,30 @@ const zenOldMincho = Zen_Old_Mincho({
   variable: "--font-display",
 });
 
+// 新しい情報プラットフォームの見出し用。next/font でセルフホストし、
+// Google Fonts への実行時リクエストを発生させない。
+const zenKakuGothic = Zen_Kaku_Gothic_New({
+  weight: ["500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  preload: false,
+  variable: "--font-platform-heading",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "障害年金の申請の流れと必要書類｜初めての方へ8ステップで解説",
+    default: "障害年金の疑問に、公的根拠と実例で答える｜障害年金ノート",
     template: `%s｜${SITE_NAME}`,
   },
   description:
-    "障害年金の申請を何から始めればよいか、初診日の確認、納付要件、年金事務所への相談、必要書類、診断書、申立書、提出、結果待ちまで8ステップで分かりやすく解説します。",
+    "障害年金がはじめての方へ。病気、申請の段階、いまの悩みから、公的資料の根拠と公開裁決例を使って自分に近い情報を探せます。",
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: "障害年金の申請の流れと必要書類｜初めての方へ8ステップで解説",
+    title: "障害年金の疑問に、公的根拠と実例で答える｜障害年金ノート",
     description:
-      "障害年金の申請を何から始めればよいか、初診日の確認、納付要件、年金事務所への相談、必要書類、診断書、申立書、提出、結果待ちまで8ステップで分かりやすく解説します。",
+      "障害年金がはじめての方へ。病気、申請の段階、いまの悩みから、公的資料の根拠と公開裁決例を使って自分に近い情報を探せます。",
     url: "/",
     locale: "ja_JP",
     images: [OG_IMAGE],
@@ -49,7 +60,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={zenOldMincho.variable}>
+    <html
+      lang="ja"
+      className={`${zenOldMincho.variable} ${zenKakuGothic.variable}`}
+    >
       <body>
         <SiteHeader />
         <main>{children}</main>

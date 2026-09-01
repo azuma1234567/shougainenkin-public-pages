@@ -5,11 +5,17 @@ import { COLUMNS_BY_DATE } from "@/lib/columns";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     "/",
+    "/hajimete",
+    "/shinsei",
+    "/byoki/utsu-soukyoku",
+    "/jitsurei",
+    "/nayami/fushikyu",
     "/columns",
     "/about",
     "/support",
     "/privacy",
     "/terms",
+    "/quality",
   ].map((path) => ({
     url: `${SITE_URL}${path === "/" ? "" : path}`,
   }));

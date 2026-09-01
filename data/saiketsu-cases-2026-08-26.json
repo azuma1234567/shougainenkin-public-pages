@@ -1,0 +1,1603 @@
+{
+  "meta": {
+    "title": "社会保険審査会 裁決例(障害給付) 構造化データセット パイロット版",
+    "created": "2026-08-26",
+    "created_by": "Cowork(Claude)による公開PDFの自動読解を起点に、厚生労働省公開PDFと照合",
+    "source": "厚生労働省 社会保険審査会「主な裁決例」 https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/05.html",
+    "license_note": "裁決書は著作権法13条により権利の目的とならない行政文書。転載・データベース化に著作権上の障害なし",
+    "bias_note": "全件が『一度不支給等の処分を受けて不服申立てに至った事例』。支給/不支給の分布は申請全体を代表しない。表示時は必ず『審査で争われた事例』とラベルすること",
+    "soten_vocabulary": [
+      "初診日",
+      "納付要件",
+      "障害の程度・等級該当性",
+      "社会的治癒",
+      "相当因果関係",
+      "診断書の信頼性・整合性",
+      "遡及・時効",
+      "手続その他"
+    ],
+    "ketsuron_vocabulary": [
+      "容認",
+      "一部容認",
+      "棄却",
+      "却下"
+    ],
+    "verification_notes": [
+      "令和7年分は厚生年金保険の障害給付10件と国民年金の障害基礎年金4件を公開PDFで照合済み",
+      "令和7年06_01は船員保険の障害給付であり、国民年金・厚生年金を対象とする本データセットの範囲外のため追加していない",
+      "令和2・3年05_04は年金額改定通知に対する不適法な再審査請求を却下した手続事案。製品の結論区分（容認・一部容認・棄却）に当てはまらないため excluded:true、verified:false とした",
+      "平成30年〜令和元年16_05は再審査請求期間を徒過した不適法な請求を却下した手続事案。同じ理由で excluded:true、verified:false とした"
+    ],
+    "backlog": [
+      "h27(平成27年 厚生年金 障害給付 37件): 一覧ページ https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/05-h27-06.html は残っているが、リンク先PDFは全て404(2026-08-26に37本すべてで確認)。原文を提示できないため対象外とする。復活した場合のみ再検討",
+      "h26以前: 05-05.html 等に一覧があるが、h27と同様にPDFが失効している可能性が高い。着手前に数本のURLで生存確認をすること",
+      "層2(社労士提供事例)・層3(利用者の結果報告)は docs/jirei-db-feasibility-2026-08-26.md を参照"
+    ],
+    "request_type_group_vocabulary": [
+      "初回",
+      "更新・支給停止",
+      "額改定",
+      "その他"
+    ]
+  },
+  "cases": [
+    {
+      "id": "r07-03_01",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/03_01.pdf",
+      "seido": "厚生年金",
+      "shobyo": "全身型重症筋無力症",
+      "seishin": false,
+      "request_type": "更新・支給停止",
+      "request_type_group": "更新・支給停止",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "3級受給中に支給停止。全身の筋力低下だけで判断せず、疲労に応じて休息が必要な状況等を総合評価し3級該当を認め、原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r07-03_02",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/03_02.pdf",
+      "seido": "厚生年金",
+      "shobyo": "眼瞼けいれん",
+      "seishin": false,
+      "request_type": "更新・支給停止",
+      "request_type_group": "更新・支給停止",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": true,
+      "youshi": "3級受給中の支給停止処分。審査会は治療による一時的効果しか認められない状態が継続し、認定基準上の症状固定に至ったと判断して原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r07-03_03",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/03_03.pdf",
+      "seido": "厚生年金",
+      "shobyo": "乳癌(肝転移)",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "事後重症請求。一般状態区分エ、肝転移、抗がん剤の副作用や予後等を総合評価し2級該当と認定し、原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r07-03_04",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/03_04.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "血管免疫芽球性T細胞リンパ腫",
+      "seishin": false,
+      "request_type": "更新・支給停止",
+      "request_type_group": "更新・支給停止",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "更新時の等級低下処分。修正診断書を採用し、難治性下痢・反復入院・車椅子生活等を総合評価し2級継続を認め、原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r07-03_05",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/03_05.pdf",
+      "seido": "厚生年金",
+      "shobyo": "両網膜色素変性",
+      "seishin": false,
+      "request_type": "更新・支給停止",
+      "request_type_group": "更新・支給停止",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "進行性疾患を『症状固定』とした支給停止処分。根治法のない進行性であることから固定とは認められず3級14号該当とし原処分取消。",
+      "verified": true
+    },
+    {
+      "id": "r07-03_06",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/03_06.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "うつ病(適応障害と認定)",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "うつ病の事後重症請求。複数の初診日主張を検討したが、厚生年金被保険者期間中の初診日は認められず、不支給処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r07-03_07",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/03_07.pdf",
+      "seido": "厚生年金",
+      "shobyo": "眼瞼痙攣・ドライアイ",
+      "seishin": false,
+      "request_type": "更新・支給停止",
+      "request_type_group": "更新・支給停止",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": true,
+      "youshi": "3級取消処分。継続的なボトックス治療にもかかわらず認定基準上の『症状固定』に至ったと判断され、処分妥当。",
+      "verified": true
+    },
+    {
+      "id": "r07-03_08",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/03_08.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "アテローム血栓性脳梗塞",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "納付要件"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "納付要件の充足が争点。事業所の適用届出前の期間の保険料徴収権と時効の解釈により納付済期間への算入を認め、要件充足を認定。",
+      "verified": true
+    },
+    {
+      "id": "r07-03_09",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/03_09.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "拡張型心筋症",
+      "seishin": false,
+      "request_type": "更新・支給停止",
+      "request_type_group": "更新・支給停止",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "植込型補助人工心臓装着者への支給停止処分。生命維持装置と常時介護の必要性を総合判断し2級該当と認定、原処分取消。",
+      "verified": true
+    },
+    {
+      "id": "r07-03_10",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/03_10.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "高次脳機能障害・うつ病",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "相当因果関係"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "脳腫瘍治療後の高次脳機能障害とうつ病の初診日が争点。脳腫瘍治療と高次脳機能障害の相当因果関係は認めず、抑うつ気分で受診した日を初診日と認定して原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r07-07_01",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/07_01.pdf",
+      "seido": "国民年金",
+      "shobyo": "両下肢不全麻痺・二分脊椎",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "事後重症請求に対する不支給処分。下肢障害と、自己導尿・順行性洗腸路による排泄管理を要する状態を併合認定し2級該当とし、原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r07-07_02",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/07_02.pdf",
+      "seido": "国民年金",
+      "shobyo": "自閉スペクトラム症",
+      "seishin": true,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "診断書の信頼性・整合性",
+        "手続その他"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "障害認定日から3か月を超えた現症日の診断書では認定できないとした処分。新型コロナ感染への不安で通院できなかった事情等から該当診断書で判断できるとし、原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r07-07_03",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/07_03.pdf",
+      "seido": "国民年金",
+      "shobyo": "チェディアック東症候群・急性リンパ性白血病・両大腿骨頭壊死・両上腕骨頭壊死",
+      "seishin": false,
+      "request_type": "認定日請求・事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "相当因果関係",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "20歳到達日による主位的請求と事後重症の予備的請求が争われた。主位的請求は棄却したが、裁定請求日の複数障害を併合認定し1級該当とし、予備的請求の原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r07-07_04",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r07/07_04.pdf",
+      "seido": "国民年金",
+      "shobyo": "脊髄髄膜瘤・脊髄脂肪腫・両麻痺性足部変形・右麻痺性股関節脱臼",
+      "seishin": false,
+      "request_type": "20歳到達日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "20歳到達日の障害状態が2級に該当しないとした処分。下肢、脊柱、その他の疾患による各障害を併合認定し2級該当とし、原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r06-03_01",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r06/03_01.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "肺移植後間質性肺炎・慢性呼吸不全",
+      "seishin": false,
+      "request_type": "更新・支給停止",
+      "request_type_group": "更新・支給停止",
+      "soten": [
+        "障害の程度・等級該当性",
+        "診断書の信頼性・整合性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "移植術後の経過を総合考慮すると現症日でも2級状態が継続しており、支給停止処分は失当とされた。",
+      "verified": true
+    },
+    {
+      "id": "r06-03_02",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r06/03_02.pdf",
+      "seido": "厚生年金",
+      "shobyo": "黄斑ジストロフィー",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "社会的治癒",
+        "初診日"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "社会的治癒の成立が争点。『臨床的に症状がなくなったか悪化のおそれのない状態』の要件を充たさないとして棄却。",
+      "verified": true
+    },
+    {
+      "id": "r06-03_03",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r06/03_03.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "右手圧挫創・右手熱傷",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "3指欠損+2指の可動域制限を『指がないのと同程度の機能障害』と評価し、一上肢の全指の著しい障害として2級を認定。",
+      "verified": true
+    },
+    {
+      "id": "r06-03_04",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r06/03_04.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "脳出血(2回目)による左片麻痺",
+      "seishin": false,
+      "request_type": "額改定",
+      "request_type_group": "額改定",
+      "soten": [
+        "相当因果関係"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "同一部位の2度目の脳出血について、部位の同一性のみでは相当因果関係を認めず独立傷病と判断。額改定請求は却下維持。",
+      "verified": true
+    },
+    {
+      "id": "r06-03_05",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r06/03_05.pdf",
+      "seido": "厚生年金",
+      "shobyo": "副腎白質ジストロフィー",
+      "seishin": false,
+      "request_type": "更新・支給停止",
+      "request_type_group": "更新・支給停止",
+      "soten": [
+        "診断書の信頼性・整合性",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "進行性疾患なのに前回診断書から全項目『改善』という矛盾を審査会が指摘。診断書は正確性に欠けるとして減額処分を取消した。",
+      "verified": true
+    },
+    {
+      "id": "r06-03_06",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r06/03_06.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "間質性肺炎(両側肺移植後)",
+      "seishin": false,
+      "request_type": "更新・支給停止",
+      "request_type_group": "更新・支給停止",
+      "soten": [
+        "障害の程度・等級該当性",
+        "診断書の信頼性・整合性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "支給停止処分を取消し、労作時息切れ・外出制限等から『労働に著しい制限』として3級相当と認定。",
+      "verified": true
+    },
+    {
+      "id": "r06-03_07",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r06/03_07.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "頚髄損傷",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性",
+        "診断書の信頼性・整合性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "認定日時点の医証不足とされた却下処分について、再審査で提出された身体障害者診断書等から3級相当を認定。",
+      "verified": true
+    },
+    {
+      "id": "r06-07_01",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r06/07_01.pdf",
+      "seido": "国民年金",
+      "shobyo": "2型糖尿病・高血圧症→慢性腎不全",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "予備的請求における国民年金1号被保険者期間中の初診日認定が争点。健診記録等から初診日を認定し原処分取消。",
+      "verified": true
+    },
+    {
+      "id": "r06-07_02",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r06/07_02.pdf",
+      "seido": "国民年金",
+      "shobyo": "下垂体機能低下症・器質性情緒不安定障害",
+      "seishin": true,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "手続その他",
+        "診断書の信頼性・整合性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "障害認定日の精神障害を示す診断書がないことも根拠に不支給とした処分。精神科を標榜しない医師でも当時診察していたなら診断書の適格性を当然に否定できず、提出機会を与えなかった手続は不適正として原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r06-07_03",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r06/07_03.pdf",
+      "seido": "国民年金",
+      "shobyo": "左下肢弛緩性麻痺(ポリオ)",
+      "seishin": false,
+      "request_type": "20歳到達日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "診断書の信頼性・整合性",
+        "手続その他"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "旧法の障害福祉年金に係る20歳到達日請求。提出診断書は当時の関節可動域、筋力、日常生活動作が不明で、障害状態を認定できる資料がないとして原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r06-07_04",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r06/07_04.pdf",
+      "seido": "国民年金",
+      "shobyo": "覚醒剤使用による残遺性および遅発性精神病性障害",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "手続その他"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "事後重症請求に対し、障害は覚醒剤使用が直接の原因であるとして国民年金法70条に基づき不支給とした処分。診断書や治療経過から同傷病による障害と認められるとして原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_01",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_01.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "慢性腎不全(2型糖尿病由来)",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "納付要件",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "一部容認",
+      "nichijo_quote": true,
+      "youshi": "お薬手帳の調剤記録から初診日を認定し、人工透析施行中であることから2級該当と判断、原処分取消。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_02",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_02.pdf",
+      "seido": "厚生年金",
+      "shobyo": "(記載なし)",
+      "seishin": false,
+      "request_type": "その他",
+      "request_type_group": "その他",
+      "soten": [
+        "遡及・時効"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "裁定前でも支分権の消滅時効は支払期到来時から進行するとの最高裁判決を引用し、5年より前の分の不支給処分を適法とした。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_03",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_03.pdf",
+      "seido": "厚生年金",
+      "shobyo": "右変形性足関節症・右変形性膝関節症",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": true,
+      "youshi": "既存障害がある場合の差引認定の適用可否が争点。併合判定参考表に明示される場合は差引認定を適用しないとの通知に従い原処分維持。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_04",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_04.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "統合失調症",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "初診日を確認できないとして却下された請求について、複数医療機関の資料を総合して初診日を認定し、2級該当として原処分取消。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_05",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_05.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "頸髄症",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "相当因果関係"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "腰椎ヘルニアと診断された症状と後の頸髄症を、症状の継続性と医学的関連性から同一傷病と認め、初診日を前医受診時と認定。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-11_01",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/11_01.pdf",
+      "seido": "国民年金",
+      "shobyo": "慢性腎不全(悪性リンパ腫治療に起因)",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "相当因果関係"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "悪性リンパ腫治療の経過で発症した腎障害との相当因果関係を認め、初診日を認定して原処分を取消した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-11_03",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/11_03.pdf",
+      "seido": "国民年金",
+      "shobyo": "統合失調症",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "診断書の信頼性・整合性",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "認定日請求で、カルテ保存期限切れのため家族の話等を基に作成された診断書は『作成経過に照らし認定困難』とされ、却下処分維持。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-11_04",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/11_04.pdf",
+      "seido": "国民年金",
+      "shobyo": "精神運動発達遅延・汎下垂体機能低下症・左視神経低形成",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "3疾患の併合(加重)認定により1級該当と判断。2級とした原処分を取消した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_06",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_06.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "糖尿病性腎症",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "納付要件",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "事後重症請求で初診日を確認できないとした処分。医師の診療情報提供書から厚生年金期間中の初診日と納付要件を認め、人工透析中の状態を2級として原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_07",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_07.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "混合性不安抑うつ障害",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": true,
+      "youshi": "事後重症請求。傷病は神経症の範畴で、診断書に精神病の病態を示す記載もないため認定対象とはならず、原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_08",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_08.pdf",
+      "seido": "厚生年金",
+      "shobyo": "右肘関節脱臼骨折・右肘関節外側副靭帯断裂",
+      "seishin": false,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "橈骨頭の人工骨頭置換日を障害認定日とする主張が争われた。肘の上腕尺骨関節の骨頭置換に当たらず、当時症状固定とも認められないとして原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_09",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_09.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "妄想性障害",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "手続その他"
+      ],
+      "ketsuron": "一部容認",
+      "nichijo_quote": false,
+      "youshi": "厚生年金期間中の初診日を認めなかった処分は、予診表等の記載経緯を検討して取り消した。個人情報開示の費用負担を求める部分は審査会の審査対象でないとして却下した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_10",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_10.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "器質性解離障害・高次脳機能障害・外傷性脳脊髄液漏出治療後",
+      "seishin": true,
+      "request_type": "額改定",
+      "request_type_group": "額改定",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "精神障害とその他の疾患による障害を総合認定し2級とした処分。それぞれ併合判定参考表の4号であり、併合認定す1級に該当するとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_11",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_11.pdf",
+      "seido": "厚生年金",
+      "shobyo": "聴覚障害",
+      "seishin": false,
+      "request_type": "新規裁定・障害手当金",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "傷病が初診日から5年経過後に固定したとして障害手当金を不支給とした処分。5年以内に障害手当金相当の聴力障害が固定したと認め、原処分を取り消して障害手当金の支給を命じた。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_12",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_12.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "右裂孔原性網膜剥離・左緑内障",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "診断書の信頼性・整合性",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "提出診断書では請求日の障害状態を認定できないとした処分。視力・視野の検査結果と傷病の病態との不整合から、診断書の数値をそのまま障害状態とすることはできないとして原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_13",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_13.pdf",
+      "seido": "厚生年金",
+      "shobyo": "脳梗塞後遺症・失語症",
+      "seishin": false,
+      "request_type": "障害認定日請求・障害手当金",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "失語症が年金3級にも障害手当金にも該当しないとした処分。音声言語と文字言語の障害を総合し、症状固定日に障害手当金相当と認めて原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-06_14",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/06_14.pdf",
+      "seido": "併給(国年+厚年)",
+      "shobyo": "網膜色素変性",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "社会的治癒"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "20歳前の初診後に通院していない期間の社会的治癒が争われた。治療法がなく緩徐に進行する疾患で、医師が受診不要と判断した資料もないため社会的治癒を認めず、原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-11_02",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/11_02.pdf",
+      "seido": "国民年金",
+      "shobyo": "卵巣癌・骨髄異形成症候群",
+      "seishin": false,
+      "request_type": "死亡後の事後重症請求・未支給年金",
+      "request_type_group": "初回",
+      "soten": [
+        "手続その他"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "死亡後に事後重症請求と未支給年金請求がされた事案。事後重症請求が死亡後である以上、未支給年金を支給する余地はなく、先行請求の不作為は審査会の権限外として原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-11_05",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/11_05.pdf",
+      "seido": "厚生年金",
+      "shobyo": "自閉スペクトラム症・軽度精神遅滞",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "20歳前初診の障害基礎年金として不支給とした処分。発達期から認定対象となる知的障害があったとは認めず、厚生年金期間中の初診日と発達障害による3級該当を認めて原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-11_06",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/11_06.pdf",
+      "seido": "国民年金",
+      "shobyo": "統合失調症",
+      "seishin": true,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "納付要件"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "軽度知的障害と統合失調症に相当因果関係があるとして初診日を出生日へ訂正させた処分。その判断に十分な根拠はなく、統合失調症の受診日を初診日として納付要件も満たすと認め、原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-11_07",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/11_07.pdf",
+      "seido": "国民年金",
+      "shobyo": "自閉症",
+      "seishin": true,
+      "request_type": "額改定",
+      "request_type_group": "額改定",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "2級受給中に1級への額改定を請求した事案。日常生活能力7項目がすべて最も重い判定で、家族の常時の援助や作業所の配慮が必要な状態を1級該当とし、原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-11_08",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/11_08.pdf",
+      "seido": "国民年金",
+      "shobyo": "中等度知的障害(精神遅滞)",
+      "seishin": true,
+      "request_type": "20歳到達日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "診断書の信頼性・整合性",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "20歳時の診断書がなく障害状態を認定できないとした処分。後年の診断書、就学・就労歴、知能検査、療育手帳等から20歳時も同程度であった蓋然性が高いとし、2級該当を認めて原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r04_05-11_09",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r04_05/11_09.pdf",
+      "seido": "国民年金",
+      "shobyo": "慢性腎不全・糖尿病性腎症",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": true,
+      "youshi": "事後重症請求における2級該当性が争われた。腎障害と糖尿病による障害を総合認定しても日常生活が著しく制限される程度には至らないとして、原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-05_01",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_01.pdf",
+      "seido": "厚生年金",
+      "shobyo": "広汎性発達障害・摂食障害",
+      "seishin": true,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "手続その他"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "同じ障害認定日を基礎とする従前の不支給処分について再審査請求と取消訴訟が確定しており、同一内容の裁定請求によって確定判断を争い直すことはできないとして再審査請求を棄却した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-05_02",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_02.pdf",
+      "seido": "厚生年金",
+      "shobyo": "統合失調症",
+      "seishin": true,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "旧厚生年金保険法下の被保険者期間中に初診日があり、障害認定日の状態は日常生活に常時の援助を要する1級相当と認め、原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-05_03",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_03.pdf",
+      "seido": "厚生年金",
+      "shobyo": "両側感音性難聴",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "社会的治癒"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "幼少期からの難聴は進行性で継続しており、勤務や通院中断の期間があっても医学的に治癒した状態とはいえないとして社会的治癒を否定し、厚生年金加入中を初診日とする主張を退けた。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-05_04",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_04.pdf",
+      "seido": "厚生年金",
+      "shobyo": "精神障害",
+      "seishin": true,
+      "request_type": "支給停止",
+      "request_type_group": "更新・支給停止",
+      "soten": [
+        "手続その他"
+      ],
+      "ketsuron": "却下",
+      "nichijo_quote": false,
+      "youshi": "障害等級3級の支給停止処分ではなく、その後の年金額改定通知を対象として申し立てた再審査請求は不適法であるとして却下した。",
+      "excluded": true,
+      "verified": false
+    },
+    {
+      "id": "r02_03-05_05",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_05.pdf",
+      "seido": "厚生年金",
+      "shobyo": "反復性うつ病性障害",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "社会的治癒"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "復職して就労した期間にも症状と治療が継続しており、医学的にも社会的にも治癒した状態とは認められないとして、再受診日を新たな初診日とする主張を退けた。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-05_06",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_06.pdf",
+      "seido": "厚生年金",
+      "shobyo": "慢性腎不全（糖尿病性腎症）",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "納付要件",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "糖尿病で初めて受診した日を初診日と認定し、被保険者要件と保険料納付要件を満たし、人工透析療法中で2級に該当するとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-05_07",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_07.pdf",
+      "seido": "厚生年金",
+      "shobyo": "躁うつ病",
+      "seishin": true,
+      "request_type": "事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "納付要件",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "患者登録記録と第三者証明などから厚生年金加入中の初診日を認定し、納付要件を満たし、裁定請求日の障害状態も2級に該当するとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-12_01",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_01.pdf",
+      "seido": "国民年金",
+      "shobyo": "脳動脈瘤コイル塞栓術後脳梗塞",
+      "seishin": false,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "提出資料から初診日を認定したうえ、四肢麻痺により日常生活動作が全介助で意思疎通も困難な状態は障害認定日に1級に該当するとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-12_02",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_02.pdf",
+      "seido": "国民年金",
+      "shobyo": "強迫性障害",
+      "seishin": true,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "診断書の信頼性・整合性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": true,
+      "youshi": "診断書作成医は当時本人を診察しておらず、基礎となった診療録にも現症日の病状や日常生活能力を裏付ける記載がないため、障害認定日の状態を認定できないとして原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-12_03",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_03.pdf",
+      "seido": "国民年金",
+      "shobyo": "統合失調症",
+      "seishin": true,
+      "request_type": "事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "古い診療録が残っていなくても、後医の診療録、入院中に届いた消印付き書簡、院内大会の賞状などから遅くとも特定日には精神科病院へ入院していたと認定し、原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-12_04",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_04.pdf",
+      "seido": "国民年金",
+      "shobyo": "統合失調症",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "納付要件"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "先行する受診時点ですでに統合失調症が疑われていたことからその日を初診日と認定し、保険料納付要件も満たすとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-12_05",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_05.pdf",
+      "seido": "国民年金",
+      "shobyo": "統合失調症",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "不登校時の受診では統合失調症の症状や診断が認められず、その後に通常の社会生活を送っていたことから、当時の受診を初診日とする主張を退けた。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-12_06",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_06.pdf",
+      "seido": "国民年金",
+      "shobyo": "糖尿病性腎症",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "手続その他"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "原処分後に別の初診日を裏付ける資料を提出したが、当初の裁定請求で初診日を変更したとは扱えず、新たな初診日による裁定請求を行うべきとして原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-12_07",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_07.pdf",
+      "seido": "国民年金",
+      "shobyo": "広汎性発達障害・双極性障害・病的窃盗",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "手続その他"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "申立てた初診日は資料で確認できず、別の初診日による厚生年金請求が考えられる旨は窓口で説明済みで、それ以上の教示義務違反もないとして原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-12_08",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_08.pdf",
+      "seido": "国民年金",
+      "shobyo": "うつ病",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "診察券と初診時に処方された抗うつ薬の薬袋などから申立てた受診日を初診日と認定し、初診日を確認できないとした原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-12_09",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_09.pdf",
+      "seido": "国民年金",
+      "shobyo": "統合失調症",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "納付要件"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "不登校時の受診は統合失調症によるものではなく、後年の精神科受診を初診日と認定した結果、通常の障害基礎年金として保険料納付要件を満たすため原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "r02_03-12_10",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_10.pdf",
+      "seido": "国民年金",
+      "shobyo": "両足部熱傷",
+      "seishin": false,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "関節可動域だけでなく、皮膚が薄く疼痛や潰瘍を繰り返し、立位・歩行ができないという実際の日常生活上の制限を総合し、2級に該当するとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h30_r01-07_01",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h30_31/07_01.pdf",
+      "seido": "厚生年金",
+      "shobyo": "非定型うつ病",
+      "seishin": true,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": true,
+      "youshi": "障害認定日には職場の配慮を受けつつ一般雇用で管理職として週4日勤務し、日常生活能力も比較的保たれていたため3級にも該当しないとして、認定日請求の原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "h30_r01-16_01",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h30_31/16_01.pdf",
+      "seido": "国民年金",
+      "shobyo": "関節リウマチ",
+      "seishin": false,
+      "request_type": "事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "手続その他"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "厚生年金用の様式第104号による先行請求に、国民年金用の様式第107号による請求が当然に含まれるとはいえず、国年期間を初診日とする事後重症請求日は後の受付日であるとして原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "h30_r01-16_02",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h30_31/16_02.pdf",
+      "seido": "国民年金",
+      "shobyo": "統合失調症",
+      "seishin": true,
+      "request_type": "事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "遡及・時効",
+        "手続その他"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "事後重症による裁定替障害基礎年金の支給開始は裁定請求月の翌月であり、制度施行時まで遡って支給することはできないとして、遡及支給を求める再審査請求を棄却した。",
+      "verified": true
+    },
+    {
+      "id": "h30_r01-16_03",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h30_31/16_03.pdf",
+      "seido": "国民年金",
+      "shobyo": "妄想型統合失調症",
+      "seishin": true,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "納付要件"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "20歳到達直後、被保険者期間2か月に対して12か月分を速やかに納付した経過などから、1か月分だけ未納でも実質的に納付要件を満たすと評価し、原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h30_r01-16_04",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h30_31/16_04.pdf",
+      "seido": "国民年金",
+      "shobyo": "うつ病",
+      "seishin": true,
+      "request_type": "事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "元担任らの具体的で相互に整合する第三者証明から20歳前の小学生時の入院を初診と認定し、裁定請求日の状態も2級に該当するとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h30_r01-16_05",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h30_31/16_05.pdf",
+      "seido": "国民年金",
+      "shobyo": "頚髄損傷",
+      "seishin": false,
+      "request_type": "額改定",
+      "request_type_group": "額改定",
+      "soten": [
+        "手続その他"
+      ],
+      "ketsuron": "却下",
+      "nichijo_quote": false,
+      "youshi": "1級から2級への減額改定を争ったが、再審査請求期間を6か月と誤解したことは期間徒過の正当な事由にならず、不適法な再審査請求として却下した。",
+      "excluded": true,
+      "verified": false
+    },
+    {
+      "id": "h28_29-07_01",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_01.pdf",
+      "seido": "厚生年金",
+      "shobyo": "パーキンソン病関連疾患（パーキンソン病）",
+      "seishin": false,
+      "request_type": "事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "診療経過から厚生年金加入中の初診日を認定し、四肢機能に関する日常生活動作の制限を総合して裁定請求日に2級に該当するとし、原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_02",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_02.pdf",
+      "seido": "厚生年金",
+      "shobyo": "左乳癌・術後局所再発",
+      "seishin": false,
+      "request_type": "事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "化学療法後の強い全身倦怠感、手足のしびれ、家事や外出・労働の制限を総合し、悪性新生物による障害が3級に該当するとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_03",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_03.pdf",
+      "seido": "厚生年金",
+      "shobyo": "もやもや病・脳梗塞・脳出血",
+      "seishin": false,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性",
+        "手続その他"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "重複請求として却下されていたが、重度意識障害から3か月後に遷延性植物状態で機能回復がほぼ望めない状態を障害認定日とし、1級に該当するとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_04",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_04.pdf",
+      "seido": "厚生年金",
+      "shobyo": "慢性腎臓病",
+      "seishin": false,
+      "request_type": "事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "糖尿病に関する資料から厚生年金加入中の初診日を認定し、継続する人工透析療法により裁定請求日の障害状態は2級に該当するとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_05",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_05.pdf",
+      "seido": "厚生年金",
+      "shobyo": "心原性脳塞栓症",
+      "seishin": false,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "初診日を認定したうえ、左上下肢不全麻痺と日常生活動作の制限は一上肢・一下肢に相当程度の障害を残す2級に該当するとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_06",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_06.pdf",
+      "seido": "厚生年金",
+      "shobyo": "両下肢麻痺",
+      "seishin": false,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "症状固定前で障害認定日未到来とされたが、両下肢筋力と移動動作の障害を併合評価すると2級に該当するとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_07",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_07.pdf",
+      "seido": "厚生年金",
+      "shobyo": "気管支喘息",
+      "seishin": false,
+      "request_type": "事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "厚生年金加入中の初診日を認定し、頻回の中発作や継続治療などから慢性気管支喘息の3級に該当するとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_08",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_08.pdf",
+      "seido": "厚生年金",
+      "shobyo": "眼瞼けいれん",
+      "seishin": false,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "開瞼を継続できず仕事や生活上の作業を続けられない障害は労働に制限を要する3級に該当し、症状固定していないため障害厚生年金を支給すべきとして原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_09",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_09.pdf",
+      "seido": "厚生年金",
+      "shobyo": "うつ病",
+      "seishin": true,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "家族の援助を要する日常生活能力と、就労支援での短時間作業も続かなかった経過を総合し、障害認定日に2級に該当するとして3級の原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_10",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_10.pdf",
+      "seido": "厚生年金",
+      "shobyo": "心原性脳塞栓症",
+      "seishin": false,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "資料から初診日と障害認定日の状態を認定し、左上下肢の用を全く廃した状態は1級に該当するとして、診断書不足を理由とした却下処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_11",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_11.pdf",
+      "seido": "厚生年金",
+      "shobyo": "全身型重症筋無力症",
+      "seishin": false,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "診察時の瞬間的な筋力正常所見だけでなく、易疲労性、時間帯による筋力変動、日常動作の著しい制限を評価し、2級に該当するとして3級の原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_12",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_12.pdf",
+      "seido": "厚生年金",
+      "shobyo": "線維筋痛症・慢性疲労症候群",
+      "seishin": false,
+      "request_type": "事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "一部容認",
+      "nichijo_quote": true,
+      "youshi": "傷病ごとに初診日と障害状態を分けて判断し、線維筋痛症は等級非該当とした一方、慢性疲労症候群は2級に該当するとして原処分の一部を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_13",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_13.pdf",
+      "seido": "厚生年金",
+      "shobyo": "気分変調症",
+      "seishin": true,
+      "request_type": "障害認定日請求・事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "一部容認",
+      "nichijo_quote": true,
+      "youshi": "障害認定日は等級非該当とした一方、裁定請求日にはヘルパーを要する生活状況などから2級に該当するとし、事後重症部分を3級とした原処分を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_14",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_14.pdf",
+      "seido": "厚生年金",
+      "shobyo": "双極性気分障害・成人期ADHD",
+      "seishin": true,
+      "request_type": "事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "一部容認",
+      "nichijo_quote": true,
+      "youshi": "厚生年金加入中の初診日は認めなかったが、国年期間の初診日を認定し、裁定請求日の状態は2級に該当するとして障害基礎年金の却下部分のみ取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_15",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_15.pdf",
+      "seido": "厚生年金",
+      "shobyo": "統合失調感情障害",
+      "seishin": true,
+      "request_type": "額改定",
+      "request_type_group": "額改定",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": true,
+      "youshi": "社会資源に依存し就労困難ではあるものの、自ら家事を行える日もあるなど日常生活が全面的に不能な1級の状態ではないとして、2級への減額改定を維持した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-07_16",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/07_16.pdf",
+      "seido": "厚生年金",
+      "shobyo": "糖尿病（三大合併症を伴う）・高血圧",
+      "seishin": false,
+      "request_type": "事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "初診日",
+        "納付要件",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "糖尿病は3級を超える状態ではなく、高血圧は申立てた初診日の前日に保険料納付要件を満たしていないとして、原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-16_01",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/16_01.pdf",
+      "seido": "国民年金",
+      "shobyo": "統合失調症",
+      "seishin": true,
+      "request_type": "支給停止",
+      "request_type_group": "更新・支給停止",
+      "soten": [
+        "手続その他"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": false,
+      "youshi": "保険者が次回診断書提出年月の指定を誤った後、過去に遡って再認定時を設定し支給停止した処分は、運用と信義則に反し受給権者を不安定にするとして取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-16_02",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/16_02.pdf",
+      "seido": "国民年金",
+      "shobyo": "慢性腎不全・腎移植後慢性移植腎症・鎖肛術後・神経因性膀胱",
+      "seishin": false,
+      "request_type": "支給停止",
+      "request_type_group": "更新・支給停止",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "腎疾患単独では等級非該当でも、肛門括約筋を欠く排便孔と虫垂を利用した導尿路は人工肛門造設・尿路変更術に相当し2級に該当するとして支給停止を取り消した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-16_03",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/16_03.pdf",
+      "seido": "国民年金",
+      "shobyo": "うつ病",
+      "seishin": true,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "診断書の信頼性・整合性",
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "約15年前の障害認定日の状態を、当時の診療録で具体的に確認できず、後から作成された追加診断書も客観的資料に基づくと認められないため原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-16_04",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/16_04.pdf",
+      "seido": "国民年金",
+      "shobyo": "うつ病",
+      "seishin": true,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "診断書の信頼性・整合性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "障害認定日から5か月以上後の診断書や知人の申述では、診療中断中だった認定日の状態を客観的・公平に認定できないとして原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-16_05",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/16_05.pdf",
+      "seido": "国民年金",
+      "shobyo": "統合失調症",
+      "seishin": true,
+      "request_type": "障害認定日請求",
+      "request_type_group": "初回",
+      "soten": [
+        "診断書の信頼性・整合性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "障害認定日から21年後の状態と全く同じ内容で作成された診断書は不自然で、当時の診療録から日常生活能力を具体的に認定できないとして原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "h28_29-16_06",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h28_29/16_06.pdf",
+      "seido": "国民年金",
+      "shobyo": "外傷後ストレス障害",
+      "seishin": true,
+      "request_type": "障害認定日請求・事後重症請求",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性",
+        "診断書の信頼性・整合性"
+      ],
+      "ketsuron": "棄却",
+      "nichijo_quote": false,
+      "youshi": "診断書上のPTSDは当時の認定基準で対象となる精神病の病態を示さず、原処分後にうつ病を追記した訂正診断書にも客観的根拠がないとして原処分を維持した。",
+      "verified": true
+    },
+    {
+      "id": "h27-a2_2-10",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h27-06-a2_2-10.pdf",
+      "seido": "厚生年金",
+      "shobyo": "高次脳機能障害(交通事故後・心因反応→抑うつ状態と診断変遷)",
+      "seishin": true,
+      "request_type": "新規裁定",
+      "request_type_group": "初回",
+      "soten": [
+        "障害の程度・等級該当性"
+      ],
+      "ketsuron": "容認",
+      "nichijo_quote": true,
+      "youshi": "認定日の2級該当性が争点。日常生活能力の判定の各項目文言(金銭管理は助言があればできる等)を引用のうえ2級該当と認定し原処分取消。",
+      "verified": false,
+      "excluded": true,
+      "exclude_reason": "原文PDFが厚労省サーバーから404(2026-08-26確認)。出典リンクが機能しないため掲載しない"
+    }
+  ]
+}

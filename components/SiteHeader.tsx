@@ -1,22 +1,44 @@
 import Link from "next/link";
-import { availableClusters } from "@/lib/columns";
-import { SITE_NAME } from "@/lib/constants";
-
-// ヘッダーは少数の項目だけ(モバイルでも折りたたみ不要)。
-// 残りのページ(運営者情報・規約類)へのリンクはフッターに置く。
-//
-// 柱ページは lib/clusters.ts で inHeader を立てたものだけがここに並ぶ。
-// 未公開のうちは何も増えないので、存在しないページへのリンクは出ない。
-const PILLAR_ITEMS = availableClusters()
-  .filter((cluster) => cluster.inHeader && cluster.pillarPath !== "/")
-  .map((cluster) => ({ href: cluster.pillarPath, label: cluster.navLabel }));
+import { APP_STORE_URL, SITE_NAME } from "@/lib/constants";
 
 const NAV_ITEMS = [
-  { href: "/", label: "申請の流れ" },
-  ...PILLAR_ITEMS,
+  { href: "/hajimete", label: "はじめての方へ" },
+  { href: "/byoki/utsu-soukyoku", label: "病気から探す" },
+  { href: "/shinsei", label: "申請の流れ" },
+  { href: "/nayami/fushikyu", label: "悩みから探す" },
+  { href: "/jitsurei", label: "実例と数字" },
   { href: "/columns", label: "コラム" },
-  { href: "/support", label: "サポート" },
 ];
+
+function BookIcon() {
+  return (
+    <svg
+      className="site-mark"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+    </svg>
+  );
+}
+
+function NavigationLinks() {
+  return (
+    <>
+      {NAV_ITEMS.map((item) => (
+        <Link key={item.href} href={item.href}>
+          {item.label}
+        </Link>
+      ))}
+    </>
+  );
+}
 
 export default function SiteHeader() {
   return (
@@ -27,44 +49,22 @@ export default function SiteHeader() {
           className="site-title"
           aria-label={`${SITE_NAME} トップページ`}
         >
-          {/* 8段階のうち3つ目を進んでいる、というマーク。装飾なので読み上げない。
-              2026-08: 金色のアークを白に変更(サイト全体から金色を外したため) */}
-          <svg
-            className="site-mark"
-            viewBox="0 0 32 32"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <circle
-              cx="16"
-              cy="16"
-              r="13"
-              fill="none"
-              stroke="rgba(255,255,255,0.3)"
-              strokeWidth="3"
-            />
-            <circle
-              cx="16"
-              cy="16"
-              r="13"
-              fill="none"
-              stroke="#ffffff"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeDasharray="30.6 81.7"
-              transform="rotate(-90 16 16)"
-            />
-            <circle cx="16" cy="16" r="4.5" fill="#ffffff" />
-          </svg>
-          <span className="site-title-text">{SITE_NAME}</span>
+          <BookIcon />
+          <span className="site-title-text">障害年金ノート</span>
         </Link>
-        <nav className="site-nav" aria-label="サイト内メニュー">
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.href} href={item.href}>
-              {item.label}
-            </Link>
-          ))}
+        <nav className="site-nav site-nav-desktop" aria-label="サイト内メニュー">
+          <NavigationLinks />
+          <a className="site-app-link" href={APP_STORE_URL}>
+            無料で使えます
+          </a>
         </nav>
+        <details className="site-mobile-menu">
+          <summary>メニュー</summary>
+          <nav aria-label="モバイルメニュー">
+            <NavigationLinks />
+            <Link href="/support">サポート</Link>
+          </nav>
+        </details>
       </div>
     </header>
   );

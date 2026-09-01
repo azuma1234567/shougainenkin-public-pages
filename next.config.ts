@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
       // 「申請の流れ」記事はトップページ(親ページ)へ統合したため恒久リダイレクト
       {
         source: "/columns/shinsei-nagare",
-        destination: "/",
+        destination: "/shinsei",
         permanent: true,
       },
     ];

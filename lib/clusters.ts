@@ -30,7 +30,7 @@ export type Cluster = {
   navLabel: string;
   /** 一覧でテーマを説明する1〜2文 */
   lead: string;
-  /** 柱ページのパス。"/" はトップページが柱を兼ねることを表す */
+  /** 柱ページのパス */
   pillarPath: string;
   /** 柱ページの本文を公開したら true にする */
   published: boolean;
@@ -47,8 +47,8 @@ export const CLUSTERS: Cluster[] = [
     label: "障害年金の申請",
     navLabel: "申請の流れ",
     lead: "初診日の確認から結果が届くまで、申請全体の流れと必要書類。",
-    // 申請の全体像はトップページが担う。同じ検索意図の記事は作らない。
-    pillarPath: "/",
+    // 申請の全体像は /shinsei が担う。同じ検索意図の記事は作らない。
+    pillarPath: "/shinsei",
     published: true,
   },
   {
@@ -96,7 +96,7 @@ export function getCluster(id: ClusterId): Cluster {
   return cluster;
 }
 
-/** 柱ページが /columns 配下の記事の場合、そのslug。トップが柱の場合はnull。 */
+/** 柱ページが /columns 配下の記事の場合、そのslug。それ以外はnull。 */
 export function clusterPillarSlug(cluster: Cluster): string | null {
   if (!cluster.pillarPath.startsWith("/columns/")) return null;
   return cluster.pillarPath.slice("/columns/".length);
