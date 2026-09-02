@@ -112,6 +112,7 @@ export default function MarkdownArticle({
 }) {
   const lines = source.replace(/\r\n/g, "\n").split("\n");
   const blocks: ReactNode[] = [];
+  const cardStack: { start: number; variant?: string }[] = [];
   let index = 0;
   // 出典ブロックは用語辞典の自動リンク対象外にするため、見出しの位置を覚えておく。
   let sourcesHeadingIndex = -1;
@@ -146,6 +147,43 @@ export default function MarkdownArticle({
     if (line === "[App Storeバッジ]") {
       blocks.push(<AppCta key={`cta-${index}`} ct={appCtaSlug} />);
       index += 1;
+      continue;
+    }
+
+    // [カード開始] 〜 [カード終了] で囲んだブロックを1枚のカードにまとめる。
+    // 印刷・スクリーンショットしやすい持ち物リストや質問メモに使う。
+    // [カード開始:質問メモ] のように種類を付けると、答えを書く余白つきの体裁になる。
+    if (/^\[カード開始(:[^\]]+)?\]$/.test(line)) {
+      const variant = line.match(/^\[カード開始:([^\]]+)\]$/)?.[1];
+      cardStack.push({ start: blocks.length, variant });
+      index += 1;
+      continue;
+    }
+    if (line === "[カード終了]") {
+      const card = cardStack.pop();
+      if (card) {
+        const inner = blocks.splice(card.start);
+        const className = card.variant === "質問メモ" ? "article-card article-qmemo" : "article-card";
+        blocks.push(<div className={className} key={`card-${index}`}>{inner}</div>);
+      }
+      index += 1;
+      continue;
+    }
+
+    // 「☐ 」で始まる行の並びはチェックリスト。文言はそのまま出す。
+    if (line.startsWith("☐")) {
+      const items: string[] = [];
+      while (index < lines.length && lines[index].trim().startsWith("☐")) {
+        items.push(lines[index].trim().replace(/^☐\s*/, ""));
+        index += 1;
+      }
+      blocks.push(
+        <ul className="article-checklist" key={`check-${index}`}>
+          {items.map((item, itemIndex) => (
+            <li key={itemIndex}><span className="article-checkbox" aria-hidden="true">☐</span><span>{inlineContent(item)}</span></li>
+          ))}
+        </ul>,
+      );
       continue;
     }
 
@@ -312,6 +350,8 @@ export default function MarkdownArticle({
         next.startsWith("- ") ||
         /^\d+\.\s/.test(next) ||
         next.startsWith("[スクショ") ||
+        next.startsWith("[カード") ||
+        next.startsWith("☐") ||
         next === "[App Storeバッジ]"
       ) {
         break;

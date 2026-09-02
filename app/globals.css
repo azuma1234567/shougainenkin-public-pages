@@ -291,6 +291,51 @@ blockquote {
   margin: 1.25rem 0;
 }
 
+/* 記事内カード: 持ち物リストや質問メモを1枚にまとめ、印刷・スクショしやすくする */
+.article-card {
+  margin: 1.25rem 0;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--card);
+}
+.article-card > :first-child { margin-top: 0; }
+.article-card > :last-child { margin-bottom: 0; }
+.article-card h3 { margin-top: 0; }
+
+.article-checklist {
+  list-style: none;
+  margin: 0.4rem 0 1rem;
+  padding: 0;
+}
+.article-checklist li {
+  display: flex;
+  gap: 0.55rem;
+  align-items: flex-start;
+  padding: 0.35rem 0;
+  border-bottom: 1px dashed var(--border);
+  line-height: 1.7;
+}
+.article-checklist li:last-child { border-bottom: 0; }
+.article-checkbox { flex: none; font-size: 1.15em; line-height: 1.5; }
+
+/* 質問メモ: 番号つきの質問の下に、答えを書き込む余白を出す */
+.article-qmemo ol { padding-left: 1.4em; }
+.article-qmemo ol li { padding: 0.35rem 0 1.9rem; position: relative; }
+.article-qmemo ol li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.7rem;
+  border-bottom: 1px dotted var(--text-muted);
+}
+.article-qmemo ol li:last-child { padding-bottom: 1.9rem; }
+
+@media print {
+  .article-card { break-inside: avoid; }
+}
+
 /*
  * 3列以上の表はスマホで横スクロールが必要になる。右端が切れていること自体が
  * 見た目では分からないため、表の直前に注記を出す。768px以上ではスクロールが

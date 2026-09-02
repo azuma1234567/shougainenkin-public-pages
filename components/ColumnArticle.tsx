@@ -19,12 +19,15 @@ export default function ColumnArticle({
   faqs,
   relatedSlugs,
   references,
+  extraJsonLd = [],
 }: {
   column: Column;
   source: string;
   faqs: Faq[];
   relatedSlugs: string[];
   references?: Reference[];
+  // 記事固有の構造化データ(ItemList / HowTo など)。FAQPage は faqs から自動で出す。
+  extraJsonLd?: Record<string, unknown>[];
 }) {
   return (
     <article>
@@ -36,6 +39,13 @@ export default function ColumnArticle({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)) }}
       />
+      {extraJsonLd.map((item, index) => (
+        <script
+          key={`jsonld-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(item).replace(/</g, "\\u003c") }}
+        />
+      ))}
 
       <Breadcrumb
         current={column.title}
