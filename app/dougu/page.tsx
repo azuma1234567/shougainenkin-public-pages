@@ -55,7 +55,7 @@ export default function DouguPage() {
 
       <header className="dougu-hero">
         <div className="p-container dougu-width">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "道具" }]} currentPath="/dougu" />
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "道具" }]} currentPath="/dougu" jsonLd={false} />
           <p className="dougu-kicker">申請の準備を、ひとつずつ</p>
           <h1>道具の置き場所</h1>
           <p className="p-hero-copy">

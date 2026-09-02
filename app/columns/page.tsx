@@ -98,7 +98,7 @@ export default function ColumnsPage() {
 
       <header className="p-page-hero columns-hero">
         <div className="p-container columns-width">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "コラム" }]} currentPath="/columns" />
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "コラム" }]} currentPath="/columns" jsonLd={false} />
           <h1>コラム</h1>
           <p className="p-page-intro">申請の段階ごとの疑問に、1記事ずつ答えています。全{COLUMNS.length}本。言葉で探すか、段階から探してください。</p>
           <PageDate updated={COLUMNS.map((column) => column.dateModified).sort().at(-1) ?? "2026-09-02"} />
