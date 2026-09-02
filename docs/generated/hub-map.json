@@ -1,0 +1,464 @@
+{
+  "generatedAt": "2026-09-02T00:33:35.927Z",
+  "columns": [
+    {
+      "slug": "shakaiteki-chiyu",
+      "hubPrimary": "/nayami/shoshinbi-karute",
+      "role": "leaf",
+      "hubSecondary": [
+        "/shinsei#step-2"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "hikazei-shuunyuu",
+      "hubPrimary": "/okane/ikura",
+      "role": "core",
+      "hubSecondary": [
+        "/gokai"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "jukyuugo-tetsuduki",
+      "hubPrimary": "/nayami/koushin",
+      "role": "leaf",
+      "hubSecondary": [
+        "/shinsei#step-8"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "taishou-shoubyou-kyoukai",
+      "hubPrimary": "/byoki/tekiou-fuan",
+      "role": "promote",
+      "hubSecondary": [
+        "/gokai"
+      ],
+      "mergeCandidate": "tekio-shogai-shogai-nenkin"
+    },
+    {
+      "slug": "tekio-shogai-shogai-nenkin",
+      "hubPrimary": "/byoki/tekiou-fuan",
+      "role": "core",
+      "hubSecondary": [],
+      "mergeCandidate": "taishou-shoubyou-kyoukai"
+    },
+    {
+      "slug": "hattatsu-shougai",
+      "hubPrimary": "/byoki/hattatsu",
+      "role": "promote",
+      "hubSecondary": [
+        "/shinsei"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "ninteibi-jigojusho",
+      "hubPrimary": "/nayami/sokyuu",
+      "role": "core",
+      "hubSecondary": [
+        "/shinsei#step-1"
+      ],
+      "mergeCandidate": "sokyuu-seikyuu"
+    },
+    {
+      "slug": "ikura-moraeru",
+      "hubPrimary": "/okane/ikura",
+      "role": "promote",
+      "hubSecondary": [
+        "/shinsei"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "sokyuu-seikyuu",
+      "hubPrimary": "/nayami/sokyuu",
+      "role": "promote",
+      "hubSecondary": [
+        "/okane/ikura"
+      ],
+      "mergeCandidate": "ninteibi-jigojusho"
+    },
+    {
+      "slug": "kiso-kousei-chigai",
+      "hubPrimary": "/shinsei#step-1",
+      "role": "core",
+      "hubSecondary": [
+        "/okane/ikura"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "hatachi-mae",
+      "hubPrimary": "/joukyou/hatachi-mae",
+      "role": "promote",
+      "hubSecondary": [
+        "/shinsei#step-3"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shoubyou-teatekin",
+      "hubPrimary": "/joukyou/shoubyou-teatekin-kara",
+      "role": "promote",
+      "hubSecondary": [
+        "/okane/chousei"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "techou-to-nenkin",
+      "hubPrimary": "/gokai",
+      "role": "core",
+      "hubSecondary": [
+        "/hajimete"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shougaisha-koyou-nenkin",
+      "hubPrimary": "/joukyou/hatarakinagara",
+      "role": "core",
+      "hubSecondary": [
+        "/jitsurei"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shoshinbi-wakaranai",
+      "hubPrimary": "/nayami/shoshinbi-karute",
+      "role": "promote",
+      "hubSecondary": [
+        "/shinsei#step-2"
+      ],
+      "mergeCandidate": "shoshinbi-karute-nashi"
+    },
+    {
+      "slug": "shoshinbi-karute-nashi",
+      "hubPrimary": "/nayami/shoshinbi-karute",
+      "role": "core",
+      "hubSecondary": [],
+      "mergeCandidate": "shoshinbi-wakaranai"
+    },
+    {
+      "slug": "shoshinbi-haiin",
+      "hubPrimary": "/nayami/shoshinbi-karute",
+      "role": "leaf",
+      "hubSecondary": [],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "daisansha-shomei",
+      "hubPrimary": "/nayami/shoshinbi-karute",
+      "role": "leaf",
+      "hubSecondary": [],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "nofu-yoken",
+      "hubPrimary": "/shinsei#step-3",
+      "role": "core",
+      "hubSecondary": [
+        "/joukyou/hatachi-mae"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shinsei-shindoi",
+      "hubPrimary": "/shinsei",
+      "role": "core",
+      "hubSecondary": [
+        "/hajimete"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "nenkin-jimusho-soudan",
+      "hubPrimary": "/shinsei#step-4",
+      "role": "core",
+      "hubSecondary": [
+        "/erabu/jibun-ka-irai"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "jibun-de-shinsei",
+      "hubPrimary": "/erabu/jibun-ka-irai",
+      "role": "promote",
+      "hubSecondary": [
+        "/shinsei"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "teishutsusaki-yuusou",
+      "hubPrimary": "/shinsei#step-7",
+      "role": "core",
+      "hubSecondary": [],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "jushinjokyo-shomeisho",
+      "hubPrimary": "/shinsei#step-2",
+      "role": "core",
+      "hubSecondary": [
+        "/nayami/shoshinbi-karute"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "hitsuyou-shorui-seishin",
+      "hubPrimary": "/shinsei#step-5",
+      "role": "core",
+      "hubSecondary": [
+        "/byoki/utsu-soukyoku",
+        "/byoki/tekiou-fuan"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shindansho-irai-timing",
+      "hubPrimary": "/shinsei#step-5",
+      "role": "leaf",
+      "hubSecondary": [
+        "/nayami/shindansho-komatta"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shindansho-tanomikata",
+      "hubPrimary": "/shinsei#step-5",
+      "role": "core",
+      "hubSecondary": [
+        "/nayami/shindansho-komatta"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shindansho-kaitekurenai",
+      "hubPrimary": "/nayami/shindansho-komatta",
+      "role": "promote",
+      "hubSecondary": [
+        "/shinsei#step-5"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shindansho-ishi-ni-tsutaeru",
+      "hubPrimary": "/shinsei#step-5",
+      "role": "core",
+      "hubSecondary": [
+        "/byoki/utsu-soukyoku"
+      ],
+      "mergeCandidate": "shinsatsu-mae-memo"
+    },
+    {
+      "slug": "nichijo-seikatsu-7koumoku",
+      "hubPrimary": "/shinsei#step-5",
+      "role": "core",
+      "hubSecondary": [
+        "/byoki/utsu-soukyoku"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shinsatsu-mae-memo",
+      "hubPrimary": "/shinsei#step-5",
+      "role": "leaf",
+      "hubSecondary": [
+        "/nayami/shindansho-komatta"
+      ],
+      "mergeCandidate": "shindansho-ishi-ni-tsutaeru"
+    },
+    {
+      "slug": "hitorigurashi-furi",
+      "hubPrimary": "/joukyou/hitorigurashi",
+      "role": "promote",
+      "hubSecondary": [
+        "/gokai"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shindansho-kakunin",
+      "hubPrimary": "/nayami/shindansho-komatta",
+      "role": "core",
+      "hubSecondary": [
+        "/shinsei#step-5"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "tokyu-hantei-guideline",
+      "hubPrimary": "/byoki/utsu-soukyoku",
+      "role": "core",
+      "hubSecondary": [
+        "/shinsei#step-5"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shindansho-jittai-chigau",
+      "hubPrimary": "/nayami/shindansho-komatta",
+      "role": "core",
+      "hubSecondary": [],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "moushitatesho-kakikata",
+      "hubPrimary": "/shinsei#step-6",
+      "role": "core",
+      "hubSecondary": [
+        "/byoki/utsu-soukyoku"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "moushitatesho-kikan-kugiri",
+      "hubPrimary": "/shinsei#step-6",
+      "role": "leaf",
+      "hubSecondary": [],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "moushitatesho-mijushin-kikan",
+      "hubPrimary": "/shinsei#step-6",
+      "role": "leaf",
+      "hubSecondary": [
+        "/nayami/shoshinbi-karute"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "hatarakinagara",
+      "hubPrimary": "/joukyou/hatarakinagara",
+      "role": "promote",
+      "hubSecondary": [
+        "/gokai"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "kazoku-enjo-kakikata",
+      "hubPrimary": "/shinsei#step-6",
+      "role": "core",
+      "hubSecondary": [
+        "/joukyou/kazoku-ga-tetsudau"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "moushitatesho-a4-insatsu",
+      "hubPrimary": "/shinsei#step-6",
+      "role": "leaf",
+      "hubSecondary": [],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shinsa-shikumi-nintei-i",
+      "hubPrimary": "/nayami/fushikyu",
+      "role": "core",
+      "hubSecondary": [
+        "/shinsei#step-7"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shinsei-kikan",
+      "hubPrimary": "/shinsei#step-7",
+      "role": "core",
+      "hubSecondary": [
+        "/nayami/fushikyu"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "fushikyuu-shinsa-seikyu",
+      "hubPrimary": "/nayami/fushikyu",
+      "role": "promote",
+      "hubSecondary": [
+        "/erabu/fushikyu-no-ato"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "koushin-kakuninhodo",
+      "hubPrimary": "/nayami/koushin",
+      "role": "promote",
+      "hubSecondary": [
+        "/shinsei#step-8"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "gaku-kaitei-seikyuu",
+      "hubPrimary": "/nayami/koushin",
+      "role": "core",
+      "hubSecondary": [
+        "/okane/ikura"
+      ],
+      "mergeCandidate": null
+    },
+    {
+      "slug": "shikyuu-teishi-fukkatsu",
+      "hubPrimary": "/nayami/shikyuu-teishi",
+      "role": "promote",
+      "hubSecondary": [
+        "/nayami/koushin"
+      ],
+      "mergeCandidate": null
+    }
+  ],
+  "hubPaths": [
+    "/",
+    "/hajimete",
+    "/shinsei",
+    "/shinsei#step-1",
+    "/shinsei#step-2",
+    "/shinsei#step-3",
+    "/shinsei#step-4",
+    "/shinsei#step-5",
+    "/shinsei#step-6",
+    "/shinsei#step-7",
+    "/shinsei#step-8",
+    "/byoki/utsu-soukyoku",
+    "/byoki/tekiou-fuan",
+    "/byoki/hattatsu",
+    "/joukyou/hatarakinagara",
+    "/joukyou/hatachi-mae",
+    "/joukyou/shoubyou-teatekin-kara",
+    "/joukyou/hitorigurashi",
+    "/nayami/fushikyu",
+    "/nayami/shindansho-komatta",
+    "/nayami/shoshinbi-karute",
+    "/nayami/koushin",
+    "/nayami/shikyuu-teishi",
+    "/nayami/sokyuu",
+    "/okane/ikura",
+    "/erabu/jibun-ka-irai"
+  ],
+  "unitPackRules": {
+    "firstVisit": [
+      "/shinsei#step-2",
+      "/nayami/shoshinbi-karute"
+    ],
+    "doctorPrep": [
+      "/shinsei#step-5",
+      "/nayami/shindansho-komatta"
+    ],
+    "statement": [
+      "/shinsei#step-6"
+    ],
+    "payment": [
+      "/okane/ikura",
+      "/joukyou/hatachi-mae",
+      "/nayami/sokyuu"
+    ],
+    "position": [
+      "/byoki/utsu-soukyoku",
+      "/byoki/tekiou-fuan",
+      "/byoki/hattatsu"
+    ]
+  }
+}

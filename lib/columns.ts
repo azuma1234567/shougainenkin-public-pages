@@ -7,6 +7,7 @@ import {
   type ClusterId,
 } from "@/lib/clusters";
 import { AUTHOR_NAME, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { COLUMN_HUB_ASSIGNMENTS, type HubRole } from "@/lib/hubs";
 
 // コラム記事のメタデータ。一覧・sitemap・JSON-LDで共通利用する。
 // slugは計測用キャンペーンリンクのctにも使うため変更しないこと。
@@ -129,6 +130,10 @@ export type Column = {
   // 「読む順」が意味を持つ大きなカテゴリにだけ付ける。
   // 将来の記事を間に挟めるよう、10刻みで付けること。
   orderInCategory?: number;
+  hubPrimary: string;
+  hubSecondary: string[];
+  role: HubRole;
+  mergeCandidate: string | null;
 };
 
 // 第3弾の記事は一覧で分散表示できるよう、公開日を1本ずつ管理する。
@@ -142,7 +147,7 @@ const NEW_COLUMN_DATES = {
   "fushikyuu-shinsa-seikyu": "2026-07-12",
 } as const;
 
-export const COLUMNS: Column[] = [
+const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "mergeCandidate">[] = [
   {
     slug: "shakaiteki-chiyu",
     title:
@@ -776,6 +781,18 @@ export const COLUMNS: Column[] = [
     orderInCategory: 60,
   },
 ];
+
+export const COLUMNS: Column[] = BASE_COLUMNS.map((column) => {
+  const hubAssignment = COLUMN_HUB_ASSIGNMENTS[column.slug];
+  if (!hubAssignment) throw new Error(`ハブ棚割りがありません: ${column.slug}`);
+  return {
+    ...column,
+    hubPrimary: hubAssignment.primary,
+    hubSecondary: hubAssignment.secondary,
+    role: hubAssignment.role,
+    mergeCandidate: hubAssignment.mergeCandidate,
+  };
+});
 
 export const COLUMNS_BY_DATE = [...COLUMNS].sort(
   (a, b) =>
