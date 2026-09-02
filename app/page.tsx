@@ -144,6 +144,19 @@ const decisions = [
   { title: "不支給と言われたあと、何ができるか", href: "/erabu/fushikyu-no-ato" },
 ] as const;
 
+const situations = [
+  ["働きながら", "/joukyou/hatarakinagara"], ["20歳前", "/joukyou/hatachi-mae"],
+  ["一人暮らし", "/joukyou/hitorigurashi"], ["傷病手当金から", "/joukyou/shoubyou-teatekin-kara"],
+  ["65歳以上", "/joukyou/65sai-ijou"], ["主婦(主夫)・無職", "/joukyou/shufu-mushoku"],
+  ["学生", "/joukyou/gakusei"], ["家族が手伝う", "/joukyou/kazoku-ga-tetsudau"],
+  ["生活保護", "/joukyou/seikatsu-hogo"],
+] as const;
+
+const moneyTopics = [
+  ["いくらもらえる?", "/okane/ikura"], ["税金と収入の扱い", "/okane/zeikin"],
+  ["他の制度との調整", "/okane/chousei"],
+] as const;
+
 const misconceptions = [
   { label: "誤解「貯金があると通らない」", title: "貯金や資産は審査に関係ありません", copy: "障害年金は保険の給付なので、貯金・資産・持ち家の有無は要件に含まれず、審査もされません。所得の制限があるのは20歳前傷病の場合だけです。", source: "日本年金機構" },
   { label: "誤解「入院してないと無理」", title: "入院歴は要件ではありません", copy: "審査で見られるのは日常生活がどれだけ制限されているかです。在宅・通院のみでも、生活の実態が基準に該当すれば認定されます。", source: "国民年金・厚生年金保険 障害認定基準" },
@@ -229,7 +242,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="p-section p-band" aria-labelledby="decision-heading">
+      <section className="p-section-lg" aria-labelledby="worry-heading">
+        <div className="p-container">
+          <SectionHeader title="いま困っていることから探す" lead="実際に申請した人がつまずいた場面を、そのまま入口にしました。" />
+          <div className="p-grid p-grid-4">
+            {worries.map((item) => (
+              <Link className="p-card" href={item.href} key={item.title}>
+                <TopicIcon />
+                <h3 className="p-card-title">{item.title}</h3>
+                <p className="p-card-copy">{item.copy}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="p-section p-band" aria-labelledby="situation-heading">
+        <div className="p-container">
+          <SectionHeader title="状況から探す" lead="年齢、働き方、家族やほかの制度との関係から、いま必要な情報を選べます。" />
+          <div className="p-chips">
+            {situations.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
+          </div>
+        </div>
+      </section>
+
+      <section className="p-section" aria-labelledby="decision-heading">
         <div className="p-container">
           <SectionHeader title="決める" lead="自分で進めるか、専門家に頼むか。費用や選び方も含め、判断材料を中立に整理します。" />
           <div className="p-grid p-grid-5">
@@ -243,17 +280,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="p-section-lg" aria-labelledby="worry-heading">
+      <section className="p-section p-band" aria-labelledby="money-heading">
         <div className="p-container">
-          <SectionHeader title="いま困っていることから探す" lead="実際に申請した人がつまずいた場面を、そのまま入口にしました。" />
-          <div className="p-grid p-grid-4">
-            {worries.map((item) => (
-              <Link className="p-card" href={item.href} key={item.title}>
-                <TopicIcon />
-                <h3 className="p-card-title">{item.title}</h3>
-                <p className="p-card-copy">{item.copy}</p>
-              </Link>
-            ))}
+          <SectionHeader title="お金の話" lead="受け取れる額、税金、ほかの制度との調整を分けて確認できます。" />
+          <div className="p-chips">
+            {moneyTopics.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
           </div>
         </div>
       </section>

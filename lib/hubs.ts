@@ -65,8 +65,13 @@ export const HUBS: HubDefinition[] = [
   hub("/byoki/nanbyou", "難病・その他の病気", "難病・その他", "byoki", true, [], "傷病=その他"),
   hub("/joukyou/hatarakinagara", "働きながら申請するとき", "働きながら", "joukyou", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "tokyu-hantei-guideline"], "争点=就労"),
   hub("/joukyou/hatachi-mae", "20歳前に初診日があるとき", "20歳前", "joukyou", true, ["hatachi-mae", "nofu-yoken"], "争点=20歳前"),
-  hub("/joukyou/shoubyou-teatekin-kara", "傷病手当金から障害年金を考えるとき", "傷病手当金から", "joukyou", true, ["shoubyou-teatekin", "kiso-kousei-chigai"]),
   hub("/joukyou/hitorigurashi", "一人暮らしで申請するとき", "一人暮らし", "joukyou", true, ["hitorigurashi-furi", "nichijo-seikatsu-7koumoku"]),
+  hub("/joukyou/shoubyou-teatekin-kara", "傷病手当金から障害年金を考えるとき", "傷病手当金から", "joukyou", true, ["shoubyou-teatekin", "kiso-kousei-chigai"]),
+  hub("/joukyou/65sai-ijou", "65歳以上・老齢年金との関係", "65歳以上", "joukyou", true),
+  hub("/joukyou/shufu-mushoku", "主婦(主夫)・無職のとき", "主婦(主夫)・無職", "joukyou", true),
+  hub("/joukyou/gakusei", "学生のとき", "学生", "joukyou", true),
+  hub("/joukyou/kazoku-ga-tetsudau", "家族が申請を手伝うとき", "家族が手伝う", "joukyou", true),
+  hub("/joukyou/seikatsu-hogo", "生活保護を受けているとき", "生活保護", "joukyou", true),
   hub("/nayami/fushikyu", "不支給と言われたとき", "不支給", "nayami", true, ["fushikyuu-shinsa-seikyu", "shinsa-shikumi-nintei-i", "shinsei-kikan", "shindansho-jittai-chigau"], "結論=棄却・一部容認"),
   hub("/nayami/shindansho-komatta", "診断書で困ったとき", "診断書で困った", "nayami", true, ["shindansho-irai-timing", "shindansho-tanomikata", "shindansho-kaitekurenai", "shindansho-ishi-ni-tsutaeru", "nichijo-seikatsu-7koumoku", "shinsatsu-mae-memo", "shindansho-kakunin", "shindansho-jittai-chigau"], "争点=診断書"),
   hub("/nayami/shoshinbi-karute", "初診日のカルテがないとき", "初診日・カルテ", "nayami", true, ["shakaiteki-chiyu", "shoshinbi-wakaranai", "shoshinbi-karute-nashi", "shoshinbi-haiin", "daisansha-shomei", "jushinjokyo-shomeisho", "moushitatesho-mijushin-kikan"], "争点=初診日"),
@@ -74,6 +79,8 @@ export const HUBS: HubDefinition[] = [
   hub("/nayami/shikyuu-teishi", "障害年金が止まったとき", "支給停止", "nayami", true, ["shikyuu-teishi-fukkatsu", "koushin-kakuninhodo"], "争点=支給停止"),
   hub("/nayami/sokyuu", "障害認定日までさかのぼって請求するとき", "遡及請求", "nayami", true, ["ninteibi-jigojusho", "sokyuu-seikyuu", "ikura-moraeru"], "争点=認定日・遡及"),
   hub("/okane/ikura", "障害年金はいくら受け取れるか", "年金額", "okane", true, ["hikazei-shuunyuu", "ikura-moraeru", "sokyuu-seikyuu", "kiso-kousei-chigai", "gaku-kaitei-seikyuu", "jukyuugo-tetsuduki"]),
+  hub("/okane/zeikin", "税金と、税金以外の「収入」扱い", "税金", "okane", true),
+  hub("/okane/chousei", "他の制度との調整", "制度との調整", "okane", true),
   hub("/erabu/jibun-ka-irai", "自分で申請するか、依頼するか", "自分で・依頼", "erabu", true, ["jibun-de-shinsei", "nenkin-jimusho-soudan", "shinsei-shindoi"]),
   hub("/erabu/irai-subeki-case", "専門家に頼んだほうがいいケース", "頼んだほうがいいケース", "erabu", true),
   hub("/erabu/hiyou-souba", "障害年金にかかるお金の話", "かかるお金", "erabu", true),
@@ -81,8 +88,7 @@ export const HUBS: HubDefinition[] = [
   hub("/erabu/fushikyu-no-ato", "不支給と言われたあと、何ができるか", "不支給のあと", "erabu", true),
   ...[
     "/byoki/choukaku-heikou", "/byoki/soshaku-gengo", "/byoki/nanbyou-sonota",
-    "/joukyou/65sai-ijou", "/joukyou/shufu-mushoku", "/joukyou/gakusei", "/joukyou/kazoku-ga-tetsudau", "/joukyou/seikatsu-hogo",
-    "/okane/zeikin", "/okane/chousei", "/senmonka",
+    "/senmonka",
   ].map((path) => hub(path, path, path, "reserved", false)),
 ];
 

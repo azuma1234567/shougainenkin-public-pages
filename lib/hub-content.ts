@@ -28,12 +28,19 @@ import joukyouHatachiMae from "@/data/hubs/joukyou-hatachi-mae.json";
 import joukyouHatarakinagara from "@/data/hubs/joukyou-hatarakinagara.json";
 import joukyouHitorigurashi from "@/data/hubs/joukyou-hitorigurashi.json";
 import joukyouShoubyou from "@/data/hubs/joukyou-shoubyou-teatekin-kara.json";
+import joukyou65sai from "@/data/hubs/joukyou-65sai-ijou.json";
+import joukyouShufu from "@/data/hubs/joukyou-shufu-mushoku.json";
+import joukyouGakusei from "@/data/hubs/joukyou-gakusei.json";
+import joukyouKazoku from "@/data/hubs/joukyou-kazoku-ga-tetsudau.json";
+import joukyouSeikatsuHogo from "@/data/hubs/joukyou-seikatsu-hogo.json";
 import nayamiKoushin from "@/data/hubs/nayami-koushin.json";
 import nayamiShikyuuTeishi from "@/data/hubs/nayami-shikyuu-teishi.json";
 import nayamiShindansho from "@/data/hubs/nayami-shindansho-komatta.json";
 import nayamiShoshinbi from "@/data/hubs/nayami-shoshinbi-karute.json";
 import nayamiSokyuu from "@/data/hubs/nayami-sokyuu.json";
 import okaneIkura from "@/data/hubs/okane-ikura.json";
+import okaneZeikin from "@/data/hubs/okane-zeikin.json";
+import okaneChousei from "@/data/hubs/okane-chousei.json";
 
 export type HubContent = { title: string; breadcrumb: string[]; source: string };
 export const HUB_CONTENT: Record<string, HubContent> = {
@@ -50,8 +57,12 @@ export const HUB_CONTENT: Record<string, HubContent> = {
   "/joukyou/hatachi-mae": joukyouHatachiMae,
   "/joukyou/hatarakinagara": joukyouHatarakinagara, "/joukyou/hitorigurashi": joukyouHitorigurashi,
   "/joukyou/shoubyou-teatekin-kara": joukyouShoubyou, "/nayami/koushin": nayamiKoushin,
+  "/joukyou/65sai-ijou": joukyou65sai, "/joukyou/shufu-mushoku": joukyouShufu,
+  "/joukyou/gakusei": joukyouGakusei, "/joukyou/kazoku-ga-tetsudau": joukyouKazoku,
+  "/joukyou/seikatsu-hogo": joukyouSeikatsuHogo,
   "/nayami/shikyuu-teishi": nayamiShikyuuTeishi, "/nayami/shindansho-komatta": nayamiShindansho,
   "/nayami/shoshinbi-karute": nayamiShoshinbi, "/nayami/sokyuu": nayamiSokyuu, "/okane/ikura": okaneIkura,
+  "/okane/zeikin": okaneZeikin, "/okane/chousei": okaneChousei,
 };
 export function getHubContent(path: string): HubContent | null {
   const item = HUB_CONTENT[path];
