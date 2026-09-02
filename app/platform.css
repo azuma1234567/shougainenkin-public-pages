@@ -20,6 +20,21 @@
   --platform-gutter: clamp(20px, 4.45vw, 64px);
 }
 
+.hub-landing .hub-column-grid .p-card-copy {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.hub-decision-next {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.hub-decision-next p { margin: 0; color: #dbeefa; }
+
 /* 共通ヘッダー */
 .site-header {
   background: #ffffff;
