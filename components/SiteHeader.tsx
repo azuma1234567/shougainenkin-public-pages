@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { href: "/jitsurei", label: "実例と数字" },
   { href: "/okane/ikura", label: "お金" },
   { href: "/columns", label: "コラム" },
+  { href: "/gokai", label: "よくある誤解" },
   { href: "/yougo", label: "用語辞典" },
 ];
 

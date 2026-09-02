@@ -3,6 +3,7 @@ import { SITE_URL } from "@/lib/constants";
 import { COLUMNS_BY_DATE } from "@/lib/columns";
 import { PUBLISHED_CONTENT_HUBS } from "@/lib/hubs";
 import { YOUGO } from "@/data/yougo";
+import { GOKAI } from "@/data/gokai";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
@@ -19,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/terms",
     "/quality",
     "/yougo",
+    "/gokai",
   ].map((path) => ({
     url: `${SITE_URL}${path === "/" ? "" : path}`,
   }));
@@ -32,9 +34,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE_URL}/yougo/${item.slug}`,
   }));
 
+  const gokaiPages: MetadataRoute.Sitemap = GOKAI.map((card) => ({
+    url: `${SITE_URL}/gokai/${card.slug}`,
+  }));
+
   const existing = new Set(staticPages.map((item) => item.url));
   const hubPages: MetadataRoute.Sitemap = PUBLISHED_CONTENT_HUBS
     .filter((hub) => !existing.has(`${SITE_URL}${hub.path}`))
     .map((hub) => ({ url: `${SITE_URL}${hub.path}` }));
-  return [...staticPages, ...hubPages, ...yougoPages, ...columnPages];
+  return [...staticPages, ...hubPages, ...yougoPages, ...gokaiPages, ...columnPages];
 }

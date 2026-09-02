@@ -6,6 +6,7 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer-inner">
         <nav aria-label="フッターメニュー">
+          <Link href="/gokai">よくある誤解</Link>
           <Link href="/yougo">用語辞典</Link>
           <Link href="/about">運営者情報</Link>
           <Link href="/quality">情報の品質について</Link>

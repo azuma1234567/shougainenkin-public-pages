@@ -13,6 +13,7 @@ import { SITE_URL } from "@/lib/constants";
 import { findCases, SAIKETSU_COUNTS } from "@/lib/saiketsu";
 import { pageMetadata } from "@/lib/seo";
 import { YOUGO } from "@/data/yougo";
+import { GOKAI } from "@/data/gokai";
 import { searchableYomi } from "@/lib/yougo";
 
 const TITLE = "障害年金の疑問に、公的根拠と実例で答える";
@@ -62,6 +63,13 @@ const searchItems: SearchItem[] = [
     category: "実例と数字",
     keywords: "統計 支給率 非該当 更新 再認定 精神障害 件数",
   },
+  ...GOKAI.map((card) => ({
+    href: `/gokai/${card.slug}`,
+    title: card.misconception,
+    description: card.truth,
+    category: "よくある誤解",
+    keywords: `${card.misconception} ${card.truth} ${card.category}`,
+  })),
   ...YOUGO.map((item) => ({
     href: `/yougo/${item.slug}`,
     title: item.term,
