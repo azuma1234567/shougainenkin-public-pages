@@ -30,7 +30,7 @@ const hub = (
 export const HUBS: HubDefinition[] = [
   hub("/", "障害年金ノート", "トップ", "existing", true),
   hub("/hajimete", "はじめての方へ", "はじめて", "existing", true, ["techou-to-nenkin"]),
-  hub("/shinsei", "障害年金の申請の流れ", "申請の流れ", "existing", true),
+  hub("/shinsei", "障害年金の申請の流れ", "申請の流れ", "existing", true, ["shinsei-shindoi"]),
   hub("/shinsei#step-1", "申請ステップ1 制度を確認する", "ステップ1", "existing", true, ["ninteibi-jigojusho", "kiso-kousei-chigai"]),
   hub("/shinsei#step-2", "申請ステップ2 初診日を確認する", "ステップ2", "existing", true, ["shakaiteki-chiyu", "shoshinbi-wakaranai", "jushinjokyo-shomeisho"]),
   hub("/shinsei#step-3", "申請ステップ3 納付要件を確認する", "ステップ3", "existing", true, ["hatachi-mae", "nofu-yoken"]),

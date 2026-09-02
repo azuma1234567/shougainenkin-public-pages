@@ -20,7 +20,7 @@ const unitPackRules = {
 };
 
 const output = {
-  generatedAt: new Date().toISOString(),
+  generatedAt: "2026-09-02",
   columns,
   hubPaths,
   unitPackRules,
