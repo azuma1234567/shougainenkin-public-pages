@@ -87,16 +87,20 @@ for (let number = 1; number <= 48; number += 1) {
   if (!category) throw new Error(`カード${number}のカテゴリが未設定`);
   if (sources.length === 0) throw new Error(`カード${number}の出典が見つからない`);
   const { number: _number, ...rest } = card;
-  items.push({ ...rest, sources, category });
+  items.push({ ...rest, sources, category, check: [], ask: "" });
 }
 
 if (items.length !== 48) throw new Error(`Expected 48 cards, found ${items.length}`);
 
-const output = `// docs/gokai-cards-batch1〜4-2026-09-02.md から生成。本文を直接編集しないこと。\n` +
+// check / ask / figure は scripts/merge-gokai-addon.mjs で追記する。ここでは空で出す。
+const output = `// docs/gokai-cards-batch1〜4-2026-09-02.md から生成(scripts/import-gokai.mjs)。\n` +
+`// check / ask / figure は docs/gokai/gokai-cards-addon-2026-09-02.json から scripts/merge-gokai-addon.mjs で追記。\n` +
+`// 本文を直接編集しないこと。\n` +
 `export const GOKAI_CATEGORIES = ${JSON.stringify(GOKAI_CATEGORIES, null, 2)} as const;\n\n` +
+`export const GOKAI_UPDATED = "2026-09-02";\n\n` +
 `export type GokaiCategory = (typeof GOKAI_CATEGORIES)[number];\n` +
 `export type GokaiLink = { label: string; href: string };\n` +
-`export type GokaiCard = { slug: string; misconception: string; truth: string; why: string; when: string; next: GokaiLink[]; sources: string[]; hubs: string[]; category: GokaiCategory };\n\n` +
+`export type GokaiCard = { slug: string; misconception: string; truth: string; why: string; when: string; next: GokaiLink[]; sources: string[]; hubs: string[]; category: GokaiCategory; check: string[]; ask: string; figure?: string };\n\n` +
 `export const GOKAI: GokaiCard[] = ${JSON.stringify(items, null, 2)};\n`;
 
 await mkdir(path.dirname(outputPath), { recursive: true });

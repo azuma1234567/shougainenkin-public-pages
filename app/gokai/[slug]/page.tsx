@@ -54,6 +54,20 @@ export default async function GokaiDetailPage({ params }: Props) {
           <h2>こんなときに多い</h2>
           <p>{card.when}</p>
         </section>
+        <section className="gokai-block gokai-check">
+          <h2>自分の場合を確かめる</h2>
+          <ul>{card.check.map((c) => <li key={c}>{c}</li>)}</ul>
+        </section>
+        <section className="gokai-block gokai-ask">
+          <h2>窓口で聞く一言</h2>
+          <p>{card.ask}</p>
+        </section>
+        {card.figure && (
+          <section className="gokai-block gokai-figure">
+            <h2>数字で見ると</h2>
+            <p>{card.figure}</p>
+          </section>
+        )}
         {next.length > 0 && (
           <section className="gokai-next">
             <h2>次に読む</h2>

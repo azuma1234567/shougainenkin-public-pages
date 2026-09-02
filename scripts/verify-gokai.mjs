@@ -4,6 +4,8 @@ import { GOKAI, GOKAI_CATEGORIES } from "../data/gokai.ts";
 import { HUBS } from "../lib/hubs.ts";
 import { SITE_NAME } from "../lib/constants.ts";
 import { decodePng, colHasInk, rowHasInk } from "./lib/png.mjs";
+import { explainAmount, findAmounts } from "./lib/amounts-derive.mjs";
+const { AMOUNTS_2026 } = await import("../data/amounts.ts");
 
 const origin = process.env.VERIFY_ORIGIN;
 const PAGE_BACKGROUND = [0xf7, 0xfb, 0xfe];
@@ -46,6 +48,17 @@ assert.equal(
   false,
   "非公開メモ・参照元をデータに含めない",
 );
+
+// 3ブロック(check / ask / figure): docs/gokai/gokai-cards-addon-2026-09-02.json 由来
+const ALLOWED_PHONES = new Set(["0570-05-4890", "0570-078374"]); // 年金相談予約・法テラス
+for (const card of GOKAI) {
+  assert.ok(Array.isArray(card.check) && card.check.length === 3, `${card.slug}: 「自分の場合を確かめる」は3項目`);
+  assert.ok(typeof card.ask === "string" && card.ask.length > 0, `${card.slug}: 「窓口で聞く一言」が1つ`);
+  const extra = [...card.check, card.ask, card.figure ?? ""].join("\n");
+  assert.doesNotMatch(extra, /x\.com|twitter|@|ツイート|note\.com|youtube/i, `${card.slug}: 3ブロックに調査元の語を入れない`);
+  for (const m of extra.matchAll(/0\d{2,4}-\d{2,4}-?\d{3,4}/g)) assert.ok(ALLOWED_PHONES.has(m[0]), `${card.slug}: 許可されていない電話番号 ${m[0]}`);
+  for (const found of findAmounts(card.figure ?? "")) assert.ok(explainAmount(found.text, AMOUNTS_2026, card.figure), `${card.slug}: 「数字で見ると」の ${found.text} が data/amounts.ts から導出できない`);
+}
 
 // 配分表と一致するか(カード番号は原稿の並び順 = data/gokai.ts の並び順)。
 const slugByNumber = GOKAI.map(({ slug }) => slug);
@@ -112,6 +125,9 @@ if (origin) {
       assert.ok(detail.includes(text.replace(/&/g, "&amp;")), `${card.slug}: 原稿を表示(${text.slice(0, 12)}…)`);
     }
     assert.doesNotMatch(visibleText(detail), /執筆メモ|実装メモ|x\.com|いいね|@/, `${card.slug}: 執筆メモ・参照元を出さない`);
+    for (const text of [...card.check, card.ask, ...(card.figure ? [card.figure] : [])]) assert.ok(detail.includes(text.replace(/&/g, "&amp;")), `${card.slug}: 3ブロックを表示(${text.slice(0, 12)}…)`);
+    const chars = visibleText(detail).replace(/\s+/g, "").length;
+    assert.ok(chars >= 500, `${card.slug}: 本文が500字以上(${chars}字)`);
     const og = await fetch(new URL(`/gokai/${card.slug}/opengraph-image`, origin));
     assert.equal(og.status, 200, `${card.slug}: OGP画像`);
     assert.equal(og.headers.get("content-type"), "image/png", `${card.slug}: OGPはPNG`);

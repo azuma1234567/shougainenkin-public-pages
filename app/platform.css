@@ -743,6 +743,10 @@
 .gokai-truth h2 { color: var(--platform-link); }
 .gokai-truth p { color: var(--platform-heading); font-size: 17px; line-height: 1.85; }
 .gokai-block { padding-top: 22px; border-top: 1px solid var(--platform-border); }
+.gokai-check ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
+.gokai-check li { font-size: 14.5px; line-height: 1.9; }
+.gokai-ask p { padding: 12px 14px; border-left: 3px solid var(--platform-primary, #0284c7); background: #f4fafe; border-radius: 0 10px 10px 0; margin: 0; }
+.gokai-figure p { margin: 0; }
 .gokai-next { display: grid; gap: 9px; padding-top: 22px; border-top: 1px solid var(--platform-border); }
 .gokai-next a, .gokai-back { color: var(--platform-link); font-size: 13.5px; font-weight: 700; }
 .gokai-sources { padding-top: 22px; border-top: 1px solid var(--platform-border); }
