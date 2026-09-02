@@ -65,6 +65,8 @@ for (const p of sitemapPaths) {
     chars: charCount(text),
     visible: visible(text),
     mainLinks: [...new Set([...main.matchAll(/href="([^"]+)"/g)].map((m) => normalizePath(m[1])).filter(Boolean))],
+    // 被リンク数の集計用: パンくず(nav[aria-label="パンくずリスト"])と誤解カードの「一覧へ戻る」(.gokai-back)は数えない(2026-09-02)
+    countedLinks: [...new Set([...main.replace(/<nav[^>]*aria-label="パンくずリスト"[\s\S]*?<\/nav>/g, " ").replace(/<a[^>]*class="gokai-back"[^>]*>[\s\S]*?<\/a>/g, " ").matchAll(/href="([^"]+)"/g)].map((m) => normalizePath(m[1])).filter(Boolean))],
     allLinks: [...new Set([...text.matchAll(/href="([^"]+)"/g)].map((m) => normalizePath(m[1])).filter(Boolean))],
     hasDate: /<time dateTime=|最終更新日|更新日|確認日/.test(stripTags(main)),
   });
@@ -173,12 +175,14 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
 {
   const inbound = new Map([...sitemapSet].map((p) => [p, new Set()]));
   for (const [from, page] of pages) for (const to of page.mainLinks) if (to !== from && inbound.has(to)) inbound.get(to).add(from);
+  const inboundCounted = new Map([...sitemapSet].map((p) => [p, new Set()]));
+  for (const [from, page] of pages) for (const to of page.countedLinks) if (to !== from && inboundCounted.has(to)) inboundCounted.get(to).add(from);
   // 法務・案内ページはフッターからのリンクが正常な設計なので、孤立の検査から外す(2026-09-02)
   const UTILITY_PAGES = ["/about", "/privacy", "/terms", "/quality", "/support"];
   const isolated = [...inbound].filter(([p, set]) => set.size === 0 && p !== "/" && !UTILITY_PAGES.includes(p)).map(([p]) => p);
   record("B-1", "孤立ページがゼロ(本文からの内部リンクが最低1本)", isolated.length === 0, `孤立 ${isolated.length} / ${pages.size}(除外 ${UTILITY_PAGES.filter((p) => sitemapSet.has(p)).length})`, isolated, "ヘッダー・フッターのリンクは数えない。法務・案内ページ(about/privacy/terms/quality/support)はフッターのみで可");
-  const over = [...inbound].filter(([, set]) => set.size > 50).map(([p, set]) => `${p} (${set.size}本)`);
-  record("B-2", "被内部リンクが50本を超えるページがゼロ", over.length === 0, `50本超 ${over.length}`, over);
+  const over = [...inboundCounted].filter(([, set]) => set.size > 50).map(([p, set]) => `${p} (${set.size}本)`);
+  record("B-2", "被内部リンクが50本を超えるページがゼロ", over.length === 0, `50本超 ${over.length}`, over, "パンくずと誤解カードの「一覧へ戻る」由来のリンクは数えない");
   const thin = [...pages].filter(([, page]) => page.chars < 500).sort((a, b) => a[1].chars - b[1].chars).map(([p, page]) => `${p} (${page.chars}字)`);
   const jitsurei = [...pages].filter(([p]) => /^\/jitsurei\/./.test(p));
   const gokaiThin = thin.filter((t) => t.startsWith("/gokai/"));
@@ -227,11 +231,8 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
   const stale = [];
   for (const p of sitemapSet) if (pages.get(p).status !== 200) stale.push(`${p} (${pages.get(p).status})`);
   record("C-1", "sitemap.xml: 全公開ページが入り、未公開ページが入っていない", notInSitemap.length === 0 && reservedInSitemap.length === 0 && stale.length === 0, `収録 ${sitemapSet.size}、リンクはあるが未収録 ${notInSitemap.length}、予約slugの混入 ${reservedInSitemap.length}、200以外 ${stale.length}`, [...notInSitemap.map((p) => `未収録: ${p}`), ...reservedInSitemap.map((p) => `予約slug: ${p}`), ...stale]);
-  const parts = ["/sitemap-columns.xml", "/sitemap-hubs.xml", "/sitemap-jitsurei.xml", "/sitemap-gokai.xml"];
-  const partStatus = [];
-  for (const p of parts) partStatus.push(`${p} (${(await fetchText(p)).status})`);
-  record("C-2", "sitemapを4本に分割する", partStatus.every((s) => s.includes("(200)")), `分割sitemap ${partStatus.filter((s) => s.includes("(200)")).length}/4`, partStatus, "未実装なら公開当日までに作る");
-  record("C-3", "Search Console にサイトマップを送信(既存47本を最初に)", null, "手動作業(スクリプト対象外)", [], "C-2 の分割後に sitemap-columns.xml から送る");
+  record("C-2", "sitemapの分割", null, `対象外(${sitemapSet.size}ページ・単一 sitemap.xml で十分。50,000 URL 超で再検討)`, [], "Google の分割要件は 50,000 URL または 50MB。2026-09-02 に対象外とした");
+  record("C-3", "Search Console にサイトマップを送信", null, "手動作業(スクリプト対象外)", [], "sitemap.xml を送る");
   const key = ["/", "/nayami/fushikyu", "/nayami/shindansho-komatta", "/nayami/shoshinbi-karute", "/nayami/koushin", "/nayami/shikyuu-teishi", "/nayami/sokyuu", "/jitsurei", "/suuji", "/yougo"];
   const keyStatus = [];
   for (const p of key) keyStatus.push(`${p} (${pages.get(p)?.status ?? (await fetchText(p)).status})`);
