@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>年金事務所を探す — 障害年金ノート(モック)</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7fbfe;--surface:#fff;--band:#eef6fc;--primary:#0284c7;--link:#0273ad;--chip:#e3f2fc;
+--h:#14425e;--text:#1e3a4d;--muted:#4a6a80;--meta:#6e8ba0;--faint:#8aa5b6;
+--line:#dcebf5;--line2:#d7e9f5;--line3:#cfe6f5;--headline:#e2eef7;
+--ok-t:#067647;--ok-b:#e8f6ef;--warn-t:#8b6a1f;--warn-b:#fdf3dd;--warn-bd:#f0e2bd;--footer:#14425e;--footer-t:#b8d4e6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;font-size:16px;line-height:1.85}
+h1,h2,h3{font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;font-weight:700;color:var(--h);line-height:1.5;margin:0}
+a{color:var(--link);text-underline-offset:3px}
+.wrap{max-width:800px;margin:0 auto;padding:0 20px}
+.ribbon{background:#14425e;color:#fff;font-size:12px;padding:6px 20px;text-align:center}
+header.site{background:var(--surface);border-bottom:1px solid var(--headline)}
+.hd{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;gap:18px;align-items:center}
+.brand{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;color:var(--h);font-size:17px;text-decoration:none}
+.nav{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px}.nav a{color:var(--muted);text-decoration:none}
+.hero{background:linear-gradient(180deg,#e8f4fc 0%,#f7fbfe 100%);padding:34px 0 26px;border-bottom:1px solid var(--line)}
+.crumb{font-size:12.5px;color:var(--meta);margin-bottom:10px}.crumb a{color:var(--meta);text-decoration:none}
+.hero h1{font-size:27px}.hero .lead{margin:12px 0 0;color:var(--muted);font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;margin:18px 0}
+.card h2{font-size:19px;margin-bottom:6px}.card h3{font-size:15.5px;margin:20px 0 4px}
+.q .t{font-size:15.5px;font-weight:600;color:var(--h);margin-top:16px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chips button{border:1.5px solid var(--line2);background:#fff;border-radius:999px;padding:9px 16px;font-size:14.5px;cursor:pointer;font-family:inherit;color:var(--text)}
+.chips button[aria-pressed=true]{border-color:var(--primary);background:var(--chip);color:var(--h);font-weight:600}
+select{width:100%;border:1.5px solid var(--line2);border-radius:10px;padding:11px 13px;font-size:16px;font-family:inherit;color:var(--text);background:#fff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.answer{background:linear-gradient(180deg,#e8f4fc 0%,#f4fafe 100%);border:1px solid var(--line3);border-radius:16px;padding:20px 22px;margin:14px 0}
+.answer .k{font-size:12.5px;color:var(--meta)}
+.answer .v{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:24px;color:var(--h);line-height:1.4}
+.answer p{font-size:14px;color:var(--muted);margin:8px 0 0}
+.office{border:1px solid var(--line);border-radius:12px;padding:16px;margin:10px 0;background:#fff}
+.office .n{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;color:var(--h);font-size:16px}
+.office .kind{display:inline-block;font-size:11.5px;border-radius:999px;padding:1px 10px;margin-left:8px;background:var(--chip);color:var(--h)}
+.office .a{font-size:14px;color:var(--muted);margin-top:6px}
+.office .t{font-size:15px;margin-top:6px}
+.office .lk{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:13.5px}
+.note{background:var(--band);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--muted);margin:14px 0}
+.note strong{color:var(--h)}
+.warnbox{background:var(--warn-b);border:1px solid var(--warn-bd);border-radius:12px;padding:13px 15px;font-size:13.5px;color:#6b5316;margin:12px 0}
+.warnbox b{color:var(--warn-t)}
+table.yoyaku{width:100%;border-collapse:collapse;font-size:14.5px;margin:8px 0}
+table.yoyaku th,table.yoyaku td{border-bottom:1px solid var(--line2);padding:11px 6px;text-align:left;vertical-align:top}
+table.yoyaku th{width:34%;color:var(--h);font-weight:600;font-size:13.5px}
+.tel{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:20px;color:var(--h);text-decoration:none}
+ul.ask,ul.mochi{margin:8px 0;padding-left:1.25em;font-size:14.5px}
+ul.ask li,ul.mochi li{margin:7px 0}
+.btn{border:0;border-radius:999px;background:var(--primary);color:#fff;padding:13px 26px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn.ghost{background:#fff;color:var(--link);border:1.5px solid var(--line3)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.asof{font-size:12.5px;color:var(--meta);margin-top:10px}
+footer.site{background:var(--footer);color:var(--footer-t);margin-top:44px;padding:28px 0;font-size:13px}
+.hidden{display:none!important}
+@media print{
+ @page{size:A4 portrait;margin:14mm}
+ body{background:#fff;font-size:11px;line-height:1.6}
+ .no-print{display:none!important}
+ .card{border:0;padding:0;margin:0 0 10px}
+ .answer{padding:10px;margin:6px 0}.answer .v{font-size:15px}
+ h1{font-size:16px}h2{font-size:13px}
+ .office{padding:8px;margin:6px 0}
+ .tel{font-size:14px}
+}
+</style>
+</head>
+<body>
+<div class="ribbon no-print">実装用モック — docs/madoguchi-tool-design-2026-09-02.md の参照HTML(窓口データはサンプル)</div>
+<header class="site no-print"><div class="hd"><a class="brand" href="#">障害年金ノート</a>
+<nav class="nav"><a href="#">はじめての方へ</a><a href="#">病気から探す</a><a href="#">申請の流れ</a><a href="#">悩みから探す</a><a href="#">実例と数字</a><a href="#">コラム</a></nav></div></header>
+
+<section class="hero no-print"><div class="wrap">
+<div class="crumb"><a href="#">ホーム</a> ／ <a href="#">道具</a> ／ 年金事務所を探す</div>
+<h1>どこへ、どう持っていくか</h1>
+<p class="lead">提出先は、初診日にどの制度に入っていたかで変わります。まずそれを調べて、それから管轄の窓口と、予約のしかたと、持ち物までを1枚にします。</p>
+</div></section>
+
+<main class="wrap">
+
+<div class="card">
+  <h2>1. 提出先を調べる</h2>
+  <div class="q"><div class="t">初診日に入っていた制度は</div>
+    <div class="chips" id="q1"></div></div>
+  <div class="q"><div class="t">初診日は20歳より前ですか</div>
+    <div class="chips" id="q2"></div></div>
+  <div id="ans"></div>
+</div>
+
+<div class="card">
+  <h2>2. 窓口を探す</h2>
+  <div class="grid2">
+    <div><label style="font-size:13.5px;color:var(--h);font-weight:600">都道府県</label>
+      <select id="pref"></select></div>
+    <div><label style="font-size:13.5px;color:var(--h);font-weight:600">市区町村</label>
+      <select id="city"><option>都道府県を先に選んでください</option></select></div>
+  </div>
+  <div id="offices"></div>
+  <p class="asof no-print">窓口の情報は日本年金機構の公表によるものです(<span id="asof">2026年9月2日</span>時点)。統廃合や移転があるため、行く前に公式ページで確認してください。</p>
+</div>
+
+<div class="card">
+  <h2>3. 予約のしかた</h2>
+  <div class="warnbox"><b>予約なしで行くと、長く待つことがあります。</b>相談は予約制です。当日に相談したい場合は、直接年金事務所へ行くことになります。</div>
+  <table class="yoyaku">
+    <tr><th>予約受付専用電話</th><td>
+      <a class="tel" href="tel:0570054890">0570-05-4890</a>(ナビダイヤル)<br>
+      <a class="tel" href="tel:0366317521">03-6631-7521</a>(一般電話)<br>
+      <span style="font-size:13px;color:var(--meta)">ナビダイヤルは通話料がかかります。一般電話のほうが安くなることがあります。</span>
+    </td></tr>
+    <tr><th>受付時間</th><td>月曜〜金曜 8:30〜17:15<br><span style="font-size:13px;color:var(--meta)">土日祝と12月29日〜1月3日は利用できません</span></td></tr>
+    <tr><th>いつの予約が取れるか</th><td>翌日以降<br><span style="font-size:13px;color:var(--meta)">当日に相談したい場合は、直接年金事務所へ</span></td></tr>
+    <tr><th>電話するとき手元に</th><td>基礎年金番号がわかるもの<br><span style="font-size:13px;color:var(--meta)">または、通知書などに書かれた照査番号</span></td></tr>
+    <tr><th>窓口の相談開始時間</th><td>平日 9:00〜16:00 ／ 土曜開所日 10:00〜15:00 ／ 延長開所日 9:00〜18:00</td></tr>
+    <tr><th>ネット予約</th><td>年金請求の手続きのみ(マイナポータル・ねんきんネット・インターネット予約サイト)<br><span style="font-size:13px;color:var(--meta)">受付は全日 8:00〜23:30</span></td></tr>
+  </table>
+  <p class="asof">出典: 日本年金機構「予約受付専用電話」「予約相談について」・確認日 2026-09-02</p>
+</div>
+
+<div class="card">
+  <h2>4. 行く日の持ち物</h2>
+  <ul class="mochi" id="mochi"></ul>
+  <p class="note no-print">書類を先にそろえたいときは → <a href="#">必要書類チェックリスト</a></p>
+</div>
+
+<div class="card">
+  <h2>5. 窓口で聞くこと</h2>
+  <ul class="ask">
+    <li>私の初診日は、この日で問題ありませんか</li>
+    <li>納付要件は満たしていますか(記録を見てもらう)</li>
+    <li>診断書はどの様式になりますか</li>
+    <li><b>さかのぼる請求と、いまの請求の両方の形で出せますか</b></li>
+    <li>この書類で、足りないものはありますか</li>
+    <li>提出したあと、結果はいつごろ、どう届きますか</li>
+    <li>年金生活者支援給付金の請求書は入っていますか</li>
+  </ul>
+  <div class="row no-print">
+    <button class="btn" onclick="window.print()">この1枚を印刷する</button>
+    <button class="btn ghost" onclick="location.href='#'">郵送で出したいとき</button>
+  </div>
+</div>
+</main>
+<footer class="site no-print"><div class="wrap">障害年金ノート — 実装用モック</div></footer>
+
+<script>
+/* ===== ★サンプルデータ。§5 の手順で全国分(47都道府県)に置き換えること ===== */
+const OFFICES=[
+ {id:'tokyo-shinjuku',pref:'東京都',kind:'nenkin',name:'新宿年金事務所',
+  zip:'160-8601',addr:'東京都新宿区新宿5-9-2 ヒューリック新宿五丁目ビル3〜8階',
+  tel:'03-3354-5048',access:'東京メトロ 新宿三丁目駅 徒歩約5分',
+  jurisdiction:['新宿区','中野区','杉並区'],url:'https://www.nenkin.go.jp/',checkedOn:'2026-09-02'},
+ {id:'tokyo-shibuya',pref:'東京都',kind:'nenkin',name:'渋谷年金事務所',
+  zip:'150-8334',addr:'東京都渋谷区神南1-12-1',
+  tel:'03-3462-1241',access:'JR 渋谷駅 徒歩約10分',
+  jurisdiction:['渋谷区','目黒区','世田谷区'],url:'https://www.nenkin.go.jp/',checkedOn:'2026-09-02'},
+ {id:'tokyo-machikado-shinjuku',pref:'東京都',kind:'machikado',name:'街角の年金相談センター 新宿',
+  zip:'160-0023',addr:'東京都新宿区西新宿1-7-1',
+  tel:'03-6851-0500',access:'JR 新宿駅 徒歩約5分',
+  jurisdiction:[],url:'https://www.nenkin.go.jp/',checkedOn:'2026-09-02'},
+ {id:'kanagawa-yokohamanishi',pref:'神奈川県',kind:'nenkin',name:'横浜西年金事務所',
+  zip:'220-8580',addr:'神奈川県横浜市西区高島2-6-31',
+  tel:'045-820-6655',access:'JR 横浜駅 徒歩約8分',
+  jurisdiction:['横浜市西区','横浜市保土ケ谷区','横浜市旭区'],url:'https://www.nenkin.go.jp/',checkedOn:'2026-09-02'},
+ {id:'osaka-tennoji',pref:'大阪府',kind:'nenkin',name:'天王寺年金事務所',
+  zip:'543-8567',addr:'大阪府大阪市天王寺区悲田院町7-6',
+  tel:'06-6772-7531',access:'JR 天王寺駅 徒歩約3分',
+  jurisdiction:['大阪市天王寺区','大阪市阿倍野区','大阪市東住吉区'],url:'https://www.nenkin.go.jp/',checkedOn:'2026-09-02'}
+];
+const MOCHI=[
+ '予約した日時のメモ',
+ '基礎年金番号がわかるもの(基礎年金番号通知書・年金手帳・マイナンバーカード)',
+ '本人確認書類',
+ '印鑑(原則不要になりましたが、念のため)',
+ '必要書類チェックリストを印刷したもの',
+ '書きかけの申立書(そのままでかまいません。見てもらえます)',
+ 'お薬手帳・診察券(初診日の手がかりになります)',
+ '聞きたいことを書いたメモ'
+];
+
+/* ===== 提出先の判定(設計書 §3) ===== */
+const S={seido:null,hatachi:null};
+const Q1=[['kokumin','国民年金'],['kousei','厚生年金'],['fumei','わからない']];
+const Q2=[['mae','20歳より前'],['ato','20歳以降'],['fumei','わからない']];
+function chips(el,arr,key){const w=document.getElementById(el);w.innerHTML='';
+ arr.forEach(([v,l])=>{const b=document.createElement('button');b.textContent=l;
+  b.setAttribute('aria-pressed',String(S[key]===v));
+  b.onclick=()=>{S[key]=S[key]===v?null:v;chips(el,arr,key);answer();};w.appendChild(b);});}
+function answer(){
+ const a=document.getElementById('ans');
+ if(!S.seido&&!S.hatachi){a.innerHTML='';return;}
+ let where='',why='',extra='';
+ const kiso = S.seido==='kokumin' || S.hatachi==='mae';
+ if(S.seido==='kousei'&&S.hatachi!=='mae'){
+   where='年金事務所';why='初診日に厚生年金に入っていたので、障害厚生年金の請求になります。';
+ }else if(kiso&&S.seido!=='kousei'){
+   where='お住まいの市区町村の国民年金の窓口';
+   why='障害基礎年金だけの請求になるためです。';
+   if(S.seido==='kokumin')extra='ただし、会社員・公務員の配偶者に扶養されていた期間(第3号被保険者)に初診日がある場合は、<b>年金事務所</b >が窓口になります。';
+ }else{
+   where='年金事務所(まずはこちらで大丈夫です)';
+   why='初診日にどの制度に入っていたかで決まります。分からないときは、年金事務所で記録を見てもらえます。';
+ }
+ a.innerHTML='<div class="answer"><div class="k">提出先</div><div class="v">'+where+'</div><p>'+why+'</p></div>'
+  +(extra?'<div class="warnbox">'+extra+'</div>':'')
+  +'<div class="note">郵送でも出せます。控えを取り、送った記録が残る方法で送ってください。 → <a href="#">提出先と郵送のしかた</a></div>';
+}
+
+/* ===== 窓口検索 ===== */
+const PREFS=[...new Set(OFFICES.map(o=>o.pref))];
+(function(){const p=document.getElementById('pref');
+ p.innerHTML='<option value="">選んでください</option>'+PREFS.map(x=>'<option>'+x+'</option>').join('');
+ p.onchange=()=>{
+   const c=document.getElementById('city');
+   const cities=[...new Set(OFFICES.filter(o=>o.pref===p.value).flatMap(o=>o.jurisdiction))].sort();
+   c.innerHTML='<option value="">すべて</option>'+cities.map(x=>'<option>'+x+'</option>').join('');
+   renderOffices();};
+ document.getElementById('city').onchange=renderOffices;})();
+
+function renderOffices(){
+ const pref=document.getElementById('pref').value, city=document.getElementById('city').value;
+ const w=document.getElementById('offices');
+ if(!pref){w.innerHTML='<p class="note">都道府県を選ぶと、管轄の窓口が出ます。</p>';return;}
+ let list=OFFICES.filter(o=>o.pref===pref);
+ if(city)list=list.filter(o=>o.kind==='machikado'||o.jurisdiction.includes(city));
+ const nen=list.filter(o=>o.kind==='nenkin'), mac=list.filter(o=>o.kind==='machikado');
+ let h='';
+ if(nen.length){h+='<h3>年金事務所</h3>'+nen.map(card).join('');}
+ if(mac.length){h+='<h3>街角の年金相談センター</h3>'
+   +'<p class="note" style="margin-top:4px">相談を受け付けています。取り扱いの範囲は窓口によって違うので、行く前に確認してください。</p>'
+   +mac.map(card).join('');}
+ if(!nen.length&&!mac.length)h='<p class="note">この市区町村のデータがサンプルに入っていません(実装時に全国分を入れます)。</p>';
+ w.innerHTML=h;
+}
+function card(o){
+ return '<div class="office"><div class="n">'+o.name
+  +'<span class="kind">'+(o.kind==='nenkin'?'年金事務所':'街角の年金相談センター')+'</span></div>'
+  +'<div class="a">〒'+o.zip+'　'+o.addr+(o.access?'<br>'+o.access:'')+'</div>'
+  +'<div class="t">電話 <a class="tel" href="tel:'+o.tel.replace(/-/g,'')+'">'+o.tel+'</a></div>'
+  +(o.jurisdiction.length?'<div class="a" style="margin-top:6px">管轄: '+o.jurisdiction.join('・')+'</div>':'')
+  +'<div class="lk no-print"><a href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(o.addr)+'" target="_blank" rel="noopener">地図を開く</a>'
+  +'<a href="'+o.url+'" target="_blank" rel="noopener">機構の公式ページ</a></div></div>';
+}
+chips('q1',Q1,'seido');chips('q2',Q2,'hatachi');answer();renderOffices();
+document.getElementById('mochi').innerHTML=MOCHI.map(m=>'<li>'+m+'</li>').join('');
+</script>
+</body>
+</html>

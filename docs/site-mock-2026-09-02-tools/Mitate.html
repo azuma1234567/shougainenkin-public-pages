@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>等級の目安をしらべる — 障害年金ノート(モック)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7fbfe; --surface:#fff; --band:#eef6fc; --primary:#0284c7;
+  --link:#0273ad; --link-h:#015d8c; --chip:#e3f2fc;
+  --h:#14425e; --text:#1e3a4d; --muted:#4a6a80; --sub:#5b7a90; --meta:#6e8ba0; --faint:#8aa5b6;
+  --line:#dcebf5; --line2:#d7e9f5; --line3:#cfe6f5; --headline:#e2eef7;
+  --ok-t:#067647; --ok-b:#e8f6ef; --warn-t:#8b6a1f; --warn-b:#fdf3dd;
+  --badge-t:#b45309; --badge-b:#fef7ec;
+  --footer:#14425e; --footer-t:#b8d4e6;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+  font-size:16px;line-height:1.85}
+h1,h2,h3{font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;font-weight:700;color:var(--h);line-height:1.5;margin:0}
+a{color:var(--link);text-underline-offset:3px}
+a:hover{color:var(--link-h)}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+
+/* ---- header ---- */
+header.site{background:var(--surface);border-bottom:1px solid var(--headline);position:sticky;top:0;z-index:20}
+.hd{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:18px}
+.brand{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;color:var(--h);font-size:17px;text-decoration:none;white-space:nowrap}
+.nav{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px}
+.nav a{color:var(--muted);text-decoration:none}
+.nav a:hover{color:var(--link)}
+
+/* ---- hero ---- */
+.hero{background:linear-gradient(180deg,#e8f4fc 0%,#f7fbfe 100%);padding:34px 0 26px;border-bottom:1px solid var(--line)}
+.crumb{font-size:12.5px;color:var(--meta);margin-bottom:10px}
+.crumb a{color:var(--meta);text-decoration:none}
+.hero h1{font-size:27px;letter-spacing:.01em}
+.hero .lead{margin:12px 0 0;color:var(--muted);font-size:15px}
+
+/* ---- progress ---- */
+.prog{display:flex;gap:6px;margin:20px 0 4px}
+.prog i{flex:1;height:4px;border-radius:999px;background:var(--line3);display:block}
+.prog i.on{background:var(--primary)}
+.prog i.done{background:#7cc3e8}
+.progtxt{font-size:12.5px;color:var(--meta);margin:0 0 18px}
+
+/* ---- card ---- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;margin:0 0 16px}
+.card h2{font-size:19px;margin-bottom:6px}
+.card h3{font-size:16px;margin:22px 0 6px}
+.card p{margin:8px 0;font-size:15px}
+.note{background:var(--band);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--muted);margin:14px 0}
+.note strong{color:var(--h)}
+.warnbox{background:var(--warn-b);border-radius:12px;padding:14px 16px;font-size:14px;color:#6b5316;margin:14px 0;border:1px solid #f0e2bd}
+.warnbox strong{color:var(--warn-t)}
+ul.plain{margin:10px 0;padding-left:1.2em;font-size:14.5px;color:var(--muted)}
+ul.plain li{margin:6px 0}
+
+/* ---- choices ---- */
+.opts{display:flex;flex-direction:column;gap:9px;margin:14px 0 4px}
+.opt{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line2);background:#fff;border-radius:12px;
+  padding:14px 16px;cursor:pointer;font-size:15px;text-align:left;width:100%;color:var(--text);line-height:1.7;
+  font-family:inherit;transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--line3);background:#fbfdff}
+.opt[aria-pressed="true"]{border-color:var(--primary);background:var(--chip)}
+.opt .mk{flex:none;width:20px;height:20px;border-radius:50%;border:1.5px solid var(--faint);margin-top:3px;position:relative}
+.opt[aria-pressed="true"] .mk{border-color:var(--primary)}
+.opt[aria-pressed="true"] .mk::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--primary)}
+.opt.chk .mk{border-radius:5px}
+.opt.chk[aria-pressed="true"] .mk::after{border-radius:2px}
+.opt .num{flex:none;width:22px;color:var(--meta);font-size:13px;margin-top:2px}
+.skip{background:none;border:0;color:var(--meta);font-size:13.5px;text-decoration:underline;cursor:pointer;padding:6px 0;font-family:inherit}
+
+/* ---- buttons ---- */
+.row{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.btn{border:0;border-radius:999px;background:var(--primary);color:#fff;padding:13px 26px;font-size:15px;
+  font-weight:600;cursor:pointer;font-family:inherit}
+.btn:hover{background:#0270a8}
+.btn[disabled]{background:#b9d9ec;cursor:default}
+.btn.ghost{background:#fff;color:var(--link);border:1.5px solid var(--line3)}
+.btn.ghost:hover{background:var(--band)}
+.btn.sm{padding:9px 18px;font-size:14px}
+
+/* ---- q item ---- */
+.qhead{font-size:12.5px;color:var(--meta);margin-bottom:4px}
+.qtitle{font-size:19px;font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;color:var(--h);line-height:1.55}
+
+/* ---- result ---- */
+.avg{display:flex;gap:26px;flex-wrap:wrap;align-items:baseline;margin:6px 0 2px}
+.avg b{font-size:34px;color:var(--h);font-family:"Zen Kaku Gothic New",sans-serif}
+.avg span{font-size:13px;color:var(--meta)}
+.verdict{background:var(--band);border-radius:12px;padding:18px;margin:14px 0;font-size:16px;line-height:1.9}
+.verdict .g{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:22px;color:var(--h)}
+table.gt{border-collapse:collapse;width:100%;font-size:13px;margin:10px 0 6px}
+table.gt th,table.gt td{border:1px solid var(--line2);padding:8px 4px;text-align:center;color:var(--muted)}
+table.gt th{background:var(--band);color:var(--h);font-weight:600;font-size:12px}
+table.gt td.hit{background:#cfe9f9;color:var(--h);font-weight:700;box-shadow:inset 0 0 0 2px var(--primary)}
+table.gt td.na{color:#c3d6e2}
+.tbl-scroll{overflow-x:auto}
+.gcap{font-size:12px;color:var(--meta);margin:4px 0 0}
+.quote{border-left:3px solid var(--line3);padding:2px 0 2px 14px;margin:10px 0;font-size:14.5px;color:var(--text)}
+.qsrc{font-size:12px;color:var(--meta);margin-top:4px}
+.dirtag{display:inline-block;font-size:11.5px;border-radius:999px;padding:2px 10px;margin-bottom:6px}
+.dir-up{background:var(--ok-b);color:var(--ok-t)}
+.dir-eq{background:var(--warn-b);color:var(--warn-t)}
+.stat{display:flex;gap:18px;flex-wrap:wrap;margin:10px 0}
+.stat div{background:var(--band);border-radius:12px;padding:12px 16px;font-size:13px;color:var(--muted);flex:1;min-width:130px}
+.stat b{display:block;font-family:"Zen Kaku Gothic New",sans-serif;font-size:22px;color:var(--h);line-height:1.3}
+.next a{display:block;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:8px 0;text-decoration:none;background:#fff}
+.next a:hover{background:#fbfdff}
+.next b{display:block;color:var(--h);font-family:"Zen Kaku Gothic New",sans-serif;font-size:15px}
+.next span{font-size:13.5px;color:var(--muted)}
+.src{font-size:12.5px;color:var(--meta);line-height:1.8}
+footer.site{background:var(--footer);color:var(--footer-t);margin-top:44px;padding:28px 0;font-size:13px}
+.hidden{display:none!important}
+@media(max-width:520px){
+  .hero h1{font-size:22px}
+  .card{padding:18px}
+  table.gt{font-size:11.5px}
+}
+/* ---- mock ribbon ---- */
+.ribbon{background:#14425e;color:#fff;font-size:12px;padding:6px 20px;text-align:center;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<div class="ribbon">実装用モック — docs/mitate-tool-design-2026-09-02.md の参照HTML</div>
+
+<header class="site">
+  <div class="hd">
+    <a class="brand" href="#">障害年金ノート</a>
+    <nav class="nav">
+      <a href="#">はじめての方へ</a><a href="#">病気から探す</a><a href="#">申請の流れ</a>
+      <a href="#">悩みから探す</a><a href="#">実例と数字</a><a href="#">コラム</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="crumb"><a href="#">ホーム</a> ／ <a href="#">道具</a> ／ 等級の目安をしらべる</div>
+    <h1>国が公表している目安に、当てはめてみる</h1>
+    <p class="lead">精神の障害の審査には、国が公表している「障害等級の目安」の表があります。診断書に書かれる2つの欄の組み合わせで、目安がどうなるかを見られます。判定しているのは国のガイドラインで、このサイトではありません。</p>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="prog" id="prog"></div>
+  <p class="progtxt" id="progtxt"></p>
+
+  <!-- ===== 0. intro ===== -->
+  <section class="card step" data-step="0">
+    <h2>はじめに</h2>
+    <ul class="plain">
+      <li>この表は<strong>国が公表しているもの</strong>です。このサイトが独自に判定するものではありません。</li>
+      <li>答えた内容と結果は、<strong>この端末の中だけ</strong>に残ります。送信も分析もしません。</li>
+      <li>答えたくない項目は<strong>飛ばせます</strong>。答えた範囲で結果を出します。</li>
+      <li>途中でやめても、<strong>続きから</strong>再開できます。</li>
+    </ul>
+    <label class="opt chk" style="margin-top:14px" onclick="toggleShared(this)" aria-pressed="false" id="sharedPc">
+      <span class="mk"></span><span>共用のパソコンを使っています(この端末に保存しない)</span>
+    </label>
+    <div class="row"><button class="btn" onclick="go(1)">はじめる</button></div>
+  </section>
+
+  <!-- ===== 1. 障害の種類 ===== -->
+  <section class="card step hidden" data-step="1">
+    <p class="qhead">1 / 6</p>
+    <p class="qtitle">どの障害で請求を考えていますか</p>
+    <div class="opts" id="kindOpts"></div>
+    <div id="outOfScope" class="hidden">
+      <div class="warnbox">
+        <strong>このガイドラインの対象外です。</strong><br>
+        「精神の障害に係る等級判定ガイドライン」は、精神障害・知的障害・発達障害の審査のために国が公表しているものです。ほかの障害には、それぞれ別の認定基準があり、この目安表は使えません。
+      </div>
+      <div class="next">
+        <a href="#"><b>病気から探す</b><span>21の病名ごとに、審査で見られるところをまとめています</span></a>
+        <a href="#"><b>障害認定基準について</b><span>障害ごとに基準がどう決まっているか</span></a>
+      </div>
+    </div>
+    <div class="row"><button class="btn ghost sm" onclick="go(0)">戻る</button><button class="btn" id="k-next" disabled onclick="go(2)">次へ</button></div>
+  </section>
+
+  <!-- ===== 2. モード ===== -->
+  <section class="card step hidden" data-step="2">
+    <p class="qhead">2 / 6</p>
+    <p class="qtitle">診断書は、もう手元にありますか</p>
+    <p style="font-size:14px;color:var(--muted)">ここで精度が大きく変わります。</p>
+    <div class="opts">
+      <button class="opt" aria-pressed="false" onclick="setMode('A',this)"><span class="mk"></span>
+        <span><b>手元にある</b><br><span style="font-size:13.5px;color:var(--muted)">診断書に書かれた欄をそのまま写します。審査が見るのと同じ数字になります。</span></span></button>
+      <button class="opt" aria-pressed="false" onclick="setMode('B',this)"><span class="mk"></span>
+        <span><b>まだない(これから請求する)</b><br><span style="font-size:13.5px;color:var(--muted)">自分で見立てた数字で当てはめます。参考値になります。</span></span></button>
+    </div>
+    <div class="row"><button class="btn ghost sm" onclick="go(1)">戻る</button><button class="btn" id="m-next" disabled onclick="go(3)">次へ</button></div>
+  </section>
+
+  <!-- ===== 3. 判定7項目 ===== -->
+  <section class="card step hidden" data-step="3">
+    <p class="qhead"><span id="abIdx">3</span> / 6 ・ 日常生活能力の判定</p>
+    <p class="qtitle" id="abTitle">適切な食事</p>
+    <div class="note" style="margin-top:12px">
+      <strong>ひとり暮らしかどうかにかかわらず、「援助がなかったらどうか」で考える</strong>のが、国の定めた見方です。
+    </div>
+    <div class="opts" id="abOpts"></div>
+    <button class="skip" onclick="skipAbility()">この項目は答えない</button>
+    <div class="row">
+      <button class="btn ghost sm" onclick="prevAbility()">戻る</button>
+      <span style="font-size:13px;color:var(--meta)" id="abCount"></span>
+    </div>
+  </section>
+
+  <!-- ===== 4. 程度 ===== -->
+  <section class="card step hidden" data-step="4">
+    <p class="qhead">4 / 6</p>
+    <p class="qtitle">日常生活能力の程度</p>
+    <p style="font-size:14px;color:var(--muted)">全体としてどのあたりかを、ひとつ選びます。</p>
+    <div class="opts" id="degOpts"></div>
+    <button class="skip" onclick="go(5)">選ばずに進む</button>
+    <div class="row"><button class="btn ghost sm" onclick="go(3)">戻る</button></div>
+  </section>
+
+  <!-- ===== 5. 総合評価の質問 ===== -->
+  <section class="card step hidden" data-step="5">
+    <p class="qhead">5 / 6</p>
+    <p class="qtitle">当てはまるものを選んでください</p>
+    <p style="font-size:14px;color:var(--muted)">目安表には使いません。ガイドラインの「総合評価」で触れられている状況に当てはまるかを見ます。いくつでも選べます。</p>
+    <div class="opts" id="gOpts"></div>
+    <div class="row"><button class="btn ghost sm" onclick="go(4)">戻る</button><button class="btn" onclick="showResult()">目安を見る</button></div>
+  </section>
+
+  <!-- ===== 6. 結果 ===== -->
+  <section class="step hidden" data-step="6">
+    <div class="card">
+      <h2>国のガイドラインの目安</h2>
+      <div class="avg"><span>判定平均 <b id="rAvg">—</b></span><span id="rAnswered"></span></div>
+      <div class="verdict" id="rVerdict"></div>
+      <div id="rModeB" class="warnbox hidden">
+        <strong>ここで使った数字は、あなたが自分で選んだものです。</strong><br>
+        審査が見るのは、医師が診断書に書いた数字です。同じにならないことがあります。この結果は「医師に何を伝えるか」を考える材料として使ってください。
+      </div>
+
+      <h3>目安表(全体)</h3>
+      <div class="tbl-scroll"><table class="gt" id="gtable"></table></div>
+      <p class="gcap">行=日常生活能力の判定の平均 / 列=日常生活能力の程度。「—」は原表の空欄です。</p>
+
+      <div class="note" id="rSeido"></div>
+    </div>
+
+    <div class="card" id="rGuideCard">
+      <h2>総合評価で動きうること</h2>
+      <p style="font-size:14.5px;color:var(--muted)">ガイドラインの「総合評価」には、次のような場合が挙げられています。あなたが選んだ状況に当てはまるものです。<strong>目安を計算し直すものではありません。</strong></p>
+      <div id="rGuide"></div>
+    </div>
+
+    <div class="card">
+      <h2>ガイドライン自身の留保</h2>
+      <p>目安はあくまで参考です。実際の認定は、診断書のほかの記載や生活の実態も含めて総合的に判断されます。ガイドラインにも「総合的に評価した結果、目安と異なる等級になることもあり得る」と書かれています。</p>
+    </div>
+
+    <div class="card">
+      <h2>数字で見る実際</h2>
+      <div class="stat">
+        <div><b>70.3%</b>新規に決まった障害年金のうち、精神の障害によるもの</div>
+        <div><b>53.9%</b>決まった等級のうち2級(1級10.9% / 3級22.1%)</div>
+        <div><b>13.0%</b>新規裁定のうち非該当(146,225件中18,982件)</div>
+      </div>
+      <p style="font-size:13.5px;color:var(--meta)">令和6年度。これは全体の分布であって、あなたの結果を予測するものではありません。 → <a href="#">数字で見る障害年金</a></p>
+    </div>
+
+    <div class="card">
+      <h2>ここからできること</h2>
+      <div class="note" id="rTell"></div>
+      <div class="next" id="rNext"></div>
+    </div>
+
+    <div class="card">
+      <h2>出典</h2>
+      <p class="src">
+        精神の障害に係る等級判定ガイドライン(平成28年9月・厚生労働省/日本年金機構) 表1「障害等級の目安」/ 第3「総合評価」<br>
+        <a href="https://www.mhlw.go.jp/file/04-Houdouhappyou-12512000-Nenkinkyoku-Jigyoukanrika/0000130045.pdf">原本PDF</a><br>
+        このサイトが判定したものではなく、国が公表している表に当てはめた結果です。
+      </p>
+      <div class="row">
+        <button class="btn ghost sm" onclick="window.print()">結果を印刷する</button>
+        <button class="btn ghost sm" onclick="go(3)">回答を見直す</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site"><div class="wrap">障害年金ノート — 実装用モック</div></footer>
+
+<script>
+/* ===== 定数(アプリ src/lib/mitateCore.ts と同一にすること) ===== */
+const ABILITY=[
+ {id:'meal',label:'適切な食事'},
+ {id:'hygiene',label:'身辺の清潔保持'},
+ {id:'money',label:'金銭管理と買い物'},
+ {id:'medical',label:'通院と服薬'},
+ {id:'communication',label:'他人との意思伝達及び対人関係'},
+ {id:'safety',label:'身辺の安全保持及び危機対応'},
+ {id:'social',label:'社会性'}];
+const ABILITY_CHOICES=[
+ {v:1,l:'できる'},
+ {v:2,l:'おおむねできるが時には助言や指導を必要とする'},
+ {v:3,l:'助言や指導があればできる'},
+ {v:4,l:'助言や指導をしてもできない若しくは行わない'}];
+const DEGREE=[
+ {v:1,l:'(1) 精神障害を認めるが、社会生活は普通にできる'},
+ {v:2,l:'(2) 家庭内での日常生活は普通にできるが、社会生活には援助が必要'},
+ {v:3,l:'(3) 家庭内での単純な日常生活はできるが、時に応じて援助が必要'},
+ {v:4,l:'(4) 日常生活における身のまわりのことも、多くの援助が必要'},
+ {v:5,l:'(5) 身のまわりのことはほとんどできないため、常時の援助が必要'}];
+const BANDS=[
+ {label:'3.5以上',min:3.5,max:null},
+ {label:'3.0以上3.5未満',min:3.0,max:3.5},
+ {label:'2.5以上3.0未満',min:2.5,max:3.0},
+ {label:'2.0以上2.5未満',min:2.0,max:2.5},
+ {label:'1.5以上2.0未満',min:1.5,max:2.0},
+ {label:'1.5未満',min:0,max:1.5}];
+/* 各行 [程度(1),(2),(3),(4),(5)]。null=原表の空欄 */
+const TABLE={
+ '3.5以上':        [null,null,null,'1級又は2級','1級'],
+ '3.0以上3.5未満': [null,null,'2級','2級','1級又は2級'],
+ '2.5以上3.0未満': [null,null,'2級又は3級','2級',null],
+ '2.0以上2.5未満': [null,'3級又は3級非該当','2級又は3級','2級',null],
+ '1.5以上2.0未満': [null,'3級又は3級非該当','3級',null,null],
+ '1.5未満':        ['3級非該当','3級非該当',null,null,null]};
+
+/* 総合評価の質問。text=引用(要旨。実装時に原文と1字照合すること) */
+const G_COMMON=[
+ {id:'g1',q:'就労継続支援A型・B型、就労移行支援、障害者雇用制度を利用して働いている',
+  t:'就労系障害福祉サービス(就労継続支援A型、就労継続支援B型)及び障害者雇用制度による就労については、1級または2級の可能性を検討する。就労移行支援についても同様である。',s:'第3 総合評価 ④就労状況',d:'up'},
+ {id:'g2',q:'一般企業だが、障害者雇用と同じくらいの援助・配慮を受けている',
+  t:'障害者雇用制度を利用しない一般企業や自営・家業等で就労している場合でも、就労系障害福祉サービスや障害者雇用制度における支援と同程度の援助を受けて就労している場合は、2級の可能性を検討する。',s:'第3 総合評価 ④就労状況',d:'up'},
+ {id:'g3',q:'ひとり暮らしだが、家族や福祉サービスの援助を受けている(いまは受けていないが、必要な状態も含む)',
+  t:'独居であっても、日常的に家族等の援助や福祉サービスを受けることによって生活できている場合(現に受けていなくても、その必要がある状態の場合も含む)は、それらの支援の状況(または必要性)を踏まえて、2級の可能性を検討する。',s:'第3 総合評価 ③生活環境',d:'up'},
+ {id:'g4',q:'施設・グループホーム・援助できる家族との同居で、生活が安定している',
+  t:'入所施設やグループホーム、日常生活上の援助を行える家族との同居など、支援が常態化した環境下では日常生活が安定している場合でも、単身で生活するとしたときに必要となる支援の状況を考慮する。',s:'第3 総合評価 ③生活環境',d:'up'},
+ {id:'g5',q:'在宅で、家族や重度訪問介護などから常時の援助を受けている',
+  t:'在宅で、家族や重度訪問介護等から常時援助を受けて療養している場合は、1級または2級の可能性を検討する。',s:'第3 総合評価 ②療養状況',d:'up'},
+ {id:'g6',q:'入院していて、安全の確保のために常時の個別の援助が必要',
+  t:'病棟内で、本人の安全確保などのために、常時個別の援助が継続して必要な場合は、1級の可能性を検討する。',s:'第3 総合評価 ②療養状況',d:'up'},
+ {id:'g7',q:'欠勤・早退・遅刻が多い',
+  t:'精神障害による出勤状況への影響(頻回の欠勤・早退・遅刻など)を考慮する。',s:'第3 総合評価 ④就労状況',d:'up'},
+ {id:'g8',q:'仕事のあと、家では何もできない状態が続く',
+  t:'就労の影響により、就労以外の場面での日常生活能力が著しく低下していることが客観的に確認できる場合は、就労の場面及び就労以外の場面の両方の状況を考慮する。',s:'第3 総合評価 ④就労状況',d:'up'}];
+const G_SEISHIN=[
+ {id:'s1',q:'意欲の低下や感情の平板化(陰性症状)が長く続いている',
+  t:'陰性症状が長期間持続し、自己管理能力や社会的役割遂行能力に著しい制限が認められれば、1級または2級の可能性を検討する。',s:'第3 総合評価 ①現在の病状又は状態像',d:'up'},
+ {id:'s2',q:'治療をしても、重いうつや躁が長く続く/何度もくり返している',
+  t:'適切な治療を行っても症状が改善せず、重篤な躁やうつが長期間持続したり、頻繁に繰り返している場合は、1級または2級の可能性を検討する。',s:'第3 総合評価 ①現在の病状又は状態像',d:'up'},
+ {id:'s3',q:'1年以上働いているが、休みがちだったり援助を受け続けている',
+  t:'1年を超えて就労を継続できていたとしても、その間における就労の頻度や就労を継続するために受けている援助や配慮の状況も踏まえ、就労の実態が不安定な場合は、それを考慮する。',s:'第3 総合評価 ④就労状況',d:'up'},
+ {id:'s4',q:'職場で臨機応変な対応や意思疎通が難しい',
+  t:'仕事場での臨機応変な対応や意思疎通に困難な状況が見られる場合は、それを考慮する。',s:'第3 総合評価 ④就労状況',d:'up'}];
+const G_CHITEKI=[
+ {id:'c1',q:'療育手帳の判定区分が中度以上(知能指数おおむね50以下)',
+  t:'療育手帳の判定区分が中度以上(知能指数がおおむね50以下)の場合は、1級または2級の可能性を検討する。',s:'第3 総合評価 ⑤その他',d:'up'},
+ {id:'c2',q:'軽度だが、不適応行動などで日常生活に著しい制限がある',
+  t:'それより軽度の判定区分である場合は、不適応行動等により日常生活に著しい制限が認められる場合は、2級の可能性を検討する。',s:'第3 総合評価 ⑤その他',d:'up'},
+ {id:'c3',q:'療育手帳はないが、養護学校・特殊学級の在籍や通知表で幼少期の状況が分かる',
+  t:'療育手帳がない場合、幼少期から知的障害があることが、養護学校や特殊学級の在籍状況、通知表などから客観的に確認できる場合は、2級の可能性を検討する。',s:'第3 総合評価 ⑤その他',d:'up'},
+ {id:'c4',q:'仕事が、保護的な環境での単純・反復的な業務',
+  t:'一般企業で就労している場合でも、仕事の内容が保護的な環境下での専ら単純かつ反復的な業務であれば、2級の可能性を検討する。',s:'第3 総合評価 ④就労状況',d:'up'},
+ {id:'c5',q:'意思疎通が難しく、常時の管理・指導が必要',
+  t:'他の従業員との意思疎通が困難で、かつ不適切な行動がみられることなどにより、常時の管理・指導が必要な場合は、2級の可能性を検討する。',s:'第3 総合評価 ④就労状況',d:'up'},
+ {id:'c6',q:'入所施設で、常時の個別の援助が必要',
+  t:'入所施設において、常時個別の援助が必要な場合は、1級の可能性を検討する。',s:'第3 総合評価 ③生活環境',d:'up'}];
+const G_HATTATSU=[
+ {id:'h1',q:'知能指数は高いが、日常生活の能力が低い',
+  t:'知能指数が高くても日常生活能力が低い場合は、それを考慮する。',s:'第3 総合評価 ①現在の病状又は状態像',d:'up'},
+ {id:'h2',q:'におい・光・音・気温などの感覚過敏で、生活に制限がある',
+  t:'臭気、光、音、気温などの感覚過敏があり、日常生活に制限が認められれば、それを考慮する。',s:'第3 総合評価 ①現在の病状又は状態像',d:'up'},
+ {id:'h3',q:'執着が強く、臨機応変な対応が難しくて常時の管理・指導が必要',
+  t:'一般企業で就労している場合でも、執着が強く、臨機応変な対応が困難であることなどにより、常時の管理・指導が必要な場合は、2級の可能性を検討する。',s:'第3 総合評価 ④就労状況',d:'up'},
+ {id:'h4',q:'仕事が、保護的な環境での単純・反復的な業務',
+  t:'一般企業で就労している場合でも、仕事の内容が保護的な環境下での専ら単純かつ反復的な業務であれば、2級の可能性を検討する。',s:'第3 総合評価 ④就労状況',d:'up'},
+ {id:'h5',q:'療育手帳が中度より軽いが、発達障害の症状で日常生活に著しい制限がある',
+  t:'療育手帳の判定区分が中度より軽い場合は、発達障害の症状により日常生活に著しい制限が認められれば、1級または2級の可能性を検討する。',s:'第3 総合評価 ⑤その他',d:'up'}];
+const G_AUTO={
+ bias:{id:'auto1',q:'特定の項目に著しい偏りがある',
+  t:'「日常生活能力の判定」の平均が低い場合であっても、各障害の特性に応じて特定の項目に著しく偏りがあり、日常生活に大きな支障が生じていると考えられる場合は、その状況を考慮する。',s:'第3 総合評価 ⑤その他',d:'up'},
+ gap:{id:'auto2',q:'判定と程度に開きがある',
+  t:'「日常生活能力の程度」と「日常生活能力の判定」に齟齬があれば、それを考慮する。',s:'第3 総合評価 ⑤その他',d:'eq'}};
+
+/* ===== 状態 ===== */
+const S={kind:null,mode:null,ability:{},degree:null,g:{},seido:null,shared:false};
+let abIdx=0, step=0;
+
+/* ===== 進み具合 ===== */
+const STEP_LABEL=['はじめに','障害の種類','診断書の有無','日常生活能力の判定','日常生活能力の程度','当てはまる状況','結果'];
+function renderProg(){
+  const p=document.getElementById('prog'); p.innerHTML='';
+  for(let i=0;i<7;i++){const e=document.createElement('i');
+    if(i<step)e.className='done'; if(i===step)e.className='on'; p.appendChild(e);}
+  document.getElementById('progtxt').textContent=STEP_LABEL[step];
+}
+function go(n){
+  step=n;
+  document.querySelectorAll('.step').forEach(el=>el.classList.toggle('hidden',+el.dataset.step!==n));
+  if(n===3){abIdx=0;renderAbility();}
+  if(n===5)renderG();
+  renderProg(); window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleShared(el){S.shared=!S.shared;el.setAttribute('aria-pressed',S.shared);}
+
+/* ===== 1. 種類 ===== */
+const KINDS=[{v:'seishin',l:'精神の障害(うつ病・双極性障害・統合失調症・不安障害 など)'},
+             {v:'chiteki',l:'知的障害'},
+             {v:'hattatsu',l:'発達障害(ASD・ADHD など)'},
+             {v:'other',l:'それ以外(身体・内部疾患・がん・難病 など)'}];
+(function(){const w=document.getElementById('kindOpts');
+ KINDS.forEach(k=>{const b=document.createElement('button');b.className='opt';b.setAttribute('aria-pressed','false');
+  b.innerHTML='<span class="mk"></span><span>'+k.l+'</span>';
+  b.onclick=()=>{S.kind=k.v;[...w.children].forEach(c=>c.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+    const out=k.v==='other';
+    document.getElementById('outOfScope').classList.toggle('hidden',!out);
+    document.getElementById('k-next').disabled=out;};
+  w.appendChild(b);});})();
+
+/* ===== 2. モード ===== */
+function setMode(m,el){S.mode=m;
+  el.parentNode.querySelectorAll('.opt').forEach(c=>c.setAttribute('aria-pressed','false'));
+  el.setAttribute('aria-pressed','true');document.getElementById('m-next').disabled=false;}
+
+/* ===== 3. 判定 ===== */
+function renderAbility(){
+  const it=ABILITY[abIdx];
+  document.getElementById('abIdx').textContent='3';
+  document.getElementById('abTitle').textContent=it.label;
+  document.getElementById('abCount').textContent=(abIdx+1)+' / '+ABILITY.length+' 項目';
+  const w=document.getElementById('abOpts');w.innerHTML='';
+  ABILITY_CHOICES.forEach(c=>{const b=document.createElement('button');b.className='opt';
+    b.setAttribute('aria-pressed',String(S.ability[it.id]===c.v));
+    b.innerHTML='<span class="mk"></span><span class="num">'+c.v+'</span><span>'+c.l+'</span>';
+    b.onclick=()=>{S.ability[it.id]=c.v;nextAbility();};w.appendChild(b);});
+}
+function nextAbility(){ if(abIdx<ABILITY.length-1){abIdx++;renderAbility();window.scrollTo({top:0,behavior:'smooth'});} else {renderDegree();go(4);} }
+function prevAbility(){ if(abIdx>0){abIdx--;renderAbility();} else go(2); }
+function skipAbility(){ delete S.ability[ABILITY[abIdx].id]; nextAbility(); }
+
+/* ===== 4. 程度 ===== */
+function renderDegree(){const w=document.getElementById('degOpts');w.innerHTML='';
+ DEGREE.forEach(d=>{const b=document.createElement('button');b.className='opt';
+  b.setAttribute('aria-pressed',String(S.degree===d.v));
+  b.innerHTML='<span class="mk"></span><span>'+d.l+'</span>';
+  b.onclick=()=>{S.degree=d.v;go(5);};w.appendChild(b);});}
+
+/* ===== 5. 総合評価の質問 ===== */
+function gset(){const ex=S.kind==='chiteki'?G_CHITEKI:S.kind==='hattatsu'?G_HATTATSU:G_SEISHIN;return G_COMMON.concat(ex);}
+function renderG(){const w=document.getElementById('gOpts');w.innerHTML='';
+ gset().forEach(g=>{const b=document.createElement('button');b.className='opt chk';
+  b.setAttribute('aria-pressed',String(!!S.g[g.id]));
+  b.innerHTML='<span class="mk"></span><span>'+g.q+'</span>';
+  b.onclick=()=>{S.g[g.id]=!S.g[g.id];b.setAttribute('aria-pressed',String(!!S.g[g.id]));};w.appendChild(b);});
+ // 初診日の制度
+ const h=document.createElement('div');h.style.marginTop='22px';
+ h.innerHTML='<p class="qtitle" style="font-size:16px">初診日に加入していた制度(任意)</p>';w.parentNode.insertBefore(h,w.nextSibling);
+ if(document.getElementById('seidoOpts'))return;
+ const s=document.createElement('div');s.className='opts';s.id='seidoOpts';
+ [{v:'kokumin',l:'国民年金(自営・学生・無職・扶養に入っていた など)'},{v:'kousei',l:'厚生年金(会社員・公務員)'},{v:'fumei',l:'わからない'}]
+  .forEach(o=>{const b=document.createElement('button');b.className='opt';b.setAttribute('aria-pressed','false');
+   b.innerHTML='<span class="mk"></span><span>'+o.l+'</span>';
+   b.onclick=()=>{S.seido=o.v;s.querySelectorAll('.opt').forEach(c=>c.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');};
+   s.appendChild(b);});
+ h.appendChild(s);}
+
+/* ===== 計算 ===== */
+function average(){const v=ABILITY.map(i=>S.ability[i.id]).filter(x=>x!==undefined);
+ if(!v.length)return{value:null,answered:0,total:ABILITY.length};
+ return{value:Math.round(v.reduce((a,b)=>a+b,0)/v.length*100)/100,answered:v.length,total:ABILITY.length};}
+function bandLabel(a){const b=BANDS.find(x=>a>=x.min&&(x.max===null||a<x.max));return b?b.label:BANDS[BANDS.length-1].label;}
+function nearBoundary(a){return [1.5,2,2.5,3,3.5].some(m=>Math.abs(a-m)<=0.15);}
+function hasBias(){const v=ABILITY.map(i=>S.ability[i.id]).filter(x=>x!==undefined);
+ return v.length>=4 && Math.max(...v)-Math.min(...v)>=2;}
+
+/* ===== 6. 結果 ===== */
+function showResult(){
+  const avg=average();
+  document.getElementById('rAvg').textContent=avg.value===null?'—':avg.value.toFixed(2);
+  document.getElementById('rAnswered').textContent=avg.value===null?'':avg.total+'項目中'+avg.answered+'項目の回答から計算しています。';
+  const V=document.getElementById('rVerdict');
+  let band=null,grade=null,blank=false;
+  if(avg.value===null){V.innerHTML='7項目のうち、少なくとも1つに答えると目安を出せます。';}
+  else if(S.degree===null){V.innerHTML='「日常生活能力の程度」を選ぶと目安を出せます。';}
+  else{
+    band=bandLabel(avg.value);grade=TABLE[band][S.degree-1];
+    if(grade===null){blank=true;
+      V.innerHTML='国のガイドラインの表では、この組み合わせ(判定平均 '+avg.value.toFixed(2)+' × 程度('+S.degree+'))に<b>目安が定められていません</b>。判定(7項目)と程度の間に開きがあるためです。ガイドラインは、こうした場合は診断書を書いた医師に内容を確認したうえで、ほかの記載も含めて総合的に評価する、としています。';}
+    else{
+      V.innerHTML='国のガイドラインでは、この組み合わせ(判定平均 '+avg.value.toFixed(2)+' × 程度('+S.degree+'))の目安は<br><span class="g">「'+grade+'」</span>とされています。';}
+  }
+  document.getElementById('rModeB').classList.toggle('hidden',S.mode!=='B');
+  renderTable(band,S.degree);
+
+  // 制度による違い
+  const sd=document.getElementById('rSeido');
+  let t='表の中の「3級」は、<strong>障害基礎年金として認定する場合には「2級非該当」と置き換える</strong>ことになっています。障害基礎年金には3級がないためです。初診日にどの制度に加入していたかで、扱いが変わります。';
+  if(S.seido==='kokumin'&&grade&&grade.indexOf('3級')>=0)
+    t+='<br><br>あなたが選んだ「国民年金」の場合、この目安の「3級」は<strong>2級非該当(3級のない制度のため)</strong>と読み替えられます。';
+  sd.innerHTML=t;
+
+  // 総合評価
+  const list=[];
+  gset().forEach(g=>{if(S.g[g.id])list.push(g);});
+  if(blank)list.push(G_AUTO.gap);
+  if(hasBias())list.push(G_AUTO.bias);
+  const gw=document.getElementById('rGuide');gw.innerHTML='';
+  if(!list.length){gw.innerHTML='<p style="font-size:14.5px;color:var(--muted)">当てはまるものは選ばれていません。</p>';}
+  list.slice(0,6).forEach(g=>{
+    const d=document.createElement('div');d.style.margin='16px 0 20px';
+    d.innerHTML='<span class="dirtag '+(g.d==='up'?'dir-up':'dir-eq')+'">'+(g.d==='up'?'上げる方向で検討される':'整合性が見られる')+'</span>'
+      +'<div style="font-weight:600;color:var(--h)">'+g.q+'</div>'
+      +'<div class="quote">'+g.t+'</div><div class="qsrc">'+g.s+'</div>';
+    gw.appendChild(d);});
+  if(nearBoundary(avg.value||0)&&!blank){
+    const d=document.createElement('div');d.style.margin='16px 0';
+    d.innerHTML='<span class="dirtag dir-eq">境目に近い</span><div style="font-size:14.5px;color:var(--muted)">判定平均が、表の区分の境目に近い位置です。こうした場合、診断書の各欄の書かれ方が結果を分けることがあります。</div>';
+    gw.appendChild(d);}
+
+  // 診察で伝えること
+  const hard=ABILITY.filter(i=>S.ability[i.id]>=3);
+  const tell=document.getElementById('rTell');
+  tell.innerHTML=hard.length
+    ? '<strong>診察で伝えることを整理する</strong><br>あなたが3・4を付けたのは、次の項目です。この項目について具体的な場面を伝えると、診断書に映りやすくなります。<ul class="plain">'+hard.map(i=>'<li>'+i.label+'</li>').join('')+'</ul>'
+    : '<strong>診察で伝えることを整理する</strong><br>3・4を付けた項目はありませんでした。';
+
+  const nx=document.getElementById('rNext');nx.innerHTML='';
+  const links=[['申立書を書く','フォームに沿って書くと、そのまま提出できる形で印刷できます','#']];
+  if(blank)links.push(['診断書で困ったとき','判定と程度の開きについて','#']);
+  if(S.g.g1||S.g.g2||S.g.g7||S.g.g8)links.push(['働きながら申請する','就労がどう見られるか','#']);
+  if(S.g.g3)links.push(['ひとり暮らしで申請する','独居の評価のされ方','#']);
+  if(S.mode==='B')links.push(['診断書を受け取ったら','実際に書かれた数字で、もう一度確かめてください','#']);
+  links.forEach(l=>{const a=document.createElement('a');a.href=l[2];
+    a.innerHTML='<b>'+l[0]+'</b><span>'+l[1]+'</span>';nx.appendChild(a);});
+
+  go(6);
+}
+function renderTable(band,deg){
+  const t=document.getElementById('gtable');
+  let h='<tr><th>判定平均</th>'+[1,2,3,4,5].map(d=>'<th>程度('+d+')</th>').join('')+'</tr>';
+  BANDS.forEach(b=>{
+    h+='<tr><th>'+b.label+'</th>';
+    for(let d=1;d<=5;d++){
+      const v=TABLE[b.label][d-1];
+      const hit=(b.label===band&&d===deg)?' hit':(v===null?' na':'');
+      h+='<td class="'+hit.trim()+'">'+(v===null?'—':v)+'</td>';}
+    h+='</tr>';});
+  t.innerHTML=h;
+}
+renderProg();
+</script>
+</body>
+</html>

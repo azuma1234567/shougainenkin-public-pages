@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>障害年金の金額 — 障害年金ノート(モック)</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7fbfe;--surface:#fff;--band:#eef6fc;--primary:#0284c7;--link:#0273ad;--chip:#e3f2fc;
+--h:#14425e;--text:#1e3a4d;--muted:#4a6a80;--meta:#6e8ba0;--faint:#8aa5b6;
+--line:#dcebf5;--line2:#d7e9f5;--line3:#cfe6f5;--headline:#e2eef7;
+--ok-t:#067647;--ok-b:#e8f6ef;--warn-t:#8b6a1f;--warn-b:#fdf3dd;--warn-bd:#f0e2bd;--footer:#14425e;--footer-t:#b8d4e6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;font-size:16px;line-height:1.85}
+h1,h2,h3{font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;font-weight:700;color:var(--h);line-height:1.5;margin:0}
+a{color:var(--link);text-underline-offset:3px}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+.ribbon{background:#14425e;color:#fff;font-size:12px;padding:6px 20px;text-align:center}
+header.site{background:var(--surface);border-bottom:1px solid var(--headline)}
+.hd{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;gap:18px;align-items:center}
+.brand{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;color:var(--h);font-size:17px;text-decoration:none}
+.nav{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px}.nav a{color:var(--muted);text-decoration:none}
+.hero{background:linear-gradient(180deg,#e8f4fc 0%,#f7fbfe 100%);padding:34px 0 26px;border-bottom:1px solid var(--line)}
+.crumb{font-size:12.5px;color:var(--meta);margin-bottom:10px}.crumb a{color:var(--meta);text-decoration:none}
+.hero h1{font-size:27px}.hero .lead{margin:12px 0 0;color:var(--muted);font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;margin:18px 0}
+.card h2{font-size:19px;margin-bottom:6px}.card h3{font-size:15.5px;margin:20px 0 4px}
+label.f{display:block;font-size:13.5px;color:var(--h);font-weight:600;margin:18px 0 6px}
+.hintline{font-size:12.5px;color:var(--meta);margin:-2px 0 6px}
+input[type=number],input[type=text],select{width:100%;border:1.5px solid var(--line2);border-radius:10px;padding:11px 13px;font-size:16px;font-family:inherit;color:var(--text);background:#fff}
+input:focus,select:focus{outline:2px solid var(--primary);outline-offset:1px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0}
+.chips button{border:1.5px solid var(--line2);background:#fff;border-radius:999px;padding:10px 18px;font-size:15px;cursor:pointer;font-family:inherit;color:var(--text)}
+.chips button[aria-pressed=true]{border-color:var(--primary);background:var(--chip);color:var(--h);font-weight:600}
+.chips button[disabled]{opacity:.38;cursor:not-allowed}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+details{border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0;background:#fff}
+details summary{cursor:pointer;font-size:14px;color:var(--link);font-weight:600}
+details .in{font-size:14px;color:var(--muted);margin-top:10px}
+.note{background:var(--band);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--muted);margin:14px 0}
+.note strong{color:var(--h)}
+.warnbox{background:var(--warn-b);border:1px solid var(--warn-bd);border-radius:12px;padding:13px 15px;font-size:13.5px;color:#6b5316;margin:12px 0}
+.warnbox b{color:var(--warn-t)}
+/* result */
+.big{background:linear-gradient(180deg,#e8f4fc 0%,#f4fafe 100%);border:1px solid var(--line3);border-radius:16px;padding:24px;margin:6px 0 16px}
+.big .y{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:40px;color:var(--h);line-height:1.2}
+.big .y small{font-size:18px;margin-left:4px}
+.big .m{display:flex;gap:26px;flex-wrap:wrap;margin-top:10px;font-size:14px;color:var(--muted)}
+.big .m b{font-family:"Zen Kaku Gothic New",sans-serif;color:var(--h);font-size:20px}
+table.br{width:100%;border-collapse:collapse;font-size:14.5px;margin:8px 0}
+table.br th,table.br td{border-bottom:1px solid var(--line2);padding:11px 4px;text-align:left;vertical-align:top}
+table.br td.n{text-align:right;white-space:nowrap;font-family:"Zen Kaku Gothic New",sans-serif;color:var(--h);font-weight:700}
+table.br td.n.zero{color:var(--faint);font-weight:500}
+table.br .why{display:block;font-size:12.5px;color:var(--meta);font-weight:400;font-family:inherit}
+table.br tr.total td{border-top:2px solid var(--line3);border-bottom:0;padding-top:14px;font-size:17px}
+.flag{display:inline-block;font-size:11.5px;background:var(--ok-b);color:var(--ok-t);border-radius:999px;padding:2px 10px;margin:2px 6px 2px 0}
+.next a{display:block;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:8px 0;text-decoration:none;background:#fff}
+.next b{display:block;color:var(--h);font-family:"Zen Kaku Gothic New",sans-serif;font-size:15px}
+.next span{font-size:13.5px;color:var(--muted)}
+footer.site{background:var(--footer);color:var(--footer-t);margin-top:44px;padding:28px 0;font-size:13px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="ribbon">実装用モック — docs/kingaku-tool-design-2026-09-02.md の参照HTML</div>
+<header class="site"><div class="hd"><a class="brand" href="#">障害年金ノート</a>
+<nav class="nav"><a href="#">はじめての方へ</a><a href="#">病気から探す</a><a href="#">申請の流れ</a><a href="#">悩みから探す</a><a href="#">実例と数字</a><a href="#">コラム</a></nav></div></header>
+
+<section class="hero"><div class="wrap">
+<div class="crumb"><a href="#">ホーム</a> ／ <a href="#">道具</a> ／ 障害年金の金額</div>
+<h1>障害年金は、いくらになるか</h1>
+<p class="lead">等級と、初診日に入っていた制度と、家族の状況から、年額と月額を内訳つきで出します。厚生年金の報酬比例部分まで計算します。入力した内容は送信されません。</p>
+</div></section>
+
+<main class="wrap">
+<div class="card">
+  <h2>入力</h2>
+
+  <label class="f">1. 等級</label>
+  <div class="chips" id="grade"></div>
+  <p class="hintline">まだ分からないときは <a href="#">等級の目安をしらべる</a> から。</p>
+
+  <label class="f">2. 初診日に入っていた制度</label>
+  <div class="chips" id="seido"></div>
+  <p class="hintline">会社員・公務員なら厚生年金。自営・学生・無職・扶養に入っていたなら国民年金です。</p>
+  <div class="warnbox hidden" id="seidoWarn"><b>3級は障害厚生年金だけの等級です。</b>障害基礎年金に3級はありません。</div>
+
+  <div class="grid2">
+    <div><label class="f">3. 18歳の年度末までの子</label>
+      <select id="kids"><option value="0">いない</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+      <p class="hintline">20歳未満で障害等級1・2級の子も数えます。</p></div>
+    <div id="spouseWrap"><label class="f">4. 生計を維持している65歳未満の配偶者</label>
+      <select id="spouse"><option value="0">いない</option><option value="1">いる</option></select>
+      <p class="hintline">障害厚生年金の1級・2級のときだけ加算されます。</p></div>
+  </div>
+
+  <div id="kouseiWrap" class="hidden">
+    <h3>厚生年金の報酬比例部分</h3>
+    <div class="grid2">
+      <div><label class="f">5. 平均標準報酬額(月・円)</label><input type="number" id="hyoujun" placeholder="例: 300000"></div>
+      <div><label class="f">6. 厚生年金の加入月数</label><input type="number" id="tsuki" placeholder="例: 120">
+        <p class="hintline">初診日の前月までの月数です。</p></div>
+    </div>
+    <details>
+      <summary>平均標準報酬額が分からない</summary>
+      <div class="in">
+        <b>ねんきん定期便</b>(毎年の誕生月に届くハガキ)の「これまでの年金加入期間」と「これまでの保険料納付額」から見当がつきます。<br>
+        <b>ねんきんネット</b>でも確認できます(基礎年金番号が必要です)。<br>
+        <b>年金事務所</b>でも教えてもらえます。<br><br>
+        ざっくりでよければ、<b>厚生年金に入っていた頃の、月々の給与とボーナスを12で割った額</b>をおおよそで入れてください。目安になります。
+      </div>
+    </details>
+    <details>
+      <summary>平成15年3月以前にも厚生年金に入っていた</summary>
+      <div class="in">
+        平成15年3月までと4月以降で計算の乗率が違います。分けて入れると正確になります。
+        <div class="grid2" style="margin-top:10px">
+          <div><label class="f">平成15年3月以前の月数</label><input type="number" id="kyuTsuki" placeholder="0"></div>
+          <div><label class="f">その頃の平均標準報酬月額(円)</label><input type="number" id="kyuHyoujun" placeholder="例: 250000"></div>
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+
+<div class="card" id="resultCard">
+  <h2>計算の結果</h2>
+  <div class="big">
+    <div class="y" id="yen">—</div>
+    <div class="m"><span>月あたり <b id="mon">—</b></span><span>偶数月の振込 <b id="bim">—</b></span></div>
+  </div>
+  <div id="flags"></div>
+  <h3>内訳</h3>
+  <table class="br" id="breakdown"></table>
+
+  <div class="note" id="kyufu"></div>
+
+  <div class="warnbox">
+    <b>これは概算です。</b>実際の額は日本年金機構が決定します。とくに障害厚生年金は、機構が<b>従前額保障</b>という別の計算とも比べて高いほうで決定するため、<b>ここで出した額より高くなることがあります。</b>
+  </div>
+  <div class="note">
+    金額は<strong>毎年4月に改定</strong>されます。表示しているのは<strong>令和8年度</strong>の額です。<br>
+    生活保護・傷病手当金・労災・老齢年金とは<strong>調整があります</strong>(ここでは計算していません)。 → <a href="#">他の制度との調整</a><br>
+    障害年金は<strong>非課税</strong>ですが、健康保険の扶養認定では収入として数えます。 → <a href="#">非課税と収入扱いのちがい</a>
+  </div>
+</div>
+
+<div class="card">
+  <h2>ここからできること</h2>
+  <div class="next">
+    <a href="#"><b>等級の目安をしらべる</b><span>自分がどのあたりか、国の基準に当てはめる</span></a>
+    <a href="#"><b>必要書類チェックリスト</b><span>自分の場合に何をそろえるか</span></a>
+    <a href="#"><b>申立書をつくる</b><span>いちばん重い書類を、フォームに沿って書く</span></a>
+    <a href="#"><b>数字で見る障害年金</b><span>全体でどのくらいの人が、どの等級で決まっているか</span></a>
+  </div>
+</div>
+</main>
+<footer class="site"><div class="wrap">障害年金ノート — 実装用モック</div></footer>
+
+<script>
+/* ===== data/amounts.ts に置く値(令和8年度) ===== */
+const A={
+  KISO_1:1059125, KISO_2:847300,
+  KO_12:243800, KO_3:81300,
+  HAIGUUSHA:243800,
+  SAITEI_3:635500,
+  KYUFU_1:7025, KYUFU_2:5620,   /* 月額 */
+  RATE_NEW:5.481/1000, RATE_OLD:7.125/1000,
+  MINASHI:300, FY:'令和8年度'
+};
+const S={grade:2,seido:null,kids:0,spouse:0,hyoujun:null,tsuki:null,kyuTsuki:0,kyuHyoujun:null};
+
+/* ---- 等級 ---- */
+(function(){const w=document.getElementById('grade');
+ [1,2,3].forEach(g=>{const b=document.createElement('button');b.textContent=g+'級';
+  b.setAttribute('aria-pressed',String(S.grade===g));
+  b.onclick=()=>{S.grade=g; if(g===3)S.seido='kousei'; sync();};w.appendChild(b);});})();
+/* ---- 制度 ---- */
+(function(){const w=document.getElementById('seido');
+ [{v:'kokumin',l:'国民年金'},{v:'kousei',l:'厚生年金'}].forEach(o=>{
+  const b=document.createElement('button');b.textContent=o.l;b.dataset.v=o.v;
+  b.onclick=()=>{if(b.disabled)return;S.seido=o.v;sync();};w.appendChild(b);});})();
+
+['kids','spouse','hyoujun','tsuki','kyuTsuki','kyuHyoujun'].forEach(k=>{
+  const el=document.getElementById(k);
+  el.addEventListener('input',()=>{S[k]=el.value===''?null:Number(el.value);calc();});
+});
+
+function sync(){
+  document.querySelectorAll('#grade button').forEach((b,i)=>b.setAttribute('aria-pressed',String(S.grade===i+1)));
+  document.querySelectorAll('#seido button').forEach(b=>{
+    const dis = (S.grade===3 && b.dataset.v==='kokumin');
+    b.disabled=dis; b.setAttribute('aria-pressed',String(S.seido===b.dataset.v));
+  });
+  document.getElementById('seidoWarn').classList.toggle('hidden',S.grade!==3);
+  document.getElementById('kouseiWrap').classList.toggle('hidden',S.seido!=='kousei');
+  document.getElementById('spouseWrap').style.opacity=(S.seido==='kousei'&&S.grade<=2)?'1':'.45';
+  calc();
+}
+
+/* ===== 計算(設計書 §4。1行も変えないこと) ===== */
+function houshuHirei(){
+  if(S.seido!=='kousei')return {v:null,minashi:false};
+  const tsuki=Number(S.tsuki||0), kyu=Number(S.kyuTsuki||0);
+  const shin=Math.max(0,tsuki-kyu);
+  if(!tsuki||(!S.hyoujun&&!S.kyuHyoujun))return {v:null,minashi:false};
+  const B=Number(S.hyoujun||0)*A.RATE_NEW*shin;
+  const Aa=Number(S.kyuHyoujun||S.hyoujun||0)*A.RATE_OLD*kyu;
+  let v=Aa+B, minashi=false;
+  if(tsuki<A.MINASHI){v=v*A.MINASHI/tsuki;minashi=true;}          /* ★300月みなし */
+  if(S.grade===1)v=v*1.25;
+  return {v:v,minashi:minashi};
+}
+function calc(){
+  const rows=[],flags=[];
+  const kousei=S.seido==='kousei';
+  /* 障害基礎年金 */
+  let kiso=0,kisoWhy='';
+  if(S.grade===1)kiso=A.KISO_1; else if(S.grade===2)kiso=A.KISO_2;
+  else kisoWhy='障害基礎年金に3級はありません';
+  rows.push(['障害基礎年金'+(S.grade<3?' '+S.grade+'級':''),kiso,kisoWhy]);
+  /* 子の加算 */
+  const kids=Number(S.kids||0);
+  let ko=0,koWhy='';
+  if(S.grade<3)ko=A.KO_12*Math.min(kids,2)+A.KO_3*Math.max(kids-2,0);
+  else koWhy='3級には子の加算がありません';
+  if(S.grade<3&&kids===0)koWhy='対象の子がいないため';
+  rows.push(['子の加算'+(kids?'('+kids+'人)':''),ko,koWhy]);
+  /* 報酬比例 */
+  const hh=houshuHirei();
+  rows.push(['報酬比例部分',hh.v,
+    !kousei?'初診日が国民年金のため、報酬比例部分はありません'
+    :hh.v===null?'平均標準報酬額と加入月数を入れると計算します':'']);
+  if(hh.minashi)flags.push('加入月数が300月未満のため、300月として計算しています');
+  if(S.grade===1&&hh.v!==null)flags.push('1級のため、報酬比例部分を1.25倍しています');
+  /* 配偶者加給 */
+  let hai=0,haiWhy='';
+  if(kousei&&S.grade<=2&&Number(S.spouse))hai=A.HAIGUUSHA;
+  else if(!kousei)haiWhy='障害基礎年金に配偶者の加算はありません';
+  else if(S.grade===3)haiWhy='3級には配偶者の加算がありません';
+  else haiWhy='対象の配偶者がいないため';
+  rows.push(['配偶者加給年金額',hai,haiWhy]);
+  /* 合計 */
+  let total=kiso+ko+(hh.v||0)+hai;
+  /* 3級の最低保障 */
+  if(kousei&&S.grade===3&&hh.v!==null&&total<A.SAITEI_3){
+    total=A.SAITEI_3;flags.push('3級の最低保障額('+num(A.SAITEI_3)+'円)が適用されています');
+  }
+  const known = (S.grade<3) || (hh.v!==null);
+  document.getElementById('yen').innerHTML = known? num(Math.round(total))+'<small>円 / 年</small>' : '—';
+  document.getElementById('mon').textContent = known? '約'+num(Math.round(total/12))+'円' : '—';
+  document.getElementById('bim').textContent = known? '約'+num(Math.round(total/6))+'円' : '—';
+
+  const t=document.getElementById('breakdown');
+  t.innerHTML=rows.map(r=>'<tr><th>'+r[0]+(r[2]?'<span class="why">'+r[2]+'</span>':'')+'</th>'
+    +'<td class="n'+((r[1]===0||r[1]===null)?' zero':'')+'">'+(r[1]===null?'—':num(Math.round(r[1]))+'円')+'</td></tr>').join('')
+    +'<tr class="total"><th>合計(年額)</th><td class="n">'+(known?num(Math.round(total))+'円':'—')+'</td></tr>';
+  document.getElementById('flags').innerHTML=flags.map(f=>'<span class="flag">'+f+'</span>').join('');
+
+  /* 年金生活者支援給付金 */
+  const k=document.getElementById('kyufu');
+  if(S.grade===3){
+    k.innerHTML='<strong>年金生活者支援給付金は、3級では受け取れません。</strong>この給付金は障害基礎年金の受給者が対象で、障害厚生年金3級のみの方は対象外です。';
+  }else{
+    const m=S.grade===1?A.KYUFU_1:A.KYUFU_2;
+    k.innerHTML='<strong>年金生活者支援給付金</strong>(所得が一定以下の場合)<br>'
+      +S.grade+'級なら 月 '+num(m)+'円(年 '+num(m*12)+'円)が上乗せされます。合計額には含めていません。'
+      +'<br>障害年金を請求するときに<strong>同時に請求するのが原則</strong>で、出し忘れの多い書類です。';
+  }
+}
+function num(n){return (n||0).toLocaleString('ja-JP');}
+sync();
+</script>
+</body>
+</html>

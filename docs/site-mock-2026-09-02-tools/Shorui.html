@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>必要書類チェックリスト — 障害年金ノート(モック)</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7fbfe;--surface:#fff;--band:#eef6fc;--primary:#0284c7;--link:#0273ad;--chip:#e3f2fc;
+--h:#14425e;--text:#1e3a4d;--muted:#4a6a80;--meta:#6e8ba0;--faint:#8aa5b6;
+--line:#dcebf5;--line2:#d7e9f5;--line3:#cfe6f5;--headline:#e2eef7;
+--ok-t:#067647;--ok-b:#e8f6ef;--warn-t:#8b6a1f;--warn-b:#fdf3dd;--warn-bd:#f0e2bd;--footer:#14425e;--footer-t:#b8d4e6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;font-size:16px;line-height:1.85}
+h1,h2,h3{font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;font-weight:700;color:var(--h);line-height:1.5;margin:0}
+a{color:var(--link);text-underline-offset:3px}
+.wrap{max-width:800px;margin:0 auto;padding:0 20px}
+.ribbon{background:#14425e;color:#fff;font-size:12px;padding:6px 20px;text-align:center}
+header.site{background:var(--surface);border-bottom:1px solid var(--headline)}
+.hd{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;gap:18px;align-items:center}
+.brand{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;color:var(--h);font-size:17px;text-decoration:none}
+.nav{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px}.nav a{color:var(--muted);text-decoration:none}
+.hero{background:linear-gradient(180deg,#e8f4fc 0%,#f7fbfe 100%);padding:34px 0 26px;border-bottom:1px solid var(--line)}
+.crumb{font-size:12.5px;color:var(--meta);margin-bottom:10px}.crumb a{color:var(--meta);text-decoration:none}
+.hero h1{font-size:27px}.hero .lead{margin:12px 0 0;color:var(--muted);font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;margin:18px 0}
+.card h2{font-size:19px;margin-bottom:6px}
+.q{margin:20px 0 4px}
+.q .t{font-size:15.5px;font-weight:600;color:var(--h)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chips button{border:1.5px solid var(--line2);background:#fff;border-radius:999px;padding:9px 16px;font-size:14.5px;cursor:pointer;font-family:inherit;color:var(--text)}
+.chips button[aria-pressed=true]{border-color:var(--primary);background:var(--chip);color:var(--h);font-weight:600}
+.note{background:var(--band);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--muted);margin:14px 0}
+.note strong{color:var(--h)}
+.warnbox{background:var(--warn-b);border:1px solid var(--warn-bd);border-radius:12px;padding:13px 15px;font-size:13.5px;color:#6b5316;margin:12px 0}
+.warnbox b{color:var(--warn-t)}
+.doc{display:flex;gap:12px;align-items:flex-start;border-bottom:1px solid var(--line2);padding:14px 2px}
+.doc:last-child{border-bottom:0}
+.doc input{width:20px;height:20px;margin-top:5px;flex:none;accent-color:var(--primary)}
+.doc .b{flex:1}
+.doc .n{font-weight:600;color:var(--h);font-size:15.5px}
+.doc .n a{font-size:12.5px;margin-left:8px;font-weight:400}
+.doc .meta{font-size:12.5px;color:var(--meta);margin-top:2px}
+.doc .meta span{margin-right:14px;white-space:nowrap}
+.doc .stuck{font-size:13px;color:var(--muted);margin-top:5px}
+.doc .why{display:inline-block;font-size:11.5px;background:var(--chip);color:var(--h);border-radius:999px;padding:1px 9px;margin-left:6px}
+.sec{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;color:var(--h);font-size:15px;margin:22px 0 2px;padding-top:14px;border-top:2px solid var(--line3)}
+.sec:first-of-type{border-top:0;padding-top:0}
+ul.ask{margin:8px 0;padding-left:1.25em;font-size:14.5px}
+ul.ask li{margin:7px 0}
+.btn{border:0;border-radius:999px;background:var(--primary);color:#fff;padding:13px 26px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn.ghost{background:#fff;color:var(--link);border:1.5px solid var(--line3)}
+.btn.sm{padding:9px 18px;font-size:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+footer.site{background:var(--footer);color:var(--footer-t);margin-top:44px;padding:28px 0;font-size:13px}
+.hidden{display:none!important}
+@media print{
+ @page{size:A4 portrait;margin:14mm}
+ body{background:#fff;font-size:11px;line-height:1.6}
+ .no-print{display:none!important}
+ .card{border:0;padding:0;margin:0 0 8px}
+ .doc{padding:6px 2px}.doc input{width:13px;height:13px}
+ .doc .n{font-size:12px}.doc .meta,.doc .stuck{font-size:10px}
+ .sec{font-size:12px;margin:10px 0 2px;padding-top:6px}
+ .note,.warnbox{padding:8px 10px;font-size:10px;margin:6px 0}
+ h1{font-size:16px}h2{font-size:13px}
+}
+</style>
+</head>
+<body>
+<div class="ribbon no-print">実装用モック — docs/shorui-tool-design-2026-09-02.md の参照HTML</div>
+<header class="site no-print"><div class="hd"><a class="brand" href="#">障害年金ノート</a>
+<nav class="nav"><a href="#">はじめての方へ</a><a href="#">病気から探す</a><a href="#">申請の流れ</a><a href="#">悩みから探す</a><a href="#">実例と数字</a><a href="#">コラム</a></nav></div></header>
+
+<section class="hero no-print"><div class="wrap">
+<div class="crumb"><a href="#">ホーム</a> ／ <a href="#">道具</a> ／ 必要書類チェックリスト</div>
+<h1>自分に必要な書類だけを、1枚にする</h1>
+<p class="lead">7つの質問に答えると、あなたの場合に要る書類だけが出ます。年金事務所へ行く日の持ち物と、窓口で聞くことも一緒に印刷できます。答えたくない質問は飛ばせます。</p>
+</div></section>
+
+<main class="wrap">
+<div class="card no-print">
+  <h2>質問</h2>
+  <div id="qs"></div>
+  <div class="row"><button class="btn ghost sm" onclick="clearAll()">選び直す</button></div>
+</div>
+
+<div class="card">
+  <h2>そろえる書類</h2>
+  <p class="note no-print"><strong>チェックはこの端末に保存されます。</strong>集め終わったものに印をつけながら進めてください。</p>
+  <div id="list"></div>
+  <div class="warnbox" style="margin-top:18px">
+    <b>これで全部とは限りません。</b>制度は変わりますし、事情によって窓口で追加を求められることがあります。<b>最後は年金事務所で確認してください。</b>
+  </div>
+</div>
+
+<div class="card">
+  <h2>年金事務所へ行く日の持ち物</h2>
+  <div id="mochimono"></div>
+</div>
+
+<div class="card">
+  <h2>窓口で聞くこと</h2>
+  <ul class="ask">
+    <li>私の初診日は、この日で問題ありませんか</li>
+    <li>納付要件は満たしていますか(記録を見てもらう)</li>
+    <li>診断書はどの様式になりますか</li>
+    <li><b>さかのぼる請求と、いまの請求の両方の形で出せますか</b></li>
+    <li>この書類で、足りないものはありますか</li>
+    <li>提出したあと、結果はいつごろ、どう届きますか</li>
+    <li>年金生活者支援給付金の請求書は入っていますか</li>
+  </ul>
+  <div class="row no-print">
+    <button class="btn" onclick="window.print()">この1枚を印刷する</button>
+    <button class="btn ghost sm" onclick="alert('モックのため未実装')">この端末から消す</button>
+  </div>
+</div>
+</main>
+<footer class="site no-print"><div class="wrap">障害年金ノート — 実装用モック</div></footer>
+
+<script>
+/* ===== 質問 ===== */
+const Q=[
+ {id:'seido',t:'1. 初診日に入っていた制度は',o:[['kokumin','国民年金'],['kousei','厚生年金'],['fumei','わからない']]},
+ {id:'hatachi',t:'2. 初診日は20歳より前ですか',o:[['mae','20歳より前'],['ato','20歳以降'],['fumei','わからない']]},
+ {id:'kata',t:'3. 請求のかた',o:[['honrai','本来請求'],['jigo','事後重症'],['sokyuu','遡及'],['mitei','まだ決めていない']]},
+ {id:'shurui',t:'4. 障害の種類',o:[['seishin','精神'],['shitai','肢体'],['me','眼'],['kikaku','聴覚・平衡・そしゃく・言語'],['naibu','内部(心臓・腎臓・肝臓・呼吸器・糖尿病)'],['ketsueki','血液・造血器'],['sonota','その他・複数']]},
+ {id:'byouin',t:'5. 初診の病院と、いま診断書を書いてもらう病院は',o:[['onaji','同じ'],['chigau','違う'],['karute','違ううえ、カルテが残っていないと言われた'],['fumei','わからない']]},
+ {id:'kazoku',t:'6. 家族(あてはまるものすべて)',multi:true,o:[['ko','18歳の年度末までの子がいる'],['haigu','65歳未満の配偶者がいる'],['nashi','どちらもいない']]},
+ {id:'jiko',t:'7. 交通事故など、第三者の行為が原因ですか',o:[['hai','はい'],['iie','いいえ']]}
+];
+const S={kazoku:[]};
+
+/* ===== 書類データ =====
+   fee: 'byouin'=病院ごとに決まっています / 'yakusho'=役所の手数料 / null=かからない
+   ★様式番号は §6 で公式ページから転記して埋めること */
+const DOCS=[
+ {id:'seikyuusho',sec:'年金事務所・市区町村でもらう',n:'年金請求書(障害給付)',
+  where:'年金事務所・市区町村の窓口',fee:null,wait:null,
+  stuck:'様式が複数あります。窓口で「障害年金の請求書」と伝えると出してもらえます。',url:'#',always:true},
+ {id:'moushitate',sec:'自分で書く',n:'病歴・就労状況等申立書',
+  where:'様式は年金事務所・機構のサイト',fee:null,wait:null,
+  stuck:'いちばん重い書類です。発病から今日まで、期間をあけずに書きます。',
+  tool:['申立書をつくる','#'],url:'#',always:true},
+ {id:'shindansho',sec:'病院でもらう',n:'診断書',
+  where:'いま診てもらっている病院',fee:'byouin',wait:'byouin',
+  stuck:'障害の種類ごとに様式が違います。先に様式を確定してから依頼してください。',url:'#',always:true},
+ {id:'shindansho2',sec:'病院でもらう',n:'診断書(障害認定日ころのもの・2通目)',
+  where:'当時かかっていた病院',fee:'byouin',wait:'byouin',
+  stuck:'当時の病院に依頼します。カルテが残っているかを先に電話で確認してください。',url:'#',
+  when:s=>s.kata==='sokyuu',why:'さかのぼる請求のため'},
+ {id:'jushinjokyo',sec:'病院でもらう',n:'受診状況等証明書',
+  where:'いちばん最初にかかった病院',fee:'byouin',wait:'byouin',
+  stuck:'初診の病院と診断書の病院が同じなら要りません。',url:'#',
+  when:s=>['chigau','karute','fumei'].includes(s.byouin),why:'初診の病院が違うため'},
+ {id:'tenpudekinai',sec:'自分で書く',n:'受診状況等証明書が添付できない申立書',
+  where:'様式は機構のサイト',fee:null,wait:null,
+  stuck:'お薬手帳・診察券・領収書など、当時が分かる資料を一緒に出します。',url:'#',
+  when:s=>s.byouin==='karute',why:'カルテが残っていないため'},
+ {id:'daisansha',sec:'人に書いてもらう',n:'第三者証明',
+  where:'当時を知る、三親等以内でない人',fee:null,wait:null,
+  stuck:'親・きょうだいには頼めません。友人・隣人・先生・同僚・民生委員などに、原則2人分。',url:'#',
+  when:s=>s.byouin==='karute',why:'カルテが残っていないため'},
+ {id:'nenkintechou',sec:'手元にあるもの',n:'基礎年金番号がわかるもの',
+  where:'基礎年金番号通知書・年金手帳・マイナンバーカード',fee:null,wait:null,
+  stuck:'見つからないときは、年金事務所で調べてもらえます。',always:true},
+ {id:'kouza',sec:'手元にあるもの',n:'受取先の口座がわかるもの',
+  where:'通帳・キャッシュカード',fee:null,wait:null,
+  stuck:'本人名義の口座です。',always:true},
+ {id:'honnin',sec:'手元にあるもの',n:'本人確認書類',
+  where:'マイナンバーカード・運転免許証など',fee:null,wait:null,stuck:'',always:true},
+ {id:'koseki',sec:'役所でもらう',n:'戸籍謄本',
+  where:'本籍地の市区町村',fee:'yakusho',wait:null,
+  stuck:'請求日より前6か月以内のものを求められることがあります。取る時期に注意。',
+  when:s=>s.kazoku.includes('ko')||s.kazoku.includes('haigu'),why:'子・配偶者の加算のため'},
+ {id:'juminhyou',sec:'役所でもらう',n:'世帯全員の住民票',
+  where:'お住まいの市区町村',fee:'yakusho',wait:null,
+  stuck:'マイナンバーの記載の有無を、窓口で確認してください。',
+  when:s=>s.kazoku.includes('ko')||s.kazoku.includes('haigu'),why:'生計を同じくしていることの確認'},
+ {id:'zaigaku',sec:'学校でもらう',n:'在学証明書または学生証の写し',
+  where:'子が通っている学校',fee:null,wait:null,
+  stuck:'高校生の子がいる場合です。',
+  when:s=>s.kazoku.includes('ko'),why:'子の加算のため'},
+ {id:'haigushotoku',sec:'役所でもらう',n:'配偶者の所得を証明するもの',
+  where:'お住まいの市区町村',fee:'yakusho',wait:null,
+  stuck:'',
+  when:s=>s.kazoku.includes('haigu'),why:'配偶者の加算のため'},
+ {id:'honninshotoku',sec:'役所でもらう',n:'本人の所得を確認する書類',
+  where:'お住まいの市区町村',fee:'yakusho',wait:null,
+  stuck:'20歳前に初診日がある場合は、本人の前年所得に制限があります(親や配偶者の収入は関係ありません)。',
+  when:s=>s.hatachi==='mae',why:'20歳前傷病の所得制限のため'},
+ {id:'jikojoukyou',sec:'年金事務所でもらう',n:'第三者行為事故状況届 ほか',
+  where:'年金事務所',fee:null,wait:null,
+  stuck:'事故証明書などが一緒に必要になります。窓口で一式を確認してください。',
+  when:s=>s.jiko==='hai',why:'第三者の行為が原因のため'},
+ {id:'kanyuukikan',sec:'年金事務所でもらう',n:'年金加入期間確認通知書',
+  where:'共済組合',fee:null,wait:null,
+  stuck:'公務員・私学共済などの加入歴がある場合です。',
+  when:s=>s.seido==='kousei',why:'共済の加入歴がある場合'}
+];
+const MOCHIMONO=[
+ '予約した日時のメモ(予約は電話かネットで。当日いきなり行くと待つことがあります)',
+ '基礎年金番号がわかるもの',
+ '本人確認書類',
+ '印鑑(原則不要になりましたが、念のため)',
+ 'このチェックリストを印刷したもの',
+ '書きかけの申立書(そのままでかまいません。見てもらえます)',
+ 'お薬手帳・診察券(初診日の手がかりになります)',
+ '聞きたいことを書いたメモ'
+];
+
+/* ===== 描画 ===== */
+function renderQ(){
+ const w=document.getElementById('qs');w.innerHTML='';
+ Q.forEach(q=>{
+  const d=document.createElement('div');d.className='q';
+  d.innerHTML='<div class="t">'+q.t+'</div>';
+  const c=document.createElement('div');c.className='chips';
+  q.o.forEach(([v,l])=>{
+   const b=document.createElement('button');b.textContent=l;
+   const on=q.multi? S[q.id].includes(v) : S[q.id]===v;
+   b.setAttribute('aria-pressed',String(on));
+   b.onclick=()=>{
+     if(q.multi){
+       if(v==='nashi'){S[q.id]=S[q.id].includes('nashi')?[]:['nashi'];}
+       else{S[q.id]=S[q.id].filter(x=>x!=='nashi');
+            const i=S[q.id].indexOf(v); if(i<0)S[q.id].push(v); else S[q.id].splice(i,1);}
+     } else { S[q.id]= S[q.id]===v? undefined : v; }
+     renderQ();render();};
+   c.appendChild(b);});
+  d.appendChild(c);w.appendChild(d);});
+}
+function feeText(f){return f==='byouin'?'文書料がかかります(病院ごとに決まっています)'
+  : f==='yakusho'?'役所の手数料がかかります' : '';}
+function waitText(w){return w==='byouin'?'すぐには出ません。経験として、依頼から1か月近くかかることもあると語られています':'';}
+
+function render(){
+ const list=document.getElementById('list');
+ const items=DOCS.filter(d=>d.always||(d.when&&d.when(S)));
+ const secs=[];items.forEach(d=>{if(!secs.includes(d.sec))secs.push(d.sec);});
+ let h='';
+ secs.forEach(sec=>{
+  h+='<div class="sec">'+sec+'</div>';
+  items.filter(d=>d.sec===sec).forEach(d=>{
+   const meta=[d.where?'<span>'+d.where+'</span>':'',feeText(d.fee)?'<span>'+feeText(d.fee)+'</span>':'',
+               waitText(d.wait)?'<span>'+waitText(d.wait)+'</span>':''].filter(Boolean).join('');
+   h+='<div class="doc"><input type="checkbox" id="c-'+d.id+'" onchange="saveChk()">'
+     +'<div class="b"><div class="n">'+d.n
+     +(d.why?'<span class="why">'+d.why+'</span>':'')
+     +(d.url?'<a href="'+d.url+'" class="no-print">様式(機構)</a>':'')
+     +(d.tool?'<a href="'+d.tool[1]+'" class="no-print">'+d.tool[0]+'</a>':'')
+     +'</div>'
+     +(meta?'<div class="meta">'+meta+'</div>':'')
+     +(d.stuck?'<div class="stuck">'+d.stuck+'</div>':'')
+     +'</div></div>';});});
+ /* 国民年金 × 配偶者 の注記 */
+ if(S.kazoku.includes('haigu')&&S.seido==='kokumin'){
+  h+='<div class="warnbox" style="margin-top:14px"><b>配偶者の加算はつきません。</b>配偶者の加算があるのは障害厚生年金の1級・2級だけです。障害基礎年金にあるのは子の加算です。ただし窓口で書類を求められる場合があります。</div>';}
+ if(S.kata==='sokyuu'){
+  h+='<div class="note" style="margin-top:14px"><strong>診断書が2通になります。</strong>障害認定日ころのものと、現在のもの。当時の病院にカルテが残っているかを、先に電話で確かめてください。</div>';}
+ list.innerHTML=h;
+ loadChk();
+ document.getElementById('mochimono').innerHTML=
+  MOCHIMONO.map((m,i)=>'<div class="doc"><input type="checkbox" id="m-'+i+'"><div class="b"><div class="n" style="font-weight:500;font-size:15px">'+m+'</div></div></div>').join('');
+}
+function saveChk(){try{const o={};document.querySelectorAll('#list input').forEach(i=>o[i.id]=i.checked);
+ localStorage.setItem('shougainenkin-note:shorui:v1',JSON.stringify(o));}catch(e){}}
+function loadChk(){try{const o=JSON.parse(localStorage.getItem('shougainenkin-note:shorui:v1')||'{}');
+ Object.keys(o).forEach(k=>{const e=document.getElementById(k);if(e)e.checked=o[k];});}catch(e){}}
+function clearAll(){Object.keys(S).forEach(k=>{if(k==='kazoku')S[k]=[];else delete S[k];});renderQ();render();}
+renderQ();render();
+</script>
+</body>
+</html>

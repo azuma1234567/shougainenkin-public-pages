@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>申立書をつくる — 障害年金ノート(モック)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7fbfe;--surface:#fff;--band:#eef6fc;--primary:#0284c7;--link:#0273ad;--link-h:#015d8c;--chip:#e3f2fc;
+  --h:#14425e;--text:#1e3a4d;--muted:#4a6a80;--meta:#6e8ba0;--faint:#8aa5b6;
+  --line:#dcebf5;--line2:#d7e9f5;--line3:#cfe6f5;--headline:#e2eef7;
+  --ok-t:#067647;--ok-b:#e8f6ef;--warn-t:#8b6a1f;--warn-b:#fdf3dd;--warn-bd:#f0e2bd;
+  --footer:#14425e;--footer-t:#b8d4e6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;font-size:16px;line-height:1.85}
+h1,h2,h3{font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;font-weight:700;color:var(--h);line-height:1.5;margin:0}
+a{color:var(--link);text-underline-offset:3px}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px}
+.ribbon{background:#14425e;color:#fff;font-size:12px;padding:6px 20px;text-align:center;letter-spacing:.04em}
+header.site{background:var(--surface);border-bottom:1px solid var(--headline);position:sticky;top:0;z-index:20}
+.hd{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:18px}
+.brand{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;color:var(--h);font-size:17px;text-decoration:none;white-space:nowrap}
+.nav{display:flex;gap:16px;flex-wrap:wrap;font-size:13.5px}
+.nav a{color:var(--muted);text-decoration:none}
+.hero{background:linear-gradient(180deg,#e8f4fc 0%,#f7fbfe 100%);padding:34px 0 26px;border-bottom:1px solid var(--line)}
+.crumb{font-size:12.5px;color:var(--meta);margin-bottom:10px}
+.crumb a{color:var(--meta);text-decoration:none}
+.hero h1{font-size:27px}
+.hero .lead{margin:12px 0 0;color:var(--muted);font-size:15px}
+
+/* stepper */
+.steps{display:flex;gap:4px;flex-wrap:wrap;margin:20px 0 6px}
+.steps button{border:1px solid var(--line2);background:#fff;color:var(--muted);border-radius:999px;
+  padding:6px 14px;font-size:12.5px;cursor:pointer;font-family:inherit}
+.steps button.on{background:var(--primary);border-color:var(--primary);color:#fff;font-weight:600}
+.steps button.done{background:var(--chip);border-color:var(--line3);color:var(--h)}
+.saved{font-size:12.5px;color:var(--meta);margin:0 0 18px}
+.saved b{color:var(--ok-t)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;margin:0 0 16px}
+.card h2{font-size:19px;margin-bottom:4px}
+.card h3{font-size:15.5px;margin:20px 0 4px}
+.card p.sub{font-size:14px;color:var(--muted);margin:6px 0 14px}
+label.f{display:block;font-size:13.5px;color:var(--h);font-weight:600;margin:14px 0 5px}
+input[type=text],input[type=date],input[type=month],input[type=number],select,textarea{
+  width:100%;border:1.5px solid var(--line2);border-radius:10px;padding:11px 13px;font-size:16px;
+  font-family:inherit;color:var(--text);background:#fff;line-height:1.7}
+textarea{min-height:150px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--primary);outline-offset:1px;border-color:var(--primary)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+.note{background:var(--band);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--muted);margin:14px 0}
+.note strong{color:var(--h)}
+.warnbox{background:var(--warn-b);border:1px solid var(--warn-bd);border-radius:12px;padding:13px 15px;font-size:13.5px;color:#6b5316;margin:12px 0}
+.warnbox b{color:var(--warn-t)}
+.hint{background:var(--band);border-radius:10px;padding:10px 13px;font-size:13px;color:var(--muted);margin:8px 0}
+.hint b{color:var(--h)}
+.row{display:flex;gap:10px;align-items:center;margin-top:18px;flex-wrap:wrap}
+.btn{border:0;border-radius:999px;background:var(--primary);color:#fff;padding:13px 26px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn.ghost{background:#fff;color:var(--link);border:1.5px solid var(--line3)}
+.btn.sm{padding:9px 18px;font-size:14px}
+.btn.danger{background:#fff;color:#a4472c;border:1.5px solid #eccfc4}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.chips button{border:1.5px solid var(--line2);background:#fff;border-radius:999px;padding:9px 16px;font-size:14px;cursor:pointer;font-family:inherit;color:var(--text)}
+.chips button[aria-pressed=true]{border-color:var(--primary);background:var(--chip);color:var(--h);font-weight:600}
+
+/* 期間カード */
+.waku{border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0;background:#fff}
+.waku .wh{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.waku .wn{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;color:var(--h);font-size:16px}
+.waku .wtools{display:flex;gap:6px}
+.waku .wtools button{border:1px solid var(--line2);background:#fff;border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer;color:var(--muted);font-family:inherit}
+.meter{height:6px;border-radius:999px;background:var(--line3);overflow:hidden;margin:6px 0 4px}
+.meter i{display:block;height:100%;background:var(--primary);transition:width .15s}
+.meter.warn i{background:#e0a92a}
+.meter.over i{background:#c4553a}
+.mtxt{font-size:12.5px;color:var(--meta)}
+.mtxt.over{color:#a4472c;font-weight:600}
+.zoku{display:inline-block;font-size:11.5px;background:var(--chip);color:var(--h);border-radius:999px;padding:2px 10px}
+
+/* 日常生活 表 */
+table.daily{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+table.daily th,table.daily td{border:1px solid var(--line2);padding:8px;text-align:center}
+table.daily th{background:var(--band);color:var(--h);font-size:12.5px}
+table.daily th.l{text-align:left}
+table.daily td button{border:1px solid var(--line2);background:#fff;border-radius:6px;width:30px;height:30px;cursor:pointer;font-family:inherit;color:var(--muted)}
+table.daily td button[aria-pressed=true]{background:var(--primary);border-color:var(--primary);color:#fff;font-weight:700}
+
+/* 印刷プレビュー */
+.pv{background:#e7eef3;border-radius:14px;padding:20px;overflow-x:auto}
+.sheetwrap{transform-origin:top left}
+.sheet{width:210mm;min-height:297mm;background:#fff;padding:12mm 10mm;margin:0 auto 14px;
+  box-shadow:0 2px 10px rgba(20,66,94,.16);font-family:"Hiragino Mincho ProN","Yu Mincho",serif;color:#000}
+.sheet .formhead{text-align:center;margin-bottom:6px}
+.sheet .ftitle{font-size:17px;letter-spacing:.3em;font-weight:700}
+.sheet .fnote{font-size:9.5px}
+.sheet table{width:100%;border-collapse:collapse;font-size:10.5px;margin-top:-1px}
+.sheet th,.sheet td{border:1.2px solid #000;padding:3px 5px;vertical-align:top;line-height:1.6}
+.sheet th{font-weight:600;text-align:center;vertical-align:middle}
+.sheet .pno{width:5%;text-align:center;font-size:14px;font-weight:700;vertical-align:middle}
+.sheet .ptext{height:26mm}
+.sheet .sub{font-size:9.5px;margin:7px 0 3px;line-height:1.6}
+.sheet .pgno{text-align:right;font-size:9px;margin-bottom:2px}
+@media print{
+  @page{size:A4 portrait;margin:0}
+  body{background:#fff}
+  .no-print{display:none!important}
+  .pv{background:#fff;padding:0}
+  .sheetwrap{transform:none!important}
+  .sheet{box-shadow:none;margin:0;page-break-after:always}
+}
+footer.site{background:var(--footer);color:var(--footer-t);margin-top:44px;padding:28px 0;font-size:13px}
+.hidden{display:none!important}
+/* 測定用(画面外) */
+#measure{position:absolute;left:-9999px;top:0;visibility:hidden;
+  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:10.5px;line-height:1.6;
+  width:118mm;padding:3px 5px;white-space:pre-wrap;word-break:break-word}
+</style>
+</head>
+<body>
+<div id="measure"></div>
+<div class="ribbon no-print">実装用モック — docs/moushitatesho-tool-design-2026-09-02.md の参照HTML</div>
+
+<header class="site no-print">
+  <div class="hd">
+    <a class="brand" href="#">障害年金ノート</a>
+    <nav class="nav">
+      <a href="#">はじめての方へ</a><a href="#">病気から探す</a><a href="#">申請の流れ</a>
+      <a href="#">悩みから探す</a><a href="#">実例と数字</a><a href="#">コラム</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero no-print">
+  <div class="wrap">
+    <div class="crumb"><a href="#">ホーム</a> ／ <a href="#">道具</a> ／ 申立書をつくる</div>
+    <h1>病歴・就労状況等申立書をつくる</h1>
+    <p class="lead">フォームに沿って書いていくと、公式様式のかたちで印刷できます。A4に分けても、A3の原寸でも出せます。書いた内容はこの端末の中だけに残り、送信はしません。</p>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="steps no-print" id="steps"></div>
+  <p class="saved no-print" id="saved"><b>●</b> ここまでの内容は、この端末に自動で保存されています</p>
+
+  <!-- 1 基本 -->
+  <section class="card step" data-s="0">
+    <h2>基本のこと</h2>
+    <p class="sub">診断書と食い違わないよう、日付は分かる範囲で正確に入れてください。分からなければ空欄のままで進めます。</p>
+    <label class="f">傷病名</label><input type="text" id="byoumei" placeholder="例: うつ病">
+    <div class="grid2">
+      <div><label class="f">発病日</label><input type="date" id="hatsubyou"></div>
+      <div><label class="f">初診日</label><input type="date" id="shoshin"></div>
+    </div>
+    <div class="grid2"><div><label class="f">生年月日</label><input type="date" id="seinengappi"></div></div>
+    <div class="note"><strong>初診日は「その症状ではじめて医師にかかった日」</strong>です。病名がついた日ではありません。眠れなくて行った内科でも初診日になります。</div>
+    <div class="row"><button class="btn" onclick="go(1)">次へ</button></div>
+  </section>
+
+  <!-- 2 請求のかた -->
+  <section class="card step hidden" data-s="1">
+    <h2>請求のかた</h2>
+    <p class="sub">選ぶと、裏面のどちらの欄を書くかが決まります。</p>
+    <div class="chips" id="seikyuu"></div>
+    <div class="note" id="seikyuuNote">選ぶと、ここに説明が出ます。</div>
+    <div class="row"><button class="btn ghost sm" onclick="go(0)">戻る</button><button class="btn" onclick="go(2)">次へ</button></div>
+  </section>
+
+  <!-- 3 期間 -->
+  <section class="card step hidden" data-s="2">
+    <h2>期間ごとの経過</h2>
+    <p class="sub">発病から今日までを、期間をあけずに順番に書きます。公式の案内では<strong>3〜5年で区切る</strong>こと、<strong>受診していた期間と、していなかった期間は分ける</strong>ことが求められています。</p>
+    <div id="checks"></div>
+    <div id="wakus"></div>
+    <div class="row">
+      <button class="btn ghost sm" onclick="addWaku()">＋ 期間を追加する</button>
+      <button class="btn ghost sm" onclick="sortWakus()">日付順に並べ替える</button>
+    </div>
+    <div class="row"><button class="btn ghost sm" onclick="go(1)">戻る</button><button class="btn" onclick="go(3)">次へ</button></div>
+  </section>
+
+  <!-- 4 裏面 -->
+  <section class="card step hidden" data-s="3">
+    <h2>就労・日常生活の状況</h2>
+    <p class="sub" id="backLead"></p>
+    <div id="backForms"></div>
+    <div class="row"><button class="btn ghost sm" onclick="go(2)">戻る</button><button class="btn" onclick="go(4)">次へ</button></div>
+  </section>
+
+  <!-- 5 日常生活状況 -->
+  <section class="card step hidden" data-s="4">
+    <h2>日常生活の状況</h2>
+    <p class="sub">1 自発的にできた ／ 2 自発的にできたが援助が必要だった ／ 3 自発的にできないが援助があればできた ／ 4 できなかった</p>
+    <div style="overflow-x:auto"><table class="daily" id="dailyTable"></table></div>
+    <label class="f">その他日常生活で不便に感じたこと</label>
+    <textarea id="sonota" style="min-height:110px"></textarea>
+    <div class="row"><button class="btn ghost sm" onclick="go(3)">戻る</button><button class="btn" onclick="go(5)">次へ</button></div>
+  </section>
+
+  <!-- 6 手帳 -->
+  <section class="card step hidden" data-s="5">
+    <h2>障害者手帳</h2>
+    <div class="chips" id="techou"></div>
+    <div id="techouInfo" class="hidden">
+      <div class="grid2">
+        <div><label class="f">種類</label><input type="text" id="t-shurui" placeholder="例: 精神障害者保健福祉手帳"></div>
+        <div><label class="f">交付年月日</label><input type="date" id="t-kofu"></div>
+        <div><label class="f">等級</label><input type="text" id="t-tokyu" placeholder="例: 2級"></div>
+        <div><label class="f">障害名</label><input type="text" id="t-namae"></div>
+      </div>
+    </div>
+    <div class="row"><button class="btn ghost sm" onclick="go(4)">戻る</button><button class="btn" onclick="go(6)">印刷へ</button></div>
+  </section>
+
+  <!-- 7 印刷 -->
+  <section class="step hidden" data-s="6">
+    <div class="card no-print">
+      <h2>印刷</h2>
+      <div class="chips" id="paper"></div>
+      <div class="warnbox">
+        <b>印刷の前に、2つだけ確認してください。</b><br>
+        ① ブラウザの印刷画面で「その他の設定」を開き、<b>ヘッダーとフッターのチェックを外す</b>(URLや日付が紙に入ってしまいます)。<br>
+        ② 倍率は<b>「用紙に合わせる」ではなく100%(等倍)</b>。合わせると枠の大きさが変わります。
+      </div>
+      <div class="note">
+        <strong>原本はA3です。</strong>A4に分けて印刷したものでも受け付けられるのが実務上の扱いですが、提出前に年金事務所へ確認してください。<br>
+        提出する前に、<strong>すべてのページの控え</strong>を取っておくことをおすすめします。更新のときに、前回なんと書いたかを見られます。
+      </div>
+      <div class="row">
+        <button class="btn" onclick="window.print()">印刷する</button>
+        <button class="btn ghost sm" onclick="exportJson()">下書きを書き出す(.json)</button>
+        <button class="btn ghost sm" onclick="go(0)">内容を見直す</button>
+        <button class="btn danger sm" onclick="alert('モックのため未実装(2段階確認つきで実装)')">この端末から消す</button>
+      </div>
+    </div>
+    <div class="pv"><div class="sheetwrap" id="sheetwrap"></div></div>
+  </section>
+</main>
+
+<footer class="site no-print"><div class="wrap">障害年金ノート — 実装用モック</div></footer>
+
+<script>
+/* ====== 定数(公式様式から §10 で転記・照合すること。下記は暫定) ====== */
+const DAILY=['着替え','洗面','トイレ','入浴','食事','散歩','炊事','洗濯','掃除','買物'];
+const WORKR=['体力に自信がなかったから','医師から働くことを止められていたから','働く意欲がなかったから','働きたかったが適切な職場がなかったから','その他'];
+const WAKU_PER_SHEET=3;                 /* ★ 公式様式から確定すること */
+const BOX_HEIGHT_MM=26;                 /* ★ 同上。枠の高さ */
+const SEIKYUU=[{v:'honrai',l:'本来請求(障害認定日で請求)'},{v:'jigojuushou',l:'事後重症請求(いまの状態で請求)'},{v:'sokyuu',l:'遡及請求(さかのぼって請求)'}];
+const SEIKYUU_NOTE={
+ honrai:'裏面は「障害認定日ころの状況」だけを書きます。',
+ jigojuushou:'裏面は「現在(請求日ころ)の状況」だけを書きます。',
+ sokyuu:'裏面は「障害認定日ころ」と「現在」の両方を書きます。'};
+
+/* ====== 状態 ====== */
+const S={version:1,byoumei:'',hatsubyou:'',shoshin:'',seinengappi:'',
+  waku:[],back:{nintei:blankBack(),genzai:blankBack()},sonota:'',
+  techou:null,techouInfo:{shurui:'',kofu:'',tokyu:'',namae:''},seikyuuType:null,paper:'a4'};
+function blankBack(){return{work:null,reasons:[],job:'',commuteMethod:'',commuteHours:'',commuteMinutes:'',daysPrev:'',daysPrevPrev:'',cond:'',daily:{}};}
+function uid(){return 'w'+Math.random().toString(36).slice(2,8);}
+let step=0;
+
+/* ====== ステップ ====== */
+const LABELS=['基本','請求のかた','期間','就労状況','日常生活','手帳','印刷'];
+function renderSteps(){const w=document.getElementById('steps');w.innerHTML='';
+ LABELS.forEach((l,i)=>{const b=document.createElement('button');b.textContent=(i+1)+'. '+l;
+  b.className=i===step?'on':(i<step?'done':'');b.onclick=()=>go(i);w.appendChild(b);});}
+function go(n){step=n;
+ document.querySelectorAll('.step').forEach(el=>el.classList.toggle('hidden',+el.dataset.s!==n));
+ if(n===2)renderWakus();
+ if(n===3)renderBack();
+ if(n===4)renderDaily();
+ if(n===6)renderSheets();
+ renderSteps();window.scrollTo({top:0,behavior:'smooth'});}
+
+/* ====== 入力バインド ====== */
+['byoumei','hatsubyou','shoshin','seinengappi','sonota'].forEach(k=>{
+ const el=document.getElementById(k);if(el)el.addEventListener('input',()=>{S[k]=el.value;});});
+['shurui','kofu','tokyu','namae'].forEach(k=>{
+ const el=document.getElementById('t-'+k);if(el)el.addEventListener('input',()=>{S.techouInfo[k]=el.value;});});
+
+/* ====== 請求のかた ====== */
+(function(){const w=document.getElementById('seikyuu');
+ SEIKYUU.forEach(s=>{const b=document.createElement('button');b.textContent=s.l;b.setAttribute('aria-pressed','false');
+  b.onclick=()=>{S.seikyuuType=s.v;[...w.children].forEach(c=>c.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+   document.getElementById('seikyuuNote').textContent=SEIKYUU_NOTE[s.v];};w.appendChild(b);});})();
+
+/* ====== 手帳 ====== */
+(function(){const w=document.getElementById('techou');
+ [{v:'ari',l:'交付されている'},{v:'nashi',l:'交付されていない'},{v:'shinsei',l:'申請中'}].forEach(t=>{
+  const b=document.createElement('button');b.textContent=t.l;b.setAttribute('aria-pressed','false');
+  b.onclick=()=>{S.techou=t.v;[...w.children].forEach(c=>c.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');
+   document.getElementById('techouInfo').classList.toggle('hidden',t.v!=='ari');};w.appendChild(b);});})();
+
+/* ====== 用紙 ====== */
+(function(){const w=document.getElementById('paper');
+ [{v:'a4',l:'A4に分けて印刷(4枚)'},{v:'a3',l:'A3の原寸で印刷(2枚)'}].forEach(p=>{
+  const b=document.createElement('button');b.textContent=p.l;b.setAttribute('aria-pressed',String(S.paper===p.v));
+  b.onclick=()=>{S.paper=p.v;[...w.children].forEach(c=>c.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');renderSheets();};
+  w.appendChild(b);});})();
+
+/* ====== 期間 ====== */
+function addWaku(){S.waku.push({id:uid(),from:'',to:'',jushin:true,kikan:'',text:''});renderWakus();}
+function delWaku(id){S.waku=S.waku.filter(w=>w.id!==id);renderWakus();}
+function moveWaku(id,d){const i=S.waku.findIndex(w=>w.id===id);const j=i+d;
+ if(j<0||j>=S.waku.length)return;[S.waku[i],S.waku[j]]=[S.waku[j],S.waku[i]];renderWakus();}
+function sortWakus(){S.waku.sort((a,b)=>(a.from||'9999').localeCompare(b.from||'9999'));renderWakus();}
+
+/* はみ出し検知: 印刷と同じ幅・フォントで実測する */
+function measure(text){const m=document.getElementById('measure');m.textContent=text||'';return m.scrollHeight;}
+function boxPx(){const p=document.createElement('div');p.style.height=BOX_HEIGHT_MM+'mm';p.style.position='absolute';
+ document.body.appendChild(p);const h=p.offsetHeight;p.remove();return h;}
+
+function renderWakus(){
+  const w=document.getElementById('wakus');w.innerHTML='';
+  if(!S.waku.length){w.innerHTML='<div class="note">まだ期間がありません。「＋ 期間を追加する」から、発病したころの期間をひとつ作ってください。</div>';}
+  const limit=boxPx();
+  S.waku.forEach((k,i)=>{
+    const sheetNo=Math.floor(i/WAKU_PER_SHEET);
+    const d=document.createElement('div');d.className='waku';
+    d.innerHTML=
+     '<div class="wh"><span class="wn">'+(i+1)+'つめの期間'
+      +(sheetNo>0?' <span class="zoku">続紙 '+sheetNo+'枚目</span>':'')+'</span>'
+     +'<span class="wtools">'
+     +'<button onclick="moveWaku(\''+k.id+'\',-1)">↑</button>'
+     +'<button onclick="moveWaku(\''+k.id+'\',1)">↓</button>'
+     +'<button onclick="delWaku(\''+k.id+'\')">削除</button></span></div>'
+     +'<div class="grid2"><div><label class="f">いつから</label><input type="month" value="'+k.from+'" oninput="upW(\''+k.id+'\',\'from\',this.value)"></div>'
+     +'<div><label class="f">いつまで</label><input type="month" value="'+k.to+'" oninput="upW(\''+k.id+'\',\'to\',this.value)"></div></div>'
+     +'<div class="chips" style="margin-top:12px">'
+     +'<button aria-pressed="'+k.jushin+'" onclick="upW(\''+k.id+'\',\'jushin\',true)">受診していた</button>'
+     +'<button aria-pressed="'+(!k.jushin)+'" onclick="upW(\''+k.id+'\',\'jushin\',false)">受診していなかった</button></div>'
+     +(k.jushin?'<label class="f">医療機関名</label><input type="text" value="'+esc(k.kikan)+'" oninput="upW(\''+k.id+'\',\'kikan\',this.value)">':'')
+     +'<label class="f">この期間のようす</label>'
+     +'<textarea oninput="upW(\''+k.id+'\',\'text\',this.value)">'+esc(k.text)+'</textarea>'
+     +'<div class="meter" id="mt-'+k.id+'"><i style="width:0%"></i></div>'
+     +'<div class="mtxt" id="mx-'+k.id+'"></div>'
+     +'<div class="hint"><b>この欄に書くこと</b><br>'
+       +(k.jushin
+         ? '通院の期間と回数、入院の期間、治療の経過、医師から言われたこと、転院や受診をやめた理由、日常生活のようす、仕事のようす'
+         : 'なぜ受診していなかったか、そのときの症状の程度、日常生活のようす、仕事のようす')
+     +'</div>';
+    w.appendChild(d);
+    updateMeter(k,limit);
+  });
+  renderChecks();
+}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function upW(id,key,val){const k=S.waku.find(x=>x.id===id);if(!k)return;k[key]=val;
+ if(key==='jushin'||key==='from'||key==='to'){renderWakus();}
+ else{updateMeter(k,boxPx());renderChecks();}}
+
+function updateMeter(k,limit){
+  const el=document.getElementById('mt-'+k.id),tx=document.getElementById('mx-'+k.id);
+  if(!el)return;
+  const h=measure(k.text),r=limit?h/limit:0;
+  el.className='meter'+(r>1?' over':(r>0.85?' warn':''));
+  el.querySelector('i').style.width=Math.min(100,r*100)+'%';
+  tx.className='mtxt'+(r>1?' over':'');
+  tx.textContent = r>1 ? 'この枠に収まりません。期間を分けるか、続紙へ送ると収まります。'
+    : r>0.85 ? 'この枠は、あと少しで埋まります。'
+    : '';
+}
+/* 期間の気づき(警告ではない) */
+function renderChecks(){
+  const w=document.getElementById('checks');w.innerHTML='';
+  const msgs=[];
+  const ws=S.waku;
+  for(let i=0;i<ws.length-1;i++){
+    if(ws[i].to&&ws[i+1].from){
+      const a=new Date(ws[i].to+'-01'),b=new Date(ws[i+1].from+'-01');
+      const gap=(b.getFullYear()-a.getFullYear())*12+(b.getMonth()-a.getMonth());
+      if(gap>1)msgs.push(jp(ws[i].to)+'から'+jp(ws[i+1].from)+'までが、どの枠にも入っていません。');
+    }
+  }
+  ws.forEach((k,i)=>{
+    if(k.from&&k.to){
+      const a=new Date(k.from+'-01'),b=new Date(k.to+'-01');
+      const m=(b.getFullYear()-a.getFullYear())*12+(b.getMonth()-a.getMonth());
+      if(m>60)msgs.push((i+1)+'つめの期間は'+Math.floor(m/12)+'年'+(m%12)+'か月あります。3〜5年で区切るのが公式の案内です。');
+    }
+    if(k.jushin&&!k.kikan.trim()&&(k.from||k.text))msgs.push((i+1)+'つめは受診していた期間なので、医療機関名の欄があります。');
+  });
+  if(S.hatsubyou&&ws.length&&ws[0].from){
+    const a=S.hatsubyou.slice(0,7);
+    if(a<ws[0].from)msgs.push('発病('+jp(a)+')から最初の枠までが空いています。');
+  }
+  const sorted=ws.every((k,i)=>i===0||!ws[i-1].from||!k.from||ws[i-1].from<=k.from);
+  if(!sorted)msgs.push('日付の順番が入れ替わっています。「日付順に並べ替える」で直せます。');
+  if(ws.length>WAKU_PER_SHEET)msgs.push(WAKU_PER_SHEET+'つを超えた分は、続紙に入ります('+Math.ceil((ws.length-WAKU_PER_SHEET)/WAKU_PER_SHEET)+'枚)。');
+  msgs.slice(0,6).forEach(m=>{const d=document.createElement('div');d.className='warnbox';d.textContent=m;w.appendChild(d);});
+}
+function jp(ym){if(!ym)return '';const[a,b]=ym.split('-');return a+'年'+parseInt(b,10)+'月';}
+
+/* ====== 裏面 ====== */
+function renderBack(){
+  const need=S.seikyuuType;
+  const show=need==='honrai'?['nintei']:need==='jigojuushou'?['genzai']:need==='sokyuu'?['nintei','genzai']:['nintei','genzai'];
+  document.getElementById('backLead').textContent= need?SEIKYUU_NOTE[need]:'請求のかたが選ばれていないので、両方の欄を出しています。';
+  const w=document.getElementById('backForms');w.innerHTML='';
+  show.forEach(key=>{
+    const b=S.back[key],label=key==='nintei'?'障害認定日(初診日から1年6か月目)ころの状況':'現在(請求日ころ)の状況';
+    const d=document.createElement('div');d.style.margin='18px 0 26px';
+    d.innerHTML='<h3>'+label+'</h3>'
+     +'<div class="chips">'
+     +'<button aria-pressed="'+(b.work===true)+'" onclick="setWork(\''+key+'\',true)">働いていた</button>'
+     +'<button aria-pressed="'+(b.work===false)+'" onclick="setWork(\''+key+'\',false)">働いていなかった</button></div>'
+     +(b.work===true?
+        '<label class="f">職種</label><input type="text" value="'+esc(b.job)+'" oninput="setB(\''+key+'\',\'job\',this.value)">'
+       +'<div class="grid2"><div><label class="f">通勤方法</label><input type="text" value="'+esc(b.commuteMethod)+'" oninput="setB(\''+key+'\',\'commuteMethod\',this.value)"></div>'
+       +'<div><label class="f">片道の時間(時/分)</label><div style="display:flex;gap:8px">'
+       +'<input type="number" value="'+esc(b.commuteHours)+'" oninput="setB(\''+key+'\',\'commuteHours\',this.value)">'
+       +'<input type="number" value="'+esc(b.commuteMinutes)+'" oninput="setB(\''+key+'\',\'commuteMinutes\',this.value)"></div></div>'
+       +'<div><label class="f">前月の出勤日数</label><input type="number" value="'+esc(b.daysPrev)+'" oninput="setB(\''+key+'\',\'daysPrev\',this.value)"></div>'
+       +'<div><label class="f">前々月の出勤日数</label><input type="number" value="'+esc(b.daysPrevPrev)+'" oninput="setB(\''+key+'\',\'daysPrevPrev\',this.value)"></div></div>'
+       +'<label class="f">仕事中や仕事が終わったときの身体の調子</label><textarea style="min-height:90px" oninput="setB(\''+key+'\',\'cond\',this.value)">'+esc(b.cond)+'</textarea>'
+      : b.work===false?
+        '<label class="f">働いていなかった理由(あてはまるものすべて)</label><div class="chips">'
+        +WORKR.map((r,i)=>'<button aria-pressed="'+b.reasons.includes(i)+'" onclick="toggleReason(\''+key+'\','+i+')">'+r+'</button>').join('')+'</div>'
+      :'');
+    w.appendChild(d);
+  });
+}
+function setWork(k,v){S.back[k].work=v;renderBack();}
+function setB(k,f,v){S.back[k][f]=v;}
+function toggleReason(k,i){const r=S.back[k].reasons;const j=r.indexOf(i);if(j<0)r.push(i);else r.splice(j,1);renderBack();}
+
+/* ====== 日常生活 ====== */
+function renderDaily(){
+  const t=document.getElementById('dailyTable');
+  const cols=S.seikyuuType==='honrai'?['nintei']:S.seikyuuType==='jigojuushou'?['genzai']:['nintei','genzai'];
+  let h='<tr><th class="l">項目</th>'+cols.map(c=>'<th>'+(c==='nintei'?'障害認定日ころ':'現在')+'</th>').join('')+'</tr>';
+  DAILY.forEach((d,i)=>{
+    h+='<tr><th class="l">'+d+'</th>';
+    cols.forEach(c=>{h+='<td>'+[1,2,3,4].map(n=>
+      '<button aria-pressed="'+(S.back[c].daily[i]===n)+'" onclick="setDaily(\''+c+'\','+i+','+n+')">'+n+'</button>').join(' ')+'</td>';});
+    h+='</tr>';});
+  t.innerHTML=h;
+}
+function setDaily(c,i,n){S.back[c].daily[i]=n;renderDaily();}
+
+/* ====== 紙面 ====== */
+function ymd(v){if(!v)return '　　　　年　　月　　日';const[a,b,c]=v.split('-');return a+'年'+parseInt(b,10)+'月'+parseInt(c,10)+'日';}
+function ck(on){return on?'■':'□';}
+function renderSheets(){
+  const w=document.getElementById('sheetwrap');
+  const sheets=Math.max(1,Math.ceil(S.waku.length/WAKU_PER_SHEET));
+  let h='';
+  for(let s=0;s<sheets;s++){
+    const part=S.waku.slice(s*WAKU_PER_SHEET,(s+1)*WAKU_PER_SHEET);
+    h+='<div class="sheet">'
+      +(s>0?'<div class="pgno">続紙　No. '+s+'</div>':'')
+      +'<div class="formhead"><div class="ftitle">病歴・就労状況等申立書'+(s>0?'(続紙)':'')+'</div>'
+      +'<div class="fnote">(この申立書は、請求者本人が発病から現在までの経過を記入するものです。)</div></div>'
+      +(s===0?'<table><tr><th style="width:12%">傷病名</th><td style="width:24%">'+esc(S.byoumei)+'</td>'
+        +'<th style="width:12%">発病日</th><td style="width:24%">'+ymd(S.hatsubyou)+'</td>'
+        +'<th style="width:12%">初診日</th><td>'+ymd(S.shoshin)+'</td></tr></table>'
+        +'<div class="sub">発病したときから現在までの経過を、年月順に期間をあけずに記入してください。受診していなかった期間も、その間の状況を記入してください。</div>':'')
+      + (part.length?part.map((k,i)=>
+        '<table><tr><td class="pno" rowspan="3">'+(s*WAKU_PER_SHEET+i+1)+'</td>'
+        +'<th style="width:13%">期間</th><td style="width:30%">'+(jp(k.from)||'　　　年　　月')+' から<br>'+(jp(k.to)||'　　　年　　月')+' まで</td>'
+        +'<td rowspan="3" class="ptext">'+esc(k.text).replace(/\n/g,'<br>')+'</td></tr>'
+        +'<tr><th>受診状況</th><td>'+ck(k.jushin)+' 受診した　'+ck(!k.jushin)+' 受診していない</td></tr>'
+        +'<tr><th>医療機関名</th><td>'+esc(k.kikan)+'</td></tr></table>').join('')
+        : '<table><tr><td class="pno">1</td><th style="width:13%">期間</th><td style="width:30%">　</td><td class="ptext">　</td></tr></table>')
+      +'</div>';
+  }
+  /* 裏面(1枚目のみ。続紙の裏面は同じ作りで生成する) */
+  h+='<div class="sheet">'
+    +'<div class="formhead"><div class="ftitle" style="font-size:14px;letter-spacing:.15em">就労・日常生活状況</div></div>'
+    +backTable('1 障害認定日(初診日から1年6月目)頃の状況',S.back.nintei)
+    +backTable('2 現在(請求日頃)の状況',S.back.genzai)
+    +'<div class="sub">日常生活状況(該当する番号に○)　1 自発的にできた ／ 2 自発的にできたが援助が必要だった ／ 3 自発的にできないが援助があればできた ／ 4 できなかった</div>'
+    +'<table><tr><th style="width:22%">項目</th><th>障害認定日頃</th><th>現在</th></tr>'
+    +DAILY.map((d,i)=>'<tr><th style="text-align:left">'+d+'</th>'
+      +'<td style="text-align:center">'+nums(S.back.nintei.daily[i])+'</td>'
+      +'<td style="text-align:center">'+nums(S.back.genzai.daily[i])+'</td></tr>').join('')
+    +'</table>'
+    +'<div class="sub">その他日常生活で不便に感じたこと</div>'
+    +'<table><tr><td style="height:18mm">'+esc(S.sonota).replace(/\n/g,'<br>')+'</td></tr></table>'
+    +'<div class="sub">障害者手帳の交付</div>'
+    +'<table><tr><td>'+ck(S.techou==='ari')+' 交付されている　　'+ck(S.techou==='nashi')+' 交付されていない　　'+ck(S.techou==='shinsei')+' 申請中</td></tr>'
+    +(S.techou==='ari'?'<tr><td>種類: '+esc(S.techouInfo.shurui)+'　／　交付年月日: '+ymd(S.techouInfo.kofu)+'　／　等級: '+esc(S.techouInfo.tokyu)+'　／　障害名: '+esc(S.techouInfo.namae)+'</td></tr>':'')
+    +'</table>'
+    +'<div class="sub">上記のとおり相違ないことを申し立てます。</div>'
+    +'<table><tr><th style="width:14%">作成日</th><td style="width:30%">　</td><th style="width:14%">電話番号</th><td>　</td></tr>'
+    +'<tr><th>現住所</th><td colspan="3">　</td></tr>'
+    +'<tr><th>請求者氏名</th><td>　　　　　　　　　　㊞</td><th>生年月日</th><td>'+ymd(S.seinengappi)+'</td></tr>'
+    +'<tr><th>代筆者氏名</th><td>　</td><th>請求者との関係</th><td>　</td></tr></table>'
+    +'</div>';
+  w.innerHTML=h;
+  /* A3のときは横に2倍のイメージ。実装では @page size を切り替える */
+  w.style.transform = S.paper==='a3' ? 'scale(0.72)' : 'scale(1)';
+}
+function nums(sel){return [1,2,3,4].map(n=>n===sel?'<span style="border:1.2px solid #000;border-radius:50%;padding:0 3px">'+n+'</span>':n).join('&nbsp;&nbsp;');}
+function backTable(label,b){
+  const rows = b.work===true
+   ? '<tr><th style="width:18%">職種</th><td>'+esc(b.job)+'</td></tr>'
+    +'<tr><th>通勤方法・時間</th><td>'+esc(b.commuteMethod)+'　片道 '+esc(b.commuteHours)+'時間 '+esc(b.commuteMinutes)+'分</td></tr>'
+    +'<tr><th>出勤日数</th><td>前月 '+esc(b.daysPrev)+'日 ／ 前々月 '+esc(b.daysPrevPrev)+'日</td></tr>'
+    +'<tr><th>身体の調子</th><td>'+esc(b.cond)+'</td></tr>'
+   : b.work===false
+   ? '<tr><th style="width:18%">その理由</th><td>'+WORKR.map((r,i)=>ck(b.reasons.includes(i))+' '+r).join('<br>')+'</td></tr>' : '';
+  return '<table><tr><th colspan="2" style="text-align:left">'+label+'</th></tr>'
+   +'<tr><th style="width:18%">就労状況</th><td>'+ck(b.work===true)+' 働いていた　　'+ck(b.work===false)+' 働いていなかった</td></tr>'+rows+'</table>';
+}
+function exportJson(){
+  const blob=new Blob([JSON.stringify(S,null,1)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='moushitatesho-'+new Date().toISOString().slice(0,10)+'.json';a.click();
+}
+addWaku();renderSteps();
+</script>
+</body>
+</html>
