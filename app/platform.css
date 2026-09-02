@@ -47,6 +47,8 @@
 .hub-faq-item { margin: 12px 0; border: 1px solid var(--platform-border); border-radius: 12px; background: #fff; }
 .hub-faq-item summary { padding: 16px 18px; color: var(--platform-navy); font-weight: 700; cursor: pointer; }
 .hub-faq-item p { padding: 0 18px 18px; }
+.hub-sibling-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--platform-border); }
+.hub-sibling-links a { display: inline-flex; align-items: center; padding: 10px 14px; border: 1px solid #b9dced; border-radius: 10px; background: #fff; color: var(--platform-blue); font-weight: 700; text-decoration: none; }
 @media (max-width: 600px) {
   .hub-content { padding-block: 32px 56px; }
   .hub-content h2 { margin-top: 44px; }
@@ -55,6 +57,17 @@
   .hub-content .article-table-figure.is-wide table, .hub-content .article-table-figure.is-wide thead, .hub-content .article-table-figure.is-wide tbody, .hub-content .article-table-figure.is-wide tr, .hub-content .article-table-figure.is-wide th, .hub-content .article-table-figure.is-wide td { display: block; width: 100%; min-width: 0; }
   .hub-content .article-table-figure.is-wide thead { display: none; }
   .hub-content .article-table-figure.is-wide tr { margin: 12px 0; border: 1px solid var(--platform-border); border-radius: 10px; overflow: hidden; }
+  .hub-content .article-table-figure.is-epilepsy-scale .article-table-wrap { overflow: visible; }
+  .hub-content .article-table-figure.is-epilepsy-scale table,
+  .hub-content .article-table-figure.is-epilepsy-scale thead,
+  .hub-content .article-table-figure.is-epilepsy-scale tbody,
+  .hub-content .article-table-figure.is-epilepsy-scale tr,
+  .hub-content .article-table-figure.is-epilepsy-scale th,
+  .hub-content .article-table-figure.is-epilepsy-scale td { display: block; width: 100%; min-width: 0; }
+  .hub-content .article-table-figure.is-epilepsy-scale thead { display: none; }
+  .hub-content .article-table-figure.is-epilepsy-scale tr { margin: 12px 0; border: 1px solid var(--platform-border); border-radius: 10px; overflow: hidden; }
+  .hub-content .article-table-figure.is-epilepsy-scale td { border-right: 0; }
+  .hub-content .article-table-figure.is-epilepsy-scale td::before { display: block; margin-bottom: 4px; color: var(--platform-meta); font-size: 11px; font-weight: 700; content: attr(data-label); }
 }
 
 /* 共通ヘッダー */

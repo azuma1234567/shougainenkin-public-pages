@@ -30,9 +30,10 @@ function applyFilter(items: SaiketsuCase[], filter: FilterKey) {
   return items;
 }
 
-function hrefFor(filter: FilterKey, page = 1) {
+function hrefFor(filter: FilterKey, page = 1, disease?: string) {
   const params = new URLSearchParams();
   if (filter !== "all") params.set("filter", filter);
+  if (disease) params.set("傷病", disease);
   if (page > 1) params.set("page", String(page));
   const query = params.toString();
   return `/jitsurei${query ? `?${query}` : ""}`;
@@ -42,11 +43,15 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
   const params = await searchParams;
   const legacyFilter = params.kind === "mental" ? "mental" : params.issue === "first-visit" ? "first-visit" : params.outcome === "accepted" ? "accepted" : undefined;
   const filter = normalizeFilter(typeof params.filter === "string" ? params.filter : legacyFilter);
+  const diseaseParam = params["傷病"];
+  const disease = typeof diseaseParam === "string" && diseaseParam.trim() ? diseaseParam.trim() : undefined;
   const requestedPage = typeof params.page === "string" ? Number.parseInt(params.page, 10) : 1;
-  const filtered = applyFilter(SAIKETSU_CASES, filter);
+  const diseaseFiltered = disease ? SAIKETSU_CASES.filter((item) => item.shobyo.includes(disease)) : SAIKETSU_CASES;
+  const filtered = applyFilter(diseaseFiltered, filter);
   const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const currentPage = Number.isFinite(requestedPage) ? Math.min(Math.max(requestedPage, 1), pageCount) : 1;
   const visible = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+  const resultLabel = disease ? `傷病「${disease}」` : filters.find((item) => item.key === filter)?.label ?? "実例";
   const issueCounts = [
     ["障害の程度・等級該当性", SAIKETSU_CASES.filter((item) => item.soten.includes("障害の程度・等級該当性")).length],
     ["初診日", SAIKETSU_COUNTS.firstVisit],
@@ -76,14 +81,14 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
                 </div>
               </div>
             </nav>
-            <p className="p-results">{filters.find((item) => item.key === filter)?.label}の実例 ・ {filtered.length}件（{currentPage}/{pageCount}ページ）</p>
+            <p className="p-results">{resultLabel}の実例 ・ {filtered.length}件（{currentPage}/{pageCount}ページ）</p>
             <div className="p-grid" style={{ gap: 12 }}>
               {visible.map((item) => <CaseCard key={item.id} item={item} />)}
             </div>
             {pageCount > 1 && (
               <nav className="p-chips" aria-label="実例一覧のページ">
-                {currentPage > 1 && <Link className="p-chip" href={hrefFor(filter, currentPage - 1)}>← 前のページ</Link>}
-                {currentPage < pageCount && <Link className="p-chip" href={hrefFor(filter, currentPage + 1)}>次のページ →</Link>}
+                {currentPage > 1 && <Link className="p-chip" href={hrefFor(filter, currentPage - 1, disease)}>← 前のページ</Link>}
+                {currentPage < pageCount && <Link className="p-chip" href={hrefFor(filter, currentPage + 1, disease)}>次のページ →</Link>}
               </nav>
             )}
           </div>

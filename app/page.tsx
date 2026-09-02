@@ -91,9 +91,12 @@ const beginnerCards = [
 ] as const;
 
 const diseaseGroups = [
-  { label: "精神・発達", items: ["うつ病・双極性障害", "統合失調症", "発達障害", "知的障害", "てんかん", "PTSD・不安障害"] },
-  { label: "内部疾患", items: ["腎疾患・人工透析", "糖尿病", "心疾患", "がん", "肝疾患", "血液の病気"] },
-  { label: "身体・その他", items: ["手足・体幹", "目の障害", "耳・平衡", "難病・その他"] },
+  { label: "精神・発達", items: [
+    ["うつ病・双極性障害", "/byoki/utsu-soukyoku"], ["適応障害・不安障害", "/byoki/tekiou-fuan"],
+    ["発達障害", "/byoki/hattatsu"], ["統合失調症", "/byoki/tougou"], ["知的障害", "/byoki/chiteki"], ["てんかん", "/byoki/tenkan"],
+  ] },
+  { label: "内部疾患", items: [["腎臓病・人工透析", "/byoki/jinzou-touseki"], ["がん", "/byoki/gan"], ["心臓病", "/byoki/shinzou"], ["糖尿病", "/byoki/tounyou"]] },
+  { label: "身体・その他", items: [["肢体の障害", "/byoki/shitai"], ["目の障害", "/byoki/shikaku"], ["耳・平衡", "/byoki/choukaku-heikou"], ["難病・その他", "/byoki/nanbyou-sonota"]] },
 ] as const;
 
 const worries = [
@@ -184,7 +187,7 @@ export default function HomePage() {
               <div className="p-chip-row" key={group.label}>
                 <span className="p-chip-label">{group.label}</span>
                 <div className="p-chips">
-                  {group.items.map((item) => item === "うつ病・双極性障害" ? <Link className="p-chip" href="/byoki/utsu-soukyoku" key={item}>{item}</Link> : <span className="p-chip" key={item}>{item}</span>)}
+                  {group.items.map(([item, href]) => href && !["/byoki/shikaku", "/byoki/choukaku-heikou", "/byoki/nanbyou-sonota"].includes(href) ? <Link className="p-chip" href={href} key={item}>{item}</Link> : <span className="p-chip" key={item}>{item}</span>)}
                 </div>
               </div>
             ))}

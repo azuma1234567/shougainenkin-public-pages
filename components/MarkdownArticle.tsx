@@ -200,10 +200,11 @@ export default function MarkdownArticle({
       // 3列以上の表はスマホで横スクロールが必要になる。切れていることが
       // 分からないため、注記を添えたうえでスクロール領域をキーボード操作可能にする。
       const isWide = headers.length >= 3;
+      const isEpilepsyScale = headers[0]?.includes("発作の型と頻度") ?? false;
 
       blocks.push(
         <div
-          className={isWide ? "article-table-figure is-wide" : "article-table-figure"}
+          className={isWide ? "article-table-figure is-wide" : isEpilepsyScale ? "article-table-figure is-epilepsy-scale" : "article-table-figure"}
           key={`table-${index}`}
         >
           {isWide ? (
@@ -228,8 +229,8 @@ export default function MarkdownArticle({
               <tbody>
                 {rows.map((row, rowIndex) => (
                   <tr key={rowIndex}>
-                    {headers.map((_, cellIndex) => (
-                      <td key={cellIndex}>
+                    {headers.map((header, cellIndex) => (
+                      <td data-label={header} key={cellIndex}>
                         {inlineContent(row[cellIndex] ?? "")}
                       </td>
                     ))}

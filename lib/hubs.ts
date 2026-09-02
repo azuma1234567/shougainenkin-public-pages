@@ -49,6 +49,7 @@ export const HUBS: HubDefinition[] = [
   hub("/byoki/gan", "がん", "がん", "byoki", true, [], "傷病=がん"),
   hub("/byoki/shinzou", "心臓病", "心臓病", "byoki", true, [], "傷病=心疾患"),
   hub("/byoki/tounyou", "糖尿病", "糖尿病", "byoki", true, [], "傷病=糖尿病"),
+  hub("/byoki/shitai", "肢体の障害", "肢体の障害", "byoki", true, [], "傷病=肢体"),
   hub("/joukyou/hatarakinagara", "働きながら申請するとき", "働きながら", "joukyou", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "tokyu-hantei-guideline"], "争点=就労"),
   hub("/joukyou/hatachi-mae", "20歳前に初診日があるとき", "20歳前", "joukyou", true, ["hatachi-mae", "nofu-yoken"], "争点=20歳前"),
   hub("/joukyou/shoubyou-teatekin-kara", "傷病手当金から障害年金を考えるとき", "傷病手当金から", "joukyou", true, ["shoubyou-teatekin", "kiso-kousei-chigai"]),
@@ -62,7 +63,7 @@ export const HUBS: HubDefinition[] = [
   hub("/okane/ikura", "障害年金はいくら受け取れるか", "年金額", "okane", true, ["hikazei-shuunyuu", "ikura-moraeru", "sokyuu-seikyuu", "kiso-kousei-chigai", "gaku-kaitei-seikyuu", "jukyuugo-tetsuduki"]),
   hub("/erabu/jibun-ka-irai", "自分で申請するか、依頼するか", "自分で・依頼", "erabu", true, ["jibun-de-shinsei", "nenkin-jimusho-soudan", "shinsei-shindoi"]),
   ...[
-    "/byoki/shitai", "/byoki/ninchishou", "/byoki/izon", "/byoki/kanzou", "/byoki/kokyuuki", "/byoki/ketsueki", "/byoki/shikaku", "/byoki/choukaku-heikou", "/byoki/soshaku-gengo", "/byoki/nanbyou-sonota",
+    "/byoki/ninchishou", "/byoki/izon", "/byoki/kanzou", "/byoki/kokyuuki", "/byoki/ketsueki", "/byoki/shikaku", "/byoki/choukaku-heikou", "/byoki/soshaku-gengo", "/byoki/nanbyou-sonota",
     "/joukyou/65sai-ijou", "/joukyou/shufu-mushoku", "/joukyou/gakusei", "/joukyou/kazoku-ga-tetsudau", "/joukyou/seikatsu-hogo",
     "/suuji", "/gokai", "/okane/zeikin", "/okane/chousei", "/erabu/irai-subeki-case", "/erabu/hiyou-souba", "/erabu/erabikata", "/erabu/fushikyu-no-ato", "/senmonka",
   ].map((path) => hub(path, path, path, "reserved", false)),

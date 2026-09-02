@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 
 const root = process.cwd();
 const sourceRoot = resolve(root, "../shougainenkin/docs");
-const names = ["byoki-tougou", "byoki-chiteki", "byoki-tenkan", "byoki-jinzou-touseki", "byoki-gan", "byoki-shinzou", "byoki-tounyou", "byoki-hattatsu", "byoki-tekiou-fuan", "erabu-jibun-ka-irai", "joukyou-hatachi-mae", "joukyou-hatarakinagara", "joukyou-hitorigurashi", "joukyou-shoubyou-teatekin-kara", "nayami-koushin", "nayami-shikyuu-teishi", "nayami-shindansho-komatta", "nayami-shoshinbi-karute", "nayami-sokyuu", "okane-ikura"];
+const names = ["byoki-tougou", "byoki-chiteki", "byoki-tenkan", "byoki-jinzou-touseki", "byoki-gan", "byoki-shinzou", "byoki-tounyou", "byoki-shitai", "byoki-hattatsu", "byoki-tekiou-fuan", "erabu-jibun-ka-irai", "joukyou-hatachi-mae", "joukyou-hatarakinagara", "joukyou-hitorigurashi", "joukyou-shoubyou-teatekin-kara", "nayami-koushin", "nayami-shikyuu-teishi", "nayami-shindansho-komatta", "nayami-shoshinbi-karute", "nayami-sokyuu", "okane-ikura"];
 const content = Object.fromEntries(names.map((name) => [`/${name.replace("-", "/")}`, JSON.parse(readFileSync(resolve(root, `data/hubs/${name}.json`), "utf8"))]));
 const reserved = ["/suuji", "/gokai", "/okane/zeikin", "/okane/chousei", "/erabu/irai-subeki-case", "/erabu/hiyou-souba", "/erabu/erabikata", "/erabu/fushikyu-no-ato", "/senmonka"];
 const failures = [];
@@ -24,6 +24,6 @@ for (const [path, item] of Object.entries(content)) {
   for (const forbidden of ["執筆メモ", "x.com", "@", "いいね"]) if (item.source.includes(forbidden)) failures.push(`${path}: ${forbidden}`);
   for (const target of reserved) if (new RegExp(`\\[[^\\]]+\\]\\(${target.replaceAll("/", "\\/")}\\)`).test(item.source)) failures.push(`${path}: 予約URLがリンク`);
 }
-if (Object.keys(content).length !== 20) failures.push("本文ページ数が20ではありません");
+if (Object.keys(content).length !== 21) failures.push("本文ページ数が21ではありません");
 if (failures.length) { console.error(failures.join("\n")); process.exit(1); }
-console.log(`OK: 本文20ページ。本文一致、見出し/FAQ一致、非公開語0、予約URLリンク0。`);
+console.log(`OK: 本文21ページ。本文一致、見出し/FAQ一致、非公開語0、予約URLリンク0。`);
