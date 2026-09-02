@@ -1,4 +1,6 @@
-const content = `
+import { apply2026Amounts } from "@/data/amounts";
+
+const rawContent = `
 
 ## 「保険料を払っていないから、もらえない」ではない
 
@@ -128,5 +130,7 @@ A. 先天性の知的障害(精神遅滞)は出生日が初診日として扱わ
 
 ※本記事は、X上で障害年金について発信している当事者・実務者の公開ポストの分析と、一般的な制度情報に基づくものです。受給や等級を保証するものではありません。所得制限の金額など最新の基準は日本年金機構のホームページで、個別の判断は年金事務所・社会保険労務士でご確認ください。
 `;
+
+const content = apply2026Amounts(rawContent);
 
 export default content;

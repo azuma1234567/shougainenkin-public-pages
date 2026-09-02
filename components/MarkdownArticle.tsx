@@ -32,8 +32,9 @@ function inlineContent(text: string, keyPrefix = "inline"): ReactNode[] {
           href === "/columns/soudansaki-chigai"
             ? "/columns/jibun-de-shinsei"
             : href;
+        const reserved = new Set(["/suuji", "/gokai", "/okane/zeikin", "/okane/chousei", "/erabu/irai-subeki-case", "/erabu/hiyou-souba", "/erabu/erabikata", "/erabu/fushikyu-no-ato", "/senmonka"]);
         nodes.push(
-          resolvedHref.startsWith("/") ? (
+          reserved.has(resolvedHref) ? <span key={`${keyPrefix}-${match.index}-reserved`}>{inlineContent(label, `${keyPrefix}-${match.index}-reserved-label`)}</span> : resolvedHref.startsWith("/") ? (
             <Link
               key={`${keyPrefix}-${match.index}-link`}
               href={resolvedHref}
@@ -115,9 +116,11 @@ function isTableDivider(line: string): boolean {
 export default function MarkdownArticle({
   source,
   appCtaSlug,
+  faqAccordion = false,
 }: {
   source: string;
   appCtaSlug: string;
+  faqAccordion?: boolean;
 }) {
   const lines = source.replace(/\r\n/g, "\n").split("\n");
   const blocks: ReactNode[] = [];
@@ -162,6 +165,21 @@ export default function MarkdownArticle({
         blocks.push(<XPostEmbed key={`x-${index}`} url={url} />);
       }
       index += 1;
+      continue;
+    }
+
+    if (faqAccordion && /^\*\*Q[.．]/.test(line)) {
+      const question = line.replace(/^\*\*/, "").replace(/\*\*$/, "");
+      index += 1;
+      const answerLines: string[] = [];
+      while (index < lines.length) {
+        const next = lines[index].trim();
+        if (!next) { index += 1; break; }
+        if (/^\*\*Q[.．]/.test(next) || next.startsWith("## ")) break;
+        answerLines.push(next);
+        index += 1;
+      }
+      blocks.push(<details className="hub-faq-item" key={`faq-${index}`}><summary>{inlineContent(question)}</summary><p>{inlineContent(answerLines.join(" "))}</p></details>);
       continue;
     }
 

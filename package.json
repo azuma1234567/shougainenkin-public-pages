@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit --pretty false"
+    ,"verify:hubs": "node scripts/verify-hub-content.mjs && node scripts/verify-hub-map.mjs"
   },
   "dependencies": {
     "next": "^15.3.4",
