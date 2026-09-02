@@ -1,0 +1,74 @@
+# 既存記事からXへの言及を外す — 実施・検証記録（2026-09-02）
+
+対象指示: `docs/x-references-removal-2026-09-02.md`（アプリrepo側）
+方針: 「調査元は表向きに一切示さない」（2026-09-01）。事実は残し、出所を消す。言い直せる記述は法令・認定基準・ガイドライン・統計に置き換える。
+
+## 1. やったこと
+
+### §3 一括置換（全記事）
+- 埋め込みツイート7件（4記事）を削除。`components/XPostEmbed.tsx` を削除し、`MarkdownArticle` の `[ツイート埋め込み:` の解釈も撤去（外部スクリプト `platform.twitter.com` の読み込みは0件になった）。`globals.css` の `.x-post-*` / `@keyframes x-post-loading` も削除。
+- `@` + アカウント名、「Xで投稿を見る」「Xの投稿を表示できない場合は」「受給者・実務者の発信から学ぶ」「X上で公開されている当事者・実務者の発信を参考にした情報と、」を削除。
+- `体感` 系: `fushikyuu-shinsa-seikyu` の「実務家の体感でも「2割弱に届かない」と言われます」を落とし、地方厚生局の統計の一文だけ残した。
+- 残してよいもの（利用者自身の記録としての「SNSの投稿履歴」「日記・SNS・スマホの写真」）はそのまま。
+
+### §4 言い換え表（本文中の言及）
+| 記事 | 対応 |
+|---|---|
+| `koushin-kakuninhodo` | 「Xで最も不安を語る」→「受給が決まったあとで、いちばん不安が語られる」。Xの体験談3件の段落を削除し、令和6年度の再認定304,456件のうち96.8%継続（増額1.4%・減額0.8%・支給停止1.0%）に置換 |
+| `taishou-shoubyou-kyoukai` | 「Xで見かける」→「よく見かける」。「受給者・実務者の発信を整理しながら／追ってきた立場から」削除 |
+| `nichijo-seikatsu-7koumoku` | 「Xで発信し続けている内容を追う」削除→記載要領「本人や家族からの聴き取りをもとに記載する」。独居の記述はガイドライン引用に置換 |
+| `tokyu-hantei-guideline` | 「体感があります」の文を削除→精神の不支給事案の75.3%が目安表で下位の区分、に置換。「実務者の体感としても」2か所削除 |
+| `shindansho-kaitekurenai` | 「Xでも定期的に流れてくる悩み」→「くり返し語られる悩み」 |
+| `moushitatesho-kikan-kugiri` | 「Xで語られる失敗談」→「よくある失敗」 |
+| `shinsei-shindoi` `shinsa-shikumi-nintei-i` | 「SNSで結果報告を読み続け」→「他の人の結果報告を読み続け」 |
+| `kazoku-enjo-kakikata` `hitorigurashi-furi` `shindansho-jittai-chigau` `shougaisha-koyou-nenkin` | 「当事者／受給者・実務者の発信で」の該当部分を削除、独居はガイドライン引用に置換 |
+| `nenkin-jimusho-soudan` | 「Xでの相談を受け付ける仕組み」は現在のリポジトリには存在せず（本番スキャン時点との差）。変更なし |
+| `moushitatesho-a4-insatsu` | **下記§2** |
+
+### §5 4記事の書き換え
+codexが途中まで進めていた書き換えは、原稿と食い違う箇所（「労働に従事していることをもって…」「75.3%」「委任状が必要です」などの原稿文が未反映、「〜という趣旨の発信をしています」「実務者の発信から」が残存）が多かったため、**4記事をHEADに戻し、原稿を行単位で流し込み直した**（`scratchpad/xref/apply-s5.mjs`。HEAD本文の行番号を先頭文字列で照合してから差し替える）。
+
+- `moushitatesho-kakikata`: h1・リード・「書き始める前に。初診日の話」・「盛ったら終わり」・就労欄を原稿どおり差し替え。原稿の範囲外に残っていた岸野さん／呟き人さん由来の段落（職場で年金の話をしない・スパイト行動・第三者記述・FAQ・まとめ・免責）は、事実を残して出所を外した。`lib/columns.ts` の title・description も更新（「あわせて読みたい」は title を参照するので連鎖して消える）。
+- `shinsatsu-mae-memo`: リード・「診察室で起きていること」（**特定個人の体調描写を丸ごと撤去**）・見出し「紙で渡すのは、制度が想定している手順です」を原稿どおり。残りの呟き人さん／岸野さん由来16か所は出所を外し、必要な箇所はガイドライン引用に置換。
+- `hatarakinagara`: 埋め込み3件削除、まとめ・免責を原稿どおり。「当事者の発信が示す実態の幅」節は、原稿の指示（削ったぶんガイドライン引用を足す）に沿って、就労以外の場面を考慮するガイドライン文を入れて書き直した。「絶対に障害年金の話はするな」への後方参照は「職場で『障害年金』の話はしない」に揃えた。
+- `hatachi-mae`: リード・「初診日の闇の、ちょうど裏側」・「10代の記録が財産になる」・「親が動いていい」・免責を原稿どおり。
+- `app/columns/*/page.tsx` の FAQ（JSON-LD用の複製）も本文と同じ文言に揃えた。
+
+## 2. `moushitatesho-a4-insatsu`（全クリックの47%）
+
+codexの作業ツリーには「精神2級の当事者としてXで発信を続け」→「体調の波を抱えたまま進」のような**言い換え**が入っていたため、HEADに戻して該当文の削除だけをやり直した。
+
+削除した3か所（指示の3語に対応）:
+1. 「ここで思い出したいのが、精神2級の当事者としてXで発信を続けている有資格者(…)の日々のポストです。眠れた朝を「6時間も寝られました」と喜び、鬱の浮き沈みを抱えながら通院と仕事をこなす。」（2文。後半は前半の人物を主語にしており単独で成立しないため同じ「該当文」として削除）
+2. 見出し末尾「 — 当事者の発信から学ぶ配分」
+3. 免責「※本記事は一般的な情報提供と、X上で障害年金について発信している当事者・実務者の公開情報の分析に基づくものです。」（後続の「様式の最新版と…でご確認ください。」は残る）
+
+機械確認: HEADの本文からこの3文字列を取り除いた結果と、作業ツリーの本文が**完全一致**（12,036字→11,844字、−192字。他は1文字も差なし）。
+
+## 3. 完了条件
+
+1. `x.com` `twitter.com` `twimg` `twitter-tweet`: ソース（app/components/content/lib/data/public）で0件。出力HTML全ページの走査結果は§4。
+2. `@`+英数字4文字以上: 記事・コンポーネントで0件。残るのはCSSのアットルール（`@media` 等）、JSON-LDの `@type` / `@context`、連絡先メールのみ。
+3. 「Xで投稿を見る」「Xの投稿を表示できない場合は」: 0件。
+4. 「受給者・実務者の発信」: 0件（h1・title・description・リンク文言を含む）。
+5. `platform.twitter.com` 等の外部スクリプト: 0件（読み込み元の `XPostEmbed` 自体を削除）。
+6. §5の4記事: 差し替え後の各節を通読し、埋め込みを消した穴・主語のない文がないことを確認（§1参照）。
+7. `moushitatesho-a4-insatsu`: 該当文の削除のみ（§2で機械確認）。
+8. h1変更に伴う他記事の表記: `lib/columns.ts` の title を参照する仕組みのため自動で更新。旧タイトル文字列は0件。
+9. URL・slug: 変更なし（`lib/columns.ts` の差分は title と description の2行のみ。リネームなし）。
+
+## 4. 実行結果
+
+- `npm run typecheck` / `npm run lint`: 成功
+- 本番ビルド後の出力HTMLを sitemap の全191ページで走査（`<main>` 内の可視HTML）: `x.com` `twitter.com` `twimg` `twitter-tweet` `platform.twitter` 「Xで投稿を見る」「Xの投稿を表示できない場合は」「受給者・実務者の発信」すべて**0件**。
+  - `@`+英数字4文字以上は、about/support/privacy/terms/quality の連絡先メール `shougainenkinsupport@gmail.com` の5件のみ（アカウント名ではない）。
+  - `<main>` の外に残る `twitter` は `<meta name="twitter:card">`（OGPのTwitter Card指定）のみで、`twitter.com` へのリンク・スクリプトは0件。
+- `npm run verify:hubs`: 191ページ、リンク切れ0、予約URLリンク0。被内部リンク50本超は `/gokai`（59本。§2で各ハブから「もっと見る」を張った結果。X削除とは無関係だが棚割り§4-7の警告として記録）。
+
+## 5. 範囲外だが方針上の残り（要判断）
+
+今回の指示（§3の語・§4・§5）には入っていないが、「〜の発信」「当事者有資格者」「実務に詳しい発信者」のように**出所をぼかした形で調査元を指す表現**が、次の記事に残っている（件数は正規表現での概数）。
+
+`nichijo-seikatsu-7koumoku` 10 / `moushitatesho-a4-insatsu` 8（触らない指示のため未処理）/ `shindansho-kaitekurenai` 7 / `koushin-kakuninhodo` 7 / `tekio-shogai-shogai-nenkin` 2 / `shoshinbi-wakaranai` 2 / `shinsei-kikan` 2 / `shindansho-ishi-ni-tsutaeru` 2 / `shindansho-irai-timing` 2 / `moushitatesho-kikan-kugiri` 2 / `hatarakinagara` 2 / `tokyu-hantei-guideline` `taishou-shoubyou-kyoukai` `sokyuu-seikyuu` `shougaisha-koyou-nenkin` `shoshinbi-karute-nashi` `shoshinbi-haiin` `shindansho-tanomikata` `nenkin-jimusho-soudan` `moushitatesho-mijushin-kikan` `kazoku-enjo-kakikata` `hitorigurashi-furi` 各1
+
+とくに「制度とお金の落とし穴を発信し続けている当事者有資格者（自身が精神2級×障害者雇用）」という言い方は、アカウント名がなくても人物が特定できる。§2の原則（事実は残す・出所は消す）で機械的に処理できる内容なので、指示があれば同じ手順で当てる。
