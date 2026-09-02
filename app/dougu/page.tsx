@@ -1,3 +1,7 @@
+// 【非公開中】道具(/dougu/*)が1本実装されるまで、このページはサイトマップと内部リンクから外し、
+// noindex にしている(docs/codex-prelaunch-fix-2026-09-02-instructions.md の追加対応、2026-09-02)。
+// 道具が入ったら: app/sitemap.ts に "/dougu" を戻す / この metadata の robots を外す /
+// lib/published-links.ts の UNPUBLISHED_PATHS から "/dougu" を外す。ファイル自体は消さない。
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/platform/Platform";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -5,11 +9,15 @@ import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 const DESCRIPTION =
   "障害年金の等級の目安、金額、必要書類、年金事務所、申立書を、ひとつずつ確認・準備するための道具をまとめています。";
 
-export const metadata: Metadata = pageMetadata({
-  title: "道具の置き場所",
-  description: DESCRIPTION,
-  path: "/dougu",
-});
+export const metadata: Metadata = {
+  ...pageMetadata({
+    title: "道具の置き場所",
+    description: DESCRIPTION,
+    path: "/dougu",
+  }),
+  // 道具が1本も無い間は検索に出さない(下のコメント参照)
+  robots: { index: false, follow: false },
+};
 
 const tools = [
   {
