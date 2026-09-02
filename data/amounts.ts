@@ -4,6 +4,10 @@ export const AMOUNTS_2026 = {
   incomeHalfBeforeOctober: "3,761,000", incomeFullBeforeOctober: "4,794,000",
   incomeHalfFromOctober: "3,858,000", incomeFullFromOctober: "4,918,000",
   dependentDisabledIncomeLimit: "180", dependentGeneralIncomeLimit: "130",
+  basicGrade1Old: "1,056,125",           // 昭和31年4月1日以前生まれの1級
+  basicGrade2Old: "844,900",             // 同 2級
+  employeesGrade3MinimumOld: "633,700",  // 同 3級最低保障
+  disabilityAllowanceMinimum: "1,271,000", // 障害手当金の最低保障(3級最低保障×2)
 } as const;
 
 const values = Object.values(AMOUNTS_2026);

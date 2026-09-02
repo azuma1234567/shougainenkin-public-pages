@@ -9,6 +9,9 @@
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
+import { explainAmount, findAmounts, paragraphAround } from "./lib/amounts-derive.mjs";
+
+const toNumber = (text) => Number(String(text).replace(/[,円]/g, ""));
 
 const origin = (process.argv[2] ?? process.env.VERIFY_ORIGIN ?? "http://localhost:3000").replace(/\/$/, "");
 const root = process.cwd();
@@ -130,18 +133,26 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
   const blocked = [...sitemapSet].filter((p) => disallows.some((d) => d !== "" && p.startsWith(d)));
   record("A-7", "robots.txt が全ページを許可している", blocked.length === 0 && /Allow:\s*\//.test(robots), `Disallow ${disallows.length} 件、公開対象の該当 ${blocked.length}`, blocked, robots.trim().replace(/\n/g, " / "));
 }
-// A-8 金額: data/amounts.ts 以外への直書き
+// A-8 金額: 出力HTMLの金額が data/amounts.ts から導出できるか(2026-09-02 に判定基準を変更)
 {
   const amounts = Object.values(AMOUNTS_2026).filter((v) => v.includes(","));
-  const re = new RegExp(amounts.map((a) => a.replace(/,/g, ",")).join("|"), "g");
-  const hits = [];
-  const walk = (dir) => { for (const name of readdirSync(dir)) { const full = path.join(dir, name); if (statSync(full).isDirectory()) walk(full); else if (/\.(tsx?|json|mjs)$/.test(name) && !full.endsWith("data/amounts.ts")) { const src = readFileSync(full, "utf8"); const n = (src.match(re) ?? []).length; if (n) hits.push(`${path.relative(root, full)} (${n})`); } } };
+  const re = new RegExp(amounts.join("|"), "g");
+  const hardcoded = [];
+  const walk = (dir) => { for (const name of readdirSync(dir)) { const full = path.join(dir, name); if (statSync(full).isDirectory()) walk(full); else if (/\.(tsx?|json|mjs)$/.test(name) && !full.endsWith("data/amounts.ts")) { const src = readFileSync(full, "utf8"); const n = (src.match(re) ?? []).length; if (n) hardcoded.push(`${path.relative(root, full)} (${n})`); } } };
   for (const dir of ["app", "components", "content", "lib", "data"]) walk(path.join(root, dir));
-  // 出力HTML側: data/amounts.ts に無い金額らしき数字(3桁区切り・100,000以上)が出ていないか
-  const known = new Set(Object.values(AMOUNTS_2026));
-  const unknown = [];
-  for (const [p, page] of pages) for (const m of page.visible.matchAll(/\d{1,3}(?:,\d{3}){1,2}円/g)) { const v = m[0].replace("円", ""); if (!known.has(v) && Number(v.replace(/,/g, "")) >= 100000) unknown.push(`${p}: ${m[0]}`); }
-  record("A-8", "金額が全ページで一致している(data/amounts.ts 経由・直書き0)", hits.length === 0, `直書きのあるファイル ${hits.length}、amounts.ts に無い10万円以上の金額 ${[...new Set(unknown)].length}`, [...hits.map((h) => `直書き: ${h}`), ...[...new Set(unknown)].slice(0, 40).map((u) => `未登録額: ${u}`)], "値そのものは data/amounts.ts と同じ数字が使われているかを「未登録額」で確認");
+  const explained = new Map();
+  const unexplained = [];
+  for (const [p, page] of pages) {
+    for (const found of findAmounts(page.visible, 100000)) {
+      const expr = explainAmount(found.text, AMOUNTS_2026, paragraphAround(page.visible, found.index));
+      if (expr) explained.set(found.text, expr);
+      else unexplained.push(`未説明額: ${p}: ${found.text}`);
+    }
+  }
+  const explainedList = [...explained].sort((a, b) => toNumber(a[0]) - toNumber(b[0])).map(([text, expr]) => `説明済み: ${text} = ${expr}`);
+  record("A-8", "金額が全ページで一致している(data/amounts.ts から導出できる)", unexplained.length === 0, `10万円以上の金額 ${explained.size + new Set(unexplained).size} 種のうち説明済み ${explained.size}、未説明 ${new Set(unexplained).size}(参考: 直書きのあるファイル ${hardcoded.length})`, [...new Set(unexplained)], "説明済みの式は末尾の付記に全件");
+  globalThis.__a8Explained = explainedList;
+  globalThis.__a8Hardcoded = hardcoded;
 }
 // A-9 / A-10 執筆メモ・調査元
 {
@@ -253,6 +264,11 @@ const d8 = ["/columns/moushitatesho-a4-insatsu", "/columns/moushitatesho-kikan-k
 lines.push("## D(人が見る): 確認用の一覧", "", `全ページの URL・タイトル・文字数は \`${path.relative(root, path.join(outDir, "pages.tsv"))}\` に出力。`, "", "| URL | タイトル | 文字数 |", "|---|---|---|");
 for (const p of d8) lines.push(`| ${p} | ${pages.get(p)?.title ?? "(取得不可)"} | ${pages.get(p)?.chars ?? "-"} |`);
 lines.push("");
+if (globalThis.__a8Explained) {
+  lines.push("## A-8 付記: 金額の検算(data/amounts.ts からの導出)", "");
+  for (const d of globalThis.__a8Explained) lines.push(`- ${d}`);
+  lines.push("", `参考: amounts.ts の値を直書きしているファイル ${globalThis.__a8Hardcoded.length} 件(判定には使わない): ${globalThis.__a8Hardcoded.join(", ")}`, "");
+}
 if (globalThis.__shrunk?.length) { lines.push("## 参考: 公開前より本文が減った既存記事(8割以上は維持)", ""); for (const d of globalThis.__shrunk) lines.push(`- ${d}`); lines.push(""); }
 const report = lines.join("\n");
 writeFileSync(path.join(outDir, "RESULT.md"), report);
