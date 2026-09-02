@@ -1,67 +1,138 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/platform/Platform";
-import { YOUGO, YOUGO_CATEGORIES, type YougoCategory } from "@/data/yougo";
-import { kanaGroup, searchableYomi, YOUGO_KANA_GROUPS } from "@/lib/yougo";
+import YougoCopyLink from "@/components/YougoCopyLink";
+import { YOUGO, YOUGO_CATEGORIES, type YougoCategory, type YougoEntry } from "@/data/yougo";
+import { SITE_URL } from "@/lib/constants";
+import { isPublishedRelatedPath, kanaGroup, YOUGO_KANA_GROUPS } from "@/lib/yougo";
 import { pageMetadata } from "@/lib/seo";
 
-const TITLE = "障害年金の用語辞典";
+// 用語辞典は1ページに40語(docs/codex-phase2-yougo-revision-2026-09-02.md)。
+// 各語は <section id="<slug>"> で、/yougo#<slug> で直接飛べる。
+
+const META_TITLE = "障害年金の用語辞典";
 const DESCRIPTION = "障害年金の手続きや審査で使われる40の用語を、やさしい言葉で確認できます。";
-export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: "/yougo" });
+export const metadata: Metadata = pageMetadata({ title: META_TITLE, description: DESCRIPTION, path: "/yougo" });
 
-type Props = { searchParams: Promise<{ category?: string; kana?: string }> };
+const CATEGORY_IDS: Record<YougoCategory, string> = {
+  "初診日まわり": "cat-shoshinbi",
+  "書類": "cat-shorui",
+  "審査": "cat-shinsa",
+  "お金・要件": "cat-okane",
+  "受給後": "cat-jukyugo",
+};
 
-function filterHref(category?: string, kana?: string) {
-  const params = new URLSearchParams();
-  if (category) params.set("category", category);
-  if (kana) params.set("kana", kana);
-  return `/yougo${params.size ? `?${params}` : ""}`;
+// 五十音の各行から、ページ順で最初に出てくる語へ飛ぶ
+function firstSlugOfKana(group: (typeof YOUGO_KANA_GROUPS)[number]): string | null {
+  return YOUGO.find((item) => kanaGroup(item.slug, item.yomi) === group)?.slug ?? null;
 }
 
-export default async function YougoPage({ searchParams }: Props) {
-  const query = await searchParams;
-  const category = YOUGO_CATEGORIES.includes(query.category as YougoCategory) ? query.category as YougoCategory : undefined;
-  const kana = YOUGO_KANA_GROUPS.includes(query.kana as (typeof YOUGO_KANA_GROUPS)[number]) ? query.kana : undefined;
-  const items = YOUGO.filter((item) => (!category || item.category === category) && (!kana || kanaGroup(item.slug, item.yomi) === kana));
+function definedTermSetJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "@id": `${SITE_URL}/yougo`,
+    name: META_TITLE,
+    description: DESCRIPTION,
+    url: `${SITE_URL}/yougo`,
+    hasDefinedTerm: YOUGO.map((item) => ({
+      "@type": "DefinedTerm",
+      "@id": `${SITE_URL}/yougo#${item.slug}`,
+      url: `${SITE_URL}/yougo#${item.slug}`,
+      name: item.term,
+      ...(item.yomi ? { alternateName: item.yomi } : {}),
+      description: `${item.paraphrase}${item.body.replace(/\n/g, "")}`,
+      inDefinedTermSet: `${SITE_URL}/yougo`,
+    })),
+  };
+}
 
+function TermCard({ item }: { item: YougoEntry }) {
+  const related = item.related.filter(({ href }) => isPublishedRelatedPath(href));
+  return (
+    <section className="yougo-term" id={item.slug} data-yougo-slug={item.slug} aria-labelledby={`${item.slug}-title`}>
+      <div className="yougo-term-head">
+        <h2 id={`${item.slug}-title`}>
+          {item.term}
+          {item.yomi && <span className="yougo-yomi">({item.yomi})</span>}
+        </h2>
+        <YougoCopyLink slug={item.slug} term={item.term} />
+      </div>
+      <p className="yougo-paraphrase"><strong>{item.paraphrase}</strong></p>
+      {item.body.split("\n").map((paragraph, index) => <p className="yougo-body" key={index}>{paragraph}</p>)}
+      {item.note && <p className="yougo-note">{item.note}</p>}
+      {related.length > 0 && (
+        <p className="yougo-related">
+          関連: {related.map((link, index) => (
+            <span key={link.href}>
+              {index > 0 && " / "}
+              <Link href={link.href}>{link.label}</Link>
+            </span>
+          ))}
+        </p>
+      )}
+    </section>
+  );
+}
+
+export default function YougoPage() {
   return (
     <div className="platform yougo-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(definedTermSetJsonLd()).replace(/</g, "\\u003c") }} />
       <header className="p-page-hero yougo-hero">
-        <div className="p-container hub-reading-width">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: TITLE }]} />
-          <h1>{TITLE}</h1>
-          <p className="p-page-intro">障害年金の書類や窓口で出てくる言葉を、知りたい入口から探せます。</p>
+        <div className="p-container yougo-reading-width">
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "用語辞典" }]} />
+          <h1>用語辞典</h1>
+          <p className="p-page-intro">障害年金でよく出てくる言葉を、むずかしくない言い方から説明します(40語)。</p>
         </div>
       </header>
-      <div className="p-container hub-reading-width yougo-content">
-        <nav className="yougo-filters" aria-label="用語の絞り込み" data-yougo-skip>
-          <section aria-labelledby="yougo-kana-heading">
-            <h2 id="yougo-kana-heading">五十音から探す</h2>
-            <div className="yougo-filter-row">
-              <Link className={!kana ? "is-active" : ""} href={filterHref(category)}>すべて</Link>
-              {YOUGO_KANA_GROUPS.map((group) => <Link key={group} className={kana === group ? "is-active" : ""} href={filterHref(category, group)}>{group}</Link>)}
-            </div>
-          </section>
-          <section aria-labelledby="yougo-category-heading">
-            <h2 id="yougo-category-heading">カテゴリから探す</h2>
-            <div className="yougo-filter-row">
-              <Link className={!category ? "is-active" : ""} href={filterHref(undefined, kana)}>すべて</Link>
-              {YOUGO_CATEGORIES.map((group) => <Link key={group} className={category === group ? "is-active" : ""} href={filterHref(group, kana)}>{group}</Link>)}
-            </div>
-          </section>
+
+      <div className="p-container yougo-reading-width yougo-content">
+        <nav className="yougo-index" aria-label="用語の目次" data-yougo-skip>
+          <div className="yougo-index-group" role="group" aria-labelledby="yougo-category-heading">
+            <p className="yougo-index-label" id="yougo-category-heading">カテゴリから探す</p>
+            <ul className="yougo-tabs">
+              {YOUGO_CATEGORIES.map((category) => (
+                <li key={category}>
+                  <a href={`#${CATEGORY_IDS[category]}`} data-yougo-tab={CATEGORY_IDS[category]}>
+                    {category}<span className="yougo-tab-count">{YOUGO.filter((item) => item.category === category).length}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="yougo-index-group" role="group" aria-labelledby="yougo-kana-heading">
+            <p className="yougo-index-label" id="yougo-kana-heading">五十音から探す</p>
+            <ul className="yougo-kana">
+              {YOUGO_KANA_GROUPS.map((group) => {
+                const slug = firstSlugOfKana(group);
+                return (
+                  <li key={group}>
+                    {slug
+                      ? <a href={`#${slug}`} data-yougo-kana={group}>{group}</a>
+                      : <span aria-disabled="true" data-yougo-kana={group}>{group}</span>}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </nav>
-        <div className="yougo-results-head"><h2>{category ?? kana ?? "全40語"}</h2><span>{items.length}語</span></div>
-        <div className="yougo-grid">
-          {items.map((item) => (
-            <Link className="yougo-card" href={`/yougo/${item.slug}`} key={item.slug} data-yougo-slug={item.slug}>
-              <span>{item.category}</span>
-              <h3>{item.term}</h3>
-              <small>{searchableYomi(item.slug, item.yomi)}</small>
-              <p>{item.paraphrase}</p>
-            </Link>
-          ))}
+
+        {YOUGO_CATEGORIES.map((category) => (
+          <div className="yougo-group" id={CATEGORY_IDS[category]} key={category} data-yougo-category={category}>
+            <p className="yougo-group-label"><span>{category}</span><small>{YOUGO.filter((item) => item.category === category).length}語</small></p>
+            {YOUGO.filter((item) => item.category === category).map((item) => <TermCard item={item} key={item.slug} />)}
+          </div>
+        ))}
+
+        <aside className="yougo-sources" data-yougo-skip>
+          <p>出典: 厚生労働省・日本年金機構の公表資料(確認日: 2026年9月2日)</p>
+        </aside>
+
+        <div className="yougo-search-cta" data-yougo-skip>
+          <p>ここに無い言葉は、サイト内検索でも探せます。</p>
+          <Link className="p-button" href="/#site-search-input">サイト内検索へ →</Link>
         </div>
-        {items.length === 0 && <p className="yougo-empty">この組み合わせに当てはまる用語はありません。</p>}
       </div>
     </div>
   );

@@ -2,7 +2,6 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/constants";
 import { COLUMNS_BY_DATE } from "@/lib/columns";
 import { PUBLISHED_CONTENT_HUBS } from "@/lib/hubs";
-import { YOUGO } from "@/data/yougo";
 import { GOKAI } from "@/data/gokai";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -30,10 +29,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(column.dateModified),
   }));
 
-  const yougoPages: MetadataRoute.Sitemap = YOUGO.map((item) => ({
-    url: `${SITE_URL}/yougo/${item.slug}`,
-  }));
-
   const gokaiPages: MetadataRoute.Sitemap = GOKAI.map((card) => ({
     url: `${SITE_URL}/gokai/${card.slug}`,
   }));
@@ -42,5 +37,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const hubPages: MetadataRoute.Sitemap = PUBLISHED_CONTENT_HUBS
     .filter((hub) => !existing.has(`${SITE_URL}${hub.path}`))
     .map((hub) => ({ url: `${SITE_URL}${hub.path}` }));
-  return [...staticPages, ...hubPages, ...yougoPages, ...gokaiPages, ...columnPages];
+  return [...staticPages, ...hubPages, ...gokaiPages, ...columnPages];
 }

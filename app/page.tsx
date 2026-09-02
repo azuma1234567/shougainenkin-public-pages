@@ -71,7 +71,7 @@ const searchItems: SearchItem[] = [
     keywords: `${card.misconception} ${card.truth} ${card.category}`,
   })),
   ...YOUGO.map((item) => ({
-    href: `/yougo/${item.slug}`,
+    href: `/yougo#${item.slug}`,
     title: item.term,
     description: item.paraphrase,
     category: "用語辞典",

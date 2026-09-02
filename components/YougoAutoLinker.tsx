@@ -11,12 +11,14 @@ export default function YougoAutoLinker() {
   const pathname = usePathname();
 
   useEffect(() => {
+    // 用語辞典は1ページ構成(/yougo#<slug>)。辞典ページ自身では自動リンクを動かさない。
+    if (pathname === "/yougo") return;
     const main = document.querySelector("main");
     if (!main) return;
-    const selfSlug = pathname.match(/^\/yougo\/([^/]+)$/)?.[1] ?? "";
+    const selfSlug = "";
     const linkedSlugs = new Set(
-      [...main.querySelectorAll<HTMLAnchorElement>('a[href^="/yougo/"]')]
-        .map((anchor) => anchor.getAttribute("href")?.split("/").pop())
+      [...main.querySelectorAll<HTMLAnchorElement>('a[href^="/yougo#"]')]
+        .map((anchor) => anchor.getAttribute("href")?.split("#").pop())
         .filter((slug): slug is string => Boolean(slug)),
     );
     const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {
@@ -38,7 +40,7 @@ export default function YougoAutoLinker() {
       while (match) {
         fragment.append(rest.slice(0, match.index));
         const anchor = document.createElement("a");
-        anchor.href = `/yougo/${match.entry.slug}`;
+        anchor.href = `/yougo#${match.entry.slug}`;
         anchor.className = "yougo-auto-link";
         anchor.dataset.yougoAuto = match.entry.slug;
         anchor.textContent = match.entry.term;
