@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/platform/Platform";
+import YougoAnchorLanding from "@/components/YougoAnchorLanding";
 import YougoCopyLink from "@/components/YougoCopyLink";
 import { YOUGO, YOUGO_CATEGORIES, type YougoCategory, type YougoEntry } from "@/data/yougo";
 import { SITE_URL } from "@/lib/constants";
@@ -78,6 +79,7 @@ function TermCard({ item }: { item: YougoEntry }) {
 export default function YougoPage() {
   return (
     <div className="platform yougo-page">
+      <YougoAnchorLanding />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(definedTermSetJsonLd()).replace(/</g, "\\u003c") }} />
       <header className="p-page-hero yougo-hero">
         <div className="p-container yougo-reading-width">
