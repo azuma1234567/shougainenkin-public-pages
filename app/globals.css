@@ -53,6 +53,55 @@
   --font-display: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
 }
 
+/* 記事本文は変えず、目次直後に棚割り上の親ハブを示す。 */
+.column-theme-block {
+  margin: 18px 0 28px;
+  padding: 16px 18px;
+  border: 1px solid #cfe6f5;
+  border-radius: 14px;
+  background: #f4faff;
+}
+
+.column-theme-title {
+  margin: 0 0 10px;
+  color: #4a6a80;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.column-theme-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.column-theme-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 11px;
+  border: 1px solid #b9dced;
+  border-radius: 999px;
+  background: #fff;
+  color: #026a9f;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.column-theme-primary {
+  color: #678399;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+@media (max-width: 480px) {
+  .column-theme-block { padding: 14px; }
+  .column-theme-links { display: grid; }
+  .column-theme-links a { border-radius: 10px; }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

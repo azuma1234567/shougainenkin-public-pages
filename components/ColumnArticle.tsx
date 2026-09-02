@@ -2,6 +2,7 @@ import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
 import ColumnFooter, { type Reference } from "@/components/ColumnFooter";
 import MarkdownArticle from "@/components/MarkdownArticle";
+import ColumnThemeBlock from "@/components/ColumnThemeBlock";
 import {
   columnBreadcrumbParents,
   columnJsonLd,
@@ -53,6 +54,7 @@ export default function ColumnArticle({
       </p>
 
       <ArticleToc />
+      <ColumnThemeBlock column={column} />
       <MarkdownArticle source={source} appCtaSlug={column.slug} />
       <ColumnFooter
         currentSlug={column.slug}
