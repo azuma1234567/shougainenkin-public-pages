@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { PageDate } from "@/components/platform/Platform";
 
 const DESCRIPTION =
   `「${SITE_NAME}」のサポートページです。よくあるご質問とお問い合わせ先をご案内します。`;
@@ -10,6 +11,9 @@ export const metadata: Metadata = pageMetadata({
   description: DESCRIPTION,
   path: "/support",
 });
+
+// このページの内容を変えたら、手でこの日付を更新する。
+const UPDATED = "2026-09-02";
 
 const breadcrumb = breadcrumbJsonLd([
   { name: "トップ", path: "/" },
@@ -25,6 +29,7 @@ export default function SupportPage() {
       />
 
       <h1>サポート</h1>
+      <PageDate updated={UPDATED} />
 
       <p>
         「{SITE_NAME}」をご利用いただきありがとうございます。

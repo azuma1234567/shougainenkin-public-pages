@@ -72,6 +72,20 @@ export function SectionHeader({ title, lead, href, linkLabel }: { title: string;
   );
 }
 
+// 最終更新日(と確認日)の表示。日付は yyyy-mm-dd で受け取り、yyyy年M月d日 で出す。
+function formatPageDate(date: string): string {
+  const [y, m, d] = date.split("-");
+  return `${y}年${Number(m)}月${Number(d)}日`;
+}
+export function PageDate({ updated, checked }: { updated: string; checked?: string }) {
+  return (
+    <p className="p-page-date">
+      <time dateTime={updated}>最終更新日 {formatPageDate(updated)}</time>
+      {checked ? <> ・ 確認日 <time dateTime={checked}>{formatPageDate(checked)}</time></> : null}
+    </p>
+  );
+}
+
 export function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <div className={`p-card ${className}`.trim()}>{children}</div>;
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/platform/Platform";
-import { GOKAI, GOKAI_CATEGORIES, type GokaiCategory } from "@/data/gokai";
+import { Breadcrumb, PageDate } from "@/components/platform/Platform";
+import { GOKAI, GOKAI_CATEGORIES, GOKAI_UPDATED, type GokaiCategory } from "@/data/gokai";
 import { pageMetadata } from "@/lib/seo";
 
 const TITLE = "障害年金のよくある誤解";
@@ -22,6 +22,7 @@ export default async function GokaiPage({ searchParams }: Props) {
           <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: TITLE }]} currentPath="/gokai" />
           <h1>{TITLE}</h1>
           <p className="p-page-intro">よく信じられている誤解を48枚に分けました。1枚ずつ「本当は」まで読めます。</p>
+          <PageDate updated={GOKAI_UPDATED} />
         </div>
       </header>
       <div className="p-container hub-reading-width gokai-content">

@@ -7,6 +7,8 @@ export const GOKAI_CATEGORIES = [
   "気持ち"
 ] as const;
 
+export const GOKAI_UPDATED = "2026-09-02";
+
 export type GokaiCategory = (typeof GOKAI_CATEGORIES)[number];
 export type GokaiLink = { label: string; href: string };
 export type GokaiCard = { slug: string; misconception: string; truth: string; why: string; when: string; next: GokaiLink[]; sources: string[]; hubs: string[]; category: GokaiCategory };

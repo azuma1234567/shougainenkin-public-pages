@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/platform/Platform";
+import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import SiteSearch, { type SearchItem } from "@/components/platform/SiteSearch";
 import { CATEGORY_ANCHORS, CATEGORY_ORDER, COLUMNS, columnsInCategory, type Column, type ColumnCategory } from "@/lib/columns";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -101,6 +101,7 @@ export default function ColumnsPage() {
           <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "コラム" }]} currentPath="/columns" />
           <h1>コラム</h1>
           <p className="p-page-intro">申請の段階ごとの疑問に、1記事ずつ答えています。全{COLUMNS.length}本。言葉で探すか、段階から探してください。</p>
+          <PageDate updated={COLUMNS.map((column) => column.dateModified).sort().at(-1) ?? "2026-09-02"} />
           <div className="columns-search"><SiteSearch items={searchItems} /></div>
         </div>
       </header>

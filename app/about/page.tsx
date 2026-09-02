@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AUTHOR_NAME, CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { PageDate } from "@/components/platform/Platform";
 
 const DESCRIPTION = `「${SITE_NAME}」の運営者情報です。運営者、サイトとアプリの目的、情報の位置づけ、お問い合わせ先をご案内します。`;
 
@@ -10,6 +11,9 @@ export const metadata: Metadata = pageMetadata({
   description: DESCRIPTION,
   path: "/about",
 });
+
+// このページの内容を変えたら、手でこの日付を更新する。
+const UPDATED = "2026-09-02";
 
 const breadcrumb = breadcrumbJsonLd([
   { name: "トップ", path: "/" },
@@ -25,6 +29,7 @@ export default function AboutPage() {
       />
 
       <h1>運営者情報</h1>
+      <PageDate updated={UPDATED} />
 
       <h2>運営者</h2>
 

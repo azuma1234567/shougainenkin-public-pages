@@ -85,3 +85,11 @@ export function getHubContent(path: string): HubContent | null {
   if (!item) return null;
   return { ...item, source: apply2026Amounts(item.source).replace(/→ ([^\n(]+)\((\/[^)]+)\)/g, "→ [$1]($2)") };
 }
+
+// その種類(byoki/nayami/…)のハブ本文に書かれた「確認日 yyyy-mm-dd」の最大値。索引ページの最終更新日に使う。
+export function latestHubCheckedDate(kind: string): string {
+  const dates = Object.entries(HUB_CONTENT)
+    .filter(([path]) => path.startsWith(`/${kind}/`))
+    .flatMap(([, item]) => [...item.source.matchAll(/確認日[ :：]*(\d{4}-\d{2}-\d{2})/g)].map((m) => m[1]));
+  return dates.sort().at(-1) ?? "2026-09-02";
+}

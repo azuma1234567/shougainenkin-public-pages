@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Breadcrumb, SectionHeader } from "@/components/platform/Platform";
+import { Breadcrumb, PageDate, SectionHeader } from "@/components/platform/Platform";
+import { latestHubCheckedDate } from "@/lib/hub-content";
 import { PUBLISHED_CONTENT_HUBS } from "@/lib/hubs";
 import { pageMetadata } from "@/lib/seo";
 
@@ -86,6 +87,7 @@ export function renderHubIndex(kind: Kind) {
           <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: spec.title }]} currentPath={`/${kind}`} />
           <h1>{spec.h1}</h1>
           <p className="p-hero-copy">{spec.lead}</p>
+          <PageDate updated={latestHubCheckedDate(kind)} />
         </div>
       </header>
 
