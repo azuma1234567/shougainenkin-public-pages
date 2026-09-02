@@ -1,12 +1,4 @@
-import { HUB_BY_PATH } from "@/lib/hubs";
-
-const ALWAYS_PUBLISHED_PREFIXES = ["/columns/", "/yougo/"];
-
-export function isPublishedRelatedPath(href: string): boolean {
-  if (ALWAYS_PUBLISHED_PREFIXES.some((prefix) => href.startsWith(prefix))) return true;
-  if (href === "/jitsurei") return true;
-  return HUB_BY_PATH.get(href)?.published === true;
-}
+export { isPublishedInternalPath as isPublishedRelatedPath } from "@/lib/published-links";
 
 const KANA_GROUPS = ["あ", "か", "さ", "た", "な", "は", "ま", "や", "ら", "わ"] as const;
 export const YOUGO_KANA_GROUPS = KANA_GROUPS;
