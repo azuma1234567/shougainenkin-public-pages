@@ -4,6 +4,7 @@ import "./globals.css";
 import "./platform.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import YougoAutoLinker from "@/components/YougoAutoLinker";
 import {
   APP_STORE_ID,
   SITE_NAME,
@@ -67,6 +68,7 @@ export default function RootLayout({
       <body>
         <SiteHeader />
         <main>{children}</main>
+        <YougoAutoLinker />
         <SiteFooter />
       </body>
     </html>

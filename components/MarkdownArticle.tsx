@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { cloneElement, isValidElement, type ReactElement, type ReactNode } from "react";
 import Link from "next/link";
 import AppCta from "@/components/AppCta";
 import XPostEmbed from "@/components/XPostEmbed";
@@ -125,6 +125,8 @@ export default function MarkdownArticle({
   const lines = source.replace(/\r\n/g, "\n").split("\n");
   const blocks: ReactNode[] = [];
   let index = 0;
+  // 出典ブロックは用語辞典の自動リンク対象外にするため、見出しの位置を覚えておく。
+  let sourcesHeadingIndex = -1;
 
   // 同じ見出しが2回出てくる記事でもidが重複しないようにする。
   const usedHeadingIds = new Set<string>();
@@ -246,6 +248,7 @@ export default function MarkdownArticle({
 
     if (line.startsWith("### ")) {
       const text = line.slice(4);
+      if (text.startsWith("出典")) sourcesHeadingIndex = blocks.length;
       blocks.push(
         <h3 key={`h3-${index}`} id={uniqueHeadingId(text, `heading-${index}`)}>
           {inlineContent(text)}
@@ -257,6 +260,7 @@ export default function MarkdownArticle({
 
     if (line.startsWith("## ")) {
       const text = line.slice(3);
+      if (text.startsWith("出典")) sourcesHeadingIndex = blocks.length;
       blocks.push(
         <h2 key={`h2-${index}`} id={uniqueHeadingId(text, `heading-${index}`)}>
           {inlineContent(text)}
@@ -342,5 +346,17 @@ export default function MarkdownArticle({
     );
   }
 
-  return <>{blocks}</>;
+  if (sourcesHeadingIndex < 0) return <>{blocks}</>;
+  // 出典見出し以降のブロックに印を付け、用語辞典の自動リンクを走らせない。
+  return (
+    <>
+      {blocks.map((block, blockIndex) =>
+        blockIndex >= sourcesHeadingIndex && isValidElement(block)
+          ? cloneElement(block as ReactElement<Record<string, unknown>>, {
+              "data-yougo-skip": "",
+            })
+          : block,
+      )}
+    </>
+  );
 }
