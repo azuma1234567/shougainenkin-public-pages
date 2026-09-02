@@ -628,6 +628,50 @@
   .columns-article-copy > span { display: -webkit-box; white-space: normal; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
 }
 
+/* 用語辞典 */
+.yougo-hero, .yougo-detail-hero { padding-block: 38px 32px; }
+.yougo-content { display: grid; gap: 26px; padding-block: 38px 72px; }
+.yougo-filters { display: grid; gap: 20px; padding: 22px; border: 1px solid var(--platform-border); border-radius: 16px; background: #fff; }
+.yougo-filters section { display: grid; gap: 10px; }
+.yougo-filters h2 { color: var(--platform-heading); font-size: 13px; }
+.yougo-filter-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.yougo-filter-row a { min-height: 38px; display: inline-flex; align-items: center; padding: 7px 14px; border: 1px solid #cfe6f5; border-radius: 999px; color: var(--platform-link); font-size: 12px; text-decoration: none; }
+.yougo-filter-row a.is-active { border-color: var(--platform-primary); background: var(--platform-primary); color: #fff; }
+.yougo-results-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.yougo-results-head h2 { color: var(--platform-heading); font-size: 22px; }
+.yougo-results-head span { color: var(--platform-muted); font-size: 12px; }
+.yougo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.yougo-card { min-width: 0; display: grid; align-content: start; gap: 7px; padding: 22px; border: 1px solid var(--platform-border); border-radius: 14px; background: #fff; color: var(--platform-text); text-decoration: none; box-shadow: 0 4px 18px rgba(20,66,94,.04); }
+.yougo-card:hover { border-color: #8cc8e8; }
+.yougo-card > span { width: fit-content; padding: 4px 8px; border-radius: 999px; background: var(--platform-chip); color: var(--platform-link); font-size: 10px; font-weight: 700; }
+.yougo-card h3 { color: var(--platform-heading); font-size: 18px; line-height: 1.45; }
+.yougo-card small, .yougo-yomi { color: var(--platform-meta); font-size: 11px; }
+.yougo-card p { margin-top: 4px; color: var(--platform-muted); font-size: 13px; line-height: 1.75; }
+.yougo-empty { padding: 28px; border-radius: 12px; background: var(--platform-band); color: var(--platform-muted); text-align: center; }
+.yougo-reading-width { max-width: 760px; }
+.yougo-detail-hero .p-label { display: inline-flex; margin-top: 24px; }
+.yougo-detail-hero h1 { margin-top: 10px; }
+.yougo-detail { display: grid; gap: 24px; padding-block: 42px 72px; color: var(--platform-text); }
+.yougo-paraphrase { display: block; padding: 22px 24px; border-left: 4px solid var(--platform-primary); border-radius: 0 12px 12px 0; background: var(--platform-band); color: var(--platform-heading); font-size: 19px; line-height: 1.7; }
+.yougo-detail > p { font-size: 15px; line-height: 2; }
+.yougo-note { padding: 18px 20px; border-radius: 12px; background: #eef6fc; color: var(--platform-text); font-size: 13.5px; line-height: 1.85; }
+.yougo-related, .yougo-sources { display: grid; gap: 9px; padding-top: 22px; border-top: 1px solid var(--platform-border); }
+.yougo-related h2, .yougo-sources h2 { color: var(--platform-heading); font-size: 15px; }
+.yougo-related a, .yougo-back { color: var(--platform-link); font-size: 13px; font-weight: 700; }
+.yougo-sources p { color: var(--platform-meta); font-size: 11px; line-height: 1.7; }
+.yougo-auto-link { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--platform-link); }
+
+@media (max-width: 720px) {
+  .yougo-content { padding-block: 30px 56px; }
+  .yougo-filters { padding: 18px 16px; }
+  .yougo-filter-row { gap: 7px; }
+  .yougo-filter-row a { min-height: 42px; padding-inline: 13px; }
+  .yougo-grid { grid-template-columns: 1fr; }
+  .yougo-card { padding: 19px 18px; }
+  .yougo-detail { padding-block: 32px 56px; }
+  .yougo-paraphrase { padding: 18px; font-size: 17px; }
+}
+
 /* /shinsei — 8ステップを同じ型で読む */
 .shinsei-reading-width { max-width: 900px; }
 .shinsei-hero { padding-block: 38px 32px; }
