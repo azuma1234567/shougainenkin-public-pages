@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit --pretty false",
     "verify:disease-hubs": "node scripts/verify-disease-hubs.mjs",
     "verify:stats": "node scripts/verify-stats.mjs"
-    ,"verify:hubs": "node scripts/verify-hub-content.mjs && node scripts/verify-hub-map.mjs"
+    ,"verify:hubs": "node scripts/verify-hub-content.mjs && node scripts/verify-hub-map.mjs",
+    "verify:yougo": "node scripts/verify-yougo.mjs"
   },
   "dependencies": {
     "next": "^15.3.4",

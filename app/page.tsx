@@ -12,6 +12,8 @@ import { COLUMNS } from "@/lib/columns";
 import { SITE_URL } from "@/lib/constants";
 import { findCases, SAIKETSU_COUNTS } from "@/lib/saiketsu";
 import { pageMetadata } from "@/lib/seo";
+import { YOUGO } from "@/data/yougo";
+import { searchableYomi } from "@/lib/yougo";
 
 const TITLE = "障害年金の疑問に、公的根拠と実例で答える";
 const DESCRIPTION = "障害年金がはじめての方へ。病気、申請の段階、いまの悩みから、公的資料の根拠と公開裁決例を使って自分に近い情報を探せます。";
@@ -60,6 +62,13 @@ const searchItems: SearchItem[] = [
     category: "実例と数字",
     keywords: "統計 支給率 非該当 更新 再認定 精神障害 件数",
   },
+  ...YOUGO.map((item) => ({
+    href: `/yougo/${item.slug}`,
+    title: item.term,
+    description: item.paraphrase,
+    category: "用語辞典",
+    keywords: `${item.term} ${searchableYomi(item.slug, item.yomi)} ${item.paraphrase}`,
+  })),
   ...COLUMNS.map((column) => ({
     href: `/columns/${column.slug}`,
     title: column.metaTitle ?? column.title,
