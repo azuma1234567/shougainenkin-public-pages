@@ -11,11 +11,24 @@ const siblingLinks: Record<string, string[]> = {
   "/byoki/shinzou": ["/byoki/shitai"],
   "/byoki/chiteki": ["/byoki/hattatsu"],
   "/byoki/hattatsu": ["/byoki/chiteki"],
+  "/byoki/ninchishou": ["/byoki/koujinou"],
+  "/byoki/koujinou": ["/byoki/ninchishou", "/byoki/gengo", "/byoki/shitai"],
+  "/byoki/gengo": ["/byoki/koujinou"],
+  "/byoki/kanzou": ["/byoki/gan"],
+  "/byoki/gan": ["/byoki/kanzou", "/byoki/ketsueki"],
+  "/byoki/ketsueki": ["/byoki/gan"],
+  "/byoki/kokyuuki": ["/byoki/shinzou"],
+  "/byoki/shikaku": ["/byoki/tounyou"],
+  "/byoki/choukaku": ["/byoki/gengo"],
+  "/byoki/nanbyou": ["/byoki/shitai"],
 };
 const siblingLabels: Record<string, string> = {
   "/byoki/tounyou": "糖尿病", "/byoki/jinzou-touseki": "腎臓病・人工透析",
   "/byoki/shinzou": "心臓病", "/byoki/shitai": "肢体の障害",
   "/byoki/chiteki": "知的障害", "/byoki/hattatsu": "発達障害",
+  "/byoki/ninchishou": "認知症(若年性を含む)", "/byoki/koujinou": "高次脳機能障害", "/byoki/izon": "依存症",
+  "/byoki/kanzou": "肝臓の病気", "/byoki/kokyuuki": "呼吸器の病気", "/byoki/ketsueki": "血液・造血器の病気",
+  "/byoki/shikaku": "目の障害", "/byoki/choukaku": "耳の障害・めまい", "/byoki/gengo": "話す・食べる機能の障害", "/byoki/nanbyou": "難病・その他の病気",
 };
 
 export default function HubLanding({ hub }: { hub: HubDefinition }) {

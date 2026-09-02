@@ -12,7 +12,8 @@
     "verify:stats": "node scripts/verify-stats.mjs"
     ,"verify:hubs": "node scripts/verify-hub-content.mjs && node scripts/verify-hub-map.mjs",
     "verify:yougo": "node scripts/verify-yougo.mjs",
-    "verify:gokai": "node scripts/verify-gokai.mjs"
+    "verify:gokai": "node scripts/verify-gokai.mjs",
+    "verify:disease-batch3": "node scripts/verify-disease-batch3.mjs"
   },
   "dependencies": {
     "next": "^15.3.4",

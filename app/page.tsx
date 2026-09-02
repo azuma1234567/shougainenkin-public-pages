@@ -118,9 +118,11 @@ const diseaseGroups = [
   { label: "精神・発達", items: [
     ["うつ病・双極性障害", "/byoki/utsu-soukyoku"], ["適応障害・不安障害", "/byoki/tekiou-fuan"],
     ["発達障害", "/byoki/hattatsu"], ["統合失調症", "/byoki/tougou"], ["知的障害", "/byoki/chiteki"], ["てんかん", "/byoki/tenkan"],
+    ["認知症(若年性を含む)", "/byoki/ninchishou"], ["高次脳機能障害", "/byoki/koujinou"], ["依存症", "/byoki/izon"],
   ] },
-  { label: "内部疾患", items: [["腎臓病・人工透析", "/byoki/jinzou-touseki"], ["がん", "/byoki/gan"], ["心臓病", "/byoki/shinzou"], ["糖尿病", "/byoki/tounyou"]] },
-  { label: "身体・その他", items: [["肢体の障害", "/byoki/shitai"], ["目の障害", "/byoki/shikaku"], ["耳・平衡", "/byoki/choukaku-heikou"], ["難病・その他", "/byoki/nanbyou-sonota"]] },
+  { label: "内部疾患", items: [["腎臓病・人工透析", "/byoki/jinzou-touseki"], ["糖尿病", "/byoki/tounyou"], ["心臓病", "/byoki/shinzou"], ["がん", "/byoki/gan"], ["肝臓の病気", "/byoki/kanzou"], ["呼吸器の病気", "/byoki/kokyuuki"], ["血液・造血器の病気", "/byoki/ketsueki"]] },
+  { label: "身体・感覚", items: [["肢体の障害", "/byoki/shitai"], ["目の障害", "/byoki/shikaku"], ["耳の障害・めまい", "/byoki/choukaku"], ["話す・食べる機能の障害", "/byoki/gengo"]] },
+  { label: "その他", items: [["難病・その他の病気", "/byoki/nanbyou"]] },
 ] as const;
 
 const worries = [

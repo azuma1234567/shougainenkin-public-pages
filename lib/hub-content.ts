@@ -9,6 +9,16 @@ import byokiTounyou from "@/data/hubs/byoki-tounyou.json";
 import byokiShitai from "@/data/hubs/byoki-shitai.json";
 import byokiHattatsu from "@/data/hubs/byoki-hattatsu.json";
 import byokiTekiouFuan from "@/data/hubs/byoki-tekiou-fuan.json";
+import byokiNinchishou from "@/data/hubs/byoki-ninchishou.json";
+import byokiKoujinou from "@/data/hubs/byoki-koujinou.json";
+import byokiIzon from "@/data/hubs/byoki-izon.json";
+import byokiKanzou from "@/data/hubs/byoki-kanzou.json";
+import byokiKokyuuki from "@/data/hubs/byoki-kokyuuki.json";
+import byokiKetsueki from "@/data/hubs/byoki-ketsueki.json";
+import byokiShikaku from "@/data/hubs/byoki-shikaku.json";
+import byokiChoukaku from "@/data/hubs/byoki-choukaku.json";
+import byokiGengo from "@/data/hubs/byoki-gengo.json";
+import byokiNanbyou from "@/data/hubs/byoki-nanbyou.json";
 import erabuJibunKaIrai from "@/data/hubs/erabu-jibun-ka-irai.json";
 import joukyouHatachiMae from "@/data/hubs/joukyou-hatachi-mae.json";
 import joukyouHatarakinagara from "@/data/hubs/joukyou-hatarakinagara.json";
@@ -27,6 +37,9 @@ export const HUB_CONTENT: Record<string, HubContent> = {
   "/byoki/jinzou-touseki": byokiJinzouTouseki, "/byoki/gan": byokiGan, "/byoki/shinzou": byokiShinzou,
   "/byoki/tounyou": byokiTounyou, "/byoki/shitai": byokiShitai,
   "/byoki/hattatsu": byokiHattatsu, "/byoki/tekiou-fuan": byokiTekiouFuan,
+  "/byoki/ninchishou": byokiNinchishou, "/byoki/koujinou": byokiKoujinou, "/byoki/izon": byokiIzon,
+  "/byoki/kanzou": byokiKanzou, "/byoki/kokyuuki": byokiKokyuuki, "/byoki/ketsueki": byokiKetsueki,
+  "/byoki/shikaku": byokiShikaku, "/byoki/choukaku": byokiChoukaku, "/byoki/gengo": byokiGengo, "/byoki/nanbyou": byokiNanbyou,
   "/erabu/jibun-ka-irai": erabuJibunKaIrai, "/joukyou/hatachi-mae": joukyouHatachiMae,
   "/joukyou/hatarakinagara": joukyouHatarakinagara, "/joukyou/hitorigurashi": joukyouHitorigurashi,
   "/joukyou/shoubyou-teatekin-kara": joukyouShoubyou, "/nayami/koushin": nayamiKoushin,
