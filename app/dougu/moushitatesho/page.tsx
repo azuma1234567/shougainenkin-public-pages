@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import MoushitateshoTool from "@/components/tools/MoushitateshoTool";
+import { pageMetadata } from "@/lib/seo";
+export const metadata:Metadata=pageMetadata({title:"病歴・就労状況等申立書をつくる",description:"入力内容をサーバーへ送らず、ブラウザの中だけで申立書の下書きを作成します。",path:"/dougu/moushitatesho"});
+export default function Page(){return <div className="platform mt-page"><MoushitateshoTool/></div>}
