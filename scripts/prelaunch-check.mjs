@@ -1,7 +1,7 @@
 // 公開前チェックリスト(docs/prelaunch-checklist-2026-09-02.md)の A〜C を機械検査し、
 // D の確認用一覧(URL・タイトル・文字数)を書き出す。
 //
-//   npm run prelaunch:check -- http://localhost:3000
+//   npm run prelaunch:check -- http://localhost:3000 [出力ファイル名]
 //   (省略時は VERIFY_ORIGIN、なければ http://localhost:3000)
 //
 // A に×が1つでもあれば exit 1。B/C の×は報告のみ。
@@ -286,7 +286,8 @@ if (globalThis.__a8Explained) {
 }
 if (globalThis.__shrunk?.length) { lines.push("## 参考: 公開前より本文が減った既存記事(8割以上は維持)", ""); for (const d of globalThis.__shrunk) lines.push(`- ${d}`); lines.push(""); }
 const report = lines.join("\n");
-writeFileSync(path.join(outDir, "RESULT.md"), report);
+// 3つ目の引数で出力ファイル名を変えられる(既定 RESULT-latest.md。手で整理した RESULT.md を上書きしない)
+writeFileSync(path.join(outDir, process.argv[3] ?? "RESULT-latest.md"), report);
 console.log(report);
 const fatal = results.filter((r) => r.id.startsWith("A") && r.ok === false);
 console.log(fatal.length ? `\nA に × が ${fatal.length} 件: 公開しない` : "\nA はすべて ○");
