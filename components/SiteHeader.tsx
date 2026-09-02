@@ -3,16 +3,11 @@ import { APP_STORE_URL, SITE_NAME } from "@/lib/constants";
 
 const NAV_ITEMS = [
   { href: "/hajimete", label: "はじめての方へ" },
-  { href: "/byoki/utsu-soukyoku", label: "病気から探す" },
-  { href: "/joukyou/hatarakinagara", label: "状況から探す" },
-  { href: "/erabu/jibun-ka-irai", label: "決める" },
+  { href: "/byoki", label: "病気から探す" },
+  { href: "/nayami", label: "悩みから探す" },
   { href: "/shinsei", label: "申請の流れ" },
-  { href: "/nayami/fushikyu", label: "悩みから探す" },
   { href: "/jitsurei", label: "実例と数字" },
-  { href: "/okane/ikura", label: "お金" },
   { href: "/columns", label: "コラム" },
-  { href: "/gokai", label: "よくある誤解" },
-  { href: "/yougo", label: "用語辞典" },
 ];
 
 function BookIcon() {

@@ -130,9 +130,10 @@ if (origin) {
     const page = await fetchHtml(hubPath);
     assert.doesNotMatch(visibleText(page), /執筆メモ|実装メモ|x\.com|いいね/, `${hubPath}: 差し込み後も執筆メモを出さない`);
     const shown = [...page.matchAll(/data-hub-gokai-slug="([^"]+)"/g)].map((match) => match[1]);
-    const expected = numbers.map((number) => slugByNumber[number - 1]).slice(0, 3);
+    // 意思決定ページは中立性を保つため、誤解カードの差し込み対象外。
+    const expected = hubPath.startsWith("/erabu/") ? [] : numbers.map((number) => slugByNumber[number - 1]).slice(0, 3);
     assert.deepEqual(shown, expected, `${hubPath}: 上位3枚を差し込む`);
-    if (numbers.length > 3) assert.match(page, /もっと見る/, `${hubPath}: もっと見るを出す`);
+    if (!hubPath.startsWith("/erabu/") && numbers.length > 3) assert.match(page, /もっと見る/, `${hubPath}: もっと見るを出す`);
   }
 }
 

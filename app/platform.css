@@ -815,3 +815,66 @@
   .shinsei-table-card { padding: 16px; }
   .shinsei-breather, .shinsei-app { padding: 22px 20px; }
 }
+
+/* ===== トップ「どこから探しますか」(2026-09-02)
+   以前は病気・悩み・状況・お金が別々のセクションに分かれ、チップとカードが
+   交互に出てリズムがばらばらだった。4つの入口を1つの枠に集め、
+   ブロックの作り(見出し + 一覧リンク + 一行 + 中身)をそろえる。 ===== */
+.p-find {
+  display: grid;
+  gap: 22px;
+}
+.p-find-block {
+  background: #fff;
+  border: 1px solid var(--line, #dcebf5);
+  border-radius: 16px;
+  padding: 22px 24px;
+}
+.p-find-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.p-find-title {
+  font-family: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--heading, #14425e);
+  margin: 0;
+}
+.p-find-more {
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+.p-find-copy {
+  margin: 6px 0 14px;
+  font-size: 14px;
+  color: var(--muted, #4a6a80);
+}
+.p-find-block .p-grid {
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+@media (max-width: 560px) {
+  .p-find-block { padding: 18px 16px; }
+  .p-find-title { font-size: 16.5px; }
+}
+
+/* 5列・8列のグリッドは、デスクトップでも窮屈でモバイルで崩れる。
+   中身の数に合わせて折り返す形にそろえる。 */
+.p-grid-5,
+.p-grid-8 {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* カード内の箇条書き(2026-09-02 /hajimete で使用) */
+.p-list {
+  margin: 10px 0 6px;
+  padding-left: 1.2em;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--muted, #4a6a80);
+}
+.p-list li { margin: 5px 0; }
+.p-list li strong { color: var(--heading, #14425e); }

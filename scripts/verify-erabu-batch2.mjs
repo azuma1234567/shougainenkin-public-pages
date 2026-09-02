@@ -21,6 +21,6 @@ assert.doesNotMatch(data.erabikata.source, /\/senmonka/, "選び方ページか�
 assert.doesNotMatch(data["fushikyu-no-ato"].source, /\[?結論が変わった実例を見る\]?\(\/jitsurei\)/, "実例案内は非リンク");
 
 const css = readFileSync(resolve(root, "app/platform.css"), "utf8");
-assert.match(css, /\.hub-erabu \.article-table-figure\.is-wide td[^}]+grid-template-columns/s, "意思決定表はモバイルで縦積み");
+assert.match(css, /\.hub-content \.article-table-figure\.is-wide td[^}]+grid-template-columns/s, "意思決定表はモバイルで縦積み");
 
 console.log("Verified 4 decision pages: 5 total, one next-step link each, neutral costs/selection, mobile stacked tables.");

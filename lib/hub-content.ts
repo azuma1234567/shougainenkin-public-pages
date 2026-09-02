@@ -38,6 +38,8 @@ import nayamiShikyuuTeishi from "@/data/hubs/nayami-shikyuu-teishi.json";
 import nayamiShindansho from "@/data/hubs/nayami-shindansho-komatta.json";
 import nayamiShoshinbi from "@/data/hubs/nayami-shoshinbi-karute.json";
 import nayamiSokyuu from "@/data/hubs/nayami-sokyuu.json";
+import nayamiFushikyu from "@/data/hubs/nayami-fushikyu.json";
+import byokiUtsuSoukyoku from "@/data/hubs/byoki-utsu-soukyoku.json";
 import okaneIkura from "@/data/hubs/okane-ikura.json";
 import okaneZeikin from "@/data/hubs/okane-zeikin.json";
 import okaneChousei from "@/data/hubs/okane-chousei.json";
@@ -61,7 +63,8 @@ export const HUB_CONTENT: Record<string, HubContent> = {
   "/joukyou/gakusei": joukyouGakusei, "/joukyou/kazoku-ga-tetsudau": joukyouKazoku,
   "/joukyou/seikatsu-hogo": joukyouSeikatsuHogo,
   "/nayami/shikyuu-teishi": nayamiShikyuuTeishi, "/nayami/shindansho-komatta": nayamiShindansho,
-  "/nayami/shoshinbi-karute": nayamiShoshinbi, "/nayami/sokyuu": nayamiSokyuu, "/okane/ikura": okaneIkura,
+  "/nayami/shoshinbi-karute": nayamiShoshinbi, "/nayami/sokyuu": nayamiSokyuu, "/nayami/fushikyu": nayamiFushikyu,
+  "/byoki/utsu-soukyoku": byokiUtsuSoukyoku, "/okane/ikura": okaneIkura,
   "/okane/zeikin": okaneZeikin, "/okane/chousei": okaneChousei,
 };
 export function getHubContent(path: string): HubContent | null {

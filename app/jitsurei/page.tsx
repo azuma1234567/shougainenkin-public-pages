@@ -66,9 +66,40 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
         <div className="p-container">
           <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "結論が変わった実例" }]} />
           <h1>結論が変わった実例</h1>
-          <p className="p-page-intro">不支給や却下の決定に対して不服申立てが行われ、国の審査会が結論を出した実例です。構造化した94件のうち、原文（公的PDF）を確認できた{SAIKETSU_COUNTS.all}件を公開しています。原文を提示できない3件は表示していません。個別の結果を保証するものではありませんが、「どんな主張が、どう判断されたか」を知る手がかりになります。</p>
+          <p className="p-page-intro">
+            同じような状況なのに、結論が分かれた事例を{SAIKETSU_COUNTS.all}件集めています。体験談ではありません。<strong>国の再審査（社会保険審査会）の裁決</strong>から取ったもので、全件、裁決の原文（PDF）へのリンクつきです。<strong>通ったものだけを並べていません。</strong>通らなかったものも、同じ密度で載せています。通った話だけを見せられても、自分がどちらに近いかは分からないからです。
+          </p>
         </div>
       </header>
+
+      <section className="p-section" style={{ paddingTop: 0, paddingBottom: 8 }} aria-labelledby="howto-heading">
+        <div className="p-container">
+          <div className="p-grid p-grid-2">
+            <div className="p-card">
+              <h2 id="howto-heading" style={{ fontSize: 15 }}>この実例が、どこから来たものか</h2>
+              <p className="p-card-copy">
+                障害年金の結果に納得できないとき、2段階の不服申立てがあります。①<strong>審査請求</strong>（社会保険審査官へ。決定を知った日の翌日から3か月以内）、②<strong>再審査請求</strong>（社会保険審査会へ。審査請求の決定書の謄本が送られた日の翌日から2か月以内）。ここに集めているのは、その<strong>2段階目の裁決</strong>です。
+              </p>
+              <p className="p-card-copy">
+                争いになった事例だけが集まっている場所なので、ふつうの申請より論点がはっきりしています。だから「<strong>何が判断を分けたのか</strong>」が読み取れます。
+              </p>
+            </div>
+            <div className="p-card">
+              <h2 style={{ fontSize: 15 }}>読み方 — どこを見るか</h2>
+              <p className="p-card-copy">見てほしいのは結論そのものではなく、<strong>その手前</strong>です。</p>
+              <ul className="p-list">
+                <li>何が足りなくて、原処分では認められなかったのか</li>
+                <li>何が加わって、結論が変わったのか（診察券、薬袋、修正した診断書、就労の実態、援助の状況）</li>
+                <li>自分の状況と、どこが同じで、どこが違うか</li>
+              </ul>
+              <p className="p-card-copy">
+                <strong>認められなかった事例のほうが、学べることが多いこともあります。</strong>「職場の配慮を受けつつ一般雇用で週4日勤務し、日常生活能力も比較的保たれていた」——ここから、就労の中身がどう見られるかが分かります。
+              </p>
+              <p className="p-note"><strong>自分と同じ争点の3件だけ</strong>読めば十分です。全部読む必要はありません。</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section className="p-section" style={{ paddingTop: 0 }} aria-label="実例の絞り込みと一覧">
         <div className="p-container p-database-layout">
@@ -104,7 +135,8 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
                   </div>
                 ))}
               </div>
-              <p className="p-source">収録{SAIKETSU_COUNTS.all}件のうち、容認・一部容認は{SAIKETSU_COUNTS.accepted}件です。この分布は申請全体の支給割合を表すものではありません。</p>
+              <p className="p-source">収録{SAIKETSU_COUNTS.all}件のうち、容認・一部容認は{SAIKETSU_COUNTS.accepted}件です。</p>
+              <p className="p-note" style={{ marginTop: 8 }}><strong>この割合は、申請全体の支給割合ではありません。</strong>公開されている裁決から集めたものです。「審査請求すれば6割通る」という意味にはなりません。申請全体では、令和6年度に新しく決まった146,225件のうち非該当は18,982件（13.0%）でした。</p>
             </div>
             <div className="p-card" style={{ background: "#eef6fc", borderColor: "#d7e9f5" }}>
               <h2 style={{ fontSize: 13.5 }}>不支給の通知を受け取った方へ</h2>
@@ -117,6 +149,31 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
               <Link className="p-card-link" href="/suuji">「数字で見る障害年金」を読む →</Link>
             </div>
           </aside>
+        </div>
+      </section>
+
+      <section className="p-section p-band" aria-labelledby="caution-heading">
+        <div className="p-container">
+          <div className="p-grid p-grid-2">
+            <div className="p-card">
+              <h2 id="caution-heading" style={{ fontSize: 15 }}>気をつけてほしいこと</h2>
+              <ul className="p-list">
+                <li>裁決は、<strong>その事案の事実関係にもとづく個別の判断</strong>です。似ていても、結論が同じになるとは限りません</li>
+                <li>ここにあるのは<strong>争いになった事例</strong>です。ふつうに通った申請はここに現れません</li>
+                <li>数字の分布は、<strong>申請全体の傾向ではありません</strong>。申請全体の数字は <Link href="/suuji">数字で見る障害年金</Link> で</li>
+              </ul>
+            </div>
+            <div className="p-card">
+              <h2 style={{ fontSize: 15 }}>ここからできること</h2>
+              <ul className="p-list">
+                <li>自分と同じ争点の実例を3件読む</li>
+                <li><Link href="/columns/tokyu-hantei-guideline">等級の目安を、国の表で確かめる</Link></li>
+                <li><Link href="/suuji">数字で見る障害年金</Link>で、全体の分布を確認する</li>
+                <li><Link href="/nayami/fushikyu">不支給と言われたとき</Link>で、次の一手を決める</li>
+              </ul>
+              <p className="p-source">出典: 社会保険審査会 裁決例（厚生労働省が公開）／厚生労働省「障害年金の業務統計等（令和6年度）」／社会保険審査官及び社会保険審査会法 ・ 確認日 2026-08-31</p>
+            </div>
+          </div>
         </div>
       </section>
     </div>

@@ -2,17 +2,64 @@ import type { Metadata } from "next";
 import HubGokai from "@/components/platform/HubGokai";
 import Link from "next/link";
 import { Breadcrumb, Card, CheckIcon, SectionHeader } from "@/components/platform/Platform";
+import { AMOUNTS_2026 as A } from "@/data/amounts";
+import { SAIKETSU_COUNTS } from "@/lib/saiketsu";
 import { pageMetadata } from "@/lib/seo";
 
 const TITLE = "障害年金がゼロからわかる｜はじめての方へ";
-const DESCRIPTION = "障害年金という言葉を初めて知った方へ。制度の意味、対象になる3つの条件、最初にすること、4つの基本用語をやさしく説明します。";
+const DESCRIPTION =
+  "障害年金という言葉を初めて知った方へ。誰が対象か(3つの確認)、いくら受け取れるか(令和8年度の実額)、どのくらい時間がかかるか、最初にすることを、公的資料の出典つきでやさしく説明します。";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: "/hajimete" });
 
+// 2026-09-02: 原稿 docs/hub-hajimete-v2-2026-09-02.md を反映。
+// 数字は令和6年度の公的統計と令和8年度の年金額(data/amounts.ts)。
+
 const checks = [
-  { title: "その症状で、最初に病院へ行った日がわかる", copy: "この日を「初診日（しょしんび）」と呼びます。障害年金のすべてはこの日を起点に決まります。精神科でなくても、最初に相談した内科などでもかまいません。", note: "思い出せなくても、あきらめないでください。調べる方法があります。" },
-  { title: "年金の保険料を、ある程度納めていた", copy: "初診日の前に、保険料を一定期間納めていた（または免除の手続きをしていた）ことが条件です。「免除」や「猶予」の期間は未納とは違い、ちゃんとカウントされます。", note: "20歳になる前の病気やけがなら、この条件はそもそも問われません。" },
-  { title: "生活や仕事に、はっきりした支障がある", copy: "家事ができない日がある、外出がむずかしい、仕事を続けられない・配慮を受けている——そうした「生活の実態」で審査されます。入院しているかどうかは条件ではありません。", note: "働いていても対象になる場合があります。" },
+  {
+    title: "その症状で、最初に病院へ行った日がわかる",
+    copy: "この日を「初診日（しょしんび）」と呼びます。障害年金のすべては、この日を起点に決まります。",
+    points: [
+      "精神科でなくてもかまいません。眠れなくて行った内科でも初診日になります",
+      "薬が出ていなくてもかまいません。「様子を見ましょう」で終わった受診も、検査だけの受診も、初診日になりえます",
+      "病名がついた日ではありません。その症状ではじめて医師にかかった日です",
+    ],
+    note: "思い出せなくても、あきらめないでください。何月何日まで特定できなくても、請求できる取り扱いがあります。",
+    href: "/columns/shoshinbi-wakaranai",
+    label: "初診日がわからないときの調べ方",
+  },
+  {
+    title: "年金の保険料を、ある程度納めていた",
+    copy: "初診日の前日の時点で、保険料を一定期間納めていた（または免除の手続きをしていた）ことが条件です。",
+    points: [
+      "「免除」や「猶予」の期間は、未納とは違います。ちゃんと数えられます。学生納付特例も同じです",
+      "判定は初診日ごとです。昔に未納があっても、その後納めていれば、別の傷病では要件を満たせます",
+      "20歳になる前の病気やけがなら、この条件はそもそも問われません",
+      "会社員・公務員の配偶者に扶養されていた期間（第3号被保険者）は、自分で払っていなくても納付済期間です",
+    ],
+    note: "記録は年金事務所で確認できます。思い込みで諦める前に、記録を見てください。",
+    href: "/columns/nofu-yoken",
+    label: "納付要件をくわしく",
+  },
+  {
+    title: "生活や仕事に、はっきりした支障がある",
+    copy: "家事ができない日がある、外出がむずかしい、仕事を続けられない・配慮を受けている——そうした「生活の実態」で審査されます。",
+    points: [
+      "入院しているかどうかは条件ではありません",
+      "働いていても対象になります。国のガイドラインに「労働に従事していることをもって、直ちに日常生活能力が向上したものと捉えない」と明記されています",
+      "貯金や持ち家は、審査されません。資産を調べるのは生活保護のほうです",
+    ],
+    note: "",
+    href: "/columns/nichijo-seikatsu-7koumoku",
+    label: "審査で見られる「日常生活能力」の7項目",
+  },
+] as const;
+
+const clues = [
+  "お薬手帳、診察券、領収書",
+  "健康保険を使った記録",
+  "当時の手帳、日記、家計簿",
+  "退職した時期、引っ越した時期、子どもの入学（生活の節目から挟むと、期間が絞れます）",
 ] as const;
 
 const terms = [
@@ -23,9 +70,30 @@ const terms = [
 ] as const;
 
 const anxieties = [
-  ["「申請するのは甘えでは…」", "障害年金は、保険料を納めてきた人のための制度上の正当な権利です。公式の案内にも、現役世代を含めて受け取れる年金だと明記されています。"],
-  ["「周りに知られたくない…」", "受給が戸籍・住民票・運転免許に載ることはありません。会社に自動的に伝わることもありません。"],
-  ["「手帳を持っていないけど…」", "障害者手帳と障害年金は別々の制度です。手帳がなくても請求できますし、等級も連動しません。"],
+  {
+    title: "「申請するのは甘えでは…」",
+    copy: "障害年金は、保険料を納めてきた人のための制度上の正当な権利です。新しく決まった障害年金の70.3%が精神の障害によるもので、制度の中でもっとも標準的なケースです。この迷い自体が、症状の一部であることもあります。",
+  },
+  {
+    title: "「周りに知られたくない…」",
+    copy: "受給が戸籍・住民票・運転免許に載ることはありません。請求は年金事務所か市区町村に出す手続きで、勤務先を経由しません。受給が始まっても、機構から会社へ通知は行きません。",
+  },
+  {
+    title: "「手帳を持っていないけど…」",
+    copy: "手帳と障害年金は別々の制度です。手帳がなくても請求できますし、等級も連動しません。手帳3級で年金2級の人もいます。",
+  },
+  {
+    title: "「働いているから無理では…」",
+    copy: "働いていること自体は、対象外の理由になりません。見られるのは、どんな支えの中で働けているかです。就労継続支援A型・B型や障害者雇用で働いている場合、ガイドラインは1級または2級の可能性を検討するとしています。",
+  },
+  {
+    title: "「昔、保険料を払っていなかった…」",
+    copy: "判定は初診日ごとです。免除や猶予の手続きをした期間は未納ではありません。まず年金事務所で記録を見てください。",
+  },
+  {
+    title: "「もう何年も前のことだから…」",
+    copy: "申請そのものに時効はありません。初診日が30年前でも請求できます。時効があるのは、さかのぼって受け取れる分（直近5年）のほうです。",
+  },
 ] as const;
 
 export default function HajimetePage() {
@@ -35,21 +103,28 @@ export default function HajimetePage() {
         <div className="p-container">
           <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "はじめての方へ" }]} />
           <h1>障害年金が、ゼロからわかる</h1>
-          <p className="p-page-intro">このページは、「障害年金」という言葉を今日はじめて知った方のためのページです。むずかしい言葉は使いません。読み終わるころには、自分が何をすればいいかがわかります。</p>
+          <p className="p-page-intro">
+            このページは、「障害年金」という言葉を今日はじめて知った方のためのページです。むずかしい言葉は使いません。読み終わるころには、自分が対象になりそうか、いくらぐらいか、最初に何をすればいいかが分かります。
+          </p>
         </div>
       </header>
 
       <section className="p-section" id="what" aria-labelledby="what-heading">
         <div className="p-container">
           <SectionHeader title="障害年金ってなに？ — 1分でわかる説明" />
-          <Card className="p-card-lg" >
-            <p style={{ fontSize: 15.5, lineHeight: 2.1 }}>病気やけがのせいで、生活や仕事がむずかしくなったときに、<strong style={{ color: "#0273ad" }}>国から定期的に受け取れるお金</strong>です。</p>
+          <Card className="p-card-lg">
+            <p style={{ fontSize: 15.5, lineHeight: 2.1 }}>
+              病気やけがのせいで、生活や仕事がむずかしくなったときに、<strong style={{ color: "#0273ad" }}>国から定期的に受け取れるお金</strong>です。
+            </p>
             <div className="p-grid" style={{ gap: 8, borderTop: "1px solid #ecf4fa", paddingTop: 14 }}>
-              <p className="p-card-copy"><CheckIcon size={16} /> 「年金」という名前ですが、<strong>高齢者だけのものではありません</strong>。20代や30代でも受け取れます。</p>
-              <p className="p-card-copy"><CheckIcon size={16} /> うつ病や発達障害など、<strong>心の病気も対象</strong>です。実際、新しく受け取り始める人の約7割は精神の障害です。</p>
-              <p className="p-card-copy"><CheckIcon size={16} /> これまで保険料を納めてきた人のための、<strong>制度上の正当な権利</strong>です。申請は甘えではありません。</p>
+              <p className="p-card-copy"><CheckIcon size={16} /> 「年金」という名前ですが、<strong>高齢者だけのものではありません</strong>。20代でも30代でも受け取れます。</p>
+              <p className="p-card-copy"><CheckIcon size={16} /> うつ病や発達障害など、<strong>心の病気も対象</strong>です。新しく受け取り始める人の<strong>70.3%が精神の障害</strong>です。</p>
+              <p className="p-card-copy"><CheckIcon size={16} /> これまで保険料を納めてきた人（または20歳前に障害を負った人）のための、<strong>制度上の正当な権利</strong>です。申請は甘えではありません。</p>
             </div>
-            <p className="p-source">出典: 日本年金機構・厚生労働省の公表資料 ・ 確認日 2026-08-31</p>
+            <div className="p-note" style={{ marginTop: 14 }}>
+              <strong>どのくらいの人が受け取っているか。</strong>令和6年度、新しく決まったのは <strong>146,225件</strong>。同じ年に更新（再認定）の対象になったのは <strong>304,456件</strong>。数十万人が受け取っている、めずらしくない制度です。
+            </div>
+            <p className="p-source">出典: 厚生労働省「障害年金の業務統計等（令和6年度）」・日本年金機構「障害年金ガイド」 ・ 確認日 2026-08-31</p>
           </Card>
         </div>
       </section>
@@ -63,33 +138,75 @@ export default function HajimetePage() {
                 <span className="p-label">確認 {index + 1}</span>
                 <h3 className="p-card-title">{item.title}</h3>
                 <p className="p-card-copy">{item.copy}</p>
-                <p className="p-note">{item.note}</p>
+                <ul className="p-list">
+                  {item.points.map((point) => <li key={point}>{point}</li>)}
+                </ul>
+                {item.note ? <p className="p-note">{item.note}</p> : null}
+                <Link className="p-card-link" href={item.href}>{item.label} →</Link>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="p-section">
+      <section className="p-section" aria-labelledby="money-heading">
+        <div className="p-container">
+          <SectionHeader title="いくらぐらい受け取れるの？" lead="金額は「等級」と「初診日にどの年金に入っていたか」で決まります。令和8年度の額です。" />
+          <div className="p-grid p-grid-3">
+            <Card className="p-card-lg">
+              <span className="p-label">障害基礎年金</span>
+              <p className="p-card-copy">初診日に国民年金だった人、20歳前の人。<strong>定額</strong>です。</p>
+              <p className="p-card-copy"><strong>2級 年{A.basicGrade2}円</strong>（月あたり約70,600円）<br /><strong>1級 年{A.basicGrade1}円</strong></p>
+              <p className="p-card-copy">偶数月に2か月分がまとめて振り込まれます。18歳の年度末までの子がいれば、子の加算（1・2人目 各{A.childFirstSecond}円／3人目以降 各{A.childThird}円）がつきます。</p>
+            </Card>
+            <Card className="p-card-lg">
+              <span className="p-label">障害厚生年金</span>
+              <p className="p-card-copy">初診日に厚生年金だった人。上の障害基礎年金に、<strong>働いていた期間の給料に応じた額が上乗せ</strong>されます。</p>
+              <p className="p-card-copy">加入期間が短くても<strong>300月（25年）分</strong>として計算されるので、若いうちに発症した人でも一定の額になります。</p>
+              <p className="p-card-copy"><strong>3級</strong>は障害厚生年金だけの等級で、最低保障 年{A.employeesGrade3Minimum}円があります。</p>
+            </Card>
+            <Card className="p-card-lg">
+              <span className="p-label">上乗せの可能性</span>
+              <p className="p-card-copy"><strong>年金生活者支援給付金</strong>。所得が一定以下なら、1級で月{A.supportGrade1Monthly}円、2級で月{A.supportGrade2Monthly}円が上乗せされます。</p>
+              <p className="p-card-copy">障害年金を請求するときに<strong>同時に請求するのが原則</strong>で、出し忘れの多い書類です。</p>
+              <Link className="p-card-link" href="/okane/ikura">いくらもらえる? をくわしく →</Link>
+            </Card>
+          </div>
+          <p className="p-source" style={{ marginTop: 10 }}>金額は毎年4月に改定されます。出典: 日本年金機構「障害年金ガイド」「年金生活者支援給付金」 ・ 確認日 2026-08-31</p>
+        </div>
+      </section>
+
+      <section className="p-section" aria-labelledby="time-heading">
         <div className="p-container p-split">
           <Card className="p-card-lg">
-            <h2 style={{ fontSize: 20 }}>いくらぐらい受け取れるの？</h2>
-            <p className="p-card-copy">金額は「等級」と「初診日にどの年金に入っていたか」で決まります。</p>
-            <div className="p-note"><strong>障害厚生年金</strong><br />働いていた期間の給料に応じて上乗せされます。</div>
-            <Link className="p-card-link" href="/columns/ikura-moraeru">公的資料で確認した金額表を見る →</Link>
+            <h2 style={{ fontSize: 20 }}>どのくらい時間がかかるか</h2>
+            <p className="p-card-copy">心の準備のために、先に知っておいてください。</p>
+            <ul className="p-list">
+              <li><strong>初診日を確認して、書類をそろえる</strong> — 人によって大きく違います。数週間から数か月</li>
+              <li><strong>診断書を依頼してから受け取るまで</strong> — すぐには出ません。1か月近くかかることもあると語られています</li>
+              <li><strong>提出してから結果が届くまで</strong> — 機構が公表している標準的な処理期間があります。<Link href="/columns/shinsei-kikan">申請から結果までの期間</Link></li>
+            </ul>
+            <p className="p-note">
+              急ぐ理由がひとつだけあります。<strong>事後重症という請求のしかたは、請求した月の翌月分から</strong>なので、1か月遅れれば1か月分が消えます。ただし、体調を崩してまで急ぐ制度ではありません。動ける日に、少しずつで大丈夫です。
+            </p>
           </Card>
           <div className="p-primary-panel p-grid" style={{ gap: 14 }}>
             <h2 style={{ fontSize: 20 }}>最初の一歩は、ひとつだけ</h2>
-            <p className="p-card-copy" style={{ color: "#dbeefa" }}>「その症状で、いちばん最初に病院へ行ったのはいつだったか」を思い出してみてください。手帳やお薬手帳、診察券が手がかりになります。</p>
+            <p className="p-card-copy" style={{ color: "#dbeefa" }}>
+              「その症状で、いちばん最初に病院へ行ったのはいつだったか」を思い出してみてください。手がかりになるもの:
+            </p>
+            <ul className="p-list" style={{ color: "#dbeefa" }}>
+              {clues.map((clue) => <li key={clue}>{clue}</li>)}
+            </ul>
             <Link href="/columns/shoshinbi-wakaranai">初診日の思い出し方ガイドへ →</Link>
-            <p className="p-source" style={{ color: "#a8d4ee" }}>確認できるときに、手がかりだけ残しておくこともできます。</p>
+            <p className="p-source" style={{ color: "#a8d4ee" }}>思い出せた範囲でメモしておくだけで、次に進めます。</p>
           </div>
         </div>
       </section>
 
       <section className="p-section" aria-labelledby="terms-heading">
         <div className="p-container">
-          <SectionHeader title="これだけ知っていれば読めます — 4つの言葉" lead="サイト内でこの言葉が出てきたら、いつでもここに戻れます。" />
+          <SectionHeader title="これだけ知っていれば読めます — 4つの言葉" lead="サイト内でこの言葉が出てきたら、いつでもここに戻れます。" href="/yougo" linkLabel="用語をもっと見る" />
           <div className="p-grid p-grid-4">
             {terms.map(([title, copy]) => <Card key={title}><h3 className="p-card-title" style={{ color: "#0273ad" }}>{title}</h3><p className="p-card-copy">{copy}</p></Card>)}
           </div>
@@ -104,16 +221,19 @@ export default function HajimetePage() {
 
       <section className="p-section-lg" aria-labelledby="anxiety-heading">
         <div className="p-container">
-          <SectionHeader title="最後に、よくある不安へ" />
+          <SectionHeader title="最後に、よくある不安へ" href="/gokai" linkLabel="よくある誤解をもっと見る" />
           <div className="p-grid p-grid-3" style={{ marginBottom: 18 }}>
-            {anxieties.map(([title, copy]) => <Card key={title}><h3 className="p-card-title">{title}</h3><p className="p-card-copy">{copy}</p></Card>)}
+            {anxieties.map((item) => <Card key={item.title}><h3 className="p-card-title">{item.title}</h3><p className="p-card-copy">{item.copy}</p></Card>)}
           </div>
           <div className="p-cta-row">
-            <strong>準備ができたら、8つのステップへ</strong>
-            <Link className="p-button" href="/shinsei">申請の流れを見る →</Link>
-            <Link href="/nayami/fushikyu">困りごとがある方は「悩みから探す」へ</Link>
-            <Link href="/columns/techou-to-nenkin">手帳と障害年金の違いを確認する</Link>
+            <strong>準備ができたら</strong>
+            <Link className="p-button" href="/shinsei">申請の流れを見る（8つのステップ） →</Link>
+            <Link href="/nayami">困りごとがある方は「悩みから探す」へ</Link>
+            <Link href="/jitsurei">結論が分かれた実例（{SAIKETSU_COUNTS.all}件）を見る</Link>
           </div>
+          <p className="p-source" style={{ marginTop: 14 }}>
+            出典: 日本年金機構「障害年金ガイド」／厚生労働省「障害年金の業務統計等（令和6年度）」／厚生労働省「精神の障害に係る等級判定ガイドライン」／国民年金法・厚生年金保険法 ・ 確認日 2026-08-31
+          </p>
         </div>
       </section>
     </div>

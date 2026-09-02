@@ -136,12 +136,13 @@ const worries = [
   { title: "20歳前の障害・家族の申請", copy: "納付要件が不問になる場合や、家族が代わりに動くときの手順。", href: "/columns/hatachi-mae" },
 ] as const;
 
+// 「頼むかどうか」を決めるための3本に絞る。
+// 「頼んだほうがいいケース」は jibun-ka-irai の中に、
+// 「不支給のあと」は /nayami/fushikyu にあるので、トップには出さない。
 const decisions = [
-  { title: "自分で申請するか、依頼するか", href: "/erabu/jibun-ka-irai" },
-  { title: "専門家に頼んだほうがいいケース", href: "/erabu/irai-subeki-case" },
-  { title: "障害年金にかかるお金の話", href: "/erabu/hiyou-souba" },
-  { title: "社労士の選び方", href: "/erabu/erabikata" },
-  { title: "不支給と言われたあと、何ができるか", href: "/erabu/fushikyu-no-ato" },
+  { title: "自分で進めるか、頼むか", copy: "向き不向きは状況で変わります。まず判断の材料を並べます。", href: "/erabu/jibun-ka-irai" },
+  { title: "かかるお金", copy: "診断書の文書料、交通費、頼んだ場合の報酬。何にいくらかかるか。", href: "/erabu/hiyou-souba" },
+  { title: "頼むと決めたら、どう選ぶか", copy: "契約の前に確認する3点。特定の事務所へは誘導しません。", href: "/erabu/erabikata" },
 ] as const;
 
 const situations = [
@@ -202,10 +203,10 @@ export default function HomePage() {
           <p className="p-hero-copy">はじめての方にも、むずかしい言葉を使わずに案内します。<br />知識240項目と、原文を確認できた公開実例{SAIKETSU_COUNTS.all}件から、あなたに近い答えを探せます。</p>
           <SiteSearch items={searchItems} />
           <div className="p-stats" aria-label="掲載情報の件数">
-            <div className="p-stat"><b>240</b><span>知識項目（全件出典つき）</span></div>
-            <div className="p-stat"><b>{SAIKETSU_COUNTS.all}</b><span>原文確認済みの公開実例</span></div>
-            <div className="p-stat"><b>67</b><span>公的出典</span></div>
-            <div className="p-stat"><b>毎朝</b><span>最新情報を巡回・更新</span></div>
+            <div className="p-stat"><b>21</b><span>病気ごとの審査の見どころ</span></div>
+            <div className="p-stat"><b>{SAIKETSU_COUNTS.all}</b><span>結論が分かれた実例（原文つき）</span></div>
+            <div className="p-stat"><b>48</b><span>よくある誤解</span></div>
+            <div className="p-stat"><b>全件</b><span>公的資料の出典・確認日つき</span></div>
           </div>
         </div>
       </section>
@@ -226,69 +227,79 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="p-section" aria-labelledby="disease-heading">
+      {/* 4つの入口をひとつにまとめる。
+          以前は「病気」「悩み」「状況」「お金」が別々のセクションに分かれ、
+          チップとカードが交互に出てリズムがばらばらだった。探し方は1か所に集める。 */}
+      <section className="p-section-lg" aria-labelledby="find-heading">
         <div className="p-container">
-          <SectionHeader title="病気から探す" lead="病気ごとに「審査で見られるポイント」と「結論を分けた実例」をまとめています。" href="/byoki/utsu-soukyoku" linkLabel="公開中の病気を見る" />
-          <div className="p-chip-groups">
-            {diseaseGroups.map((group) => (
-              <div className="p-chip-row" key={group.label}>
-                <span className="p-chip-label">{group.label}</span>
-                <div className="p-chips">
-                  {group.items.map(([item, href]) => href && !["/byoki/shikaku", "/byoki/choukaku-heikou", "/byoki/nanbyou-sonota"].includes(href) ? <Link className="p-chip" href={href} key={item}>{item}</Link> : <span className="p-chip" key={item}>{item}</span>)}
-                </div>
+          <SectionHeader
+            title="どこから探しますか"
+            lead="入口は4つあります。どこから入っても、必要なところへつながります。"
+          />
+
+          <div className="p-find">
+            <div className="p-find-block">
+              <div className="p-find-head">
+                <h3 className="p-find-title">病気から</h3>
+                <Link className="p-find-more" href="/byoki">一覧を見る →</Link>
               </div>
-            ))}
+              <p className="p-find-copy">病名では決まりませんが、審査で見られるところは病気ごとに違います。</p>
+              <div className="p-chip-groups">
+                {diseaseGroups.map((group) => (
+                  <div className="p-chip-row" key={group.label}>
+                    <span className="p-chip-label">{group.label}</span>
+                    <div className="p-chips">
+                      {group.items.map(([item, href]) =>
+                        href && !["/byoki/shikaku", "/byoki/choukaku-heikou", "/byoki/nanbyou-sonota"].includes(href) ? (
+                          <Link className="p-chip" href={href} key={href}>{item}</Link>
+                        ) : null,
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="p-find-block">
+              <div className="p-find-head">
+                <h3 className="p-find-title">いま困っていることから</h3>
+                <Link className="p-find-more" href="/nayami">一覧を見る →</Link>
+              </div>
+              <p className="p-find-copy">実際に申請した人がつまずいた場面を、そのまま入口にしました。</p>
+              <div className="p-grid">
+                {worries.slice(0, 6).map((item) => (
+                  <Link className="p-card" href={item.href} key={item.title}>
+                    <h4 className="p-card-title">{item.title}</h4>
+                    <p className="p-card-copy">{item.copy}</p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="p-find-block">
+              <div className="p-find-head">
+                <h3 className="p-find-title">いまの状況から</h3>
+                <Link className="p-find-more" href="/joukyou">一覧を見る →</Link>
+              </div>
+              <p className="p-find-copy">同じ病気でも、暮らし方によって見られるところが変わります。</p>
+              <div className="p-chips">
+                {situations.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
+              </div>
+            </div>
+
+            <div className="p-find-block">
+              <div className="p-find-head">
+                <h3 className="p-find-title">お金のことから</h3>
+                <Link className="p-find-more" href="/okane">一覧を見る →</Link>
+              </div>
+              <p className="p-find-copy">受け取れる額、税金、ほかの制度との調整。</p>
+              <div className="p-chips">
+                {moneyTopics.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
+              </div>
+            </div>
           </div>
         </div>
       </section>
-
-      <section className="p-section-lg" aria-labelledby="worry-heading">
-        <div className="p-container">
-          <SectionHeader title="いま困っていることから探す" lead="実際に申請した人がつまずいた場面を、そのまま入口にしました。" />
-          <div className="p-grid p-grid-4">
-            {worries.map((item) => (
-              <Link className="p-card" href={item.href} key={item.title}>
-                <TopicIcon />
-                <h3 className="p-card-title">{item.title}</h3>
-                <p className="p-card-copy">{item.copy}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="p-section p-band" aria-labelledby="situation-heading">
-        <div className="p-container">
-          <SectionHeader title="状況から探す" lead="年齢、働き方、家族やほかの制度との関係から、いま必要な情報を選べます。" />
-          <div className="p-chips">
-            {situations.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
-          </div>
-        </div>
-      </section>
-
-      <section className="p-section" aria-labelledby="decision-heading">
-        <div className="p-container">
-          <SectionHeader title="決める" lead="自分で進めるか、専門家に頼むか。費用や選び方も含め、判断材料を中立に整理します。" />
-          <div className="p-grid p-grid-5">
-            {decisions.map((item) => (
-              <Link className="p-card" href={item.href} key={item.href}>
-                <h3 className="p-card-title">{item.title}</h3>
-                <span className="p-card-link">読む →</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="p-section p-band" aria-labelledby="money-heading">
-        <div className="p-container">
-          <SectionHeader title="お金の話" lead="受け取れる額、税金、ほかの制度との調整を分けて確認できます。" />
-          <div className="p-chips">
-            {moneyTopics.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
-          </div>
-        </div>
-      </section>
-
       <section className="p-section" aria-labelledby="misconception-heading">
         <div className="p-container">
           <SectionHeader title="その心配、誤解かもしれません" lead="あきらめる前に確認してほしい、よくある思い込みです。すべて公的資料で確認済み。" />
@@ -328,6 +339,28 @@ export default function HomePage() {
               <Link className="p-card p-step-card" href={`/shinsei#step-${index + 1}`} key={step}>
                 <span className="p-step-label">STEP {index + 1}</span>
                 <span className="p-step-title">{step}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 旧「決める」。何を決めるのかが分からない見出しだったので、言葉を変えて3本に絞った。
+          8ステップで全体像を見たあとに置く(順番そのものが判断の順番)。 */}
+      <section className="p-section p-band" aria-labelledby="decision-heading">
+        <div className="p-container">
+          <SectionHeader
+            title="自分でやるか、頼むか"
+            lead="申請は自分でもできますし、専門家に頼むこともできます。どちらが向いているかは状況によって変わります。ここでは判断材料だけを置きます。"
+            href="/erabu"
+            linkLabel="ぜんぶ見る"
+          />
+          <div className="p-grid p-grid-3">
+            {decisions.map((item) => (
+              <Link className="p-card" href={item.href} key={item.href}>
+                <h3 className="p-card-title">{item.title}</h3>
+                <p className="p-card-copy">{item.copy}</p>
+                <span className="p-card-link">読む →</span>
               </Link>
             ))}
           </div>

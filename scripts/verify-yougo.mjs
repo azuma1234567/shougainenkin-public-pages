@@ -60,9 +60,9 @@ if (origin) {
     assert.match(page, new RegExp(`data-yougo-slug="${item.slug}"`), `${item.slug}: 五十音から到達`);
   }
   const fee = await fetchHtml("/yougo/bunshoryou");
-  assert.doesNotMatch(fee, /href="\/erabu\/hiyou-souba"/, "未公開の費用ページを非リンク");
+  assert.match(fee, /href="\/erabu\/hiyou-souba"/, "公開済みの費用ページをリンク");
   const review = await fetchHtml("/yougo/shinsa-seikyuu");
-  assert.doesNotMatch(review, /href="\/erabu\/fushikyu-no-ato"/, "未公開の不支給後ページを非リンク");
+  assert.match(review, /href="\/erabu\/fushikyu-no-ato"/, "公開済みの不支給後ページをリンク");
   const criteria = await fetchHtml("/yougo/nintei-kijun");
   assert.match(criteria, /href="\/suuji"/, "公開済みの数字ページをリンク");
   const hub = await fetchHtml("/nayami/koushin");

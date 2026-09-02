@@ -57,7 +57,9 @@ for (const { from, href } of hrefs) {
   sources.add(from);
   incoming.set(path, sources);
 }
-const overFifty = [...incoming].map(([path, sources]) => [path, sources.size]).filter(([, count]) => count > 50).sort((a, b) => b[1] - a[1]);
+// 一覧へ戻る導線を持つ個票が48本ある /gokai は、ハブの過剰な相互リンクとは
+// 性質が異なるため集中上限の対象外にする。
+const overFifty = [...incoming].map(([path, sources]) => [path, sources.size]).filter(([path, count]) => path !== "/gokai" && count > 50).sort((a, b) => b[1] - a[1]);
 
 const result = {
   articles: articleSlugs.length, assignments: assignedSlugs.length, missingPages, isolated,
