@@ -83,7 +83,7 @@ export default function YougoPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(definedTermSetJsonLd()).replace(/</g, "\\u003c") }} />
       <header className="p-page-hero yougo-hero">
         <div className="p-container yougo-reading-width">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "用語辞典" }]} />
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "用語辞典" }]} currentPath="/yougo" />
           <h1>用語辞典</h1>
           <p className="p-page-intro">障害年金でよく出てくる言葉を、むずかしくない言い方から説明します(40語)。</p>
         </div>

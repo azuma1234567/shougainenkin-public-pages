@@ -86,7 +86,7 @@ export default function SuujiPage() {
     <div className="platform suuji-page">
       <header className="p-page-hero suuji-hero">
         <div className="p-container hub-reading-width">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { href: "/jitsurei", label: "実例と数字" }, { label: TITLE }]} />
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { href: "/jitsurei", label: "実例と数字" }, { label: TITLE }]} currentPath="/suuji" />
           <h1>{TITLE}</h1>
           <p className="p-page-intro">障害年金は、年に約{Math.round(r06New["計"].value / 10000)}万人が新しく申請し、そのうち{formatPercent(r06New["支給"].pct ?? 0)}が支給に至っています。更新で止まる人は100人に1人。精神の障害での申請が{Math.round((sampleTypes["精神障害"]["件数"].pct ?? 0) / 10)}割を占め、いちばん標準的なケースです。</p>
           <p className="p-page-intro">このページは、国が公表している2つの資料（日本年金機構の業務統計と、厚生労働省の認定状況調査）から、申請する人が「自分の位置」を知るための数字だけを取り出したものです。不安を煽るためでも、安心させるためでもなく、実態を見るために。数字は毎年、公表後に更新します。</p>

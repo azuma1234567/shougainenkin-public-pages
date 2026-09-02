@@ -20,7 +20,7 @@ export default function DiseaseHub({ data, showListings = false }: { data: Disea
     <div className="platform">
       <header className="p-page-hero">
         <div className="p-container">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { href: "/byoki/utsu-soukyoku", label: "病気から探す" }, { label: data.name }]} />
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { href: "/byoki/utsu-soukyoku", label: "病気から探す" }, { label: data.name }]} currentPath="/byoki/utsu-soukyoku" />
           <h1>{data.name}の障害年金</h1>
           <div className="p-answer">
             <p className="p-answer-title"><CheckIcon size={20} />{data.answer}</p>

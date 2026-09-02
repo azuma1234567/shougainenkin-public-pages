@@ -64,7 +64,7 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
     <div className="platform">
       <header className="p-page-hero" style={{ background: "#f7fbfe", paddingBottom: 28 }}>
         <div className="p-container">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "結論が変わった実例" }]} />
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "結論が変わった実例" }]} currentPath="/jitsurei" />
           <h1>結論が変わった実例</h1>
           <p className="p-page-intro">
             同じような状況なのに、結論が分かれた事例を{SAIKETSU_COUNTS.all}件集めています。体験談ではありません。<strong>国の再審査（社会保険審査会）の裁決</strong>から取ったもので、全件、裁決の原文（PDF）へのリンクつきです。<strong>通ったものだけを並べていません。</strong>通らなかったものも、同じ密度で載せています。通った話だけを見せられても、自分がどちらに近いかは分からないからです。

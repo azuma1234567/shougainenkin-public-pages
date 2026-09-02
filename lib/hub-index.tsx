@@ -83,7 +83,7 @@ export function renderHubIndex(kind: Kind) {
     <div className="platform">
       <header className="p-page-hero">
         <div className="p-container hub-reading-width">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: spec.title }]} />
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: spec.title }]} currentPath={`/${kind}`} />
           <h1>{spec.h1}</h1>
           <p className="p-hero-copy">{spec.lead}</p>
         </div>

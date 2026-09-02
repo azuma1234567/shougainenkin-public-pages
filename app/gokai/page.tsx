@@ -19,7 +19,7 @@ export default async function GokaiPage({ searchParams }: Props) {
     <div className="platform gokai-page">
       <header className="p-page-hero gokai-hero">
         <div className="p-container hub-reading-width">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: TITLE }]} />
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: TITLE }]} currentPath="/gokai" />
           <h1>{TITLE}</h1>
           <p className="p-page-intro">よく信じられている誤解を48枚に分けました。1枚ずつ「本当は」まで読めます。</p>
         </div>

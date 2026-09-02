@@ -209,7 +209,9 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
   const hasBreadcrumb = (page) => page.jsonLd.some((item) => item["@type"] === "BreadcrumbList" || item["@graph"]?.some((g) => g["@type"] === "BreadcrumbList")) || /class="p-breadcrumb"|aria-label="パンくず/.test(page.html);
   const noCrumbLd = [...pages].filter(([p, page]) => p !== "/" && !page.jsonLd.some((item) => item["@type"] === "BreadcrumbList" || item["@graph"]?.some((g) => g["@type"] === "BreadcrumbList"))).map(([p]) => p);
   const noCrumb = [...pages].filter(([p, page]) => p !== "/" && !hasBreadcrumb(page)).map(([p]) => p);
-  record("B-9", "パンくずが全ページにある(BreadcrumbList を含む)", noCrumb.length === 0 && noCrumbLd.length === 0, `表示なし ${noCrumb.length}、BreadcrumbList(構造化データ)なし ${noCrumbLd.length}`, noCrumbLd.length ? noCrumbLd.map((p) => `BreadcrumbListなし: ${p}`) : noCrumb, "表示のパンくずはあるが構造化データが無いページを別に数える");
+  const countCrumbLd = (page) => page.jsonLd.reduce((n, item) => n + (item["@type"] === "BreadcrumbList" ? 1 : 0) + (item["@graph"]?.filter((g) => g["@type"] === "BreadcrumbList").length ?? 0), 0);
+  const dupCrumbLd = [...pages].filter(([, page]) => countCrumbLd(page) >= 2).map(([p, page]) => `BreadcrumbListが${countCrumbLd(page)}つ: ${p}`);
+  record("B-9", "パンくずが全ページにある(BreadcrumbList を含む・二重なし)", noCrumb.length === 0 && noCrumbLd.length === 0 && dupCrumbLd.length === 0, `表示なし ${noCrumb.length}、BreadcrumbList(構造化データ)なし ${noCrumbLd.length}、2つ以上 ${dupCrumbLd.length}`, [...noCrumb, ...noCrumbLd.map((p) => `BreadcrumbListなし: ${p}`), ...dupCrumbLd], "表示のパンくずはあるが構造化データが無いページと、二重に出ているページを別に数える");
   const noDate = [...pages].filter(([p, page]) => p !== "/" && !page.hasDate).map(([p]) => p);
   record("B-10", "更新日が全ページに表示されている", noDate.length === 0, `更新日/確認日の表示なし ${noDate.length}`, noDate);
 }

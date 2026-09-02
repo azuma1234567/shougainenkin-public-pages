@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import type { SaiketsuCase } from "@/lib/saiketsu";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export function CheckIcon({ size = 18 }: { size?: number }) {
   return (
@@ -28,16 +29,34 @@ export function TopicIcon() {
   );
 }
 
-export function Breadcrumb({ items }: { items: { href?: string; label: string }[] }) {
+// パンくず。jsonLd が true(既定)のとき BreadcrumbList の構造化データも出す。
+// 最後の項目(href なし)は currentPath を現在のページの path として使う。
+// currentPath が無いときは最後の項目を JSON-LD から落とす(item 無しの ListItem は出さない)。
+// href の無い中間項目も JSON-LD からは落とす。
+// コラム記事は lib/columns.ts の columnJsonLd が BreadcrumbList を持つので、そちらでは使わない。
+export function Breadcrumb({ items, currentPath, jsonLd = true }: { items: { href?: string; label: string }[]; currentPath?: string; jsonLd?: boolean }) {
+  const jsonLdItems = items.flatMap((item, index) => {
+    if (item.href) return [{ name: item.label, path: item.href }];
+    if (index === items.length - 1 && currentPath) return [{ name: item.label, path: currentPath }];
+    return [];
+  });
   return (
-    <nav className="p-breadcrumb" aria-label="パンくずリスト">
-      {items.map((item, index) => (
-        <span key={`${item.label}-${index}`}>
-          {index > 0 && " / "}
-          {item.href ? <Link href={item.href}>{item.label}</Link> : item.label}
-        </span>
-      ))}
-    </nav>
+    <>
+      <nav className="p-breadcrumb" aria-label="パンくずリスト">
+        {items.map((item, index) => (
+          <span key={`${item.label}-${index}`}>
+            {index > 0 && " / "}
+            {item.href ? <Link href={item.href}>{item.label}</Link> : item.label}
+          </span>
+        ))}
+      </nav>
+      {jsonLd && jsonLdItems.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd(jsonLdItems)).replace(/</g, "\\u003c") }}
+        />
+      )}
+    </>
   );
 }
 

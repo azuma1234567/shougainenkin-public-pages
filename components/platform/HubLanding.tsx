@@ -36,7 +36,7 @@ export default function HubLanding({ hub }: { hub: HubDefinition }) {
   if (!content) return null;
   const crumbs = content.breadcrumb.map((label, index) => ({ label, href: index === 0 ? "/" : undefined }));
   return <div className={`platform hub-landing${hub.kind === "erabu" ? " hub-erabu" : ""}`}>
-    <header className="p-page-hero"><div className="p-container hub-reading-width"><Breadcrumb items={crumbs} /><h1>{content.title}</h1></div></header>
+    <header className="p-page-hero"><div className="p-container hub-reading-width"><Breadcrumb items={crumbs} currentPath={hub.path} /><h1>{content.title}</h1></div></header>
     <article className="p-container hub-reading-width hub-content" {...(hub.kind === "erabu" ? { "data-yougo-skip": "" } : {})}>
       <MarkdownArticle source={content.source} appCtaSlug={`hub-${hub.path.split("/").filter(Boolean).join("-")}`} faqAccordion />
       {hub.kind !== "erabu" ? <HubGokai hubPath={hub.path} /> : null}

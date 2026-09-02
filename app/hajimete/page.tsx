@@ -101,7 +101,7 @@ export default function HajimetePage() {
     <div className="platform">
       <header className="p-page-hero">
         <div className="p-container">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "はじめての方へ" }]} />
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "はじめての方へ" }]} currentPath="/hajimete" />
           <h1>障害年金が、ゼロからわかる</h1>
           <p className="p-page-intro">
             このページは、「障害年金」という言葉を今日はじめて知った方のためのページです。むずかしい言葉は使いません。読み終わるころには、自分が対象になりそうか、いくらぐらいか、最初に何をすればいいかが分かります。

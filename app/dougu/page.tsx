@@ -36,6 +36,7 @@ const tools = [
     number: "05",
     title: "申立書をつくる",
     description: "発病から現在までを期間に分けて、申立書の下書きをつくります。",
+    href: "/dougu/moushitatesho",
   },
 ] as const;
 
@@ -54,7 +55,7 @@ export default function DouguPage() {
 
       <header className="dougu-hero">
         <div className="p-container dougu-width">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "道具" }]} />
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "道具" }]} currentPath="/dougu" />
           <p className="dougu-kicker">申請の準備を、ひとつずつ</p>
           <h1>道具の置き場所</h1>
           <p className="p-hero-copy">
@@ -71,16 +72,18 @@ export default function DouguPage() {
           </div>
 
           <div className="dougu-grid">
-            {tools.map((tool) => (
-              <article className="dougu-card" key={tool.number}>
+            {tools.map((tool) => {
+              const href = "href" in tool ? tool.href : undefined;
+              const content = <>
                 <div className="dougu-card-top">
                   <span className="dougu-number" aria-hidden="true">{tool.number}</span>
-                  <span className="dougu-status">準備中</span>
+                  <span className="dougu-status">{href ? "公開中" : "準備中"}</span>
                 </div>
                 <h3>{tool.title}</h3>
                 <p>{tool.description}</p>
-              </article>
-            ))}
+              </>;
+              return href ? <a className="dougu-card dougu-card-link" href={href} key={tool.number}>{content}</a> : <article className="dougu-card" key={tool.number}>{content}</article>;
+            })}
           </div>
 
           <p className="dougu-note">

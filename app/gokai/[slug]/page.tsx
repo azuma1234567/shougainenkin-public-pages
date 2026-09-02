@@ -36,7 +36,7 @@ export default async function GokaiDetailPage({ params }: Props) {
     <div className="platform gokai-detail-page">
       <header className="p-page-hero gokai-detail-hero">
         <div className="p-container gokai-reading-width">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { href: "/gokai", label: "よくある誤解" }, { label: card.category }]} />
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { href: "/gokai", label: "よくある誤解" }, { label: card.category }]} currentPath={`/gokai/${card.slug}`} />
           <span className="p-label">よくある誤解</span>
           <h1>{card.misconception}</h1>
         </div>
