@@ -20,6 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/quality",
     "/yougo",
     "/gokai",
+    "/suuji",
+    "/byoki",
+    "/nayami",
+    "/joukyou",
+    "/okane",
+    "/erabu",
   ].map((path) => ({
     url: `${SITE_URL}${path === "/" ? "" : path}`,
   }));

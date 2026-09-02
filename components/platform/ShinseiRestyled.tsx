@@ -100,7 +100,7 @@ export default function ShinseiRestyled() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
-      { "@type": "HowTo", name: "障害年金の申請の流れ(8ステップ)", step: STEPS.map((step, index) => ({ "@type": "HowToStep", position: index + 1, name: step.title, url: `${SITE_URL}/shinsei#${step.id}` })) },
+      { "@type": "HowTo", name: "障害年金の申請の流れ(8ステップ)", step: STEPS.map((step, index) => ({ "@type": "HowToStep", position: index + 1, name: step.title, text: step.oneLine, url: `${SITE_URL}/shinsei#${step.id}` })) },
       { "@type": "FAQPage", mainEntity: FAQ_ITEMS.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) },
     ],
   };
