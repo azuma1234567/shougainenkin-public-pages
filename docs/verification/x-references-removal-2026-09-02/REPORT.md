@@ -65,10 +65,15 @@ codexの作業ツリーには「精神2級の当事者としてXで発信を続�
   - `<main>` の外に残る `twitter` は `<meta name="twitter:card">`（OGPのTwitter Card指定）のみで、`twitter.com` へのリンク・スクリプトは0件。
 - `npm run verify:hubs`: 191ページ、リンク切れ0、予約URLリンク0。被内部リンク50本超は `/gokai`（59本。§2で各ハブから「もっと見る」を張った結果。X削除とは無関係だが棚割り§4-7の警告として記録）。
 
-## 5. 範囲外だが方針上の残り（要判断）
+## 5. 第2パス: 出所をぼかした言及の処理(azuma の指示で実施)
 
-今回の指示（§3の語・§4・§5）には入っていないが、「〜の発信」「当事者有資格者」「実務に詳しい発信者」のように**出所をぼかした形で調査元を指す表現**が、次の記事に残っている（件数は正規表現での概数）。
+第1パスの範囲外だった「〜の発信でも」「当事者有資格者の視点を借りれば」「実務に詳しい発信者が言うとおり」「当事者発信者のポスト」などを、24記事・約90か所で処理した。方針は§2と同じ。
 
-`nichijo-seikatsu-7koumoku` 10 / `moushitatesho-a4-insatsu` 8（触らない指示のため未処理）/ `shindansho-kaitekurenai` 7 / `koushin-kakuninhodo` 7 / `tekio-shogai-shogai-nenkin` 2 / `shoshinbi-wakaranai` 2 / `shinsei-kikan` 2 / `shindansho-ishi-ni-tsutaeru` 2 / `shindansho-irai-timing` 2 / `moushitatesho-kikan-kugiri` 2 / `hatarakinagara` 2 / `tokyu-hantei-guideline` `taishou-shoubyou-kyoukai` `sokyuu-seikyuu` `shougaisha-koyou-nenkin` `shoshinbi-karute-nashi` `shoshinbi-haiin` `shindansho-tanomikata` `nenkin-jimusho-soudan` `moushitatesho-mijushin-kikan` `kazoku-enjo-kakikata` `hitorigurashi-furi` 各1
+- **言い直したもの**: 「働いていても不正ではない」→ガイドラインの「労働に従事していることをもって直ちに…捉えない」、障害者雇用→「1級または2級の可能性を検討する」、第三者メモ→「家族等の援助の状況を考慮する」、目安表の限界→令和6年度調査の75.3%。
+- **削除したもの**(言い直せない意見・伝聞): 「実務者の本音」(一元化への不満)、特定人物の受給状況(精神2級×障害者雇用の公表事例)、「盛った書類はすぐ分かる」の伝聞、「相談の3割は家族から」の未出典の数字、当事者のポストの引用語(「良い傾向です」)。
+- **一般化したもの**: 「毎日ポストを見て」→「毎日SNSを見て」、「信頼できる発信は」→「信頼できる情報は」。
+- **残したもの**: 「専門家」「実務者の共通見解」のように出所を指さない一般表現、利用者自身の記録としてのSNS、「文書やFAXでの相談」。
 
-とくに「制度とお金の落とし穴を発信し続けている当事者有資格者（自身が精神2級×障害者雇用）」という言い方は、アカウント名がなくても人物が特定できる。§2の原則（事実は残す・出所は消す）で機械的に処理できる内容なので、指示があれば同じ手順で当てる。
+`moushitatesho-a4-insatsu` は第1パスの「該当文の削除のみ」の指示に配慮し、節の削除だけに絞った(追加語は「結論は」の1語)。差分は独立したコミットにしてある。
+
+最終確認: `発信|有資格者|実務経験者|ポスト|呟き|岸野|X上|Xで|ツイート|当事者発信` を記事本文とFAQ複製に対して走査し、残るのは「文書やFAXでの相談」(FAXの「Xで」)のみ。typecheck / lint 成功。出力HTML走査は第1パスで全191ページ0件を確認済みで、第2パスは本文文字列内の削除・言い換えのみ(埋め込み・スクリプト・リンクの変更なし)。
