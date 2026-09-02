@@ -6,6 +6,16 @@
 //
 // A に×が1つでもあれば exit 1。B/C の×は報告のみ。
 // 「公開前」の基準は git の main ブランチ(本番に出ている内容)から取る。
+//
+// 判定基準の変更履歴
+// 2026-09-02 (docs/codex-prelaunch-fix-2026-09-02-instructions.md):
+//   A-8: 「直書き0」ではなく、出力HTMLの10万円以上の金額が data/amounts.ts の値から導出できるか
+//        (値そのもの / 年額2〜4個の和 / ×1.25 / ÷12・÷12×2(±100円) / 本文に明示した前年度額 / 「超」の+1)で判定する。
+//        直書きのファイル数は参考として付記に出すだけ。検算式は scripts/lib/amounts-derive.mjs。
+//   B-1: 法務・案内ページ(about/privacy/terms/quality/support)はフッターからのリンクが正常な設計なので孤立の検査から外す。
+//   B-2: パンくず(nav[aria-label="パンくずリスト"])と誤解カードの「一覧へ戻る」(.gokai-back)由来のリンクは被リンク数に数えない。
+//   B-9: BreadcrumbList が2つ以上あるページも数える(コラム記事は columnJsonLd の分だけ)。
+//   C-2: 分割sitemapは対象外(Google の分割要件は 50,000 URL / 50MB。現状は単一 sitemap.xml で十分)。
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
