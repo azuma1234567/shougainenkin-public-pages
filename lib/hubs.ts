@@ -42,6 +42,9 @@ export const HUBS: HubDefinition[] = [
   hub("/byoki/utsu-soukyoku", "うつ病・双極性障害", "うつ病・双極性障害", "byoki", true, ["hitsuyou-shorui-seishin", "shindansho-ishi-ni-tsutaeru", "nichijo-seikatsu-7koumoku", "tokyu-hantei-guideline", "moushitatesho-kakikata", "hatarakinagara", "shindansho-kakunin"], "傷病=うつ・双極"),
   hub("/byoki/tekiou-fuan", "適応障害・不安障害・神経症・PTSD", "適応障害・不安障害", "byoki", true, ["taishou-shoubyou-kyoukai", "tekio-shogai-shogai-nenkin", "hitsuyou-shorui-seishin"], "傷病=神経症・PTSD"),
   hub("/byoki/hattatsu", "発達障害", "発達障害", "byoki", true, ["hattatsu-shougai", "hitsuyou-shorui-seishin"], "傷病=発達"),
+  hub("/byoki/tougou", "統合失調症", "統合失調症", "byoki", true, [], "傷病=統合失調症"),
+  hub("/byoki/chiteki", "知的障害", "知的障害", "byoki", true, [], "傷病=知的障害"),
+  hub("/byoki/tenkan", "てんかん", "てんかん", "byoki", true),
   hub("/joukyou/hatarakinagara", "働きながら申請するとき", "働きながら", "joukyou", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "tokyu-hantei-guideline"], "争点=就労"),
   hub("/joukyou/hatachi-mae", "20歳前に初診日があるとき", "20歳前", "joukyou", true, ["hatachi-mae", "nofu-yoken"], "争点=20歳前"),
   hub("/joukyou/shoubyou-teatekin-kara", "傷病手当金から障害年金を考えるとき", "傷病手当金から", "joukyou", true, ["shoubyou-teatekin", "kiso-kousei-chigai"]),
@@ -55,7 +58,7 @@ export const HUBS: HubDefinition[] = [
   hub("/okane/ikura", "障害年金はいくら受け取れるか", "年金額", "okane", true, ["hikazei-shuunyuu", "ikura-moraeru", "sokyuu-seikyuu", "kiso-kousei-chigai", "gaku-kaitei-seikyuu", "jukyuugo-tetsuduki"]),
   hub("/erabu/jibun-ka-irai", "自分で申請するか、依頼するか", "自分で・依頼", "erabu", true, ["jibun-de-shinsei", "nenkin-jimusho-soudan", "shinsei-shindoi"]),
   ...[
-    "/byoki/tougou", "/byoki/chiteki", "/byoki/tenkan", "/byoki/ninchishou", "/byoki/izon", "/byoki/jinzou-touseki", "/byoki/tounyou", "/byoki/shinzou", "/byoki/gan", "/byoki/kanzou", "/byoki/kokyuuki", "/byoki/ketsueki", "/byoki/shitai", "/byoki/shikaku", "/byoki/choukaku-heikou", "/byoki/soshaku-gengo", "/byoki/nanbyou-sonota",
+    "/byoki/jinzou-touseki", "/byoki/gan", "/byoki/shinzou", "/byoki/tounyou", "/byoki/shitai", "/byoki/ninchishou", "/byoki/izon", "/byoki/kanzou", "/byoki/kokyuuki", "/byoki/ketsueki", "/byoki/shikaku", "/byoki/choukaku-heikou", "/byoki/soshaku-gengo", "/byoki/nanbyou-sonota",
     "/joukyou/65sai-ijou", "/joukyou/shufu-mushoku", "/joukyou/gakusei", "/joukyou/kazoku-ga-tetsudau", "/joukyou/seikatsu-hogo",
     "/suuji", "/gokai", "/okane/zeikin", "/okane/chousei", "/erabu/irai-subeki-case", "/erabu/hiyou-souba", "/erabu/erabikata", "/erabu/fushikyu-no-ato", "/senmonka",
   ].map((path) => hub(path, path, path, "reserved", false)),

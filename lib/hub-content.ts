@@ -1,4 +1,7 @@
 import { apply2026Amounts } from "@/data/amounts";
+import byokiTougou from "@/data/hubs/byoki-tougou.json";
+import byokiChiteki from "@/data/hubs/byoki-chiteki.json";
+import byokiTenkan from "@/data/hubs/byoki-tenkan.json";
 import byokiHattatsu from "@/data/hubs/byoki-hattatsu.json";
 import byokiTekiouFuan from "@/data/hubs/byoki-tekiou-fuan.json";
 import erabuJibunKaIrai from "@/data/hubs/erabu-jibun-ka-irai.json";
@@ -15,6 +18,7 @@ import okaneIkura from "@/data/hubs/okane-ikura.json";
 
 export type HubContent = { title: string; breadcrumb: string[]; source: string };
 export const HUB_CONTENT: Record<string, HubContent> = {
+  "/byoki/tougou": byokiTougou, "/byoki/chiteki": byokiChiteki, "/byoki/tenkan": byokiTenkan,
   "/byoki/hattatsu": byokiHattatsu, "/byoki/tekiou-fuan": byokiTekiouFuan,
   "/erabu/jibun-ka-irai": erabuJibunKaIrai, "/joukyou/hatachi-mae": joukyouHatachiMae,
   "/joukyou/hatarakinagara": joukyouHatarakinagara, "/joukyou/hitorigurashi": joukyouHitorigurashi,
