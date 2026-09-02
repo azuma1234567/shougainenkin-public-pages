@@ -49,6 +49,72 @@
 .hub-faq-item p { padding: 0 18px 18px; }
 .hub-sibling-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--platform-border); }
 .hub-sibling-links a { display: inline-flex; align-items: center; padding: 10px 14px; border: 1px solid #b9dced; border-radius: 10px; background: #fff; color: var(--platform-blue); font-weight: 700; text-decoration: none; }
+
+/* /suuji: 公的統計を、本文と同じ空色系トークンで読むための専用レイアウト。 */
+.suuji-hero { background: var(--platform-bg); }
+.suuji-content { padding-block: 18px 76px; }
+.suuji-section { padding-block: 38px; border-bottom: 1px solid var(--platform-border); }
+.suuji-section > h2, .suuji-sources > h2 { margin: 0 0 22px; color: var(--platform-heading); font-size: clamp(1.4rem, 3vw, 1.82rem); }
+.suuji-section > p { margin: 18px 0 0; color: var(--platform-text); line-height: 1.95; }
+.suuji-stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.suuji-stat-tile { display: grid; align-content: start; min-height: 162px; padding: 22px; border: 1px solid #cfe4f2; border-radius: 12px; background: #fff; box-shadow: 0 1px 3px rgba(20, 66, 94, 0.05); }
+.suuji-stat-tile span { color: var(--platform-muted); font-size: .88rem; font-weight: 700; }
+.suuji-stat-tile strong { margin-top: 7px; color: var(--platform-primary); font-size: clamp(2rem, 5vw, 3rem); line-height: 1.2; letter-spacing: -.03em; }
+.suuji-stat-tile small { align-self: end; margin-top: 14px; color: var(--platform-subtle); line-height: 1.5; }
+.suuji-chart-card { margin: 22px 0; padding: 22px; border: 1px solid var(--platform-border); border-radius: 12px; background: #fff; }
+.suuji-bar-row + .suuji-bar-row { margin-top: 18px; }
+.suuji-bar-label { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 7px; color: var(--platform-text); font-size: .92rem; }
+.suuji-bar-label strong { color: var(--platform-heading); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.suuji-bar-track { height: 14px; overflow: hidden; border-radius: 3px; background: #e8f3fa; }
+.suuji-bar-track span { display: block; height: 100%; border-radius: inherit; background: var(--platform-primary); }
+.suuji-chart-note { margin: 18px 0 0; color: var(--platform-subtle); font-size: .82rem; line-height: 1.65; }
+.suuji-table-wrap { margin: 24px 0; overflow-x: auto; border: 1px solid var(--platform-border); border-radius: 12px; background: #fff; }
+.suuji-table { width: 100%; min-width: 650px; border-collapse: collapse; font-size: .9rem; }
+.suuji-table caption { padding: 16px 18px; color: var(--platform-heading); font-weight: 700; text-align: left; }
+.suuji-table th, .suuji-table td { padding: 12px 14px; border-top: 1px solid var(--platform-border); text-align: right; font-variant-numeric: tabular-nums; }
+.suuji-table thead th { background: var(--platform-band); color: var(--platform-heading); }
+.suuji-table th:first-child { text-align: left; }
+.suuji-stacked { display: flex; width: 100%; min-height: 34px; overflow: hidden; border-radius: 6px; background: var(--platform-band); }
+.suuji-stacked span { min-width: 2px; }
+.suuji-stacked .is-1級, .suuji-dot.is-1級 { background: #075985; }
+.suuji-stacked .is-2級, .suuji-dot.is-2級 { background: #0284c7; }
+.suuji-stacked .is-3級, .suuji-dot.is-3級 { background: #69b7dd; }
+.suuji-stacked .is-非該当, .suuji-dot.is-非該当 { background: #c5dfea; }
+.suuji-legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 20px; margin: 18px 0 0; padding: 0; list-style: none; }
+.suuji-legend li { display: grid; grid-template-columns: 12px 1fr; align-items: center; column-gap: 8px; color: var(--platform-muted); font-size: .88rem; }
+.suuji-legend li strong { grid-column: 2; color: var(--platform-heading); font-size: .84rem; font-variant-numeric: tabular-nums; }
+.suuji-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--platform-primary); }
+.suuji-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.suuji-links a { display: inline-flex; min-height: 44px; align-items: center; padding: 9px 13px; border: 1px solid #b9dced; border-radius: 9px; background: #fff; font-weight: 700; text-decoration: none; }
+.suuji-donut-layout { display: grid; grid-template-columns: 210px 1fr; align-items: center; gap: 32px; }
+.suuji-donut { display: grid; width: 190px; aspect-ratio: 1; place-items: center; border-radius: 50%; }
+.suuji-donut::before { grid-area: 1 / 1; width: 122px; aspect-ratio: 1; border-radius: 50%; background: #fff; content: ""; }
+.suuji-donut span { z-index: 1; display: grid; grid-area: 1 / 1; color: var(--platform-muted); text-align: center; }
+.suuji-donut strong { color: var(--platform-heading); font-size: 1.5rem; }
+.suuji-dot.renewal-継続 { background: #0284c7; }
+.suuji-dot.renewal-増額改定 { background: #38a8dc; }
+.suuji-dot.renewal-減額改定 { background: #8fc9e7; }
+.suuji-dot.renewal-支給停止 { background: #c5dfea; }
+.suuji-check-card { margin: 22px 0; padding: 22px; border-left: 4px solid var(--platform-primary); background: var(--platform-band); }
+.suuji-check-card p { margin: 0 0 14px; }
+.suuji-check-card dl { display: grid; gap: 10px; }
+.suuji-check-card dl div { display: grid; grid-template-columns: 130px 1fr; gap: 12px; }
+.suuji-check-card dt { color: var(--platform-heading); font-weight: 700; }
+.suuji-check-card dd { color: var(--platform-text); }
+.suuji-check-card small { display: block; margin-top: 12px; color: var(--platform-subtle); }
+.suuji-line-chart svg { display: block; width: 100%; height: 220px; overflow: visible; }
+.suuji-axis { fill: none; stroke: var(--platform-border); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.suuji-line { fill: none; stroke: var(--platform-primary); stroke-linecap: round; stroke-linejoin: round; stroke-width: 3; vector-effect: non-scaling-stroke; }
+.suuji-point { fill: #fff; stroke: var(--platform-primary); stroke-width: 3; vector-effect: non-scaling-stroke; }
+.suuji-year-list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+.suuji-year-list div { display: grid; min-width: 0; padding: 10px; border-top: 3px solid #b9dced; }
+.suuji-year-list strong { color: var(--platform-heading); font-size: .8rem; }
+.suuji-year-list span { color: var(--platform-text); font-size: .88rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.suuji-year-list small { color: var(--platform-subtle); font-size: .72rem; }
+.suuji-definition-note { padding: 16px 18px; border: 1px solid #cfe4f2; border-radius: 10px; background: #f4faff; }
+.suuji-sources { padding-top: 38px; }
+.suuji-sources ul { padding-left: 1.3em; }
+.suuji-sources li { margin-top: 10px; color: var(--platform-subtle); font-size: .84rem; line-height: 1.7; }
 @media (max-width: 600px) {
   .hub-content { padding-block: 32px 56px; }
   .hub-content h2 { margin-top: 44px; }
@@ -68,6 +134,33 @@
   .hub-content .article-table-figure.is-epilepsy-scale tr { margin: 12px 0; border: 1px solid var(--platform-border); border-radius: 10px; overflow: hidden; }
   .hub-content .article-table-figure.is-epilepsy-scale td { border-right: 0; }
   .hub-content .article-table-figure.is-epilepsy-scale td::before { display: block; margin-bottom: 4px; color: var(--platform-meta); font-size: 11px; font-weight: 700; content: attr(data-label); }
+  .suuji-content { padding-block: 4px 52px; }
+  .suuji-section { padding-block: 32px; }
+  .suuji-stat-grid { grid-template-columns: 1fr; }
+  .suuji-stat-tile { min-height: 146px; padding: 19px; }
+  .suuji-chart-card { padding: 17px; }
+  .suuji-bar-label { align-items: flex-end; }
+  .suuji-bar-label strong { font-size: .78rem; }
+  .suuji-table-wrap { overflow: visible; border: 0; background: transparent; }
+  .suuji-table { min-width: 0; }
+  .suuji-table caption { padding-inline: 0; }
+  .suuji-table thead { display: none; }
+  .suuji-table tbody, .suuji-table tr, .suuji-table th, .suuji-table td { display: block; width: 100%; }
+  .suuji-table tr { margin-bottom: 12px; overflow: hidden; border: 1px solid var(--platform-border); border-radius: 10px; background: #fff; }
+  .suuji-table th, .suuji-table td { display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid var(--platform-border); text-align: right; }
+  .suuji-table th { border-top: 0; background: var(--platform-band); }
+  .suuji-table td::before { color: var(--platform-subtle); font-weight: 700; }
+  .suuji-table td:nth-child(2)::before { content: "決定"; }
+  .suuji-table td:nth-child(3)::before { content: "支給"; }
+  .suuji-table td:nth-child(4)::before { content: "非該当"; }
+  .suuji-legend { grid-template-columns: 1fr; }
+  .suuji-donut-layout { grid-template-columns: 1fr; justify-items: center; gap: 20px; }
+  .suuji-donut-layout .suuji-legend { width: 100%; }
+  .suuji-check-card { padding: 18px; }
+  .suuji-check-card dl div { grid-template-columns: 1fr; gap: 2px; }
+  .suuji-year-list { grid-template-columns: 1fr; }
+  .suuji-year-list div { grid-template-columns: 90px 1fr; align-items: baseline; }
+  .suuji-year-list small { grid-column: 2; }
 }
 
 /* 共通ヘッダー */

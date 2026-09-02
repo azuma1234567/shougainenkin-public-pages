@@ -1,0 +1,128 @@
+{
+  "年度": "令和6年度",
+  "決定区分別件数": {
+    "新規裁定・合計": {
+      "計": { "value": 146225, "unit": "件", "pct": null },
+      "1級": { "value": 15995, "unit": "件", "pct": 10.9 },
+      "2級": { "value": 80395, "unit": "件", "pct": 55.0 },
+      "3級": { "value": 30460, "unit": "件", "pct": 20.8 },
+      "障害手当金": { "value": 393, "unit": "件", "pct": 0.3 },
+      "非該当": { "value": 18982, "unit": "件", "pct": 13.0 },
+      "支給": { "value": 127243, "unit": "件", "pct": 87.0, "derived": true }
+    },
+    "新規裁定・障害基礎": {
+      "計": { "value": 88562, "unit": "件", "pct": null },
+      "1級": { "value": 11737, "unit": "件", "pct": 13.3 },
+      "2級": { "value": 62209, "unit": "件", "pct": 70.2 },
+      "3級": { "value": 0, "unit": "件", "pct": null },
+      "障害手当金": { "value": 0, "unit": "件", "pct": null },
+      "非該当": { "value": 14616, "unit": "件", "pct": 16.5 }
+    },
+    "新規裁定・障害厚生": {
+      "計": { "value": 57663, "unit": "件", "pct": null },
+      "1級": { "value": 4258, "unit": "件", "pct": 7.4 },
+      "2級": { "value": 18186, "unit": "件", "pct": 31.5 },
+      "3級": { "value": 30460, "unit": "件", "pct": 52.8 },
+      "障害手当金": { "value": 393, "unit": "件", "pct": 0.7 },
+      "非該当": { "value": 4366, "unit": "件", "pct": 7.6 }
+    },
+    "再認定・合計": {
+      "計": { "value": 304456, "unit": "件", "pct": null },
+      "継続": { "value": 294405, "unit": "件", "pct": 96.7 },
+      "増額改定": { "value": 4359, "unit": "件", "pct": 1.4 },
+      "減額改定": { "value": 2451, "unit": "件", "pct": 0.8 },
+      "支給停止": { "value": 3241, "unit": "件", "pct": 1.1 }
+    },
+    "再認定・障害基礎": {
+      "計": { "value": 194621, "unit": "件", "pct": null },
+      "継続": { "value": 190328, "unit": "件", "pct": 97.8 },
+      "増額改定": { "value": 1643, "unit": "件", "pct": 0.8 },
+      "減額改定": { "value": 867, "unit": "件", "pct": 0.4 },
+      "支給停止": { "value": 1783, "unit": "件", "pct": 0.9 }
+    },
+    "再認定・障害厚生": {
+      "計": { "value": 109835, "unit": "件", "pct": null },
+      "継続": { "value": 104077, "unit": "件", "pct": 94.8 },
+      "増額改定": { "value": 2716, "unit": "件", "pct": 2.5 },
+      "減額改定": { "value": 1584, "unit": "件", "pct": 1.4 },
+      "支給停止": { "value": 1458, "unit": "件", "pct": 1.3 }
+    }
+  },
+  "診断書種類別件数・新規裁定": {
+    "精神障害・知的障害": {
+      "決定": { "value": 99386, "unit": "件", "pct": null, "derived": true },
+      "支給": { "value": 87697, "unit": "件", "pct": null },
+      "非該当": { "value": 11689, "unit": "件", "pct": 11.8, "derived": true }
+    },
+    "眼": {
+      "決定": { "value": 3035, "unit": "件", "pct": null, "derived": true },
+      "支給": { "value": 2837, "unit": "件", "pct": null },
+      "非該当": { "value": 198, "unit": "件", "pct": 6.5, "derived": true }
+    },
+    "聴覚等": {
+      "決定": { "value": 3083, "unit": "件", "pct": null, "derived": true },
+      "支給": { "value": 2859, "unit": "件", "pct": null },
+      "非該当": { "value": 224, "unit": "件", "pct": 7.3, "derived": true }
+    },
+    "肢体": {
+      "決定": { "value": 24692, "unit": "件", "pct": null, "derived": true },
+      "支給": { "value": 21425, "unit": "件", "pct": null },
+      "非該当": { "value": 3267, "unit": "件", "pct": 13.2, "derived": true }
+    },
+    "呼吸器疾患": {
+      "決定": { "value": 1008, "unit": "件", "pct": null, "derived": true },
+      "支給": { "value": 636, "unit": "件", "pct": null },
+      "非該当": { "value": 372, "unit": "件", "pct": 36.9, "derived": true }
+    },
+    "循環器疾患": {
+      "決定": { "value": 4891, "unit": "件", "pct": null, "derived": true },
+      "支給": { "value": 3990, "unit": "件", "pct": null },
+      "非該当": { "value": 901, "unit": "件", "pct": 18.4, "derived": true }
+    },
+    "腎疾患・肝疾患・糖尿病": {
+      "決定": { "value": 7912, "unit": "件", "pct": null, "derived": true },
+      "支給": { "value": 6953, "unit": "件", "pct": null },
+      "非該当": { "value": 959, "unit": "件", "pct": 12.1, "derived": true }
+    },
+    "血液・造血器・その他": {
+      "決定": { "value": 6753, "unit": "件", "pct": null, "derived": true },
+      "支給": { "value": 4451, "unit": "件", "pct": null },
+      "非該当": { "value": 2302, "unit": "件", "pct": 34.1, "derived": true }
+    }
+  },
+  "診断書種類別件数・再認定": {
+    "精神障害・知的障害": {
+      "継続": { "value": 238772, "unit": "件", "pct": null, "derived": true },
+      "支給停止": { "value": 1026, "unit": "件", "pct": null, "derived": true }
+    },
+    "眼": {
+      "継続": { "value": 5685, "unit": "件", "pct": null, "derived": true },
+      "支給停止": { "value": 85, "unit": "件", "pct": null, "derived": true }
+    },
+    "聴覚等": {
+      "継続": { "value": 4382, "unit": "件", "pct": null, "derived": true },
+      "支給停止": { "value": 91, "unit": "件", "pct": null, "derived": true }
+    },
+    "肢体": {
+      "継続": { "value": 24371, "unit": "件", "pct": null, "derived": true },
+      "支給停止": { "value": 574, "unit": "件", "pct": null, "derived": true }
+    },
+    "呼吸器疾患": {
+      "継続": { "value": 978, "unit": "件", "pct": null, "derived": true },
+      "支給停止": { "value": 97, "unit": "件", "pct": null, "derived": true }
+    },
+    "循環器疾患": {
+      "継続": { "value": 7842, "unit": "件", "pct": null, "derived": true },
+      "支給停止": { "value": 308, "unit": "件", "pct": null, "derived": true }
+    },
+    "腎疾患・肝疾患・糖尿病": {
+      "継続": { "value": 12139, "unit": "件", "pct": null, "derived": true },
+      "支給停止": { "value": 671, "unit": "件", "pct": null, "derived": true }
+    },
+    "血液・造血器・その他": {
+      "継続": { "value": 5242, "unit": "件", "pct": null, "derived": true },
+      "支給停止": { "value": 398, "unit": "件", "pct": null, "derived": true }
+    }
+  },
+  "審査請求・再審査請求": {}
+}

@@ -1,0 +1,44 @@
+{
+  "確認日": "2026-09-02",
+  "sources": {
+    "gyoumuToukeiR06": {
+      "title": "日本年金機構『障害年金業務統計（令和6年度決定分）』",
+      "url": "https://www.nenkin.go.jp/info/kokaitokei/tokei/shogai/index.files/r06.pdf",
+      "publishedAt": "2025-09-19",
+      "publishedLabel": "令和7年9月19日",
+      "checkedAt": "2026-09-02",
+      "extraction": "pdftotext -layout",
+      "correction": "訂正反映: あり(令和7年10月31日)",
+      "correctionLabel": "令和7年10月31日",
+      "correctionUrl": "https://www.nenkin.go.jp/info/kokaitokei/tokei/shogai/index.files/seigohyou.pdf",
+      "notes": [
+        "現行r06.pdfの診断書種類別支給件数が訂正PDFの正欄と一致することを確認した。",
+        "新規裁定の『非該当』は、国民年金法第30条等の支給要件に該当しない場合を指し、障害の程度以外の理由も含む。審査資料の不備等で障害等級を判定できない場合は別に『却下』として計上される。",
+        "診断書種類別件数は、1人が複数の診断書を用いる場合に診断書ごとに計上されるため、決定区分別件数とは一致しない。",
+        "審査請求・再審査請求の件数表は当該PDFにない。"
+      ]
+    },
+    "gyoumuToukeiR02R05": {
+      "title": "日本年金機構『過去の障害年金業務統計（令和2〜5年度決定分）』",
+      "url": "https://www.nenkin.go.jp/info/kokaitokei/tokei/shogai/kako.html",
+      "publishedAt": "2025-09-19",
+      "checkedAt": "2026-09-02",
+      "extraction": "pdftotext -layout"
+    },
+    "ninteiChousaR06": {
+      "title": "厚生労働省年金局『令和6年度の障害年金の認定状況についての調査報告書』",
+      "url": "https://www.mhlw.go.jp/content/12512000/001502249.pdf",
+      "publishedAt": "2025-06-11",
+      "publishedLabel": "令和7年6月11日",
+      "checkedAt": "2026-09-02",
+      "extraction": "pdftotext -layout"
+    },
+    "tenken": {
+      "title": "日本年金機構『障害年金の認定状況について』",
+      "url": "https://www.nenkin.go.jp/tokusetsu/tenken.html",
+      "publishedAt": "2026-08-31",
+      "checkedAt": "2026-09-02",
+      "notes": ["進行中の点検であるため、取得日をデータに保持する。"]
+    }
+  }
+}

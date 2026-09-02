@@ -111,6 +111,11 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
               <p className="p-card-copy">不服申立てには期限があります（通知を知った日の翌日から3か月）。まずは選択肢を確認してください。</p>
               <Link className="p-card-link" href="/nayami/fushikyu">「不支給と言われたとき」を読む →</Link>
             </div>
+            <div className="p-card">
+              <h2 style={{ fontSize: 13.5 }}>申請全体の数字を見る</h2>
+              <p className="p-card-copy">新規裁定、支給割合、診断書の種類、更新結果を、公的統計から確認できます。</p>
+              <Link className="p-card-link" href="/suuji">「数字で見る障害年金」を読む →</Link>
+            </div>
           </aside>
         </div>
       </section>

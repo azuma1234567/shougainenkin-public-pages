@@ -53,6 +53,13 @@ const searchItems: SearchItem[] = [
     category: "実例と数字",
     keywords: "裁決例 容認 棄却 不支給 初診日 原文 PDF",
   },
+  {
+    href: "/suuji",
+    title: "数字で見る障害年金",
+    description: "新規裁定、支給割合、病気の種類、更新結果を公的統計から確認できます。",
+    category: "実例と数字",
+    keywords: "統計 支給率 非該当 更新 再認定 精神障害 件数",
+  },
   ...COLUMNS.map((column) => ({
     href: `/columns/${column.slug}`,
     title: column.metaTitle ?? column.title,

@@ -31,6 +31,7 @@ export const HUBS: HubDefinition[] = [
   hub("/", "障害年金ノート", "トップ", "existing", true),
   hub("/hajimete", "はじめての方へ", "はじめて", "existing", true, ["techou-to-nenkin"]),
   hub("/shinsei", "障害年金の申請の流れ", "申請の流れ", "existing", true, ["shinsei-shindoi"]),
+  hub("/suuji", "数字で見る障害年金", "数字で見る", "existing", true),
   hub("/shinsei#step-1", "申請ステップ1 制度を確認する", "ステップ1", "existing", true, ["ninteibi-jigojusho", "kiso-kousei-chigai"]),
   hub("/shinsei#step-2", "申請ステップ2 初診日を確認する", "ステップ2", "existing", true, ["shakaiteki-chiyu", "shoshinbi-wakaranai", "jushinjokyo-shomeisho"]),
   hub("/shinsei#step-3", "申請ステップ3 納付要件を確認する", "ステップ3", "existing", true, ["hatachi-mae", "nofu-yoken"]),
@@ -65,7 +66,7 @@ export const HUBS: HubDefinition[] = [
   ...[
     "/byoki/ninchishou", "/byoki/izon", "/byoki/kanzou", "/byoki/kokyuuki", "/byoki/ketsueki", "/byoki/shikaku", "/byoki/choukaku-heikou", "/byoki/soshaku-gengo", "/byoki/nanbyou-sonota",
     "/joukyou/65sai-ijou", "/joukyou/shufu-mushoku", "/joukyou/gakusei", "/joukyou/kazoku-ga-tetsudau", "/joukyou/seikatsu-hogo",
-    "/suuji", "/gokai", "/okane/zeikin", "/okane/chousei", "/erabu/irai-subeki-case", "/erabu/hiyou-souba", "/erabu/erabikata", "/erabu/fushikyu-no-ato", "/senmonka",
+    "/gokai", "/okane/zeikin", "/okane/chousei", "/erabu/irai-subeki-case", "/erabu/hiyou-souba", "/erabu/erabikata", "/erabu/fushikyu-no-ato", "/senmonka",
   ].map((path) => hub(path, path, path, "reserved", false)),
 ];
 
