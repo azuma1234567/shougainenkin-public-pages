@@ -44,6 +44,19 @@ import okaneIkura from "@/data/hubs/okane-ikura.json";
 import okaneZeikin from "@/data/hubs/okane-zeikin.json";
 import okaneChousei from "@/data/hubs/okane-chousei.json";
 
+const nayamiFushikyuPublished = {
+  ...nayamiFushikyu,
+  source: nayamiFushikyu.source
+    .replace(
+      "★codexが日本年金機構・厚生労働省の公表情報で確認して埋めること。確認できなければ、この項目ごと削る。",
+      "地方厚生局の案内では、審査請求書を受け付けてから**概ね3〜4か月**かかっているとされています。ただし、内容によってはそれ以上かかる場合があります。",
+    )
+    .replace(
+      "- 日本年金機構「障害年金の請求手続き(診断書の現症日)」・確認日 2026-08-31",
+      "- 日本年金機構「障害年金の請求手続き(診断書の現症日)」・確認日 2026-08-31\n- 九州厚生局「社会保険審査官に対する審査請求に関するよくあるご質問Q&A」・確認日 2026-09-02",
+    ),
+};
+
 export type HubContent = { title: string; breadcrumb: string[]; source: string };
 export const HUB_CONTENT: Record<string, HubContent> = {
   "/byoki/tougou": byokiTougou, "/byoki/chiteki": byokiChiteki, "/byoki/tenkan": byokiTenkan,
@@ -63,7 +76,7 @@ export const HUB_CONTENT: Record<string, HubContent> = {
   "/joukyou/gakusei": joukyouGakusei, "/joukyou/kazoku-ga-tetsudau": joukyouKazoku,
   "/joukyou/seikatsu-hogo": joukyouSeikatsuHogo,
   "/nayami/shikyuu-teishi": nayamiShikyuuTeishi, "/nayami/shindansho-komatta": nayamiShindansho,
-  "/nayami/shoshinbi-karute": nayamiShoshinbi, "/nayami/sokyuu": nayamiSokyuu, "/nayami/fushikyu": nayamiFushikyu,
+  "/nayami/shoshinbi-karute": nayamiShoshinbi, "/nayami/sokyuu": nayamiSokyuu, "/nayami/fushikyu": nayamiFushikyuPublished,
   "/byoki/utsu-soukyoku": byokiUtsuSoukyoku, "/okane/ikura": okaneIkura,
   "/okane/zeikin": okaneZeikin, "/okane/chousei": okaneChousei,
 };
