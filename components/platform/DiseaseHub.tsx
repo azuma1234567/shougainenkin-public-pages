@@ -1,4 +1,5 @@
 import Link from "next/link";
+import HubGokai from "@/components/platform/HubGokai";
 import { Breadcrumb, Card, CaseCard, CheckIcon, SectionHeader } from "@/components/platform/Platform";
 import type { SaiketsuCase } from "@/lib/saiketsu";
 
@@ -64,6 +65,12 @@ export default function DiseaseHub({ data, showListings = false }: { data: Disea
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="p-section" aria-labelledby="hub-gokai-heading">
+        <div className="p-container">
+          <HubGokai hubPath="/byoki/utsu-soukyoku" />
         </div>
       </section>
 

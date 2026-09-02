@@ -1,4 +1,5 @@
 import MarkdownArticle from "@/components/MarkdownArticle";
+import HubGokai from "@/components/platform/HubGokai";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/platform/Platform";
 import { getHubContent } from "@/lib/hub-content";
@@ -25,6 +26,7 @@ export default function HubLanding({ hub }: { hub: HubDefinition }) {
     <header className="p-page-hero"><div className="p-container hub-reading-width"><Breadcrumb items={crumbs} /><h1>{content.title}</h1></div></header>
     <article className="p-container hub-reading-width hub-content">
       <MarkdownArticle source={content.source} appCtaSlug={`hub-${hub.path.split("/").filter(Boolean).join("-")}`} faqAccordion />
+      <HubGokai hubPath={hub.path} />
       {siblingLinks[hub.path]?.length ? <nav className="hub-sibling-links" aria-label="関連する病名ハブ">
         {siblingLinks[hub.path].map((path) => <Link key={path} href={path}>{siblingLabels[path]} →</Link>)}
       </nav> : null}

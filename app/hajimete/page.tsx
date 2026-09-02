@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import HubGokai from "@/components/platform/HubGokai";
 import Link from "next/link";
 import { Breadcrumb, Card, CheckIcon, SectionHeader } from "@/components/platform/Platform";
 import { pageMetadata } from "@/lib/seo";
@@ -92,6 +93,12 @@ export default function HajimetePage() {
           <div className="p-grid p-grid-4">
             {terms.map(([title, copy]) => <Card key={title}><h3 className="p-card-title" style={{ color: "#0273ad" }}>{title}</h3><p className="p-card-copy">{copy}</p></Card>)}
           </div>
+        </div>
+      </section>
+
+      <section className="p-section" aria-labelledby="hub-gokai-heading">
+        <div className="p-container">
+          <HubGokai hubPath="/hajimete" />
         </div>
       </section>
 
