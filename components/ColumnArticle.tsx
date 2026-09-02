@@ -10,6 +10,7 @@ import {
   type Column,
 } from "@/lib/columns";
 import { faqJsonLd } from "@/lib/seo";
+import { isPublishedInternalPath } from "@/lib/published-links";
 import Link from "next/link";
 
 type Faq = { question: string; answer: string };
@@ -66,7 +67,7 @@ export default function ColumnArticle({
 
       <ArticleToc />
       <ColumnThemeBlock column={column} />
-      {["moushitatesho-a4-insatsu", "moushitatesho-kikan-kugiri"].includes(column.slug) && (
+      {isPublishedInternalPath("/dougu/moushitatesho") && ["moushitatesho-a4-insatsu", "moushitatesho-kikan-kugiri"].includes(column.slug) && (
         <aside className="mt-column-card">
           <strong>この様式を、ブラウザで書いてそのまま印刷できます</strong>
           <p>入力内容はサーバーへ送らず、この端末のブラウザの中だけに保存します。</p>
@@ -74,7 +75,7 @@ export default function ColumnArticle({
         </aside>
       )}
       <MarkdownArticle source={source} appCtaSlug={column.slug} />
-      {column.slug === "moushitatesho-kakikata" && <aside className="mt-column-card"><strong>申立書の下書きをつくる</strong><p>期間ごとに入力し、公式様式に重ねて印刷できます。</p><Link href="/dougu/moushitatesho">道具を開く</Link></aside>}
+      {isPublishedInternalPath("/dougu/moushitatesho") && column.slug === "moushitatesho-kakikata" && <aside className="mt-column-card"><strong>申立書の下書きをつくる</strong><p>期間ごとに入力し、公式様式に重ねて印刷できます。</p><Link href="/dougu/moushitatesho">道具を開く</Link></aside>}
       <ColumnFooter
         currentSlug={column.slug}
         relatedSlugs={relatedSlugs}
