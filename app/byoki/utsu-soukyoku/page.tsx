@@ -36,7 +36,11 @@ const data: DiseaseHubData = {
     { question: "休職中です。退職してから申請すべきですか？", answer: "退職を待つ必要はありません。休職中でも申請でき、手続きに勤務先は関与しません。会社に自動的に伝わることもありません。" },
   ],
   related: [
+    { href: "/columns/hitsuyou-shorui-seishin", label: "精神疾患の申請に必要な書類" },
+    { href: "/columns/shindansho-ishi-ni-tsutaeru", label: "生活の実態を主治医に伝える" },
     { href: "/columns/nichijo-seikatsu-7koumoku", label: "診断書の「日常生活能力」7項目" },
+    { href: "/columns/tokyu-hantei-guideline", label: "精神の障害の等級判定ガイドライン" },
+    { href: "/columns/moushitatesho-kakikata", label: "精神疾患の申立書の書き方" },
     { href: "/columns/hatarakinagara", label: "働きながら申請するときの見られ方" },
     { href: "/columns/shindansho-kakunin", label: "診断書を受け取ったあとの確認" },
   ],

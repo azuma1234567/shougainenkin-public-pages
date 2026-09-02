@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/constants";
 import { COLUMNS_BY_DATE } from "@/lib/columns";
+import { PUBLISHED_CONTENT_HUBS } from "@/lib/hubs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
@@ -25,5 +26,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(column.dateModified),
   }));
 
-  return [...staticPages, ...columnPages];
+  const existing = new Set(staticPages.map((item) => item.url));
+  const hubPages: MetadataRoute.Sitemap = PUBLISHED_CONTENT_HUBS
+    .filter((hub) => !existing.has(`${SITE_URL}${hub.path}`))
+    .map((hub) => ({ url: `${SITE_URL}${hub.path}` }));
+  return [...staticPages, ...hubPages, ...columnPages];
 }

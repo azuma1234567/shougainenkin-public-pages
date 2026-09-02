@@ -105,6 +105,7 @@ export default function HajimetePage() {
             <strong>準備ができたら、8つのステップへ</strong>
             <Link className="p-button" href="/shinsei">申請の流れを見る →</Link>
             <Link href="/nayami/fushikyu">困りごとがある方は「悩みから探す」へ</Link>
+            <Link href="/columns/techou-to-nenkin">手帳と障害年金の違いを確認する</Link>
           </div>
         </div>
       </section>

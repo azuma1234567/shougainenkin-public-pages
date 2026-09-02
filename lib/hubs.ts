@@ -125,6 +125,19 @@ export function publishedHubLinks(assignment: ColumnHubAssignment): HubDefinitio
     .filter((item): item is HubDefinition => Boolean(item?.published));
 }
 
+const EXPLICIT_SIBLINGS: Record<string, string[]> = {
+  hatarakinagara: ["shougaisha-koyou-nenkin"],
+  "shougaisha-koyou-nenkin": ["hatarakinagara"],
+};
+
+export function siblingSlugs(slug: string): string[] {
+  const assignment = COLUMN_HUB_ASSIGNMENTS[slug];
+  return [...new Set([
+    ...(assignment?.mergeCandidate ? [assignment.mergeCandidate] : []),
+    ...(EXPLICIT_SIBLINGS[slug] ?? []),
+  ])];
+}
+
 export const PUBLISHED_CONTENT_HUBS = HUBS.filter((item) => item.published && ["byoki", "joukyou", "nayami", "okane", "erabu"].includes(item.kind));
 
 export const UNIT_PACK_TO_HUBS: Record<string, string[]> = {

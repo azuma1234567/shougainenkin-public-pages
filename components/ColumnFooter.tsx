@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getColumn, parentPillar, relatedColumns } from "@/lib/columns";
+import { siblingSlugs } from "@/lib/hubs";
 
 export type Reference = { label: string; href: string };
 
@@ -60,6 +61,7 @@ export default function ColumnFooter({
   const others = relatedColumns(currentSlug, relatedSlugs);
   // 親(柱)ページへの導線。柱ページが未公開の間はnullで、何も表示しない。
   const pillar = parentPillar(getColumn(currentSlug));
+  const siblings = siblingSlugs(currentSlug).map(getColumn);
   return (
     <>
       {references.length > 0 && (
@@ -86,6 +88,12 @@ export default function ColumnFooter({
           <Link href={pillar.pillarPath}>{pillar.label}</Link>
           」にまとめています。
         </p>
+      )}
+      {siblings.length > 0 && (
+        <section className="related-columns column-siblings">
+          <h2>特に関係が近い記事</h2>
+          <ul>{siblings.map((column) => <li key={column.slug}><Link href={`/columns/${column.slug}`}>{column.title}</Link></li>)}</ul>
+        </section>
       )}
       <section className="related-columns">
         <h2>あわせて読みたい</h2>

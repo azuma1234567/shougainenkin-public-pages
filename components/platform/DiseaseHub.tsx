@@ -85,10 +85,15 @@ export default function DiseaseHub({ data, showListings = false }: { data: Disea
               <h2 style={{ fontSize: 17 }}>この病気での次の一歩</h2>
               <p className="p-card-copy" style={{ color: "#dbeefa" }}>まず「その症状で最初に病院へ行った日」を確認してください。精神科でなく、不眠や体調不良で行った内科でもかまいません。</p>
               <Link href="/shinsei#step-1">初診日の確認からはじめる →</Link>
+              <Link href="/erabu/jibun-ka-irai">自分で進めるか、依頼するかを比べる →</Link>
             </div>
             <Card>
               <h3 className="p-card-title">関連コラム</h3>
               {data.related.map((item) => <Link className="p-card-link" href={item.href} key={item.href}>{item.label} →</Link>)}
+            </Card>
+            <Card>
+              <h3 className="p-card-title">しんどくなったら</h3>
+              <Link className="p-card-link" href="/columns/shinsei-shindoi">小分けで進める方法を読む →</Link>
             </Card>
             {showListings && (
               <Card>

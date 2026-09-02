@@ -80,8 +80,15 @@ export default function FushikyuPage() {
             <Card>
               <h2 style={{ fontSize: 15 }}>関連コラム</h2>
               <Link className="p-card-link" href="/columns/fushikyuu-shinsa-seikyu">審査請求と再請求の違いを詳しく読む →</Link>
+              <Link className="p-card-link" href="/columns/shinsa-shikumi-nintei-i">審査で見られるポイントを確認する →</Link>
+              <Link className="p-card-link" href="/columns/shinsei-kikan">結果が届くまでの期間を確認する →</Link>
               <Link className="p-card-link" href="/columns/shindansho-jittai-chigau">診断書が実態と違うときの確認 →</Link>
             </Card>
+            <div className="p-primary-panel p-grid" style={{ gap: 10 }}>
+              <h2 style={{ fontSize: 15 }}>次の進め方を比べる</h2>
+              <Link href="/erabu/jibun-ka-irai">自分で進めるか、依頼するかを比べる →</Link>
+            </div>
+            <Card><h2 className="p-card-title">しんどくなったら</h2><Link className="p-card-link" href="/columns/shinsei-shindoi">小分けで進める方法を読む →</Link></Card>
             {SHOW_LISTINGS && <Card><span className="p-label">掲載</span><h2 style={{ fontSize: 15 }}>ひとりで進めるのが難しいとき</h2><p className="p-card-copy">当サイトは特定の事務所を推薦・選定しません。</p></Card>}
           </div>
         </div>
