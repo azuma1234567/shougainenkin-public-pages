@@ -406,7 +406,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "障害年金の相談で年金事務所に持っていくものを、初回相談の持ち物チェックリストで解説。必ず持つもの・あると話が早いもの・不要なものの3分類、初診日や通院歴が整理できていない場合の準備、予約方法、当日聞かれること、代理の家族が行く場合まで。",
     datePublished: "2026-07-23",
-    dateModified: "2026-08-11",
+    dateModified: "2026-09-02",
     primaryCluster: "application",
     category: "相談・進め方",
   },
@@ -417,7 +417,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "受診状況等証明書を郵送で依頼する手順を解説。遠方や引っ越し先の病院からの取り寄せ、電話での伝え方、同封するもの、返信用封筒と料金の扱い、届くまでの期間、カルテがない・廃院の場合の次の一手まで。",
     datePublished: "2026-07-23",
-    dateModified: "2026-08-11",
+    dateModified: "2026-09-02",
     primaryCluster: "conditions",
     secondaryClusters: ["application"],
     category: "必要書類・提出",
@@ -457,7 +457,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "障害年金の申請から結果が届くまでの流れを解説します。審査中の連絡、追加書類、結果が遅い場合の確認方法や、結果待ちの間にしておきたい準備も紹介します。",
     datePublished: "2026-07-23",
-    dateModified: "2026-07-30",
+    dateModified: "2026-09-02",
     primaryCluster: "application",
     category: "結果を待つ・不支給のとき",
   },
