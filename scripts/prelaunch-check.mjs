@@ -173,8 +173,10 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
 {
   const inbound = new Map([...sitemapSet].map((p) => [p, new Set()]));
   for (const [from, page] of pages) for (const to of page.mainLinks) if (to !== from && inbound.has(to)) inbound.get(to).add(from);
-  const isolated = [...inbound].filter(([p, set]) => set.size === 0 && p !== "/").map(([p]) => p);
-  record("B-1", "孤立ページがゼロ(本文からの内部リンクが最低1本)", isolated.length === 0, `孤立 ${isolated.length} / ${pages.size}`, isolated, "ヘッダー・フッターのリンクは数えない");
+  // 法務・案内ページはフッターからのリンクが正常な設計なので、孤立の検査から外す(2026-09-02)
+  const UTILITY_PAGES = ["/about", "/privacy", "/terms", "/quality", "/support"];
+  const isolated = [...inbound].filter(([p, set]) => set.size === 0 && p !== "/" && !UTILITY_PAGES.includes(p)).map(([p]) => p);
+  record("B-1", "孤立ページがゼロ(本文からの内部リンクが最低1本)", isolated.length === 0, `孤立 ${isolated.length} / ${pages.size}(除外 ${UTILITY_PAGES.filter((p) => sitemapSet.has(p)).length})`, isolated, "ヘッダー・フッターのリンクは数えない。法務・案内ページ(about/privacy/terms/quality/support)はフッターのみで可");
   const over = [...inbound].filter(([, set]) => set.size > 50).map(([p, set]) => `${p} (${set.size}本)`);
   record("B-2", "被内部リンクが50本を超えるページがゼロ", over.length === 0, `50本超 ${over.length}`, over);
   const thin = [...pages].filter(([, page]) => page.chars < 500).sort((a, b) => a[1].chars - b[1].chars).map(([p, page]) => `${p} (${page.chars}字)`);

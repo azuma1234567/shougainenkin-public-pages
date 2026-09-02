@@ -43,9 +43,10 @@ export const HUB_INDEX: Record<Kind, IndexSpec> = {
       "病名が一覧にないときは、[悩みから探す](/nayami)か、[はじめての方へ](/hajimete)へ。",
     ],
     groups: [
-      { label: "精神・発達", paths: ["/byoki/utsu-soukyoku", "/byoki/tekiou-fuan", "/byoki/hattatsu", "/byoki/tougou", "/byoki/chiteki", "/byoki/tenkan"] },
-      { label: "内部の病気", paths: ["/byoki/jinzou-touseki", "/byoki/shinzou", "/byoki/tounyou", "/byoki/gan"] },
-      { label: "体の障害", paths: ["/byoki/shitai"] },
+      { label: "精神・発達", paths: ["/byoki/utsu-soukyoku", "/byoki/tekiou-fuan", "/byoki/hattatsu", "/byoki/tougou", "/byoki/chiteki", "/byoki/tenkan", "/byoki/ninchishou", "/byoki/koujinou", "/byoki/izon"] },
+      { label: "内部の病気", paths: ["/byoki/jinzou-touseki", "/byoki/shinzou", "/byoki/tounyou", "/byoki/gan", "/byoki/kanzou", "/byoki/kokyuuki", "/byoki/ketsueki"] },
+      { label: "体・感覚の障害", paths: ["/byoki/shitai", "/byoki/shikaku", "/byoki/choukaku", "/byoki/gengo"] },
+      { label: "その他の疾患", paths: ["/byoki/nanbyou"] },
     ],
     tail: {
       text: "ここに無い病気でも、障害年金の対象になることがあります。決まるのは病名ではなく、生活や仕事にどれだけ支障があるかです。",
