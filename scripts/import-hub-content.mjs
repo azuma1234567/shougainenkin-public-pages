@@ -4,6 +4,8 @@ import { resolve } from "node:path";
 const sourceRoot = process.env.HUB_SOURCE_ROOT ?? resolve(process.cwd(), "../shougainenkin/docs");
 const files = [
   ["byoki-tougou", "/byoki/tougou"], ["byoki-chiteki", "/byoki/chiteki"], ["byoki-tenkan", "/byoki/tenkan"],
+  ["byoki-jinzou-touseki", "/byoki/jinzou-touseki"], ["byoki-gan", "/byoki/gan"], ["byoki-shinzou", "/byoki/shinzou"],
+  ["byoki-tounyou", "/byoki/tounyou"],
   ["byoki-hattatsu", "/byoki/hattatsu"], ["byoki-tekiou-fuan", "/byoki/tekiou-fuan"],
   ["erabu-jibun-ka-irai", "/erabu/jibun-ka-irai"], ["joukyou-hatachi-mae", "/joukyou/hatachi-mae"],
   ["joukyou-hatarakinagara", "/joukyou/hatarakinagara"], ["joukyou-hitorigurashi", "/joukyou/hitorigurashi"],
