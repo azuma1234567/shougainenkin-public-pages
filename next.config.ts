@@ -19,6 +19,17 @@ const nextConfig: NextConfig = {
         destination: "/shinsei",
         permanent: true,
       },
+      // 道具ページの名称を /dougu に統一。旧候補URLは301で引き継ぐ。
+      {
+        source: "/tsukuru",
+        destination: "/dougu",
+        statusCode: 301,
+      },
+      {
+        source: "/tsukuru/:path*",
+        destination: "/dougu/:path*",
+        statusCode: 301,
+      },
     ];
   },
 };

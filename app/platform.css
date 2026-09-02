@@ -899,6 +899,120 @@
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
+/* ===== /dougu: 道具の置き場所 ===== */
+.dougu-page {
+  background: var(--platform-bg);
+}
+.dougu-width {
+  max-width: 900px;
+}
+.dougu-hero {
+  padding: 34px 0 30px;
+  border-bottom: 1px solid var(--platform-border);
+  background: linear-gradient(180deg, #e8f4fc 0%, var(--platform-bg) 100%);
+}
+.dougu-kicker {
+  margin: 12px 0 5px;
+  color: var(--platform-primary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+.dougu-hero h1 {
+  margin: 0;
+  color: var(--platform-heading);
+  font-family: var(--font-platform-heading), "Hiragino Kaku Gothic ProN", sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.35rem);
+  line-height: 1.45;
+}
+.dougu-section {
+  padding: 42px 0 72px;
+}
+.dougu-section-head {
+  margin-bottom: 20px;
+}
+.dougu-section-head h2 {
+  margin: 0;
+  color: var(--platform-heading);
+  font-family: var(--font-platform-heading), "Hiragino Kaku Gothic ProN", sans-serif;
+  font-size: 1.35rem;
+}
+.dougu-section-head p {
+  margin: 6px 0 0;
+  color: var(--platform-muted);
+  font-size: 14px;
+}
+.dougu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.dougu-card {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--platform-border);
+  border-radius: 14px;
+  background: var(--platform-surface);
+  box-shadow: 0 1px 3px rgba(20, 66, 94, .05);
+}
+.dougu-card:last-child {
+  grid-column: 1 / -1;
+}
+.dougu-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.dougu-number {
+  color: var(--platform-faint);
+  font-family: var(--font-platform-heading), sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+.dougu-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 3px 10px;
+  border: 1px solid #d7e9f5;
+  border-radius: 999px;
+  background: var(--platform-band);
+  color: var(--platform-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+.dougu-card h3 {
+  margin: 0;
+  color: var(--platform-heading);
+  font-family: var(--font-platform-heading), "Hiragino Kaku Gothic ProN", sans-serif;
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+.dougu-card p {
+  margin: 8px 0 0;
+  color: var(--platform-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.dougu-note {
+  margin: 22px 0 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--platform-band);
+  color: var(--platform-muted);
+  font-size: 13.5px;
+  line-height: 1.75;
+}
+@media (max-width: 600px) {
+  .dougu-hero { padding: 26px 0 24px; }
+  .dougu-section { padding: 30px 0 52px; }
+  .dougu-grid { grid-template-columns: 1fr; }
+  .dougu-card, .dougu-card:last-child { grid-column: auto; padding: 19px 18px; }
+}
+
 /* カード内の箇条書き(2026-09-02 /hajimete で使用) */
 .p-list {
   margin: 10px 0 6px;
