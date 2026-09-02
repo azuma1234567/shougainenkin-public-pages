@@ -32,7 +32,7 @@ function inlineContent(text: string, keyPrefix = "inline"): ReactNode[] {
           href === "/columns/soudansaki-chigai"
             ? "/columns/jibun-de-shinsei"
             : href;
-        const reserved = new Set(["/gokai", "/okane/zeikin", "/okane/chousei", "/erabu/irai-subeki-case", "/erabu/hiyou-souba", "/erabu/erabikata", "/erabu/fushikyu-no-ato", "/senmonka"]);
+        const reserved = new Set(["/gokai", "/okane/zeikin", "/okane/chousei", "/senmonka"]);
         nodes.push(
           reserved.has(resolvedHref) ? <span key={`${keyPrefix}-${match.index}-reserved`}>{inlineContent(label, `${keyPrefix}-${match.index}-reserved-label`)}</span> : resolvedHref.startsWith("/") ? (
             <Link

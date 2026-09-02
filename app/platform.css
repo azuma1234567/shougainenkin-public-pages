@@ -123,6 +123,8 @@
   .hub-content .article-table-figure.is-wide table, .hub-content .article-table-figure.is-wide thead, .hub-content .article-table-figure.is-wide tbody, .hub-content .article-table-figure.is-wide tr, .hub-content .article-table-figure.is-wide th, .hub-content .article-table-figure.is-wide td { display: block; width: 100%; min-width: 0; }
   .hub-content .article-table-figure.is-wide thead { display: none; }
   .hub-content .article-table-figure.is-wide tr { margin: 12px 0; border: 1px solid var(--platform-border); border-radius: 10px; overflow: hidden; }
+  .hub-erabu .article-table-figure.is-wide td { display: grid; grid-template-columns: minmax(92px, 34%) 1fr; gap: 12px; border-right: 0; }
+  .hub-erabu .article-table-figure.is-wide td::before { color: var(--platform-meta); font-size: 11px; font-weight: 700; content: attr(data-label); }
   .hub-content .article-table-figure.is-epilepsy-scale .article-table-wrap { overflow: visible; }
   .hub-content .article-table-figure.is-epilepsy-scale table,
   .hub-content .article-table-figure.is-epilepsy-scale thead,

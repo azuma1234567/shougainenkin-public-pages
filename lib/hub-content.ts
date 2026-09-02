@@ -20,6 +20,10 @@ import byokiChoukaku from "@/data/hubs/byoki-choukaku.json";
 import byokiGengo from "@/data/hubs/byoki-gengo.json";
 import byokiNanbyou from "@/data/hubs/byoki-nanbyou.json";
 import erabuJibunKaIrai from "@/data/hubs/erabu-jibun-ka-irai.json";
+import erabuIraiSubekiCase from "@/data/hubs/erabu-irai-subeki-case.json";
+import erabuHiyouSouba from "@/data/hubs/erabu-hiyou-souba.json";
+import erabuErabikata from "@/data/hubs/erabu-erabikata.json";
+import erabuFushikyuNoAto from "@/data/hubs/erabu-fushikyu-no-ato.json";
 import joukyouHatachiMae from "@/data/hubs/joukyou-hatachi-mae.json";
 import joukyouHatarakinagara from "@/data/hubs/joukyou-hatarakinagara.json";
 import joukyouHitorigurashi from "@/data/hubs/joukyou-hitorigurashi.json";
@@ -40,7 +44,10 @@ export const HUB_CONTENT: Record<string, HubContent> = {
   "/byoki/ninchishou": byokiNinchishou, "/byoki/koujinou": byokiKoujinou, "/byoki/izon": byokiIzon,
   "/byoki/kanzou": byokiKanzou, "/byoki/kokyuuki": byokiKokyuuki, "/byoki/ketsueki": byokiKetsueki,
   "/byoki/shikaku": byokiShikaku, "/byoki/choukaku": byokiChoukaku, "/byoki/gengo": byokiGengo, "/byoki/nanbyou": byokiNanbyou,
-  "/erabu/jibun-ka-irai": erabuJibunKaIrai, "/joukyou/hatachi-mae": joukyouHatachiMae,
+  "/erabu/jibun-ka-irai": erabuJibunKaIrai,
+  "/erabu/irai-subeki-case": erabuIraiSubekiCase, "/erabu/hiyou-souba": erabuHiyouSouba,
+  "/erabu/erabikata": erabuErabikata, "/erabu/fushikyu-no-ato": erabuFushikyuNoAto,
+  "/joukyou/hatachi-mae": joukyouHatachiMae,
   "/joukyou/hatarakinagara": joukyouHatarakinagara, "/joukyou/hitorigurashi": joukyouHitorigurashi,
   "/joukyou/shoubyou-teatekin-kara": joukyouShoubyou, "/nayami/koushin": nayamiKoushin,
   "/nayami/shikyuu-teishi": nayamiShikyuuTeishi, "/nayami/shindansho-komatta": nayamiShindansho,

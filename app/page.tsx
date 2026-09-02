@@ -136,6 +136,14 @@ const worries = [
   { title: "20歳前の障害・家族の申請", copy: "納付要件が不問になる場合や、家族が代わりに動くときの手順。", href: "/columns/hatachi-mae" },
 ] as const;
 
+const decisions = [
+  { title: "自分で申請するか、依頼するか", href: "/erabu/jibun-ka-irai" },
+  { title: "専門家に頼んだほうがいいケース", href: "/erabu/irai-subeki-case" },
+  { title: "障害年金にかかるお金の話", href: "/erabu/hiyou-souba" },
+  { title: "社労士の選び方", href: "/erabu/erabikata" },
+  { title: "不支給と言われたあと、何ができるか", href: "/erabu/fushikyu-no-ato" },
+] as const;
+
 const misconceptions = [
   { label: "誤解「貯金があると通らない」", title: "貯金や資産は審査に関係ありません", copy: "障害年金は保険の給付なので、貯金・資産・持ち家の有無は要件に含まれず、審査もされません。所得の制限があるのは20歳前傷病の場合だけです。", source: "日本年金機構" },
   { label: "誤解「入院してないと無理」", title: "入院歴は要件ではありません", copy: "審査で見られるのは日常生活がどれだけ制限されているかです。在宅・通院のみでも、生活の実態が基準に該当すれば認定されます。", source: "国民年金・厚生年金保険 障害認定基準" },
@@ -216,6 +224,20 @@ export default function HomePage() {
                   {group.items.map(([item, href]) => href && !["/byoki/shikaku", "/byoki/choukaku-heikou", "/byoki/nanbyou-sonota"].includes(href) ? <Link className="p-chip" href={href} key={item}>{item}</Link> : <span className="p-chip" key={item}>{item}</span>)}
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="p-section p-band" aria-labelledby="decision-heading">
+        <div className="p-container">
+          <SectionHeader title="決める" lead="自分で進めるか、専門家に頼むか。費用や選び方も含め、判断材料を中立に整理します。" />
+          <div className="p-grid p-grid-5">
+            {decisions.map((item) => (
+              <Link className="p-card" href={item.href} key={item.href}>
+                <h3 className="p-card-title">{item.title}</h3>
+                <span className="p-card-link">読む →</span>
+              </Link>
             ))}
           </div>
         </div>

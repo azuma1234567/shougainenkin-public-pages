@@ -5,6 +5,7 @@ const NAV_ITEMS = [
   { href: "/hajimete", label: "はじめての方へ" },
   { href: "/byoki/utsu-soukyoku", label: "病気から探す" },
   { href: "/joukyou/hatarakinagara", label: "状況から探す" },
+  { href: "/erabu/jibun-ka-irai", label: "決める" },
   { href: "/shinsei", label: "申請の流れ" },
   { href: "/nayami/fushikyu", label: "悩みから探す" },
   { href: "/jitsurei", label: "実例と数字" },

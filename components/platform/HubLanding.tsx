@@ -35,11 +35,11 @@ export default function HubLanding({ hub }: { hub: HubDefinition }) {
   const content = getHubContent(hub.path);
   if (!content) return null;
   const crumbs = content.breadcrumb.map((label, index) => ({ label, href: index === 0 ? "/" : undefined }));
-  return <div className="platform hub-landing">
+  return <div className={`platform hub-landing${hub.kind === "erabu" ? " hub-erabu" : ""}`}>
     <header className="p-page-hero"><div className="p-container hub-reading-width"><Breadcrumb items={crumbs} /><h1>{content.title}</h1></div></header>
-    <article className="p-container hub-reading-width hub-content">
+    <article className="p-container hub-reading-width hub-content" {...(hub.kind === "erabu" ? { "data-yougo-skip": "" } : {})}>
       <MarkdownArticle source={content.source} appCtaSlug={`hub-${hub.path.split("/").filter(Boolean).join("-")}`} faqAccordion />
-      <HubGokai hubPath={hub.path} />
+      {hub.kind !== "erabu" ? <HubGokai hubPath={hub.path} /> : null}
       {siblingLinks[hub.path]?.length ? <nav className="hub-sibling-links" aria-label="関連する病名ハブ">
         {siblingLinks[hub.path].map((path) => <Link key={path} href={path}>{siblingLabels[path]} →</Link>)}
       </nav> : null}
