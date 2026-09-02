@@ -1,7 +1,6 @@
 import { cloneElement, isValidElement, type ReactElement, type ReactNode } from "react";
 import Link from "next/link";
 import AppCta from "@/components/AppCta";
-import XPostEmbed from "@/components/XPostEmbed";
 
 function inlineContent(text: string, keyPrefix = "inline"): ReactNode[] {
   const nodes: ReactNode[] = [];
@@ -89,17 +88,6 @@ function headingId(text: string): string {
     .toLowerCase();
 }
 
-function xPostUrl(line: string): string | null {
-  const specifiedUrl = line.match(/https:\/\/x\.com\/[^\]]+/)?.[0];
-  if (specifiedUrl) return specifiedUrl;
-
-  if (line.includes("岸野さんの障害者雇用の心得")) {
-    return "https://x.com/coco_ruuchan/status/2075183030982078880";
-  }
-
-  return null;
-}
-
 function tableCells(line: string): string[] {
   return line
     .replace(/^\|/, "")
@@ -157,15 +145,6 @@ export default function MarkdownArticle({
 
     if (line === "[App Storeバッジ]") {
       blocks.push(<AppCta key={`cta-${index}`} ct={appCtaSlug} />);
-      index += 1;
-      continue;
-    }
-
-    if (line.startsWith("[ツイート埋め込み:")) {
-      const url = xPostUrl(line);
-      if (url) {
-        blocks.push(<XPostEmbed key={`x-${index}`} url={url} />);
-      }
       index += 1;
       continue;
     }
@@ -333,7 +312,6 @@ export default function MarkdownArticle({
         next.startsWith("- ") ||
         /^\d+\.\s/.test(next) ||
         next.startsWith("[スクショ") ||
-        next.startsWith("[ツイート埋め込み:") ||
         next === "[App Storeバッジ]"
       ) {
         break;
