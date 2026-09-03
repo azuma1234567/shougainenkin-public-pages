@@ -791,6 +791,38 @@ strong {
   font-weight: 700;
 }
 
+/* 特定商取引法に基づく表記。項目名と内容の対の並び。 */
+.tokushoho-list {
+  margin: 1.5rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.tokushoho-list dt {
+  margin: 0;
+  padding: 0.9rem 0 0.2rem;
+  font-weight: 700;
+}
+
+.tokushoho-list dd {
+  margin: 0;
+  padding: 0 0 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 700px) {
+  .tokushoho-list {
+    display: grid;
+    grid-template-columns: 14rem 1fr;
+  }
+  .tokushoho-list dt {
+    padding: 0.9rem 1rem 0.9rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .tokushoho-list dd {
+    padding: 0.9rem 0;
+  }
+}
+
 .app-store-section {
   background-color: var(--card);
   border: 1px solid var(--card-border);
