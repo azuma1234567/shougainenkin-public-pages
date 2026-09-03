@@ -4,6 +4,7 @@
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
 import { jurisdictionOf, machikadoOf, municipalitiesOf, office, PREFECTURES, CHECKED_ON } from "../../lib/madoguchi.ts";
+import { PLACEMENTS, TOOLS } from "../../data/dougu.ts";
 
 const results = [];
 const check = (id, label, fn) => {
@@ -20,12 +21,24 @@ const codeOf = (pref, name) => municipalitiesOf(pref).find((m) => m.name === nam
 
 /* 1番は 2026-09-03 に書き換えた。/dougu の一覧ページは無く、/dougu は /shinsei へ301。
    301を踏ませるリンクを足すのは間違いなので、検査のほうを今の構造に合わせた。 */
-check(1, "/dougu/madoguchi が動き、/dougu から行ける", () => {
+// 1. /shinsei の申請の流れの中から、この道具へ行ける。パンくずの親も /shinsei。
+// (2026-09-03 に書き換え。もとは「/dougu から行ける」だったが、/dougu の一覧ページは無く
+//  /shinsei へ301する。301を踏ませるリンクを足すのは間違いなので、検査を今の構造に合わせた)
+check(1, "/shinsei の申請の流れから /dougu/madoguchi へ行ける", () => {
   assert.ok(existsSync(PAGE), `${PAGE} が無い`);
-  assert.match(src("app/dougu/page.tsx"), /href: "\/dougu\/madoguchi"/, "/dougu の一覧に href が無い");
+  // /shinsei の8ステップの中に、この道具への導線がある
+  const flow = src("components/platform/StepFlow.tsx");
+  assert.match(flow, /PLACEMENTS\.shinseiSteps\[stepId\]/, "申請の流れが道具の配置を読んでいない");
+  assert.match(flow, /href=\{placementCard\(placement\)\.href\}/, "ステップから道具へリンクしていない");
+  const steps = Object.entries(PLACEMENTS.shinseiSteps)
+    .filter(([, list]) => (list ?? []).some((x) => x.tool === "madoguchi")).map(([id]) => id);
+  assert.ok(steps.length > 0, "申請の流れのどのステップにも置かれていない");
+  assert.equal(TOOLS.madoguchi.path, "/dougu/madoguchi", "道具のパスが違う");
+  // パンくずの親が /shinsei
+  assert.match(src(PAGE), /href: "\/shinsei", label: "申請の流れ"/, "パンくずの親が /shinsei でない");
   assert.match(src("app/sitemap.ts"), /"\/dougu\/madoguchi"/, "sitemap に無い");
-  assert.match(src(PAGE), /href: "\/dougu", label: "道具"/, "パンくずから /dougu へ戻れない");
-  return "page.tsx / 一覧の href / sitemap / パンくず";
+  assert.match(src("lib/published-links.ts"), /"\/dougu\/madoguchi"/, "公開判定に無い");
+  return `/shinsei の ${steps.join(" / ")} から行ける / パンくずの親は /shinsei / sitemap・公開判定にあり`;
 });
 
 /* 2026-09-03 の作り直しで、制度と20歳前の2問は消した(指示書 B-3)。
