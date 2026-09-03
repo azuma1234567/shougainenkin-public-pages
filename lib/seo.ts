@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { AUTHOR_NAME, CONTACT_EMAIL, SITE_NAME, SITE_URL } from "@/lib/constants";
 
 export const OG_IMAGE = {
   url: "/opengraph-image",
@@ -91,3 +91,30 @@ export function pageMetadata({
     robots: { index: true, follow: true },
   };
 }
+
+// 運営者と発行元。実体は /about に置き、トップの WebSite.publisher からこの @id を
+// 参照する。記事の columnJsonLd は同じ名前・URL の Organization を author/publisher に
+// 直接持っており、値は一致するが @id では結んでいない。
+export const ABOUT_PERSON_ID = `${SITE_URL}/about#person`;
+export const ABOUT_PUBLISHER_ID = `${SITE_URL}/about#organization`;
+
+// /about に出す Person / Organization。
+export const publisherJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": ABOUT_PERSON_ID,
+      name: AUTHOR_NAME,
+      url: `${SITE_URL}/about`,
+    },
+    {
+      "@type": "Organization",
+      "@id": ABOUT_PUBLISHER_ID,
+      name: SITE_NAME,
+      url: SITE_URL,
+      email: CONTACT_EMAIL,
+      founder: { "@id": ABOUT_PERSON_ID },
+    },
+  ],
+};

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
 import { QUALITY_METRICS } from "@/lib/quality";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -29,6 +30,11 @@ export default function QualityPage() {
       <h2>この情報はどう作られているか</h2>
       <p>
         制度に関する情報は、日本年金機構・厚生労働省・法令（e-Gov）の一次資料だけを事実の出典とし、各項目に出典と確認日を付けて管理しています。SNS・ブログ・伝聞は、何が知られていないかを知る参考にはしますが、事実の出典にはしません。
+      </p>
+      <p>
+        記事に何を書くかは、広告主から独立して決めています。広告と編集の関係については、
+        <Link href="/about#ad-promises">運営者情報の「運営のしかたと、広告についての約束」</Link>
+        をご覧ください。医師や社会保険労務士による監修は受けていません。その方針も同じ場所に記しています。
       </p>
 
       <h2>いま収録しているもの</h2>

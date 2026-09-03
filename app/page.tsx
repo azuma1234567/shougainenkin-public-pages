@@ -13,9 +13,9 @@ import SiteSearch, { type SearchItem } from "@/components/platform/SiteSearch";
 import AdLabel from "@/components/AdLabel";
 import { SHOW_LISTINGS } from "@/lib/ads";
 import { COLUMNS } from "@/lib/columns";
-import { SITE_URL } from "@/lib/constants";
+import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { findCases, SAIKETSU_COUNTS } from "@/lib/saiketsu";
-import { pageMetadata } from "@/lib/seo";
+import { ABOUT_PUBLISHER_ID, pageMetadata } from "@/lib/seo";
 import { YOUGO } from "@/data/yougo";
 import { GOKAI } from "@/data/gokai";
 import { searchableYomi } from "@/lib/yougo";
@@ -190,9 +190,12 @@ export default function HomePage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "障害年金申請サポート",
+    "@id": `${SITE_URL}/#website`,
+    name: SITE_NAME,
     url: SITE_URL,
     description: DESCRIPTION,
+    // 発行元の実体は /about に置いている(lib/seo.ts の publisherJsonLd)。
+    publisher: { "@id": ABOUT_PUBLISHER_ID },
   };
 
   return (
