@@ -570,6 +570,15 @@ strong {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* 広告で運営していることの常時開示(景表法のステマ規制)。
+   フッターの全ページに出す。リンクの色より一段落とす。 */
+.footer-ad-disclosure {
+  margin: 0.25rem 0 0.75rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.82rem;
+  line-height: 1.7;
+}
+
 .analytics-preference-button {
   appearance: none;
   background: #ffffff;

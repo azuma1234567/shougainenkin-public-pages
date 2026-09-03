@@ -15,7 +15,13 @@ export default function SiteFooter() {
           <Link href="/quality">情報の品質について</Link>
           <Link href="/privacy">プライバシーポリシー</Link>
           <Link href="/terms">利用規約</Link>
+          <Link href="/ads">広告掲載について</Link>
+          <Link href="/app/terms">アプリの利用規約・プライバシーポリシー</Link>
         </nav>
+        {/* 景表法のステマ規制対応。広告で運営していることを全ページの下部で常時開示する。 */}
+        <p className="footer-ad-disclosure">
+          当サイトは広告収入で運営しています。広告・PRであるものにはその旨を表示します。
+        </p>
         <AnalyticsConsent />
       </div>
     </footer>

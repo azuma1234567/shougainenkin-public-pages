@@ -4,6 +4,8 @@ import { COLUMNS_BY_DATE } from "@/lib/columns";
 import { PUBLISHED_CONTENT_HUBS } from "@/lib/hubs";
 import { GOKAI } from "@/data/gokai";
 
+// /tokushoho は、有料掲載を受け付けるまで未確定の項目が残るため noindex にしている。
+// sitemap にも入れない(app/tokushoho/page.tsx の DRAFT を false にするとき、ここへ足す)。
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     "/",
@@ -17,6 +19,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/support",
     "/privacy",
     "/terms",
+    "/ads",
+    // アプリ向けの法務ページ。サイト向けの /privacy /terms とは別文書。
+    "/app/privacy",
+    "/app/terms",
     "/quality",
     "/yougo",
     "/gokai",
