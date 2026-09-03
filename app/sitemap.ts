@@ -4,8 +4,8 @@ import { COLUMNS_BY_DATE } from "@/lib/columns";
 import { PUBLISHED_CONTENT_HUBS } from "@/lib/hubs";
 import { GOKAI } from "@/data/gokai";
 
-// /tokushoho は、有料掲載を受け付けるまで未確定の項目が残るため noindex にしている。
-// sitemap にも入れない(app/tokushoho/page.tsx の DRAFT を false にするとき、ここへ足す)。
+// sitemap に意図的に入れないページは lib/sitemap-excluded.ts に理由つきで並べている。
+// (理由をここに二重に書かない。公開前チェック C-1 はそのリストを見て、入れ忘れと区別する。)
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     "/",

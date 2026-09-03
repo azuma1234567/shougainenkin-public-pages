@@ -31,6 +31,7 @@ mkdirSync(outDir, { recursive: true });
 const { SITE_URL } = await import("../lib/constants.ts");
 const { HUBS } = await import("../lib/hubs.ts");
 const { AMOUNTS_2026 } = await import("../data/amounts.ts");
+const { SITEMAP_EXCLUDED } = await import("../lib/sitemap-excluded.ts");
 
 const results = [];
 const record = (id, label, ok, count, detail = [], note = "") => results.push({ id, label, ok, count, detail, note });
@@ -236,11 +237,29 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
 {
   const reachable = new Set();
   for (const page of pages.values()) for (const to of page.allLinks) if (isHtmlPath(to)) reachable.add(to);
-  const notInSitemap = [...reachable].filter((p) => !sitemapSet.has(p) && !reservedPaths.includes(p) && !p.startsWith("/columns/") && !["/", "/nayami/fushikyu"].includes(p));
+  /* sitemap に意図的に入れないページ(lib/sitemap-excluded.ts)は「未収録」に数えない。
+     入れ忘れと区別するための明示リストなので、リストに無いのに未収録なら従来どおり×。
+     あわせて、リストにあるページが本当に noindex かも見る(除外と noindex のちぐはぐを防ぐ)。 */
+  const excludedPaths = SITEMAP_EXCLUDED.map((e) => e.path);
+  const notInSitemap = [...reachable].filter((p) => !sitemapSet.has(p) && !reservedPaths.includes(p) && !excludedPaths.includes(p) && !p.startsWith("/columns/") && !["/", "/nayami/fushikyu"].includes(p));
   const reservedInSitemap = [...sitemapSet].filter((p) => reservedPaths.includes(p));
+  const excludedInSitemap = [...sitemapSet].filter((p) => excludedPaths.includes(p));
+  const notNoindex = [];
+  for (const e of SITEMAP_EXCLUDED) {
+    const { status, text } = await fetchText(e.path);
+    if (status !== 200) { notNoindex.push(`${e.path}: ${status}(ページが無い。リストから消すか、パスを直す)`); continue; }
+    const robots = text.match(/<meta name="robots" content="([^"]*)"/)?.[1] ?? "";
+    if (!/noindex/i.test(robots)) notNoindex.push(`${e.path}: sitemap から外しているのに noindex でない(robots=${robots || "なし"})`);
+  }
   const stale = [];
   for (const p of sitemapSet) if (pages.get(p).status !== 200) stale.push(`${p} (${pages.get(p).status})`);
-  record("C-1", "sitemap.xml: 全公開ページが入り、未公開ページが入っていない", notInSitemap.length === 0 && reservedInSitemap.length === 0 && stale.length === 0, `収録 ${sitemapSet.size}、リンクはあるが未収録 ${notInSitemap.length}、予約slugの混入 ${reservedInSitemap.length}、200以外 ${stale.length}`, [...notInSitemap.map((p) => `未収録: ${p}`), ...reservedInSitemap.map((p) => `予約slug: ${p}`), ...stale]);
+  record("C-1", "sitemap.xml: 全公開ページが入り、未公開ページが入っていない",
+    notInSitemap.length === 0 && reservedInSitemap.length === 0 && stale.length === 0 && notNoindex.length === 0 && excludedInSitemap.length === 0,
+    `収録 ${sitemapSet.size}、リンクはあるが未収録 ${notInSitemap.length}、予約slugの混入 ${reservedInSitemap.length}、200以外 ${stale.length}、意図的な除外 ${SITEMAP_EXCLUDED.length}(noindexでない ${notNoindex.length})`,
+    [...notInSitemap.map((p) => `未収録: ${p}`), ...reservedInSitemap.map((p) => `予約slug: ${p}`), ...stale,
+     ...excludedInSitemap.map((p) => `意図的な除外なのに sitemap に入っている: ${p}`), ...notNoindex,
+    ],
+    `意図的な除外は lib/sitemap-excluded.ts の明示リスト。リストに無いのに未収録なら×。リストにあるのに noindex でなくても×。<br>${SITEMAP_EXCLUDED.map((e) => `${e.path} — ${e.reason}${e.until ? `(${e.until})` : ""}`).join("<br>")}`);
   record("C-2", "sitemapの分割", null, `対象外(${sitemapSet.size}ページ・単一 sitemap.xml で十分。50,000 URL 超で再検討)`, [], "Google の分割要件は 50,000 URL または 50MB。2026-09-02 に対象外とした");
   record("C-3", "Search Console にサイトマップを送信", null, "手動作業(スクリプト対象外)", [], "sitemap.xml を送る");
   const key = ["/", "/nayami/fushikyu", "/nayami/shindansho-komatta", "/nayami/shoshinbi-karute", "/nayami/koushin", "/nayami/shikyuu-teishi", "/nayami/sokyuu", "/jitsurei", "/suuji", "/yougo"];
