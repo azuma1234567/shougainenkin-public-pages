@@ -2777,3 +2777,55 @@ main a:not([class]):hover {
 table.kg-br{width:100%;margin:8px 0;border-collapse:collapse;font-size:14.5px}table.kg-br th,table.kg-br td{padding:11px 4px;border-bottom:1px solid #d7e9f5;text-align:left;vertical-align:top;font-weight:400}table.kg-br td.kg-n{color:var(--platform-heading);font-family:var(--font-platform-heading),sans-serif;font-weight:700;text-align:right;white-space:nowrap}table.kg-br td.kg-n.kg-zero{color:var(--platform-faint);font-weight:500}table.kg-br .kg-why{display:block;color:var(--platform-meta);font-family:inherit;font-size:12.5px;font-weight:400}table.kg-br tr.kg-total td,table.kg-br tr.kg-total th{padding-top:14px;border-top:2px solid #cfe6f5;border-bottom:0;font-size:17px}
 .kg-next-item{display:block;padding:14px 16px;margin:8px 0;border:1px solid var(--platform-border);border-radius:12px;background:#fff;text-decoration:none}.kg-next-item b{display:block;color:var(--platform-heading);font-family:var(--font-platform-heading),sans-serif;font-size:15px}.kg-next-item span{color:var(--platform-muted);font-size:13.5px}.kg-next-soon{opacity:.62}.kg-next-soon .kg-soon{display:block;margin-top:4px;color:var(--platform-meta);font-size:12px}
 @media(max-width:560px){.kg-grid2{grid-template-columns:1fr}.kg-card{padding:18px 16px}}
+
+/* /dougu/mitate: 等級の目安をしらべる。値は docs/site-mock-2026-09-02-tools/Mitate.html から。 */
+.mi-page{background:var(--platform-bg)}.mi-width{max-width:760px}.mi-page .dougu-hero h1{font-size:clamp(1.35rem,5.4vw,27px);letter-spacing:.01em}.mi-lead{margin:12px 0 0;color:var(--platform-muted);font-size:15px}.mi-main{padding:20px 0 64px}.mi-tool{max-width:100%}
+.mi-prog{display:flex;gap:6px;margin:0 0 4px}.mi-prog i{flex:1;height:4px;border-radius:999px;background:#cfe6f5;display:block}.mi-prog i.on{background:var(--platform-primary)}.mi-prog i.done{background:#7cc3e8}.mi-progtxt{margin:0 0 18px;color:var(--platform-meta);font-size:12.5px}.mi-savenote{margin:-10px 0 14px;color:#8b6a1f;font-size:13px}
+.mi-card{padding:22px;margin:0 0 16px;border:1px solid var(--platform-border);border-radius:14px;background:var(--platform-surface)}.mi-card h2{margin:0 0 6px;color:var(--platform-heading);font-family:var(--font-platform-heading),"Hiragino Kaku Gothic ProN",sans-serif;font-size:19px;line-height:1.5}.mi-card h3{margin:22px 0 6px;color:var(--platform-heading);font-family:var(--font-platform-heading),"Hiragino Kaku Gothic ProN",sans-serif;font-size:16px;line-height:1.5}.mi-card p{margin:8px 0;font-size:15px;line-height:1.85}
+.mi-qhead{margin:0 0 4px;color:var(--platform-meta);font-size:12.5px}.mi-qtitle{margin:0;color:var(--platform-heading);font-family:var(--font-platform-heading),sans-serif;font-size:19px;font-weight:700;line-height:1.55}.mi-sub{color:var(--platform-muted);font-size:14px;line-height:1.85}.mi-optnote{color:var(--platform-muted);font-size:13.5px}.mi-count{color:var(--platform-meta);font-size:13px}
+.mi-note{margin:14px 0;padding:14px 16px;border-radius:12px;background:var(--platform-band);color:var(--platform-muted);font-size:14px;line-height:1.85}.mi-note strong{color:var(--platform-heading)}
+.mi-warnbox{margin:14px 0;padding:14px 16px;border:1px solid #f0e2bd;border-radius:12px;background:#fdf3dd;color:#6b5316;font-size:14px;line-height:1.85}.mi-warnbox strong{color:#8b6a1f}
+.mi-plain{margin:10px 0;padding-left:1.2em;color:var(--platform-muted);font-size:14.5px}.mi-plain li{margin:6px 0}
+.mi-opts{display:flex;flex-direction:column;gap:9px;margin:14px 0 4px}
+.mi-opt{display:flex;gap:12px;align-items:flex-start;width:100%;padding:14px 16px;border:1.5px solid #d7e9f5;border-radius:12px;background:#fff;color:var(--platform-text);font-family:inherit;font-size:15px;line-height:1.7;text-align:left;cursor:pointer;transition:border-color .12s,background .12s}.mi-opt:hover{border-color:#cfe6f5;background:#fbfdff}.mi-opt[aria-pressed=true]{border-color:var(--platform-primary);background:var(--platform-chip)}
+.mi-mk{flex:none;position:relative;width:20px;height:20px;margin-top:3px;border:1.5px solid var(--platform-faint);border-radius:50%}.mi-opt[aria-pressed=true] .mi-mk{border-color:var(--platform-primary)}.mi-opt[aria-pressed=true] .mi-mk::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--platform-primary)}.mi-chk .mi-mk{border-radius:5px}.mi-chk[aria-pressed=true] .mi-mk::after{border-radius:2px}
+.mi-num{flex:none;width:22px;margin-top:2px;color:var(--platform-meta);font-size:13px}
+.mi-skip{padding:6px 0;border:0;background:none;color:var(--platform-meta);font-family:inherit;font-size:13.5px;text-decoration:underline;cursor:pointer}
+.mi-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+.mi-btn{padding:13px 26px;border:0;border-radius:999px;background:var(--platform-primary);color:#fff;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer}.mi-btn:hover{background:#0270a8}.mi-btn:disabled{background:#b9d9ec;cursor:default}.mi-ghost{border:1.5px solid #cfe6f5;background:#fff;color:var(--platform-link)}.mi-ghost:hover{background:var(--platform-band)}.mi-sm{padding:9px 18px;font-size:14px}
+.mi-opt:focus-visible,.mi-btn:focus-visible,.mi-skip:focus-visible{outline:2px solid var(--platform-primary);outline-offset:2px}
+.mi-avg{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:baseline;margin:6px 0 2px}.mi-avg b{color:var(--platform-heading);font-family:var(--font-platform-heading),sans-serif;font-size:clamp(26px,7vw,34px)}.mi-avg span{color:var(--platform-meta);font-size:13px}
+.mi-verdict{margin:14px 0;padding:18px;border-radius:12px;background:var(--platform-band);font-size:16px;line-height:1.9}.mi-g{color:var(--platform-heading);font-family:var(--font-platform-heading),sans-serif;font-size:22px;font-weight:700}
+.mi-tbl-scroll{overflow-x:auto}table.mi-gt{width:100%;margin:10px 0 6px;border-collapse:collapse;font-size:13px}table.mi-gt th,table.mi-gt td{padding:8px 4px;border:1px solid #d7e9f5;color:var(--platform-muted);text-align:center;font-weight:400}table.mi-gt thead th,table.mi-gt tbody th{background:var(--platform-band);color:var(--platform-heading);font-size:12px;font-weight:600}table.mi-gt td.mi-hit{background:#cfe9f9;color:var(--platform-heading);font-weight:700;box-shadow:inset 0 0 0 2px var(--platform-primary)}table.mi-gt td.mi-na{color:#c3d6e2}.mi-gcap{margin:4px 0 0;color:var(--platform-meta);font-size:12px}
+.mi-guide{margin:16px 0 20px}.mi-gq{margin:0;color:var(--platform-heading);font-weight:600}.mi-quote{margin:10px 0;padding:2px 0 2px 14px;border-left:3px solid #cfe6f5;color:var(--platform-text);font-size:14.5px;line-height:1.9}.mi-qsrc{margin:4px 0 0;color:var(--platform-meta);font-size:12px}
+.mi-dirtag{display:inline-block;margin-bottom:6px;padding:2px 10px;border-radius:999px;font-size:11.5px}.mi-dir-up{background:#e8f6ef;color:#067647}.mi-dir-eq{background:#fdf3dd;color:#8b6a1f}
+.mi-stat{display:flex;flex-wrap:wrap;gap:18px;margin:10px 0}.mi-stat div{flex:1;min-width:130px;padding:12px 16px;border-radius:12px;background:var(--platform-band);color:var(--platform-muted);font-size:13px}.mi-stat b{display:block;color:var(--platform-heading);font-family:var(--font-platform-heading),sans-serif;font-size:22px;line-height:1.3}
+.mi-next a,.mi-next-plain{display:block;padding:14px 16px;margin:8px 0;border:1px solid var(--platform-border);border-radius:12px;background:#fff;text-decoration:none}.mi-next a:hover{background:#fbfdff}.mi-next b{display:block;color:var(--platform-heading);font-family:var(--font-platform-heading),sans-serif;font-size:15px}.mi-next span{color:var(--platform-muted);font-size:13.5px}
+.mi-src{color:var(--platform-meta);font-size:12.5px;line-height:1.8;word-break:break-all}
+.mi-printhead{display:none}
+@media(max-width:520px){.mi-card{padding:18px 16px}table.mi-gt{font-size:11.5px}}
+@media print{
+  /* 診察に持っていく紙。載せるのは 目安(目安表を含む)・総合評価・留保・出典 の4つだけ。
+     「数字で見る実際」と「ここからできること」は画面用の導線なので落とす。
+     目標は A4 2枚以内。1枚に詰め込むと目安表が読めなくなる
+     (docs/mitate-tool-design-2026-09-02.md §13-13、2026-09-03に条件を変更)。 */
+  .no-print,.mi-screen-only{display:none!important}
+  .mi-page{background:#fff}
+  .mi-main{padding:0}
+  .mi-printhead{display:block;margin:0 0 8pt;color:#000;font-size:9.5pt;line-height:1.55}
+  .mi-card{padding:0 0 6pt;margin:0 0 6pt;border:0;border-bottom:1px solid #999;border-radius:0}
+  .mi-card h2{font-size:12pt;margin:0 0 3pt}.mi-card h3{font-size:10.5pt;margin:6pt 0 2pt}
+  .mi-card p,.mi-sub,.mi-note,.mi-warnbox{font-size:9pt;line-height:1.5;margin:5pt 0}
+  .mi-note,.mi-warnbox,.mi-verdict{padding:5pt 7pt;background:#fff;border:1px solid #bbb}
+  .mi-verdict{font-size:10pt;line-height:1.6;margin:6pt 0}
+  .mi-avg{margin:2pt 0}.mi-avg b{font-size:16pt}.mi-g{font-size:12.5pt}
+  /* 目安表はページ境界で割らない(割れると自分の位置が読めなくなる) */
+  .mi-tbl-scroll,table.mi-gt{break-inside:avoid;page-break-inside:avoid;overflow:visible}
+  table.mi-gt{font-size:8pt;margin:5pt 0 3pt}table.mi-gt th,table.mi-gt td{padding:2.5pt 2pt}
+  table.mi-gt td.mi-hit{box-shadow:none;outline:2px solid #000;background:#e6e6e6}
+  .mi-guide{break-inside:avoid;page-break-inside:avoid;margin:7pt 0}
+  .mi-gq{font-size:9pt}.mi-dirtag{margin-bottom:2pt;padding:1pt 6pt;font-size:8pt;border:1px solid #bbb;background:#fff;color:#000}
+  .mi-quote{font-size:8.5pt;line-height:1.55;margin:3pt 0;padding-left:9pt;border-left-width:2px}
+  .mi-qsrc,.mi-src,.mi-gcap{font-size:7.5pt;line-height:1.5}
+  @page{size:A4;margin:12mm}
+}

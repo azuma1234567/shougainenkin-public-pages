@@ -1,0 +1,63 @@
+{
+ "generatedAt": "2026-09-03T02:51:44.452Z",
+ "a4ContentMm": 273,
+ "cases": [
+  {
+   "name": "modeA-guides0",
+   "mode": "A",
+   "guides": 0,
+   "pages": 1,
+   "screenOnlyVisible": 0,
+   "cardsOnPrint": [
+    "国のガイドラインの目安",
+    "総合評価で動きうること",
+    "ガイドライン自身の留保",
+    "出典"
+   ],
+   "hasSource": true,
+   "hasPrintHead": true,
+   "contentMm": 221.2,
+   "tableStartPage": 1,
+   "tableEndPage": 1,
+   "tableHeightMm": 52.2
+  },
+  {
+   "name": "modeB-guides2",
+   "mode": "B",
+   "guides": 2,
+   "pages": 2,
+   "screenOnlyVisible": 0,
+   "cardsOnPrint": [
+    "国のガイドラインの目安",
+    "総合評価で動きうること",
+    "ガイドライン自身の留保",
+    "出典"
+   ],
+   "hasSource": true,
+   "hasPrintHead": true,
+   "contentMm": 307,
+   "tableStartPage": 1,
+   "tableEndPage": 1,
+   "tableHeightMm": 52.2
+  },
+  {
+   "name": "modeB-guides6",
+   "mode": "B",
+   "guides": 6,
+   "pages": 2,
+   "screenOnlyVisible": 0,
+   "cardsOnPrint": [
+    "国のガイドラインの目安",
+    "総合評価で動きうること",
+    "ガイドライン自身の留保",
+    "出典"
+   ],
+   "hasSource": true,
+   "hasPrintHead": true,
+   "contentMm": 444.8,
+   "tableStartPage": 1,
+   "tableEndPage": 1,
+   "tableHeightMm": 52.2
+  }
+ ]
+}
