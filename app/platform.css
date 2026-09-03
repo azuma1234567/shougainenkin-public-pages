@@ -955,9 +955,13 @@
 .p-find-block .p-grid {
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
 }
+.p-find-small-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.p-find-block-small { height: 100%; }
+.p-find-choice { color: inherit; text-decoration: none; }
 @media (max-width: 560px) {
   .p-find-block { padding: 18px 16px; }
   .p-find-title { font-size: 16.5px; }
+  .p-find-small-grid { grid-template-columns: 1fr; }
 }
 
 /* 5列・8列のグリッドは、デスクトップでも窮屈でモバイルで崩れる。

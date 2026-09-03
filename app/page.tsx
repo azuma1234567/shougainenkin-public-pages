@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { JibunCards } from "@/components/platform/JibunCard";
 import { DouguCards } from "@/components/platform/DouguCard";
-import { PLACEMENTS, PRIVACY_LINE } from "@/data/dougu";
+import { PLACEMENTS } from "@/data/dougu";
 import Link from "next/link";
 import {
   Card,
@@ -143,12 +142,6 @@ const worries = [
 // 「頼むかどうか」を決めるための3本に絞る。
 // 「頼んだほうがいいケース」は jibun-ka-irai の中に、
 // 「不支給のあと」は /nayami/fushikyu にあるので、トップには出さない。
-const decisions = [
-  { title: "自分で進めるか、頼むか", copy: "向き不向きは状況で変わります。まず判断の材料を並べます。", href: "/erabu/jibun-ka-irai" },
-  { title: "かかるお金", copy: "診断書の文書料、交通費、頼んだ場合の報酬。何にいくらかかるか。", href: "/erabu/hiyou-souba" },
-  { title: "頼むと決めたら、どう選ぶか", copy: "契約の前に確認する3点。特定の事務所へは誘導しません。", href: "/erabu/erabikata" },
-] as const;
-
 const situations = [
   ["働きながら", "/joukyou/hatarakinagara"], ["20歳前", "/joukyou/hatachi-mae"],
   ["一人暮らし", "/joukyou/hitorigurashi"], ["傷病手当金から", "/joukyou/shoubyou-teatekin-kara"],
@@ -238,20 +231,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 「自分の場合を確かめる」の帯。5つとも入力はブラウザの中だけで処理する。 */}
-      <section className="p-section jibun-band" aria-labelledby="dougu-heading">
-        <div className="p-container">
-          <SectionHeader
-            title="自分の場合を、確かめる"
-            lead="入力した内容は、どれもこの端末の中だけで処理します。サーバーへは送りません。"
-            href="/dougu"
-            linkLabel="自分の場合を確かめる"
-          />
-          <p className="jc-privacy">{PRIVACY_LINE}</p>
-          <JibunCards />
-        </div>
-      </section>
-
       <section className="p-section-lg" aria-labelledby="beginner-heading">
         <div className="p-container">
           <SectionHeader title="障害年金、はじめてですか？" lead="知識ゼロで大丈夫です。この3つから始めてください。" />
@@ -268,14 +247,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 4つの入口をひとつにまとめる。
-          以前は「病気」「悩み」「状況」「お金」が別々のセクションに分かれ、
-          チップとカードが交互に出てリズムがばらばらだった。探し方は1か所に集める。 */}
       <section className="p-section-lg" aria-labelledby="find-heading">
         <div className="p-container">
           <SectionHeader
-            title="どこから探しますか"
-            lead="入口は4つあります。どこから入っても、必要なところへつながります。"
+            title="探す"
+            lead="入口は5つあります。どこから入っても、必要なところへつながります。"
           />
 
           <div className="p-find">
@@ -303,6 +279,17 @@ export default function HomePage() {
 
             <div className="p-find-block">
               <div className="p-find-head">
+                <h3 className="p-find-title">いまの状況から</h3>
+                <Link className="p-find-more" href="/joukyou">一覧を見る →</Link>
+              </div>
+              <p className="p-find-copy">同じ病気でも、暮らし方によって見られるところが変わります。</p>
+              <div className="p-chips">
+                {situations.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
+              </div>
+            </div>
+
+            <div className="p-find-block">
+              <div className="p-find-head">
                 <h3 className="p-find-title">いま困っていることから</h3>
                 <Link className="p-find-more" href="/nayami">一覧を見る →</Link>
               </div>
@@ -317,26 +304,22 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="p-find-block">
-              <div className="p-find-head">
-                <h3 className="p-find-title">いまの状況から</h3>
-                <Link className="p-find-more" href="/joukyou">一覧を見る →</Link>
+            <div className="p-find-small-grid">
+              <div className="p-find-block p-find-block-small">
+                <div className="p-find-head">
+                  <h3 className="p-find-title">お金のことから</h3>
+                  <Link className="p-find-more" href="/okane">一覧を見る →</Link>
+                </div>
+                <p className="p-find-copy">受け取れる額、税金、ほかの制度との調整。</p>
+                <div className="p-chips">
+                  {moneyTopics.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
+                </div>
               </div>
-              <p className="p-find-copy">同じ病気でも、暮らし方によって見られるところが変わります。</p>
-              <div className="p-chips">
-                {situations.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
-              </div>
-            </div>
-
-            <div className="p-find-block">
-              <div className="p-find-head">
-                <h3 className="p-find-title">お金のことから</h3>
-                <Link className="p-find-more" href="/okane">一覧を見る →</Link>
-              </div>
-              <p className="p-find-copy">受け取れる額、税金、ほかの制度との調整。</p>
-              <div className="p-chips">
-                {moneyTopics.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
-              </div>
+              <Link className="p-find-block p-find-block-small p-find-choice" href="/erabu">
+                <h3 className="p-find-title">自分でやるか、頼むか</h3>
+                <p className="p-find-copy">申請は自分でもできますし、専門家に頼むこともできます。どちらが向いているかは状況によって変わります。ここでは判断材料だけを置きます。</p>
+                <span className="p-card-link">ぜんぶ見る →</span>
+              </Link>
             </div>
           </div>
         </div>
@@ -370,28 +353,6 @@ export default function HomePage() {
           </div>
           <div className="p-grid">
             {featuredCases.map((item) => <CaseCard key={item.id} item={item} />)}
-          </div>
-        </div>
-      </section>
-
-      {/* 旧「決める」。何を決めるのかが分からない見出しだったので、言葉を変えて3本に絞った。
-          8ステップで全体像を見たあとに置く(順番そのものが判断の順番)。 */}
-      <section className="p-section p-band" aria-labelledby="decision-heading">
-        <div className="p-container">
-          <SectionHeader
-            title="自分でやるか、頼むか"
-            lead="申請は自分でもできますし、専門家に頼むこともできます。どちらが向いているかは状況によって変わります。ここでは判断材料だけを置きます。"
-            href="/erabu"
-            linkLabel="ぜんぶ見る"
-          />
-          <div className="p-grid p-grid-3">
-            {decisions.map((item) => (
-              <Link className="p-card" href={item.href} key={item.href}>
-                <h3 className="p-card-title">{item.title}</h3>
-                <p className="p-card-copy">{item.copy}</p>
-                <span className="p-card-link">読む →</span>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
