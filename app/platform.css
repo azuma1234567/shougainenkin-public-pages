@@ -536,6 +536,9 @@
 .p-learning { padding: 10px 12px; border-radius: 8px; background: var(--platform-band); color: var(--platform-link); font-size: 12px; line-height: 1.7; }
 
 .p-step-card { padding: 16px 14px; border-radius: 12px; }
+.p-step-flow-item { min-width: 0; display: grid; align-content: start; gap: 10px; }
+.p-step-flow-item .dougu-band-card { min-height: 100%; }
+.p-step-flow-item .dougu-band-card.p-card-lg { padding: 24px; }
 .p-step-label { color: var(--platform-link); font-size: 12px; font-weight: 700; }
 .p-step-title { color: var(--platform-heading); font-size: 13.5px; font-weight: 700; line-height: 1.5; }
 .p-action-card { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; }

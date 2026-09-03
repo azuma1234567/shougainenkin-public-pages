@@ -161,9 +161,10 @@ export const PLACEMENTS: {
     "/byoki/chiteki": ["mitate"],
   },
   shinseiSteps: {
-    "step-3": ["madoguchi"],       /* 年金事務所へ相談する */
-    "step-4": ["shorui"],          /* 必要書類をそろえる */
-    "step-6": ["moushitatesho"],   /* 申立書を作成する */
+    "step-3": [{ tool: "madoguchi", title: "どこに出せばいい？", blurb: "管轄の年金事務所と、予約のしかた" }],
+    "step-4": [{ tool: "shorui", title: "何をそろえればいい？", blurb: "自分の場合に要る書類だけを一覧に" }],
+    "step-5": [{ tool: "mitate", title: "私は何級くらい？", blurb: "受け取った診断書の裏面を、国の目安表に当てはめる" }],
+    "step-6": [{ tool: "moushitatesho", title: "申立書を、自分で書きたい", blurb: "期間ごとに書いて、公式様式に重ねて印刷" }],
   },
 };
 

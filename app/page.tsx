@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { JibunCards } from "@/components/platform/JibunCard";
-import { PRIVACY_LINE } from "@/data/dougu";
+import { DouguCards } from "@/components/platform/DouguCard";
+import { PLACEMENTS, PRIVACY_LINE } from "@/data/dougu";
 import Link from "next/link";
 import {
   Card,
@@ -217,6 +218,26 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="p-section-lg" aria-labelledby="steps-heading">
+        <div className="p-container">
+          <SectionHeader title="申請の流れ ― 8つのステップ" lead="初診日の確認から結果が届くまで。それぞれの段階で使える機能を、そのステップに置いています。" href="/shinsei" linkLabel="申請の流れを詳しく見る" />
+          <div className="p-grid p-grid-8 p-step-flow">
+            {steps.map((step, index) => {
+              const stepId = `step-${index + 1}`;
+              return (
+                <div className="p-step-flow-item" key={step}>
+                  <Link className="p-card p-step-card" href={`/shinsei#${stepId}`}>
+                    <span className="p-step-label">STEP {index + 1}</span>
+                    <span className="p-step-title">{step}</span>
+                  </Link>
+                  <DouguCards placements={PLACEMENTS.shinseiSteps[stepId]} variant="grid" className={stepId === "step-6" ? "p-card-lg" : ""} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* 「自分の場合を確かめる」の帯。5つとも入力はブラウザの中だけで処理する。 */}
       <section className="p-section jibun-band" aria-labelledby="dougu-heading">
         <div className="p-container">
@@ -349,20 +370,6 @@ export default function HomePage() {
           </div>
           <div className="p-grid">
             {featuredCases.map((item) => <CaseCard key={item.id} item={item} />)}
-          </div>
-        </div>
-      </section>
-
-      <section className="p-section-lg" aria-labelledby="steps-heading">
-        <div className="p-container">
-          <SectionHeader title="はじめての方は、8つのステップで" lead="初診日の確認から結果が届くまで。全体の地図を持ってから動くと、迷いにくくなります。" href="/shinsei" linkLabel="申請の流れを詳しく見る" />
-          <div className="p-grid p-grid-8">
-            {steps.map((step, index) => (
-              <Link className="p-card p-step-card" href={`/shinsei#step-${index + 1}`} key={step}>
-                <span className="p-step-label">STEP {index + 1}</span>
-                <span className="p-step-title">{step}</span>
-              </Link>
-            ))}
           </div>
         </div>
       </section>
