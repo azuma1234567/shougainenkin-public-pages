@@ -5,6 +5,7 @@ import { HUBS } from "../lib/hubs.ts";
 import { SITE_NAME } from "../lib/constants.ts";
 import { decodePng, colHasInk, rowHasInk } from "./lib/png.mjs";
 import { explainAmount, findAmounts } from "./lib/amounts-derive.mjs";
+import { verifyBodies, verifyBodyHtml, verifyBuiltBodies, verifyIntegration } from "./verify-gokai-bodies.mjs";
 const { AMOUNTS_2026 } = await import("../data/amounts.ts");
 
 const origin = process.env.VERIFY_ORIGIN;
@@ -121,11 +122,14 @@ if (origin) {
   for (const card of GOKAI) {
     assert.match(list, new RegExp(`href="/gokai/${card.slug}"`), `${card.slug}: 一覧から到達可能`);
     const detail = await fetchHtml(`/gokai/${card.slug}`);
-    for (const text of [card.misconception, card.truth, card.why, card.when, ...card.sources]) {
+    // 詳細は本文原稿へ差し替えたため、旧短文の表示チェックは本文全字照合へ置換。
+    // 旧フィールドのデータ・一覧・OGP・ハブ・電話番号/金額の検査は維持する。
+    verifyBodyHtml(detail, card.slug);
+    for (const text of [card.misconception]) {
       assert.ok(detail.includes(text.replace(/&/g, "&amp;")), `${card.slug}: 原稿を表示(${text.slice(0, 12)}…)`);
     }
     assert.doesNotMatch(visibleText(detail), /執筆メモ|実装メモ|x\.com|いいね|@/, `${card.slug}: 執筆メモ・参照元を出さない`);
-    for (const text of [...card.check, card.ask, ...(card.figure ? [card.figure] : [])]) assert.ok(detail.includes(text.replace(/&/g, "&amp;")), `${card.slug}: 3ブロックを表示(${text.slice(0, 12)}…)`);
+    for (const text of [...card.check, card.ask]) assert.ok(detail.includes(text.replace(/&/g, "&amp;")), `${card.slug}: 確認項目と窓口の一言を表示(${text.slice(0, 12)}…)`);
     const chars = visibleText(detail).replace(/\s+/g, "").length;
     assert.ok(chars >= 500, `${card.slug}: 本文が500字以上(${chars}字)`);
     const og = await fetch(new URL(`/gokai/${card.slug}/opengraph-image`, origin));
@@ -155,3 +159,7 @@ if (origin) {
 
 console.log(`誤解カード検証: 48枚、5カテゴリ、配分表19ハブ一致、OGP・ハブ差し込み${origin ? "(実URL)" : "(静的)"} OK`);
 if (uncoveredHubs.length > 0) console.log(`配分表が触れていない公開ハブ(0枚): ${uncoveredHubs.join(", ")}`);
+
+await verifyBodies();
+if (process.env.VERIFY_BUILT === "1") await verifyBuiltBodies();
+if (process.env.VERIFY_INTEGRATION === "1") await verifyIntegration();
