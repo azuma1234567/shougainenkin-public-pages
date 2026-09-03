@@ -23,12 +23,12 @@ origin: http://localhost:3200 / ページ数: 167 / 基準: git main
 |---|---|---|---|
 | B-1 | × | 孤立ページがゼロ(本文からの内部リンクが最低1本) | 孤立 1 / 167(除外 5)<br>※ヘッダー・フッターのリンクは数えない。法務・案内ページ(about/privacy/terms/quality/support)はフッターのみで可 |
 | B-2 | ○ | 被内部リンクが50本を超えるページがゼロ | 50本超 0<br>※パンくずと誤解カードの「一覧へ戻る」由来のリンクは数えない |
-| B-3 | × | 500字未満のページの一覧 | 500字未満 3(うち誤解カード 0)。実例の個別ページ 0 件<br>※実例94件の個別ページはサイトマップに無い(未実装) |
+| B-3 | × | 500字未満のページの一覧 | 500字未満 2(うち誤解カード 0)。実例の個別ページ 0 件<br>※実例94件の個別ページはサイトマップに無い(未実装) |
 | B-4 | × | h1が1ページに1つだけ | 複数/なし 1 |
 | B-5 | ○ | titleとmeta descriptionが全ページにある | 空 0、description重複 0組 |
 | B-6 | ○ | titleの重複がない | 重複 0組 |
 | B-7 | ○ | OGP画像が全ページにある | og:image なし 0。誤解カードの自動生成画像 48/48 |
-| B-8 | ○ | 構造化データが妥当 | 型別件数 WebSite:1 BreadcrumbList:165 undefined:48 HowTo:2 FAQPage:47 MobileApplication:1 DefinedTermSet:1 Article:47 ItemList:1、エラー 0<br>※スキーマ必須項目の静的検査。Google のリッチリザルトテストは公開URLで別途実施 |
+| B-8 | ○ | 構造化データが妥当 | 型別件数 WebSite:1 BreadcrumbList:165 undefined:49 HowTo:2 FAQPage:47 Person:1 Organization:1 MobileApplication:1 DefinedTermSet:1 Article:47 ItemList:1、エラー 0<br>※スキーマ必須項目の静的検査。Google のリッチリザルトテストは公開URLで別途実施 |
 | B-9 | × | パンくずが全ページにある(BreadcrumbList を含む・二重なし) | 表示なし 1、BreadcrumbList(構造化データ)なし 1、2つ以上 0<br>※表示のパンくずはあるが構造化データが無いページと、二重に出ているページを別に数える |
 | B-10 | × | 更新日が全ページに表示されている | 更新日/確認日の表示なし 3 |
 
@@ -36,11 +36,10 @@ origin: http://localhost:3200 / ページ数: 167 / 基準: git main
 
 - /app
 
-### B-3 の該当一覧(3件)
+### B-3 の該当一覧(2件)
 
 - /dougu/moushitatesho (23字)
-- /dougu (382字)
-- /dougu/mitate (397字)
+- /dougu/mitate (421字)
 
 ### B-4 の該当一覧(1件)
 
