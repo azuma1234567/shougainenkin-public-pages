@@ -10,7 +10,8 @@ import {
   type Column,
 } from "@/lib/columns";
 import { faqJsonLd } from "@/lib/seo";
-import { isPublishedInternalPath } from "@/lib/published-links";
+import { DouguCards } from "@/components/platform/DouguCard";
+import { PLACEMENTS } from "@/data/dougu";
 import AdLabel from "@/components/AdLabel";
 import Link from "next/link";
 
@@ -68,13 +69,7 @@ export default function ColumnArticle({
 
       <ArticleToc />
       <ColumnThemeBlock column={column} />
-      {isPublishedInternalPath("/dougu/moushitatesho") && ["moushitatesho-a4-insatsu", "moushitatesho-kikan-kugiri"].includes(column.slug) && (
-        <aside className="mt-column-card">
-          <strong>この様式を、ブラウザで書いてそのまま印刷できます</strong>
-          <p>入力内容はサーバーへ送らず、この端末のブラウザの中だけに保存します。</p>
-          <Link href={column.slug === "moushitatesho-kikan-kugiri" ? "/dougu/moushitatesho#kikan" : "/dougu/moushitatesho"}>申立書をつくる</Link>
-        </aside>
-      )}
+      <DouguCards placements={PLACEMENTS.columns[column.slug]} position="before" />
       <MarkdownArticle
         source={source}
         appCtaSlug={column.slug}
@@ -87,7 +82,7 @@ export default function ColumnArticle({
           ) : undefined
         }
       />
-      {isPublishedInternalPath("/dougu/moushitatesho") && column.slug === "moushitatesho-kakikata" && <aside className="mt-column-card"><strong>申立書の下書きをつくる</strong><p>期間ごとに入力し、公式様式に重ねて印刷できます。</p><Link href="/dougu/moushitatesho">道具を開く</Link></aside>}
+      <DouguCards placements={PLACEMENTS.columns[column.slug]} position="after" />
       <ColumnFooter
         currentSlug={column.slug}
         relatedSlugs={relatedSlugs}

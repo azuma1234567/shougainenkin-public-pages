@@ -1,4 +1,6 @@
 import MarkdownArticle from "@/components/MarkdownArticle";
+import { DouguCards } from "@/components/platform/DouguCard";
+import { PLACEMENTS, visiblePlacements } from "@/data/dougu";
 import HubGokai from "@/components/platform/HubGokai";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/platform/Platform";
@@ -38,7 +40,15 @@ export default function HubLanding({ hub }: { hub: HubDefinition }) {
   return <div className={`platform hub-landing${hub.kind === "erabu" ? " hub-erabu" : ""}`}>
     <header className="p-page-hero"><div className="p-container hub-reading-width"><Breadcrumb items={crumbs} currentPath={hub.path} /><h1>{content.title}</h1></div></header>
     <article className="p-container hub-reading-width hub-content" {...(hub.kind === "erabu" ? { "data-yougo-skip": "" } : {})}>
-      <MarkdownArticle source={content.source} appCtaSlug={`hub-${hub.path.split("/").filter(Boolean).join("-")}`} faqAccordion />
+      <MarkdownArticle
+        source={content.source}
+        appCtaSlug={`hub-${hub.path.split("/").filter(Boolean).join("-")}`}
+        faqAccordion
+        /* 道具カードはリードの直後に差し込む。ハブ本文(data/hubs/*.json)は触らない。 */
+        leadNotice={visiblePlacements(PLACEMENTS.hubs[hub.path]).length
+          ? <DouguCards key="dougu" placements={PLACEMENTS.hubs[hub.path]} variant="hub" />
+          : undefined}
+      />
       {hub.kind !== "erabu" ? <HubGokai hubPath={hub.path} /> : null}
       {siblingLinks[hub.path]?.length ? <nav className="hub-sibling-links" aria-label="関連する病名ハブ">
         {siblingLinks[hub.path].map((path) => <Link key={path} href={path}>{siblingLabels[path]} →</Link>)}
