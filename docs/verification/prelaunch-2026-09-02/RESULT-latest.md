@@ -1,6 +1,6 @@
 # 公開前チェック 実行結果 (2026-09-03)
 
-origin: http://localhost:3110 / ページ数: 159 / 基準: git main
+origin: http://localhost:3200 / ページ数: 160 / 基準: git main
 
 ## A
 
@@ -8,12 +8,12 @@ origin: http://localhost:3110 / ページ数: 159 / 基準: git main
 |---|---|---|---|
 | A-1 | ○ | 既存記事のURLが1本も変わっていない | 47/47 が同一URLで200 |
 | A-2 | ○ | 既存記事の本文が消えていない(公開前の8割未満・本文なしを×) | 本文が消えた/8割未満 0、方針上の削除で減ったもの 0(いずれも8割以上を維持)、46 記事を比較<br>※main ブランチの本文文字列と比較。減少分は docs/verification/prelaunch-2026-09-02/RESULT.md 末尾に一覧 |
-| A-3 | ○ | 404が出るリンクがゼロ | リンク先 159 件を検査、破損 0 |
+| A-3 | ○ | 404が出るリンクがゼロ | リンク先 160 件を検査、破損 0 |
 | A-4 | ○ | 未公開ページへのリンクがゼロ | 予約slug 4 件へのリンク 0 |
-| A-5 | ○ | noindex が残っていない | noindex 0 / 159 |
-| A-6 | ○ | canonical が自分自身を指している | 自己参照 159 / 159 |
+| A-5 | ○ | noindex が残っていない | noindex 0 / 160 |
+| A-6 | ○ | canonical が自分自身を指している | 自己参照 160 / 160 |
 | A-7 | ○ | robots.txt が全ページを許可している | Disallow 0 件、公開対象の該当 0<br>※User-Agent: * / Allow: / /  / Host: https://shougainenkin-note.net / Sitemap: https://shougainenkin-note.net/sitemap.xml |
-| A-8 | ○ | 金額が全ページで一致している(data/amounts.ts から導出できる) | 10万円以上の金額 23 種のうち説明済み 23、未説明 0(参考: 直書きのあるファイル 23)<br>※説明済みの式は末尾の付記に全件 |
+| A-8 | ○ | 金額が全ページで一致している(data/amounts.ts から導出できる) | 10万円以上の金額 24 種のうち説明済み 24、未説明 0(参考: 直書きのあるファイル 23)<br>※説明済みの式は末尾の付記に全件 |
 | A-9 | ○ | 「執筆メモ」「x.com」「@」が出力に含まれていない | 執筆メモ/x.com 0、@ 0(連絡先メールの @ 5 件は除外) |
 | A-10 | ○ | 調査元(X/YouTube/note等)への言及がゼロ | ドメイン名・アカウント名・X固有語 0 |
 
@@ -21,20 +21,16 @@ origin: http://localhost:3110 / ページ数: 159 / 基準: git main
 
 | # | 判定 | 項目 | 件数 |
 |---|---|---|---|
-| B-1 | × | 孤立ページがゼロ(本文からの内部リンクが最低1本) | 孤立 1 / 159(除外 5)<br>※ヘッダー・フッターのリンクは数えない。法務・案内ページ(about/privacy/terms/quality/support)はフッターのみで可 |
+| B-1 | ○ | 孤立ページがゼロ(本文からの内部リンクが最低1本) | 孤立 0 / 160(除外 5)<br>※ヘッダー・フッターのリンクは数えない。法務・案内ページ(about/privacy/terms/quality/support)はフッターのみで可 |
 | B-2 | ○ | 被内部リンクが50本を超えるページがゼロ | 50本超 0<br>※パンくずと誤解カードの「一覧へ戻る」由来のリンクは数えない |
 | B-3 | × | 500字未満のページの一覧 | 500字未満 2(うち誤解カード 0)。実例の個別ページ 0 件<br>※実例94件の個別ページはサイトマップに無い(未実装) |
 | B-4 | × | h1が1ページに1つだけ | 複数/なし 1 |
 | B-5 | ○ | titleとmeta descriptionが全ページにある | 空 0、description重複 0組 |
 | B-6 | ○ | titleの重複がない | 重複 0組 |
 | B-7 | ○ | OGP画像が全ページにある | og:image なし 0。誤解カードの自動生成画像 48/48 |
-| B-8 | ○ | 構造化データが妥当 | 型別件数 WebSite:1 BreadcrumbList:157 undefined:48 HowTo:2 FAQPage:47 DefinedTermSet:1 Article:47 ItemList:1、エラー 0<br>※スキーマ必須項目の静的検査。Google のリッチリザルトテストは公開URLで別途実施 |
+| B-8 | ○ | 構造化データが妥当 | 型別件数 WebSite:1 BreadcrumbList:158 undefined:48 HowTo:2 FAQPage:47 DefinedTermSet:1 Article:47 ItemList:1、エラー 0<br>※スキーマ必須項目の静的検査。Google のリッチリザルトテストは公開URLで別途実施 |
 | B-9 | × | パンくずが全ページにある(BreadcrumbList を含む・二重なし) | 表示なし 1、BreadcrumbList(構造化データ)なし 1、2つ以上 0<br>※表示のパンくずはあるが構造化データが無いページと、二重に出ているページを別に数える |
-| B-10 | × | 更新日が全ページに表示されている | 更新日/確認日の表示なし 2 |
-
-### B-1 の該当一覧(1件)
-
-- /dougu
+| B-10 | × | 更新日が全ページに表示されている | 更新日/確認日の表示なし 3 |
 
 ### B-3 の該当一覧(2件)
 
@@ -50,20 +46,21 @@ origin: http://localhost:3110 / ページ数: 159 / 基準: git main
 - /dougu/moushitatesho
 - BreadcrumbListなし: /dougu/moushitatesho
 
-### B-10 の該当一覧(2件)
+### B-10 の該当一覧(3件)
 
 - /dougu
+- /dougu/kingaku
 - /dougu/moushitatesho
 
 ## C
 
 | # | 判定 | 項目 | 件数 |
 |---|---|---|---|
-| C-1 | ○ | sitemap.xml: 全公開ページが入り、未公開ページが入っていない | 収録 159、リンクはあるが未収録 0、予約slugの混入 0、200以外 0 |
-| C-2 | 手動 | sitemapの分割 | 対象外(159ページ・単一 sitemap.xml で十分。50,000 URL 超で再検討)<br>※Google の分割要件は 50,000 URL または 50MB。2026-09-02 に対象外とした |
+| C-1 | ○ | sitemap.xml: 全公開ページが入り、未公開ページが入っていない | 収録 160、リンクはあるが未収録 0、予約slugの混入 0、200以外 0 |
+| C-2 | 手動 | sitemapの分割 | 対象外(160ページ・単一 sitemap.xml で十分。50,000 URL 超で再検討)<br>※Google の分割要件は 50,000 URL または 50MB。2026-09-02 に対象外とした |
 | C-3 | 手動 | Search Console にサイトマップを送信 | 手動作業(スクリプト対象外)<br>※sitemap.xml を送る |
 | C-4 | 手動 | 主要10ページの URL検査(インデックス登録リクエスト) | 10ページとも200: ○(送信自体は手動) |
-| C-5 | ○ | 旧URLからのリダイレクトが必要な変更がない | 公開前URL 67 件のうち200以外 0<br>※main ブランチの sitemap 静的ページ + 記事URL |
+| C-5 | ○ | 旧URLからのリダイレクトが必要な変更がない | 公開前URL 69 件のうち200以外 0<br>※main ブランチの sitemap 静的ページ + 記事URL |
 
 ## D(人が見る): 確認用の一覧
 
@@ -80,6 +77,7 @@ origin: http://localhost:3110 / ページ数: 159 / 基準: git main
 - 説明済み: 111,242円 = (basicGrade2(847,300) + childFirstSecond(243,800) + childFirstSecond(243,800)) ÷ 12 ≒ 111,242
 - 説明済み: 135,669円 = (basicGrade1(1,059,125) + childFirstSecond(243,800) + childFirstSecond(243,800) + childThird(81,300)) ÷ 12 ≒ 135,669
 - 説明済み: 141,200円 = (basicGrade2(847,300)) ÷ 12 × 2 ≒ 141,200
+- 説明済み: 141,217円 = (basicGrade2(847,300)) ÷ 12 × 2 ≒ 141,217
 - 説明済み: 243,800円 = childFirstSecond(243,800)
 - 説明済み: 487,600円 = childFirstSecond(243,800) + childFirstSecond(243,800)
 - 説明済み: 633,700円 = employeesGrade3MinimumOld(633,700)

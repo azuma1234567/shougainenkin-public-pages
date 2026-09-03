@@ -24,6 +24,7 @@ const tools = [
     number: "02",
     title: "障害年金の金額",
     description: "等級や加入していた制度などから、受け取る金額の目安を内訳つきで確認します。",
+    href: "/dougu/kingaku",
   },
   {
     number: "03",
