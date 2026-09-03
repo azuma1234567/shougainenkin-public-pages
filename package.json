@@ -9,8 +9,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit --pretty false",
     "verify:disease-hubs": "node scripts/verify-disease-hubs.mjs",
-    "verify:stats": "node scripts/verify-stats.mjs"
-    ,"verify:hubs": "node scripts/verify-hub-content.mjs && node scripts/verify-hub-map.mjs",
+    "verify:stats": "node scripts/verify-stats.mjs",
+    "verify:hubs": "node scripts/verify-hub-content.mjs && node scripts/verify-hub-map.mjs",
     "verify:yougo": "node scripts/verify-yougo.mjs",
     "verify:gokai": "node scripts/verify-gokai.mjs",
     "verify:kingaku": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-kingaku.mjs",
@@ -18,6 +18,7 @@
     "verify:mitate:print": "node scripts/verify-mitate/print.mjs",
     "verify:shorui": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-shorui/verify.mjs",
     "verify:shorui:print": "node scripts/verify-shorui/print.mjs",
+    "verify:madoguchi-parse": "node scripts/madoguchi/parse.test.mjs",
     "prelaunch:check": "node scripts/prelaunch-check.mjs",
     "verify:disease-batch3": "node scripts/verify-disease-batch3.mjs",
     "verify:erabu-batch2": "node scripts/verify-erabu-batch2.mjs",
@@ -34,6 +35,7 @@
     "@types/react-dom": "^19.1.0",
     "eslint": "^9.28.0",
     "eslint-config-next": "^15.3.4",
+    "node-html-parser": "^9.0.3",
     "playwright": "^1.62.1",
     "typescript": "^5.8.3"
   }

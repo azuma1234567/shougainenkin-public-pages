@@ -1,0 +1,4022 @@
+{
+ "checkedOn": "2026-09-03",
+ "note": "市区町村コード → {kousei, kokumin}。値は offices.json の id。",
+ "byMunicipality": {
+  "102016": {
+   "kousei": "gunma-maebashi",
+   "kokumin": "gunma-maebashi"
+  },
+  "102024": {
+   "kousei": "gunma-takasaki",
+   "kokumin": "gunma-takasaki"
+  },
+  "102032": {
+   "kousei": "gunma-kiryu",
+   "kokumin": "gunma-kiryu"
+  },
+  "102041": {
+   "kousei": "gunma-maebashi",
+   "kokumin": "gunma-maebashi"
+  },
+  "102059": {
+   "kousei": "gunma-ota",
+   "kokumin": "gunma-ota"
+  },
+  "102067": {
+   "kousei": "gunma-shibukawa",
+   "kokumin": "gunma-shibukawa"
+  },
+  "102075": {
+   "kousei": "gunma-ota",
+   "kokumin": "gunma-ota"
+  },
+  "102083": {
+   "kousei": "gunma-shibukawa",
+   "kokumin": "gunma-shibukawa"
+  },
+  "102091": {
+   "kousei": "gunma-takasaki",
+   "kokumin": "gunma-takasaki"
+  },
+  "102105": {
+   "kousei": "gunma-takasaki",
+   "kokumin": "gunma-takasaki"
+  },
+  "102113": {
+   "kousei": "gunma-takasaki",
+   "kokumin": "gunma-takasaki"
+  },
+  "102121": {
+   "kousei": "gunma-kiryu",
+   "kokumin": "gunma-kiryu"
+  },
+  "111015": {
+   "kousei": "saitama-omiya",
+   "kokumin": "saitama-omiya"
+  },
+  "111023": {
+   "kousei": "saitama-omiya",
+   "kokumin": "saitama-omiya"
+  },
+  "111031": {
+   "kousei": "saitama-omiya",
+   "kokumin": "saitama-omiya"
+  },
+  "111040": {
+   "kousei": "saitama-omiya",
+   "kokumin": "saitama-omiya"
+  },
+  "111058": {
+   "kousei": "saitama-omiya",
+   "kokumin": "saitama-omiya"
+  },
+  "111066": {
+   "kousei": "saitama-urawa",
+   "kokumin": "saitama-urawa"
+  },
+  "111074": {
+   "kousei": "saitama-urawa",
+   "kokumin": "saitama-urawa"
+  },
+  "111082": {
+   "kousei": "saitama-urawa",
+   "kokumin": "saitama-urawa"
+  },
+  "111091": {
+   "kousei": "saitama-urawa",
+   "kokumin": "saitama-urawa"
+  },
+  "111104": {
+   "kousei": "saitama-kasukabe",
+   "kokumin": "saitama-kasukabe"
+  },
+  "112011": {
+   "kousei": "saitama-kawagoe",
+   "kokumin": "saitama-kawagoe"
+  },
+  "112020": {
+   "kousei": "saitama-kumagaya",
+   "kokumin": "saitama-kumagaya"
+  },
+  "112038": {
+   "kousei": "saitama-urawa",
+   "kokumin": "saitama-urawa"
+  },
+  "112062": {
+   "kousei": "saitama-kumagaya",
+   "kokumin": "saitama-kumagaya"
+  },
+  "112071": {
+   "kousei": "saitama-chichibu",
+   "kokumin": "saitama-chichibu"
+  },
+  "112089": {
+   "kousei": "saitama-tokorozawa",
+   "kokumin": "saitama-tokorozawa"
+  },
+  "112097": {
+   "kousei": "saitama-tokorozawa",
+   "kokumin": "saitama-tokorozawa"
+  },
+  "112101": {
+   "kousei": "saitama-kumagaya",
+   "kokumin": "saitama-kumagaya"
+  },
+  "112119": {
+   "kousei": "saitama-kumagaya",
+   "kokumin": "saitama-kumagaya"
+  },
+  "112127": {
+   "kousei": "saitama-kawagoe",
+   "kokumin": "saitama-kawagoe"
+  },
+  "112143": {
+   "kousei": "saitama-kasukabe",
+   "kokumin": "saitama-kasukabe"
+  },
+  "112151": {
+   "kousei": "saitama-tokorozawa",
+   "kokumin": "saitama-tokorozawa"
+  },
+  "112160": {
+   "kousei": "saitama-kumagaya",
+   "kokumin": "saitama-kumagaya"
+  },
+  "112178": {
+   "kousei": "saitama-omiya",
+   "kokumin": "saitama-omiya"
+  },
+  "112186": {
+   "kousei": "saitama-kumagaya",
+   "kokumin": "saitama-kumagaya"
+  },
+  "112194": {
+   "kousei": "saitama-omiya",
+   "kokumin": "saitama-omiya"
+  },
+  "112216": {
+   "kousei": "saitama-koshigaya",
+   "kokumin": "saitama-koshigaya"
+  },
+  "112224": {
+   "kousei": "saitama-koshigaya",
+   "kokumin": "saitama-koshigaya"
+  },
+  "112232": {
+   "kousei": "saitama-urawa",
+   "kokumin": "saitama-urawa"
+  },
+  "112241": {
+   "kousei": "saitama-urawa",
+   "kokumin": "saitama-urawa"
+  },
+  "112259": {
+   "kousei": "saitama-tokorozawa",
+   "kokumin": "saitama-tokorozawa"
+  },
+  "112275": {
+   "kousei": "saitama-kawagoe",
+   "kokumin": "saitama-kawagoe"
+  },
+  "112283": {
+   "kousei": "saitama-kawagoe",
+   "kokumin": "saitama-kawagoe"
+  },
+  "112291": {
+   "kousei": "saitama-kawagoe",
+   "kokumin": "saitama-kawagoe"
+  },
+  "112305": {
+   "kousei": "saitama-kawagoe",
+   "kokumin": "saitama-kawagoe"
+  },
+  "112313": {
+   "kousei": "saitama-omiya",
+   "kokumin": "saitama-omiya"
+  },
+  "112321": {
+   "kousei": "saitama-kasukabe",
+   "kokumin": "saitama-kasukabe"
+  },
+  "112330": {
+   "kousei": "saitama-omiya",
+   "kokumin": "saitama-omiya"
+  },
+  "112348": {
+   "kousei": "saitama-koshigaya",
+   "kokumin": "saitama-koshigaya"
+  },
+  "112356": {
+   "kousei": "saitama-kawagoe",
+   "kokumin": "saitama-kawagoe"
+  },
+  "112372": {
+   "kousei": "saitama-koshigaya",
+   "kokumin": "saitama-koshigaya"
+  },
+  "112381": {
+   "kousei": "saitama-kasukabe",
+   "kokumin": "saitama-kasukabe"
+  },
+  "112399": {
+   "kousei": "saitama-kawagoe",
+   "kokumin": "saitama-kawagoe"
+  },
+  "112402": {
+   "kousei": "saitama-kasukabe",
+   "kokumin": "saitama-kasukabe"
+  },
+  "112411": {
+   "kousei": "saitama-kawagoe",
+   "kokumin": "saitama-kawagoe"
+  },
+  "112429": {
+   "kousei": "saitama-tokorozawa",
+   "kokumin": "saitama-tokorozawa"
+  },
+  "112437": {
+   "kousei": "saitama-koshigaya",
+   "kokumin": "saitama-koshigaya"
+  },
+  "112453": {
+   "kousei": "saitama-kawagoe",
+   "kokumin": "saitama-kawagoe"
+  },
+  "112461": {
+   "kousei": "saitama-kasukabe",
+   "kokumin": "saitama-kasukabe"
+  },
+  "113247": {
+   "kousei": "saitama-tokorozawa",
+   "kokumin": "saitama-tokorozawa"
+  },
+  "121011": {
+   "kousei": "chiba-chiba",
+   "kokumin": "chiba-chiba"
+  },
+  "121029": {
+   "kousei": "chiba-makuhari",
+   "kokumin": "chiba-makuhari"
+  },
+  "121037": {
+   "kousei": "chiba-makuhari",
+   "kokumin": "chiba-makuhari"
+  },
+  "121045": {
+   "kousei": "chiba-chiba",
+   "kokumin": "chiba-chiba"
+  },
+  "121053": {
+   "kousei": "chiba-chiba",
+   "kokumin": "chiba-chiba"
+  },
+  "121061": {
+   "kousei": "chiba-makuhari",
+   "kokumin": "chiba-makuhari"
+  },
+  "122025": {
+   "kousei": "chiba-sawara",
+   "kokumin": "chiba-sawara"
+  },
+  "122033": {
+   "kousei": "chiba-ichikawa",
+   "kokumin": "chiba-ichikawa"
+  },
+  "122041": {
+   "kousei": "chiba-funabashi",
+   "kokumin": "chiba-funabashi"
+  },
+  "122050": {
+   "kousei": "chiba-kisarazu",
+   "kokumin": "chiba-kisarazu"
+  },
+  "122068": {
+   "kousei": "chiba-kisarazu",
+   "kokumin": "chiba-kisarazu"
+  },
+  "122076": {
+   "kousei": "chiba-matsudo",
+   "kokumin": "chiba-matsudo"
+  },
+  "122084": {
+   "kousei": "chiba-matsudo",
+   "kokumin": "chiba-matsudo"
+  },
+  "122106": {
+   "kousei": "chiba-chiba",
+   "kokumin": "chiba-chiba"
+  },
+  "122114": {
+   "kousei": "chiba-sawara",
+   "kokumin": "chiba-sawara"
+  },
+  "122122": {
+   "kousei": "chiba-makuhari",
+   "kokumin": "chiba-makuhari"
+  },
+  "122131": {
+   "kousei": "chiba-chiba",
+   "kokumin": "chiba-chiba"
+  },
+  "122157": {
+   "kousei": "chiba-sawara",
+   "kokumin": "chiba-sawara"
+  },
+  "122165": {
+   "kousei": "chiba-makuhari",
+   "kokumin": "chiba-makuhari"
+  },
+  "122173": {
+   "kousei": "chiba-matsudo",
+   "kokumin": "chiba-matsudo"
+  },
+  "122181": {
+   "kousei": "chiba-chiba",
+   "kokumin": "chiba-chiba"
+  },
+  "122190": {
+   "kousei": "chiba-kisarazu",
+   "kokumin": "chiba-kisarazu"
+  },
+  "122203": {
+   "kousei": "chiba-matsudo",
+   "kokumin": "chiba-matsudo"
+  },
+  "122211": {
+   "kousei": "chiba-funabashi",
+   "kokumin": "chiba-funabashi"
+  },
+  "122220": {
+   "kousei": "chiba-matsudo",
+   "kokumin": "chiba-matsudo"
+  },
+  "122238": {
+   "kousei": "chiba-kisarazu",
+   "kokumin": "chiba-kisarazu"
+  },
+  "122246": {
+   "kousei": "chiba-ichikawa",
+   "kokumin": "chiba-ichikawa"
+  },
+  "122254": {
+   "kousei": "chiba-kisarazu",
+   "kokumin": "chiba-kisarazu"
+  },
+  "122262": {
+   "kousei": "chiba-kisarazu",
+   "kokumin": "chiba-kisarazu"
+  },
+  "122271": {
+   "kousei": "chiba-ichikawa",
+   "kokumin": "chiba-ichikawa"
+  },
+  "122289": {
+   "kousei": "chiba-makuhari",
+   "kokumin": "chiba-makuhari"
+  },
+  "122297": {
+   "kousei": "chiba-kisarazu",
+   "kokumin": "chiba-kisarazu"
+  },
+  "122301": {
+   "kousei": "chiba-makuhari",
+   "kokumin": "chiba-makuhari"
+  },
+  "122319": {
+   "kousei": "chiba-funabashi",
+   "kokumin": "chiba-funabashi"
+  },
+  "122327": {
+   "kousei": "chiba-funabashi",
+   "kokumin": "chiba-funabashi"
+  },
+  "122335": {
+   "kousei": "chiba-makuhari",
+   "kokumin": "chiba-makuhari"
+  },
+  "122343": {
+   "kousei": "chiba-kisarazu",
+   "kokumin": "chiba-kisarazu"
+  },
+  "122351": {
+   "kousei": "chiba-sawara",
+   "kokumin": "chiba-sawara"
+  },
+  "122360": {
+   "kousei": "chiba-sawara",
+   "kokumin": "chiba-sawara"
+  },
+  "122378": {
+   "kousei": "chiba-chiba",
+   "kokumin": "chiba-chiba"
+  },
+  "122386": {
+   "kousei": "chiba-chiba",
+   "kokumin": "chiba-chiba"
+  },
+  "122394": {
+   "kousei": "chiba-chiba",
+   "kokumin": "chiba-chiba"
+  },
+  "123226": {
+   "kousei": "chiba-makuhari",
+   "kokumin": "chiba-makuhari"
+  },
+  "131016": {
+   "kousei": "tokyo-chiyoda",
+   "kokumin": "tokyo-chiyoda"
+  },
+  "131024": {
+   "kousei": "tokyo-chuo",
+   "kokumin": "tokyo-chuo"
+  },
+  "131032": {
+   "kousei": "tokyo-minato",
+   "kokumin": "tokyo-minato"
+  },
+  "131041": {
+   "kousei": "tokyo-shinjuku",
+   "kokumin": "tokyo-shinjuku"
+  },
+  "131059": {
+   "kousei": "tokyo-bunkyo",
+   "kokumin": "tokyo-bunkyo"
+  },
+  "131067": {
+   "kousei": "tokyo-ueno",
+   "kokumin": "tokyo-ueno"
+  },
+  "131075": {
+   "kousei": "tokyo-sumida",
+   "kokumin": "tokyo-sumida"
+  },
+  "131083": {
+   "kousei": "tokyo-koto",
+   "kokumin": "tokyo-koto"
+  },
+  "131091": {
+   "kousei": "tokyo-shinagawa",
+   "kokumin": "tokyo-shinagawa"
+  },
+  "131105": {
+   "kousei": "tokyo-meguro",
+   "kokumin": "tokyo-meguro"
+  },
+  "131113": {
+   "kousei": "tokyo-ota",
+   "kokumin": "tokyo-ota"
+  },
+  "131121": {
+   "kousei": "tokyo-setagaya",
+   "kokumin": "tokyo-setagaya"
+  },
+  "131130": {
+   "kousei": "tokyo-shibuya",
+   "kokumin": "tokyo-shibuya"
+  },
+  "131148": {
+   "kousei": "tokyo-shinjuku",
+   "kokumin": "tokyo-nakano"
+  },
+  "131156": {
+   "kousei": "tokyo-shinjuku",
+   "kokumin": "tokyo-suginami"
+  },
+  "131164": {
+   "kousei": "tokyo-ikebukuro",
+   "kokumin": "tokyo-ikebukuro"
+  },
+  "131172": {
+   "kousei": "tokyo-kita",
+   "kokumin": "tokyo-kita"
+  },
+  "131181": {
+   "kousei": "tokyo-arakawa",
+   "kokumin": "tokyo-arakawa"
+  },
+  "131199": {
+   "kousei": "tokyo-itabashi",
+   "kokumin": "tokyo-itabashi"
+  },
+  "131202": {
+   "kousei": "tokyo-nerima",
+   "kokumin": "tokyo-nerima"
+  },
+  "131211": {
+   "kousei": "tokyo-adachi",
+   "kokumin": "tokyo-adachi"
+  },
+  "131229": {
+   "kousei": "tokyo-katsushika",
+   "kokumin": "tokyo-katsushika"
+  },
+  "131237": {
+   "kousei": "tokyo-edogawa",
+   "kokumin": "tokyo-edogawa"
+  },
+  "132012": {
+   "kousei": "tokyo-hachioji",
+   "kokumin": "tokyo-hachioji"
+  },
+  "132021": {
+   "kousei": "tokyo-tachikawa",
+   "kokumin": "tokyo-tachikawa"
+  },
+  "132039": {
+   "kousei": "tokyo-musashino",
+   "kokumin": "tokyo-musashino"
+  },
+  "132047": {
+   "kousei": "tokyo-musashino",
+   "kokumin": "tokyo-musashino"
+  },
+  "132055": {
+   "kousei": "tokyo-ome",
+   "kokumin": "tokyo-ome"
+  },
+  "132063": {
+   "kousei": "tokyo-fucyu",
+   "kokumin": "tokyo-fucyu"
+  },
+  "132071": {
+   "kousei": "tokyo-tachikawa",
+   "kokumin": "tokyo-tachikawa"
+  },
+  "132080": {
+   "kousei": "tokyo-fucyu",
+   "kokumin": "tokyo-fucyu"
+  },
+  "132098": {
+   "kousei": "tokyo-hachioji",
+   "kokumin": "tokyo-hachioji"
+  },
+  "132101": {
+   "kousei": "tokyo-tachikawa",
+   "kokumin": "tokyo-tachikawa"
+  },
+  "132110": {
+   "kousei": "tokyo-musashino",
+   "kokumin": "tokyo-musashino"
+  },
+  "132128": {
+   "kousei": "tokyo-tachikawa",
+   "kokumin": "tokyo-tachikawa"
+  },
+  "132136": {
+   "kousei": "tokyo-musashino",
+   "kokumin": "tokyo-musashino"
+  },
+  "132144": {
+   "kousei": "tokyo-tachikawa",
+   "kokumin": "tokyo-tachikawa"
+  },
+  "132152": {
+   "kousei": "tokyo-tachikawa",
+   "kokumin": "tokyo-tachikawa"
+  },
+  "132187": {
+   "kousei": "tokyo-ome",
+   "kokumin": "tokyo-ome"
+  },
+  "132195": {
+   "kousei": "tokyo-fucyu",
+   "kokumin": "tokyo-fucyu"
+  },
+  "132209": {
+   "kousei": "tokyo-tachikawa",
+   "kokumin": "tokyo-tachikawa"
+  },
+  "132217": {
+   "kousei": "tokyo-musashino",
+   "kokumin": "tokyo-musashino"
+  },
+  "132225": {
+   "kousei": "tokyo-musashino",
+   "kokumin": "tokyo-musashino"
+  },
+  "132233": {
+   "kousei": "tokyo-tachikawa",
+   "kokumin": "tokyo-tachikawa"
+  },
+  "132241": {
+   "kousei": "tokyo-fucyu",
+   "kokumin": "tokyo-fucyu"
+  },
+  "132250": {
+   "kousei": "tokyo-fucyu",
+   "kokumin": "tokyo-fucyu"
+  },
+  "132276": {
+   "kousei": "tokyo-ome",
+   "kokumin": "tokyo-ome"
+  },
+  "132284": {
+   "kousei": "tokyo-ome",
+   "kokumin": "tokyo-ome"
+  },
+  "132292": {
+   "kousei": "tokyo-musashino",
+   "kokumin": "tokyo-musashino"
+  },
+  "133612": {
+   "kousei": "tokyo-minato",
+   "kokumin": "tokyo-minato"
+  },
+  "133621": {
+   "kousei": "tokyo-minato",
+   "kokumin": "tokyo-minato"
+  },
+  "133639": {
+   "kousei": "tokyo-minato",
+   "kokumin": "tokyo-minato"
+  },
+  "133647": {
+   "kousei": "tokyo-minato",
+   "kokumin": "tokyo-minato"
+  },
+  "133817": {
+   "kousei": "tokyo-minato",
+   "kokumin": "tokyo-minato"
+  },
+  "133825": {
+   "kousei": "tokyo-minato",
+   "kokumin": "tokyo-minato"
+  },
+  "134015": {
+   "kousei": "tokyo-minato",
+   "kokumin": "tokyo-minato"
+  },
+  "134023": {
+   "kousei": "tokyo-minato",
+   "kokumin": "tokyo-minato"
+  },
+  "134210": {
+   "kousei": "tokyo-minato",
+   "kokumin": "tokyo-minato"
+  },
+  "141011": {
+   "kousei": "kanagawa-tsurumi",
+   "kokumin": "kanagawa-tsurumi"
+  },
+  "141020": {
+   "kousei": "kanagawa-tsurumi",
+   "kokumin": "kanagawa-tsurumi"
+  },
+  "141038": {
+   "kousei": "kanagawa-yokohamanaka",
+   "kokumin": "kanagawa-yokohamanaka"
+  },
+  "141046": {
+   "kousei": "kanagawa-yokohamanaka",
+   "kokumin": "kanagawa-yokohamanaka"
+  },
+  "141054": {
+   "kousei": "kanagawa-yokohamanaka",
+   "kokumin": "kanagawa-yokohamaminami"
+  },
+  "141062": {
+   "kousei": "kanagawa-yokohamanishi",
+   "kokumin": "kanagawa-yokohamanishi"
+  },
+  "141071": {
+   "kousei": "kanagawa-yokohamanaka",
+   "kokumin": "kanagawa-yokohamaminami"
+  },
+  "141089": {
+   "kousei": "kanagawa-yokohamanaka",
+   "kokumin": "kanagawa-yokohamaminami"
+  },
+  "141097": {
+   "kousei": "kanagawa-kohoku",
+   "kokumin": "kanagawa-kohoku"
+  },
+  "141101": {
+   "kousei": "kanagawa-yokohamanishi",
+   "kokumin": "kanagawa-yokohamanishi"
+  },
+  "141119": {
+   "kousei": "kanagawa-yokohamanaka",
+   "kokumin": "kanagawa-yokohamaminami"
+  },
+  "141127": {
+   "kousei": "kanagawa-yokohamanishi",
+   "kokumin": "kanagawa-yokohamanishi"
+  },
+  "141135": {
+   "kousei": "kanagawa-kohoku",
+   "kokumin": "kanagawa-kohoku"
+  },
+  "141143": {
+   "kousei": "kanagawa-yokohamanishi",
+   "kokumin": "kanagawa-yokohamanishi"
+  },
+  "141151": {
+   "kousei": "kanagawa-yokohamanishi",
+   "kokumin": "kanagawa-yokohamanishi"
+  },
+  "141160": {
+   "kousei": "kanagawa-yokohamanishi",
+   "kokumin": "kanagawa-yokohamanishi"
+  },
+  "141178": {
+   "kousei": "kanagawa-kohoku",
+   "kokumin": "kanagawa-kohoku"
+  },
+  "141186": {
+   "kousei": "kanagawa-kohoku",
+   "kokumin": "kanagawa-kohoku"
+  },
+  "141313": {
+   "kousei": "kanagawa-kawasaki",
+   "kokumin": "kanagawa-kawasaki"
+  },
+  "141321": {
+   "kousei": "kanagawa-kawasaki",
+   "kokumin": "kanagawa-kawasaki"
+  },
+  "141330": {
+   "kousei": "kanagawa-takatsu",
+   "kokumin": "kanagawa-takatsu"
+  },
+  "141348": {
+   "kousei": "kanagawa-takatsu",
+   "kokumin": "kanagawa-takatsu"
+  },
+  "141356": {
+   "kousei": "kanagawa-takatsu",
+   "kokumin": "kanagawa-takatsu"
+  },
+  "141364": {
+   "kousei": "kanagawa-takatsu",
+   "kokumin": "kanagawa-takatsu"
+  },
+  "141372": {
+   "kousei": "kanagawa-takatsu",
+   "kokumin": "kanagawa-takatsu"
+  },
+  "141518": {
+   "kousei": "kanagawa-sagamihara",
+   "kokumin": "kanagawa-sagamihara"
+  },
+  "141526": {
+   "kousei": "kanagawa-sagamihara",
+   "kokumin": "kanagawa-sagamihara"
+  },
+  "141534": {
+   "kousei": "kanagawa-sagamihara",
+   "kokumin": "kanagawa-sagamihara"
+  },
+  "142018": {
+   "kousei": "kanagawa-yokosuka",
+   "kokumin": "kanagawa-yokosuka"
+  },
+  "142034": {
+   "kousei": "kanagawa-hiratsuka",
+   "kokumin": "kanagawa-hiratsuka"
+  },
+  "142042": {
+   "kousei": "kanagawa-fujisawa",
+   "kokumin": "kanagawa-fujisawa"
+  },
+  "142051": {
+   "kousei": "kanagawa-fujisawa",
+   "kokumin": "kanagawa-fujisawa"
+  },
+  "142069": {
+   "kousei": "kanagawa-odawara",
+   "kokumin": "kanagawa-odawara"
+  },
+  "142077": {
+   "kousei": "kanagawa-fujisawa",
+   "kokumin": "kanagawa-fujisawa"
+  },
+  "142085": {
+   "kousei": "kanagawa-yokosuka",
+   "kokumin": "kanagawa-yokosuka"
+  },
+  "142107": {
+   "kousei": "kanagawa-yokosuka",
+   "kokumin": "kanagawa-yokosuka"
+  },
+  "142115": {
+   "kousei": "kanagawa-hiratsuka",
+   "kokumin": "kanagawa-hiratsuka"
+  },
+  "142123": {
+   "kousei": "kanagawa-atsugi",
+   "kokumin": "kanagawa-atsugi"
+  },
+  "142131": {
+   "kousei": "kanagawa-sagamihara",
+   "kokumin": "kanagawa-sagamihara"
+  },
+  "142140": {
+   "kousei": "kanagawa-hiratsuka",
+   "kokumin": "kanagawa-hiratsuka"
+  },
+  "142158": {
+   "kousei": "kanagawa-atsugi",
+   "kokumin": "kanagawa-atsugi"
+  },
+  "142166": {
+   "kousei": "kanagawa-atsugi",
+   "kokumin": "kanagawa-atsugi"
+  },
+  "142174": {
+   "kousei": "kanagawa-odawara",
+   "kokumin": "kanagawa-odawara"
+  },
+  "142182": {
+   "kousei": "kanagawa-atsugi",
+   "kokumin": "kanagawa-atsugi"
+  },
+  "151017": {
+   "kousei": "nigata-nigatanishi",
+   "kokumin": "nigata-nigatahigashi"
+  },
+  "151025": {
+   "kousei": "nigata-nigatanishi",
+   "kokumin": "nigata-nigatahigashi"
+  },
+  "151033": {
+   "kousei": "nigata-nigatanishi",
+   "kokumin": "nigata-nigatanishi"
+  },
+  "151041": {
+   "kousei": "nigata-nigatanishi",
+   "kokumin": "nigata-nigatahigashi"
+  },
+  "151050": {
+   "kousei": "nigata-nigatanishi",
+   "kokumin": "nigata-nigatahigashi"
+  },
+  "151068": {
+   "kousei": "nigata-nigatanishi",
+   "kokumin": "nigata-nigatahigashi"
+  },
+  "151076": {
+   "kousei": "nigata-nigatanishi",
+   "kokumin": "nigata-nigatanishi"
+  },
+  "151084": {
+   "kousei": "nigata-nigatanishi",
+   "kokumin": "nigata-nigatanishi"
+  },
+  "152021": {
+   "kousei": "nigata-nagaoka",
+   "kokumin": "nigata-nagaoka"
+  },
+  "152048": {
+   "kousei": "nigata-sanjo",
+   "kokumin": "nigata-sanjo"
+  },
+  "152056": {
+   "kousei": "nigata-kashiwazaki",
+   "kokumin": "nigata-kashiwazaki"
+  },
+  "152064": {
+   "kousei": "nigata-shibata",
+   "kokumin": "nigata-shibata"
+  },
+  "152081": {
+   "kousei": "nigata-nagaoka",
+   "kokumin": "nigata-nagaoka"
+  },
+  "152099": {
+   "kousei": "nigata-sanjo",
+   "kokumin": "nigata-sanjo"
+  },
+  "152102": {
+   "kousei": "nigata-muikamachi",
+   "kokumin": "nigata-muikamachi"
+  },
+  "152111": {
+   "kousei": "nigata-sanjo",
+   "kokumin": "nigata-sanjo"
+  },
+  "152129": {
+   "kousei": "nigata-shibata",
+   "kokumin": "nigata-shibata"
+  },
+  "152137": {
+   "kousei": "nigata-sanjo",
+   "kokumin": "nigata-sanjo"
+  },
+  "152161": {
+   "kousei": "nigata-joetsu",
+   "kokumin": "nigata-joetsu"
+  },
+  "152170": {
+   "kousei": "nigata-joetsu",
+   "kokumin": "nigata-joetsu"
+  },
+  "152188": {
+   "kousei": "nigata-nigatanishi",
+   "kokumin": "nigata-nigatahigashi"
+  },
+  "152226": {
+   "kousei": "nigata-joetsu",
+   "kokumin": "nigata-joetsu"
+  },
+  "152234": {
+   "kousei": "nigata-shibata",
+   "kokumin": "nigata-shibata"
+  },
+  "152242": {
+   "kousei": "nigata-nigatanishi",
+   "kokumin": "nigata-nigatanishi"
+  },
+  "152251": {
+   "kousei": "nigata-nagaoka",
+   "kokumin": "nigata-nagaoka"
+  },
+  "152269": {
+   "kousei": "nigata-muikamachi",
+   "kokumin": "nigata-muikamachi"
+  },
+  "152277": {
+   "kousei": "nigata-shibata",
+   "kokumin": "nigata-shibata"
+  },
+  "162019": {
+   "kousei": "toyama-toyama",
+   "kokumin": "toyama-toyama"
+  },
+  "162027": {
+   "kousei": "toyama-takaoka",
+   "kokumin": "toyama-takaoka"
+  },
+  "162043": {
+   "kousei": "toyama-uozu",
+   "kokumin": "toyama-uozu"
+  },
+  "162051": {
+   "kousei": "toyama-takaoka",
+   "kokumin": "toyama-takaoka"
+  },
+  "162060": {
+   "kousei": "toyama-uozu",
+   "kokumin": "toyama-uozu"
+  },
+  "162078": {
+   "kousei": "toyama-uozu",
+   "kokumin": "toyama-uozu"
+  },
+  "162086": {
+   "kousei": "toyama-tonami",
+   "kokumin": "toyama-tonami"
+  },
+  "162094": {
+   "kousei": "toyama-tonami",
+   "kokumin": "toyama-tonami"
+  },
+  "162108": {
+   "kousei": "toyama-tonami",
+   "kokumin": "toyama-tonami"
+  },
+  "162116": {
+   "kousei": "toyama-takaoka",
+   "kokumin": "toyama-takaoka"
+  },
+  "172014": {
+   "kousei": null,
+   "kokumin": "ishikawa-kanazawakita"
+  },
+  "172022": {
+   "kousei": "ishikawa-nanao",
+   "kokumin": "ishikawa-nanao"
+  },
+  "172031": {
+   "kousei": "ishikawa-komatsu",
+   "kokumin": "ishikawa-komatsu"
+  },
+  "172049": {
+   "kousei": "ishikawa-nanao",
+   "kokumin": "ishikawa-nanao"
+  },
+  "172057": {
+   "kousei": "ishikawa-nanao",
+   "kokumin": "ishikawa-nanao"
+  },
+  "172065": {
+   "kousei": "ishikawa-komatsu",
+   "kokumin": "ishikawa-komatsu"
+  },
+  "172073": {
+   "kousei": "ishikawa-nanao",
+   "kokumin": "ishikawa-nanao"
+  },
+  "172090": {
+   "kousei": null,
+   "kokumin": "ishikawa-kanazawakita"
+  },
+  "172103": {
+   "kousei": "ishikawa-kanazawaminami",
+   "kokumin": "ishikawa-kanazawaminami"
+  },
+  "172111": {
+   "kousei": "ishikawa-komatsu",
+   "kokumin": "ishikawa-komatsu"
+  },
+  "172120": {
+   "kousei": "ishikawa-kanazawaminami",
+   "kokumin": "ishikawa-kanazawaminami"
+  },
+  "182010": {
+   "kousei": "fukui-fukui",
+   "kokumin": "fukui-fukui"
+  },
+  "182028": {
+   "kousei": "fukui-tsuruga",
+   "kokumin": "fukui-tsuruga"
+  },
+  "182044": {
+   "kousei": "fukui-tsuruga",
+   "kokumin": "fukui-tsuruga"
+  },
+  "182052": {
+   "kousei": "fukui-fukui",
+   "kokumin": "fukui-fukui"
+  },
+  "182061": {
+   "kousei": "fukui-fukui",
+   "kokumin": "fukui-fukui"
+  },
+  "182079": {
+   "kousei": "fukui-takefu",
+   "kokumin": "fukui-takefu"
+  },
+  "182087": {
+   "kousei": "fukui-fukui",
+   "kokumin": "fukui-fukui"
+  },
+  "182095": {
+   "kousei": "fukui-takefu",
+   "kokumin": "fukui-takefu"
+  },
+  "182109": {
+   "kousei": "fukui-fukui",
+   "kokumin": "fukui-fukui"
+  },
+  "192015": {
+   "kousei": "yamanashi-kofu",
+   "kokumin": "yamanashi-kofu"
+  },
+  "192023": {
+   "kousei": "yamanashi-otsuki",
+   "kokumin": "yamanashi-otsuki"
+  },
+  "192040": {
+   "kousei": "yamanashi-otsuki",
+   "kokumin": "yamanashi-otsuki"
+  },
+  "192058": {
+   "kousei": "yamanashi-kofu",
+   "kokumin": "yamanashi-kofu"
+  },
+  "192066": {
+   "kousei": "yamanashi-otsuki",
+   "kokumin": "yamanashi-otsuki"
+  },
+  "192074": {
+   "kousei": "yamanashi-ryuo",
+   "kokumin": "yamanashi-ryuo"
+  },
+  "192082": {
+   "kousei": "yamanashi-ryuo",
+   "kokumin": "yamanashi-ryuo"
+  },
+  "192091": {
+   "kousei": "yamanashi-ryuo",
+   "kokumin": "yamanashi-ryuo"
+  },
+  "192104": {
+   "kousei": "yamanashi-ryuo",
+   "kokumin": "yamanashi-ryuo"
+  },
+  "192112": {
+   "kousei": "yamanashi-kofu",
+   "kokumin": "yamanashi-kofu"
+  },
+  "192121": {
+   "kousei": "yamanashi-otsuki",
+   "kokumin": "yamanashi-otsuki"
+  },
+  "192139": {
+   "kousei": "yamanashi-kofu",
+   "kokumin": "yamanashi-kofu"
+  },
+  "192147": {
+   "kousei": "yamanashi-ryuo",
+   "kokumin": "yamanashi-ryuo"
+  },
+  "202011": {
+   "kousei": "nagano-naganominami",
+   "kokumin": "nagano-naganominami"
+  },
+  "202029": {
+   "kousei": "nagano-matsumoto",
+   "kokumin": "nagano-matsumoto"
+  },
+  "202037": {
+   "kousei": "nagano-komoro",
+   "kokumin": "nagano-komoro"
+  },
+  "202045": {
+   "kousei": "nagano-okaya",
+   "kokumin": "nagano-okaya"
+  },
+  "202053": {
+   "kousei": "nagano-ida",
+   "kokumin": "nagano-ida"
+  },
+  "202061": {
+   "kousei": "nagano-okaya",
+   "kokumin": "nagano-okaya"
+  },
+  "202070": {
+   "kousei": "nagano-naganominami",
+   "kokumin": "nagano-naganominami"
+  },
+  "202088": {
+   "kousei": "nagano-komoro",
+   "kokumin": "nagano-komoro"
+  },
+  "202096": {
+   "kousei": "nagano-ina",
+   "kokumin": "nagano-ina"
+  },
+  "202100": {
+   "kousei": "nagano-ina",
+   "kokumin": "nagano-ina"
+  },
+  "202118": {
+   "kousei": "nagano-naganominami",
+   "kokumin": "nagano-naganominami"
+  },
+  "202126": {
+   "kousei": "nagano-matsumoto",
+   "kokumin": "nagano-matsumoto"
+  },
+  "202134": {
+   "kousei": "nagano-naganominami",
+   "kokumin": "nagano-naganominami"
+  },
+  "202142": {
+   "kousei": "nagano-okaya",
+   "kokumin": "nagano-okaya"
+  },
+  "202151": {
+   "kousei": "nagano-matsumoto",
+   "kokumin": "nagano-matsumoto"
+  },
+  "202177": {
+   "kousei": "nagano-komoro",
+   "kokumin": "nagano-komoro"
+  },
+  "202185": {
+   "kousei": "nagano-naganominami",
+   "kokumin": "nagano-naganominami"
+  },
+  "202193": {
+   "kousei": "nagano-komoro",
+   "kokumin": "nagano-komoro"
+  },
+  "202207": {
+   "kousei": "nagano-matsumoto",
+   "kokumin": "nagano-matsumoto"
+  },
+  "212016": {
+   "kousei": "gifu-gifukita",
+   "kokumin": "gifu-gifukita"
+  },
+  "212024": {
+   "kousei": "gifu-ogaki",
+   "kokumin": "gifu-ogaki"
+  },
+  "212032": {
+   "kousei": "gifu-takayama",
+   "kokumin": "gifu-takayama"
+  },
+  "212041": {
+   "kousei": "gifu-tajimi",
+   "kokumin": "gifu-tajimi"
+  },
+  "212059": {
+   "kousei": "gifu-minokamo",
+   "kokumin": "gifu-minokamo"
+  },
+  "212067": {
+   "kousei": "gifu-tajimi",
+   "kokumin": "gifu-tajimi"
+  },
+  "212075": {
+   "kousei": "gifu-minokamo",
+   "kokumin": "gifu-minokamo"
+  },
+  "212083": {
+   "kousei": "gifu-tajimi",
+   "kokumin": "gifu-tajimi"
+  },
+  "212091": {
+   "kousei": "gifu-gifukita",
+   "kokumin": "gifu-gifuminami"
+  },
+  "212105": {
+   "kousei": "gifu-tajimi",
+   "kokumin": "gifu-tajimi"
+  },
+  "212113": {
+   "kousei": "gifu-minokamo",
+   "kokumin": "gifu-minokamo"
+  },
+  "212121": {
+   "kousei": "gifu-tajimi",
+   "kokumin": "gifu-tajimi"
+  },
+  "212130": {
+   "kousei": "gifu-gifukita",
+   "kokumin": "gifu-gifuminami"
+  },
+  "212148": {
+   "kousei": "gifu-minokamo",
+   "kokumin": "gifu-minokamo"
+  },
+  "212156": {
+   "kousei": "gifu-gifukita",
+   "kokumin": "gifu-gifukita"
+  },
+  "212164": {
+   "kousei": "gifu-gifukita",
+   "kokumin": "gifu-gifukita"
+  },
+  "212172": {
+   "kousei": "gifu-takayama",
+   "kokumin": "gifu-takayama"
+  },
+  "212181": {
+   "kousei": "gifu-gifukita",
+   "kokumin": "gifu-gifukita"
+  },
+  "212199": {
+   "kousei": "gifu-minokamo",
+   "kokumin": "gifu-minokamo"
+  },
+  "212202": {
+   "kousei": "gifu-takayama",
+   "kokumin": "gifu-takayama"
+  },
+  "212211": {
+   "kousei": "gifu-ogaki",
+   "kokumin": "gifu-ogaki"
+  },
+  "221015": {
+   "kousei": "shizuoka-shizuoka",
+   "kokumin": "shizuoka-shizuoka"
+  },
+  "221023": {
+   "kousei": "shizuoka-shizuoka",
+   "kokumin": "shizuoka-shizuoka"
+  },
+  "221031": {
+   "kousei": "shizuoka-shizuoka",
+   "kokumin": "shizuoka-shimizu"
+  },
+  "221384": {
+   "kousei": null,
+   "kokumin": "shizuoka-hamamatsunishi"
+  },
+  "221392": {
+   "kousei": null,
+   "kokumin": "shizuoka-hamamatsuhigashi"
+  },
+  "221406": {
+   "kousei": null,
+   "kokumin": "shizuoka-hamamatsuhigashi"
+  },
+  "222038": {
+   "kousei": "shizuoka-numazu",
+   "kokumin": "shizuoka-numazu"
+  },
+  "222054": {
+   "kousei": "shizuoka-mishima",
+   "kokumin": "shizuoka-mishima"
+  },
+  "222062": {
+   "kousei": "shizuoka-mishima",
+   "kokumin": "shizuoka-mishima"
+  },
+  "222071": {
+   "kousei": "shizuoka-fuji",
+   "kokumin": "shizuoka-fuji"
+  },
+  "222089": {
+   "kousei": "shizuoka-mishima",
+   "kokumin": "shizuoka-mishima"
+  },
+  "222097": {
+   "kousei": "shizuoka-shimada",
+   "kokumin": "shizuoka-shimada"
+  },
+  "222101": {
+   "kousei": "shizuoka-fuji",
+   "kokumin": "shizuoka-fuji"
+  },
+  "222119": {
+   "kousei": null,
+   "kokumin": "shizuoka-hamamatsuhigashi"
+  },
+  "222127": {
+   "kousei": "shizuoka-shimada",
+   "kokumin": "shizuoka-shimada"
+  },
+  "222135": {
+   "kousei": "shizuoka-kakegawa",
+   "kokumin": "shizuoka-kakegawa"
+  },
+  "222143": {
+   "kousei": "shizuoka-shimada",
+   "kokumin": "shizuoka-shimada"
+  },
+  "222151": {
+   "kousei": "shizuoka-numazu",
+   "kokumin": "shizuoka-numazu"
+  },
+  "222160": {
+   "kousei": "shizuoka-kakegawa",
+   "kokumin": "shizuoka-kakegawa"
+  },
+  "222194": {
+   "kousei": "shizuoka-mishima",
+   "kokumin": "shizuoka-mishima"
+  },
+  "222208": {
+   "kousei": "shizuoka-numazu",
+   "kokumin": "shizuoka-numazu"
+  },
+  "222216": {
+   "kousei": "shizuoka-hamamatsunishi",
+   "kokumin": "shizuoka-hamamatsunishi"
+  },
+  "222224": {
+   "kousei": "shizuoka-mishima",
+   "kokumin": "shizuoka-mishima"
+  },
+  "222232": {
+   "kousei": "shizuoka-kakegawa",
+   "kokumin": "shizuoka-kakegawa"
+  },
+  "222241": {
+   "kousei": "shizuoka-kakegawa",
+   "kokumin": "shizuoka-kakegawa"
+  },
+  "222259": {
+   "kousei": "shizuoka-mishima",
+   "kokumin": "shizuoka-mishima"
+  },
+  "222267": {
+   "kousei": "shizuoka-shimada",
+   "kokumin": "shizuoka-shimada"
+  },
+  "231011": {
+   "kousei": "aichi-ozone",
+   "kokumin": "aichi-ozone"
+  },
+  "231029": {
+   "kousei": "aichi-ozone",
+   "kokumin": "aichi-ozone"
+  },
+  "231037": {
+   "kousei": "aichi-ozone",
+   "kokumin": "aichi-nagoyakita"
+  },
+  "231045": {
+   "kousei": "aichi-nagoyanishi",
+   "kokumin": "aichi-nagoyanishi"
+  },
+  "231053": {
+   "kousei": "aichi-nakamura",
+   "kokumin": "aichi-nakamura"
+  },
+  "231061": {
+   "kousei": "aichi-tsurumai",
+   "kokumin": "aichi-tsurumai"
+  },
+  "231070": {
+   "kousei": "aichi-showa",
+   "kokumin": "aichi-showa"
+  },
+  "231088": {
+   "kousei": "aichi-kasadera",
+   "kokumin": "aichi-kasadera"
+  },
+  "231096": {
+   "kousei": "aichi-atsuta",
+   "kokumin": "aichi-atsuta"
+  },
+  "231100": {
+   "kousei": "aichi-atsuta",
+   "kokumin": "aichi-atsuta"
+  },
+  "231118": {
+   "kousei": "aichi-atsuta",
+   "kokumin": "aichi-atsuta"
+  },
+  "231126": {
+   "kousei": "aichi-kasadera",
+   "kokumin": "aichi-kasadera"
+  },
+  "231134": {
+   "kousei": "aichi-ozone",
+   "kokumin": "aichi-ozone"
+  },
+  "231142": {
+   "kousei": "aichi-kasadera",
+   "kokumin": "aichi-kasadera"
+  },
+  "231151": {
+   "kousei": "aichi-ozone",
+   "kokumin": "aichi-ozone"
+  },
+  "231169": {
+   "kousei": "aichi-showa",
+   "kokumin": "aichi-showa"
+  },
+  "232017": {
+   "kousei": "aichi-toyohashi",
+   "kokumin": "aichi-toyohashi"
+  },
+  "232025": {
+   "kousei": "aichi-okazaki",
+   "kokumin": "aichi-okazaki"
+  },
+  "232033": {
+   "kousei": "aichi-ichinomiya",
+   "kokumin": "aichi-ichinomiya"
+  },
+  "232041": {
+   "kousei": "aichi-seto",
+   "kokumin": "aichi-seto"
+  },
+  "232050": {
+   "kousei": "aichi-handa",
+   "kokumin": "aichi-handa"
+  },
+  "232068": {
+   "kousei": "aichi-ozone",
+   "kokumin": "aichi-nagoyakita"
+  },
+  "232076": {
+   "kousei": "aichi-toyokawa",
+   "kokumin": "aichi-toyokawa"
+  },
+  "232084": {
+   "kousei": "aichi-nakamura",
+   "kokumin": "aichi-nakamura"
+  },
+  "232092": {
+   "kousei": "aichi-kariya",
+   "kokumin": "aichi-kariya"
+  },
+  "232106": {
+   "kousei": "aichi-kariya",
+   "kokumin": "aichi-kariya"
+  },
+  "232114": {
+   "kousei": "aichi-toyota",
+   "kokumin": "aichi-toyota"
+  },
+  "232122": {
+   "kousei": "aichi-kariya",
+   "kokumin": "aichi-kariya"
+  },
+  "232131": {
+   "kousei": "aichi-kariya",
+   "kokumin": "aichi-kariya"
+  },
+  "232149": {
+   "kousei": "aichi-toyohashi",
+   "kokumin": "aichi-toyohashi"
+  },
+  "232157": {
+   "kousei": "aichi-ichinomiya",
+   "kokumin": "aichi-ichinomiya"
+  },
+  "232165": {
+   "kousei": "aichi-handa",
+   "kokumin": "aichi-handa"
+  },
+  "232173": {
+   "kousei": "aichi-ichinomiya",
+   "kokumin": "aichi-ichinomiya"
+  },
+  "232190": {
+   "kousei": "aichi-ozone",
+   "kokumin": "aichi-nagoyakita"
+  },
+  "232203": {
+   "kousei": "aichi-ichinomiya",
+   "kokumin": "aichi-ichinomiya"
+  },
+  "232211": {
+   "kousei": "aichi-toyokawa",
+   "kokumin": "aichi-toyokawa"
+  },
+  "232220": {
+   "kousei": "aichi-handa",
+   "kokumin": "aichi-handa"
+  },
+  "232238": {
+   "kousei": "aichi-handa",
+   "kokumin": "aichi-handa"
+  },
+  "232246": {
+   "kousei": "aichi-handa",
+   "kokumin": "aichi-handa"
+  },
+  "232254": {
+   "kousei": "aichi-kariya",
+   "kokumin": "aichi-kariya"
+  },
+  "232262": {
+   "kousei": "aichi-seto",
+   "kokumin": "aichi-seto"
+  },
+  "232271": {
+   "kousei": "aichi-kariya",
+   "kokumin": "aichi-kariya"
+  },
+  "232289": {
+   "kousei": "aichi-ichinomiya",
+   "kokumin": "aichi-ichinomiya"
+  },
+  "232297": {
+   "kousei": "aichi-kasadera",
+   "kokumin": "aichi-kasadera"
+  },
+  "232301": {
+   "kousei": "aichi-showa",
+   "kokumin": "aichi-showa"
+  },
+  "232319": {
+   "kousei": "aichi-toyohashi",
+   "kokumin": "aichi-toyohashi"
+  },
+  "232327": {
+   "kousei": "aichi-nakamura",
+   "kokumin": "aichi-nakamura"
+  },
+  "232335": {
+   "kousei": "aichi-nagoyanishi",
+   "kokumin": "aichi-nagoyanishi"
+  },
+  "232343": {
+   "kousei": "aichi-nagoyanishi",
+   "kokumin": "aichi-nagoyanishi"
+  },
+  "232351": {
+   "kousei": "aichi-nakamura",
+   "kokumin": "aichi-nakamura"
+  },
+  "232360": {
+   "kousei": "aichi-toyota",
+   "kokumin": "aichi-toyota"
+  },
+  "232378": {
+   "kousei": "aichi-nakamura",
+   "kokumin": "aichi-nakamura"
+  },
+  "232386": {
+   "kousei": "aichi-seto",
+   "kokumin": "aichi-seto"
+  },
+  "242012": {
+   "kousei": "mie-tsu",
+   "kokumin": "mie-tsu"
+  },
+  "242021": {
+   "kousei": "mie-yokkaichi",
+   "kokumin": "mie-yokkaichi"
+  },
+  "242039": {
+   "kousei": "mie-ise",
+   "kokumin": "mie-ise"
+  },
+  "242047": {
+   "kousei": "mie-matsusaka",
+   "kokumin": "mie-matsusaka"
+  },
+  "242055": {
+   "kousei": "mie-yokkaichi",
+   "kokumin": "mie-yokkaichi"
+  },
+  "242071": {
+   "kousei": "mie-tsu",
+   "kokumin": "mie-tsu"
+  },
+  "242080": {
+   "kousei": "mie-tsu",
+   "kokumin": "mie-tsu"
+  },
+  "242098": {
+   "kousei": "mie-owase",
+   "kokumin": "mie-owase"
+  },
+  "242101": {
+   "kousei": "mie-tsu",
+   "kokumin": "mie-tsu"
+  },
+  "242110": {
+   "kousei": "mie-ise",
+   "kokumin": "mie-ise"
+  },
+  "242128": {
+   "kousei": "mie-owase",
+   "kokumin": "mie-owase"
+  },
+  "242144": {
+   "kousei": "mie-yokkaichi",
+   "kokumin": "mie-yokkaichi"
+  },
+  "242152": {
+   "kousei": "mie-ise",
+   "kokumin": "mie-ise"
+  },
+  "242161": {
+   "kousei": "mie-tsu",
+   "kokumin": "mie-tsu"
+  },
+  "252018": {
+   "kousei": "shiga-otsu",
+   "kokumin": "shiga-otsu"
+  },
+  "252026": {
+   "kousei": "shiga-hikone",
+   "kokumin": "shiga-hikone"
+  },
+  "252034": {
+   "kousei": "shiga-hikone",
+   "kokumin": "shiga-hikone"
+  },
+  "252042": {
+   "kousei": "shiga-kusatsu",
+   "kokumin": "shiga-kusatsu"
+  },
+  "252069": {
+   "kousei": "shiga-kusatsu",
+   "kokumin": "shiga-kusatsu"
+  },
+  "252077": {
+   "kousei": "shiga-kusatsu",
+   "kokumin": "shiga-kusatsu"
+  },
+  "252085": {
+   "kousei": "shiga-kusatsu",
+   "kokumin": "shiga-kusatsu"
+  },
+  "252093": {
+   "kousei": "shiga-kusatsu",
+   "kokumin": "shiga-kusatsu"
+  },
+  "252107": {
+   "kousei": "shiga-kusatsu",
+   "kokumin": "shiga-kusatsu"
+  },
+  "252115": {
+   "kousei": "shiga-kusatsu",
+   "kokumin": "shiga-kusatsu"
+  },
+  "252123": {
+   "kousei": "shiga-otsu",
+   "kokumin": "shiga-otsu"
+  },
+  "252131": {
+   "kousei": "shiga-hikone",
+   "kokumin": "shiga-hikone"
+  },
+  "252140": {
+   "kousei": "shiga-hikone",
+   "kokumin": "shiga-hikone"
+  },
+  "261017": {
+   "kousei": "kyoto-kamigyo",
+   "kokumin": "kyoto-kamigyo"
+  },
+  "261025": {
+   "kousei": "kyoto-kamigyo",
+   "kokumin": "kyoto-kamigyo"
+  },
+  "261033": {
+   "kousei": "kyoto-kamigyo",
+   "kokumin": "kyoto-kamigyo"
+  },
+  "261041": {
+   "kousei": "kyoto-nakagyo",
+   "kokumin": "kyoto-nakagyo"
+  },
+  "261050": {
+   "kousei": "kyoto-nakagyo",
+   "kokumin": "kyoto-nakagyo"
+  },
+  "261068": {
+   "kousei": "kyoto-shimogyo",
+   "kokumin": "kyoto-shimogyo"
+  },
+  "261076": {
+   "kousei": "kyoto-shimogyo",
+   "kokumin": "kyoto-shimogyo"
+  },
+  "261084": {
+   "kousei": "kyoto-kyotonishi",
+   "kokumin": "kyoto-kyotonishi"
+  },
+  "261092": {
+   "kousei": "kyoto-kyotominami",
+   "kokumin": "kyoto-kyotominami"
+  },
+  "261106": {
+   "kousei": "kyoto-nakagyo",
+   "kokumin": "kyoto-nakagyo"
+  },
+  "261114": {
+   "kousei": "kyoto-kyotonishi",
+   "kokumin": "kyoto-kyotonishi"
+  },
+  "262013": {
+   "kousei": "kyoto-maizuru",
+   "kokumin": "kyoto-maizuru"
+  },
+  "262021": {
+   "kousei": "kyoto-maizuru",
+   "kokumin": "kyoto-maizuru"
+  },
+  "262030": {
+   "kousei": "kyoto-maizuru",
+   "kokumin": "kyoto-maizuru"
+  },
+  "262048": {
+   "kousei": "kyoto-kyotominami",
+   "kokumin": "kyoto-kyotominami"
+  },
+  "262056": {
+   "kousei": "kyoto-maizuru",
+   "kokumin": "kyoto-maizuru"
+  },
+  "262064": {
+   "kousei": "kyoto-kyotonishi",
+   "kokumin": "kyoto-kyotonishi"
+  },
+  "262072": {
+   "kousei": "kyoto-kyotominami",
+   "kokumin": "kyoto-kyotominami"
+  },
+  "262081": {
+   "kousei": "kyoto-kyotonishi",
+   "kokumin": "kyoto-kyotonishi"
+  },
+  "262099": {
+   "kousei": "kyoto-kyotonishi",
+   "kokumin": "kyoto-kyotonishi"
+  },
+  "262102": {
+   "kousei": "kyoto-kyotominami",
+   "kokumin": "kyoto-kyotominami"
+  },
+  "262111": {
+   "kousei": "kyoto-kyotominami",
+   "kokumin": "kyoto-kyotominami"
+  },
+  "262129": {
+   "kousei": "kyoto-maizuru",
+   "kokumin": "kyoto-maizuru"
+  },
+  "262137": {
+   "kousei": "kyoto-kyotonishi",
+   "kokumin": "kyoto-kyotonishi"
+  },
+  "262145": {
+   "kousei": "kyoto-kyotominami",
+   "kokumin": "kyoto-kyotominami"
+  },
+  "271021": {
+   "kousei": "osaka-otemae",
+   "kokumin": "osaka-otemae"
+  },
+  "271039": {
+   "kousei": "osaka-fukushima",
+   "kokumin": "osaka-fukushima"
+  },
+  "271047": {
+   "kousei": "osaka-ichioka",
+   "kokumin": "osaka-ichioka"
+  },
+  "271063": {
+   "kousei": "osaka-horie",
+   "kokumin": "osaka-horie"
+  },
+  "271071": {
+   "kousei": "osaka-ichioka",
+   "kokumin": "osaka-ichioka"
+  },
+  "271080": {
+   "kousei": "osaka-ichioka",
+   "kokumin": "osaka-horie"
+  },
+  "271098": {
+   "kousei": "osaka-tennoji",
+   "kokumin": "osaka-tennoji"
+  },
+  "271110": {
+   "kousei": "osaka-otemae",
+   "kokumin": "osaka-nanba"
+  },
+  "271136": {
+   "kousei": "osaka-fukushima",
+   "kokumin": "osaka-fukushima"
+  },
+  "271144": {
+   "kousei": "osaka-yodogawa",
+   "kokumin": "osaka-yodogawa"
+  },
+  "271152": {
+   "kousei": "osaka-otemae",
+   "kokumin": "osaka-imazato"
+  },
+  "271161": {
+   "kousei": "osaka-otemae",
+   "kokumin": "osaka-imazato"
+  },
+  "271179": {
+   "kousei": "osaka-otemae",
+   "kokumin": "osaka-joto"
+  },
+  "271187": {
+   "kousei": "osaka-otemae",
+   "kokumin": "osaka-joto"
+  },
+  "271195": {
+   "kousei": "osaka-tennoji",
+   "kokumin": "osaka-tennoji"
+  },
+  "271209": {
+   "kousei": "osaka-tamade",
+   "kokumin": "osaka-tamade"
+  },
+  "271217": {
+   "kousei": "osaka-hirano",
+   "kokumin": "osaka-hirano"
+  },
+  "271225": {
+   "kousei": "osaka-tamade",
+   "kokumin": "osaka-tamade"
+  },
+  "271233": {
+   "kousei": "osaka-yodogawa",
+   "kokumin": "osaka-yodogawa"
+  },
+  "271241": {
+   "kousei": "osaka-otemae",
+   "kokumin": "osaka-joto"
+  },
+  "271250": {
+   "kousei": "osaka-tamade",
+   "kokumin": "osaka-tamade"
+  },
+  "271268": {
+   "kousei": "osaka-hirano",
+   "kokumin": "osaka-hirano"
+  },
+  "271276": {
+   "kousei": null,
+   "kokumin": "osaka-tenma"
+  },
+  "271284": {
+   "kousei": "osaka-otemae",
+   "kokumin": "osaka-otemae"
+  },
+  "271411": {
+   "kousei": "osaka-sakaihigashi",
+   "kokumin": "osaka-sakaihigashi"
+  },
+  "271420": {
+   "kousei": "osaka-sakaihigashi",
+   "kokumin": "osaka-sakaihigashi"
+  },
+  "271438": {
+   "kousei": "osaka-sakaihigashi",
+   "kokumin": "osaka-sakaihigashi"
+  },
+  "271446": {
+   "kousei": "osaka-sakainishi",
+   "kokumin": "osaka-sakaihigashi"
+  },
+  "271454": {
+   "kousei": "osaka-sakaihigashi",
+   "kokumin": "osaka-sakaihigashi"
+  },
+  "271462": {
+   "kousei": "osaka-sakaihigashi",
+   "kokumin": "osaka-sakaihigashi"
+  },
+  "271471": {
+   "kousei": "osaka-sakaihigashi",
+   "kokumin": "osaka-sakaihigashi"
+  },
+  "272027": {
+   "kousei": "osaka-kaizuka",
+   "kokumin": "osaka-kaizuka"
+  },
+  "272035": {
+   "kousei": "osaka-toyonaka",
+   "kokumin": "osaka-toyonaka"
+  },
+  "272043": {
+   "kousei": "osaka-toyonaka",
+   "kokumin": "osaka-toyonaka"
+  },
+  "272051": {
+   "kousei": "osaka-suita",
+   "kokumin": "osaka-suita"
+  },
+  "272060": {
+   "kousei": "osaka-sakainishi",
+   "kokumin": "osaka-sakainishi"
+  },
+  "272078": {
+   "kousei": "osaka-suita",
+   "kokumin": "osaka-suita"
+  },
+  "272086": {
+   "kousei": "osaka-kaizuka",
+   "kokumin": "osaka-kaizuka"
+  },
+  "272094": {
+   "kousei": "osaka-moriguchi",
+   "kokumin": "osaka-moriguchi"
+  },
+  "272108": {
+   "kousei": "osaka-hirakata",
+   "kokumin": "osaka-hirakata"
+  },
+  "272116": {
+   "kousei": "osaka-suita",
+   "kokumin": "osaka-suita"
+  },
+  "272124": {
+   "kousei": "osaka-yao",
+   "kokumin": "osaka-yao"
+  },
+  "272132": {
+   "kousei": "osaka-kaizuka",
+   "kokumin": "osaka-kaizuka"
+  },
+  "272141": {
+   "kousei": "osaka-tennoji",
+   "kokumin": "osaka-tennoji"
+  },
+  "272159": {
+   "kousei": "osaka-hirakata",
+   "kokumin": "osaka-hirakata"
+  },
+  "272167": {
+   "kousei": "osaka-tennoji",
+   "kokumin": "osaka-tennoji"
+  },
+  "272175": {
+   "kousei": "osaka-tennoji",
+   "kokumin": "osaka-tennoji"
+  },
+  "272183": {
+   "kousei": "osaka-moriguchi",
+   "kokumin": "osaka-moriguchi"
+  },
+  "272191": {
+   "kousei": "osaka-sakainishi",
+   "kokumin": "osaka-sakainishi"
+  },
+  "272205": {
+   "kousei": "osaka-toyonaka",
+   "kokumin": "osaka-toyonaka"
+  },
+  "272213": {
+   "kousei": "osaka-yao",
+   "kokumin": "osaka-yao"
+  },
+  "272221": {
+   "kousei": "osaka-tennoji",
+   "kokumin": "osaka-tennoji"
+  },
+  "272230": {
+   "kousei": "osaka-moriguchi",
+   "kokumin": "osaka-moriguchi"
+  },
+  "272248": {
+   "kousei": "osaka-suita",
+   "kokumin": "osaka-suita"
+  },
+  "272256": {
+   "kousei": "osaka-sakainishi",
+   "kokumin": "osaka-sakainishi"
+  },
+  "272264": {
+   "kousei": "osaka-tennoji",
+   "kokumin": "osaka-tennoji"
+  },
+  "272272": {
+   "kousei": "osaka-higashiosaka",
+   "kokumin": "osaka-higashiosaka"
+  },
+  "272281": {
+   "kousei": "osaka-kaizuka",
+   "kokumin": "osaka-kaizuka"
+  },
+  "272299": {
+   "kousei": "osaka-hirakata",
+   "kokumin": "osaka-hirakata"
+  },
+  "272302": {
+   "kousei": "osaka-hirakata",
+   "kokumin": "osaka-hirakata"
+  },
+  "272311": {
+   "kousei": "osaka-tennoji",
+   "kokumin": "osaka-tennoji"
+  },
+  "272329": {
+   "kousei": "osaka-kaizuka",
+   "kokumin": "osaka-kaizuka"
+  },
+  "281018": {
+   "kousei": "hyogo-sannomiya",
+   "kokumin": "hyogo-higashinada"
+  },
+  "281026": {
+   "kousei": "hyogo-sannomiya",
+   "kokumin": "hyogo-higashinada"
+  },
+  "281051": {
+   "kousei": "hyogo-hyogo",
+   "kokumin": "hyogo-hyogo"
+  },
+  "281069": {
+   "kousei": "hyogo-suma",
+   "kokumin": "hyogo-suma"
+  },
+  "281077": {
+   "kousei": "hyogo-suma",
+   "kokumin": "hyogo-suma"
+  },
+  "281085": {
+   "kousei": "hyogo-suma",
+   "kokumin": "hyogo-suma"
+  },
+  "281093": {
+   "kousei": "hyogo-hyogo",
+   "kokumin": "hyogo-hyogo"
+  },
+  "281107": {
+   "kousei": "hyogo-sannomiya",
+   "kokumin": "hyogo-sannomiya"
+  },
+  "281115": {
+   "kousei": "hyogo-suma",
+   "kokumin": "hyogo-suma"
+  },
+  "282014": {
+   "kousei": "hyogo-himeji",
+   "kokumin": "hyogo-himeji"
+  },
+  "282022": {
+   "kousei": "hyogo-amagasaki",
+   "kokumin": "hyogo-amagasaki"
+  },
+  "282031": {
+   "kousei": "hyogo-akashi",
+   "kokumin": "hyogo-akashi"
+  },
+  "282049": {
+   "kousei": "hyogo-nishinomiya",
+   "kokumin": "hyogo-nishinomiya"
+  },
+  "282057": {
+   "kousei": "hyogo-akashi",
+   "kokumin": "hyogo-akashi"
+  },
+  "282065": {
+   "kousei": "hyogo-nishinomiya",
+   "kokumin": "hyogo-nishinomiya"
+  },
+  "282073": {
+   "kousei": "hyogo-amagasaki",
+   "kokumin": "hyogo-amagasaki"
+  },
+  "282081": {
+   "kousei": "hyogo-himeji",
+   "kokumin": "hyogo-himeji"
+  },
+  "282090": {
+   "kousei": "hyogo-toyooka",
+   "kokumin": "hyogo-toyooka"
+  },
+  "282103": {
+   "kousei": "hyogo-kakogawa",
+   "kokumin": "hyogo-kakogawa"
+  },
+  "282120": {
+   "kousei": "hyogo-himeji",
+   "kokumin": "hyogo-himeji"
+  },
+  "282138": {
+   "kousei": "hyogo-kakogawa",
+   "kokumin": "hyogo-kakogawa"
+  },
+  "282146": {
+   "kousei": "hyogo-nishinomiya",
+   "kokumin": "hyogo-nishinomiya"
+  },
+  "282154": {
+   "kousei": "hyogo-akashi",
+   "kokumin": "hyogo-akashi"
+  },
+  "282162": {
+   "kousei": "hyogo-kakogawa",
+   "kokumin": "hyogo-kakogawa"
+  },
+  "282171": {
+   "kousei": "hyogo-amagasaki",
+   "kokumin": "hyogo-amagasaki"
+  },
+  "282189": {
+   "kousei": "hyogo-akashi",
+   "kokumin": "hyogo-akashi"
+  },
+  "282197": {
+   "kousei": "hyogo-nishinomiya",
+   "kokumin": "hyogo-nishinomiya"
+  },
+  "282201": {
+   "kousei": "hyogo-kakogawa",
+   "kokumin": "hyogo-kakogawa"
+  },
+  "282219": {
+   "kousei": "hyogo-nishinomiya",
+   "kokumin": "hyogo-nishinomiya"
+  },
+  "282227": {
+   "kousei": "hyogo-toyooka",
+   "kokumin": "hyogo-toyooka"
+  },
+  "282235": {
+   "kousei": "hyogo-nishinomiya",
+   "kokumin": "hyogo-nishinomiya"
+  },
+  "282243": {
+   "kousei": "hyogo-akashi",
+   "kokumin": "hyogo-akashi"
+  },
+  "282251": {
+   "kousei": "hyogo-toyooka",
+   "kokumin": "hyogo-toyooka"
+  },
+  "282260": {
+   "kousei": "hyogo-akashi",
+   "kokumin": "hyogo-akashi"
+  },
+  "282278": {
+   "kousei": "hyogo-himeji",
+   "kokumin": "hyogo-himeji"
+  },
+  "282286": {
+   "kousei": "hyogo-akashi",
+   "kokumin": "hyogo-akashi"
+  },
+  "282294": {
+   "kousei": "hyogo-himeji",
+   "kokumin": "hyogo-himeji"
+  },
+  "292010": {
+   "kousei": "nara-nara",
+   "kokumin": "nara-nara"
+  },
+  "292028": {
+   "kousei": "nara-yamatotakada",
+   "kokumin": "nara-yamatotakada"
+  },
+  "292036": {
+   "kousei": "nara-nara",
+   "kokumin": "nara-nara"
+  },
+  "292044": {
+   "kousei": "nara-sakurai",
+   "kokumin": "nara-sakurai"
+  },
+  "292052": {
+   "kousei": "nara-sakurai",
+   "kokumin": "nara-sakurai"
+  },
+  "292061": {
+   "kousei": "nara-sakurai",
+   "kokumin": "nara-sakurai"
+  },
+  "292079": {
+   "kousei": "nara-yamatotakada",
+   "kokumin": "nara-yamatotakada"
+  },
+  "292087": {
+   "kousei": "nara-yamatotakada",
+   "kokumin": "nara-yamatotakada"
+  },
+  "292095": {
+   "kousei": "nara-nara",
+   "kokumin": "nara-nara"
+  },
+  "292109": {
+   "kousei": "nara-yamatotakada",
+   "kokumin": "nara-yamatotakada"
+  },
+  "292117": {
+   "kousei": "nara-yamatotakada",
+   "kokumin": "nara-yamatotakada"
+  },
+  "292125": {
+   "kousei": "nara-sakurai",
+   "kokumin": "nara-sakurai"
+  },
+  "294535": {
+   "kousei": "nara-sakurai",
+   "kokumin": "nara-sakurai"
+  },
+  "302015": {
+   "kousei": null,
+   "kokumin": "wakayama-wakayamahigashi"
+  },
+  "302023": {
+   "kousei": null,
+   "kokumin": "wakayama-wakayamanishi"
+  },
+  "302031": {
+   "kousei": "wakayama-wakayamahigashi",
+   "kokumin": "wakayama-wakayamahigashi"
+  },
+  "302040": {
+   "kousei": null,
+   "kokumin": "wakayama-wakayamanishi"
+  },
+  "302058": {
+   "kousei": "wakayama-tanabe",
+   "kokumin": "wakayama-tanabe"
+  },
+  "302066": {
+   "kousei": "wakayama-tanabe",
+   "kokumin": "wakayama-tanabe"
+  },
+  "302074": {
+   "kousei": "wakayama-tanabe",
+   "kokumin": "wakayama-tanabe"
+  },
+  "302082": {
+   "kousei": "wakayama-wakayamahigashi",
+   "kokumin": "wakayama-wakayamahigashi"
+  },
+  "302091": {
+   "kousei": "wakayama-wakayamahigashi",
+   "kokumin": "wakayama-wakayamahigashi"
+  },
+  "312011": {
+   "kousei": "tottori-tottori",
+   "kokumin": "tottori-tottori"
+  },
+  "312029": {
+   "kousei": "tottori-yonago",
+   "kokumin": "tottori-yonago"
+  },
+  "312037": {
+   "kousei": "tottori-kurayoshi",
+   "kokumin": "tottori-kurayoshi"
+  },
+  "312045": {
+   "kousei": "tottori-yonago",
+   "kokumin": "tottori-yonago"
+  },
+  "322016": {
+   "kousei": "shimane-matsue",
+   "kokumin": "shimane-matsue"
+  },
+  "322024": {
+   "kousei": "shimane-hamada",
+   "kokumin": "shimane-hamada"
+  },
+  "322032": {
+   "kousei": "shimane-izumo",
+   "kokumin": "shimane-izumo"
+  },
+  "322041": {
+   "kousei": "shimane-hamada",
+   "kokumin": "shimane-hamada"
+  },
+  "322059": {
+   "kousei": "shimane-izumo",
+   "kokumin": "shimane-izumo"
+  },
+  "322067": {
+   "kousei": "shimane-matsue",
+   "kokumin": "shimane-matsue"
+  },
+  "322075": {
+   "kousei": "shimane-hamada",
+   "kokumin": "shimane-hamada"
+  },
+  "322091": {
+   "kousei": "shimane-matsue",
+   "kokumin": "shimane-matsue"
+  },
+  "331015": {
+   "kousei": null,
+   "kokumin": "okayama-okayamanishi"
+  },
+  "331023": {
+   "kousei": null,
+   "kokumin": "okayama-okayamanishi"
+  },
+  "331031": {
+   "kousei": null,
+   "kokumin": "okayama-okayamanishi"
+  },
+  "331040": {
+   "kousei": null,
+   "kokumin": "okayama-okayamanishi"
+  },
+  "332020": {
+   "kousei": null,
+   "kokumin": "okayama-kurashikihigashi"
+  },
+  "332038": {
+   "kousei": "okayama-tsuyama",
+   "kokumin": "okayama-tsuyama"
+  },
+  "332046": {
+   "kousei": "okayama-okayamanishi",
+   "kokumin": "okayama-okayamanishi"
+  },
+  "332054": {
+   "kousei": "okayama-kurashikinishi",
+   "kokumin": "okayama-kurashikinishi"
+  },
+  "332071": {
+   "kousei": "okayama-kurashikinishi",
+   "kokumin": "okayama-kurashikinishi"
+  },
+  "332089": {
+   "kousei": null,
+   "kokumin": "okayama-kurashikihigashi"
+  },
+  "332097": {
+   "kousei": "okayama-takahashi",
+   "kokumin": "okayama-takahashi"
+  },
+  "332101": {
+   "kousei": "okayama-takahashi",
+   "kokumin": "okayama-takahashi"
+  },
+  "332119": {
+   "kousei": null,
+   "kokumin": "okayama-okayamahigashi"
+  },
+  "332127": {
+   "kousei": null,
+   "kokumin": "okayama-okayamahigashi"
+  },
+  "332135": {
+   "kousei": null,
+   "kokumin": "okayama-okayamahigashi"
+  },
+  "332143": {
+   "kousei": "okayama-tsuyama",
+   "kokumin": "okayama-tsuyama"
+  },
+  "332151": {
+   "kousei": "okayama-tsuyama",
+   "kokumin": "okayama-tsuyama"
+  },
+  "332160": {
+   "kousei": "okayama-kurashikinishi",
+   "kokumin": "okayama-kurashikinishi"
+  },
+  "341011": {
+   "kousei": "hiroshima-hiroshimahigashi",
+   "kokumin": "hiroshima-hiroshimahigashi"
+  },
+  "341029": {
+   "kousei": "hiroshima-hiroshimahigashi",
+   "kokumin": "hiroshima-hiroshimaminami"
+  },
+  "341037": {
+   "kousei": "hiroshima-hiroshimahigashi",
+   "kokumin": "hiroshima-hiroshimaminami"
+  },
+  "341045": {
+   "kousei": "hiroshima-hiroshimahigashi",
+   "kokumin": "hiroshima-hiroshimanishi"
+  },
+  "341053": {
+   "kousei": "hiroshima-hiroshimahigashi",
+   "kokumin": "hiroshima-hiroshimahigashi"
+  },
+  "341061": {
+   "kousei": "hiroshima-hiroshimahigashi",
+   "kokumin": "hiroshima-hiroshimahigashi"
+  },
+  "341070": {
+   "kousei": "hiroshima-hiroshimahigashi",
+   "kokumin": "hiroshima-hiroshimaminami"
+  },
+  "341088": {
+   "kousei": "hiroshima-hiroshimahigashi",
+   "kokumin": "hiroshima-hiroshimanishi"
+  },
+  "342025": {
+   "kousei": "hiroshima-kure",
+   "kokumin": "hiroshima-kure"
+  },
+  "342033": {
+   "kousei": "hiroshima-kure",
+   "kokumin": "hiroshima-kure"
+  },
+  "342041": {
+   "kousei": "hiroshima-mihara",
+   "kokumin": "hiroshima-mihara"
+  },
+  "342050": {
+   "kousei": "hiroshima-mihara",
+   "kokumin": "hiroshima-mihara"
+  },
+  "342076": {
+   "kousei": "hiroshima-fukuyama",
+   "kokumin": "hiroshima-fukuyama"
+  },
+  "342084": {
+   "kousei": "hiroshima-bingofuchu",
+   "kokumin": "hiroshima-bingofuchu"
+  },
+  "342092": {
+   "kousei": "hiroshima-miyoshi",
+   "kokumin": "hiroshima-miyoshi"
+  },
+  "342106": {
+   "kousei": "hiroshima-miyoshi",
+   "kokumin": "hiroshima-miyoshi"
+  },
+  "342114": {
+   "kousei": "hiroshima-hiroshimahigashi",
+   "kokumin": "hiroshima-hiroshimanishi"
+  },
+  "342122": {
+   "kousei": "hiroshima-kure",
+   "kokumin": "hiroshima-kure"
+  },
+  "342131": {
+   "kousei": "hiroshima-hiroshimahigashi",
+   "kokumin": "hiroshima-hiroshimanishi"
+  },
+  "342149": {
+   "kousei": "hiroshima-miyoshi",
+   "kokumin": "hiroshima-miyoshi"
+  },
+  "342157": {
+   "kousei": "hiroshima-hiroshimahigashi",
+   "kokumin": "hiroshima-hiroshimaminami"
+  },
+  "352012": {
+   "kousei": "yamaguchi-shimonoseki",
+   "kokumin": "yamaguchi-shimonoseki"
+  },
+  "352021": {
+   "kousei": "yamaguchi-ube",
+   "kokumin": "yamaguchi-ube"
+  },
+  "352039": {
+   "kousei": "yamaguchi-yamaguchi",
+   "kokumin": "yamaguchi-yamaguchi"
+  },
+  "352047": {
+   "kousei": "yamaguchi-hagi",
+   "kokumin": "yamaguchi-hagi"
+  },
+  "352063": {
+   "kousei": "yamaguchi-yamaguchi",
+   "kokumin": "yamaguchi-yamaguchi"
+  },
+  "352071": {
+   "kousei": "yamaguchi-tokuyama",
+   "kokumin": "yamaguchi-tokuyama"
+  },
+  "352080": {
+   "kousei": "yamaguchi-iwakuni",
+   "kokumin": "yamaguchi-iwakuni"
+  },
+  "352101": {
+   "kousei": "yamaguchi-tokuyama",
+   "kokumin": "yamaguchi-tokuyama"
+  },
+  "352110": {
+   "kousei": "yamaguchi-hagi",
+   "kokumin": "yamaguchi-hagi"
+  },
+  "352128": {
+   "kousei": "yamaguchi-iwakuni",
+   "kokumin": "yamaguchi-iwakuni"
+  },
+  "352136": {
+   "kousei": "yamaguchi-ube",
+   "kokumin": "yamaguchi-ube"
+  },
+  "352152": {
+   "kousei": "yamaguchi-tokuyama",
+   "kokumin": "yamaguchi-tokuyama"
+  },
+  "352161": {
+   "kousei": "yamaguchi-ube",
+   "kokumin": "yamaguchi-ube"
+  },
+  "362018": {
+   "kousei": null,
+   "kokumin": "tokushima-tokushimakita"
+  },
+  "362026": {
+   "kousei": "tokushima-tokushimakita",
+   "kokumin": "tokushima-tokushimakita"
+  },
+  "362034": {
+   "kousei": null,
+   "kokumin": "tokushima-tokushimaminami"
+  },
+  "362042": {
+   "kousei": null,
+   "kokumin": "tokushima-tokushimaminami"
+  },
+  "362051": {
+   "kousei": "tokushima-tokushimakita",
+   "kokumin": "tokushima-tokushimakita"
+  },
+  "362069": {
+   "kousei": "tokushima-tokushimakita",
+   "kokumin": "tokushima-tokushimakita"
+  },
+  "362077": {
+   "kousei": "tokushima-awahanda",
+   "kokumin": "tokushima-awahanda"
+  },
+  "362085": {
+   "kousei": "tokushima-awahanda",
+   "kokumin": "tokushima-awahanda"
+  },
+  "372013": {
+   "kousei": "kagawa-takamatsunishi",
+   "kokumin": "kagawa-takamatsunishi"
+  },
+  "372021": {
+   "kousei": "kagawa-zentsuji",
+   "kokumin": "kagawa-zentsuji"
+  },
+  "372030": {
+   "kousei": "kagawa-takamatsunishi",
+   "kokumin": "kagawa-takamatsunishi"
+  },
+  "372048": {
+   "kousei": "kagawa-zentsuji",
+   "kokumin": "kagawa-zentsuji"
+  },
+  "372056": {
+   "kousei": "kagawa-zentsuji",
+   "kokumin": "kagawa-zentsuji"
+  },
+  "372064": {
+   "kousei": "kagawa-takamatsunishi",
+   "kokumin": "kagawa-takamatsuhigashi"
+  },
+  "372072": {
+   "kousei": "kagawa-takamatsunishi",
+   "kokumin": "kagawa-takamatsuhigashi"
+  },
+  "372081": {
+   "kousei": "kagawa-zentsuji",
+   "kokumin": "kagawa-zentsuji"
+  },
+  "382019": {
+   "kousei": null,
+   "kokumin": "ehime-matsuyamahigashi"
+  },
+  "382027": {
+   "kousei": "ehime-imabari",
+   "kokumin": "ehime-imabari"
+  },
+  "382035": {
+   "kousei": "ehime-uwajima",
+   "kokumin": "ehime-uwajima"
+  },
+  "382043": {
+   "kousei": "ehime-uwajima",
+   "kokumin": "ehime-uwajima"
+  },
+  "382051": {
+   "kousei": "ehime-nihama",
+   "kokumin": "ehime-nihama"
+  },
+  "382060": {
+   "kousei": null,
+   "kokumin": "ehime-nihama"
+  },
+  "382078": {
+   "kousei": null,
+   "kokumin": "ehime-matsuyamanishi"
+  },
+  "382108": {
+   "kousei": null,
+   "kokumin": "ehime-matsuyamanishi"
+  },
+  "382132": {
+   "kousei": "ehime-nihama",
+   "kokumin": "ehime-nihama"
+  },
+  "382141": {
+   "kousei": "ehime-uwajima",
+   "kokumin": "ehime-uwajima"
+  },
+  "382159": {
+   "kousei": "ehime-matsuyamahigashi",
+   "kokumin": "ehime-matsuyamahigashi"
+  },
+  "392014": {
+   "kousei": "kochi-kochinishi",
+   "kokumin": "kochi-kochinishi"
+  },
+  "392022": {
+   "kousei": "kochi-nankoku",
+   "kokumin": "kochi-nankoku"
+  },
+  "392031": {
+   "kousei": "kochi-nankoku",
+   "kokumin": "kochi-nankoku"
+  },
+  "392049": {
+   "kousei": "kochi-nankoku",
+   "kokumin": "kochi-nankoku"
+  },
+  "392057": {
+   "kousei": "kochi-kochinishi",
+   "kokumin": "kochi-kochinishi"
+  },
+  "392065": {
+   "kousei": "kochi-kochinishi",
+   "kokumin": "kochi-kochinishi"
+  },
+  "392081": {
+   "kousei": "kochi-hata",
+   "kokumin": "kochi-hata"
+  },
+  "392090": {
+   "kousei": "kochi-hata",
+   "kokumin": "kochi-hata"
+  },
+  "392103": {
+   "kousei": "kochi-hata",
+   "kokumin": "kochi-hata"
+  },
+  "392111": {
+   "kousei": "kochi-nankoku",
+   "kokumin": "kochi-nankoku"
+  },
+  "392120": {
+   "kousei": "kochi-nankoku",
+   "kokumin": "kochi-nankoku"
+  },
+  "401013": {
+   "kousei": "fukuoka-kokurakita",
+   "kokumin": "fukuoka-kokurakita"
+  },
+  "401030": {
+   "kousei": "fukuoka-yahata",
+   "kokumin": "fukuoka-yahata"
+  },
+  "401056": {
+   "kousei": "fukuoka-yahata",
+   "kokumin": "fukuoka-yahata"
+  },
+  "401064": {
+   "kousei": "fukuoka-kokurakita",
+   "kokumin": "fukuoka-kokurakita"
+  },
+  "401072": {
+   "kousei": "fukuoka-kokuraminami",
+   "kokumin": "fukuoka-kokuraminami"
+  },
+  "401081": {
+   "kousei": "fukuoka-yahata",
+   "kokumin": "fukuoka-yahata"
+  },
+  "401099": {
+   "kousei": "fukuoka-yahata",
+   "kokumin": "fukuoka-yahata"
+  },
+  "401315": {
+   "kousei": "fukuoka-hakata",
+   "kokumin": "fukuoka-higashifukuoka"
+  },
+  "401323": {
+   "kousei": "fukuoka-hakata",
+   "kokumin": "fukuoka-hakata"
+  },
+  "401331": {
+   "kousei": "fukuoka-nakafukuoka",
+   "kokumin": "fukuoka-nakafukuoka"
+  },
+  "401340": {
+   "kousei": "fukuoka-minamifukuoka",
+   "kokumin": "fukuoka-minamifukuoka"
+  },
+  "401358": {
+   "kousei": "fukuoka-nishifukuoka",
+   "kokumin": "fukuoka-nishifukuoka"
+  },
+  "401366": {
+   "kousei": "fukuoka-nishifukuoka",
+   "kokumin": "fukuoka-nishifukuoka"
+  },
+  "401374": {
+   "kousei": "fukuoka-nishifukuoka",
+   "kokumin": "fukuoka-nishifukuoka"
+  },
+  "402028": {
+   "kousei": "fukuoka-omuta",
+   "kokumin": "fukuoka-omuta"
+  },
+  "402036": {
+   "kousei": "fukuoka-kurume",
+   "kokumin": "fukuoka-kurume"
+  },
+  "402044": {
+   "kousei": "fukuoka-nogata",
+   "kokumin": "fukuoka-nogata"
+  },
+  "402052": {
+   "kousei": "fukuoka-nogata",
+   "kokumin": "fukuoka-nogata"
+  },
+  "402061": {
+   "kousei": "fukuoka-nogata",
+   "kokumin": "fukuoka-nogata"
+  },
+  "402079": {
+   "kousei": "fukuoka-omuta",
+   "kokumin": "fukuoka-omuta"
+  },
+  "402109": {
+   "kousei": "fukuoka-kurume",
+   "kokumin": "fukuoka-kurume"
+  },
+  "402117": {
+   "kousei": "fukuoka-kurume",
+   "kokumin": "fukuoka-kurume"
+  },
+  "402125": {
+   "kousei": "fukuoka-kurume",
+   "kokumin": "fukuoka-kurume"
+  },
+  "402133": {
+   "kousei": "fukuoka-kokuraminami",
+   "kokumin": "fukuoka-kokuraminami"
+  },
+  "402141": {
+   "kousei": "fukuoka-kokuraminami",
+   "kokumin": "fukuoka-kokuraminami"
+  },
+  "402150": {
+   "kousei": "fukuoka-yahata",
+   "kokumin": "fukuoka-yahata"
+  },
+  "402168": {
+   "kousei": "fukuoka-kurume",
+   "kokumin": "fukuoka-kurume"
+  },
+  "402176": {
+   "kousei": "fukuoka-minamifukuoka",
+   "kokumin": "fukuoka-minamifukuoka"
+  },
+  "402184": {
+   "kousei": "fukuoka-minamifukuoka",
+   "kokumin": "fukuoka-minamifukuoka"
+  },
+  "402192": {
+   "kousei": "fukuoka-minamifukuoka",
+   "kokumin": "fukuoka-minamifukuoka"
+  },
+  "402206": {
+   "kousei": "fukuoka-hakata",
+   "kokumin": "fukuoka-higashifukuoka"
+  },
+  "402214": {
+   "kousei": "fukuoka-minamifukuoka",
+   "kokumin": "fukuoka-minamifukuoka"
+  },
+  "402231": {
+   "kousei": "fukuoka-hakata",
+   "kokumin": "fukuoka-higashifukuoka"
+  },
+  "402249": {
+   "kousei": "fukuoka-hakata",
+   "kokumin": "fukuoka-higashifukuoka"
+  },
+  "402257": {
+   "kousei": "fukuoka-kurume",
+   "kokumin": "fukuoka-kurume"
+  },
+  "402265": {
+   "kousei": "fukuoka-nogata",
+   "kokumin": "fukuoka-nogata"
+  },
+  "402273": {
+   "kousei": "fukuoka-nogata",
+   "kokumin": "fukuoka-nogata"
+  },
+  "402281": {
+   "kousei": "fukuoka-minamifukuoka",
+   "kokumin": "fukuoka-minamifukuoka"
+  },
+  "402290": {
+   "kousei": "fukuoka-omuta",
+   "kokumin": "fukuoka-omuta"
+  },
+  "402303": {
+   "kousei": "fukuoka-nishifukuoka",
+   "kokumin": "fukuoka-nishifukuoka"
+  },
+  "402311": {
+   "kousei": "fukuoka-minamifukuoka",
+   "kokumin": "fukuoka-minamifukuoka"
+  },
+  "412015": {
+   "kousei": "saga-saga",
+   "kokumin": "saga-saga"
+  },
+  "412023": {
+   "kousei": "saga-karatsu",
+   "kokumin": "saga-karatsu"
+  },
+  "412031": {
+   "kousei": "saga-saga",
+   "kokumin": "saga-saga"
+  },
+  "412040": {
+   "kousei": "saga-saga",
+   "kokumin": "saga-saga"
+  },
+  "412058": {
+   "kousei": "saga-karatsu",
+   "kokumin": "saga-karatsu"
+  },
+  "412066": {
+   "kousei": "saga-takeo",
+   "kokumin": "saga-takeo"
+  },
+  "412074": {
+   "kousei": "saga-takeo",
+   "kokumin": "saga-takeo"
+  },
+  "412082": {
+   "kousei": "saga-saga",
+   "kokumin": "saga-saga"
+  },
+  "412091": {
+   "kousei": "saga-takeo",
+   "kokumin": "saga-takeo"
+  },
+  "412104": {
+   "kousei": "saga-saga",
+   "kokumin": "saga-saga"
+  },
+  "422011": {
+   "kousei": "nagasaki-nagasakiminami",
+   "kokumin": "nagasaki-nagasakiminami"
+  },
+  "422029": {
+   "kousei": "nagasaki-sasebo",
+   "kokumin": "nagasaki-sasebo"
+  },
+  "422037": {
+   "kousei": "nagasaki-isahaya",
+   "kokumin": "nagasaki-isahaya"
+  },
+  "422045": {
+   "kousei": "nagasaki-isahaya",
+   "kokumin": "nagasaki-isahaya"
+  },
+  "422053": {
+   "kousei": "nagasaki-isahaya",
+   "kokumin": "nagasaki-isahaya"
+  },
+  "422070": {
+   "kousei": "nagasaki-sasebo",
+   "kokumin": "nagasaki-sasebo"
+  },
+  "422088": {
+   "kousei": "nagasaki-sasebo",
+   "kokumin": "nagasaki-sasebo"
+  },
+  "422096": {
+   "kousei": "nagasaki-nagasakiminami",
+   "kokumin": "nagasaki-nagasakiminami"
+  },
+  "422100": {
+   "kousei": "nagasaki-nagasakiminami",
+   "kokumin": "nagasaki-nagasakiminami"
+  },
+  "422118": {
+   "kousei": "nagasaki-nagasakiminami",
+   "kokumin": "nagasaki-nagasakiminami"
+  },
+  "422126": {
+   "kousei": "nagasaki-nagasakiminami",
+   "kokumin": "nagasaki-nagasakiminami"
+  },
+  "422134": {
+   "kousei": "nagasaki-isahaya",
+   "kokumin": "nagasaki-isahaya"
+  },
+  "422142": {
+   "kousei": "nagasaki-isahaya",
+   "kokumin": "nagasaki-isahaya"
+  },
+  "431010": {
+   "kousei": "kumamoto-kumamotohigashi",
+   "kokumin": "kumamoto-kumamotonishi"
+  },
+  "431028": {
+   "kousei": "kumamoto-kumamotohigashi",
+   "kokumin": "kumamoto-kumamotonishi"
+  },
+  "431036": {
+   "kousei": "kumamoto-kumamotohigashi",
+   "kokumin": "kumamoto-kumamotonishi"
+  },
+  "431044": {
+   "kousei": "kumamoto-kumamotohigashi",
+   "kokumin": "kumamoto-kumamotonishi"
+  },
+  "431052": {
+   "kousei": "kumamoto-kumamotohigashi",
+   "kokumin": "kumamoto-kumamotonishi"
+  },
+  "432024": {
+   "kousei": "kumamoto-yatsushiro",
+   "kokumin": "kumamoto-yatsushiro"
+  },
+  "432032": {
+   "kousei": "kumamoto-yatsushiro",
+   "kokumin": "kumamoto-yatsushiro"
+  },
+  "432041": {
+   "kousei": "kumamoto-tamana",
+   "kokumin": "kumamoto-tamana"
+  },
+  "432059": {
+   "kousei": "kumamoto-yatsushiro",
+   "kokumin": "kumamoto-yatsushiro"
+  },
+  "432067": {
+   "kousei": "kumamoto-tamana",
+   "kokumin": "kumamoto-tamana"
+  },
+  "432083": {
+   "kousei": "kumamoto-kumamotohigashi",
+   "kokumin": "kumamoto-kumamotonishi"
+  },
+  "432105": {
+   "kousei": "kumamoto-kumamotohigashi",
+   "kokumin": "kumamoto-kumamotonishi"
+  },
+  "432113": {
+   "kousei": "kumamoto-kumamotohigashi",
+   "kokumin": "kumamoto-kumamotohigashi"
+  },
+  "432121": {
+   "kousei": "kumamoto-hondo",
+   "kokumin": "kumamoto-hondo"
+  },
+  "432130": {
+   "kousei": "kumamoto-kumamotohigashi",
+   "kokumin": "kumamoto-kumamotohigashi"
+  },
+  "432148": {
+   "kousei": "kumamoto-kumamotohigashi",
+   "kokumin": "kumamoto-kumamotohigashi"
+  },
+  "432156": {
+   "kousei": "kumamoto-hondo",
+   "kokumin": "kumamoto-hondo"
+  },
+  "432164": {
+   "kousei": "kumamoto-kumamotohigashi",
+   "kokumin": "kumamoto-kumamotonishi"
+  },
+  "442011": {
+   "kousei": "oita-oita",
+   "kokumin": "oita-oita"
+  },
+  "442020": {
+   "kousei": "oita-beppu",
+   "kokumin": "oita-beppu"
+  },
+  "442038": {
+   "kousei": "oita-beppu",
+   "kokumin": "oita-beppu"
+  },
+  "442046": {
+   "kousei": "oita-hita",
+   "kokumin": "oita-hita"
+  },
+  "442054": {
+   "kousei": "oita-saiki",
+   "kokumin": "oita-saiki"
+  },
+  "442062": {
+   "kousei": "oita-saiki",
+   "kokumin": "oita-saiki"
+  },
+  "442071": {
+   "kousei": "oita-saiki",
+   "kokumin": "oita-saiki"
+  },
+  "442089": {
+   "kousei": "oita-oita",
+   "kokumin": "oita-oita"
+  },
+  "442097": {
+   "kousei": "oita-beppu",
+   "kokumin": "oita-beppu"
+  },
+  "442101": {
+   "kousei": "oita-beppu",
+   "kokumin": "oita-beppu"
+  },
+  "442119": {
+   "kousei": "oita-beppu",
+   "kokumin": "oita-beppu"
+  },
+  "442127": {
+   "kousei": "oita-oita",
+   "kokumin": "oita-oita"
+  },
+  "442135": {
+   "kousei": "oita-oita",
+   "kokumin": "oita-oita"
+  },
+  "442143": {
+   "kousei": "oita-beppu",
+   "kokumin": "oita-beppu"
+  },
+  "452017": {
+   "kousei": "miyazaki-miyazaki",
+   "kokumin": "miyazaki-miyazaki"
+  },
+  "452025": {
+   "kousei": "miyazaki-miyakonojo",
+   "kokumin": "miyazaki-miyakonojo"
+  },
+  "452033": {
+   "kousei": "miyazaki-nobeoka",
+   "kokumin": "miyazaki-nobeoka"
+  },
+  "452041": {
+   "kousei": "miyazaki-miyazaki",
+   "kokumin": "miyazaki-miyazaki"
+  },
+  "452050": {
+   "kousei": "miyazaki-miyakonojo",
+   "kokumin": "miyazaki-miyakonojo"
+  },
+  "452068": {
+   "kousei": "miyazaki-nobeoka",
+   "kokumin": "miyazaki-nobeoka"
+  },
+  "452076": {
+   "kousei": "miyazaki-miyakonojo",
+   "kokumin": "miyazaki-miyakonojo"
+  },
+  "452084": {
+   "kousei": "miyazaki-takanabe",
+   "kokumin": "miyazaki-takanabe"
+  },
+  "452092": {
+   "kousei": "miyazaki-miyakonojo",
+   "kokumin": "miyazaki-miyakonojo"
+  },
+  "462012": {
+   "kousei": null,
+   "kokumin": "kagoshima-kagoshimakita"
+  },
+  "462039": {
+   "kousei": "kagoshima-kanoya",
+   "kokumin": "kagoshima-kanoya"
+  },
+  "462047": {
+   "kousei": null,
+   "kokumin": "kagoshima-kagoshimaminami"
+  },
+  "462063": {
+   "kousei": "kagoshima-sendai",
+   "kokumin": "kagoshima-sendai"
+  },
+  "462080": {
+   "kousei": "kagoshima-sendai",
+   "kokumin": "kagoshima-sendai"
+  },
+  "462101": {
+   "kousei": null,
+   "kokumin": "kagoshima-kagoshimaminami"
+  },
+  "462136": {
+   "kousei": "kagoshima-kagoshimakita",
+   "kokumin": "kagoshima-kagoshimakita"
+  },
+  "462144": {
+   "kousei": "kagoshima-kanoya",
+   "kokumin": "kagoshima-kanoya"
+  },
+  "462152": {
+   "kousei": "kagoshima-sendai",
+   "kokumin": "kagoshima-sendai"
+  },
+  "462161": {
+   "kousei": "kagoshima-kagoshimakita",
+   "kokumin": "kagoshima-kagoshimakita"
+  },
+  "462179": {
+   "kousei": "kagoshima-kanoya",
+   "kokumin": "kagoshima-kanoya"
+  },
+  "462187": {
+   "kousei": "kagoshima-kajiki",
+   "kokumin": "kagoshima-kajiki"
+  },
+  "462195": {
+   "kousei": "kagoshima-sendai",
+   "kokumin": "kagoshima-sendai"
+  },
+  "462209": {
+   "kousei": null,
+   "kokumin": "kagoshima-kagoshimaminami"
+  },
+  "462217": {
+   "kousei": "kagoshima-kanoya",
+   "kokumin": "kagoshima-kanoya"
+  },
+  "462225": {
+   "kousei": "kagoshima-amamioshima",
+   "kokumin": "kagoshima-amamioshima"
+  },
+  "462233": {
+   "kousei": null,
+   "kokumin": "kagoshima-kagoshimaminami"
+  },
+  "462241": {
+   "kousei": "kagoshima-kajiki",
+   "kokumin": "kagoshima-kajiki"
+  },
+  "462250": {
+   "kousei": "kagoshima-kajiki",
+   "kokumin": "kagoshima-kajiki"
+  },
+  "472018": {
+   "kousei": null,
+   "kokumin": "okinawa-naha"
+  },
+  "472051": {
+   "kousei": "okinawa-koza",
+   "kokumin": "okinawa-koza"
+  },
+  "472077": {
+   "kousei": "okinawa-ishigaki",
+   "kokumin": "okinawa-ishigaki"
+  },
+  "472085": {
+   "kousei": "okinawa-urasoe",
+   "kokumin": "okinawa-urasoe"
+  },
+  "472093": {
+   "kousei": "okinawa-nago",
+   "kokumin": "okinawa-nago"
+  },
+  "472107": {
+   "kousei": "okinawa-naha",
+   "kokumin": "okinawa-naha"
+  },
+  "472115": {
+   "kousei": "okinawa-koza",
+   "kokumin": "okinawa-koza"
+  },
+  "472123": {
+   "kousei": "okinawa-naha",
+   "kokumin": "okinawa-naha"
+  },
+  "472131": {
+   "kousei": "okinawa-koza",
+   "kokumin": "okinawa-koza"
+  },
+  "472140": {
+   "kousei": "okinawa-hirara",
+   "kokumin": "okinawa-hirara"
+  },
+  "472158": {
+   "kousei": null,
+   "kokumin": "okinawa-urasoe"
+  },
+  "473294": {
+   "kousei": "okinawa-urasoe",
+   "kokumin": "okinawa-urasoe"
+  },
+  "473481": {
+   "kousei": "okinawa-urasoe",
+   "kokumin": "okinawa-urasoe"
+  },
+  "473596": {
+   "kousei": "okinawa-nago",
+   "kokumin": "okinawa-nago"
+  },
+  "473600": {
+   "kousei": "okinawa-nago",
+   "kokumin": "okinawa-nago"
+  },
+  "473618": {
+   "kousei": "okinawa-urasoe",
+   "kokumin": "okinawa-urasoe"
+  },
+  "011037": {
+   "kousei": "hokkaido-sapporohigashi",
+   "kokumin": "hokkaido-sapporohigashi"
+  },
+  "011045": {
+   "kousei": "hokkaido-sapporohigashi",
+   "kokumin": "hokkaido-sapporohigashi"
+  },
+  "011053": {
+   "kousei": "hokkaido-sapporohigashi",
+   "kokumin": "hokkaido-sapporohigashi"
+  },
+  "011011": {
+   "kousei": "hokkaido-sapporonishi",
+   "kokumin": "hokkaido-sapporonishi"
+  },
+  "011029": {
+   "kousei": "hokkaido-sapporonishi",
+   "kokumin": "hokkaido-sapporokita"
+  },
+  "011061": {
+   "kousei": "hokkaido-sapporonishi",
+   "kokumin": "hokkaido-sapporonishi"
+  },
+  "011070": {
+   "kousei": "hokkaido-sapporonishi",
+   "kokumin": "hokkaido-sapporokita"
+  },
+  "011096": {
+   "kousei": "hokkaido-sapporonishi",
+   "kokumin": "hokkaido-sapporokita"
+  },
+  "012351": {
+   "kousei": "hokkaido-sapporonishi",
+   "kokumin": "hokkaido-sapporokita"
+  },
+  "011088": {
+   "kousei": "hokkaido-shinsapporo",
+   "kokumin": "hokkaido-shinsapporo"
+  },
+  "011100": {
+   "kousei": "hokkaido-shinsapporo",
+   "kokumin": "hokkaido-shinsapporo"
+  },
+  "012173": {
+   "kousei": "hokkaido-shinsapporo",
+   "kokumin": "hokkaido-shinsapporo"
+  },
+  "012246": {
+   "kousei": "hokkaido-shinsapporo",
+   "kokumin": "hokkaido-shinsapporo"
+  },
+  "012319": {
+   "kousei": "hokkaido-shinsapporo",
+   "kokumin": "hokkaido-shinsapporo"
+  },
+  "012343": {
+   "kousei": "hokkaido-shinsapporo",
+   "kokumin": "hokkaido-shinsapporo"
+  },
+  "012025": {
+   "kousei": "hokkaido-hakodate",
+   "kokumin": "hokkaido-hakodate"
+  },
+  "012360": {
+   "kousei": "hokkaido-hakodate",
+   "kokumin": "hokkaido-hakodate"
+  },
+  "014729": {
+   "kousei": "hokkaido-asahikawa",
+   "kokumin": "hokkaido-asahikawa"
+  },
+  "012041": {
+   "kousei": "hokkaido-asahikawa",
+   "kokumin": "hokkaido-asahikawa"
+  },
+  "012203": {
+   "kousei": "hokkaido-asahikawa",
+   "kokumin": "hokkaido-asahikawa"
+  },
+  "012211": {
+   "kousei": "hokkaido-asahikawa",
+   "kokumin": "hokkaido-asahikawa"
+  },
+  "012297": {
+   "kousei": "hokkaido-asahikawa",
+   "kokumin": "hokkaido-asahikawa"
+  },
+  "012068": {
+   "kousei": "hokkaido-kushiro",
+   "kokumin": "hokkaido-kushiro"
+  },
+  "012238": {
+   "kousei": "hokkaido-kushiro",
+   "kokumin": "hokkaido-kushiro"
+  },
+  "015717": {
+   "kousei": "hokkaido-muroran",
+   "kokumin": "hokkaido-muroran"
+  },
+  "015849": {
+   "kousei": "hokkaido-muroran",
+   "kokumin": "hokkaido-muroran"
+  },
+  "012050": {
+   "kousei": "hokkaido-muroran",
+   "kokumin": "hokkaido-muroran"
+  },
+  "012301": {
+   "kousei": "hokkaido-muroran",
+   "kokumin": "hokkaido-muroran"
+  },
+  "012335": {
+   "kousei": "hokkaido-muroran",
+   "kokumin": "hokkaido-muroran"
+  },
+  "012131": {
+   "kousei": "hokkaido-tomakomai",
+   "kokumin": "hokkaido-tomakomai"
+  },
+  "014231": {
+   "kousei": "hokkaido-iwamizawa",
+   "kokumin": "hokkaido-iwamizawa"
+  },
+  "014303": {
+   "kousei": "hokkaido-iwamizawa",
+   "kokumin": "hokkaido-iwamizawa"
+  },
+  "012106": {
+   "kousei": "hokkaido-iwamizawa",
+   "kokumin": "hokkaido-iwamizawa"
+  },
+  "012092": {
+   "kousei": "hokkaido-iwamizawa",
+   "kokumin": "hokkaido-iwamizawa"
+  },
+  "012157": {
+   "kousei": "hokkaido-iwamizawa",
+   "kokumin": "hokkaido-iwamizawa"
+  },
+  "012220": {
+   "kousei": "hokkaido-iwamizawa",
+   "kokumin": "hokkaido-iwamizawa"
+  },
+  "012033": {
+   "kousei": "hokkaido-otaru",
+   "kokumin": "hokkaido-otaru"
+  },
+  "012084": {
+   "kousei": "hokkaido-kitami",
+   "kokumin": "hokkaido-kitami"
+  },
+  "012114": {
+   "kousei": "hokkaido-kitami",
+   "kokumin": "hokkaido-kitami"
+  },
+  "012190": {
+   "kousei": "hokkaido-kitami",
+   "kokumin": "hokkaido-kitami"
+  },
+  "016357": {
+   "kousei": "hokkaido-obihiro",
+   "kokumin": "hokkaido-obihiro"
+  },
+  "016365": {
+   "kousei": "hokkaido-obihiro",
+   "kokumin": "hokkaido-obihiro"
+  },
+  "016438": {
+   "kousei": "hokkaido-obihiro",
+   "kokumin": "hokkaido-obihiro"
+  },
+  "016446": {
+   "kousei": "hokkaido-obihiro",
+   "kokumin": "hokkaido-obihiro"
+  },
+  "016454": {
+   "kousei": "hokkaido-obihiro",
+   "kokumin": "hokkaido-obihiro"
+  },
+  "016462": {
+   "kousei": "hokkaido-obihiro",
+   "kokumin": "hokkaido-obihiro"
+  },
+  "012076": {
+   "kousei": "hokkaido-obihiro",
+   "kokumin": "hokkaido-obihiro"
+  },
+  "012149": {
+   "kousei": "hokkaido-wakkanai",
+   "kokumin": "hokkaido-wakkanai"
+  },
+  "012262": {
+   "kousei": "hokkaido-sunagawa",
+   "kokumin": "hokkaido-sunagawa"
+  },
+  "012165": {
+   "kousei": "hokkaido-sunagawa",
+   "kokumin": "hokkaido-sunagawa"
+  },
+  "012181": {
+   "kousei": "hokkaido-sunagawa",
+   "kokumin": "hokkaido-sunagawa"
+  },
+  "012254": {
+   "kousei": "hokkaido-sunagawa",
+   "kokumin": "hokkaido-sunagawa"
+  },
+  "012271": {
+   "kousei": "hokkaido-sunagawa",
+   "kokumin": "hokkaido-sunagawa"
+  },
+  "012289": {
+   "kousei": "hokkaido-sunagawa",
+   "kokumin": "hokkaido-sunagawa"
+  },
+  "012122": {
+   "kousei": "hokkaido-rumoi",
+   "kokumin": "hokkaido-rumoi"
+  },
+  "024015": {
+   "kousei": "aomori-aomori",
+   "kokumin": "aomori-aomori"
+  },
+  "024023": {
+   "kousei": "aomori-aomori",
+   "kokumin": "aomori-aomori"
+  },
+  "024082": {
+   "kousei": "aomori-aomori",
+   "kokumin": "aomori-aomori"
+  },
+  "022012": {
+   "kousei": "aomori-aomori",
+   "kokumin": "aomori-aomori"
+  },
+  "024066": {
+   "kousei": "aomori-mutsu",
+   "kokumin": "aomori-mutsu"
+  },
+  "024112": {
+   "kousei": "aomori-mutsu",
+   "kokumin": "aomori-mutsu"
+  },
+  "022080": {
+   "kousei": "aomori-mutsu",
+   "kokumin": "aomori-mutsu"
+  },
+  "024058": {
+   "kousei": "aomori-hachinohe",
+   "kokumin": "aomori-hachinohe"
+  },
+  "024121": {
+   "kousei": "aomori-hachinohe",
+   "kokumin": "aomori-hachinohe"
+  },
+  "022039": {
+   "kousei": "aomori-hachinohe",
+   "kokumin": "aomori-hachinohe"
+  },
+  "022063": {
+   "kousei": "aomori-hachinohe",
+   "kokumin": "aomori-hachinohe"
+  },
+  "022071": {
+   "kousei": "aomori-hachinohe",
+   "kokumin": "aomori-hachinohe"
+  },
+  "022021": {
+   "kousei": "aomori-hirosaki",
+   "kokumin": "aomori-hirosaki"
+  },
+  "022047": {
+   "kousei": "aomori-hirosaki",
+   "kokumin": "aomori-hirosaki"
+  },
+  "022055": {
+   "kousei": "aomori-hirosaki",
+   "kokumin": "aomori-hirosaki"
+  },
+  "022098": {
+   "kousei": "aomori-hirosaki",
+   "kokumin": "aomori-hirosaki"
+  },
+  "022101": {
+   "kousei": "aomori-hirosaki",
+   "kokumin": "aomori-hirosaki"
+  },
+  "032018": {
+   "kousei": "iwate-morioka",
+   "kokumin": "iwate-morioka"
+  },
+  "032140": {
+   "kousei": "iwate-morioka",
+   "kokumin": "iwate-morioka"
+  },
+  "032166": {
+   "kousei": "iwate-morioka",
+   "kokumin": "iwate-morioka"
+  },
+  "032051": {
+   "kousei": "iwate-hanamaki",
+   "kokumin": "iwate-hanamaki"
+  },
+  "032069": {
+   "kousei": "iwate-hanamaki",
+   "kokumin": "iwate-hanamaki"
+  },
+  "032085": {
+   "kousei": "iwate-hanamaki",
+   "kokumin": "iwate-hanamaki"
+  },
+  "032131": {
+   "kousei": "iwate-ninohe",
+   "kokumin": "iwate-ninohe"
+  },
+  "032077": {
+   "kousei": "iwate-ninohe",
+   "kokumin": "iwate-ninohe"
+  },
+  "032093": {
+   "kousei": "iwate-ichinoseki",
+   "kokumin": "iwate-ichinoseki"
+  },
+  "032034": {
+   "kousei": "iwate-ichinoseki",
+   "kokumin": "iwate-ichinoseki"
+  },
+  "032107": {
+   "kousei": "iwate-ichinoseki",
+   "kokumin": "iwate-ichinoseki"
+  },
+  "032158": {
+   "kousei": "iwate-ichinoseki",
+   "kokumin": "iwate-ichinoseki"
+  },
+  "032026": {
+   "kousei": "iwate-miyako",
+   "kokumin": "iwate-miyako"
+  },
+  "032115": {
+   "kousei": "iwate-miyako",
+   "kokumin": "iwate-miyako"
+  },
+  "041017": {
+   "kousei": "miyagi-sendaihigashi",
+   "kokumin": "miyagi-sendaikita"
+  },
+  "041025": {
+   "kousei": "miyagi-sendaihigashi",
+   "kokumin": "miyagi-sendaihigashi"
+  },
+  "041033": {
+   "kousei": "miyagi-sendaihigashi",
+   "kokumin": "miyagi-sendaiminami"
+  },
+  "041041": {
+   "kousei": "miyagi-sendaihigashi",
+   "kokumin": "miyagi-sendaiminami"
+  },
+  "041050": {
+   "kousei": "miyagi-sendaihigashi",
+   "kokumin": "miyagi-sendaikita"
+  },
+  "042030": {
+   "kousei": "miyagi-sendaihigashi",
+   "kokumin": "miyagi-sendaihigashi"
+  },
+  "042072": {
+   "kousei": "miyagi-sendaihigashi",
+   "kokumin": "miyagi-sendaiminami"
+  },
+  "042099": {
+   "kousei": "miyagi-sendaihigashi",
+   "kokumin": "miyagi-sendaihigashi"
+  },
+  "042111": {
+   "kousei": "miyagi-sendaihigashi",
+   "kokumin": "miyagi-sendaiminami"
+  },
+  "042161": {
+   "kousei": "miyagi-sendaihigashi",
+   "kokumin": "miyagi-sendaikita"
+  },
+  "042064": {
+   "kousei": "miyagi-ogawara",
+   "kokumin": "miyagi-ogawara"
+  },
+  "042081": {
+   "kousei": "miyagi-ogawara",
+   "kokumin": "miyagi-ogawara"
+  },
+  "042021": {
+   "kousei": "miyagi-ishinomaki",
+   "kokumin": "miyagi-ishinomaki"
+  },
+  "042056": {
+   "kousei": "miyagi-ishinomaki",
+   "kokumin": "miyagi-ishinomaki"
+  },
+  "042145": {
+   "kousei": "miyagi-ishinomaki",
+   "kokumin": "miyagi-ishinomaki"
+  },
+  "042153": {
+   "kousei": "miyagi-furukawa",
+   "kokumin": "miyagi-furukawa"
+  },
+  "042129": {
+   "kousei": "miyagi-furukawa",
+   "kokumin": "miyagi-furukawa"
+  },
+  "042137": {
+   "kousei": "miyagi-furukawa",
+   "kokumin": "miyagi-furukawa"
+  },
+  "053481": {
+   "kousei": "akita-akitajimusho",
+   "kokumin": "akita-akitajimusho"
+  },
+  "052019": {
+   "kousei": "akita-akitajimusho",
+   "kokumin": "akita-akitajimusho"
+  },
+  "052060": {
+   "kousei": "akita-akitajimusho",
+   "kokumin": "akita-akitajimusho"
+  },
+  "052116": {
+   "kousei": "akita-akitajimusho",
+   "kokumin": "akita-akitajimusho"
+  },
+  "052132": {
+   "kousei": "akita-takanosu",
+   "kokumin": "akita-takanosu"
+  },
+  "052027": {
+   "kousei": "akita-takanosu",
+   "kokumin": "akita-takanosu"
+  },
+  "052043": {
+   "kousei": "akita-takanosu",
+   "kokumin": "akita-takanosu"
+  },
+  "052094": {
+   "kousei": "akita-takanosu",
+   "kokumin": "akita-takanosu"
+  },
+  "052124": {
+   "kousei": "akita-omagari",
+   "kokumin": "akita-omagari"
+  },
+  "052035": {
+   "kousei": "akita-omagari",
+   "kokumin": "akita-omagari"
+  },
+  "052078": {
+   "kousei": "akita-omagari",
+   "kokumin": "akita-omagari"
+  },
+  "052159": {
+   "kousei": "akita-omagari",
+   "kokumin": "akita-omagari"
+  },
+  "052108": {
+   "kousei": "akita-honjo",
+   "kokumin": "akita-honjo"
+  },
+  "052141": {
+   "kousei": "akita-honjo",
+   "kokumin": "akita-honjo"
+  },
+  "062014": {
+   "kousei": "yamagata-yamagata",
+   "kokumin": "yamagata-yamagata"
+  },
+  "062073": {
+   "kousei": "yamagata-yamagata",
+   "kokumin": "yamagata-yamagata"
+  },
+  "062103": {
+   "kousei": "yamagata-yamagata",
+   "kokumin": "yamagata-yamagata"
+  },
+  "062065": {
+   "kousei": "yamagata-sagae",
+   "kokumin": "yamagata-sagae"
+  },
+  "062081": {
+   "kousei": "yamagata-sagae",
+   "kokumin": "yamagata-sagae"
+  },
+  "062111": {
+   "kousei": "yamagata-sagae",
+   "kokumin": "yamagata-sagae"
+  },
+  "062057": {
+   "kousei": "yamagata-shinjo",
+   "kokumin": "yamagata-shinjo"
+  },
+  "062120": {
+   "kousei": "yamagata-shinjo",
+   "kokumin": "yamagata-shinjo"
+  },
+  "062031": {
+   "kousei": "yamagata-tsuruoka",
+   "kokumin": "yamagata-tsuruoka"
+  },
+  "062049": {
+   "kousei": "yamagata-tsuruoka",
+   "kokumin": "yamagata-tsuruoka"
+  },
+  "062022": {
+   "kousei": "yamagata-yonezawa",
+   "kokumin": "yamagata-yonezawa"
+  },
+  "062090": {
+   "kousei": "yamagata-yonezawa",
+   "kokumin": "yamagata-yonezawa"
+  },
+  "062138": {
+   "kousei": "yamagata-yonezawa",
+   "kokumin": "yamagata-yonezawa"
+  },
+  "072010": {
+   "kousei": "fukushima-tohokufukushima",
+   "kokumin": "fukushima-tohokufukushima"
+  },
+  "072109": {
+   "kousei": "fukushima-tohokufukushima",
+   "kokumin": "fukushima-tohokufukushima"
+  },
+  "072133": {
+   "kousei": "fukushima-tohokufukushima",
+   "kokumin": "fukushima-tohokufukushima"
+  },
+  "072141": {
+   "kousei": "fukushima-tohokufukushima",
+   "kokumin": "fukushima-tohokufukushima"
+  },
+  "072044": {
+   "kousei": "fukushima-taira",
+   "kokumin": "fukushima-taira"
+  },
+  "072095": {
+   "kousei": "fukushima-soma",
+   "kokumin": "fukushima-soma"
+  },
+  "072125": {
+   "kousei": "fukushima-soma",
+   "kokumin": "fukushima-soma"
+  },
+  "072036": {
+   "kousei": "fukushima-koriyama",
+   "kokumin": "fukushima-koriyama"
+  },
+  "072079": {
+   "kousei": "fukushima-koriyama",
+   "kokumin": "fukushima-koriyama"
+  },
+  "072117": {
+   "kousei": "fukushima-koriyama",
+   "kokumin": "fukushima-koriyama"
+  },
+  "072052": {
+   "kousei": "fukushima-shirakawa",
+   "kokumin": "fukushima-shirakawa"
+  },
+  "072028": {
+   "kousei": "fukushima-aizuwakamatsu",
+   "kokumin": "fukushima-aizuwakamatsu"
+  },
+  "072087": {
+   "kousei": "fukushima-aizuwakamatsu",
+   "kokumin": "fukushima-aizuwakamatsu"
+  },
+  "082163": {
+   "kousei": null,
+   "kokumin": "ibaraki-mitominami"
+  },
+  "082228": {
+   "kousei": null,
+   "kokumin": "ibaraki-mitominami"
+  },
+  "082236": {
+   "kousei": null,
+   "kokumin": "ibaraki-mitominami"
+  },
+  "082325": {
+   "kousei": null,
+   "kokumin": "ibaraki-mitominami"
+  },
+  "082333": {
+   "kousei": null,
+   "kokumin": "ibaraki-mitominami"
+  },
+  "082341": {
+   "kousei": null,
+   "kokumin": "ibaraki-mitominami"
+  },
+  "082368": {
+   "kousei": null,
+   "kokumin": "ibaraki-mitominami"
+  },
+  "082121": {
+   "kousei": "ibaraki-mitokita",
+   "kokumin": "ibaraki-mitokita"
+  },
+  "082210": {
+   "kousei": "ibaraki-mitokita",
+   "kokumin": "ibaraki-mitokita"
+  },
+  "082252": {
+   "kousei": "ibaraki-mitokita",
+   "kokumin": "ibaraki-mitokita"
+  },
+  "082261": {
+   "kousei": "ibaraki-mitokita",
+   "kokumin": "ibaraki-mitokita"
+  },
+  "082015": {
+   "kousei": null,
+   "kokumin": "ibaraki-mitokita"
+  },
+  "082031": {
+   "kousei": "ibaraki-tsuchiura",
+   "kokumin": "ibaraki-tsuchiura"
+  },
+  "082058": {
+   "kousei": "ibaraki-tsuchiura",
+   "kokumin": "ibaraki-tsuchiura"
+  },
+  "082082": {
+   "kousei": "ibaraki-tsuchiura",
+   "kokumin": "ibaraki-tsuchiura"
+  },
+  "082171": {
+   "kousei": "ibaraki-tsuchiura",
+   "kokumin": "ibaraki-tsuchiura"
+  },
+  "082198": {
+   "kousei": "ibaraki-tsuchiura",
+   "kokumin": "ibaraki-tsuchiura"
+  },
+  "082201": {
+   "kousei": "ibaraki-tsuchiura",
+   "kokumin": "ibaraki-tsuchiura"
+  },
+  "082244": {
+   "kousei": "ibaraki-tsuchiura",
+   "kokumin": "ibaraki-tsuchiura"
+  },
+  "082295": {
+   "kousei": "ibaraki-tsuchiura",
+   "kokumin": "ibaraki-tsuchiura"
+  },
+  "082309": {
+   "kousei": "ibaraki-tsuchiura",
+   "kokumin": "ibaraki-tsuchiura"
+  },
+  "082350": {
+   "kousei": "ibaraki-tsuchiura",
+   "kokumin": "ibaraki-tsuchiura"
+  },
+  "082279": {
+   "kousei": "ibaraki-shimodate",
+   "kokumin": "ibaraki-shimodate"
+  },
+  "082040": {
+   "kousei": "ibaraki-shimodate",
+   "kokumin": "ibaraki-shimodate"
+  },
+  "082074": {
+   "kousei": "ibaraki-shimodate",
+   "kokumin": "ibaraki-shimodate"
+  },
+  "082104": {
+   "kousei": "ibaraki-shimodate",
+   "kokumin": "ibaraki-shimodate"
+  },
+  "082287": {
+   "kousei": "ibaraki-shimodate",
+   "kokumin": "ibaraki-shimodate"
+  },
+  "082317": {
+   "kousei": "ibaraki-shimodate",
+   "kokumin": "ibaraki-shimodate"
+  },
+  "082112": {
+   "kousei": "ibaraki-shimodate",
+   "kokumin": "ibaraki-shimodate"
+  },
+  "082023": {
+   "kousei": "ibaraki-hitachi",
+   "kokumin": "ibaraki-hitachi"
+  },
+  "082147": {
+   "kousei": "ibaraki-hitachi",
+   "kokumin": "ibaraki-hitachi"
+  },
+  "082155": {
+   "kousei": "ibaraki-hitachi",
+   "kokumin": "ibaraki-hitachi"
+  },
+  "093866": {
+   "kousei": "tochigi-utsunomiyahigashi",
+   "kokumin": "tochigi-utsunomiyahigashi"
+  },
+  "094111": {
+   "kousei": "tochigi-utsunomiyahigashi",
+   "kokumin": "tochigi-utsunomiyahigashi"
+  },
+  "092096": {
+   "kousei": null,
+   "kokumin": "tochigi-utsunomiyahigashi"
+  },
+  "092142": {
+   "kousei": null,
+   "kokumin": "tochigi-utsunomiyahigashi"
+  },
+  "092151": {
+   "kousei": null,
+   "kokumin": "tochigi-utsunomiyahigashi"
+  },
+  "092053": {
+   "kousei": "tochigi-utsunomiyanishi",
+   "kokumin": "tochigi-utsunomiyanishi"
+  },
+  "092011": {
+   "kousei": null,
+   "kokumin": "tochigi-utsunomiyanishi"
+  },
+  "092100": {
+   "kousei": "tochigi-otawara",
+   "kokumin": "tochigi-otawara"
+  },
+  "092118": {
+   "kousei": "tochigi-otawara",
+   "kokumin": "tochigi-otawara"
+  },
+  "092134": {
+   "kousei": "tochigi-otawara",
+   "kokumin": "tochigi-otawara"
+  },
+  "092037": {
+   "kousei": "tochigi-tochigi",
+   "kokumin": "tochigi-tochigi"
+  },
+  "092029": {
+   "kousei": "tochigi-tochigi",
+   "kokumin": "tochigi-tochigi"
+  },
+  "092045": {
+   "kousei": "tochigi-tochigi",
+   "kokumin": "tochigi-tochigi"
+  },
+  "092088": {
+   "kousei": "tochigi-tochigi",
+   "kokumin": "tochigi-tochigi"
+  },
+  "092169": {
+   "kousei": "tochigi-tochigi",
+   "kokumin": "tochigi-tochigi"
+  },
+  "092061": {
+   "kousei": "tochigi-imaichi",
+   "kokumin": "tochigi-imaichi"
+  }
+ }
+}

@@ -33,3 +33,9 @@ next-env.d.ts
 
 # Spotlight exclusion markers
 .metadata_never_index
+
+# 年金事務所データの取得元HTML(scripts/madoguchi/fetch.mjs)。
+# 500ページ・数十MBあり、毎年の再取得で git 履歴に積み上がるのでコミットしない。
+# 証跡は data/madoguchi/offices.json の url + sourceHash(sha256先頭16) + checkedOn で残す。
+# 再現用の固定資料は scripts/madoguchi/fixtures/ に代表5ファイルだけ置いている。
+/docs/verification/madoguchi-source-*/
