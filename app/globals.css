@@ -3049,3 +3049,64 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
 .mt-cross{margin-top:28px}.mt-cross h2{margin:0 0 10px;font:700 1.08rem/1.55 var(--font-platform-heading),sans-serif;color:var(--platform-heading)}
 @media(max-width:600px){.dougu-band,.dougu-cross{grid-template-columns:1fr}}
 @media print{.dougu-cross,.mt-cross{display:none!important}}
+
+/* /dougu/moushitatesho — 書く人の順で進む画面 */
+.mt-redesign{--mt-primary:#0284c7;--mt-soft:#e8f4fc;--mt-border:#d5e3ec;color:var(--platform-text)}
+.mt-redesign .mt-panel{padding:clamp(22px,5vw,40px);border:0;border-radius:16px;background:#fff}
+.mt-redesign .mt-intro-panel{display:grid;gap:22px}
+.mt-redesign h1{margin:0;color:var(--platform-heading);font:700 clamp(1.8rem,5vw,2.5rem)/1.4 var(--font-platform-heading),sans-serif}
+.mt-redesign h2{margin:0 0 22px;color:var(--platform-heading);font:700 clamp(20px,4vw,22px)/1.55 var(--font-platform-heading),sans-serif}
+.mt-intro-lead,.mt-explanation{font-size:16px;line-height:1.9;color:var(--platform-text)}
+.mt-reassurance{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+.mt-reassurance span{padding:7px 12px;border-radius:999px;background:#f1f4f6;color:#445566;font-size:16px}
+.mt-start{justify-self:start}
+.mt-resume{display:grid;gap:12px;padding:18px;border-radius:12px;background:var(--mt-soft);font-size:16px}
+.mt-resume>div{display:flex;flex-wrap:wrap;gap:10px}
+.mt-flow-head{position:relative;padding:18px 0 24px}
+.mt-progress-line{height:4px;margin-right:110px;border-radius:999px;background:var(--mt-border);overflow:hidden}
+.mt-progress-line span{display:block;height:100%;background:var(--mt-primary)}
+.mt-interrupt{position:absolute;top:0;right:0;padding:8px;border:0;background:transparent;color:var(--platform-muted);font-size:16px;text-decoration:underline}
+.mt-save-status{margin:14px 0 0;color:var(--platform-muted);font-size:16px}
+.mt-redesign button,.mt-redesign .mt-file,.mt-redesign .mt-print-link{min-height:46px;padding:10px 18px;border:1px solid var(--mt-border);border-radius:9px;background:#fff;color:var(--mt-primary);font:700 16px/1.45 inherit;cursor:pointer}
+.mt-redesign .mt-primary,.mt-redesign .mt-print-link{border-color:var(--mt-primary);background:var(--mt-primary);color:#fff}
+.mt-redesign .mt-fields{gap:22px}
+.mt-redesign .mt-field,.mt-redesign fieldset{font-size:16px}
+.mt-redesign .mt-field>span,.mt-redesign legend{color:var(--platform-heading);font-size:16px;font-weight:700;line-height:1.6}
+.mt-redesign .mt-field input,.mt-redesign .mt-field textarea,.mt-redesign fieldset input:not([type=radio]):not([type=checkbox]){width:100%;padding:12px 13px;border:1px solid #9db9ca;border-radius:8px;background:#fff;color:#163c52;font-size:16px}
+.mt-redesign textarea{min-height:150px;resize:vertical;overflow-y:hidden}
+.mt-calm{margin-top:18px;color:var(--platform-muted);font-size:16px;line-height:1.7}
+.mt-example{margin:20px 0;padding:16px;border:1px solid var(--mt-border);border-radius:10px;background:#fff;color:var(--platform-muted);font-size:16px;line-height:1.8}
+.mt-redesign .mt-notice,.mt-redesign .mt-overflow{margin:12px 0;padding:12px 15px;border:0;border-radius:9px;background:var(--mt-soft);color:var(--platform-text);font-size:16px}
+.mt-period-rows{display:grid;gap:12px}
+.mt-period-row{display:grid;grid-template-columns:auto minmax(145px,1fr) auto minmax(145px,1fr) auto auto;align-items:center;gap:9px;font-size:16px}
+.mt-period-row input[type=month]{min-width:0;width:100%;padding:10px;border:1px solid #9db9ca;border-radius:8px;font-size:16px}
+.mt-period-row label,.mt-inline-choices label{display:flex;align-items:center;gap:7px;font-size:16px}
+.mt-period-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.mt-period-count{margin-bottom:8px;color:var(--mt-primary);font-size:16px;font-weight:700}
+.mt-redesign fieldset{min-width:0;padding:16px;border:1px solid var(--mt-border);border-radius:10px}
+.mt-inline-choices{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px}
+.mt-inline-choices input,.mt-life input,.mt-check input{width:20px;height:20px;flex:0 0 auto}
+.mt-hint,.mt-storage{margin-top:20px;border:1px solid var(--mt-border);border-radius:10px;background:#fff;font-size:16px}
+.mt-hint summary,.mt-storage summary{padding:15px;color:var(--mt-primary);font-weight:700;cursor:pointer}
+.mt-hint p{padding:0 15px 15px;line-height:1.7}
+.mt-big-choices{display:grid;gap:12px}
+.mt-big-choices button{text-align:left}
+.mt-big-choices button.is-selected{border-color:var(--mt-primary);background:var(--mt-soft);color:var(--platform-heading)}
+.mt-life{display:grid;gap:18px}
+.mt-life fieldset>small{display:block;margin:2px 0 10px;color:var(--platform-muted);font-size:16px}
+.mt-life fieldset>div{display:grid;gap:8px}
+.mt-life label{display:flex;align-items:flex-start;gap:10px;padding:11px;border-radius:8px;background:#f5f7f8;font-size:16px}
+.mt-life label span{display:grid;gap:2px}
+.mt-life label strong{font-size:16px}
+.mt-life label small{color:var(--platform-muted);font-size:16px;line-height:1.5}
+.mt-notebook{margin-top:22px}
+.mt-date-parts{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+.mt-date-parts label{display:grid;gap:6px}
+.mt-storage>div{display:grid;justify-items:start;gap:12px;padding:0 15px 15px}
+.mt-storage .mt-file{position:relative}
+.mt-redesign .mt-cross .dougu-cross{grid-template-columns:repeat(2,minmax(0,1fr))}
+.mt-redesign .mt-cross .dougu-band-card{font-size:16px}
+.mt-redesign .mt-actions{align-items:center}
+@media(prefers-color-scheme:dark){.mt-redesign .mt-panel,.mt-example,.mt-hint,.mt-storage{background:var(--background)}.mt-reassurance span,.mt-life label{background:#20313b}.mt-redesign .mt-field input,.mt-redesign .mt-field textarea,.mt-redesign fieldset input:not([type=radio]):not([type=checkbox]){background:#142631;color:#fff}}
+@media(max-width:600px){.mt-redesign{padding-inline:14px}.mt-period-row{grid-template-columns:1fr 1fr}.mt-period-row>span:nth-of-type(2){display:none}.mt-period-row label{grid-column:auto}.mt-redesign .mt-cross .dougu-cross{grid-template-columns:1fr}.mt-date-parts{grid-template-columns:1.5fr 1fr 1fr}.mt-redesign .mt-actions{align-items:flex-start}}
+@media print{.mt-redesign{background:#fff!important;color:#000!important}}
