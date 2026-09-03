@@ -21,6 +21,7 @@ const tools = [
     number: "01",
     title: "等級の目安をしらべる",
     description: "自分がどのあたりかを、国の基準に沿って確認します。",
+    href: "/dougu/mitate",
   },
   {
     number: "02",
