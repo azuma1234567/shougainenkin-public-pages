@@ -3,6 +3,7 @@ import { SITE_NAME } from "@/lib/constants";
 
 const NAV_ITEMS = [
   { href: "/hajimete", label: "はじめての方へ" },
+  { href: "/dougu", label: "自分の場合" },
   { href: "/byoki", label: "病気から探す" },
   { href: "/nayami", label: "悩みから探す" },
   { href: "/shinsei", label: "申請の流れ" },

@@ -1121,3 +1121,7 @@
   .jc-row-lead, .jc-row-rest { grid-template-columns: 1fr; }
   .jc { padding: 18px; }
 }
+
+/* フッターの「自分の場合を確かめる」の列 */
+.footer-jibun { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; margin-bottom: 14px; }
+.footer-jibun-heading { color: #fff; font-weight: 700; font-size: 13.5px; }

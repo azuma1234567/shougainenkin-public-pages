@@ -217,6 +217,20 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 「自分の場合を確かめる」の帯。5つとも入力はブラウザの中だけで処理する。 */}
+      <section className="p-section jibun-band" aria-labelledby="dougu-heading">
+        <div className="p-container">
+          <SectionHeader
+            title="自分の場合を、確かめる"
+            lead="入力した内容は、どれもこの端末の中だけで処理します。サーバーへは送りません。"
+            href="/dougu"
+            linkLabel="自分の場合を確かめる"
+          />
+          <p className="jc-privacy">{PRIVACY_LINE}</p>
+          <JibunCards />
+        </div>
+      </section>
+
       <section className="p-section-lg" aria-labelledby="beginner-heading">
         <div className="p-container">
           <SectionHeader title="障害年金、はじめてですか？" lead="知識ゼロで大丈夫です。この3つから始めてください。" />
@@ -304,19 +318,6 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      {/* 「自分の場合を確かめる」の帯。5つとも入力はブラウザの中だけで処理する。 */}
-      <section className="p-section" aria-labelledby="dougu-heading">
-        <div className="p-container">
-          <SectionHeader
-            title="自分の場合を、確かめる"
-            lead="入力した内容は、どれもこの端末の中だけで処理します。サーバーへは送りません。"
-            href="/dougu"
-            linkLabel="自分の場合を確かめる"
-          />
-          <p className="jc-privacy">{PRIVACY_LINE}</p>
-          <JibunCards />
         </div>
       </section>
 
