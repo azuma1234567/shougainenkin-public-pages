@@ -22,7 +22,7 @@ export default function Page() {
       <header className="dougu-hero no-print">
         <div className="p-container sr-width">
           <Breadcrumb
-            items={[{ href: "/", label: "ホーム" }, { href: "/dougu", label: "道具" }, { label: "必要書類チェックリスト" }]}
+            items={[{ href: "/", label: "ホーム" }, { href: "/dougu", label: "自分の場合を確かめる" }, { label: "必要書類チェックリスト" }]}
             currentPath="/dougu/shorui"
           />
           <h1>自分に必要な書類だけを、1枚にする</h1>

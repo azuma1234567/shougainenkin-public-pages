@@ -306,14 +306,14 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* 道具の帯。5つとも入力はブラウザの中だけで処理する。グローバルナビには足さない。 */}
+      {/* 「自分の場合を確かめる」の帯。5つとも入力はブラウザの中だけで処理する。 */}
       <section className="p-section" aria-labelledby="dougu-heading">
         <div className="p-container">
           <SectionHeader
-            title="調べる道具"
+            title="自分の場合を、確かめる"
             lead="入力した内容は、どれもこの端末の中だけで処理します。サーバーへは送りません。"
             href="/dougu"
-            linkLabel="道具の置き場所へ"
+            linkLabel="自分の場合を確かめる"
           />
           <div className="p-grid dougu-band">
             <DouguCards placements={TOP_BAND_TOOLS} variant="grid" />

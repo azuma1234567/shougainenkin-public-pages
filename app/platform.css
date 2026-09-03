@@ -1021,6 +1021,14 @@
   font-size: 14px;
   line-height: 1.8;
 }
+.dougu-guide {
+  margin: 8px 0 0;
+  padding-left: 1.2em;
+  color: var(--platform-muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+.dougu-guide li { margin: 4px 0; }
 .dougu-note {
   margin: 22px 0 0;
   padding: 14px 16px;

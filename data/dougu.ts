@@ -13,41 +13,77 @@ export type Tool = {
   path: string;
   /* 一覧・帯で使う短い名前 */
   name: string;
-  /* カードの見出し */
+  /* カードの見出し。利用者が心の中で言っている問い */
+  question: string;
+  /* 何が出るか */
+  what: string;
+  /* 何に基づくか */
+  basis: string;
+  /* basis を短くした1語句(カードの meta 行) */
+  basisShort: string;
+  /* 所要 */
+  time: string;
+  /* 記事内カード(mt-column-card)で使う見出し・説明・リンク文言 */
   title: string;
-  /* 1文の説明 */
   blurb: string;
-  /* リンクの文言 */
   cta: string;
 };
+
+/* 全カードの下、または帯の見出し直下に1回だけ出す。 */
+export const PRIVACY_LINE = "入力した内容は、この端末の中だけで処理します。サーバーには送りません。";
 
 export const TOOLS: Record<ToolId, Tool> = {
   mitate: {
     id: "mitate", path: "/dougu/mitate", name: "等級の目安をしらべる",
+    question: "私は何級くらい？",
+    what: "診断書に書かれる2つの欄を選ぶと、国の目安表のどこに当たるかが出ます。",
+    basis: "国が公表している「精神の障害に係る等級判定ガイドライン」の目安表。判定ではなく、公開されている基準に自分を置いてみるためのものです。",
+    basisShort: "国の目安表に当てはめる",
+    time: "約3分",
     title: "国の目安に当てはめてみる",
     blurb: "診断書に書かれる2つの欄の組み合わせで、国が公表している目安がどうなるかを見られます。判定ではありません。",
     cta: "目安をしらべる",
   },
   kingaku: {
     id: "kingaku", path: "/dougu/kingaku", name: "障害年金の金額",
+    question: "いくらもらえる？",
+    what: "等級・初診日に入っていた制度・家族の状況から、年額と月額を内訳つきで出します。",
+    basis: "日本年金機構が公表している令和8年度の年金額と計算式。",
+    basisShort: "令和8年度の年金額で計算",
+    time: "約2分",
     title: "自分の場合の金額を出す",
     blurb: "等級・制度・家族の状況を選ぶと、年額と月額を内訳つきで出します。入力は送信されません。",
     cta: "金額を計算する",
   },
   shorui: {
     id: "shorui", path: "/dougu/shorui", name: "必要書類チェックリスト",
+    question: "何をそろえればいい？",
+    what: "7つの質問に答えると、自分の場合に必要な書類だけが並びます。持ち物と窓口で聞くことも一緒に印刷できます。",
+    basis: "日本年金機構の様式と案内。",
+    basisShort: "機構の様式に沿って",
+    time: "約3分",
     title: "自分に必要な書類だけを出す",
     blurb: "7つの質問に答えると、あなたの場合に要る書類だけが出ます。持ち物と窓口で聞くことも一緒に印刷できます。",
     cta: "必要書類をしらべる",
   },
   madoguchi: {
     id: "madoguchi", path: "/dougu/madoguchi", name: "年金事務所を探す",
+    question: "どこに出せばいい？",
+    what: "初診日の制度で提出先が変わります。お住まいの市区町村から、管轄の年金事務所と予約のしかたを出します。",
+    basis: "日本年金機構が公表している全国の窓口と管轄区域(2026-09-03 取得)。",
+    basisShort: "機構の管轄区域で",
+    time: "約1分",
     title: "出す前に、行き先を確かめる",
     blurb: "初診日に入っていた制度で、提出先が年金事務所か市区町村かに分かれます。管轄の窓口と予約のしかたを出します。",
     cta: "年金事務所を探す",
   },
   moushitatesho: {
     id: "moushitatesho", path: "/dougu/moushitatesho", name: "申立書をつくる",
+    question: "申立書を、自分で書きたい",
+    what: "発病から今までを期間ごとに入力すると、公式様式に重ねて印刷できる下書きになります。",
+    basis: "日本年金機構の様式(病歴・就労状況等申立書)。",
+    basisShort: "公式様式に重ねて印刷",
+    time: "30分から",
     title: "申立書の下書きをつくる",
     blurb: "期間ごとに入力し、公式様式に重ねて印刷できます。入力内容はこの端末の中だけに保存します。",
     cta: "申立書をつくる",
@@ -109,7 +145,7 @@ export const PLACEMENTS: {
       tool: "moushitatesho",
       title: "申立書の下書きをつくる",
       blurb: "期間ごとに入力し、公式様式に重ねて印刷できます。",
-      cta: "道具を開く",
+      cta: "申立書をつくる",
       position: "after",
     }],
     /* 提出先・郵送の記事。クリック上位3本の1つで、まさに「どこへ出すか」を扱っている。 */

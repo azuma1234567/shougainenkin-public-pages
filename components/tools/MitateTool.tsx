@@ -323,7 +323,7 @@ function Result({ s, onBack }: { s: MitateState; onBack: () => void }) {
           {lookup.kind === "blank" && <Link href="/nayami/shindansho-komatta"><b>診断書で困ったとき</b><span>判定と程度の開きについて</span></Link>}
           {(s.guide.g1 || s.guide.g2 || s.guide.g7 || s.guide.g8) && <Link href="/joukyou/hatarakinagara"><b>働きながら申請する</b><span>就労がどう見られるか</span></Link>}
           {s.guide.g3 && <Link href="/joukyou/hitorigurashi"><b>ひとり暮らしで申請する</b><span>独居の評価のされ方</span></Link>}
-          {s.mode === "B" && <p className="mi-next-plain"><b>診断書を受け取ったら</b><span>この道具にもう一度戻って、実際に書かれた数字で確かめてください</span></p>}
+          {s.mode === "B" && <p className="mi-next-plain"><b>診断書を受け取ったら</b><span>この機能にもう一度戻って、実際に書かれた数字で確かめてください</span></p>}
         </div>
       </section>
 

@@ -23,7 +23,7 @@ export default function Page() {
       <header className="dougu-hero no-print">
         <div className="p-container md-width">
           <Breadcrumb
-            items={[{ href: "/", label: "ホーム" }, { href: "/dougu", label: "道具" }, { label: "年金事務所を探す" }]}
+            items={[{ href: "/", label: "ホーム" }, { href: "/dougu", label: "自分の場合を確かめる" }, { label: "年金事務所を探す" }]}
             currentPath="/dougu/madoguchi"
           />
           <h1>どこへ、どう持っていくか</h1>

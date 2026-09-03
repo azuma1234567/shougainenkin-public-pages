@@ -31,7 +31,7 @@ export default function Page() {
       <header className="dougu-hero">
         <div className="p-container kg-width">
           <Breadcrumb
-            items={[{ href: "/", label: "ホーム" }, { href: "/dougu", label: "道具" }, { label: "障害年金の金額" }]}
+            items={[{ href: "/", label: "ホーム" }, { href: "/dougu", label: "自分の場合を確かめる" }, { label: "障害年金の金額" }]}
             currentPath="/dougu/kingaku"
           />
           <h1>障害年金は、いくらになるか</h1>

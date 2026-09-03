@@ -6,11 +6,11 @@ import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 const UPDATED = "2026-09-03";
 
 const DESCRIPTION =
-  "障害年金の等級の目安、金額、必要書類、年金事務所、申立書を、ひとつずつ確認・準備するための道具をまとめています。";
+  "「自分の場合はどうなるのか」に、公開されている基準と数字で答える5つの機能です。等級の目安・金額・必要書類・年金事務所・申立書を、自分の状況に当てはめて確かめられます。";
 
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: "道具の置き場所",
+    title: "自分の場合を確かめる",
     description: DESCRIPTION,
     path: "/dougu",
   }),
@@ -52,7 +52,7 @@ const tools = [
 export default function DouguPage() {
   const breadcrumb = breadcrumbJsonLd([
     { name: "トップ", path: "/" },
-    { name: "道具の置き場所", path: "/dougu" },
+    { name: "自分の場合を確かめる", path: "/dougu" },
   ]);
 
   return (
@@ -64,11 +64,12 @@ export default function DouguPage() {
 
       <header className="dougu-hero">
         <div className="p-container dougu-width">
-          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "道具" }]} currentPath="/dougu" jsonLd={false} />
+          <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "自分の場合を確かめる" }]} currentPath="/dougu" jsonLd={false} />
           <p className="dougu-kicker">申請の準備を、ひとつずつ</p>
-          <h1>道具の置き場所</h1>
+          <h1>自分の場合を、確かめる</h1>
           <p className="p-hero-copy">
-            調べる、見積もる、そろえる、書く、出す。障害年金の準備で必要になる道具を、ここにまとめていきます。
+            「自分の場合はどうなるのか」に、公開されている基準と数字で答える5つの機能です。
+            どれも、国や日本年金機構が公表しているものに、あなたの状況を当てはめるだけです。このサイトが判定したり、予測したりはしません。
           </p>
           <PageDate updated={UPDATED} />
         </div>
@@ -77,8 +78,12 @@ export default function DouguPage() {
       <section className="dougu-section" aria-labelledby="dougu-list-heading">
         <div className="p-container dougu-width">
           <div className="dougu-section-head">
-            <h2 id="dougu-list-heading">5つの道具</h2>
-            <p>まだ公開していない道具は「準備中」と表示しています。</p>
+            <h2 id="dougu-list-heading">どれから使うか</h2>
+            <ul className="dougu-guide">
+              <li>申請を考え始めたばかりなら → 「私は何級くらい？」「いくらもらえる？」</li>
+              <li>申請すると決めたら → 「何をそろえればいい？」「どこに出せばいい？」</li>
+              <li>書き始めたら → 「申立書を、自分で書きたい」</li>
+            </ul>
           </div>
 
           <div className="dougu-grid">
@@ -86,10 +91,6 @@ export default function DouguPage() {
               const candidateHref = "href" in tool ? tool.href : undefined;
               const href = candidateHref && isPublishedInternalPath(candidateHref) ? candidateHref : undefined;
               const content = <>
-                <div className="dougu-card-top">
-                  <span className="dougu-number" aria-hidden="true">{tool.number}</span>
-                  <span className="dougu-status">{href ? "公開中" : "準備中"}</span>
-                </div>
                 <h3>{tool.title}</h3>
                 <p>{tool.description}</p>
               </>;
@@ -97,9 +98,7 @@ export default function DouguPage() {
             })}
           </div>
 
-          <p className="dougu-note">
-            準備中の道具を使うための登録や予約は必要ありません。公開できたものから、このページでお知らせします。
-          </p>
+          <p className="dougu-note">入力した内容は、この端末の中だけで処理します。サーバーには送りません。</p>
         </div>
       </section>
     </div>
