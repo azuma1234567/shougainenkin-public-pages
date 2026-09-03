@@ -1,5 +1,6 @@
 import Link from "next/link";
 import AnalyticsConsent from "@/components/AnalyticsConsent";
+import { HAS_ACTIVE_ADS } from "@/lib/ads";
 
 export default function SiteFooter() {
   return (
@@ -18,9 +19,15 @@ export default function SiteFooter() {
           <Link href="/ads">広告掲載について</Link>
           <Link href="/app/terms">アプリの利用規約・プライバシーポリシー</Link>
         </nav>
-        {/* 景表法のステマ規制対応。広告で運営していることを全ページの下部で常時開示する。 */}
+        <p className="footer-copyright">© 2026 障害年金ノート</p>
+        {/* 景表法のステマ規制対応。広告で運営していることを全ページの下部で常時開示する。
+            導入前に「運営しています」と書くと先行記載になるので、lib/ads.ts の
+            フラグで実態に合わせる(/terms 第3条・/about と同じ切り替え)。 */}
         <p className="footer-ad-disclosure">
-          当サイトは広告収入で運営しています。広告・PRであるものにはその旨を表示します。
+          {HAS_ACTIVE_ADS
+            ? "当サイトは広告収入で運営しています。"
+            : "当サイトは広告収入での運営を予定しています。"}
+          広告・PRであるものにはその旨を表示します。
         </p>
         <AnalyticsConsent />
       </div>

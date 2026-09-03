@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { adSourceList, HAS_ACTIVE_ADS } from "@/lib/ads";
 import { APP_STORE_URL, AUTHOR_NAME, CONTACT_EMAIL } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { PageDate } from "@/components/platform/Platform";
@@ -62,9 +63,12 @@ export default function AboutPage() {
 
       <h2>運営のしかた</h2>
 
+      {/* 導入前に「運営しています」と書くと先行記載になるので、
+          lib/ads.ts のフラグで実態に合わせる。 */}
       <p>
-        このサイトは、広告収入によって運営しています。具体的には、Google AdSense による広告、
-        記事内のアフィリエイト広告、社会保険労務士事務所などからの掲載料です。
+        このサイトは、広告収入によって
+        {HAS_ACTIVE_ADS ? "運営しています" : "運営することを予定しています"}。
+        具体的には、{adSourceList("about")}です。
         広告・PR であるものには、その旨を表示します。
       </p>
 

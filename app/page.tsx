@@ -9,6 +9,7 @@ import {
 } from "@/components/platform/Platform";
 import SiteSearch, { type SearchItem } from "@/components/platform/SiteSearch";
 import AdLabel from "@/components/AdLabel";
+import { SHOW_LISTINGS } from "@/lib/ads";
 import { COLUMNS } from "@/lib/columns";
 import { SITE_URL } from "@/lib/constants";
 import { findCases, SAIKETSU_COUNTS } from "@/lib/saiketsu";
@@ -19,7 +20,6 @@ import { searchableYomi } from "@/lib/yougo";
 
 const TITLE = "障害年金の疑問に、公的根拠と実例で答える";
 const DESCRIPTION = "障害年金がはじめての方へ。病気、申請の段階、いまの悩みから、公的資料の根拠と公開裁決例を使って自分に近い情報を探せます。";
-const SHOW_LISTINGS = false;
 
 const searchItems: SearchItem[] = [
   {

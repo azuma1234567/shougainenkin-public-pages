@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AnalyticsConsentSettingsButton } from "@/components/AnalyticsConsent";
+import { ADSENSE_ENABLED, AFFILIATE_ASPS } from "@/lib/ads";
 import { CONTACT_EMAIL, SITE_LEGAL_UPDATED } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
   "「障害年金ノート」(shougainenkin-note.net)のプライバシーポリシーです。閲覧・お問い合わせ・広告掲載に関する情報の取扱い、アクセス解析と広告配信について説明します。";
-
-// アフィリエイト・サービス・プロバイダ(ASP)の名前。
-// 登録していない事業者の名前は書かないこと(第7条)。
-// 実際に登録したら、ここへ事業者名を足して公開する。
-const AFFILIATE_ASPS: string[] = [];
 
 export const metadata: Metadata = pageMetadata({
   title: "プライバシーポリシー",
@@ -123,34 +119,43 @@ export default function PrivacyPage() {
       </p>
 
       <h2>6. 広告配信(Google AdSense)</h2>
-      <p>
-        本サイトは、第三者配信の広告サービス Google AdSense を利用しています。
-        Google などの第三者配信事業者は、利用者の興味に応じた広告を表示するために Cookie を使用します。
-        この Cookie により、利用者が本サイトや他のサイトにアクセスした際の情報が利用されることがありますが、
-        氏名、住所、メールアドレス、電話番号は含まれません。
-      </p>
-      <ul>
-        <li>
-          パーソナライズ広告を無効にするには、Google の広告設定(
-          <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer external">
-            https://www.google.com/settings/ads
-          </a>
-          )で設定を変更してください。
-        </li>
-        <li>
-          その他の第三者配信事業者の Cookie を無効にするには、www.aboutads.info(
-          <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer external">
-            https://www.aboutads.info/choices/
-          </a>
-          )をご利用ください。
-        </li>
-        <li>
-          Google の広告における Cookie の利用について:{" "}
-          <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer external">
-            https://policies.google.com/technologies/ads
-          </a>
-        </li>
-      </ul>
+      {ADSENSE_ENABLED ? (
+        <>
+          <p>
+            本サイトは、第三者配信の広告サービス Google AdSense を利用しています。
+            Google などの第三者配信事業者は、利用者の興味に応じた広告を表示するために Cookie を使用します。
+            この Cookie により、利用者が本サイトや他のサイトにアクセスした際の情報が利用されることがありますが、
+            氏名、住所、メールアドレス、電話番号は含まれません。
+          </p>
+          <ul>
+            <li>
+              パーソナライズ広告を無効にするには、Google の広告設定(
+              <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer external">
+                https://www.google.com/settings/ads
+              </a>
+              )で設定を変更してください。
+            </li>
+            <li>
+              その他の第三者配信事業者の Cookie を無効にするには、www.aboutads.info(
+              <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer external">
+                https://www.aboutads.info/choices/
+              </a>
+              )をご利用ください。
+            </li>
+            <li>
+              Google の広告における Cookie の利用について:{" "}
+              <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer external">
+                https://policies.google.com/technologies/ads
+              </a>
+            </li>
+          </ul>
+        </>
+      ) : (
+        <p>
+          本サイトは現在、第三者配信の広告(Google AdSense など)を利用していません。
+          導入する場合は、本ポリシーを改定し、最終更新日とともにお知らせします。
+        </p>
+      )}
 
       <h2>7. アフィリエイトプログラム</h2>
       <p>

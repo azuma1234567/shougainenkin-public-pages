@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { adSourceList, HAS_ACTIVE_ADS } from "@/lib/ads";
 import { CONTACT_EMAIL, SITE_LEGAL_UPDATED } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -68,9 +69,12 @@ export default function TermsPage() {
 
       <h2>3. 広告と掲載について</h2>
       <ul>
+        {/* 導入前に「運営されています」と書くと先行記載になるので、
+            lib/ads.ts のフラグで実態に合わせる。 */}
         <li>
-          本サイトは、広告収入(Google AdSense、アフィリエイト広告、社会保険労務士事務所などからの掲載料)
-          によって運営されています。広告・PR であるものには、その旨を表示します。
+          本サイトは、広告収入({adSourceList("terms")})によって
+          {HAS_ACTIVE_ADS ? "運営されています" : "運営することを予定しています"}。
+          広告・PR であるものには、その旨を表示します。
         </li>
         <li>
           広告や掲載枠の内容は、広告主および掲載事務所の責任で作成されています。
