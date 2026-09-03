@@ -86,6 +86,10 @@ export const HUBS: HubDefinition[] = [
   hub("/erabu/hiyou-souba", "障害年金にかかるお金の話", "かかるお金", "erabu", true),
   hub("/erabu/erabikata", "社労士の選び方", "社労士の選び方", "erabu", true),
   hub("/erabu/fushikyu-no-ato", "不支給と言われたあと、何ができるか", "不支給のあと", "erabu", true),
+  // /senmonka を公開するときは、一覧テンプレートに次の2つを常時表示すること
+  // (2026-09-03 の法務ページ刷新の指示書 §8-6)。無料掲載にも広告掲載規約が及ぶ。
+  //   1. <AdLabel kind="掲載(広告)" /> と /ads(広告掲載について)へのリンク
+  //   2. 「当サイトは特定の事務所を推薦・選定しません」の免責
   ...[
     "/byoki/choukaku-heikou", "/byoki/soshaku-gengo", "/byoki/nanbyou-sonota",
     "/senmonka",
