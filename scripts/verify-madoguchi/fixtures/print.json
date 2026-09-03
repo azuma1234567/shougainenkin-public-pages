@@ -1,44 +1,50 @@
 {
- "generatedAt": "2026-09-03T12:37:47.537Z",
+ "generatedAt": "2026-09-03T21:35:18.330Z",
  "cases": [
   {
    "name": "横浜市南区(厚年と国年で違う)",
    "pages": 1,
    "splitItems": [],
    "itemCount": 2,
-   "contentMm": 259.9,
+   "contentMm": 240.9,
    "office": true,
    "yoyaku": true,
    "mochimono": true,
    "ask": true,
    "printHead": true,
-   "machikadoOnPrint": false
+   "machikadoOnPrint": false,
+   "pickedOnPrint": true,
+   "selectsOnPrint": 0
   },
   {
    "name": "水戸市(分かれる市)",
    "pages": 2,
    "splitItems": [],
    "itemCount": 3,
-   "contentMm": 316.9,
+   "contentMm": 297.8,
    "office": true,
    "yoyaku": true,
    "mochimono": true,
    "ask": true,
    "printHead": true,
-   "machikadoOnPrint": false
+   "machikadoOnPrint": false,
+   "pickedOnPrint": true,
+   "selectsOnPrint": 0
   },
   {
    "name": "東京都新宿区",
    "pages": 1,
    "splitItems": [],
    "itemCount": 1,
-   "contentMm": 217.7,
+   "contentMm": 198.6,
    "office": true,
    "yoyaku": true,
    "mochimono": true,
    "ask": true,
    "printHead": true,
-   "machikadoOnPrint": false
+   "machikadoOnPrint": false,
+   "pickedOnPrint": true,
+   "selectsOnPrint": 0
   }
  ],
  "mobile": {

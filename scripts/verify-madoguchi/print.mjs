@@ -42,6 +42,7 @@ async function pick(page, pref, city) {
 }
 
 async function run(name, { pref, city }) {
+  const picked = `${pref} ${city}`;
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto(url);
@@ -52,7 +53,7 @@ async function run(name, { pref, city }) {
   await page.emulateMedia({ media: "print" });
   await page.evaluate(() => document.fonts?.ready);
   await sleep(300);
-  const layout = await page.evaluate(() => {
+  const layout = await page.evaluate((want) => {
     const main = document.querySelector(".md-main");
     const t = main.innerText;
     return {
@@ -67,8 +68,11 @@ async function run(name, { pref, city }) {
         .filter((e) => e.offsetParent !== null)
         .map((e) => e.innerText.replace(/\s+/g, "")).filter(Boolean),
       machikadoOnPrint: [...document.querySelectorAll(".md-screen-only")].some((e) => e.offsetParent !== null),
+      /* 紙には選んだ地名だけを出す。選択欄は出さない(仕上げ指示 4)。 */
+      pickedOnPrint: t.replace(/\s+/g, " ").includes(want),
+      selectsOnPrint: [...document.querySelectorAll(".md-card select")].filter((e) => e.offsetParent !== null).length,
     };
-  });
+  }, picked);
   const file = path.join(work, `${name}.pdf`);
   await page.pdf({ path: file, format: "A4", printBackground: true, preferCSSPageSize: true, margin: { top: "0", right: "0", bottom: "0", left: "0" } });
   const pdf = JSON.parse(execFileSync(PY, ["-c",
@@ -106,6 +110,6 @@ await browser.close();
 server.kill("SIGTERM");
 
 writeFileSync(out, `${JSON.stringify({ generatedAt: new Date().toISOString(), cases, mobile, network }, null, 1)}\n`);
-for (const c of cases) console.log(`${c.name}: ${c.pages}ページ / ${c.contentMm}mm / 窓口${c.office} 予約${c.yoyaku} 持ち物${c.mochimono} 聞くこと${c.ask} / 割れた項目 ${c.splitItems.length}`);
+for (const c of cases) console.log(`${c.name}: ${c.pages}ページ / ${c.contentMm}mm / 窓口${c.office} 予約${c.yoyaku} 持ち物${c.mochimono} 聞くこと${c.ask} / 地名${c.pickedOnPrint} 選択欄${c.selectsOnPrint} / 割れた項目 ${c.splitItems.length}`);
 console.log(`375px: ${mobile.scrollWidth}/${mobile.clientWidth} はみ出し ${mobile.overflowing}`);
 console.log(`通信: 先読み以外 ${network.filter((n) => !n.prefetch).length} / 先読み・アイコン ${network.filter((n) => n.prefetch).length}`);

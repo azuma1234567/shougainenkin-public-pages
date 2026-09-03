@@ -18,6 +18,8 @@ const src = (f) => readFileSync(f, "utf8");
 const all = JSON.parse(src("data/madoguchi/offices.json")).offices;
 const codeOf = (pref, name) => municipalitiesOf(pref).find((m) => m.name === name)?.code;
 
+/* 1番は 2026-09-03 に書き換えた。/dougu の一覧ページは無く、/dougu は /shinsei へ301。
+   301を踏ませるリンクを足すのは間違いなので、検査のほうを今の構造に合わせた。 */
 check(1, "/dougu/madoguchi が動き、/dougu から行ける", () => {
   assert.ok(existsSync(PAGE), `${PAGE} が無い`);
   assert.match(src("app/dougu/page.tsx"), /href: "\/dougu\/madoguchi"/, "/dougu の一覧に href が無い");
@@ -139,9 +141,12 @@ check(10, "印刷で A4 2枚以内に、窓口・予約・持ち物・聞くこ�
   for (const c of m.cases) {
     assert.ok(c.pages <= 2, `${c.name}: ${c.pages}ページ(2枚を超えている)`);
     for (const s of ["office", "yoyaku", "mochimono", "ask"]) assert.ok(c[s], `${c.name}: ${s} が印刷に出ていない`);
+    /* 紙には選んだ地名だけを出す。選択欄は出さない(2026-09-03) */
+    assert.ok(c.pickedOnPrint, `${c.name}: 選んだ地名が紙に出ていない`);
+    assert.equal(c.selectsOnPrint, 0, `${c.name}: 選択欄が紙に出ている(${c.selectsOnPrint})`);
     assert.deepEqual(c.splitItems, [], `${c.name}: 改ページで割れた項目 ${c.splitItems.join(" / ")}`);
   }
-  return `実測 ${m.cases.map((c) => `${c.name} ${c.pages}ページ`).join(" / ")}。窓口・予約・持ち物・聞くことが全条件で印刷面にある`;
+  return `実測 ${m.cases.map((c) => `${c.name} ${c.pages}ページ`).join(" / ")}。窓口・予約・持ち物・聞くことが全条件で印刷面にあり、選んだ地名も出る(選択欄は出ない)`;
 });
 
 check(11, "外部の地図SDK・埋め込みが無い。回答内容を含む送信が0件", () => {

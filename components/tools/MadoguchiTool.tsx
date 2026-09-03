@@ -19,6 +19,8 @@ export default function MadoguchiTool() {
   const [pref, setPref] = useState("");
   const [code, setCode] = useState("");
   const [shared, setShared] = useState(false);
+  /* 選び終わったら選択欄を1行に畳む。「変える」で戻す(仕上げ指示 4)。 */
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     try {
@@ -36,33 +38,48 @@ export default function MadoguchiTool() {
 
   const cities = pref ? municipalitiesOf(pref) : [];
   const city = cities.find((c) => c.code === code);
+  const picked = pref && city ? `${pref} ${city.name}` : "";
+  const collapsed = !!picked && !editing;
   const jur = code ? jurisdictionOf(code) : null;
   const machikado = pref ? machikadoOf(pref) : [];
 
   return (
     <>
-      {/* 本人が確実に知っているのは住所。最初の操作をそれにする(指示書 B-2)。 */}
-      <section className="md-card" aria-labelledby="md-h1">
-        <h2 id="md-h1">お住まい</h2>
-        <div className="md-grid2">
-          <div>
-            <label className="md-label" htmlFor="md-pref">都道府県</label>
-            <select id="md-pref" value={pref} onChange={(e) => { setPref(e.target.value); setCode(""); }}>
-              <option value="">選んでください</option>
-              {PREFECTURES.map((p) => <option key={p} value={p}>{p}</option>)}
-            </select>
+      {/* 本人が確実に知っているのは住所。最初の操作をそれにする(指示書 B-2)。
+          選び終わったら1行に畳む。紙には選んだ地名だけを出す(仕上げ指示 4)。 */}
+      {picked && (
+        <section className={collapsed ? "md-card md-picked-card" : "md-card md-picked-card md-print-only"} aria-label="お住まい">
+          <p className="md-picked">
+            <span className="md-picked-name">{picked}</span>
+            {collapsed && (
+              <button type="button" className="md-change no-print" aria-label="住所を選び直す" onClick={() => setEditing(true)}>変える</button>
+            )}
+          </p>
+        </section>
+      )}
+      {!collapsed && (
+        <section className="md-card no-print" aria-labelledby="md-h1">
+          <h2 id="md-h1">お住まい</h2>
+          <div className="md-grid2">
+            <div>
+              <label className="md-label" htmlFor="md-pref">都道府県</label>
+              <select id="md-pref" value={pref} onChange={(e) => { setPref(e.target.value); setCode(""); setEditing(true); }}>
+                <option value="">選んでください</option>
+                {PREFECTURES.map((p) => <option key={p} value={p}>{p}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="md-label" htmlFor="md-city">市区町村</label>
+              <select id="md-city" value={code} onChange={(e) => { setCode(e.target.value); setEditing(false); }} disabled={!pref}>
+                <option value="">{pref ? "選んでください" : "都道府県を先に選んでください"}</option>
+                {cities.map((c) => <option key={c.code} value={c.code}>{c.name}</option>)}
+              </select>
+            </div>
           </div>
-          <div>
-            <label className="md-label" htmlFor="md-city">市区町村</label>
-            <select id="md-city" value={code} onChange={(e) => setCode(e.target.value)} disabled={!pref}>
-              <option value="">{pref ? "選んでください" : "都道府県を先に選んでください"}</option>
-              {cities.map((c) => <option key={c.code} value={c.code}>{c.name}</option>)}
-            </select>
-          </div>
-        </div>
-        {!pref && <p className="md-note">都道府県と市区町村を選ぶと、管轄の窓口が出ます。</p>}
-        {pref && !code && <p className="md-note">市区町村を選ぶと、管轄の年金事務所が出ます。街角の年金相談センターは下に出しています。</p>}
-      </section>
+          {!pref && <p className="md-note">都道府県と市区町村を選ぶと、管轄の窓口が出ます。</p>}
+          {pref && !code && <p className="md-note">市区町村を選ぶと、管轄の年金事務所が出ます。街角の年金相談センターは下に出しています。</p>}
+        </section>
+      )}
 
       {jur && city && (
         <section className="md-card" aria-labelledby="md-h2">
@@ -194,10 +211,11 @@ function OfficeCard({ office: o }: { office: Office }) {
         {o.name}
         <span className="md-kind">{o.kind === "nenkin" ? "年金事務所" : o.sub === "office" ? "街角(オフィス)" : "街角(センター)"}</span>
       </p>
-      <p className="md-a">〒{o.zip}　{o.addr}{o.access && <><br />{o.access}</>}</p>
+      {/* ここで人がすることは電話で予約を取ること。電話を名前のすぐ下に置く(仕上げ指示 3)。 */}
       {o.tel && (
         <p className="md-tel-row">電話 <a className="md-tel" href={telHref(o.tel)}>{o.tel}</a>{o.telNote && <span className="md-small">（{o.telNote}）</span>}</p>
       )}
+      <p className="md-a">〒{o.zip}　{o.addr}{o.access && <><br />{o.access}</>}</p>
       <p className="md-source">日本年金機構の公表({CHECKED_ON} 取得)による</p>
       <p className="md-lk no-print">
         <a href={mapUrl(o.addr)} rel="noreferrer">地図を開く</a>

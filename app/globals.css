@@ -3029,8 +3029,9 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
 .md-office{border-left:4px solid var(--platform-primary)}
 .md-where{border:1px solid #cfe6f5;background:#f4fafe}
 .md-fold>summary{color:var(--platform-heading);font-family:var(--font-platform-heading),"Hiragino Kaku Gothic ProN",sans-serif;font-size:19px;line-height:1.5;cursor:pointer}.md-fold>summary:focus-visible{outline:2px solid var(--platform-primary);outline-offset:2px}
+.md-picked-card{padding:14px 22px}.md-picked{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin:0}.md-picked-name{color:var(--platform-heading);font-family:var(--font-platform-heading),"Hiragino Kaku Gothic ProN",sans-serif;font-size:17px;font-weight:700}.md-change{padding:7px 16px;border:1.5px solid #cfe6f5;border-radius:999px;background:#fff;color:var(--platform-link);font-family:inherit;font-size:13.5px;cursor:pointer}.md-change:focus-visible{outline:2px solid var(--platform-primary);outline-offset:2px}.md-print-only{display:none}
 .md-printhead{display:none}
-@media(max-width:560px){.md-grid2{grid-template-columns:1fr}.md-card{padding:18px 16px}.md-top{padding:6px 0 10px}}
+@media(max-width:560px){.md-grid2{grid-template-columns:1fr}.md-card{padding:18px 16px}.md-top{padding:6px 0 10px}}@media(max-width:520px){.md-grid2{grid-template-columns:1fr 1fr;gap:10px}.md-grid2>div{min-width:0}.md-card select{padding:11px 8px}.md-picked-card{padding:12px 16px}}
 @media print{
   /* 窓口へ持っていく紙。A4 2枚以内(ほかの道具と同じ)。 */
   @page{size:A4 portrait;margin:14mm}
@@ -3053,6 +3054,8 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
   .md-fold>summary{list-style:none;font-size:13px;margin:0 0 2px}
   .md-fold>summary::-webkit-details-marker{display:none}
   .md-office{border-left:1px solid var(--platform-border)}
+  .md-print-only{display:block!important}
+  .md-picked-card{padding:0;margin:0 0 6px}.md-picked-name{font-size:12px}
 }
 
 /* 道具カード(data/dougu.ts の PLACEMENTS から出す)。記事内は既存の .mt-column-card のまま。 */
