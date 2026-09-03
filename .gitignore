@@ -30,3 +30,6 @@ next-env.d.ts
 # claude code
 /.claude/
 /_to_delete/
+
+# Spotlight exclusion markers
+.metadata_never_index
