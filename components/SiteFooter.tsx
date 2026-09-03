@@ -16,7 +16,7 @@ export default function SiteFooter() {
             <Link key={id} href={TOOLS[id].path}>{TOOLS[id].question}</Link>
           ))}
         </nav>
-        <nav aria-label="フッターメニュー">
+        <nav className="footer-links" aria-label="フッターメニュー">
           <Link href="/joukyou">状況から探す</Link>
           <Link href="/okane">お金の話</Link>
           <Link href="/erabu">自分でやるか、頼むか</Link>
@@ -30,16 +30,18 @@ export default function SiteFooter() {
           <Link href="/app">無料iPhoneアプリ</Link>
           <Link href="/app/terms">アプリの利用規約・プライバシーポリシー</Link>
         </nav>
-        <p className="footer-copyright">© 2026 {SITE_NAME}</p>
-        {/* 景表法のステマ規制対応。広告で運営していることを全ページの下部で常時開示する。
-            導入前に「運営しています」と書くと先行記載になるので、lib/ads.ts の
-            フラグで実態に合わせる(/terms 第3条・/about と同じ切り替え)。 */}
-        <p className="footer-ad-disclosure">
-          {HAS_ACTIVE_ADS
-            ? "当サイトは広告収入で運営しています。"
-            : "当サイトは広告収入での運営を予定しています。"}
-          広告・PRであるものにはその旨を表示します。
-        </p>
+        <div className="footer-bottom">
+          <p className="footer-copyright">© 2026 {SITE_NAME}</p>
+          {/* 景表法のステマ規制対応。広告で運営していることを全ページの下部で常時開示する。
+              導入前に「運営しています」と書くと先行記載になるので、lib/ads.ts の
+              フラグで実態に合わせる(/terms 第3条・/about と同じ切り替え)。 */}
+          <p className="footer-ad-disclosure">
+            {HAS_ACTIVE_ADS
+              ? "当サイトは広告収入で運営しています。"
+              : "当サイトは広告収入での運営を予定しています。"}
+            広告・PRであるものにはその旨を表示します。
+          </p>
+        </div>
         <AnalyticsConsent />
       </div>
     </footer>
