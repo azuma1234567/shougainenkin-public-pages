@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T02:02:57.640Z",
+  "generatedAt": "2026-09-03T12:08:29.469Z",
   "projection": [
     {
       "name": "empty",
@@ -4118,7 +4118,7 @@
     }
   ],
   "storage": {
-    "message": "保存できませんでした。書き出しをご利用ください",
+    "message": "この端末では保存できません。閉じると消えます",
     "pass": true
   },
   "roundtrip": [
