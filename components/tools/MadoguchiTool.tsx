@@ -189,7 +189,6 @@ export default function MadoguchiTool() {
         <h2 id="md-next">ここからできること</h2>
         <div className="dougu-cross">
           <Link className="dougu-band-card" href="/dougu/shorui" prefetch={false}><b>必要書類をしらべる</b><span>自分の場合に要る書類だけを、持ち物と一緒に1枚にします</span></Link>
-          <Link className="dougu-band-card" href="/dougu/moushitatesho" prefetch={false}><b>申立書をつくる</b><span>いちばん重い書類を、フォームに沿って書きます</span></Link>
         </div>
       </section>
     </>

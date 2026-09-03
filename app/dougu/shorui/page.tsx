@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import ShoruiTool from "@/components/tools/ShoruiTool";
 import { TOOLS } from "@/data/dougu";
@@ -23,7 +24,7 @@ export default function Page() {
       <header className="dougu-hero no-print">
         <div className="p-container sr-width">
           <Breadcrumb
-            items={[{ href: "/", label: "ホーム" }, { href: "/dougu", label: "自分の場合を確かめる" }, { label: "必要書類チェックリスト" }]}
+            items={[{ href: "/", label: "トップ" }, { href: "/shinsei", label: "申請の流れ" }, { label: "必要書類チェックリスト" }]}
             currentPath="/dougu/shorui"
           />
           <h1>自分に必要な書類だけを、1枚にする</h1>
@@ -43,6 +44,7 @@ export default function Page() {
           障害年金の必要書類チェックリスト（障害年金申請サポート）。これで全部とは限りません。最後は年金事務所で確認してください。
         </p>
         <ShoruiTool />
+        <p className="no-print"><Link href="/shinsei">申請の流れへ戻る</Link></p>
       </div>
     </div>
   );

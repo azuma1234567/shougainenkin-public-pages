@@ -1,11 +1,9 @@
-/* 「自分の場合を確かめる」5つの機能のカード。トップの帯と /dougu で同じ部品・同じ並びを使う。
-   記事の中に差し込む小さいカードは components/platform/DouguCard.tsx(用途が違うので分けている)。 */
+/* /hajimete に差し込む機能カード。 */
 import Link from "next/link";
 import { TOOLS, type ToolId } from "@/data/dougu";
 import { isPublishedInternalPath } from "@/lib/published-links";
 
 /* 2+3 の並び。申請の時間順。 */
-export const JIBUN_ORDER: ToolId[] = ["mitate", "kingaku", "shorui", "madoguchi", "moushitatesho"];
 const LEAD: ToolId[] = ["mitate", "kingaku"];
 
 export function JibunCard({ id }: { id: ToolId }) {
@@ -23,7 +21,7 @@ export function JibunCard({ id }: { id: ToolId }) {
 }
 
 /* 未公開の機能は出さない(タグでは表現しない)。 */
-export function JibunCards({ ids = JIBUN_ORDER }: { ids?: ToolId[] }) {
+export function JibunCards({ ids }: { ids: ToolId[] }) {
   const visible = ids.filter((id) => isPublishedInternalPath(TOOLS[id].path));
   const lead = visible.filter((id) => LEAD.includes(id));
   const rest = visible.filter((id) => !LEAD.includes(id));

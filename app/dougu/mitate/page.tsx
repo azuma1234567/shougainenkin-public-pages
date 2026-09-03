@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import MitateTool from "@/components/tools/MitateTool";
 import { TOOLS } from "@/data/dougu";
@@ -23,7 +24,7 @@ export default function Page() {
       <header className="dougu-hero no-print">
         <div className="p-container mi-width">
           <Breadcrumb
-            items={[{ href: "/", label: "ホーム" }, { href: "/dougu", label: "自分の場合を確かめる" }, { label: "等級の目安をしらべる" }]}
+            items={[{ href: "/", label: "トップ" }, { href: "/shinsei", label: "申請の流れ" }, { label: "等級の目安をしらべる" }]}
             currentPath="/dougu/mitate"
           />
           <h1>国が公表している目安に、当てはめてみる</h1>
@@ -43,6 +44,7 @@ export default function Page() {
           国が公表している目安に当てはめた結果です（障害年金申請サポート / 精神の障害に係る等級判定ガイドライン 平成28年9月）。このサイトが判定したものではありません。
         </p>
         <MitateTool />
+        <p className="no-print"><Link href="/shinsei">申請の流れへ戻る</Link></p>
       </div>
     </div>
   );

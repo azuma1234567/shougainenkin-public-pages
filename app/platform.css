@@ -307,7 +307,7 @@
   max-width: calc(var(--platform-container) + (var(--platform-gutter) * 2));
   padding: 32px var(--platform-gutter) 24px;
   display: grid;
-  grid-template-columns: minmax(240px, 0.85fr) minmax(0, 2fr);
+  grid-template-columns: 1fr;
   align-items: start;
   gap: 24px 48px;
   text-align: left;
@@ -324,19 +324,11 @@
 .site-footer nav { margin: 0; }
 .site-footer a { color: #b8d4e6; font-size: 12.5px; }
 .site-footer a:hover { background: rgba(255,255,255,0.08); }
-.site-footer .footer-jibun {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2px 12px;
-  align-items: start;
-}
-.site-footer .footer-jibun-heading { grid-column: 1 / -1; margin-bottom: 6px; }
 .site-footer .footer-links {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2px 14px;
 }
-.site-footer .footer-jibun a,
 .site-footer .footer-links a { justify-content: flex-start; min-height: 36px; padding: 4px 8px; line-height: 1.5; }
 .site-footer .footer-bottom {
   grid-column: 1 / -1;
@@ -582,7 +574,7 @@
   .p-more { min-height: 44px; display: inline-flex; align-items: center; }
   .p-stats { flex-wrap: wrap; }
   .site-footer-inner { grid-template-columns: 1fr; gap: 24px; }
-  .site-footer .footer-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .site-footer .footer-links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .site-footer .footer-bottom { grid-column: 1; }
 }
 
@@ -592,8 +584,7 @@
   .site-title { font-size: 17px; gap: 8px; }
   .site-mark { width: 24px; height: 24px; }
   .site-footer-inner { padding: 28px 20px 22px; gap: 22px; }
-  .site-footer .footer-jibun { grid-template-columns: 1fr; width: 100%; }
-  .site-footer .footer-links { grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; }
+  .site-footer .footer-links { grid-template-columns: 1fr; width: 100%; }
   .site-footer .footer-bottom { flex-direction: column; gap: 10px; }
   .site-footer .footer-ad-disclosure { text-align: left; }
   .footer-site-name span { display: block; margin-top: 4px; }
@@ -1105,7 +1096,7 @@
 .p-list li strong { color: var(--heading, #14425e); }
 
 
-/* ===== 「自分の場合を確かめる」のカード(トップの帯と /dougu で共通) ===== */
+/* ===== /hajimete の機能カード ===== */
 .jibun-band { background: var(--platform-band); }
 .jc-set { display: grid; gap: 14px; }
 .jc-row { display: grid; gap: 14px; }
@@ -1158,7 +1149,3 @@
   .jc-row-lead, .jc-row-rest { grid-template-columns: 1fr; }
   .jc { padding: 18px; }
 }
-
-/* フッターの「自分の場合を確かめる」の列 */
-.footer-jibun { margin-bottom: 0; }
-.footer-jibun-heading { color: #fff; font-weight: 700; font-size: 13.5px; }

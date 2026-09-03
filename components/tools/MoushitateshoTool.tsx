@@ -39,6 +39,5 @@ function Other({state,patch}:any){return <div className="mt-fields"><Field label
 function Finish({state}:{state:MoushitateshoState}){const printRef=useRef<HTMLAnchorElement>(null);useLayoutEffect(()=>{printRef.current?.focus()},[]);return <><p className="mt-lead">入力した内容を、公式様式の位置に重ねて印刷します。空欄はそのまま手書きできます。</p><Link ref={printRef} className="mt-print-link" href="/dougu/moushitatesho/insatsu" onClick={()=>{try{window.name=`moushitatesho:${JSON.stringify(state)}`}catch{}}}>印刷プレビューを開く</Link>
   <section className="mt-cross" aria-labelledby="mt-next"><h2 id="mt-next">ここからできること</h2><div className="dougu-cross">
     <Link className="dougu-band-card" href="/dougu/madoguchi"><b>年金事務所を探す</b><span>出す前に行き先を確かめる。管轄の窓口と予約のしかたを出します</span></Link>
-    <Link className="dougu-band-card" href="/dougu/shorui"><b>必要書類をしらべる</b><span>ほかにそろえる書類を、持ち物と一緒に1枚にします</span></Link>
   </div></section></>}
 function Field({label,children}:any){return <label className="mt-field"><span>{label}</span>{children}</label>}

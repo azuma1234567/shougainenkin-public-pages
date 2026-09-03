@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: "/dougu",
+        destination: "/shinsei",
+        statusCode: 301,
+      },
       // 「申請の流れ」記事はトップページ(親ページ)へ統合したため恒久リダイレクト
       {
         source: "/columns/shinsei-nagare",

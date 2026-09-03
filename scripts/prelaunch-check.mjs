@@ -269,8 +269,13 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
   const oldStatic = [...(gitShow("app/sitemap.ts") ?? "").matchAll(/^    "([^"]+)",$/gm)].map((m) => m[1]);
   const oldUrls = [...new Set([...oldStatic, ...baselineSlugs.map((s) => `/columns/${s}`)])];
   const changed = [];
-  for (const p of oldUrls) { const status = pages.get(p)?.status ?? (await fetchText(p)).status; if (status !== 200) changed.push(`${p} (${status})`); }
-  record("C-5", "旧URLからのリダイレクトが必要な変更がない", changed.length === 0, `公開前URL ${oldUrls.length} 件のうち200以外 ${changed.length}`, changed, "main ブランチの sitemap 静的ページ + 記事URL");
+  const redirected = [];
+  for (const p of oldUrls) {
+    const response = pages.get(p) ?? await fetchText(p);
+    if (p === "/dougu" && response.status === 301 && response.location === "/shinsei") redirected.push(`${p} → ${response.location} (${response.status})`);
+    else if (response.status !== 200) changed.push(`${p} (${response.status}${response.location ? ` → ${response.location}` : ""})`);
+  }
+  record("C-5", "旧URLの維持または301リダイレクト", changed.length === 0 && redirected.length === 1, `公開前URL ${oldUrls.length} 件のうち /dougu → /shinsei 301: ${redirected.length === 1 ? "○" : "×"}、その他200以外 ${changed.length}`, [...redirected, ...changed], "main ブランチの sitemap 静的ページ + 記事URL");
 }
 
 // ---------- D. 人が見る用の一覧 ----------

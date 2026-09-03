@@ -124,7 +124,7 @@ export default function ShoruiTool() {
       <section className="sr-card no-print" aria-labelledby="sr-next">
         <h2 id="sr-next">ここからできること</h2>
         <div className="dougu-cross">
-          <Link className="dougu-band-card" href="/dougu/madoguchi"><b>年金事務所を探す</b><span>出す前に行き先を確かめる。管轄の窓口と予約のしかたを出します</span></Link>
+          <Link className="dougu-band-card" href="/dougu/mitate"><b>等級の目安をしらべる</b><span>受け取った診断書の裏面を、国の目安表に当てはめます</span></Link>
           <Link className="dougu-band-card" href="/dougu/moushitatesho"><b>申立書をつくる</b><span>いちばん重い書類を、フォームに沿って書きます</span></Link>
         </div>
       </section>

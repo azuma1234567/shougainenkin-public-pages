@@ -544,11 +544,22 @@ strong {
 }
 
 .site-footer nav {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0 0.4rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
   margin-bottom: 0.75rem;
+  text-align: left;
+}
+
+.site-footer nav section {
+  display: flex;
+  flex-direction: column;
+}
+
+.site-footer nav h2 {
+  margin: 0 0 0.35rem;
+  color: #ffffff;
+  font-size: 0.92rem;
 }
 
 .site-footer a {

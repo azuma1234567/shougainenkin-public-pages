@@ -2,33 +2,15 @@ import Link from "next/link";
 import AnalyticsConsent from "@/components/AnalyticsConsent";
 import { HAS_ACTIVE_ADS } from "@/lib/ads";
 import { SITE_NAME } from "@/lib/constants";
-import { TOOLS } from "@/data/dougu";
-import { JIBUN_ORDER } from "@/components/platform/JibunCard";
-import { isPublishedInternalPath } from "@/lib/published-links";
 
 export default function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="site-footer-inner">
-        <nav className="footer-jibun" aria-label="自分の場合を確かめる">
-          <span className="footer-jibun-heading">自分の場合を確かめる</span>
-          {JIBUN_ORDER.filter((id) => isPublishedInternalPath(TOOLS[id].path)).map((id) => (
-            <Link key={id} href={TOOLS[id].path}>{TOOLS[id].question}</Link>
-          ))}
-        </nav>
         <nav className="footer-links" aria-label="フッターメニュー">
-          <Link href="/joukyou">状況から探す</Link>
-          <Link href="/okane">お金の話</Link>
-          <Link href="/erabu">自分でやるか、頼むか</Link>
-          <Link href="/gokai">よくある誤解</Link>
-          <Link href="/yougo">用語辞典</Link>
-          <Link href="/about">運営者情報</Link>
-          <Link href="/quality">情報の品質について</Link>
-          <Link href="/privacy">プライバシーポリシー</Link>
-          <Link href="/terms">利用規約</Link>
-          <Link href="/ads">広告掲載について</Link>
-          <Link href="/app">無料iPhoneアプリ</Link>
-          <Link href="/app/terms">アプリの利用規約・プライバシーポリシー</Link>
+          <section><h2>探す</h2><Link href="/byoki">病気から</Link><Link href="/joukyou">状況から</Link><Link href="/nayami">悩みから</Link><Link href="/okane">お金の話</Link><Link href="/erabu">自分でやるか、頼むか</Link></section>
+          <section><h2>読む</h2><Link href="/hajimete">はじめての方へ</Link><Link href="/shinsei">申請の流れ</Link><Link href="/gokai">よくある誤解</Link><Link href="/jitsurei">実例と数字</Link><Link href="/suuji">数字で見る障害年金</Link><Link href="/columns">コラム</Link><Link href="/yougo">用語辞典</Link></section>
+          <section><h2>このサイトについて</h2><Link href="/about">運営者情報</Link><Link href="/quality">情報の品質について</Link><Link href="/support">お問い合わせ</Link><Link href="/privacy">プライバシーポリシー</Link><Link href="/terms">利用規約</Link><Link href="/ads">広告掲載について</Link><Link href="/app">無料iPhoneアプリ</Link><Link href="/app/terms">アプリの利用規約・プライバシーポリシー</Link></section>
         </nav>
         <div className="footer-bottom">
           <p className="footer-copyright">© 2026 {SITE_NAME}</p>

@@ -33,7 +33,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/joukyou",
     "/okane",
     "/erabu",
-    "/dougu",
     "/dougu/mitate",
     "/dougu/kingaku",
     "/dougu/shorui",

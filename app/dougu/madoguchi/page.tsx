@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import MadoguchiTool from "@/components/tools/MadoguchiTool";
 import { CHECKED_ON } from "@/lib/madoguchi";
@@ -24,7 +25,7 @@ export default function Page() {
       <header className="dougu-hero no-print">
         <div className="p-container md-width">
           <Breadcrumb
-            items={[{ href: "/", label: "ホーム" }, { href: "/dougu", label: "自分の場合を確かめる" }, { label: "年金事務所を探す" }]}
+            items={[{ href: "/", label: "トップ" }, { href: "/shinsei", label: "申請の流れ" }, { label: "年金事務所を探す" }]}
             currentPath="/dougu/madoguchi"
           />
           <h1>どこへ、どう持っていくか</h1>
@@ -44,6 +45,7 @@ export default function Page() {
           障害年金の窓口メモ（障害年金申請サポート）。窓口の情報は日本年金機構の公表（{CHECKED_ON} 取得）によるものです。統廃合や移転があるため、行く前に機構の公式ページで確認してください。
         </p>
         <MadoguchiTool />
+        <p className="no-print"><Link href="/shinsei">申請の流れへ戻る</Link></p>
       </div>
     </div>
   );
