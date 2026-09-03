@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import KingakuTool from "@/components/tools/KingakuTool";
+import { TOOLS } from "@/data/dougu";
 import { pageMetadata } from "@/lib/seo";
 import { isPublishedInternalPath } from "@/lib/published-links";
 
@@ -37,6 +38,10 @@ export default function Page() {
           <h1>障害年金は、いくらになるか</h1>
           <p className="kg-lead">
             等級と、初診日に入っていた制度と、家族の状況から、年額と月額を内訳つきで出します。厚生年金の報酬比例部分まで計算します。入力した内容は送信されません。
+          </p>
+          <p className="jc-hero-meta jc--kingaku">
+            <span className="jc-time">{TOOLS.kingaku.time}</span>
+            <span className="jc-basis">入力した内容は送信しません</span>
           </p>
           <PageDate updated={UPDATED} />
         </div>

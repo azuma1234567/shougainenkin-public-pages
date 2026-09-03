@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { DouguCards } from "@/components/platform/DouguCard";
-import { TOP_BAND_TOOLS } from "@/data/dougu";
+import { JibunCards } from "@/components/platform/JibunCard";
+import { PRIVACY_LINE } from "@/data/dougu";
 import Link from "next/link";
 import {
   Card,
@@ -315,9 +315,8 @@ export default function HomePage() {
             href="/dougu"
             linkLabel="自分の場合を確かめる"
           />
-          <div className="p-grid dougu-band">
-            <DouguCards placements={TOP_BAND_TOOLS} variant="grid" />
-          </div>
+          <p className="jc-privacy">{PRIVACY_LINE}</p>
+          <JibunCards />
         </div>
       </section>
 

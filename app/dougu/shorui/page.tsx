@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import ShoruiTool from "@/components/tools/ShoruiTool";
+import { TOOLS } from "@/data/dougu";
 import { pageMetadata } from "@/lib/seo";
 import { isPublishedInternalPath } from "@/lib/published-links";
 
@@ -28,6 +29,10 @@ export default function Page() {
           <h1>自分に必要な書類だけを、1枚にする</h1>
           <p className="sr-lead">
             7つの質問に答えると、あなたの場合に要る書類だけが出ます。年金事務所へ行く日の持ち物と、窓口で聞くことも一緒に印刷できます。答えたくない質問は飛ばせます。
+          </p>
+          <p className="jc-hero-meta jc--shorui">
+            <span className="jc-time">{TOOLS.shorui.time}</span>
+            <span className="jc-basis">入力した内容は送信しません</span>
           </p>
           <PageDate updated={UPDATED} />
         </div>

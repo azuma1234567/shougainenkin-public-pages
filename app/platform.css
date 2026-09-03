@@ -16,6 +16,17 @@
   --platform-faint: #8aa5b6;
   --platform-border: #dcebf5;
   --platform-border-soft: #e2eef7;
+  /* 「自分の場合を確かめる」5つの機能の色。記事カードと別物だと一目で分かるようにする。 */
+  --jc-mitate: #0284c7;
+  --jc-kingaku: #059669;
+  --jc-shorui: #d97706;
+  --jc-madoguchi: #7c3aed;
+  --jc-moushitatesho: #0e7490;
+  --jc-mitate-bg: #e8f4fc;
+  --jc-kingaku-bg: #e6f6ef;
+  --jc-shorui-bg: #fdf3e3;
+  --jc-madoguchi-bg: #f0eafb;
+  --jc-moushitatesho-bg: #e4f3f6;
   --platform-container: 1200px;
   --platform-gutter: clamp(20px, 4.45vw, 64px);
 }
@@ -1055,3 +1066,58 @@
 }
 .p-list li { margin: 5px 0; }
 .p-list li strong { color: var(--heading, #14425e); }
+
+
+/* ===== 「自分の場合を確かめる」のカード(トップの帯と /dougu で共通) ===== */
+.jibun-band { background: var(--platform-band); }
+.jc-set { display: grid; gap: 14px; }
+.jc-row { display: grid; gap: 14px; }
+.jc-row-lead { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.jc-row-rest { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.jc {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  padding: 20px 22px;
+  border: 1px solid var(--platform-border);
+  border-left: 6px solid var(--jc-accent, var(--platform-primary));
+  border-radius: 12px;
+  background: var(--platform-surface);
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(20, 66, 94, .05);
+  transition: background .12s, border-color .12s;
+}
+.jc:hover { background: var(--jc-hover, var(--platform-band)); }
+.jc:focus-visible { outline: 2px solid var(--jc-accent, var(--platform-primary)); outline-offset: 2px; }
+.jc-q {
+  color: var(--jc-accent, var(--platform-primary));
+  font-family: var(--font-platform-heading), "Hiragino Kaku Gothic ProN", sans-serif;
+  font-size: clamp(1.15rem, 2.4vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.5;
+}
+.jc-what { color: var(--platform-text); font-size: 14.5px; line-height: 1.8; }
+.jc-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 2px; }
+.jc-time, .jc-basis {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.jc-time { background: var(--jc-hover, var(--platform-band)); color: var(--jc-accent, var(--platform-primary)); font-weight: 700; }
+.jc-basis { border: 1px solid var(--platform-border); color: var(--platform-meta); }
+.jc-privacy { margin: 10px 0 18px; color: var(--platform-muted); font-size: 13.5px; line-height: 1.8; }
+.jc--mitate { --jc-accent: var(--jc-mitate); --jc-hover: var(--jc-mitate-bg); }
+.jc--kingaku { --jc-accent: var(--jc-kingaku); --jc-hover: var(--jc-kingaku-bg); }
+.jc--shorui { --jc-accent: var(--jc-shorui); --jc-hover: var(--jc-shorui-bg); }
+.jc--madoguchi { --jc-accent: var(--jc-madoguchi); --jc-hover: var(--jc-madoguchi-bg); }
+.jc--moushitatesho { --jc-accent: var(--jc-moushitatesho); --jc-hover: var(--jc-moushitatesho-bg); }
+/* 機能ページの hero に出す、一覧と同じチップ */
+.jc-hero-meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 10px 0 0; }
+@media (max-width: 760px) {
+  .jc-row-lead, .jc-row-rest { grid-template-columns: 1fr; }
+  .jc { padding: 18px; }
+}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import MadoguchiTool from "@/components/tools/MadoguchiTool";
 import { CHECKED_ON } from "@/lib/madoguchi";
+import { TOOLS } from "@/data/dougu";
 import { pageMetadata } from "@/lib/seo";
 import { isPublishedInternalPath } from "@/lib/published-links";
 
@@ -29,6 +30,10 @@ export default function Page() {
           <h1>どこへ、どう持っていくか</h1>
           <p className="md-lead">
             提出先は、初診日にどの制度に入っていたかで変わります。まずそれを調べて、それから管轄の窓口と、予約のしかたと、持ち物までを1枚にします。
+          </p>
+          <p className="jc-hero-meta jc--madoguchi">
+            <span className="jc-time">{TOOLS.madoguchi.time}</span>
+            <span className="jc-basis">入力した内容は送信しません</span>
           </p>
           <PageDate updated={UPDATED} />
         </div>

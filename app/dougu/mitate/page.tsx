@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import MitateTool from "@/components/tools/MitateTool";
+import { TOOLS } from "@/data/dougu";
 import { pageMetadata } from "@/lib/seo";
 import { isPublishedInternalPath } from "@/lib/published-links";
 
@@ -28,6 +29,10 @@ export default function Page() {
           <h1>国が公表している目安に、当てはめてみる</h1>
           <p className="mi-lead">
             精神の障害の審査には、国が公表している「障害等級の目安」の表があります。診断書に書かれる2つの欄の組み合わせで、目安がどうなるかを見られます。判定しているのは国のガイドラインで、このサイトではありません。
+          </p>
+          <p className="jc-hero-meta jc--mitate">
+            <span className="jc-time">{TOOLS.mitate.time}</span>
+            <span className="jc-basis">入力した内容は送信しません</span>
           </p>
           <PageDate updated={UPDATED} />
         </div>
