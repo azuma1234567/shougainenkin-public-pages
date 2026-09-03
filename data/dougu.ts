@@ -112,7 +112,36 @@ export const PLACEMENTS: {
       cta: "道具を開く",
       position: "after",
     }],
+    /* 提出先・郵送の記事。クリック上位3本の1つで、まさに「どこへ出すか」を扱っている。 */
+    "teishutsusaki-yuusou": ["madoguchi"],
   },
-  hubs: {},
-  shinseiSteps: {},
+  hubs: {
+    "/okane/ikura": ["kingaku"],
+    /* 精神系の病名ハブ。目安表の対象がこの3区分(精神・知的・発達)なので、そこだけに置く。 */
+    "/byoki/utsu-soukyoku": ["mitate"],
+    "/byoki/tekiou-fuan": ["mitate"],
+    "/byoki/tougou": ["mitate"],
+    "/byoki/hattatsu": ["mitate"],
+    "/byoki/chiteki": ["mitate"],
+  },
+  shinseiSteps: {
+    "step-3": ["madoguchi"],       /* 年金事務所へ相談する */
+    "step-4": ["shorui"],          /* 必要書類をそろえる */
+    "step-6": ["moushitatesho"],   /* 申立書を作成する */
+  },
+};
+
+/* /hajimete に並べる2枚(見出し「使える道具」)。 */
+export const HAJIMETE_TOOLS: ToolId[] = ["mitate", "kingaku"];
+
+/* トップの帯。順番は 等級の目安 / 金額 / 必要書類 / 年金事務所 / 申立書。 */
+export const TOP_BAND_TOOLS: ToolId[] = ["mitate", "kingaku", "shorui", "madoguchi", "moushitatesho"];
+
+/* 各道具ページの「ここからできること」で、ほかの道具へ渡す相互リンク。 */
+export const TOOL_CROSS_LINKS: Record<ToolId, ToolId[]> = {
+  mitate: ["kingaku", "shorui"],
+  kingaku: ["shorui", "mitate"],
+  shorui: ["madoguchi", "moushitatesho"],
+  moushitatesho: ["madoguchi", "shorui"],
+  madoguchi: ["shorui", "moushitatesho"],
 };

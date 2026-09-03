@@ -170,7 +170,6 @@ export default function MadoguchiTool() {
       <section className="md-card" aria-labelledby="md-h4">
         <h2 id="md-h4">4. 行く日の持ち物</h2>
         <ul className="md-list">{SHORUI_MOCHIMONO.map((m) => <li key={m}>{m}</li>)}</ul>
-        <p className="md-note no-print">書類を先にそろえたいときは → <Link href="/dougu/shorui" prefetch={false}>必要書類チェックリスト</Link></p>
       </section>
 
       <section className="md-card" aria-labelledby="md-h5">
@@ -183,6 +182,14 @@ export default function MadoguchiTool() {
             共用のパソコンを使っています(この端末に保存しない)
           </button>
           <Link className="md-btn md-ghost" href="/columns/teishutsusaki-yuusou" prefetch={false}>郵送で出したいとき</Link>
+        </div>
+      </section>
+
+      <section className="md-card no-print" aria-labelledby="md-next">
+        <h2 id="md-next">ここからできること</h2>
+        <div className="dougu-cross">
+          <Link className="dougu-band-card" href="/dougu/shorui" prefetch={false}><b>必要書類をしらべる</b><span>自分の場合に要る書類だけを、持ち物と一緒に1枚にします</span></Link>
+          <Link className="dougu-band-card" href="/dougu/moushitatesho" prefetch={false}><b>申立書をつくる</b><span>いちばん重い書類を、フォームに沿って書きます</span></Link>
         </div>
       </section>
     </>

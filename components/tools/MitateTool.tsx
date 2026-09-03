@@ -318,6 +318,8 @@ function Result({ s, onBack }: { s: MitateState; onBack: () => void }) {
         </div>
         <div className="mi-next no-print">
           <Link href="/dougu/moushitatesho"><b>申立書を書く</b><span>フォームに沿って書くと、そのまま提出できる形で印刷できます</span></Link>
+          <Link href="/dougu/kingaku"><b>金額を計算する</b><span>その等級だと年額と月額がいくらになるか、内訳つきで出します</span></Link>
+          <Link href="/dougu/shorui"><b>必要書類をしらべる</b><span>自分の場合に要る書類だけを、1枚にまとめます</span></Link>
           {lookup.kind === "blank" && <Link href="/nayami/shindansho-komatta"><b>診断書で困ったとき</b><span>判定と程度の開きについて</span></Link>}
           {(s.guide.g1 || s.guide.g2 || s.guide.g7 || s.guide.g8) && <Link href="/joukyou/hatarakinagara"><b>働きながら申請する</b><span>就労がどう見られるか</span></Link>}
           {s.guide.g3 && <Link href="/joukyou/hitorigurashi"><b>ひとり暮らしで申請する</b><span>独居の評価のされ方</span></Link>}

@@ -3025,3 +3025,14 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
   ul.md-list{font-size:10px;line-height:1.55}ul.md-list li{margin:1px 0}
   .md-kind{background:#fff;border:1px solid #bbb;font-size:9.5px}
 }
+
+/* 道具カード(data/dougu.ts の PLACEMENTS から出す)。記事内は既存の .mt-column-card のまま。 */
+.dougu-hub-card{margin:18px 0}
+.dougu-band,.dougu-cross{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.dougu-band-card{display:block;padding:16px 18px;border:1px solid var(--platform-border);border-radius:12px;background:#fff;text-decoration:none;box-shadow:0 1px 3px rgba(20,66,94,.05)}
+.dougu-band-card:hover{border-color:var(--platform-primary);background:#fbfdff}
+.dougu-band-card b{display:block;color:var(--platform-heading);font-family:var(--font-platform-heading),"Hiragino Kaku Gothic ProN",sans-serif;font-size:15.5px;line-height:1.55}
+.dougu-band-card span{display:block;margin-top:6px;color:var(--platform-muted);font-size:13.5px;line-height:1.8}
+.mt-cross{margin-top:28px}.mt-cross h2{margin:0 0 10px;font:700 1.08rem/1.55 var(--font-platform-heading),sans-serif;color:var(--platform-heading)}
+@media(max-width:600px){.dougu-band,.dougu-cross{grid-template-columns:1fr}}
+@media print{.dougu-cross,.mt-cross{display:none!important}}

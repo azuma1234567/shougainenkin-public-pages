@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { DouguCards } from "@/components/platform/DouguCard";
+import { HAJIMETE_TOOLS } from "@/data/dougu";
 import HubGokai from "@/components/platform/HubGokai";
 import Link from "next/link";
 import { Breadcrumb, Card, CheckIcon, SectionHeader } from "@/components/platform/Platform";
@@ -173,6 +175,15 @@ export default function HajimetePage() {
             </Card>
           </div>
           <p className="p-source" style={{ marginTop: 10 }}>金額は毎年4月に改定されます。出典: 日本年金機構「障害年金ガイド」「年金生活者支援給付金」 ・ 確認日 2026-08-31</p>
+        </div>
+      </section>
+
+      <section className="p-section" aria-labelledby="dougu-heading">
+        <div className="p-container">
+          <SectionHeader title="使える道具" lead="入力した内容は、どれもこの端末の中だけで処理します。サーバーへは送りません。" />
+          <div className="p-grid p-grid-2 dougu-band">
+            <DouguCards placements={HAJIMETE_TOOLS} variant="grid" />
+          </div>
         </div>
       </section>
 
