@@ -1,6 +1,6 @@
 # 公開前チェック 実行結果 (2026-09-03)
 
-origin: http://localhost:3000 / ページ数: 166 / 基準: git main
+origin: http://localhost:3200 / ページ数: 166 / 基準: git main
 
 ## A
 
