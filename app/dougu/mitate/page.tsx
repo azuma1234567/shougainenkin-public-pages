@@ -35,7 +35,7 @@ export default function Page() {
 
       <div className="p-container mi-width mi-main">
         <p className="mi-printhead">
-          国が公表している目安に当てはめた結果です（障害年金ノート / 精神の障害に係る等級判定ガイドライン 平成28年9月）。このサイトが判定したものではありません。
+          国が公表している目安に当てはめた結果です（障害年金申請サポート / 精神の障害に係る等級判定ガイドライン 平成28年9月）。このサイトが判定したものではありません。
         </p>
         <MitateTool />
       </div>

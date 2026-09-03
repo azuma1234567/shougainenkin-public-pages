@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CONTACT_EMAIL, SITE_LEGAL_UPDATED } from "@/lib/constants";
+import { CONTACT_EMAIL, SITE_LEGAL_UPDATED, SITE_NAME } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
-  "「障害年金ノート」への広告・事務所情報の掲載についてのご案内と、広告掲載規約です。掲載基準、表示のしかた、料金、掲載の停止について定めています。";
+  `「${SITE_NAME}」への広告・事務所情報の掲載についてのご案内と、広告掲載規約です。掲載基準、表示のしかた、料金、掲載の停止について定めています。`;
 
 // 有料掲載の条件。運営者が料金と期間を決めるまでは料金表を出さず、
 // 個別見積りの案内にとどめる(指示書 §5 第5条・§9)。
@@ -40,7 +40,7 @@ export default function AdsPage() {
       <h2>掲載のご案内</h2>
 
       <p>
-        「障害年金ノート」は、障害年金の申請を考えている方とそのご家族が読む情報サイトです。
+        「{SITE_NAME}」は、障害年金の申請を考えている方とそのご家族が読む情報サイトです。
         自分で申請するか専門家に頼むかを決める段階で読まれることが多く、
         社会保険労務士事務所の情報を、その判断材料のひとつとして掲載しています。
       </p>
@@ -109,7 +109,7 @@ export default function AdsPage() {
       <h2>広告掲載規約</h2>
 
       <p>
-        この規約は、「障害年金ノート」(shougainenkin-note.net、以下「本サイト」)に広告または事務所情報を掲載する方
+        この規約は、「{SITE_NAME}」(shougainenkin-note.net、以下「本サイト」)に広告または事務所情報を掲載する方
         (以下「広告主」)と、運営者(あずまたいすけ、以下「運営者」)との間に適用されます。
       </p>
 

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { adSourceList, HAS_ACTIVE_ADS } from "@/lib/ads";
-import { APP_STORE_URL, AUTHOR_NAME, CONTACT_EMAIL } from "@/lib/constants";
+import { APP_STORE_URL, AUTHOR_NAME, CONTACT_EMAIL, SITE_NAME } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { PageDate } from "@/components/platform/Platform";
 
 const DESCRIPTION =
-  "「障害年金ノート」の運営者情報です。運営者、サイトの目的、運営のしかた(広告収入)、情報の位置づけ、お問い合わせ先をご案内します。";
+  `「${SITE_NAME}」の運営者情報です。運営者、サイトの目的、運営のしかた(広告収入)、情報の位置づけ、お問い合わせ先をご案内します。`;
 
 export const metadata: Metadata = pageMetadata({
   title: "運営者情報",
@@ -36,7 +36,7 @@ export default function AboutPage() {
       <h2>このサイトについて</h2>
 
       <p>
-        「障害年金ノート」(shougainenkin-note.net)は、障害年金の申請を考えている方とそのご家族に向けて、
+        「{SITE_NAME}」(shougainenkin-note.net)は、障害年金の申請を考えている方とそのご家族に向けて、
         制度の仕組み、申請の流れ、診断書や申立書の準備、公開されている裁決例を、
         できるだけ平易に整理して届ける情報サイトです。
       </p>

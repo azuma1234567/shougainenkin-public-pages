@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AUTHOR_NAME, CONTACT_EMAIL, SITE_LEGAL_UPDATED } from "@/lib/constants";
+import { AUTHOR_NAME, CONTACT_EMAIL, SITE_LEGAL_UPDATED, SITE_NAME } from "@/lib/constants";
 import { pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
-  "「障害年金ノート」の広告掲載に関する、特定商取引法に基づく表記です。";
+  `「${SITE_NAME}」の広告掲載に関する、特定商取引法に基づく表記です。`;
 
 // 有料掲載を受け付けるまでは未確定の項目が残るため、検索結果に出さない。
 // 【 】をすべて埋めたら DRAFT を false にして、app/sitemap.ts にも追加する。

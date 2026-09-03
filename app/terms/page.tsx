@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { adSourceList, HAS_ACTIVE_ADS } from "@/lib/ads";
-import { CONTACT_EMAIL, SITE_LEGAL_UPDATED } from "@/lib/constants";
+import { CONTACT_EMAIL, SITE_LEGAL_UPDATED, SITE_NAME } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
-  "「障害年金ノート」(shougainenkin-note.net)の利用規約です。情報の性質、広告と掲載、著作権、禁止事項、免責について定めています。";
+  `「${SITE_NAME}」(shougainenkin-note.net)の利用規約です。情報の性質、広告と掲載、著作権、禁止事項、免責について定めています。`;
 
 export const metadata: Metadata = pageMetadata({
   title: "利用規約",
@@ -37,7 +37,7 @@ export default function TermsPage() {
       <p className="meta-line">最終更新日: {SITE_LEGAL_UPDATED}</p>
 
       <p>
-        この規約は、「障害年金ノート」(shougainenkin-note.net、以下「本サイト」)を閲覧・利用するすべての方
+        この規約は、「{SITE_NAME}」(shougainenkin-note.net、以下「本サイト」)を閲覧・利用するすべての方
         (以下「利用者」)に適用されます。本サイトを利用した時点で、この規約に同意したものとみなします。
       </p>
 

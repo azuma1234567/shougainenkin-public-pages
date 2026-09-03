@@ -28,7 +28,7 @@ const hub = (
 ): HubDefinition => ({ path, label, shortLabel, kind, published, relatedSlugs, jitsureiFilter });
 
 export const HUBS: HubDefinition[] = [
-  hub("/", "障害年金ノート", "トップ", "existing", true),
+  hub("/", "障害年金申請サポート", "トップ", "existing", true),
   hub("/hajimete", "はじめての方へ", "はじめて", "existing", true, ["techou-to-nenkin"]),
   hub("/shinsei", "障害年金の申請の流れ", "申請の流れ", "existing", true, ["shinsei-shindoi"]),
   hub("/suuji", "数字で見る障害年金", "数字で見る", "existing", true),

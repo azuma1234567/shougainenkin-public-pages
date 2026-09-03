@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { AnalyticsConsentSettingsButton } from "@/components/AnalyticsConsent";
 import { ADSENSE_ENABLED, AFFILIATE_ASPS, SHOW_LISTINGS } from "@/lib/ads";
-import { CONTACT_EMAIL, SITE_LEGAL_UPDATED } from "@/lib/constants";
+import { CONTACT_EMAIL, SITE_LEGAL_UPDATED, SITE_NAME } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
-  "「障害年金ノート」(shougainenkin-note.net)のプライバシーポリシーです。閲覧・お問い合わせ・広告掲載に関する情報の取扱い、アクセス解析と広告配信について説明します。";
+  `「${SITE_NAME}」(shougainenkin-note.net)のプライバシーポリシーです。閲覧・お問い合わせ・広告掲載に関する情報の取扱い、アクセス解析と広告配信について説明します。`;
 
 export const metadata: Metadata = pageMetadata({
   title: "プライバシーポリシー",
@@ -39,7 +39,7 @@ export default function PrivacyPage() {
       <p className="meta-line">最終更新日: {SITE_LEGAL_UPDATED}</p>
 
       <p>
-        本ポリシーは、「障害年金ノート」(shougainenkin-note.net、以下「本サイト」)を閲覧・利用する方の情報を、
+        本ポリシーは、「{SITE_NAME}」(shougainenkin-note.net、以下「本サイト」)を閲覧・利用する方の情報を、
         運営者がどのように取り扱うかを説明するものです。
       </p>
 

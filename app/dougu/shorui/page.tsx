@@ -35,7 +35,7 @@ export default function Page() {
 
       <div className="p-container sr-width sr-main">
         <p className="sr-printhead">
-          障害年金の必要書類チェックリスト（障害年金ノート）。これで全部とは限りません。最後は年金事務所で確認してください。
+          障害年金の必要書類チェックリスト（障害年金申請サポート）。これで全部とは限りません。最後は年金事務所で確認してください。
         </p>
         <ShoruiTool />
       </div>
