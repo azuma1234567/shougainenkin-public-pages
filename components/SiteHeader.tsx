@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { APP_STORE_URL, SITE_NAME } from "@/lib/constants";
+import { SITE_NAME } from "@/lib/constants";
 
 const NAV_ITEMS = [
   { href: "/hajimete", label: "はじめての方へ" },
@@ -50,19 +50,18 @@ export default function SiteHeader() {
           aria-label={`${SITE_NAME} トップページ`}
         >
           <BookIcon />
-          <span className="site-title-text">障害年金ノート</span>
+          <span className="site-title-text">{SITE_NAME}</span>
         </Link>
         <nav className="site-nav site-nav-desktop" aria-label="サイト内メニュー">
           <NavigationLinks />
-          <a className="site-app-link" href={APP_STORE_URL}>
-            無料で使えます
-          </a>
+          <Link className="site-app-link" href="/app">無料アプリ</Link>
         </nav>
         <details className="site-mobile-menu">
           <summary>メニュー</summary>
           <nav aria-label="モバイルメニュー">
             <NavigationLinks />
             <Link href="/support">サポート</Link>
+            <Link href="/app">無料アプリ</Link>
           </nav>
         </details>
       </div>

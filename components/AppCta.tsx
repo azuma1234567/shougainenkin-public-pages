@@ -10,7 +10,7 @@ export default function AppCta({ ct }: { ct: string }) {
       <p>
         この記事の内容を、質問に答えるだけで進められるアプリを作りました。
         日々の記録が診察で医師に渡せる資料になり、申立書の下書きになります。
-        ログイン不要・記録は端末の中に。基本機能は無料です。
+        ログイン不要・記録は端末の中に。すべての機能を無料で使えます。
       </p>
       <p>
         <AppStoreBadge href={appStoreLink(ct)} />

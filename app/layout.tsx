@@ -33,7 +33,7 @@ const zenKakuGothic = Zen_Kaku_Gothic_New({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "障害年金の疑問に、公的根拠と実例で答える｜障害年金ノート",
+    default: "障害年金の疑問に、公的根拠と実例で答える｜障害年金申請サポート",
     template: `%s｜${SITE_NAME}`,
   },
   description:
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: SITE_NAME,
-    title: "障害年金の疑問に、公的根拠と実例で答える｜障害年金ノート",
+    title: "障害年金の疑問に、公的根拠と実例で答える｜障害年金申請サポート",
     description:
       "障害年金がはじめての方へ。病気、申請の段階、いまの悩みから、公的資料の根拠と公開裁決例を使って自分に近い情報を探せます。",
     url: "/",

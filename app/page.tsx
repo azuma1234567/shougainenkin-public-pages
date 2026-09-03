@@ -18,7 +18,7 @@ import { YOUGO } from "@/data/yougo";
 import { GOKAI } from "@/data/gokai";
 import { searchableYomi } from "@/lib/yougo";
 
-const TITLE = "障害年金の疑問に、公的根拠と実例で答える";
+const TITLE = "障害年金の疑問に、公的根拠と実例で答える｜障害年金申請サポート";
 const DESCRIPTION = "障害年金がはじめての方へ。病気、申請の段階、いまの悩みから、公的資料の根拠と公開裁決例を使って自分に近い情報を探せます。";
 
 const searchItems: SearchItem[] = [
@@ -188,7 +188,7 @@ export default function HomePage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "障害年金ノート",
+    name: "障害年金申請サポート",
     url: SITE_URL,
     description: DESCRIPTION,
   };

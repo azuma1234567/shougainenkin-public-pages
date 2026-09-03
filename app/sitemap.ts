@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/privacy",
     "/terms",
     "/ads",
+    "/app",
     // アプリ向けの法務ページ。サイト向けの /privacy /terms とは別文書。
     "/app/privacy",
     "/app/terms",
