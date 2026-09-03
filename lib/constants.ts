@@ -27,21 +27,26 @@ export const APP_STORE_URL = resolveAppStoreUrl();
 // ct = キャンペーン名(記事slugを渡す)
 export const appStoreLink = (_ct: string) => APP_STORE_URL;
 
-// 利用規約・プライバシーポリシーの制定日。
+// アプリ「障害年金申請サポート」の利用規約・プライバシーポリシーの制定日。
 // 次の4か所は常に同じ値・同じ文面にすること(原本は shougainenkin リポジトリの
 // docs/public-pages.md)。過去に公開サイトだけが古いまま取り残された実績がある。
 //   1. docs/public-pages.md               … 原本
-//   2. ここ(公開サイト /terms・/privacy)  … 利用者が実際に読むページ
+//   2. ここ(公開サイト /app/terms・/app/privacy)… 利用者が実際に読むページ
 //   3. server/app/{terms,privacy}/page.tsx … LEGAL_VERSION
 //   4. src/MockupV4App 14.tsx             … LEGAL_VERSION(アプリ内表示)
 //
 // 制定日は、条文そのものを改定したときだけ動かす。文言を1文字も変えていない
 // 同期作業や表示の修正では動かさないこと。
+//
+// 2026-09-03: 公開サイトの /terms・/privacy はサイト向けの文面(広告・アクセス
+// 解析・掲載)へ切り替わり、アプリ向けの文面は /app/terms・/app/privacy へ移した。
+// この定数はアプリ向け2ページだけが使う。
 export const LEGAL_VERSION = "2026年8月28日";
 
-// 公開ページを更新した日。公開サイトだけに表示する項目で、同期先3か所には無い。
-// 制定日と違い、条文の改定を伴わない更新(同期・表記の修正など)でも動かしてよい。
-export const LEGAL_UPDATED = "2026年8月24日";
+// 公開サイト自身の利用規約・プライバシーポリシー・広告掲載規約・運営者情報の
+// 最終更新日。アプリ側の制定日(LEGAL_VERSION)とは系統が別で、混ぜないこと。
+// サイト側は広告主・解析ツールの変更のたびに改定するため、独立して動かす。
+export const SITE_LEGAL_UPDATED = "2026年9月3日";
 
 export const CONTACT_EMAIL = "shougainenkinsupport@gmail.com";
 

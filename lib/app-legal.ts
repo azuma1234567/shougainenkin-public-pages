@@ -6,9 +6,12 @@
 // (docs/public-pages.md の同期先一覧も参照)
 //
 // 公開サイト自身のポリシーは app/privacy・app/terms(/privacy・/terms)。
-// この文面と混ぜないこと。日付の系統も別で、こちらは原本の LEGAL_VERSION を出す。
+// この文面と混ぜないこと。日付の系統も別で、こちらは原本の LEGAL_VERSION を出す
+// (サイト側は SITE_LEGAL_UPDATED)。
 
-export const APP_LEGAL_VERSION = '2026年8月28日';
+import { LEGAL_VERSION } from '@/lib/constants';
+
+export const APP_LEGAL_VERSION = LEGAL_VERSION;
 
 export type AppLegalSection = { title: string; body: string };
 
