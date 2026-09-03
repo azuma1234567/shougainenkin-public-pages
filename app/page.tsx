@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { DouguCards } from "@/components/platform/DouguCard";
-import { PLACEMENTS } from "@/data/dougu";
 import Link from "next/link";
+import StepFlow from "@/components/platform/StepFlow";
 import {
   Card,
   CaseCard,
@@ -161,8 +160,6 @@ const misconceptions = [
   { label: "誤解「一生の記録に残る」", href: "/gokai/kaisha-ni-shirareru", title: "戸籍や運転免許に載ることはありません", copy: "受給が戸籍・住民票・運転免許に記載されることはありません。年金の記録として管理されるだけで、「公的なレッテルになる」という不安は実態と異なります。", source: "日本年金機構" },
 ] as const;
 
-const steps = ["初診日を確認する", "納付要件を確認する", "年金事務所へ相談する", "必要書類をそろえる", "診断書の準備をする", "申立書を作成する", "年金事務所へ提出する", "結果を待つ"];
-
 const featuredCases = [
   ...findCases((item) => item.shobyo.includes("統合失調症") && item.soten.includes("初診日"), 1),
   ...findCases((item) => item.shobyo.includes("自閉") && item.ketsuron === "容認", 1),
@@ -214,20 +211,7 @@ export default function HomePage() {
       <section className="p-section-lg" aria-labelledby="steps-heading">
         <div className="p-container">
           <SectionHeader title="申請の流れ ― 8つのステップ" lead="初診日の確認から結果が届くまで。それぞれの段階で使える機能を、そのステップに置いています。" href="/shinsei" linkLabel="申請の流れを詳しく見る" />
-          <div className="p-grid p-grid-8 p-step-flow">
-            {steps.map((step, index) => {
-              const stepId = `step-${index + 1}`;
-              return (
-                <div className="p-step-flow-item" key={step}>
-                  <Link className="p-card p-step-card" href={`/shinsei#${stepId}`}>
-                    <span className="p-step-label">STEP {index + 1}</span>
-                    <span className="p-step-title">{step}</span>
-                  </Link>
-                  <DouguCards placements={PLACEMENTS.shinseiSteps[stepId]} variant="grid" className={stepId === "step-6" ? "p-card-lg" : ""} />
-                </div>
-              );
-            })}
-          </div>
+          <StepFlow />
         </div>
       </section>
 
