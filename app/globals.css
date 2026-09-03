@@ -2829,3 +2829,54 @@ table.kg-br{width:100%;margin:8px 0;border-collapse:collapse;font-size:14.5px}ta
   .mi-qsrc,.mi-src,.mi-gcap{font-size:7.5pt;line-height:1.5}
   @page{size:A4;margin:12mm}
 }
+
+/* /dougu/shorui: 必要書類チェックリスト。値は docs/site-mock-2026-09-02-tools/Shorui.html から。 */
+.sr-page{background:var(--platform-bg)}.sr-width{max-width:800px}.sr-page .dougu-hero h1{font-size:clamp(1.35rem,5.4vw,27px)}.sr-lead{margin:12px 0 0;color:var(--platform-muted);font-size:15px}.sr-main{padding:2px 0 64px}
+.sr-card{padding:22px;margin:18px 0;border:1px solid var(--platform-border);border-radius:14px;background:var(--platform-surface)}.sr-card h2{margin:0 0 6px;color:var(--platform-heading);font-family:var(--font-platform-heading),"Hiragino Kaku Gothic ProN",sans-serif;font-size:19px;line-height:1.5}
+.sr-q{margin:20px 0 4px}.sr-t{margin:0;color:var(--platform-heading);font-size:15.5px;font-weight:600;line-height:1.7}
+.sr-chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.sr-chips button{padding:9px 16px;border:1.5px solid #d7e9f5;border-radius:999px;background:#fff;color:var(--platform-text);font-family:inherit;font-size:14.5px;cursor:pointer}.sr-chips button[aria-pressed=true]{border-color:var(--platform-primary);background:var(--platform-chip);color:var(--platform-heading);font-weight:600}
+.sr-note{margin:14px 0;padding:14px 16px;border-radius:12px;background:var(--platform-band);color:var(--platform-muted);font-size:14px;line-height:1.85}.sr-note strong{color:var(--platform-heading)}
+.sr-warnbox{margin:12px 0;padding:13px 15px;border:1px solid #f0e2bd;border-radius:12px;background:#fdf3dd;color:#6b5316;font-size:13.5px;line-height:1.85}.sr-warnbox b{color:#8b6a1f}
+.sr-mt{margin-top:14px}.sr-mt2{margin-top:18px}
+.sr-sec{margin:22px 0 2px;padding-top:14px;border-top:2px solid #cfe6f5;color:var(--platform-heading);font-family:var(--font-platform-heading),sans-serif;font-size:15px;font-weight:700}.sr-card>div:first-of-type .sr-sec{border-top:0;padding-top:0}
+.sr-doc{display:flex;gap:12px;align-items:flex-start;padding:14px 2px;border-bottom:1px solid #d7e9f5}.sr-doc:last-child{border-bottom:0}
+.sr-doc input{flex:none;width:20px;height:20px;margin-top:5px;accent-color:var(--platform-primary)}
+.sr-b{flex:1;min-width:0}.sr-n{color:var(--platform-heading);font-size:15.5px;font-weight:600;cursor:pointer}.sr-plain{font-weight:500;font-size:15px}
+.sr-links a{margin-left:8px;font-size:12.5px;font-weight:400}
+.sr-meta{margin:2px 0 0;color:var(--platform-meta);font-size:12.5px}.sr-meta span{margin-right:14px}
+.sr-stuck{margin:5px 0 0;color:var(--platform-muted);font-size:13px;line-height:1.75}
+.sr-forms{margin:5px 0 0;color:var(--platform-muted);font-size:12.5px;line-height:1.8}.sr-forms span{display:block}.sr-forms a{margin-left:8px}
+.sr-why{display:inline-block;margin-left:6px;padding:1px 9px;border-radius:999px;background:var(--platform-chip);color:var(--platform-heading);font-size:11.5px;font-weight:400}
+ul.sr-ask{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.sr-ask li{margin:7px 0}
+.sr-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+.sr-btn{padding:13px 26px;border:0;border-radius:999px;background:var(--platform-primary);color:#fff;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer}.sr-ghost{border:1.5px solid #cfe6f5;background:#fff;color:var(--platform-link)}.sr-sm{padding:9px 18px;font-size:14px}
+.sr-opt-btn{padding:9px 16px;border:1.5px solid #d7e9f5;border-radius:999px;background:#fff;color:var(--platform-text);font-family:inherit;font-size:13.5px;cursor:pointer}.sr-opt-btn[aria-pressed=true]{border-color:var(--platform-primary);background:var(--platform-chip);color:var(--platform-heading);font-weight:600}
+.sr-link{border:0;background:none;color:var(--platform-link);font-family:inherit;font-size:13.5px;text-decoration:underline;cursor:pointer}.sr-confirm{color:var(--platform-muted);font-size:13.5px}
+.sr-chips button:focus-visible,.sr-btn:focus-visible,.sr-opt-btn:focus-visible,.sr-link:focus-visible,.sr-doc input:focus-visible{outline:2px solid var(--platform-primary);outline-offset:2px}
+.sr-box{display:none}
+.sr-printhead{display:none}
+@media(max-width:520px){.sr-card{padding:18px 16px}}
+@media print{
+  /* 窓口へ持っていく紙。A4 2枚以内(1枚には収まらない。docs/shorui-tool-design-2026-09-02.md §5-4)。
+     持ち物と窓口で聞くことは落とさない——この紙の本体はそちらなので。 */
+  @page{size:A4 portrait;margin:14mm}
+  .no-print{display:none!important}
+  .sr-page{background:#fff}.sr-main{padding:0}
+  body{font-size:11px;line-height:1.6}
+  .sr-printhead{display:block;margin:0 0 6px;color:#000;font-size:10px;line-height:1.5}
+  .sr-card{padding:0;margin:0 0 8px;border:0;border-radius:0}
+  .sr-card h2{font-size:13px;margin:0 0 2px;break-after:avoid;page-break-after:avoid}
+  /* 手で書き込む余白なので詰めない。項目は改ページで割らない。 */
+  .sr-doc{padding:6px 2px;break-inside:avoid;page-break-inside:avoid}
+  /* チェック欄。input は隠し、::before の枠線で箱を描く。
+     背景グラフィックをオフにして印刷しても消えないよう、背景色を使わない。 */
+  .sr-doc input{display:none!important}
+  .sr-box{display:inline-block;flex:none;margin-top:2px}
+  .sr-box::before{content:"";display:inline-block;width:11px;height:11px;border:1px solid #333;border-radius:2px;vertical-align:-1px}
+  .sr-doc input:checked+.sr-box::before{content:"\2713";width:11px;height:11px;line-height:10px;text-align:center;font-size:10px;font-weight:700;color:#000}
+  .sr-n{font-size:12px}.sr-plain{font-size:11.5px}.sr-meta,.sr-stuck,.sr-forms{font-size:10px;line-height:1.45}
+  .sr-sec{font-size:12px;margin:10px 0 2px;padding-top:6px;break-after:avoid;page-break-after:avoid}
+  .sr-note,.sr-warnbox{padding:8px 10px;font-size:10px;margin:6px 0;background:#fff;border:1px solid #bbb;break-inside:avoid}
+  ul.sr-ask{font-size:10.5px;line-height:1.6}ul.sr-ask li{margin:2px 0;break-inside:avoid;page-break-inside:avoid}
+  .sr-why{background:#fff;border:1px solid #bbb;font-size:9.5px}
+}

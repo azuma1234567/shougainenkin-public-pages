@@ -1,0 +1,109 @@
+{
+ "generatedAt": "2026-09-03T03:31:26.616Z",
+ "a4ContentMm": 269,
+ "cases": [
+  {
+   "name": "未回答(共通のみ)",
+   "labels": [],
+   "pages": 2,
+   "splitItems": [],
+   "itemCount": 21,
+   "contentMm": 275.9,
+   "rawInputsVisible": 0,
+   "checkedOnScreen": 0,
+   "boxesDrawn": 14,
+   "boxesTicked": 0,
+   "boxUsesBackground": false,
+   "finalCheckOnPrint": true,
+   "mochimonoOnPrint": true,
+   "askOnPrint": true,
+   "printHead": true,
+   "moneyOnPrint": false
+  },
+  {
+   "name": "最大(全分岐)",
+   "labels": [
+    "国民年金",
+    "20歳より前",
+    "遡及",
+    "内部(心臓・腎臓・肝臓・呼吸器・糖尿病)",
+    "違ううえ、カルテが残っていないと言われた",
+    "18歳の年度末までの子がいる",
+    "65歳未満の配偶者がいる",
+    "はい"
+   ],
+   "pages": 2,
+   "splitItems": [],
+   "itemCount": 31,
+   "contentMm": 510.3,
+   "rawInputsVisible": 0,
+   "checkedOnScreen": 0,
+   "boxesDrawn": 24,
+   "boxesTicked": 0,
+   "boxUsesBackground": false,
+   "finalCheckOnPrint": true,
+   "mochimonoOnPrint": true,
+   "askOnPrint": true,
+   "printHead": true,
+   "moneyOnPrint": false
+  },
+  {
+   "name": "最大+全チェック",
+   "labels": [
+    "厚生年金",
+    "20歳より前",
+    "遡及",
+    "精神",
+    "違ううえ、カルテが残っていないと言われた",
+    "18歳の年度末までの子がいる",
+    "65歳未満の配偶者がいる",
+    "はい"
+   ],
+   "pages": 2,
+   "splitItems": [],
+   "itemCount": 32,
+   "contentMm": 505.1,
+   "rawInputsVisible": 0,
+   "checkedOnScreen": 25,
+   "boxesDrawn": 25,
+   "boxesTicked": 25,
+   "boxUsesBackground": false,
+   "finalCheckOnPrint": true,
+   "mochimonoOnPrint": true,
+   "askOnPrint": true,
+   "printHead": true,
+   "moneyOnPrint": false
+  }
+ ],
+ "mobile": {
+  "scrollWidth": 375,
+  "clientWidth": 375,
+  "overflowing": 0
+ },
+ "network": [
+  {
+   "method": "GET",
+   "url": "http://127.0.0.1:3220/icon.png?456ec51301557816",
+   "prefetch": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "http://127.0.0.1:3220/?_rsc=dw6XW2Ez4qB7TqtG",
+   "prefetch": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "http://127.0.0.1:3220/dougu?_rsc=dw6XW2Ez4qB7TqtG",
+   "prefetch": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "http://127.0.0.1:3220/privacy?_rsc=dw6XW2Ez4qB7TqtG",
+   "prefetch": true,
+   "hasBody": false
+  }
+ ]
+}
