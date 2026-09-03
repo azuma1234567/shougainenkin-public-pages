@@ -162,9 +162,9 @@ const moneyTopics = [
 ] as const;
 
 const misconceptions = [
-  { label: "誤解「貯金があると通らない」", title: "貯金や資産は審査に関係ありません", copy: "障害年金は保険の給付なので、貯金・資産・持ち家の有無は要件に含まれず、審査もされません。所得の制限があるのは20歳前傷病の場合だけです。", source: "日本年金機構" },
-  { label: "誤解「入院してないと無理」", title: "入院歴は要件ではありません", copy: "審査で見られるのは日常生活がどれだけ制限されているかです。在宅・通院のみでも、生活の実態が基準に該当すれば認定されます。", source: "国民年金・厚生年金保険 障害認定基準" },
-  { label: "誤解「一生の記録に残る」", title: "戸籍や運転免許に載ることはありません", copy: "受給が戸籍・住民票・運転免許に記載されることはありません。年金の記録として管理されるだけで、「公的なレッテルになる」という不安は実態と異なります。", source: "日本年金機構" },
+  { label: "誤解「貯金があると通らない」", href: "/gokai/chokin-ga-aru", title: "貯金や資産は審査に関係ありません", copy: "障害年金は保険の給付なので、貯金・資産・持ち家の有無は要件に含まれず、審査もされません。所得の制限があるのは20歳前傷病の場合だけです。", source: "日本年金機構" },
+  { label: "誤解「入院してないと無理」", href: "/gokai/nyuuin-shitenai", title: "入院歴は要件ではありません", copy: "審査で見られるのは日常生活がどれだけ制限されているかです。在宅・通院のみでも、生活の実態が基準に該当すれば認定されます。", source: "国民年金・厚生年金保険 障害認定基準" },
+  { label: "誤解「一生の記録に残る」", href: "/gokai/kaisha-ni-shirareru", title: "戸籍や運転免許に載ることはありません", copy: "受給が戸籍・住民票・運転免許に記載されることはありません。年金の記録として管理されるだけで、「公的なレッテルになる」という不安は実態と異なります。", source: "日本年金機構" },
 ] as const;
 
 const steps = ["初診日を確認する", "納付要件を確認する", "年金事務所へ相談する", "必要書類をそろえる", "診断書の準備をする", "申立書を作成する", "年金事務所へ提出する", "結果を待つ"];
@@ -323,7 +323,7 @@ export default function HomePage() {
 
       <section className="p-section" aria-labelledby="misconception-heading">
         <div className="p-container">
-          <SectionHeader title="その心配、誤解かもしれません" lead="あきらめる前に確認してほしい、よくある思い込みです。すべて公的資料で確認済み。" />
+          <SectionHeader title="その心配、誤解かもしれません" lead="あきらめる前に確認してほしい、よくある思い込みです。すべて公的資料で確認済み。" href="/gokai" linkLabel="よくある誤解を全部見る" />
           <div className="p-grid p-grid-3">
             {misconceptions.map((item) => (
               <Card key={item.title}>
@@ -331,6 +331,7 @@ export default function HomePage() {
                 <h3 className="p-card-title">{item.title}</h3>
                 <p className="p-card-copy">{item.copy}</p>
                 <p className="p-source">出典: {item.source} ・ 確認日 2026-08-31</p>
+                <Link className="p-card-link" href={item.href}>くわしく見る →</Link>
               </Card>
             ))}
           </div>
