@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/platform/Platform";
+import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import KingakuTool from "@/components/tools/KingakuTool";
 import { pageMetadata } from "@/lib/seo";
 import { isPublishedInternalPath } from "@/lib/published-links";
+
+const UPDATED = "2026-09-03";
 
 const DESCRIPTION =
   "等級と、初診日に入っていた制度と、家族の状況から、障害年金の年額と月額を内訳つきで計算します。厚生年金の報酬比例部分まで出します。入力内容は送信されません。";
@@ -36,10 +38,11 @@ export default function Page() {
           <p className="kg-lead">
             等級と、初診日に入っていた制度と、家族の状況から、年額と月額を内訳つきで出します。厚生年金の報酬比例部分まで計算します。入力した内容は送信されません。
           </p>
+          <PageDate updated={UPDATED} />
         </div>
       </header>
 
-      <main className="p-container kg-width kg-main">
+      <div className="p-container kg-width kg-main">
         <KingakuTool />
 
         <section className="kg-card" aria-labelledby="kg-next-heading">
@@ -53,7 +56,7 @@ export default function Page() {
             })}
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

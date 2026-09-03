@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
-import { Breadcrumb } from "@/components/platform/Platform";
+import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import { isPublishedInternalPath } from "@/lib/published-links";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+
+const UPDATED = "2026-09-03";
 
 const DESCRIPTION =
   "障害年金の等級の目安、金額、必要書類、年金事務所、申立書を、ひとつずつ確認・準備するための道具をまとめています。";
@@ -65,6 +67,7 @@ export default function DouguPage() {
           <p className="p-hero-copy">
             調べる、見積もる、そろえる、書く、出す。障害年金の準備で必要になる道具を、ここにまとめていきます。
           </p>
+          <PageDate updated={UPDATED} />
         </div>
       </header>
 

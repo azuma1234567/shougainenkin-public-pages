@@ -30,12 +30,12 @@ origin: http://localhost:3200 / ページ数: 160 / 基準: git main
 | B-7 | ○ | OGP画像が全ページにある | og:image なし 0。誤解カードの自動生成画像 48/48 |
 | B-8 | ○ | 構造化データが妥当 | 型別件数 WebSite:1 BreadcrumbList:158 undefined:48 HowTo:2 FAQPage:47 DefinedTermSet:1 Article:47 ItemList:1、エラー 0<br>※スキーマ必須項目の静的検査。Google のリッチリザルトテストは公開URLで別途実施 |
 | B-9 | × | パンくずが全ページにある(BreadcrumbList を含む・二重なし) | 表示なし 1、BreadcrumbList(構造化データ)なし 1、2つ以上 0<br>※表示のパンくずはあるが構造化データが無いページと、二重に出ているページを別に数える |
-| B-10 | × | 更新日が全ページに表示されている | 更新日/確認日の表示なし 3 |
+| B-10 | ○ | 更新日が全ページに表示されている | 更新日/確認日の表示なし 0 |
 
 ### B-3 の該当一覧(2件)
 
-- /dougu/moushitatesho (9字)
-- /dougu (368字)
+- /dougu/moushitatesho (23字)
+- /dougu (382字)
 
 ### B-4 の該当一覧(1件)
 
@@ -46,12 +46,6 @@ origin: http://localhost:3200 / ページ数: 160 / 基準: git main
 - /dougu/moushitatesho
 - BreadcrumbListなし: /dougu/moushitatesho
 
-### B-10 の該当一覧(3件)
-
-- /dougu
-- /dougu/kingaku
-- /dougu/moushitatesho
-
 ## C
 
 | # | 判定 | 項目 | 件数 |
@@ -60,7 +54,7 @@ origin: http://localhost:3200 / ページ数: 160 / 基準: git main
 | C-2 | 手動 | sitemapの分割 | 対象外(160ページ・単一 sitemap.xml で十分。50,000 URL 超で再検討)<br>※Google の分割要件は 50,000 URL または 50MB。2026-09-02 に対象外とした |
 | C-3 | 手動 | Search Console にサイトマップを送信 | 手動作業(スクリプト対象外)<br>※sitemap.xml を送る |
 | C-4 | 手動 | 主要10ページの URL検査(インデックス登録リクエスト) | 10ページとも200: ○(送信自体は手動) |
-| C-5 | ○ | 旧URLからのリダイレクトが必要な変更がない | 公開前URL 69 件のうち200以外 0<br>※main ブランチの sitemap 静的ページ + 記事URL |
+| C-5 | ○ | 旧URLからのリダイレクトが必要な変更がない | 公開前URL 70 件のうち200以外 0<br>※main ブランチの sitemap 静的ページ + 記事URL |
 
 ## D(人が見る): 確認用の一覧
 
