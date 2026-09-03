@@ -19,6 +19,8 @@ url	title	chars
 /joukyou	状況から探す｜障害年金申請サポート	520
 /okane	お金の話｜障害年金申請サポート	554
 /erabu	自分でやるか、頼むか｜障害年金申請サポート	505
+/dougu	道具の置き場所｜障害年金申請サポート	368
+/dougu/moushitatesho	病歴・就労状況等申立書をつくる｜障害年金申請サポート	9
 /byoki/tekiou-fuan	適応障害・不安障害・パニック障害・PTSDと障害年金｜障害年金申請サポート	4430
 /byoki/hattatsu	発達障害(ADHD・ASD)と障害年金｜障害年金申請サポート	4137
 /byoki/tougou	統合失調症と障害年金｜障害年金申請サポート	3666
@@ -135,7 +137,7 @@ url	title	chars
 /columns/shindansho-irai-timing	障害年金の診断書はいつ頼む?｜現症日と依頼タイミング｜障害年金申請サポート	8472
 /columns/hitsuyou-shorui-seishin	精神疾患の障害年金｜必要書類チェックリスト｜障害年金申請サポート	8406
 /columns/taishou-shoubyou-kyoukai	適応障害・不安障害・神経症は障害年金の対象外？｜障害年金申請サポート	8594
-/columns/moushitatesho-kikan-kugiri	障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方｜障害年金申請サポート	10409
+/columns/moushitatesho-kikan-kugiri	障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方｜障害年金申請サポート	10474
 /columns/sokyuu-seikyuu	障害年金の遡及請求｜最大5年分をさかのぼる条件｜障害年金申請サポート	8132
 /columns/shougaisha-koyou-nenkin	障害者雇用で働きながら障害年金はもらえる？｜障害年金申請サポート	8418
 /columns/koushin-kakuninhodo	障害年金の更新（障害状態確認届）｜時期・支給停止への備え｜障害年金申請サポート	8645
@@ -148,8 +150,8 @@ url	title	chars
 /columns/shindansho-kakunin	障害年金の診断書を受け取ったら確認すべき7つのポイント｜障害年金申請サポート	9201
 /columns/shinsatsu-mae-memo	障害年金の診断書｜主治医に渡す「生活状況メモ」の書き方【具体例つき】｜障害年金申請サポート	7622
 /columns/hatarakinagara	働きながら障害年金｜就労中に医師へ伝えること｜障害年金申請サポート	10719
-/columns/moushitatesho-kakikata	病歴・就労状況等申立書の書き方【精神疾患】審査で落ちる書き方・伝わる書き方｜障害年金申請サポート	7261
-/columns/moushitatesho-a4-insatsu	障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説｜障害年金申請サポート	10529
+/columns/moushitatesho-kakikata	病歴・就労状況等申立書の書き方【精神疾患】審査で落ちる書き方・伝わる書き方｜障害年金申請サポート	7301
+/columns/moushitatesho-a4-insatsu	障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説｜障害年金申請サポート	10594
 /columns/jibun-de-shinsei	障害年金は自分で申請できる?社労士に依頼する場合との違い｜障害年金申請サポート	1924
 /columns/techou-to-nenkin	障害者手帳と障害年金の違い — 手帳の等級と年金の等級は別物です｜障害年金申請サポート	9532
 /columns/shoubyou-teatekin	傷病手当金と障害年金は同時にもらえる？併給調整と申請準備｜障害年金申請サポート	9568

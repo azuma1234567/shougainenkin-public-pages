@@ -1,9 +1,6 @@
-// 【非公開中】道具(/dougu/*)が1本実装されるまで、このページはサイトマップと内部リンクから外し、
-// noindex にしている(docs/codex-prelaunch-fix-2026-09-02-instructions.md の追加対応、2026-09-02)。
-// 道具が入ったら: app/sitemap.ts に "/dougu" を戻す / この metadata の robots を外す /
-// lib/published-links.ts の UNPUBLISHED_PATHS から "/dougu" を外す。ファイル自体は消さない。
 import type { Metadata } from "next";
 import { Breadcrumb } from "@/components/platform/Platform";
+import { isPublishedInternalPath } from "@/lib/published-links";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
@@ -15,8 +12,6 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     path: "/dougu",
   }),
-  // 道具が1本も無い間は検索に出さない(下のコメント参照)
-  robots: { index: false, follow: false },
 };
 
 const tools = [
@@ -81,7 +76,8 @@ export default function DouguPage() {
 
           <div className="dougu-grid">
             {tools.map((tool) => {
-              const href = "href" in tool ? tool.href : undefined;
+              const candidateHref = "href" in tool ? tool.href : undefined;
+              const href = candidateHref && isPublishedInternalPath(candidateHref) ? candidateHref : undefined;
               const content = <>
                 <div className="dougu-card-top">
                   <span className="dougu-number" aria-hidden="true">{tool.number}</span>

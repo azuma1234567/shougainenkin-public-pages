@@ -26,6 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/joukyou",
     "/okane",
     "/erabu",
+    "/dougu",
+    "/dougu/moushitatesho",
   ].map((path) => ({
     url: `${SITE_URL}${path === "/" ? "" : path}`,
   }));

@@ -1,0 +1,3779 @@
+{
+  "generatedAt": "2026-09-03T01:12:00.191Z",
+  "projection": [
+    {
+      "name": "empty",
+      "format": "a3",
+      "page": 1,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/empty-a3-1.png",
+      "crop": null,
+      "lineCount": 13,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1220,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3296,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 424,
+          "outputPx": 424,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 608,
+          "outputPx": 608,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 791,
+          "outputPx": 791,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1454,
+          "outputPx": 1454,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2117,
+          "outputPx": 2116,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2780,
+          "outputPx": 2778,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3442,
+          "outputPx": 3441,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4106,
+          "outputPx": 4104,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4768,
+          "outputPx": 4766,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "format": "a3",
+      "page": 2,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/empty-a3-2.png",
+      "crop": null,
+      "lineCount": 25,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1587,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3296,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 183,
+          "outputPx": 183,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 362,
+          "outputPx": 362,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 496,
+          "outputPx": 496,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 642,
+          "outputPx": 642,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 787,
+          "outputPx": 787,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 862,
+          "outputPx": 862,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1008,
+          "outputPx": 1008,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1383,
+          "outputPx": 1382,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1826,
+          "outputPx": 1824,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2054,
+          "outputPx": 2054,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2188,
+          "outputPx": 2187,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2334,
+          "outputPx": 2332,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2480,
+          "outputPx": 2478,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2554,
+          "outputPx": 2554,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2700,
+          "outputPx": 2700,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3076,
+          "outputPx": 3074,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3518,
+          "outputPx": 3516,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3747,
+          "outputPx": 3746,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3822,
+          "outputPx": 3820,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4098,
+          "outputPx": 4096,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4372,
+          "outputPx": 4370,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "format": "a4",
+      "page": 1,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/empty-a4-1.png",
+      "crop": "top",
+      "lineCount": 9,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1222,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 424,
+          "outputPx": 424,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 608,
+          "outputPx": 608,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 791,
+          "outputPx": 791,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1453,
+          "outputPx": 1454,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2115,
+          "outputPx": 2116,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "format": "a4",
+      "page": 2,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/empty-a4-2.png",
+      "crop": "bottom",
+      "lineCount": 8,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1222,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 298,
+          "outputPx": 296,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 960,
+          "outputPx": 959,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1622,
+          "outputPx": 1622,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2284,
+          "outputPx": 2284,
+          "deltaMm": 0
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "format": "a4",
+      "page": 3,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/empty-a4-3.png",
+      "crop": "top",
+      "lineCount": 18,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 462,
+          "outputPx": 462,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1588,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 183,
+          "outputPx": 183,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 362,
+          "outputPx": 362,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 496,
+          "outputPx": 496,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 642,
+          "outputPx": 642,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 787,
+          "outputPx": 787,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 862,
+          "outputPx": 862,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1007,
+          "outputPx": 1008,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1382,
+          "outputPx": 1382,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1824,
+          "outputPx": 1824,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2052,
+          "outputPx": 2054,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2186,
+          "outputPx": 2187,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2332,
+          "outputPx": 2332,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2476,
+          "outputPx": 2477,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "format": "a4",
+      "page": 4,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/empty-a4-4.png",
+      "crop": "bottom",
+      "lineCount": 14,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 462,
+          "outputPx": 462,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1588,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1646,
+          "outputPx": 1646,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 74,
+          "outputPx": 72,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 220,
+          "outputPx": 218,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 594,
+          "outputPx": 592,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1036,
+          "outputPx": 1034,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1264,
+          "outputPx": 1264,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1340,
+          "outputPx": 1338,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1614,
+          "outputPx": 1614,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1889,
+          "outputPx": 1888,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "minimal",
+      "format": "a3",
+      "page": 1,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/minimal-a3-1.png",
+      "crop": null,
+      "lineCount": 13,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1220,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3296,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 424,
+          "outputPx": 424,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 608,
+          "outputPx": 608,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 791,
+          "outputPx": 791,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1454,
+          "outputPx": 1454,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2117,
+          "outputPx": 2116,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2780,
+          "outputPx": 2778,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3442,
+          "outputPx": 3441,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4106,
+          "outputPx": 4104,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4768,
+          "outputPx": 4766,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "minimal",
+      "format": "a3",
+      "page": 2,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/minimal-a3-2.png",
+      "crop": null,
+      "lineCount": 25,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1587,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3296,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 183,
+          "outputPx": 183,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 362,
+          "outputPx": 362,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 496,
+          "outputPx": 496,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 642,
+          "outputPx": 642,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 787,
+          "outputPx": 787,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 862,
+          "outputPx": 862,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1008,
+          "outputPx": 1008,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1383,
+          "outputPx": 1382,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1826,
+          "outputPx": 1824,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2054,
+          "outputPx": 2054,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2188,
+          "outputPx": 2187,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2334,
+          "outputPx": 2332,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2480,
+          "outputPx": 2478,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2554,
+          "outputPx": 2554,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2700,
+          "outputPx": 2700,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3076,
+          "outputPx": 3074,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3518,
+          "outputPx": 3516,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3747,
+          "outputPx": 3746,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3822,
+          "outputPx": 3820,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4098,
+          "outputPx": 4096,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4372,
+          "outputPx": 4370,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "minimal",
+      "format": "a4",
+      "page": 1,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/minimal-a4-1.png",
+      "crop": "top",
+      "lineCount": 9,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1222,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 424,
+          "outputPx": 424,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 608,
+          "outputPx": 608,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 791,
+          "outputPx": 791,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1453,
+          "outputPx": 1454,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2115,
+          "outputPx": 2116,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "minimal",
+      "format": "a4",
+      "page": 2,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/minimal-a4-2.png",
+      "crop": "bottom",
+      "lineCount": 8,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1222,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 298,
+          "outputPx": 296,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 960,
+          "outputPx": 959,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1622,
+          "outputPx": 1622,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2284,
+          "outputPx": 2284,
+          "deltaMm": 0
+        }
+      ]
+    },
+    {
+      "name": "minimal",
+      "format": "a4",
+      "page": 3,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/minimal-a4-3.png",
+      "crop": "top",
+      "lineCount": 18,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 462,
+          "outputPx": 462,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1588,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 183,
+          "outputPx": 183,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 362,
+          "outputPx": 362,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 496,
+          "outputPx": 496,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 642,
+          "outputPx": 642,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 787,
+          "outputPx": 787,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 862,
+          "outputPx": 862,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1007,
+          "outputPx": 1008,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1382,
+          "outputPx": 1382,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1824,
+          "outputPx": 1824,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2052,
+          "outputPx": 2054,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2186,
+          "outputPx": 2187,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2332,
+          "outputPx": 2332,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2476,
+          "outputPx": 2477,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "minimal",
+      "format": "a4",
+      "page": 4,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/minimal-a4-4.png",
+      "crop": "bottom",
+      "lineCount": 14,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 462,
+          "outputPx": 462,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1588,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1646,
+          "outputPx": 1646,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 74,
+          "outputPx": 72,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 220,
+          "outputPx": 218,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 594,
+          "outputPx": 592,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1036,
+          "outputPx": 1034,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1264,
+          "outputPx": 1264,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1340,
+          "outputPx": 1338,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1614,
+          "outputPx": 1614,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1889,
+          "outputPx": 1888,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "three-periods",
+      "format": "a3",
+      "page": 1,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/three-periods-a3-1.png",
+      "crop": null,
+      "lineCount": 13,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1220,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3296,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 424,
+          "outputPx": 424,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 608,
+          "outputPx": 608,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 791,
+          "outputPx": 791,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1454,
+          "outputPx": 1454,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2117,
+          "outputPx": 2116,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2780,
+          "outputPx": 2778,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3442,
+          "outputPx": 3441,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4106,
+          "outputPx": 4104,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4768,
+          "outputPx": 4766,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "three-periods",
+      "format": "a3",
+      "page": 2,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/three-periods-a3-2.png",
+      "crop": null,
+      "lineCount": 25,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1587,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3296,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 183,
+          "outputPx": 183,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 362,
+          "outputPx": 362,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 496,
+          "outputPx": 496,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 642,
+          "outputPx": 642,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 787,
+          "outputPx": 787,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 862,
+          "outputPx": 862,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1008,
+          "outputPx": 1008,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1383,
+          "outputPx": 1382,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1826,
+          "outputPx": 1824,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2054,
+          "outputPx": 2054,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2188,
+          "outputPx": 2187,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2334,
+          "outputPx": 2332,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2480,
+          "outputPx": 2478,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2554,
+          "outputPx": 2554,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2700,
+          "outputPx": 2700,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3076,
+          "outputPx": 3074,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3518,
+          "outputPx": 3516,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3747,
+          "outputPx": 3746,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3822,
+          "outputPx": 3820,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4098,
+          "outputPx": 4096,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4372,
+          "outputPx": 4370,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "three-periods",
+      "format": "a4",
+      "page": 1,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/three-periods-a4-1.png",
+      "crop": "top",
+      "lineCount": 9,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1222,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 424,
+          "outputPx": 424,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 608,
+          "outputPx": 608,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 791,
+          "outputPx": 791,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1453,
+          "outputPx": 1454,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2115,
+          "outputPx": 2116,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "three-periods",
+      "format": "a4",
+      "page": 2,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/three-periods-a4-2.png",
+      "crop": "bottom",
+      "lineCount": 8,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1222,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 298,
+          "outputPx": 296,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 960,
+          "outputPx": 959,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1622,
+          "outputPx": 1622,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2284,
+          "outputPx": 2284,
+          "deltaMm": 0
+        }
+      ]
+    },
+    {
+      "name": "three-periods",
+      "format": "a4",
+      "page": 3,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/three-periods-a4-3.png",
+      "crop": "top",
+      "lineCount": 18,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 462,
+          "outputPx": 462,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1588,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 183,
+          "outputPx": 183,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 362,
+          "outputPx": 362,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 496,
+          "outputPx": 496,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 642,
+          "outputPx": 642,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 787,
+          "outputPx": 787,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 862,
+          "outputPx": 862,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1007,
+          "outputPx": 1008,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1382,
+          "outputPx": 1382,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1824,
+          "outputPx": 1824,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2052,
+          "outputPx": 2054,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2186,
+          "outputPx": 2187,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2332,
+          "outputPx": 2332,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2476,
+          "outputPx": 2477,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "three-periods",
+      "format": "a4",
+      "page": 4,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/three-periods-a4-4.png",
+      "crop": "bottom",
+      "lineCount": 14,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 462,
+          "outputPx": 462,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1588,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1646,
+          "outputPx": 1646,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 74,
+          "outputPx": 72,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 220,
+          "outputPx": 218,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 594,
+          "outputPx": 592,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1036,
+          "outputPx": 1034,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1264,
+          "outputPx": 1264,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1340,
+          "outputPx": 1338,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1614,
+          "outputPx": 1614,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1889,
+          "outputPx": 1888,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "seven-periods",
+      "format": "a3",
+      "page": 1,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/seven-periods-a3-1.png",
+      "crop": null,
+      "lineCount": 13,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1220,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3296,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 424,
+          "outputPx": 424,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 608,
+          "outputPx": 608,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 791,
+          "outputPx": 791,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1454,
+          "outputPx": 1454,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2117,
+          "outputPx": 2116,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2780,
+          "outputPx": 2778,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3442,
+          "outputPx": 3441,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4106,
+          "outputPx": 4104,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4768,
+          "outputPx": 4766,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "seven-periods",
+      "format": "a3",
+      "page": 2,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/seven-periods-a3-2.png",
+      "crop": null,
+      "lineCount": 25,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1587,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3296,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 183,
+          "outputPx": 183,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 362,
+          "outputPx": 362,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 496,
+          "outputPx": 496,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 642,
+          "outputPx": 642,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 787,
+          "outputPx": 787,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 862,
+          "outputPx": 862,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1008,
+          "outputPx": 1008,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1383,
+          "outputPx": 1382,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1826,
+          "outputPx": 1824,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2054,
+          "outputPx": 2054,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2188,
+          "outputPx": 2187,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2334,
+          "outputPx": 2332,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2480,
+          "outputPx": 2478,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2554,
+          "outputPx": 2554,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2700,
+          "outputPx": 2700,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3076,
+          "outputPx": 3074,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3518,
+          "outputPx": 3516,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3747,
+          "outputPx": 3746,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3822,
+          "outputPx": 3820,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4098,
+          "outputPx": 4096,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4372,
+          "outputPx": 4370,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "seven-periods",
+      "format": "a4",
+      "page": 1,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/seven-periods-a4-1.png",
+      "crop": "top",
+      "lineCount": 9,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1222,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 424,
+          "outputPx": 424,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 608,
+          "outputPx": 608,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 791,
+          "outputPx": 791,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1453,
+          "outputPx": 1454,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2115,
+          "outputPx": 2116,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "seven-periods",
+      "format": "a4",
+      "page": 2,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/seven-periods-a4-2.png",
+      "crop": "bottom",
+      "lineCount": 8,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1222,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 298,
+          "outputPx": 296,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 960,
+          "outputPx": 959,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1622,
+          "outputPx": 1622,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2284,
+          "outputPx": 2284,
+          "deltaMm": 0
+        }
+      ]
+    },
+    {
+      "name": "seven-periods",
+      "format": "a4",
+      "page": 3,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/seven-periods-a4-3.png",
+      "crop": "top",
+      "lineCount": 18,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 462,
+          "outputPx": 462,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1588,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 183,
+          "outputPx": 183,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 362,
+          "outputPx": 362,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 496,
+          "outputPx": 496,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 642,
+          "outputPx": 642,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 787,
+          "outputPx": 787,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 862,
+          "outputPx": 862,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1007,
+          "outputPx": 1008,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1382,
+          "outputPx": 1382,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1824,
+          "outputPx": 1824,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2052,
+          "outputPx": 2054,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2186,
+          "outputPx": 2187,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2332,
+          "outputPx": 2332,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2476,
+          "outputPx": 2477,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "seven-periods",
+      "format": "a4",
+      "page": 4,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/seven-periods-a4-4.png",
+      "crop": "bottom",
+      "lineCount": 14,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 462,
+          "outputPx": 462,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1588,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1646,
+          "outputPx": 1646,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 74,
+          "outputPx": 72,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 220,
+          "outputPx": 218,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 594,
+          "outputPx": 592,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1036,
+          "outputPx": 1034,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1264,
+          "outputPx": 1264,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1340,
+          "outputPx": 1338,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1614,
+          "outputPx": 1614,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1889,
+          "outputPx": 1888,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "seven-periods",
+      "format": "a3",
+      "page": 3,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/continuation-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/seven-periods-a3-3.png",
+      "crop": null,
+      "lineCount": 12,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 238,
+          "outputPx": 238,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 338,
+          "outputPx": 338,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 917,
+          "outputPx": 918,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 2230,
+          "outputPx": 2232,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 404,
+          "outputPx": 404,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 518,
+          "outputPx": 518,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 941,
+          "outputPx": 942,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1371,
+          "outputPx": 1372,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1801,
+          "outputPx": 1802,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2231,
+          "outputPx": 2232,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2661,
+          "outputPx": 2662,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3092,
+          "outputPx": 3094,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "seven-periods",
+      "format": "a4",
+      "page": 5,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/continuation-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/seven-periods-a4-5.png",
+      "crop": null,
+      "lineCount": 12,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 238,
+          "outputPx": 238,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 338,
+          "outputPx": 338,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 917,
+          "outputPx": 918,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 2230,
+          "outputPx": 2232,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 404,
+          "outputPx": 404,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 518,
+          "outputPx": 518,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 941,
+          "outputPx": 942,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1371,
+          "outputPx": 1372,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1801,
+          "outputPx": 1802,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2231,
+          "outputPx": 2232,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2661,
+          "outputPx": 2662,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3092,
+          "outputPx": 3094,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "maximal",
+      "format": "a3",
+      "page": 1,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/maximal-a3-1.png",
+      "crop": null,
+      "lineCount": 13,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1220,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3296,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 424,
+          "outputPx": 424,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 608,
+          "outputPx": 608,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 791,
+          "outputPx": 791,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1454,
+          "outputPx": 1454,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2117,
+          "outputPx": 2116,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2780,
+          "outputPx": 2778,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3442,
+          "outputPx": 3441,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4106,
+          "outputPx": 4104,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4768,
+          "outputPx": 4766,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "maximal",
+      "format": "a3",
+      "page": 2,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/maximal-a3-2.png",
+      "crop": null,
+      "lineCount": 25,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1587,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3296,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 183,
+          "outputPx": 183,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 362,
+          "outputPx": 362,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 496,
+          "outputPx": 496,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 642,
+          "outputPx": 642,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 787,
+          "outputPx": 787,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 862,
+          "outputPx": 862,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1008,
+          "outputPx": 1008,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1383,
+          "outputPx": 1382,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1826,
+          "outputPx": 1824,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2054,
+          "outputPx": 2054,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2188,
+          "outputPx": 2187,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2334,
+          "outputPx": 2332,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2480,
+          "outputPx": 2478,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2554,
+          "outputPx": 2554,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2700,
+          "outputPx": 2700,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3076,
+          "outputPx": 3074,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3518,
+          "outputPx": 3516,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3747,
+          "outputPx": 3746,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3822,
+          "outputPx": 3820,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4098,
+          "outputPx": 4096,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 4372,
+          "outputPx": 4370,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "maximal",
+      "format": "a4",
+      "page": 1,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/maximal-a4-1.png",
+      "crop": "top",
+      "lineCount": 9,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1222,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 424,
+          "outputPx": 424,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 608,
+          "outputPx": 608,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 791,
+          "outputPx": 791,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1453,
+          "outputPx": 1454,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2115,
+          "outputPx": 2116,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "maximal",
+      "format": "a4",
+      "page": 2,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/maximal-a4-2.png",
+      "crop": "bottom",
+      "lineCount": 8,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 328,
+          "outputPx": 328,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1220,
+          "outputPx": 1222,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 298,
+          "outputPx": 296,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 960,
+          "outputPx": 959,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1622,
+          "outputPx": 1622,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2284,
+          "outputPx": 2284,
+          "deltaMm": 0
+        }
+      ]
+    },
+    {
+      "name": "maximal",
+      "format": "a4",
+      "page": 3,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/maximal-a4-3.png",
+      "crop": "top",
+      "lineCount": 18,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 462,
+          "outputPx": 462,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1588,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 183,
+          "outputPx": 183,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 362,
+          "outputPx": 362,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 496,
+          "outputPx": 496,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 642,
+          "outputPx": 642,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 787,
+          "outputPx": 787,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 862,
+          "outputPx": 862,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1007,
+          "outputPx": 1008,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1382,
+          "outputPx": 1382,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1824,
+          "outputPx": 1824,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2052,
+          "outputPx": 2054,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2186,
+          "outputPx": 2187,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2332,
+          "outputPx": 2332,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2476,
+          "outputPx": 2477,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "maximal",
+      "format": "a4",
+      "page": 4,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/main-2.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/maximal-a4-4.png",
+      "crop": "bottom",
+      "lineCount": 14,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 212,
+          "outputPx": 212,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 346,
+          "outputPx": 346,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 462,
+          "outputPx": 462,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1587,
+          "outputPx": 1588,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 1646,
+          "outputPx": 1646,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 3296,
+          "outputPx": 3298,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 74,
+          "outputPx": 72,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 220,
+          "outputPx": 218,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 594,
+          "outputPx": 592,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1036,
+          "outputPx": 1034,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1264,
+          "outputPx": 1264,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1340,
+          "outputPx": 1338,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1614,
+          "outputPx": 1614,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1889,
+          "outputPx": 1888,
+          "deltaMm": 0.085
+        }
+      ]
+    },
+    {
+      "name": "maximal",
+      "format": "a3",
+      "page": 3,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/continuation-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/maximal-a3-3.png",
+      "crop": null,
+      "lineCount": 12,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 238,
+          "outputPx": 238,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 338,
+          "outputPx": 338,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 917,
+          "outputPx": 918,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 2230,
+          "outputPx": 2232,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 404,
+          "outputPx": 404,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 518,
+          "outputPx": 518,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 941,
+          "outputPx": 942,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1371,
+          "outputPx": 1372,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1801,
+          "outputPx": 1802,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2231,
+          "outputPx": 2232,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2661,
+          "outputPx": 2662,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3092,
+          "outputPx": 3094,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "maximal",
+      "format": "a4",
+      "page": 5,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/continuation-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/maximal-a4-5.png",
+      "crop": null,
+      "lineCount": 12,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 238,
+          "outputPx": 238,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 338,
+          "outputPx": 338,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 917,
+          "outputPx": 918,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 2230,
+          "outputPx": 2232,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 404,
+          "outputPx": 404,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 518,
+          "outputPx": 518,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 941,
+          "outputPx": 942,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1371,
+          "outputPx": 1372,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1801,
+          "outputPx": 1802,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2231,
+          "outputPx": 2232,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2661,
+          "outputPx": 2662,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3092,
+          "outputPx": 3094,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "maximal",
+      "format": "a3",
+      "page": 4,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/continuation-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/maximal-a3-4.png",
+      "crop": null,
+      "lineCount": 12,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 238,
+          "outputPx": 238,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 338,
+          "outputPx": 338,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 917,
+          "outputPx": 918,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 2230,
+          "outputPx": 2232,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 404,
+          "outputPx": 404,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 518,
+          "outputPx": 518,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 941,
+          "outputPx": 942,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1371,
+          "outputPx": 1372,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1801,
+          "outputPx": 1802,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2231,
+          "outputPx": 2232,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2661,
+          "outputPx": 2662,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3092,
+          "outputPx": 3094,
+          "deltaMm": 0.169
+        }
+      ]
+    },
+    {
+      "name": "maximal",
+      "format": "a4",
+      "page": 6,
+      "reference": "/Users/azumataisuke/Projects/shougainenkin-public-pages/public/forms/moushitatesho/continuation-1.png",
+      "output": "/Users/azumataisuke/Projects/shougainenkin-public-pages/docs/verification/dougu-moushitatesho-2026-09-03/png/maximal-a4-6.png",
+      "crop": null,
+      "lineCount": 12,
+      "maxDeltaMm": 0.169,
+      "pass": true,
+      "lines": [
+        {
+          "axis": "vertical",
+          "referencePx": 238,
+          "outputPx": 238,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 338,
+          "outputPx": 338,
+          "deltaMm": 0
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 917,
+          "outputPx": 918,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "vertical",
+          "referencePx": 2230,
+          "outputPx": 2232,
+          "deltaMm": 0.169
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 404,
+          "outputPx": 404,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 518,
+          "outputPx": 518,
+          "deltaMm": 0
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 941,
+          "outputPx": 942,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1371,
+          "outputPx": 1372,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 1801,
+          "outputPx": 1802,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2231,
+          "outputPx": 2232,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 2661,
+          "outputPx": 2662,
+          "deltaMm": 0.085
+        },
+        {
+          "axis": "horizontal",
+          "referencePx": 3092,
+          "outputPx": 3094,
+          "deltaMm": 0.169
+        }
+      ]
+    }
+  ],
+  "distribution": [
+    {
+      "periods": 1,
+      "main": 1,
+      "continuationPages": 0,
+      "expectedContinuationPages": 0,
+      "distribution": [
+        "main:1"
+      ],
+      "numbers": [],
+      "pass": true
+    },
+    {
+      "periods": 2,
+      "main": 2,
+      "continuationPages": 0,
+      "expectedContinuationPages": 0,
+      "distribution": [
+        "main:2"
+      ],
+      "numbers": [],
+      "pass": true
+    },
+    {
+      "periods": 3,
+      "main": 3,
+      "continuationPages": 0,
+      "expectedContinuationPages": 0,
+      "distribution": [
+        "main:3"
+      ],
+      "numbers": [],
+      "pass": true
+    },
+    {
+      "periods": 4,
+      "main": 4,
+      "continuationPages": 0,
+      "expectedContinuationPages": 0,
+      "distribution": [
+        "main:4"
+      ],
+      "numbers": [],
+      "pass": true
+    },
+    {
+      "periods": 5,
+      "main": 5,
+      "continuationPages": 0,
+      "expectedContinuationPages": 0,
+      "distribution": [
+        "main:5"
+      ],
+      "numbers": [],
+      "pass": true
+    },
+    {
+      "periods": 6,
+      "main": 5,
+      "continuationPages": 1,
+      "expectedContinuationPages": 1,
+      "distribution": [
+        "main:5",
+        "cont1:1"
+      ],
+      "numbers": [
+        "1"
+      ],
+      "pass": true
+    },
+    {
+      "periods": 7,
+      "main": 5,
+      "continuationPages": 1,
+      "expectedContinuationPages": 1,
+      "distribution": [
+        "main:5",
+        "cont1:2"
+      ],
+      "numbers": [
+        "1"
+      ],
+      "pass": true
+    },
+    {
+      "periods": 8,
+      "main": 5,
+      "continuationPages": 1,
+      "expectedContinuationPages": 1,
+      "distribution": [
+        "main:5",
+        "cont1:3"
+      ],
+      "numbers": [
+        "1"
+      ],
+      "pass": true
+    },
+    {
+      "periods": 9,
+      "main": 5,
+      "continuationPages": 1,
+      "expectedContinuationPages": 1,
+      "distribution": [
+        "main:5",
+        "cont1:4"
+      ],
+      "numbers": [
+        "1"
+      ],
+      "pass": true
+    },
+    {
+      "periods": 10,
+      "main": 5,
+      "continuationPages": 1,
+      "expectedContinuationPages": 1,
+      "distribution": [
+        "main:5",
+        "cont1:5"
+      ],
+      "numbers": [
+        "1"
+      ],
+      "pass": true
+    },
+    {
+      "periods": 11,
+      "main": 5,
+      "continuationPages": 2,
+      "expectedContinuationPages": 2,
+      "distribution": [
+        "main:5",
+        "cont1:5",
+        "cont2:1"
+      ],
+      "numbers": [
+        "1",
+        "2"
+      ],
+      "pass": true
+    },
+    {
+      "periods": 12,
+      "main": 5,
+      "continuationPages": 2,
+      "expectedContinuationPages": 2,
+      "distribution": [
+        "main:5",
+        "cont1:5",
+        "cont2:2"
+      ],
+      "numbers": [
+        "1",
+        "2"
+      ],
+      "pass": true
+    }
+  ],
+  "overflow": [
+    {
+      "name": "empty",
+      "format": "a4",
+      "count": 0,
+      "autoFit": 0,
+      "boxes": []
+    },
+    {
+      "name": "empty",
+      "format": "a3",
+      "count": 0,
+      "autoFit": 0,
+      "boxes": []
+    },
+    {
+      "name": "minimal",
+      "format": "a4",
+      "count": 0,
+      "autoFit": 0,
+      "boxes": []
+    },
+    {
+      "name": "minimal",
+      "format": "a3",
+      "count": 0,
+      "autoFit": 0,
+      "boxes": []
+    },
+    {
+      "name": "three-periods",
+      "format": "a4",
+      "count": 0,
+      "autoFit": 0,
+      "boxes": []
+    },
+    {
+      "name": "three-periods",
+      "format": "a3",
+      "count": 0,
+      "autoFit": 0,
+      "boxes": []
+    },
+    {
+      "name": "seven-periods",
+      "format": "a4",
+      "count": 0,
+      "autoFit": 0,
+      "boxes": []
+    },
+    {
+      "name": "seven-periods",
+      "format": "a3",
+      "count": 0,
+      "autoFit": 0,
+      "boxes": []
+    },
+    {
+      "name": "maximal",
+      "format": "a4",
+      "count": 0,
+      "autoFit": 21,
+      "boxes": []
+    },
+    {
+      "name": "maximal",
+      "format": "a3",
+      "count": 0,
+      "autoFit": 14,
+      "boxes": []
+    }
+  ],
+  "storage": {
+    "message": "保存できませんでした。書き出しをご利用ください",
+    "pass": true
+  },
+  "roundtrip": [
+    {
+      "name": "empty",
+      "pass": true
+    },
+    {
+      "name": "minimal",
+      "pass": true
+    },
+    {
+      "name": "three-periods",
+      "pass": true
+    },
+    {
+      "name": "seven-periods",
+      "pass": true
+    },
+    {
+      "name": "maximal",
+      "pass": true
+    }
+  ],
+  "keyboard": {
+    "pass": true,
+    "focusLosses": 0,
+    "reachedPrint": true,
+    "scrollWidth": 375,
+    "clientWidth": 375
+  }
+}
