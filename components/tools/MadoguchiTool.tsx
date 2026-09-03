@@ -1,25 +1,21 @@
 "use client";
-/* /dougu/madoguchi。docs/madoguchi-tool-design-2026-09-02.md と
-   docs/site-mock-2026-09-02-tools/Madoguchi.html が見た目とロジックの正。
-   窓口データは data/madoguchi(機構サイトから 2026-09-03 に取得)。
+/* /dougu/madoguchi。docs/shorui-madoguchi-redesign-2026-09-03-instructions.md B が画面の正。
+   (もとの設計は docs/madoguchi-tool-design-2026-09-02.md §3・§6。順番と言葉だけ差し替えた)
+   窓口データは data/madoguchi(機構サイトから 2026-09-03 に取得)。lib/madoguchi は触っていない。
    住所・電話を自サイトの言い切りにしない。各件から機構ページへリンクする。
    地図は埋め込まず検索URLへのリンクだけ。入力はサーバーへ送らない。 */
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   CHECKED_ON, PREFECTURES, jurisdictionOf, kankatsuUrl, machikadoOf, mapUrl,
-  municipalitiesOf, submission, telHref, type Hatachi, type Office, type Seido,
+  municipalitiesOf, telHref, type Office,
 } from "@/lib/madoguchi";
 import { SHORUI_ASK, SHORUI_MOCHIMONO } from "@/data/shorui";
 
 const STORAGE_KEY = "shougainenkin-note:madoguchi:v1";
-const Q1: [Seido, string][] = [["kokumin", "国民年金"], ["kousei", "厚生年金"], ["fumei", "わからない"]];
-const Q2: [Hatachi, string][] = [["mae", "20歳より前"], ["ato", "20歳以降"], ["fumei", "わからない"]];
 const asOf = `${CHECKED_ON.slice(0, 4)}年${Number(CHECKED_ON.slice(5, 7))}月${Number(CHECKED_ON.slice(8, 10))}日`;
 
 export default function MadoguchiTool() {
-  const [seido, setSeido] = useState<Seido | null>(null);
-  const [hatachi, setHatachi] = useState<Hatachi | null>(null);
   const [pref, setPref] = useState("");
   const [code, setCode] = useState("");
   const [shared, setShared] = useState(false);
@@ -38,48 +34,16 @@ export default function MadoguchiTool() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ pref, code })); } catch { /* 同上 */ }
   }, [pref, code, shared]);
 
-  const ans = submission(seido, hatachi);
   const cities = pref ? municipalitiesOf(pref) : [];
   const city = cities.find((c) => c.code === code);
   const jur = code ? jurisdictionOf(code) : null;
   const machikado = pref ? machikadoOf(pref) : [];
-  /* 判定がまだなら両方出す(どちらか一方に決めつけない)。 */
-  const show = ans?.show ?? ["kousei", "kokumin"];
 
   return (
     <>
+      {/* 本人が確実に知っているのは住所。最初の操作をそれにする(指示書 B-2)。 */}
       <section className="md-card" aria-labelledby="md-h1">
-        <h2 id="md-h1">1. 提出先を調べる</h2>
-        <p className="md-t" id="md-q1">初診日に入っていた制度は</p>
-        <div className="md-chips" role="group" aria-labelledby="md-q1">
-          {Q1.map(([v, l]) => <button type="button" key={v} aria-pressed={seido === v} onClick={() => setSeido(seido === v ? null : v)}>{l}</button>)}
-        </div>
-        <p className="md-t" id="md-q2">初診日は20歳より前ですか</p>
-        <div className="md-chips" role="group" aria-labelledby="md-q2">
-          {Q2.map(([v, l]) => <button type="button" key={v} aria-pressed={hatachi === v} onClick={() => setHatachi(hatachi === v ? null : v)}>{l}</button>)}
-        </div>
-
-        {ans && (
-          <>
-            <div className="md-answer">
-              <p className="md-k">提出先</p>
-              <p className="md-v">{ans.where}</p>
-              <p>{ans.why}</p>
-            </div>
-            {ans.dai3 && (
-              <p className="md-warnbox">
-                ただし、会社員・公務員の配偶者に扶養されていた期間(第3号被保険者)に初診日がある場合は、<b>年金事務所</b>が窓口になります。
-              </p>
-            )}
-            <p className="md-note">
-              郵送でも出せます。控えを取り、送った記録が残る方法で送ってください。 → <Link href="/columns/teishutsusaki-yuusou" prefetch={false}>提出先と郵送のしかた</Link>
-            </p>
-          </>
-        )}
-      </section>
-
-      <section className="md-card" aria-labelledby="md-h2">
-        <h2 id="md-h2">2. 窓口を探す</h2>
+        <h2 id="md-h1">お住まい</h2>
         <div className="md-grid2">
           <div>
             <label className="md-label" htmlFor="md-pref">都道府県</label>
@@ -96,54 +60,60 @@ export default function MadoguchiTool() {
             </select>
           </div>
         </div>
-
         {!pref && <p className="md-note">都道府県と市区町村を選ぶと、管轄の窓口が出ます。</p>}
         {pref && !code && <p className="md-note">市区町村を選ぶと、管轄の年金事務所が出ます。街角の年金相談センターは下に出しています。</p>}
-
-        {jur && city && (
-          <>
-            {jur.differs && (
-              <p className="md-warnbox">
-                <b>{city.name}は、厚生年金と国民年金で管轄の年金事務所が違います。</b>
-                相談と提出で行く場所が違うことがあります。どちらに行けばよいか迷ったら、窓口で確かめてください。
-              </p>
-            )}
-            {show.includes("kousei") && (
-              <OfficeGroup
-                title="健康保険・厚生年金保険の管轄"
-                note="障害厚生年金の請求・相談はこちらです。"
-                offices={jur.kousei} split={jur.split} splitText={jur.splitText.kousei} pref={pref} cityName={city.name}
-              />
-            )}
-            {show.includes("kokumin") && (
-              <OfficeGroup
-                title="国民年金の管轄"
-                note="障害基礎年金の請求は市区町村の窓口ですが、相談はこの年金事務所でも受けられます。"
-                offices={jur.kokumin} split={jur.split} splitText={jur.splitText.kokumin} pref={pref} cityName={city.name}
-              />
-            )}
-          </>
-        )}
-
-        {/* 街角は県内どこでも使えるので一覧が長い。紙は「行く窓口」に絞るため印刷しない。 */}
-        {pref && machikado.length > 0 && (
-          <div className="md-screen-only">
-            <h3>街角の年金相談センター</h3>
-            <p className="md-note md-note-tight">
-              管轄はありません。{pref}のどこにお住まいでも使えます。
-              <br /><strong>年金証書の再発行・国民年金の加入納付・事業所の手続きは扱っていません。</strong>これらは年金事務所へ。
-            </p>
-            {machikado.map((o) => <OfficeCard key={o.id} office={o} />)}
-          </div>
-        )}
-
-        <p className="md-asof">
-          住所・電話・管轄は<strong>日本年金機構の公表({CHECKED_ON} 取得)による</strong>ものです。統廃合や移転があるため、行く前に各件の「機構の公式ページ」で確認してください({asOf}時点)。
-        </p>
       </section>
 
-      <section className="md-card" aria-labelledby="md-h3">
-        <h2 id="md-h3">3. 予約のしかた</h2>
+      {jur && city && (
+        <section className="md-card" aria-labelledby="md-h2">
+          <h2 id="md-h2">あなたの年金事務所</h2>
+          {jur.differs && (
+            <p className="md-warnbox">
+              <b>{city.name}は、厚生年金と国民年金で管轄の年金事務所が違います。</b>
+              相談と提出で行く場所が違うことがあります。どちらに行けばよいか迷ったら、窓口で確かめてください。
+            </p>
+          )}
+          {jur.differs ? (
+            <>
+              <OfficeGroup title="会社員だった方(厚生年金)の請求・相談"
+                offices={jur.kousei} split={jur.split} splitText={jur.splitText.kousei} pref={pref} cityName={city.name} />
+              <OfficeGroup title="国民年金の方の相談"
+                offices={jur.kokumin} split={jur.split} splitText={jur.splitText.kokumin} pref={pref} cityName={city.name} />
+            </>
+          ) : (
+            <OfficeGroup title="厚生年金・国民年金とも"
+              offices={jur.kousei} split={jur.split} splitText={jur.splitText.kousei} pref={pref} cityName={city.name} />
+          )}
+
+          {/* 質問して分岐せず、両方を並べて1行で説明する(指示書 B-3)。 */}
+          <p className="md-note md-where">
+            国民年金だけの請求(障害基礎年金)は、お住まいの市区町村の国民年金の窓口にも出せます。20歳前に初診日がある方も同じです。
+            初診日が第3号被保険者(会社員の配偶者)の期間にある方は年金事務所へ。
+          </p>
+          <p className="md-note no-print">
+            郵送でも出せます。控えを取り、送った記録が残る方法で送ってください。 → <Link href="/columns/teishutsusaki-yuusou" prefetch={false}>提出先と郵送のしかた</Link>
+          </p>
+
+          <p className="md-asof">
+            住所・電話・管轄は<strong>日本年金機構の公表({CHECKED_ON} 取得)による</strong>ものです。統廃合や移転があるため、行く前に各件の「機構の公式ページ」で確認してください({asOf}時点)。
+          </p>
+        </section>
+      )}
+
+      {/* 街角は県内どこでも使えるので一覧が長い。紙は「行く窓口」に絞るため印刷しない。 */}
+      {pref && machikado.length > 0 && (
+        <section className="md-card md-screen-only" aria-label="街角の年金相談センター">
+          <h3>街角の年金相談センター</h3>
+          <p className="md-note md-note-tight">
+            管轄はありません。{pref}のどこにお住まいでも使えます。
+            <br /><strong>年金証書の再発行・国民年金の加入納付・事業所の手続きは扱っていません。</strong>これらは年金事務所へ。
+          </p>
+          {machikado.map((o) => <OfficeCard key={o.id} office={o} />)}
+        </section>
+      )}
+
+      <section className="md-card" aria-labelledby="md-h4">
+        <h2 id="md-h4">予約のしかた</h2>
         <p className="md-warnbox"><b>予約なしで行くと、長く待つことがあります。</b>相談は予約制です。当日に相談したい場合は、直接年金事務所へ行くことになります。</p>
         <table className="md-yoyaku">
           <tbody>
@@ -167,42 +137,44 @@ export default function MadoguchiTool() {
         </p>
       </section>
 
-      <section className="md-card" aria-labelledby="md-h4">
-        <h2 id="md-h4">4. 行く日の持ち物</h2>
+      {/* 見出しだけ出して折りたたむ(指示書 B-2)。印刷では開いた状態で出す。 */}
+      <details className="md-card md-fold">
+        <summary>行く日の持ち物</summary>
         <ul className="md-list">{SHORUI_MOCHIMONO.map((m) => <li key={m}>{m}</li>)}</ul>
-      </section>
+      </details>
 
-      <section className="md-card" aria-labelledby="md-h5">
-        <h2 id="md-h5">5. 窓口で聞くこと</h2>
+      <details className="md-card md-fold">
+        <summary>窓口で聞くこと</summary>
         <ul className="md-list">{SHORUI_ASK.map((a) => <li key={a.text}>{a.strong ? <b>{a.text}</b> : a.text}</li>)}</ul>
-        <div className="md-row no-print">
-          <button type="button" className="md-btn" onClick={() => window.print()}>この紙を印刷する</button>
-          <button type="button" className="md-opt-btn" aria-pressed={shared}
-            onClick={() => { const next = !shared; setShared(next); if (next) { try { localStorage.removeItem(STORAGE_KEY); } catch { /* 同上 */ } } }}>
-            共用のパソコンを使っています(この端末に保存しない)
-          </button>
-          <Link className="md-btn md-ghost" href="/columns/teishutsusaki-yuusou" prefetch={false}>郵送で出したいとき</Link>
-        </div>
-      </section>
+      </details>
+
+      <div className="md-row no-print">
+        <button type="button" className="md-btn" onClick={() => window.print()}>この紙を印刷する</button>
+        <Link className="md-btn md-ghost" href="/columns/teishutsusaki-yuusou" prefetch={false}>郵送で出したいとき</Link>
+        <button type="button" className="md-opt-btn" aria-pressed={shared}
+          onClick={() => { const next = !shared; setShared(next); if (next) { try { localStorage.removeItem(STORAGE_KEY); } catch { /* 同上 */ } } }}>
+          共用のパソコンを使っています(この端末に保存しない)
+        </button>
+      </div>
 
       <section className="md-card no-print" aria-labelledby="md-next">
         <h2 id="md-next">ここからできること</h2>
         <div className="dougu-cross">
-          <Link className="dougu-band-card" href="/dougu/shorui" prefetch={false}><b>必要書類をしらべる</b><span>自分の場合に要る書類だけを、持ち物と一緒に1枚にします</span></Link>
+          <Link className="dougu-band-card" href="/dougu/shorui" prefetch={false}><b>何をそろえればいい？</b><span>自分の場合に要る書類だけを、持ち物と一緒に1枚にします</span></Link>
+          <Link className="dougu-band-card" href="/dougu/moushitatesho" prefetch={false}><b>申立書を、自分で書きたい</b><span>いちばん重い書類を、フォームに沿って書きます</span></Link>
         </div>
       </section>
     </>
   );
 }
 
-function OfficeGroup({ title, note, offices, split, splitText, pref, cityName }: {
-  title: string; note: string; offices: Office[]; split: boolean; splitText: string[]; pref: string; cityName: string;
+function OfficeGroup({ title, offices, split, splitText, pref, cityName }: {
+  title: string; offices: Office[]; split: boolean; splitText: string[]; pref: string; cityName: string;
 }) {
   if (offices.length === 0) return null;
   return (
     <div className="md-group">
       <h3>{title}</h3>
-      <p className="md-note md-note-tight">{note}</p>
       {split && offices.length > 1 && (
         <p className="md-warnbox">
           <b>{cityName}は、町名によって事務所が分かれます。</b>下の2か所のどちらになるかは、機構の管轄区域表で確認してください。

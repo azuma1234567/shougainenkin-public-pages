@@ -3025,8 +3025,12 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
 .md-btn{display:inline-flex;align-items:center;padding:13px 26px;border:0;border-radius:999px;background:var(--platform-primary);color:#fff;font-family:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer}.md-ghost{border:1.5px solid #cfe6f5;background:#fff;color:var(--platform-link)}
 .md-opt-btn{padding:9px 16px;border:1.5px solid #d7e9f5;border-radius:999px;background:#fff;color:var(--platform-text);font-family:inherit;font-size:13.5px;cursor:pointer}.md-opt-btn[aria-pressed=true]{border-color:var(--platform-primary);background:var(--platform-chip);color:var(--platform-heading);font-weight:600}
 .md-chips button:focus-visible,.md-btn:focus-visible,.md-opt-btn:focus-visible,.md-card select:focus-visible{outline:2px solid var(--platform-primary);outline-offset:2px}
+.md-top{padding:10px 0 14px}.md-page .md-top h1{margin:6px 0 0;color:var(--platform-heading);font-family:var(--font-platform-heading),"Hiragino Kaku Gothic ProN",sans-serif;font-size:clamp(1.35rem,5.4vw,27px);line-height:1.45}
+.md-office{border-left:4px solid var(--platform-primary)}
+.md-where{border:1px solid #cfe6f5;background:#f4fafe}
+.md-fold>summary{color:var(--platform-heading);font-family:var(--font-platform-heading),"Hiragino Kaku Gothic ProN",sans-serif;font-size:19px;line-height:1.5;cursor:pointer}.md-fold>summary:focus-visible{outline:2px solid var(--platform-primary);outline-offset:2px}
 .md-printhead{display:none}
-@media(max-width:560px){.md-grid2{grid-template-columns:1fr}.md-card{padding:18px 16px}}
+@media(max-width:560px){.md-grid2{grid-template-columns:1fr}.md-card{padding:18px 16px}.md-top{padding:6px 0 10px}}
 @media print{
   /* 窓口へ持っていく紙。A4 2枚以内(ほかの道具と同じ)。 */
   @page{size:A4 portrait;margin:14mm}
@@ -3045,6 +3049,10 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
   table.md-yoyaku{font-size:9.5px}table.md-yoyaku th,table.md-yoyaku td{padding:3px 4px}
   ul.md-list{font-size:10px;line-height:1.55}ul.md-list li{margin:1px 0}
   .md-kind{background:#fff;border:1px solid #bbb;font-size:9.5px}
+  .md-fold>*{display:block!important}
+  .md-fold>summary{list-style:none;font-size:13px;margin:0 0 2px}
+  .md-fold>summary::-webkit-details-marker{display:none}
+  .md-office{border-left:1px solid var(--platform-border)}
 }
 
 /* 道具カード(data/dougu.ts の PLACEMENTS から出す)。記事内は既存の .mt-column-card のまま。 */

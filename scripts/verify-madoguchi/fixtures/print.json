@@ -1,12 +1,12 @@
 {
- "generatedAt": "2026-09-03T05:26:32.463Z",
+ "generatedAt": "2026-09-03T12:37:47.537Z",
  "cases": [
   {
-   "name": "厚生年金・横浜市南区",
-   "pages": 2,
+   "name": "横浜市南区(厚年と国年で違う)",
+   "pages": 1,
    "splitItems": [],
-   "itemCount": 16,
-   "contentMm": 367.7,
+   "itemCount": 2,
+   "contentMm": 259.9,
    "office": true,
    "yoyaku": true,
    "mochimono": true,
@@ -15,11 +15,11 @@
    "machikadoOnPrint": false
   },
   {
-   "name": "わからない・水戸市(分かれる市)",
+   "name": "水戸市(分かれる市)",
    "pages": 2,
    "splitItems": [],
-   "itemCount": 18,
-   "contentMm": 476.6,
+   "itemCount": 3,
+   "contentMm": 316.9,
    "office": true,
    "yoyaku": true,
    "mochimono": true,
@@ -28,11 +28,11 @@
    "machikadoOnPrint": false
   },
   {
-   "name": "国民年金・東京都新宿区",
-   "pages": 2,
+   "name": "東京都新宿区",
+   "pages": 1,
    "splitItems": [],
-   "itemCount": 16,
-   "contentMm": 371.6,
+   "itemCount": 1,
+   "contentMm": 217.7,
    "office": true,
    "yoyaku": true,
    "mochimono": true,
@@ -61,7 +61,7 @@
   },
   {
    "method": "GET",
-   "url": "http://127.0.0.1:3230/dougu?_rsc=lC_5L_1F_ta4WuWH",
+   "url": "http://127.0.0.1:3230/shinsei?_rsc=lC_5L_1F_ta4WuWH",
    "prefetch": true,
    "hasBody": false
   },

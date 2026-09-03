@@ -41,16 +41,13 @@ async function pick(page, pref, city) {
   await sleep(300);
 }
 
-async function run(name, { seido, hatachi, pref, city }) {
+async function run(name, { pref, city }) {
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto(url);
   await page.locator("#md-pref").waitFor();
   await sleep(600);
-  /* 「わからない」は Q1 と Q2 の両方にあるので、設問ごとに絞る */
-  const chip = (q, label) => page.locator(`[aria-labelledby="${q}"] button`).filter({ hasText: new RegExp(`^${label}$`) }).first();
-  if (seido) { await chip("md-q1", seido).click(); await sleep(120); }
-  if (hatachi) { await chip("md-q2", hatachi).click(); await sleep(120); }
+  /* 2026-09-03 の作り直しで、制度と20歳前の設問は消えた。最初の操作は住所だけ(指示書 B-3)。 */
   await pick(page, pref, city);
   await page.emulateMedia({ media: "print" });
   await page.evaluate(() => document.fonts?.ready);
@@ -82,9 +79,9 @@ async function run(name, { seido, hatachi, pref, city }) {
 }
 
 const cases = [];
-cases.push(await run("厚生年金・横浜市南区", { seido: "厚生年金", hatachi: "20歳以降", pref: "神奈川県", city: "横浜市南区" }));
-cases.push(await run("わからない・水戸市(分かれる市)", { seido: "わからない", hatachi: "わからない", pref: "茨城県", city: "水戸市" }));
-cases.push(await run("国民年金・東京都新宿区", { seido: "国民年金", hatachi: "20歳以降", pref: "東京都", city: "新宿区" }));
+cases.push(await run("横浜市南区(厚年と国年で違う)", { pref: "神奈川県", city: "横浜市南区" }));
+cases.push(await run("水戸市(分かれる市)", { pref: "茨城県", city: "水戸市" }));
+cases.push(await run("東京都新宿区", { pref: "東京都", city: "新宿区" }));
 
 const mobileCtx = await browser.newContext({ viewport: { width: 375, height: 900 } });
 const mp = await mobileCtx.newPage();
@@ -97,7 +94,6 @@ mp.on("request", (r) => {
 await mp.goto(url);
 await mp.locator("#md-pref").waitFor();
 await sleep(600);
-await mp.locator('[aria-labelledby="md-q1"] button').filter({ hasText: /^わからない$/ }).first().click();
 await pick(mp, "茨城県", "水戸市");
 await sleep(500);
 const mobile = await mp.evaluate(() => {

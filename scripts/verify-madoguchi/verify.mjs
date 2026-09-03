@@ -3,7 +3,7 @@
 // 印刷(10)と375px(12)の実測は scripts/verify-madoguchi/print.mjs の結果を読む。
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
-import { jurisdictionOf, machikadoOf, municipalitiesOf, office, submission, PREFECTURES, CHECKED_ON } from "../../lib/madoguchi.ts";
+import { jurisdictionOf, machikadoOf, municipalitiesOf, office, PREFECTURES, CHECKED_ON } from "../../lib/madoguchi.ts";
 
 const results = [];
 const check = (id, label, fn) => {
@@ -26,31 +26,37 @@ check(1, "/dougu/madoguchi が動き、/dougu から行ける", () => {
   return "page.tsx / 一覧の href / sitemap / パンくず";
 });
 
-check(2, "§3 の判定が4通りすべて動く。「わからない」で両方が出る", () => {
-  const kousei = submission("kousei", "ato");
-  assert.equal(kousei.where, "年金事務所");
-  assert.deepEqual(kousei.show, ["kousei"]);
-  const kokumin = submission("kokumin", "ato");
-  assert.match(kokumin.where, /市区町村の国民年金の窓口/);
-  assert.deepEqual(kokumin.show, ["kokumin"]);
-  const mae = submission("fumei", "mae");
-  assert.match(mae.where, /市区町村の国民年金の窓口/, "20歳前が障害基礎年金になっていない");
-  const fumei = submission("fumei", "fumei");
-  assert.match(fumei.where, /年金事務所/);
-  assert.deepEqual(fumei.show, ["kousei", "kokumin"], "「わからない」で両方が出ない");
-  assert.equal(submission(null, null), null, "未回答で結果が出ている");
-  /* 厚生年金でも20歳前なら障害基礎年金の側 */
-  assert.match(submission("kousei", "mae").where, /年金事務所/);
-  return "厚生=年金事務所 / 国民・20歳前=市区町村 / わからない=両方 / 未回答は出さない";
+/* 2026-09-03 の作り直しで、制度と20歳前の2問は消した(指示書 B-3)。
+   提出先の判定は lib/madoguchi.ts の submission に残してあるが、画面では使わず、
+   両方を並べて1行で説明する。§8-2/§8-3 の検査を、その1行に置き換えた。 */
+check(2, "最初の操作が都道府県の選択。節の番号と「提出先を調べる」が無い", () => {
+  const t = src(TOOL);
+  // 都道府県の選択より前に、質問(チップ)が無い
+  assert.ok(!t.includes("md-chips"), "質問のチップが残っている");
+  assert.ok(!/aria-labelledby="md-q[12]"/.test(t), "制度・20歳前の設問が残っている");
+  assert.ok(t.indexOf('id="md-pref"') < t.indexOf('id="md-h2"'), "都道府県より前に別の操作がある");
+  assert.match(t, /<h2 id="md-h1">お住まい<\/h2>/, "最初の見出しが「お住まい」でない");
+  assert.match(t, /<h2 id="md-h2">あなたの年金事務所<\/h2>/, "「あなたの年金事務所」の見出しが無い");
+  // B-5-4 「1.」〜「5.」と「提出先を調べる」が画面に無い
+  assert.ok(!t.includes("提出先を調べる"), "「提出先を調べる」が残っている");
+  for (const n of [1, 2, 3, 4, 5]) {
+    assert.ok(!new RegExp(`>${n}\\. `).test(t), `節の番号「${n}.」が残っている`);
+  }
+  assert.ok(!t.includes("submission"), "画面が提出先の判定を呼んでいる");
+  return "お住まい → あなたの年金事務所 の順。制度・20歳前の設問と節の番号は無い";
 });
 
-check(3, "第3号被保険者の但し書きが、国民年金を選んだときに出る", () => {
-  assert.equal(submission("kokumin", "ato").dai3, true);
-  assert.equal(submission("kokumin", "mae").dai3, true);
-  assert.equal(submission("kousei", "ato").dai3, false, "厚生年金でも出ている");
-  assert.equal(submission("fumei", "fumei").dai3, false, "わからないでも出ている");
-  assert.match(src(TOOL), /第3号被保険者\)に初診日がある場合は、<b>年金事務所<\/b>が窓口になります。/);
-  return "国民年金のときだけ true / 文言は設計書のまま";
+check(3, "提出先の1行の説明が、事務所カードの下に出ている", () => {
+  const t = src(TOOL);
+  assert.match(t, /国民年金だけの請求\(障害基礎年金\)は、お住まいの市区町村の国民年金の窓口にも出せます。20歳前に初診日がある方も同じです。/, "国民年金・20歳前の1行が無い");
+  assert.match(t, /初診日が第3号被保険者\(会社員の配偶者\)の期間にある方は年金事務所へ。/, "第3号の1行が無い");
+  // 事務所カードより下に置く(質問して分岐せず、両方を並べてから説明する)
+  assert.ok(t.indexOf("<OfficeGroup") < t.indexOf("md-where"), "1行が事務所カードより上にある");
+  // 厚年・国年の両方を、質問なしで並べる
+  assert.match(t, /title="会社員だった方\(厚生年金\)の請求・相談"/, "厚生年金の見出しが無い");
+  assert.match(t, /title="国民年金の方の相談"/, "国民年金の見出しが無い");
+  assert.match(t, /title="厚生年金・国民年金とも"/, "同じ事務所のときにまとめる扱いが無い");
+  return "国民年金だけ／20歳前／第3号 の1行が事務所カードの下。厚年・国年は質問なしで両方出す";
 });
 
 check(4, "都道府県 → 市区町村で管轄の年金事務所が出る。47都道府県ぶんある", () => {
