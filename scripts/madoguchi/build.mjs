@@ -188,6 +188,33 @@ write(path.join(DATA_DIR, "offices.json"), { checkedOn: CHECKED_ON, source: "htt
 write(path.join(DATA_DIR, "index.json"), { checkedOn: CHECKED_ON, note: "市区町村コード → {kousei, kokumin}。値は offices.json の id。", byMunicipality: index });
 write(path.join(DATA_DIR, "unresolved.json"), { checkedOn: CHECKED_ON, note: "展開できなかった管轄文字列と、二重割当。推測で埋めていない。", count: unresolved.length, unresolved });
 
+/* ---------- 3.5 画面用に絞ったデータ ----------
+   offices.json(444KB)をそのまま読むとページが重い。画面に出す項目だけを1本にまとめる。
+   外部への通信を増やさないため、fetch ではなく import で読める形にする。 */
+const clientOffices = {};
+for (const o of offices) {
+  clientOffices[o.id] = {
+    n: o.name, k: o.kind, ...(o.sub ? { s: o.sub } : {}),
+    z: o.zip, a: o.addr, t: o.tel, ...(o.telNote ? { tn: o.telNote } : {}),
+    ...(o.access ? { ac: o.access } : {}), u: o.url, p: o.prefName,
+  };
+}
+const clientMuni = {};
+for (const m of municipalities.municipalities) {
+  if (m.hoppo) continue;                       /* 年金事務所が付かないので選択肢に出さない */
+  (clientMuni[m.pref] ??= []).push([m.code, m.name]);
+}
+/* 街角は管轄が無く誰でも使えるので、都道府県ごとに引けるようにする。 */
+const clientMachikado = {};
+for (const o of offices) if (o.kind === "machikado") (clientMachikado[o.prefName] ??= []).push(o.id);
+write(path.join(DATA_DIR, "client.json"), {
+  checkedOn: CHECKED_ON, commonTel: COMMON_TEL,
+  kankatsuUrl: "https://www.nenkin.go.jp/section/soudan/kankatsu/kankatsu_",
+  prefSlug: Object.fromEntries(PREFS.map(([slug, name]) => [name, slug])),
+  offices: clientOffices, municipalities: clientMuni, machikado: clientMachikado,
+  index,
+});
+
 /* ---------- 4. RESULT.md ---------- */
 const nenkinAll = offices.filter((o) => o.kind === "nenkin");
 const satellites = nenkinAll.filter((o) => o.satellite);

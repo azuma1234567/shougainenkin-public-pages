@@ -12,7 +12,10 @@ registerHooks({
     if (specifier.startsWith("@/")) {
       const resolved = new URL(specifier.slice(2), root).href;
       const url = /\.[a-z]+$/.test(resolved) ? resolved : `${resolved}.ts`;
-      return { url, shortCircuit: true };
+      /* TypeScript は resolveJsonModule で属性なしに JSON を読めるが、node の ESM は
+         with { type: "json" } を要求する。ここで補う。 */
+      const importAttributes = url.endsWith(".json") ? { ...context.importAttributes, type: "json" } : context.importAttributes;
+      return { url, importAttributes, shortCircuit: true };
     }
     return nextResolve(specifier, context);
   },

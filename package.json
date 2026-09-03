@@ -19,6 +19,8 @@
     "verify:shorui": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-shorui/verify.mjs",
     "verify:shorui:print": "node scripts/verify-shorui/print.mjs",
     "verify:madoguchi-parse": "node scripts/madoguchi/parse.test.mjs",
+    "verify:madoguchi": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-madoguchi/verify.mjs",
+    "verify:madoguchi:print": "node scripts/verify-madoguchi/print.mjs",
     "prelaunch:check": "node scripts/prelaunch-check.mjs",
     "verify:disease-batch3": "node scripts/verify-disease-batch3.mjs",
     "verify:erabu-batch2": "node scripts/verify-erabu-batch2.mjs",

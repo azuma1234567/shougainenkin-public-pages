@@ -2976,3 +2976,52 @@ ul.sr-ask{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.s
   ul.sr-ask{font-size:10.5px;line-height:1.6}ul.sr-ask li{margin:2px 0;break-inside:avoid;page-break-inside:avoid}
   .sr-why{background:#fff;border:1px solid #bbb;font-size:9.5px}
 }
+
+/* /dougu/madoguchi: 年金事務所を探す。値は docs/site-mock-2026-09-02-tools/Madoguchi.html から。 */
+.md-page{background:var(--platform-bg)}.md-width{max-width:800px}.md-page .dougu-hero h1{font-size:clamp(1.35rem,5.4vw,27px)}.md-lead{margin:12px 0 0;color:var(--platform-muted);font-size:15px}.md-main{padding:2px 0 64px}
+.md-card{padding:22px;margin:18px 0;border:1px solid var(--platform-border);border-radius:14px;background:var(--platform-surface)}.md-card h2{margin:0 0 6px;color:var(--platform-heading);font-family:var(--font-platform-heading),"Hiragino Kaku Gothic ProN",sans-serif;font-size:19px;line-height:1.5}.md-card h3{margin:20px 0 4px;color:var(--platform-heading);font-family:var(--font-platform-heading),sans-serif;font-size:15.5px;line-height:1.5}
+.md-t{margin:16px 0 0;color:var(--platform-heading);font-size:15.5px;font-weight:600}
+.md-chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.md-chips button{padding:9px 16px;border:1.5px solid #d7e9f5;border-radius:999px;background:#fff;color:var(--platform-text);font-family:inherit;font-size:14.5px;cursor:pointer}.md-chips button[aria-pressed=true]{border-color:var(--platform-primary);background:var(--platform-chip);color:var(--platform-heading);font-weight:600}
+.md-label{display:block;color:var(--platform-heading);font-size:13.5px;font-weight:600}
+.md-card select{width:100%;margin-top:4px;padding:11px 13px;border:1.5px solid #d7e9f5;border-radius:10px;background:#fff;color:var(--platform-text);font-family:inherit;font-size:16px}.md-card select:disabled{background:#f4f8fb;color:var(--platform-meta)}
+.md-grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.md-answer{padding:20px 22px;margin:14px 0;border:1px solid #cfe6f5;border-radius:16px;background:linear-gradient(180deg,#e8f4fc 0%,#f4fafe 100%)}.md-k{margin:0;color:var(--platform-meta);font-size:12.5px}.md-v{margin:0;color:var(--platform-heading);font-family:var(--font-platform-heading),sans-serif;font-size:clamp(19px,5vw,24px);font-weight:700;line-height:1.4}.md-answer p:last-child{margin:8px 0 0;color:var(--platform-muted);font-size:14px}
+.md-note{margin:14px 0;padding:14px 16px;border-radius:12px;background:var(--platform-band);color:var(--platform-muted);font-size:14px;line-height:1.85}.md-note strong{color:var(--platform-heading)}.md-note-tight{margin:6px 0 10px}
+.md-warnbox{margin:12px 0;padding:13px 15px;border:1px solid #f0e2bd;border-radius:12px;background:#fdf3dd;color:#6b5316;font-size:13.5px;line-height:1.85}.md-warnbox b{color:#8b6a1f}.md-splittext{color:#6b5316;font-size:12.5px}
+.md-group{margin-top:6px}
+.md-office{padding:16px;margin:10px 0;border:1px solid var(--platform-border);border-radius:12px;background:#fff;break-inside:avoid}
+.md-n{margin:0;color:var(--platform-heading);font-family:var(--font-platform-heading),sans-serif;font-size:16px;font-weight:700}
+.md-kind{display:inline-block;margin-left:8px;padding:1px 10px;border-radius:999px;background:var(--platform-chip);color:var(--platform-heading);font-size:11.5px;font-weight:400}
+.md-a{margin:6px 0 0;color:var(--platform-muted);font-size:14px;line-height:1.75}
+.md-tel-row{margin:6px 0 0;font-size:15px}.md-tel{color:var(--platform-heading);font-family:var(--font-platform-heading),sans-serif;font-size:20px;font-weight:700;text-decoration:none}.md-tel:hover{text-decoration:underline}
+.md-small{color:var(--platform-meta);font-size:13px}
+.md-source{margin:6px 0 0;color:var(--platform-meta);font-size:12px}
+.md-lk{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0 0;font-size:13.5px}
+.md-asof{margin:10px 0 0;color:var(--platform-meta);font-size:12.5px;line-height:1.8}.md-asof strong{color:var(--platform-muted)}
+table.md-yoyaku{width:100%;margin:8px 0;border-collapse:collapse;font-size:14.5px}table.md-yoyaku th,table.md-yoyaku td{padding:11px 6px;border-bottom:1px solid #d7e9f5;text-align:left;vertical-align:top}table.md-yoyaku th{width:34%;color:var(--platform-heading);font-size:13.5px;font-weight:600}
+ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.md-list li{margin:7px 0;break-inside:avoid}
+.md-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+.md-btn{display:inline-flex;align-items:center;padding:13px 26px;border:0;border-radius:999px;background:var(--platform-primary);color:#fff;font-family:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer}.md-ghost{border:1.5px solid #cfe6f5;background:#fff;color:var(--platform-link)}
+.md-opt-btn{padding:9px 16px;border:1.5px solid #d7e9f5;border-radius:999px;background:#fff;color:var(--platform-text);font-family:inherit;font-size:13.5px;cursor:pointer}.md-opt-btn[aria-pressed=true]{border-color:var(--platform-primary);background:var(--platform-chip);color:var(--platform-heading);font-weight:600}
+.md-chips button:focus-visible,.md-btn:focus-visible,.md-opt-btn:focus-visible,.md-card select:focus-visible{outline:2px solid var(--platform-primary);outline-offset:2px}
+.md-printhead{display:none}
+@media(max-width:560px){.md-grid2{grid-template-columns:1fr}.md-card{padding:18px 16px}}
+@media print{
+  /* 窓口へ持っていく紙。A4 2枚以内(ほかの道具と同じ)。 */
+  @page{size:A4 portrait;margin:14mm}
+  .no-print,.md-screen-only{display:none!important}
+  .md-page{background:#fff}.md-main{padding:0}
+  body{font-size:11px;line-height:1.6}
+  .md-printhead{display:block;margin:0 0 6px;color:#000;font-size:10px;line-height:1.5}
+  .md-card{padding:0;margin:0 0 8px;border:0;border-radius:0;break-inside:auto}
+  .md-card h2{font-size:13px;margin:0 0 2px;break-after:avoid;page-break-after:avoid}
+  .md-card h3{font-size:12px;margin:6px 0 2px;break-after:avoid;page-break-after:avoid}
+  .md-answer{padding:6pt 8pt;margin:5px 0;background:#fff;border:1px solid #bbb}.md-v{font-size:15px}
+  .md-note,.md-warnbox{padding:6pt 8pt;font-size:10px;margin:5px 0;background:#fff;border:1px solid #bbb;break-inside:avoid}
+  .md-office{padding:5pt 7pt;margin:4px 0}
+  .md-n{font-size:12px}.md-a,.md-small,.md-source,.md-asof{font-size:9.5px}
+  .md-tel{font-size:13px}.md-tel-row{font-size:11px}
+  table.md-yoyaku{font-size:9.5px}table.md-yoyaku th,table.md-yoyaku td{padding:3px 4px}
+  ul.md-list{font-size:10px;line-height:1.55}ul.md-list li{margin:1px 0}
+  .md-kind{background:#fff;border:1px solid #bbb;font-size:9.5px}
+}

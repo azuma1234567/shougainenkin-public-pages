@@ -1,0 +1,75 @@
+{
+ "generatedAt": "2026-09-03T05:26:32.463Z",
+ "cases": [
+  {
+   "name": "厚生年金・横浜市南区",
+   "pages": 2,
+   "splitItems": [],
+   "itemCount": 16,
+   "contentMm": 367.7,
+   "office": true,
+   "yoyaku": true,
+   "mochimono": true,
+   "ask": true,
+   "printHead": true,
+   "machikadoOnPrint": false
+  },
+  {
+   "name": "わからない・水戸市(分かれる市)",
+   "pages": 2,
+   "splitItems": [],
+   "itemCount": 18,
+   "contentMm": 476.6,
+   "office": true,
+   "yoyaku": true,
+   "mochimono": true,
+   "ask": true,
+   "printHead": true,
+   "machikadoOnPrint": false
+  },
+  {
+   "name": "国民年金・東京都新宿区",
+   "pages": 2,
+   "splitItems": [],
+   "itemCount": 16,
+   "contentMm": 371.6,
+   "office": true,
+   "yoyaku": true,
+   "mochimono": true,
+   "ask": true,
+   "printHead": true,
+   "machikadoOnPrint": false
+  }
+ ],
+ "mobile": {
+  "scrollWidth": 375,
+  "clientWidth": 375,
+  "overflowing": 0
+ },
+ "network": [
+  {
+   "method": "GET",
+   "url": "http://127.0.0.1:3230/icon.png?456ec51301557816",
+   "prefetch": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "http://127.0.0.1:3230/?_rsc=lC_5L_1F_ta4WuWH",
+   "prefetch": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "http://127.0.0.1:3230/dougu?_rsc=lC_5L_1F_ta4WuWH",
+   "prefetch": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "http://127.0.0.1:3230/privacy?_rsc=lC_5L_1F_ta4WuWH",
+   "prefetch": true,
+   "hasBody": false
+  }
+ ]
+}
