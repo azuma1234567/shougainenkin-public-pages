@@ -25,9 +25,9 @@ export function feeText(fee: ShoruiDoc["fee"]): string {
   return "";
 }
 
-/* 待ち日数も断定しない(§2-3)。 */
+/* 待ち日数も断定しない(§2-3)。確認できない数字は書かず、聞く先を書く(2026-09-03)。 */
 export function waitText(wait: ShoruiDoc["wait"]): string {
-  return wait === "byouin" ? "すぐには出ません。経験として、依頼から1か月近くかかることもあると語られています" : "";
+  return wait === "byouin" ? "その場では出ません。日数は病院に聞いてください。" : "";
 }
 
 /* §4「Q4 → 診断書の様式が決まる」。障害の種類を選んだときだけ、公式の様式名とページを出す。

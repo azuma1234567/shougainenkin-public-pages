@@ -105,10 +105,12 @@ check(4, "国民年金 × 配偶者あり で「加算はつきません」の�
 check(5, "遡及を選ぶと診断書が2通になる", () => {
   const got = ids(a({ kata: "sokyuu" }));
   assert.ok(got.includes("shindansho") && got.includes("shindansho2"), "2通になっていない");
-  for (const k of ["honrai", "jigo", "mitei"]) assert.ok(!ids(a({ kata: k })).includes("shindansho2"), `${k} で2通目が出る`);
+  for (const k of ["jigo", "mitei"]) assert.ok(!ids(a({ kata: k })).includes("shindansho2"), `${k} で2通目が出る`);
   assert.equal(showSokyuuNote(a({ kata: "sokyuu" })), true);
   assert.match(src(TOOL), /診断書が2通になります。/);
-  return "遡及のみ shindansho + shindansho2 / 本来・事後重症・未定では1通";
+  // 多めに出す側の誤りでも文書料がかかるので、断定せず確認先を書く(2026-09-03)
+  assert.match(src(TOOL), /障害認定日から1年たっていない場合は、1通で足りることがあります。年金事務所で確認してください。/, "1通で足りる場合の注記が無い");
+  return "遡及のみ shindansho + shindansho2 / しない・まだでは1通 / 1通で足りる場合の断りつき";
 });
 
 // 6. 文書料の金額が1つも書かれていない
@@ -123,7 +125,8 @@ check(6, "文書料の金額が1つも書かれていない", () => {
   assert.equal(feeText("byouin"), "文書料がかかります(病院ごとに決まっています)");
   assert.equal(feeText("yakusho"), "役所の手数料がかかります");
   assert.equal(feeText(null), "");
-  assert.match(waitText("byouin"), /経験として、依頼から1か月近くかかることもあると語られています/, "待ちを断定している");
+  assert.equal(waitText("byouin"), "その場では出ません。日数は病院に聞いてください。", "待ちの書き方が違う");
+  assert.ok(!/\d/.test(waitText("byouin")), "待ちの文に数字が入っている");
   return "円・千円・万円 の表記0件 / 文書料は「病院ごとに決まっています」";
 });
 

@@ -65,7 +65,7 @@ export default function ShoruiTool() {
           <p className="sr-warnbox sr-mt"><b>配偶者の加算はつきません。</b>配偶者の加算があるのは障害厚生年金の1級・2級だけです。障害基礎年金にあるのは子の加算です。ただし窓口で書類を求められる場合があります。</p>
         )}
         {showSokyuuNote(s) && (
-          <p className="sr-note sr-mt"><strong>診断書が2通になります。</strong>障害認定日ころのものと、現在のもの。当時の病院にカルテが残っているかを、先に電話で確かめてください。</p>
+          <p className="sr-note sr-mt"><strong>診断書が2通になります。</strong>障害認定日ころのものと、現在のもの。当時の病院にカルテが残っているかを、先に電話で確かめてください。障害認定日から1年たっていない場合は、1通で足りることがあります。年金事務所で確認してください。</p>
         )}
 
         <p className="sr-warnbox sr-mt2">

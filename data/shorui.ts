@@ -12,7 +12,9 @@
 export type ShoruiAnswers = {
   seido?: 'kokumin' | 'kousei' | 'fumei';
   hatachi?: 'mae' | 'ato' | 'fumei';
-  kata?: 'honrai' | 'jigo' | 'sokyuu' | 'mitei';
+  /* 'honrai' は 2026-09-03 に選択肢から外れて到達しなくなったので型からも消した。
+     when の === 'sokyuu' は変えていない。 */
+  kata?: 'jigo' | 'sokyuu' | 'mitei';
   shurui?: 'seishin' | 'shitai' | 'me' | 'kikaku' | 'naibu' | 'ketsueki' | 'sonota';
   byouin?: 'onaji' | 'chigau' | 'karute' | 'fumei';
   kazoku: string[];

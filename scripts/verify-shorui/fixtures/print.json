@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-09-03T12:45:08.908Z",
+ "generatedAt": "2026-09-03T21:34:26.683Z",
  "a4ContentMm": 269,
  "cases": [
   {
@@ -8,7 +8,7 @@
    "pages": 2,
    "splitItems": [],
    "itemCount": 21,
-   "contentMm": 279.7,
+   "contentMm": 275.9,
    "rawInputsVisible": 0,
    "checkedOnScreen": 0,
    "boxesDrawn": 14,
@@ -59,7 +59,7 @@
    "pages": 2,
    "splitItems": [],
    "itemCount": 31,
-   "contentMm": 510.3,
+   "contentMm": 503.7,
    "rawInputsVisible": 0,
    "checkedOnScreen": 0,
    "boxesDrawn": 24,
@@ -110,7 +110,7 @@
    "pages": 2,
    "splitItems": [],
    "itemCount": 32,
-   "contentMm": 505.1,
+   "contentMm": 498.4,
    "rawInputsVisible": 0,
    "checkedOnScreen": 25,
    "boxesDrawn": 25,

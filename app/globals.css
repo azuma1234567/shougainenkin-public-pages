@@ -2969,7 +2969,7 @@ ul.sr-ask{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.s
 .sr-fold{margin:18px 0;border:1px solid var(--platform-border);border-radius:14px;background:var(--platform-surface)}.sr-fold>summary{padding:16px 22px;color:var(--platform-heading);font-size:15px;font-weight:600;cursor:pointer}.sr-fold>summary:focus-visible{outline:2px solid var(--platform-primary);outline-offset:2px}.sr-fold>*:not(summary){margin-left:22px;margin-right:22px}.sr-fold>.sr-row{margin-bottom:18px}
 .sr-box{display:none}
 .sr-printhead{display:none}
-@media(max-width:520px){.sr-card{padding:18px 16px}.sr-top{padding:6px 0 10px}.sr-doc{padding:10px 2px}.sr-n{font-size:15px}.sr-links{display:block;margin-top:2px}.sr-links a{margin:0 12px 0 0}.sr-meta{font-size:12px;line-height:1.55}.sr-meta span{margin-right:10px}.sr-stuck{margin-top:3px;font-size:12.5px;line-height:1.6}.sr-hint{margin-top:2px;font-size:12.5px}.sr-forms{font-size:12px;line-height:1.6}}
+@media(max-width:520px){.sr-card{padding:18px 16px}.sr-top{padding:4px 0 2px}.sr-page .sr-top h1{margin:2px 0 0}.sr-lead{margin:8px 0 0;line-height:1.5}.sr-page .jc-hero-meta{margin:6px 0 0}.sr-main{padding-top:0}.sr-card{margin:8px 0;padding-top:8px}.sr-card h2{margin-bottom:2px}.sr-sec{margin-top:8px;margin-bottom:0}.sr-doc{padding:10px 2px}.sr-n{font-size:15px}.sr-links{display:block;margin-top:2px}.sr-links a{margin:0 12px 0 0}.sr-meta{font-size:12px;line-height:1.55}.sr-meta span{margin-right:10px}.sr-stuck{margin-top:3px;font-size:12.5px;line-height:1.6}.sr-hint{margin-top:2px;font-size:12.5px}.sr-forms{font-size:12px;line-height:1.6}}
 @media print{
   /* 窓口へ持っていく紙。A4 2枚以内(1枚には収まらない。docs/shorui-tool-design-2026-09-02.md §5-4)。
      持ち物と窓口で聞くことは落とさない——この紙の本体はそちらなので。 */
