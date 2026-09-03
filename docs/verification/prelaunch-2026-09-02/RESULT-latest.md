@@ -75,7 +75,7 @@ origin: http://localhost:3200 / ページ数: 167 / 基準: git main
 |---|---|---|
 | /columns/moushitatesho-a4-insatsu | 障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説｜障害年金申請サポート | 10594 |
 | /columns/moushitatesho-kikan-kugiri | 障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方｜障害年金申請サポート | 10479 |
-| /columns/teishutsusaki-yuusou | 障害年金の書類はどこに提出する?｜年金事務所・市役所・郵送｜障害年金申請サポート | 8530 |
+| /columns/teishutsusaki-yuusou | 障害年金の書類はどこに提出する?｜年金事務所・市役所・郵送｜障害年金申請サポート | 8604 |
 
 ## A-8 付記: 金額の検算(data/amounts.ts からの導出)
 

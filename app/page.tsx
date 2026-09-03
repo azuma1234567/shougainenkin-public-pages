@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { DouguCards } from "@/components/platform/DouguCard";
+import { TOP_BAND_TOOLS } from "@/data/dougu";
 import Link from "next/link";
 import {
   Card,
@@ -301,6 +303,21 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      {/* 道具の帯。5つとも入力はブラウザの中だけで処理する。グローバルナビには足さない。 */}
+      <section className="p-section" aria-labelledby="dougu-heading">
+        <div className="p-container">
+          <SectionHeader
+            title="調べる道具"
+            lead="入力した内容は、どれもこの端末の中だけで処理します。サーバーへは送りません。"
+            href="/dougu"
+            linkLabel="道具の置き場所へ"
+          />
+          <div className="p-grid dougu-band">
+            <DouguCards placements={TOP_BAND_TOOLS} variant="grid" />
+          </div>
+        </div>
+      </section>
+
       <section className="p-section" aria-labelledby="misconception-heading">
         <div className="p-container">
           <SectionHeader title="その心配、誤解かもしれません" lead="あきらめる前に確認してほしい、よくある思い込みです。すべて公的資料で確認済み。" />
