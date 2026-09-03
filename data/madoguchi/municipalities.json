@@ -1168,15 +1168,13 @@
    "code": "016934",
    "pref": "北海道",
    "name": "標津町",
-   "kind": "町",
-   "hoppo": true
+   "kind": "町"
   },
   {
    "code": "016942",
    "pref": "北海道",
    "name": "羅臼町",
-   "kind": "町",
-   "hoppo": true
+   "kind": "町"
   },
   {
    "code": "016951",
@@ -1210,13 +1208,15 @@
    "code": "016993",
    "pref": "北海道",
    "name": "紗那村",
-   "kind": "村"
+   "kind": "村",
+   "hoppo": true
   },
   {
    "code": "017001",
    "pref": "北海道",
    "name": "蘂取村",
-   "kind": "村"
+   "kind": "村",
+   "hoppo": true
   },
   {
    "code": "022012",

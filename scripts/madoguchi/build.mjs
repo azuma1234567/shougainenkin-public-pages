@@ -12,6 +12,7 @@ const manifest = JSON.parse(read("manifest.json"));
 const hashOf = new Map(manifest.pages.map((p) => [p.file, p.sha256.slice(0, 16)]));
 const municipalities = JSON.parse(readFileSync(path.join(DATA_DIR, "municipalities.json"), "utf8"));
 const manualMap = JSON.parse(readFileSync(path.join(import.meta.dirname, "manual-map.json"), "utf8"));
+const gunMap = JSON.parse(readFileSync(path.join(DATA_DIR, "gun-map.json"), "utf8"));
 
 const ZIP_RE = /^\d{3}-\d{4}$/;
 const TEL_RE = /^0\d{1,4}-\d{1,4}-\d{4}$/;
@@ -73,6 +74,7 @@ for (const m of municipalities.municipalities) {
 const norm = (s) => (s ?? "").replace(/[ヶヵｹ]/g, "ケ").replace(/[ノヽ]/g, "");
 const unresolved = [];
 const index = {};   // code -> {kousei, kokumin}
+const gunExcept = [];
 
 /* 管轄表の1語を市区町村コードへ。返り値は配列(郡は複数)。 */
 function resolve(token, { prefName, officeAddr, notes }) {
@@ -113,7 +115,14 @@ function resolve(token, { prefName, officeAddr, notes }) {
     const hits = manual.map((n) => list.find((m) => norm(m.name) === norm(n))).filter(Boolean);
     if (hits.length === manual.length) return hits;
   }
-  /* 郡は総務省のコード表に郡名が無いので展開できない(RESULT に出す) */
+  /* 郡 → その郡の町村(日本郵便 KEN_ALL から作った gun-map)。ここに無ければ展開しない */
+  if (bare.endsWith("郡")) {
+    const towns = gunMap.gun[`${prefName}|${bare}`];
+    if (towns) {
+      const hits = towns.map((x) => list.find((m) => m.code === x.code)).filter(Boolean);
+      if (hits.length === towns.length) return hits;
+    }
+  }
   return null;
 }
 
@@ -127,21 +136,47 @@ for (const [slug, prefName] of PREFS) {
     if (!office) { unresolved.push({ pref: prefName, kind: "事務所名", value: row.office, reason: "管轄表の事務所名が都道府県ページの事務所と結びつかない" }); continue; }
     for (const [field, cell] of [["jurisdictionKousei", row.kousei], ["jurisdictionKokumin", row.kokumin]]) {
       for (const token of splitJurisdiction(cell)) {
-        if (token.type === "gun") { unresolved.push({ pref: prefName, office: row.office, field, value: token.value, reason: "郡まるごと。総務省のコード表に郡名が無いので町村へ展開できない" }); continue; }
-        if (token.type === "partial") { unresolved.push({ pref: prefName, office: row.office, field, value: token.value, reason: `市区町村より細かい単位で分けられている: ${token.note}` }); continue; }
         if (token.type === "unknown") { unresolved.push({ pref: prefName, office: row.office, field, value: token.value, reason: "読み取れない文字列" }); continue; }
+        const key = field === "jurisdictionKousei" ? "kousei" : "kokumin";
+        /* 「入間郡(所沢年金事務所管内の地域を除く。)」は、郡の町村のうち他の事務所が名指ししていない残り。
+           先に名指しを全部つけてから引き算するので、二段目に回す。 */
+        if (token.type === "partial" && token.value.endsWith("郡")) { gunExcept.push({ prefName, office, field, key, token, notes }); continue; }
         const hits = resolve(token.value, { prefName, officeAddr: office.addr, notes });
-        if (hits === null) { unresolved.push({ pref: prefName, office: row.office, field, value: token.value, reason: "市区町村コードへ展開できない" }); continue; }
+        if (hits === null) { unresolved.push({ pref: prefName, office: row.office, field, value: token.value, reason: token.type === "gun" ? "郡が gun-map(KEN_ALL)に無い" : "市区町村コードへ展開できない" }); continue; }
         for (const m of hits) {
           if (!office[field].includes(m.code)) office[field].push(m.code);
           index[m.code] ??= { kousei: null, kokumin: null };
-          const key = field === "jurisdictionKousei" ? "kousei" : "kokumin";
-          if (index[m.code][key] && index[m.code][key] !== office.id) {
-            unresolved.push({ pref: prefName, kind: "二重割当", code: m.code, name: m.name, field: key, offices: [index[m.code][key], office.id] });
+          const cur = index[m.code][key];
+          if (token.type === "partial") {
+            /* 機構が市区町村より細かい単位で2つの事務所に分けている。両方を持ち、振り分けの文を生のまま残す。 */
+            const entry = Array.isArray(cur) ? cur : cur ? [cur] : [];
+            if (!entry.includes(office.id)) entry.push(office.id);
+            index[m.code][key] = entry;
+            index[m.code].split = true;
+            index[m.code].splitText ??= {};
+            index[m.code].splitText[key] ??= [];
+            if (!index[m.code].splitText[key].includes(token.splitText)) index[m.code].splitText[key].push(token.splitText);
+          } else if (Array.isArray(cur)) {
+            if (!cur.includes(office.id)) cur.push(office.id);
+          } else if (cur && cur !== office.id) {
+            unresolved.push({ pref: prefName, kind: "二重割当", code: m.code, name: m.name, field: key, offices: [cur, office.id] });
           } else index[m.code][key] = office.id;
         }
       }
     }
+  }
+}
+
+/* 二段目: 郡(…を除く。) */
+for (const { prefName, office, field, key, token, notes } of gunExcept) {
+  const towns = resolve(token.value, { prefName, officeAddr: office.addr, notes });
+  if (towns === null) { unresolved.push({ pref: prefName, office: office.nameShort, field, value: token.value, reason: "郡が gun-map(KEN_ALL)に無い" }); continue; }
+  const rest = towns.filter((m) => { const v = index[m.code]?.[key]; return !(Array.isArray(v) ? v.length : v); });
+  if (rest.length === 0) unresolved.push({ pref: prefName, office: office.nameShort, field, value: token.splitText, reason: "郡(除く)の残りが0件(郡の町村がすべて他の事務所に付いている)" });
+  for (const m of rest) {
+    if (!office[field].includes(m.code)) office[field].push(m.code);
+    index[m.code] ??= { kousei: null, kokumin: null };
+    index[m.code][key] = office.id;
   }
 }
 
@@ -159,13 +194,17 @@ const satellites = nenkinAll.filter((o) => o.satellite);
 const machikadoAll = offices.filter((o) => o.kind === "machikado");
 const assigned = Object.keys(index);
 const target = municipalities.municipalities.filter((m) => !m.hoppo);
-const noKousei = target.filter((m) => !index[m.code]?.kousei);
-const noKokumin = target.filter((m) => !index[m.code]?.kokumin);
+const has = (m, k) => { const v = index[m.code]?.[k]; return Array.isArray(v) ? v.length > 0 : !!v; };
+const noKousei = target.filter((m) => !has(m, "kousei"));
+const noKokumin = target.filter((m) => !has(m, "kokumin"));
 const dupes = unresolved.filter((u) => u.kind === "二重割当");
+/* split の市区: 2件 かつ splitText がある、以外は異常として数える */
+const splitEntries = Object.entries(index).filter(([, v]) => v.split);
+const splitBad = splitEntries.filter(([, v]) => ["kousei", "kokumin"].some((k) => Array.isArray(v[k]) && (v[k].length !== 2 || !(v.splitText?.[k]?.length))));
+const nameOf = (code) => municipalities.municipalities.find((m) => m.code === code);
 const tokenFails = unresolved.filter((u) => u.kind !== "二重割当");
-const gunFails = tokenFails.filter((u) => u.reason.startsWith("郡まるごと"));
-const partialFails = tokenFails.filter((u) => u.reason.startsWith("市区町村より細かい"));
-const otherFails = tokenFails.filter((u) => !gunFails.includes(u) && !partialFails.includes(u));
+const gunFails = tokenFails.filter((u) => u.reason.startsWith("郡が"));
+const otherFails = tokenFails.filter((u) => !gunFails.includes(u));
 const uniq = (list) => [...new Set(list.map((u) => `${u.pref} ${u.office} ${u.field === "jurisdictionKousei" ? "厚年" : "国年"}: ${u.value}`))];
 const rows = prefCounts.map((p) => `| ${p.prefName} | ${p.nenkin} | ${p.machikado} | ${p.kankatsu} |${p.note ? ` ${p.note}` : ""}`).join("\n");
 const sum = (k) => prefCounts.reduce((n, p) => n + p[k], 0);
@@ -209,11 +248,29 @@ ${satellites.map((o) => `  - ${o.prefName} ${o.name}`).join("\n")}
 | 厚年が未割当 | **${noKousei.length}** |
 | 国年の事務所が付いた | ${target.length - noKokumin.length} |
 | 国年が未割当 | **${noKokumin.length}** |
-| 二重割当 | **${dupes.length}** |
+| 二重割当(異常) | **${dupes.length}** |
+| 2事務所に分かれる市区(split) | ${splitEntries.length}(うち条件を満たさないもの **${splitBad.length}**) |
+
+判定条件: 1市区町村 = 厚年1・国年1、**または** \`split: true\` かつ 2件 かつ \`splitText\` あり。これ以外の二重は異常として数える。
+郡は日本郵便の郵便番号データ(KEN_ALL、sha256先頭16 ${gunMap.sourceHash.slice(0, 16)}、${gunMap.checkedOn} 取得)から作った
+\`data/madoguchi/gun-map.json\`(郡 ${gunMap.gunCount} / 町村 ${gunMap.townCount})で町村へ展開した。
+北方領土の6村は事務所が付かないので対象から除いた。
+
+### 2事務所に分かれる市区(${splitEntries.length}件)
+
+機構が市区町村より細かい単位(大字)で振り分けているもの。両方の事務所を持ち、管轄表の文を \`splitText\` に生のまま残した。
+
+${splitEntries.map(([code, v]) => { const m = nameOf(code); return `- ${code} ${m?.pref ?? ""}${m?.name ?? ""} — 厚年 ${Array.isArray(v.kousei) ? v.kousei.join(" / ") : v.kousei} ／ 国年 ${Array.isArray(v.kokumin) ? v.kokumin.join(" / ") : v.kokumin}`; }).join("\n")}
+${splitBad.length ? `\n### split の条件を満たさないもの(異常)\n\n${splitBad.map(([code, v]) => `- ${code} ${JSON.stringify(v)}`).join("\n")}\n` : ""}
 
 ${noKousei.length ? `### 厚年 未割当(先頭50件)\n\n${noKousei.slice(0, 50).map((m) => `- ${m.code} ${m.pref}${m.name}`).join("\n")}\n` : ""}
 ${noKokumin.length ? `### 国年 未割当(先頭50件)\n\n${noKokumin.slice(0, 50).map((m) => `- ${m.code} ${m.pref}${m.name}`).join("\n")}\n` : ""}
-${dupes.length ? `### 二重割当\n\n${dupes.slice(0, 50).map((d) => `- ${d.code} ${d.pref}${d.name} ${d.field}: ${d.offices.join(" / ")}`).join("\n")}\n` : ""}
+${dupes.length ? `### 二重割当(異常)\n\n${dupes.slice(0, 50).map((d) => `- ${d.code} ${d.pref}${d.name} ${d.field}: ${d.offices.join(" / ")}`).join("\n")}\n` : ""}
+### 北方領土の6村(選択肢から除く)
+
+年金事務所が付かないので、市区町村の選択肢から外す。総務省の「1,741市区町村」にも数えられていない。
+
+${municipalities.municipalities.filter((m) => m.hoppo).map((m) => `- ${m.code} ${m.pref}${m.name}`).join("\n")}
 
 ## 4. 展開できなかった管轄文字列(unresolved)
 
@@ -221,17 +278,12 @@ ${tokenFails.length} 件。**推測で埋めていない。**
 
 | 種類 | 件数 | なぜ展開できないか |
 |---|---:|---|
-| 「◯◯郡」まるごと | ${gunFails.length} | 総務省のコード表に**郡名が入っていない**(町村名だけ)。郡→町村の対応が無い |
-| 「◯◯市のうち…」「◯◯市(…を除く。)」 | ${partialFails.length} | 機構が**市区町村より細かい単位(大字)**で2つの事務所に分けている。市区町村コードの粒度では表せない |
+| 「◯◯郡」で gun-map に無いもの | ${gunFails.length} | KEN_ALL に「都道府県\|郡」の組が無い |
 | その他 | ${otherFails.length} | 下の一覧 |
 
-### 「◯◯郡」まるごと(ユニーク ${uniq(gunFails).length} 種。先頭40)
+### 郡が gun-map に無いもの(${uniq(gunFails).length}件)
 
-${uniq(gunFails).slice(0, 40).map((s) => `- ${s}`).join("\n")}
-
-### 市区町村より細かい単位で分けられている(ユニーク ${uniq(partialFails).length} 種。全件)
-
-${uniq(partialFails).map((s) => `- ${s}`).join("\n")}
+${uniq(gunFails).map((s) => `- ${s}`).join("\n") || "なし"}
 
 ### その他(${otherFails.length}件)
 
@@ -247,4 +299,4 @@ ${uniq(otherFails).slice(0, 40).map((s) => `- ${s}`).join("\n") || "なし"}
 ${manifest.failures.length ? manifest.failures.map((f) => `- ${f.status} ${f.url}`).join("\n") : "なし"}
 `;
 writeFileSync(path.join(RESULT_DIR, "RESULT.md"), md);
-console.log(`事務所 ${nenkinAll.length} / 街角 ${machikadoAll.length} / 未割当 厚年${noKousei.length} 国年${noKokumin.length} / 二重${dupes.length} / unresolved ${tokenFails.length}(郡 ${gunFails.length})`);
+console.log(`事務所 ${nenkinAll.length} / 街角 ${machikadoAll.length} / 未割当 厚年${noKousei.length} 国年${noKokumin.length} / 二重(異常)${dupes.length} / split ${splitEntries.length}(異常${splitBad.length}) / unresolved ${tokenFails.length}`);

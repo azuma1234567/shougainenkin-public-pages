@@ -54,8 +54,10 @@ const clean = (s) => (s ?? "").replace(/\s+/g, "").trim();
 const sheet1 = parsed.sheet1.slice(1).map((r) => ({ code: clean(r.A), pref: clean(r.B), name: clean(r.C) }));
 const sheet2 = parsed.sheet2.slice(1).map((r) => ({ code: clean(r.A), pref: clean(r.B), name: clean(r.C) }));
 
-/* 北方領土の6村。コード表には載るが「1,741市区町村」には数えない。除外せず kind に印を付けて残す。 */
-const HOPPO = new Set(["016934", "016942", "016951", "016969", "016977", "016985"]);
+/* 北方領土の6村(色丹村・泊村・留夜別村・留別村・紗那村・蘂取村)。コード表には載るが
+   「1,741市区町村」には数えず、年金事務所も付かない。除外せず hoppo:true の印を付けて残す。 */
+const HOPPO_NAMES = new Set(["色丹村", "泊村", "留夜別村", "留別村", "紗那村", "蘂取村"]);
+const isHoppo = (r) => r.pref === "北海道" && HOPPO_NAMES.has(r.name) && r.code >= "016900";
 
 const designatedCities = sheet2.filter((r) => !r.name.endsWith("区")).map((r) => r.name);
 const wards = sheet2.filter((r) => r.name.endsWith("区"));
@@ -73,7 +75,7 @@ const out = [];
 for (const r of sheet1) {
   if (!r.name) continue;                       // 都道府県だけの行
   if (designatedCities.includes(r.name)) continue; // 政令市は区に置き換える
-  out.push({ code: r.code, pref: r.pref, name: r.name, kind: kindOf(r.pref, r.name), hoppo: HOPPO.has(r.code) || undefined });
+  out.push({ code: r.code, pref: r.pref, name: r.name, kind: kindOf(r.pref, r.name), hoppo: isHoppo(r) || undefined });
 }
 for (const w of wards) {
   const city = designatedCities.find((c) => w.name.startsWith(c));

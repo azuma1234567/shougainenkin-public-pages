@@ -172,7 +172,12 @@ export function splitJurisdiction(cell) {
   /* 「◯◯のうち…」「◯◯（…を除く。）」を先に切り出す。括弧の中に読点があるので、
      素朴に読点で割ると壊れる。 */
   const rest = [];
-  let buf = text;
+  /* 「除く」を含まない括弧は但し書き(番地の範囲など)なので先に落とす。
+     読点まわりの空白を詰める(「玉柏 、田町」→「玉柏、田町」)。
+     こうしておくと「のうち」の大字の列は読点で続き、次の市区町村は空白で切れる。 */
+  let buf = text
+    .replace(/[（(][^）)]*[）)]/g, (m) => (m.includes("除く") ? m : " "))
+    .replace(/\s*、\s*/g, "、");
 
   /* 1) 「A市のうち<大字の列>」。A が市区町村なら「一部」として1件にする。 */
   const uchi = /([^\s、。（(）)]+?[市区町村郡])\s*のうち/g;
@@ -187,17 +192,18 @@ export function splitJurisdiction(cell) {
     }
     for (const p of partials) {
       if (/郡$/.test(p)) continue;
-      out.push({ value: p, type: "partial", note: "市区町村より細かい単位で分けられている(「のうち」)" });
+      const esc = p.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const clause = buf.match(new RegExp(esc + "\\s*のうち(?:[^\\s（(]|[（(][^）)]*[）)])*"))?.[0] ?? "";
+      out.push({ value: p, type: "partial", note: "市区町村より細かい単位で分けられている(「のうち」)", splitText: squash(clause) });
     }
     /* 「のうち」の内訳を落とす。郡は「上北郡のうち六戸町及びおいらせ町 三戸郡」のように
        空白の手前で終わり、後ろに別の管轄が続く。市区町村は大字の列がセルの最後まで続く。 */
-    buf = buf.replace(/([^\s、。（(）)]+?郡)\s*のうち[^\s（(]*/g, " ");
-    buf = buf.replace(/([^\s、。（(）)]+?[市区町村])\s*のうち[\s\S]*$/g, " ");
+    buf = buf.replace(/([^\s、。（(）)]+?[市区町村郡])\s*のうち(?:[^\s（(]|[（(][^）)]*[）)])*/g, " ");
   }
 
   /* 2) 「A（…を除く。）」→ A の一部 */
   for (const g of buf.matchAll(/([^\s、。（(）)]+?[市区町村郡])\s*[（(][^）)]*除く[^）)]*[）)]/g)) {
-    out.push({ value: g[1], type: "partial", note: "ほかの年金事務所の管内を除いた残り(「除く」)" });
+    out.push({ value: g[1], type: "partial", note: "ほかの年金事務所の管内を除いた残り(「除く」)", splitText: squash(g[0]) });
   }
   buf = buf.replace(/([^\s、。（(）)]+?[市区町村郡])\s*[（(][^）)]*除く[^）)]*[）)]/g, " ");
 
