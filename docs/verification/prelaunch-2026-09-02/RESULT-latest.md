@@ -39,7 +39,7 @@ origin: http://localhost:3000 / ページ数: 166 / 基準: git main
 ### B-3 の該当一覧(2件)
 
 - /dougu/moushitatesho (48字)
-- /dougu/mitate (424字)
+- /dougu/mitate (323字)
 
 ### B-4 の該当一覧(1件)
 
@@ -59,7 +59,7 @@ origin: http://localhost:3000 / ページ数: 166 / 基準: git main
 | C-2 | 手動 | sitemapの分割 | 対象外(166ページ・単一 sitemap.xml で十分。50,000 URL 超で再検討)<br>※Google の分割要件は 50,000 URL または 50MB。2026-09-02 に対象外とした |
 | C-3 | 手動 | Search Console にサイトマップを送信 | 手動作業(スクリプト対象外)<br>※sitemap.xml を送る |
 | C-4 | 手動 | 主要10ページの URL検査(インデックス登録リクエスト) | 10ページとも200: ○(送信自体は手動) |
-| C-5 | ○ | 旧URLの維持または301リダイレクト | 公開前URL 77 件のうち /dougu → /shinsei 301: ○、その他200以外 0<br>※main ブランチの sitemap 静的ページ + 記事URL |
+| C-5 | ○ | 旧URLの維持または301リダイレクト | 公開前URL 76 件のうち /dougu → /shinsei 301: ○、その他200以外 0<br>※main ブランチの sitemap 静的ページ + 記事URL |
 
 ## D(人が見る): 確認用の一覧
 

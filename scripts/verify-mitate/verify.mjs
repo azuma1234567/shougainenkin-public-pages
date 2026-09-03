@@ -193,7 +193,7 @@ check(13, "A4 2枚以内で印刷でき、目安表が割れず、出典と主�
   assert.match(src(PAGE), /国が公表している目安に当てはめた結果です/, "印刷物の主語が無い");
   assert.match(src(PAGE), /このサイトが判定したものではありません。/);
   assert.match(src(TOOL), /MITATE_SOURCE\.url/, "出典URLが無い");
-  assert.match(css, /\.no-print,\.mi-screen-only\{display:none!important\}/, "画面用カードが印刷から落ちない");
+  assert.match(css, /\.no-print,\.mi-screen-only,\.mi-next-lines\{display:none!important\}/, "画面用要素が印刷から落ちない");
   assert.match(css, /\.mi-tbl-scroll,table\.mi-gt\{break-inside:avoid/, "目安表に break-inside: avoid が無い");
   assert.match(css, /\.mi-guide\{break-inside:avoid/, "引用に break-inside: avoid が無い");
   const file = "scripts/verify-mitate/fixtures/print.json";
