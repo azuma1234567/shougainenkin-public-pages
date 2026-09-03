@@ -26,9 +26,12 @@ if (!ready) { server.kill("SIGTERM"); throw new Error("検証用サーバーが�
 const browser = await chromium.launch({ headless: true, executablePath: chrome, args: ["--font-render-hinting=none"] });
 const url = `http://127.0.0.1:${PORT}/dougu/shorui`;
 
-// 選択肢はラベルで押す(質問ごとに1つずつ)
+// 選択肢は設問ごとに押す。「はい」は Q(会社員)と Q(事故)の両方にあるので設問で絞る。
 async function answer(page, labels) {
-  for (const l of labels) { await page.getByRole("button", { name: l, exact: true }).click(); await sleep(80); }
+  for (const [id, l] of labels) {
+    await page.locator(`[aria-labelledby="sr-q-${id}"] button`).filter({ hasText: new RegExp(`^${l}$`) }).first().click();
+    await sleep(80);
+  }
 }
 
 async function run(name, labels, checkAll) {
@@ -98,8 +101,8 @@ async function run(name, labels, checkAll) {
 
 const cases = [];
 cases.push(await run("未回答(共通のみ)", [], false));
-cases.push(await run("最大(全分岐)", ["国民年金", "20歳より前", "遡及", "内部(心臓・腎臓・肝臓・呼吸器・糖尿病)", "違ううえ、カルテが残っていないと言われた", "18歳の年度末までの子がいる", "65歳未満の配偶者がいる", "はい"], false));
-cases.push(await run("最大+全チェック", ["厚生年金", "20歳より前", "遡及", "精神", "違ううえ、カルテが残っていないと言われた", "18歳の年度末までの子がいる", "65歳未満の配偶者がいる", "はい"], true));
+cases.push(await run("最大(全分岐)", [["seido", "いいえ"], ["hatachi", "20歳より前"], ["kata", "する"], ["shurui", "内部\\(心臓・腎臓など\\)"], ["byouin", "違ううえ、カルテが無いと言われた"], ["kazoku", "18歳までの子がいる"], ["kazoku", "65歳未満の配偶者がいる"], ["jiko", "はい"]], false));
+cases.push(await run("最大+全チェック", [["seido", "はい"], ["hatachi", "20歳より前"], ["kata", "する"], ["shurui", "精神"], ["byouin", "違ううえ、カルテが無いと言われた"], ["kazoku", "18歳までの子がいる"], ["kazoku", "65歳未満の配偶者がいる"], ["jiko", "はい"]], true));
 
 // 375px と 送信
 const mobileCtx = await browser.newContext({ viewport: { width: 375, height: 900 } });
@@ -114,7 +117,7 @@ mp.on("request", (r) => {
 });
 await mp.goto(url);
 await mp.locator(".sr-doc").first().waitFor();
-await answer(mp, ["厚生年金", "20歳より前", "遡及", "内部(心臓・腎臓・肝臓・呼吸器・糖尿病)", "違ううえ、カルテが残っていないと言われた", "18歳の年度末までの子がいる", "65歳未満の配偶者がいる", "はい"]);
+await answer(mp, [["seido", "いいえ"], ["hatachi", "20歳より前"], ["kata", "する"], ["shurui", "内部\\(心臓・腎臓など\\)"], ["byouin", "違ううえ、カルテが無いと言われた"], ["kazoku", "18歳までの子がいる"], ["kazoku", "65歳未満の配偶者がいる"], ["jiko", "はい"]]);
 await sleep(500);
 const mobile = await mp.evaluate(() => {
   const de = document.documentElement;

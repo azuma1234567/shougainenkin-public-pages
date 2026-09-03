@@ -31,8 +31,9 @@ check(1, "/dougu/shorui が動き、/dougu から行ける", () => {
   return "page.tsx / 一覧の href / sitemap / 公開判定 / パンくず";
 });
 
-// 2. 7問すべて飛ばせる。飛ばすと共通の書類だけが出る。
-check(2, "7問すべて飛ばすと、共通の書類だけが出る", () => {
+// 2. 共通6件が最初から出る。7問すべて飛ばせる。役所の言葉を画面に出さない。
+// (2026-09-03 の作り直し。docs/shorui-madoguchi-redesign-2026-09-03-instructions.md A-5 の 1・2・5)
+check(2, "共通6件が最初から出て、7問とも飛ばせる。役所の言葉が画面に無い", () => {
   assert.equal(SHORUI_QUESTIONS.length, 7, "質問が7問でない");
   const always = SHORUI_DOCS.filter((d) => d.always).map((d) => d.id);
   assert.deepEqual(ids(a()), always, `未回答で出る書類が違う: ${ids(a()).join(",")}`);
@@ -40,7 +41,21 @@ check(2, "7問すべて飛ばすと、共通の書類だけが出る", () => {
   // 質問に「必須」の仕掛けが無い(選ばなくても結果が出る)
   assert.ok(!src(TOOL).includes("required"), "required がある");
   assert.match(src(TOOL), /prev\[id\] === v \? undefined : v/, "同じ選択肢をもう一度押して未回答へ戻せない");
-  return `共通6件: ${always.join(" / ")}`;
+  // 書類の一覧が質問より先に出ている(ソース上の並び)
+  assert.ok(src(TOOL).indexOf('id="sr-docs"') < src(TOOL).indexOf('id="sr-q"'), "質問が書類より先にある");
+  // A-5-2 「質問」「1.」〜「7.」「本来請求」「事後重症」「遡及」が画面に無い
+  const screen = [SHORUI_QUESTIONS.map((q) => `${q.t} ${q.o.map(([, l]) => l).join(" ")}`).join("\n"),
+    src(TOOL).replace(/\/\*[\s\S]*?\*\//g, " ")].join("\n");
+  for (const w of ["本来請求", "事後重症", "遡及"]) assert.ok(!screen.includes(w), `画面に「${w}」がある`);
+  assert.ok(!/<h2 id="sr-q">質問<\/h2>/.test(src(TOOL)), "見出しが「質問」のまま");
+  assert.match(src(TOOL), /<h2 id="sr-q">あなたの場合に足すもの<\/h2>/, "見出しが「あなたの場合に足すもの」でない");
+  assert.match(src(TOOL), />答えを消す</, "「答えを消す」が無い");
+  for (const q of SHORUI_QUESTIONS) assert.ok(!/^\d/.test(q.t), `質問に番号が残っている: ${q.t}`);
+  // A-5-5 回答で足された行に「あなたの場合」の印がある
+  assert.match(src(TOOL), /const added = !d\.always;/, "足された行を見分けていない");
+  assert.match(src(TOOL), /<span className="sr-mine">あなたの場合<\/span>/, "「あなたの場合」の印が無い");
+  assert.match(src("app/globals.css"), /\.sr-added\{background:#e8f4fc\}/, "足された行の薄い primary 背景が無い");
+  return `共通6件: ${always.join(" / ")} / 質問は番号なし7問・見出しは「あなたの場合に足すもの」・本来請求/事後重症/遡及は画面に無い`;
 });
 
 // 3. §4 の分岐が全部動く(7パターン)

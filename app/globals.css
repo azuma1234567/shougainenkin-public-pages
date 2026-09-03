@@ -2961,9 +2961,15 @@ ul.sr-ask{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.s
 .sr-opt-btn{padding:9px 16px;border:1.5px solid #d7e9f5;border-radius:999px;background:#fff;color:var(--platform-text);font-family:inherit;font-size:13.5px;cursor:pointer}.sr-opt-btn[aria-pressed=true]{border-color:var(--platform-primary);background:var(--platform-chip);color:var(--platform-heading);font-weight:600}
 .sr-link{border:0;background:none;color:var(--platform-link);font-family:inherit;font-size:13.5px;text-decoration:underline;cursor:pointer}.sr-confirm{color:var(--platform-muted);font-size:13.5px}
 .sr-chips button:focus-visible,.sr-btn:focus-visible,.sr-opt-btn:focus-visible,.sr-link:focus-visible,.sr-doc input:focus-visible{outline:2px solid var(--platform-primary);outline-offset:2px}
+.sr-top{padding:10px 0 14px}.sr-page .sr-top h1{margin:6px 0 0;color:var(--platform-heading);font-family:var(--font-platform-heading),"Hiragino Kaku Gothic ProN",sans-serif;font-size:clamp(1.35rem,5.4vw,27px);line-height:1.45}
+.sr-added{background:#e8f4fc}
+.sr-mine{display:inline-block;margin-left:6px;padding:1px 9px;border-radius:999px;border:1px solid #cfe6f5;background:#fff;color:var(--platform-heading);font-size:11.5px;font-weight:600}
+.sr-hint{margin:4px 0 0;color:var(--platform-muted);font-size:13px}
+.sr-clear{margin-top:2px;font-size:13px;color:var(--platform-muted)}
+.sr-fold{margin:18px 0;border:1px solid var(--platform-border);border-radius:14px;background:var(--platform-surface)}.sr-fold>summary{padding:16px 22px;color:var(--platform-heading);font-size:15px;font-weight:600;cursor:pointer}.sr-fold>summary:focus-visible{outline:2px solid var(--platform-primary);outline-offset:2px}.sr-fold>*:not(summary){margin-left:22px;margin-right:22px}.sr-fold>.sr-row{margin-bottom:18px}
 .sr-box{display:none}
 .sr-printhead{display:none}
-@media(max-width:520px){.sr-card{padding:18px 16px}}
+@media(max-width:520px){.sr-card{padding:18px 16px}.sr-top{padding:6px 0 10px}.sr-doc{padding:10px 2px}.sr-n{font-size:15px}.sr-links{display:block;margin-top:2px}.sr-links a{margin:0 12px 0 0}.sr-meta{font-size:12px;line-height:1.55}.sr-meta span{margin-right:10px}.sr-stuck{margin-top:3px;font-size:12.5px;line-height:1.6}.sr-hint{margin-top:2px;font-size:12.5px}.sr-forms{font-size:12px;line-height:1.6}}
 @media print{
   /* 窓口へ持っていく紙。A4 2枚以内(1枚には収まらない。docs/shorui-tool-design-2026-09-02.md §5-4)。
      持ち物と窓口で聞くことは落とさない——この紙の本体はそちらなので。 */
@@ -2987,6 +2993,9 @@ ul.sr-ask{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.s
   .sr-note,.sr-warnbox{padding:8px 10px;font-size:10px;margin:6px 0;background:#fff;border:1px solid #bbb;break-inside:avoid}
   ul.sr-ask{font-size:10.5px;line-height:1.6}ul.sr-ask li{margin:2px 0;break-inside:avoid;page-break-inside:avoid}
   .sr-why{background:#fff;border:1px solid #bbb;font-size:9.5px}
+  .sr-added{background:#fff}
+  .sr-mine{background:#fff;border:1px solid #bbb;font-size:9.5px}
+  .sr-hint{font-size:10px;line-height:1.45}
 }
 
 /* /dougu/madoguchi: 年金事務所を探す。値は docs/site-mock-2026-09-02-tools/Madoguchi.html から。 */

@@ -9,33 +9,30 @@ import { isPublishedInternalPath } from "@/lib/published-links";
 const UPDATED = "2026-09-03";
 
 const DESCRIPTION =
-  "7つの質問に答えると、自分の場合に必要な障害年金の書類だけが出ます。年金事務所へ行く日の持ち物と、窓口で聞くことも一緒にA4 1枚で印刷できます。入力内容は送信されません。";
+  "誰にでも要る書類を先に出しています。下の質問に答えると、あなたの場合に要るものが足されます。年金事務所へ行く日の持ち物と、窓口で聞くことも一緒にA4 1枚で印刷できます。入力内容は送信されません。";
 
 const isPublished = isPublishedInternalPath("/dougu/shorui");
 
 export const metadata: Metadata = {
-  ...pageMetadata({ title: "自分に必要な書類だけを、1枚にする", description: DESCRIPTION, path: "/dougu/shorui" }),
+  ...pageMetadata({ title: TOOLS.shorui.question, description: DESCRIPTION, path: "/dougu/shorui" }),
   ...(!isPublished && { robots: { index: false, follow: false } }),
 };
 
 export default function Page() {
   return (
     <div className="platform sr-page">
-      <header className="dougu-hero no-print">
-        <div className="p-container sr-width">
+      <header className="no-print">
+        <div className="p-container sr-width sr-top">
           <Breadcrumb
             items={[{ href: "/", label: "トップ" }, { href: "/shinsei", label: "申請の流れ" }, { label: "必要書類チェックリスト" }]}
             currentPath="/dougu/shorui"
           />
-          <h1>自分に必要な書類だけを、1枚にする</h1>
-          <p className="sr-lead">
-            7つの質問に答えると、あなたの場合に要る書類だけが出ます。年金事務所へ行く日の持ち物と、窓口で聞くことも一緒に印刷できます。答えたくない質問は飛ばせます。
-          </p>
+          <h1>{TOOLS.shorui.question}</h1>
+          <p className="sr-lead">誰にでも要る書類を先に出しています。下の質問に答えると、あなたの場合に要るものが足されます。</p>
           <p className="jc-hero-meta jc--shorui">
             <span className="jc-time">{TOOLS.shorui.time}</span>
             <span className="jc-basis">入力した内容は送信しません</span>
           </p>
-          <PageDate updated={UPDATED} />
         </div>
       </header>
 
@@ -44,7 +41,10 @@ export default function Page() {
           障害年金の必要書類チェックリスト（障害年金申請サポート）。これで全部とは限りません。最後は年金事務所で確認してください。
         </p>
         <ShoruiTool />
-        <p className="no-print"><Link href="/shinsei">申請の流れへ戻る</Link></p>
+        <div className="no-print">
+          <p><Link href="/shinsei">申請の流れへ戻る</Link></p>
+          <PageDate updated={UPDATED} />
+        </div>
       </div>
     </div>
   );

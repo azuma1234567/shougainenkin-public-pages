@@ -1,6 +1,6 @@
 "use client";
-/* /dougu/shorui。docs/shorui-tool-design-2026-09-02.md と
-   docs/site-mock-2026-09-02-tools/Shorui.html が見た目とロジックの正。
+/* /dougu/shorui。docs/shorui-madoguchi-redesign-2026-09-03-instructions.md A が画面の正。
+   (もとの設計は docs/shorui-tool-design-2026-09-02.md §3・§5。順番と言葉だけ差し替えた)
    分岐は data/shorui.ts の when(モックのまま)。文書料の金額と待ち日数は書かない。
    入力はサーバーへ送らず、この端末のチェック状態だけを localStorage に置く。 */
 import Link from "next/link";
@@ -45,27 +45,9 @@ export default function ShoruiTool() {
 
   return (
     <>
-      <section className="sr-card no-print" aria-labelledby="sr-q">
-        <h2 id="sr-q">質問</h2>
-        {SHORUI_QUESTIONS.map((q) => (
-          <div className="sr-q" key={q.id}>
-            <p className="sr-t" id={`sr-q-${q.id}`}>{q.t}</p>
-            <div className="sr-chips" role="group" aria-labelledby={`sr-q-${q.id}`}>
-              {q.o.map(([v, label]) => {
-                const on = q.multi ? s.kazoku.includes(v) : s[q.id] === v;
-                return <button type="button" key={v} aria-pressed={on} onClick={() => pick(q.id, v, q.multi)}>{label}</button>;
-              })}
-            </div>
-          </div>
-        ))}
-        <div className="sr-row">
-          <button type="button" className="sr-btn sr-ghost sr-sm" onClick={() => setS(emptyShoruiAnswers())}>選び直す</button>
-        </div>
-      </section>
-
+      {/* 共通の6件は最初から出す。質問に答えるたびに行が増える(指示書 A-2)。 */}
       <section className="sr-card" aria-labelledby="sr-docs">
         <h2 id="sr-docs">そろえる書類</h2>
-        <p className="sr-note no-print"><strong>チェックはこの端末に保存されます。</strong>集め終わったものに印をつけながら進めてください。</p>
         {saveNote && <p className="sr-warnbox no-print" role="status">{saveNote}</p>}
 
         {sections.map(({ sec, docs: list }) => (
@@ -73,7 +55,8 @@ export default function ShoruiTool() {
             <p className="sr-sec">{sec}</p>
             {list.map((d) => (
               <DocRow key={d.id} d={d} checked={!!checks[`c-${d.id}`]} onToggle={() => toggle(`c-${d.id}`)}
-                extra={d.id === "seikyuusho" ? seikyuusho : d.id === "shindansho" ? forms : []} />
+                extra={d.id === "seikyuusho" ? seikyuusho : d.id === "shindansho" ? forms : []}
+                hint={d.id === "shindansho" && forms.length === 0 ? "種類を選ぶと様式が決まります" : ""} />
             ))}
           </div>
         ))}
@@ -88,6 +71,24 @@ export default function ShoruiTool() {
         <p className="sr-warnbox sr-mt2">
           <b>これで全部とは限りません。</b>制度は変わりますし、事情によって窓口で追加を求められることがあります。<b>最後は年金事務所で確認してください。</b>
         </p>
+      </section>
+
+      <section className="sr-card no-print" aria-labelledby="sr-q">
+        <h2 id="sr-q">あなたの場合に足すもの</h2>
+        {SHORUI_QUESTIONS.map((q) => (
+          <div className="sr-q" key={q.id}>
+            <p className="sr-t" id={`sr-q-${q.id}`}>{q.t}</p>
+            <div className="sr-chips" role="group" aria-labelledby={`sr-q-${q.id}`}>
+              {q.o.map(([v, label]) => {
+                const on = q.multi ? s.kazoku.includes(v) : s[q.id] === v;
+                return <button type="button" key={v} aria-pressed={on} onClick={() => pick(q.id, v, q.multi)}>{label}</button>;
+              })}
+            </div>
+          </div>
+        ))}
+        <div className="sr-row">
+          <button type="button" className="sr-link sr-clear" onClick={() => setS(emptyShoruiAnswers())}>答えを消す</button>
+        </div>
       </section>
 
       <section className="sr-card" aria-labelledby="sr-mochi">
@@ -106,8 +107,16 @@ export default function ShoruiTool() {
         <ul className="sr-ask">
           {SHORUI_ASK.map((a) => <li key={a.text}>{a.strong ? <b>{a.text}</b> : a.text}</li>)}
         </ul>
-        <div className="sr-row no-print">
-          <button type="button" className="sr-btn" onClick={() => window.print()}>この1枚を印刷する</button>
+      </section>
+
+      <div className="sr-row no-print">
+        <button type="button" className="sr-btn" onClick={() => window.print()}>この1枚を印刷する</button>
+      </div>
+
+      <details className="sr-fold no-print">
+        <summary>保存について</summary>
+        <p className="sr-note"><strong>チェックはこの端末に保存されます。</strong>集め終わったものに印をつけながら進めてください。</p>
+        <div className="sr-row">
           <button type="button" className="sr-opt-btn" aria-pressed={shared}
             onClick={() => { const next = !shared; setShared(next); if (next) { clearShoruiChecks(); setSaveNote(""); } }}>
             共用のパソコンを使っています(この端末に保存しない)
@@ -119,28 +128,31 @@ export default function ShoruiTool() {
                 <button type="button" className="sr-link" onClick={() => setConfirmClear(false)}>やめる</button>
               </span>}
         </div>
-      </section>
+      </details>
 
       <section className="sr-card no-print" aria-labelledby="sr-next">
         <h2 id="sr-next">ここからできること</h2>
         <div className="dougu-cross">
-          <Link className="dougu-band-card" href="/dougu/mitate"><b>等級の目安をしらべる</b><span>受け取った診断書の裏面を、国の目安表に当てはめます</span></Link>
-          <Link className="dougu-band-card" href="/dougu/moushitatesho"><b>申立書をつくる</b><span>いちばん重い書類を、フォームに沿って書きます</span></Link>
+          <Link className="dougu-band-card" href="/dougu/madoguchi" prefetch={false}><b>どこに出せばいい？</b><span>お住まいの市区町村から、管轄の年金事務所を出します</span></Link>
+          <Link className="dougu-band-card" href="/dougu/moushitatesho" prefetch={false}><b>申立書を、自分で書きたい</b><span>いちばん重い書類を、フォームに沿って書きます</span></Link>
         </div>
       </section>
     </>
   );
 }
 
-function DocRow({ d, checked, onToggle, extra }: { d: ShoruiDoc; checked: boolean; onToggle: () => void; extra: { name: string; url: string }[] }) {
+function DocRow({ d, checked, onToggle, extra, hint }: { d: ShoruiDoc; checked: boolean; onToggle: () => void; extra: { name: string; url: string }[]; hint: string }) {
   const meta = [d.where, feeText(d.fee), waitText(d.wait)].filter(Boolean);
+  /* always でない行は、回答で足された行(指示書 A-4)。 */
+  const added = !d.always;
   return (
-    <div className="sr-doc">
+    <div className={added ? "sr-doc sr-added" : "sr-doc"}>
       <input type="checkbox" id={`c-${d.id}`} checked={checked} onChange={onToggle} aria-label={`${d.n} をそろえた`} />
       <span className="sr-box" aria-hidden="true" />
       <div className="sr-b">
         <label className="sr-n" htmlFor={`c-${d.id}`}>
           {d.n}
+          {added && <span className="sr-mine">あなたの場合</span>}
           {d.why && <span className="sr-why">{d.why}</span>}
         </label>
         <span className="sr-links no-print">
@@ -148,6 +160,7 @@ function DocRow({ d, checked, onToggle, extra }: { d: ShoruiDoc; checked: boolea
           {d.tool && <Link href={d.tool[1]} prefetch={false}>{d.tool[0]}</Link>}
         </span>
         {meta.length > 0 && <p className="sr-meta">{meta.map((m) => <span key={m}>{m}</span>)}</p>}
+        {hint && <p className="sr-hint">{hint}</p>}
         {d.stuck && <p className="sr-stuck">{d.stuck}</p>}
         {extra.length > 0 && (
           <p className="sr-forms">
