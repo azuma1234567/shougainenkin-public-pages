@@ -3,6 +3,7 @@ import { SITE_URL } from "@/lib/constants";
 import { COLUMNS_BY_DATE } from "@/lib/columns";
 import { PUBLISHED_CONTENT_HUBS } from "@/lib/hubs";
 import { GOKAI } from "@/data/gokai";
+import { GOKAI_BODIES_UPDATED } from "@/data/gokai-bodies";
 
 // sitemap に意図的に入れないページは lib/sitemap-excluded.ts に理由つきで並べている。
 // (理由をここに二重に書かない。公開前チェック C-1 はそのリストを見て、入れ忘れと区別する。)
@@ -49,6 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const gokaiPages: MetadataRoute.Sitemap = GOKAI.map((card) => ({
     url: `${SITE_URL}/gokai/${card.slug}`,
+    lastModified: new Date(GOKAI_BODIES_UPDATED),
   }));
 
   const existing = new Set(staticPages.map((item) => item.url));

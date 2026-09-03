@@ -114,7 +114,7 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
             </nav>
             <p className="p-results">{resultLabel}の実例 ・ {filtered.length}件（{currentPage}/{pageCount}ページ）</p>
             <div className="p-grid" style={{ gap: 12 }}>
-              {visible.map((item) => <CaseCard key={item.id} item={item} />)}
+              {visible.map((item) => <div key={item.id} id={item.id}><CaseCard item={item} /></div>)}
             </div>
             {pageCount > 1 && (
               <nav className="p-chips" aria-label="実例一覧のページ">

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Breadcrumb } from "@/components/platform/Platform";
-import { GOKAI } from "@/data/gokai";
-import { gokaiCardBySlug, isPublishedInternalPath } from "@/lib/gokai";
+import { Breadcrumb, PageDate } from "@/components/platform/Platform";
+import GokaiBody from "@/components/platform/GokaiBody";
+import { GOKAI, GOKAI_UPDATED } from "@/data/gokai";
+import { GOKAI_BODIES, GOKAI_BODIES_UPDATED } from "@/data/gokai-bodies";
+import { gokaiCardBySlug } from "@/lib/gokai";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -15,14 +17,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const card = gokaiCardBySlug(slug);
   if (!card) return {};
+  const body = GOKAI_BODIES[slug];
+  if (!body) throw new Error(`誤解カード本文なし: ${slug}`);
   const path = `/gokai/${slug}`;
-  const fullTitle = `${card.misconception}｜${SITE_NAME}`;
+  const fullTitle = `${body.title}｜${SITE_NAME}`;
   return {
-    title: card.misconception,
-    description: card.truth,
+    title: body.title,
+    description: body.description,
     alternates: { canonical: `${SITE_URL}${path}` },
-    openGraph: { title: fullTitle, description: card.truth, type: "article", siteName: SITE_NAME, url: `${SITE_URL}${path}`, locale: "ja_JP" },
-    twitter: { card: "summary_large_image", title: fullTitle, description: card.truth },
+    openGraph: { title: fullTitle, description: body.description, type: "article", siteName: SITE_NAME, url: `${SITE_URL}${path}`, locale: "ja_JP" },
+    twitter: { card: "summary_large_image", title: fullTitle, description: body.description },
     robots: { index: true, follow: true },
   };
 }
@@ -31,53 +35,41 @@ export default async function GokaiDetailPage({ params }: Props) {
   const { slug } = await params;
   const card = gokaiCardBySlug(slug);
   if (!card) notFound();
-  const next = card.next.filter(({ href }) => isPublishedInternalPath(href));
+  const body = GOKAI_BODIES[slug];
+  if (!body) throw new Error(`誤解カード本文なし: ${slug}`);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article", headline: body.title, description: body.description,
+        datePublished: GOKAI_UPDATED, dateModified: body.checkedOn,
+        author: { "@type": "Organization", name: SITE_NAME },
+        publisher: { "@type": "Organization", name: SITE_NAME },
+        mainEntityOfPage: `${SITE_URL}/gokai/${slug}`,
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: body.sections.flatMap(section => section.blocks).filter(block => block.type === "faq").map(block => ({
+          "@type": "Question", name: block.q,
+          acceptedAnswer: { "@type": "Answer", text: block.a },
+        })),
+      },
+    ],
+  };
   return (
     <div className="platform gokai-detail-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <header className="p-page-hero gokai-detail-hero">
         <div className="p-container gokai-reading-width">
           <Breadcrumb items={[{ href: "/", label: "トップ" }, { href: "/gokai", label: "よくある誤解" }, { label: card.category }]} currentPath={`/gokai/${card.slug}`} />
           <span className="p-label">よくある誤解</span>
-          <h1>{card.misconception}</h1>
+          <p className="gokai-detail-quote">{card.misconception}</p>
+          <h1>{body.title}</h1>
+          <PageDate updated={GOKAI_BODIES_UPDATED} checked={body.checkedOn} />
         </div>
       </header>
       <article className="p-container gokai-reading-width gokai-detail">
-        <section className="gokai-truth">
-          <h2>本当は</h2>
-          <p>{card.truth}</p>
-        </section>
-        <section className="gokai-block">
-          <h2>なぜ</h2>
-          <p>{card.why}</p>
-        </section>
-        <section className="gokai-block">
-          <h2>こんなときに多い</h2>
-          <p>{card.when}</p>
-        </section>
-        <section className="gokai-block gokai-check">
-          <h2>自分の場合を確かめる</h2>
-          <ul>{card.check.map((c) => <li key={c}>{c}</li>)}</ul>
-        </section>
-        <section className="gokai-block gokai-ask">
-          <h2>窓口で聞く一言</h2>
-          <p>{card.ask}</p>
-        </section>
-        {card.figure && (
-          <section className="gokai-block gokai-figure">
-            <h2>数字で見ると</h2>
-            <p>{card.figure}</p>
-          </section>
-        )}
-        {next.length > 0 && (
-          <section className="gokai-next">
-            <h2>次に読む</h2>
-            {next.map((link) => <Link key={link.href} href={link.href}>{link.label} →</Link>)}
-          </section>
-        )}
-        <aside className="gokai-sources" data-yougo-skip>
-          <h2>出典</h2>
-          <ul>{card.sources.map((source) => <li key={source}>{source}</li>)}</ul>
-        </aside>
+        <GokaiBody body={body} />
         <Link className="gokai-back" href="/gokai">よくある誤解の一覧へ戻る</Link>
       </article>
     </div>
