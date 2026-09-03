@@ -11,6 +11,7 @@ import {
 } from "@/lib/columns";
 import { faqJsonLd } from "@/lib/seo";
 import { isPublishedInternalPath } from "@/lib/published-links";
+import AdLabel from "@/components/AdLabel";
 import Link from "next/link";
 
 type Faq = { question: string; answer: string };
@@ -74,7 +75,18 @@ export default function ColumnArticle({
           <Link href={column.slug === "moushitatesho-kikan-kugiri" ? "/dougu/moushitatesho#kikan" : "/dougu/moushitatesho"}>申立書をつくる</Link>
         </aside>
       )}
-      <MarkdownArticle source={source} appCtaSlug={column.slug} />
+      <MarkdownArticle
+        source={source}
+        appCtaSlug={column.slug}
+        leadNotice={
+          column.affiliate ? (
+            <p className="affiliate-notice" key="affiliate-notice">
+              <AdLabel kind="PR" />
+              <span>※本記事にはアフィリエイト広告(PR)を含みます</span>
+            </p>
+          ) : undefined
+        }
+      />
       {isPublishedInternalPath("/dougu/moushitatesho") && column.slug === "moushitatesho-kakikata" && <aside className="mt-column-card"><strong>申立書の下書きをつくる</strong><p>期間ごとに入力し、公式様式に重ねて印刷できます。</p><Link href="/dougu/moushitatesho">道具を開く</Link></aside>}
       <ColumnFooter
         currentSlug={column.slug}

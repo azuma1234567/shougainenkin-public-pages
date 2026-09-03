@@ -579,6 +579,38 @@ strong {
   line-height: 1.7;
 }
 
+/* ---- 広告表示(景表法のステマ規制) ---- */
+
+/* <AdLabel>。広告枠・掲載枠・アフィリエイトリンクの区別なく、この見た目で統一する。 */
+.ad-label {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid #c9a227;
+  border-radius: 999px;
+  background: #fdf6e3;
+  color: #7a5c05;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+
+/* アフィリエイト広告を含む記事の、リード直後に出す一行。 */
+.affiliate-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin: 1.25rem 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e6d9a8;
+  border-radius: 8px;
+  background: #fdfaf0;
+  color: var(--text);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
 .analytics-preference-button {
   appearance: none;
   background: #ffffff;

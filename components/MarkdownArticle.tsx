@@ -105,10 +105,14 @@ export default function MarkdownArticle({
   source,
   appCtaSlug,
   faqAccordion = false,
+  leadNotice,
 }: {
   source: string;
   appCtaSlug: string;
   faqAccordion?: boolean;
+  // リード(本文の最初のブロック)の直後に差し込む注記。
+  // アフィリエイト広告の表示に使う。景表法が求める「目立つ位置」がここ。
+  leadNotice?: ReactNode;
 }) {
   const lines = source.replace(/\r\n/g, "\n").split("\n");
   const blocks: ReactNode[] = [];
@@ -362,6 +366,12 @@ export default function MarkdownArticle({
     blocks.push(
       <p key={`p-${index}`}>{inlineContent(paragraphLines.join(" "))}</p>,
     );
+  }
+
+  // リードの直後へ注記を差し込む。出典見出しの位置も1つずれる。
+  if (leadNotice && blocks.length > 0) {
+    blocks.splice(1, 0, leadNotice);
+    if (sourcesHeadingIndex >= 1) sourcesHeadingIndex += 1;
   }
 
   if (sourcesHeadingIndex < 0) return <>{blocks}</>;

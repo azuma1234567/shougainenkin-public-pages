@@ -134,6 +134,11 @@ export type Column = {
   hubSecondary: string[];
   role: HubRole;
   mergeCandidate: string | null;
+  // 本文に成果報酬型の広告(アフィリエイト広告)を含む記事は true にする。
+  // ColumnArticle がリードの直後に「※本記事にはアフィリエイト広告(PR)を含みます」を
+  // 自動で出す。景表法のステマ規制は、記事ごとに・目立つ位置での表示を求めている。
+  // リンクを1本でも入れたらここを true にすること(あとから足したときの付け忘れが一番危ない)。
+  affiliate?: boolean;
 };
 
 // 第3弾の記事は一覧で分散表示できるよう、公開日を1本ずつ管理する。
