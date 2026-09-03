@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import MitateTool from "@/components/tools/MitateTool";
-import { TOOLS } from "@/data/dougu";
 import { pageMetadata } from "@/lib/seo";
 import { isPublishedInternalPath } from "@/lib/published-links";
 
@@ -21,21 +20,12 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="platform mi-page">
-      <header className="dougu-hero no-print">
-        <div className="p-container mi-width">
+      <header className="no-print">
+        <div className="p-container mi-width mi-breadcrumb-wrap">
           <Breadcrumb
             items={[{ href: "/", label: "トップ" }, { href: "/shinsei", label: "申請の流れ" }, { label: "等級の目安をしらべる" }]}
             currentPath="/dougu/mitate"
           />
-          <h1>国が公表している目安に、当てはめてみる</h1>
-          <p className="mi-lead">
-            精神の障害の審査には、国が公表している「障害等級の目安」の表があります。診断書に書かれる2つの欄の組み合わせで、目安がどうなるかを見られます。判定しているのは国のガイドラインで、このサイトではありません。
-          </p>
-          <p className="jc-hero-meta jc--mitate">
-            <span className="jc-time">{TOOLS.mitate.time}</span>
-            <span className="jc-basis">入力した内容は送信しません</span>
-          </p>
-          <PageDate updated={UPDATED} />
         </div>
       </header>
 
@@ -44,7 +34,7 @@ export default function Page() {
           国が公表している目安に当てはめた結果です（障害年金申請サポート / 精神の障害に係る等級判定ガイドライン 平成28年9月）。このサイトが判定したものではありません。
         </p>
         <MitateTool />
-        <p className="no-print"><Link href="/shinsei">申請の流れへ戻る</Link></p>
+        <div className="no-print"><p><Link href="/shinsei">申請の流れへ戻る</Link></p><PageDate updated={UPDATED} /></div>
       </div>
     </div>
   );

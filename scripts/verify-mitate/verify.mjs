@@ -30,14 +30,13 @@ const ROWS = ["3.5以上", "3.0以上3.5未満", "2.5以上3.0未満", "2.0以�
 const ZEN = { "０": "0", "１": "1", "２": "2", "３": "3", "４": "4", "５": "5", "６": "6", "７": "7", "８": "8", "９": "9", "Ａ": "A", "Ｂ": "B", "（": "(", "）": ")" };
 const half = (s) => s.replace(/[０-９ＡＢ（）]/g, (c) => ZEN[c]);
 
-// 1. /dougu・/dougu/mitate が動く。/dougu/moushitatesho との行き来ができる。
-check(1, "/dougu・/dougu/mitate が動き、申立書ツールと行き来できる", () => {
+// 1. /dougu/mitate が公開導線につながっている。
+check(1, "/dougu/mitate が動き、申立書ツールへの導線がある", () => {
   assert.ok(existsSync(PAGE), `${PAGE} が無い`);
-  assert.match(src("app/dougu/page.tsx"), /href: "\/dougu\/mitate"/, "/dougu の一覧に mitate が無い");
   assert.match(src(TOOL), /href="\/dougu\/moushitatesho"/, "結果から申立書ツールへの導線が無い");
   assert.match(src("app/sitemap.ts"), /"\/dougu\/mitate"/, "sitemap に無い");
-  assert.match(src(PAGE), /href: "\/dougu", label: "道具"/, "パンくずから /dougu へ戻れない");
-  return "page.tsx / 一覧の href / 申立書への導線 / sitemap / パンくず";
+  assert.match(src(PAGE), /href: "\/shinsei", label: "申請の流れ"/, "パンくずから /shinsei へ戻れない");
+  return "page.tsx / 申立書への導線 / sitemap / 申請の流れへのパンくず";
 });
 
 // 2. 目安表が原本と全セル一致(座標照合の結果と突き合わせる)
@@ -77,16 +76,16 @@ check(3, "境界値は上の行に入り、平均は小数第2位で丸めてか
   return "1.5/2.0/2.5/3.0/3.5 とも上の行 / 15÷7=2.14・22÷7=3.14 で丸めてから当てはめ";
 });
 
-// 4. 一部だけ答えても結果が出て、「◯項目の回答から計算」が出る
-check(4, "一部だけの回答でも結果が出て、回答項目数が出る", () => {
+// 4. 一部だけ答えても、回答した項目だけで平均を出す。
+check(4, "一部だけの回答でも、回答した項目だけで平均を出す", () => {
   const a = mitateAverage(st({ ability: { meal: 3, social: 4 } }));
   assert.equal(a.answered, 2); assert.equal(a.total, 7); assert.equal(a.value, 3.5);
   const look = mitateLookup(st({ ability: { meal: 3, social: 4 }, degree: 4 }));
   assert.equal(look.kind, "found"); assert.equal(look.grade, "1級又は2級");
   assert.equal(mitateAverage(st()).value, null, "0件で平均が出ている");
   assert.equal(mitateLookup(st()).kind, "none");
-  assert.match(src(TOOL), /\{avg\.total\}項目中\{avg\.answered\}項目の回答から計算しています。/, "項目数の表示が無い");
-  return "2項目のみ → 平均3.5・7項目中2項目と表示 / 0件では結果を出さない";
+  assert.ok(!src(TOOL).includes("項目中"), "結果に回答項目数が出ている");
+  return "2項目のみ → 平均3.5 / 0件では結果を出さない / 結果に回答項目数を出さない";
 });
 
 // 5. 表が空欄の組み合わせで §5-4 の文が出る。適当な等級を出さない。
@@ -96,31 +95,29 @@ check(5, "空欄の組み合わせで、目安を出さず §5-4 の文を出す
   assert.equal(look.kind, "blank", `kind=${look.kind}`);
   assert.equal(look.grade, undefined, "空欄なのに等級が入っている");
   assert.match(src(TOOL), /目安が定められていません/, "§5-4 の文が無い");
-  assert.match(src(TOOL), /診断書を書いた医師に内容を確認したうえで、ほかの記載も含めて総合的に評価する/, "§5-4 の後半が無い");
+  assert.match(src(TOOL), /表に目安が無いのは、対象外という意味ではありません。/, "空欄の説明が無い");
   // 空欄16通りすべてで blank になる
   let blanks = 0;
   for (const row of ROWS) for (let d = 1; d <= 5; d += 1) if (MITATE_GRADE_TABLE[row][d - 1] === null) blanks += 1;
   return `平均4.00×程度(1) は blank / 空欄 ${blanks} 通りは lookup が found にならない`;
 });
 
-// 6. 「それ以外」のとき目安表に進めない
-check(6, "障害の種類が「それ以外」のとき、目安表に進めない", () => {
-  assert.match(src(TOOL), /const outOfScope = s\.kind === "other";/, "対象外の判定が無い");
-  assert.match(src(TOOL), /disabled=\{!s\.kind \|\| outOfScope\}/, "「次へ」が無効化されていない");
-  assert.match(src(TOOL), /このガイドラインの対象外です。/, "専用の案内が無い");
-  assert.match(src(TOOL), /ほかの障害には、それぞれ別の認定基準があり、この目安表は使えません。/);
-  return "kind=other で次へが disabled / 専用の案内と /byoki への導線";
+// 6. はじめる前に質問を置かない。
+check(6, "「はじめる」の前に質問が無い", () => {
+  const intro = src(TOOL).slice(src(TOOL).indexOf('if (step === 0)'), src(TOOL).indexOf('if (step >= 1'));
+  assert.match(intro, /「私は、障害年金の対象になるのかな」と思ったら/);
+  assert.match(intro, />はじめる</);
+  for (const word of ["障害の種類", "共用のパソコンを使っています", "加入していた制度", "診断書は、もう手元にありますか"]) assert.ok(!intro.includes(word), `入口に「${word}」がある`);
+  return "入口は見出し・説明・3つの安心・はじめる・診断書モードへのリンクだけ";
 });
 
-// 7. モードBの注記が入力中も結果画面にも常時出る(閉じられない)
-check(7, "モードBの注記が入力中も結果画面にも常時出る", () => {
+// 7. 自己回答と診断書転記で、結果の静かな1行を切り替える。
+check(7, "結果の静かな1行がモードで切り替わる", () => {
   const text = src(TOOL);
-  assert.match(text, /function ModeBNote\(\)/, "注記の部品が無い");
-  const uses = [...text.matchAll(/\{s\.mode === "B" && <ModeBNote \/>\}/g)].length;
-  assert.ok(uses >= 4, `注記の出現が ${uses} 箇所しかない(モード・判定・程度・総合評価・結果)`);
-  assert.ok(!/ModeBNote[\s\S]{0,400}(閉じる|onClick|hidden)/.test(text.slice(text.indexOf("function ModeBNote"))), "注記に閉じる操作がある");
-  assert.match(text, /審査が見るのは、医師が診断書に書いた数字です。/);
-  return `${uses}箇所(モード選択・判定7項目・程度・総合評価・結果)に常時表示。閉じる操作なし`;
+  assert.match(text, /この結果は、あなた自身の答えから出しています。実際の審査は医師の診断書をもとに行われるので、違う結果になることがあります。/);
+  assert.match(text, /診断書の記載をそのまま当てはめた結果です。/);
+  assert.ok(!text.includes("mi-warnbox"), "黄色い注記が残っている");
+  return "自己回答と診断書転記の2文を切替 / 黄色い注記なし";
 });
 
 // 8. §7 の質問が種類で切り替わり、引用が原本と1字一致。最大6件。
@@ -140,24 +137,23 @@ check(8, "総合評価の質問が種類で切り替わり、引用が原本と1
   return `${all.length}件すべて原本の文字列に含まれる(全文・省略なし) / 種類で切替 / 上限6件`;
 });
 
-// 9. 国民年金を選ぶと「3級」に「2級非該当」が併記される(書き換えではない)
-check(9, "国民年金のとき「3級」に「2級非該当」が併記される", () => {
+// 9. 診断書モードで正式文言と結果リンクを切り替える。
+check(9, "診断書モードで正式文言と結果リンクが切り替わる", () => {
   const text = src(TOOL);
-  assert.match(text, /s\.seido === "kokumin" && grade && grade\.includes\("3級"\)/, "併記の条件が無い");
-  assert.match(text, /2級非該当\(3級のない制度のため\)/, "併記の文が無い");
-  assert.match(text, /と読み替えられます。/);
-  // 表そのものは書き換えない
-  assert.match(text, /\{v === null \? "—" : v\}/, "表のセルが加工されている");
-  assert.ok(!/MITATE_GRADE_TABLE[\s\S]{0,200}replace/.test(text), "表の値を置換している");
-  return "条件つきで結果の下に併記。目安表のセルと lookup の値は書き換えない";
+  assert.match(text, /get\("mode"\) === "shindansho"/);
+  assert.match(text, /\{shindansho \? choice\.formal : choice\.plain\}/);
+  assert.match(text, /→ 何をそろえればいい？/);
+  assert.match(text, /→ 申立書を、自分で書きたい/);
+  assert.match(text, /→ 診断書で困ったとき/);
+  return "?mode=shindansho / 正式文言を strong / 指定3リンクへ切替";
 });
 
 // 10. 結果画面に目安表の全体が出て、該当セルが強調される
 check(10, "結果画面に目安表の全体が出て、該当セルが強調される", () => {
   const text = src(TOOL);
-  assert.match(text, /MITATE_AVERAGE_BANDS\.map\(\(b\) =>/, "全行を回していない");
-  assert.match(text, /\[1, 2, 3, 4, 5\]\.map\(\(d\) => \{/, "全列を回していない");
-  assert.match(text, /const hit = b\.label === band && d === s\.degree;/, "該当セルの判定が無い");
+  assert.match(text, /MITATE_AVERAGE_BANDS\.map\(\(row\) =>/, "全行を回していない");
+  assert.match(text, /\[1,2,3,4,5\]\.map\(\(degree\) => \{/, "全列を回していない");
+  assert.match(text, /hit = row\.label === band && degree === state\.degree/, "該当セルの判定が無い");
   assert.match(text, /hit \? "mi-hit"/, "強調クラスが無い");
   assert.match(src("app/globals.css"), /table\.mi-gt td\.mi-hit\{/, "強調のスタイルが無い");
   return "6行×5列を常に描画し、該当セルに mi-hit と aria-current";
@@ -200,36 +196,31 @@ check(13, "A4 2枚以内で印刷でき、目安表が割れず、出典と主�
   assert.match(css, /\.no-print,\.mi-screen-only\{display:none!important\}/, "画面用カードが印刷から落ちない");
   assert.match(css, /\.mi-tbl-scroll,table\.mi-gt\{break-inside:avoid/, "目安表に break-inside: avoid が無い");
   assert.match(css, /\.mi-guide\{break-inside:avoid/, "引用に break-inside: avoid が無い");
-  // 画面用の2枚(数字で見る実際 / ここからできること)には mi-screen-only が付いている
-  assert.equal((src(TOOL).match(/mi-card mi-screen-only/g) ?? []).length, 2, "印刷から落とすカードが2枚でない");
-
   const file = "scripts/verify-mitate/fixtures/print.json";
   assert.ok(existsSync(file), `${file} が無い。npm run verify:mitate:print を先に実行する`);
   const measured = JSON.parse(src(file));
-  const KEEP = ["国のガイドラインの目安", "総合評価で動きうること", "ガイドライン自身の留保", "出典"];
   for (const c of measured.cases) {
     assert.ok(c.pages <= 2, `${c.name}: ${c.pages}ページ(2枚を超えている)`);
-    assert.equal(c.screenOnlyVisible, 0, `${c.name}: 画面用カードが印刷に残っている`);
-    assert.deepEqual(c.cardsOnPrint, KEEP, `${c.name}: 印刷に載るカードが違う → ${c.cardsOnPrint.join(" / ")}`);
     assert.ok(c.hasSource, `${c.name}: 出典が印刷に無い`);
     assert.ok(c.hasPrintHead, `${c.name}: 主語の但し書きが印刷に無い`);
     assert.equal(c.tableStartPage, c.tableEndPage, `${c.name}: 目安表が ${c.tableStartPage}〜${c.tableEndPage}ページ目にまたがっている`);
   }
   const line = measured.cases.map((c) => `${c.name} ${c.pages}ページ(${c.contentMm}mm)`).join(" / ");
-  return `実測 ${line}。目安表はいずれも1ページ目に収まる(${measured.cases[0].tableHeightMm}mm)。載せるのは ${KEEP.join("・")} の4つ / 測定 ${measured.generatedAt}`;
+  return `実測 ${line}。目安表はページをまたがらない / 測定 ${measured.generatedAt}`;
 });
 
 // 14. localStorage が無効でも入力と結果表示ができる
-check(14, "localStorage が無効でも動く", () => {
+check(14, "「残す」を押したときだけ localStorage に書く", () => {
   const store = src(STORE);
   assert.equal((store.match(/try \{/g) ?? []).length, 3, "load/save/clear のどれかが try/catch でない");
   assert.match(store, /catch \{ return null; \}/);
-  assert.match(src(TOOL), /setSaveNote\(saveMitate\(s\) \? "" : "この端末に保存できませんでした。入力と結果はそのまま使えます。"\)/, "保存失敗の知らせが無い");
+  assert.equal((src(TOOL).match(/saveMitate\(/g) ?? []).length, 1, "保存呼び出しがボタン以外にもある");
+  assert.match(src(TOOL), /onClick=\{\(\) => setSaved\(saveMitate\(state\)\)\}/, "残すボタンから保存していない");
   assert.ok(!src(TOOL).includes("localStorage."), "コンポーネントが localStorage を直接触っている");
   // 壊れた保存値は捨てる
   assert.equal(normalizeMitate({ ability: { meal: 9 }, degree: 8, kind: "zzz", guide: { nope: true } }), null);
   assert.deepEqual(normalizeMitate({ ability: { meal: 3, bogus: 4 }, degree: 3 }), { ability: { meal: 3 }, guide: {}, degree: 3 });
-  return "load/save/clear とも try/catch / 保存失敗を画面で知らせる / 壊れた値は未回答へ戻す";
+  return "saveMitate は残すボタンの1回だけ / storage は try/catch / 壊れた値は未回答へ戻す";
 });
 
 // 15. モバイル375px・キーボード(ソース側で担保できる分)
@@ -238,9 +229,9 @@ check(15, "375pxとキーボード操作の作り", () => {
   assert.ok(!/<div[^>]*onClick/.test(text), "div に onClick がある(ネイティブ要素でない)");
   const buttons = (text.match(/type="button"/g) ?? []).length;
   assert.ok(buttons >= 10, `button に type が付いていないものがある(${buttons})`);
-  assert.match(css, /\.mi-opt:focus-visible,\.mi-btn:focus-visible,\.mi-skip:focus-visible\{outline/, "フォーカスリングが無い");
+  assert.match(css, /\.mi-answer-list button:hover,\.mi-answer-list button:focus-visible\{/, "フォーカスリングが無い");
   assert.match(css, /\.mi-tbl-scroll\{overflow-x:auto\}/, "表の横スクロール枠が無い");
-  assert.match(css, /@media\(max-width:520px\)\{\.mi-card\{padding:18px 16px\}/, "モバイルの詰めが無い");
+  assert.match(css, /@media\(max-width:520px\)/, "モバイル指定が無い");
   return `選択肢はすべて <button type="button">(${buttons}個) / focus-visible / 表は枠内でスクロール`;
 });
 

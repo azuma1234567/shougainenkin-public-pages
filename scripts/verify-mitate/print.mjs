@@ -32,18 +32,13 @@ const ABILITY = [2, 2, 3, 3, 3, 3, 3];
 async function run({ name, mode, guides }) {
   const context = await browser.newContext();
   const page = await context.newPage();
-  await page.goto(`http://127.0.0.1:${PORT}/dougu/mitate`);
+  await page.goto(`http://127.0.0.1:${PORT}/dougu/mitate${mode === "A" ? "?mode=shindansho" : ""}`);
   await page.getByRole("button", { name: "はじめる" }).click();
-  await page.locator(".mi-opt").first().click();                       // 精神の障害
-  await page.getByRole("button", { name: "次へ" }).click();
-  await page.locator(".mi-opt").nth(mode === "B" ? 1 : 0).click();      // モード
-  await page.getByRole("button", { name: "次へ" }).click();
-  for (const v of ABILITY) { await page.locator(".mi-opt").nth(v - 1).click(); await sleep(80); }
-  await page.locator(".mi-opt").nth(2).click();                        // 程度(3)
-  await sleep(150);
-  for (let i = 0; i < guides; i += 1) { await page.locator(".mi-opt").nth(i).click(); await sleep(60); }
-  await page.getByRole("button", { name: "目安を見る" }).click();
+  for (const v of ABILITY) { await page.locator(".mi-answer-list button").nth(v - 1).click(); await sleep(40); }
+  await page.locator(".mi-answer-list button").nth(2).click();         // 程度(3)
+  await page.locator(".mi-answer-list button").first().click();        // 診断名
   await page.locator(".mi-gt").waitFor();
+  if (guides > 3) await page.getByRole("button", { name: "もっと見る" }).click();
 
   await page.emulateMedia({ media: "print" });
   await page.evaluate(() => document.fonts?.ready);
@@ -62,7 +57,6 @@ async function run({ name, mode, guides }) {
     const mm = (px) => +(px / (96 / 25.4)).toFixed(1);
     return {
       screenOnlyVisible: [...document.querySelectorAll(".mi-screen-only")].filter((el) => el.offsetParent !== null).length,
-      cardsOnPrint: [...document.querySelectorAll(".mi-card")].filter((el) => el.offsetParent !== null).map((el) => el.querySelector("h2")?.textContent),
       hasSource: !!document.querySelector(".mi-src") && document.querySelector(".mi-src").offsetParent !== null,
       hasPrintHead: !!document.querySelector(".mi-printhead") && document.querySelector(".mi-printhead").offsetParent !== null,
       contentMm: mm(main.getBoundingClientRect().height),
@@ -80,14 +74,14 @@ async function run({ name, mode, guides }) {
 }
 
 const cases = [];
-cases.push(await run({ name: "modeA-guides0", mode: "A", guides: 0 }));
-cases.push(await run({ name: "modeB-guides2", mode: "B", guides: 2 }));
-cases.push(await run({ name: "modeB-guides6", mode: "B", guides: 6 }));  // 引用は最大6件
+cases.push(await run({ name: "modeA-guides3", mode: "A", guides: 3 }));
+cases.push(await run({ name: "modeB-guides3", mode: "B", guides: 3 }));
+cases.push(await run({ name: "modeB-guides6", mode: "B", guides: 6 }));
 await browser.close();
 server.kill("SIGTERM");
 
 const result = { generatedAt: new Date().toISOString(), a4ContentMm: A4_CONTENT_MM, cases };
 writeFileSync(out, `${JSON.stringify(result, null, 1)}\n`);
 for (const c of cases) {
-  console.log(`${c.name}: ${c.pages}ページ / 内容 ${c.contentMm}mm / 目安表 ${c.tableStartPage}〜${c.tableEndPage}ページ目(${c.tableHeightMm}mm) / 印刷に残るカード ${c.cardsOnPrint.length}`);
+  console.log(`${c.name}: ${c.pages}ページ / 内容 ${c.contentMm}mm / 目安表 ${c.tableStartPage}〜${c.tableEndPage}ページ目(${c.tableHeightMm}mm)`);
 }
