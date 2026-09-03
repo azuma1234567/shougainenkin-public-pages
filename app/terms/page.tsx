@@ -26,10 +26,12 @@ export default function TermsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
+      {/* サイト名とアプリ名が同じなので、どちらの版かは前後の語で見分けてもらう。
+          「ウェブサイト」「iPhoneアプリ」を必ず添えること。 */}
       <aside className="legal-crosslink">
-        iPhoneアプリ「障害年金申請サポート」の利用規約は
-        <Link href="/app/terms">アプリの利用規約</Link>をご覧ください。
-        このページは、ウェブサイト shougainenkin-note.net の利用に関する規約です。
+        iPhoneアプリ「{SITE_NAME}」の利用規約は
+        <Link href="/app/terms">iPhoneアプリ版の利用規約</Link>をご覧ください。
+        このページは、ウェブサイト「{SITE_NAME}」(shougainenkin-note.net)の利用に関する規約です。
       </aside>
 
       <h1>利用規約</h1>
@@ -37,7 +39,7 @@ export default function TermsPage() {
       <p className="meta-line">最終更新日: {SITE_LEGAL_UPDATED}</p>
 
       <p>
-        この規約は、「{SITE_NAME}」(shougainenkin-note.net、以下「本サイト」)を閲覧・利用するすべての方
+        この規約は、ウェブサイト「{SITE_NAME}」(shougainenkin-note.net、以下「本サイト」)を閲覧・利用するすべての方
         (以下「利用者」)に適用されます。本サイトを利用した時点で、この規約に同意したものとみなします。
       </p>
 

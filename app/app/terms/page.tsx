@@ -26,9 +26,11 @@ export default function AppTermsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
+      {/* サイト名とアプリ名が同じなので、どちらの版かは前後の語で見分けてもらう。
+          「ウェブサイト」「iPhoneアプリ」を必ず添えること。 */}
       <aside className="legal-crosslink">
-        本サイト(shougainenkin-note.net)の閲覧に関する規約は
-        <Link href="/terms">利用規約</Link>をご覧ください。
+        ウェブサイト「{SITE_NAME}」(shougainenkin-note.net)の閲覧に関する規約は
+        <Link href="/terms">ウェブサイト版の利用規約</Link>をご覧ください。
         このページは、iPhoneアプリ「{SITE_NAME}」の利用条件です。
       </aside>
 
@@ -36,6 +38,11 @@ export default function AppTermsPage() {
 
       <p className="meta-line">最終改定日: {APP_LEGAL_VERSION}</p>
       <p className="meta-line">運営者: あずまたいすけ(個人)</p>
+
+      <p>
+        この規約は、iPhoneアプリ「{SITE_NAME}」(以下「本アプリ」)の利用条件を
+        定めるものです。本アプリを利用することで、本規約に同意したものとみなします。
+      </p>
 
       {APP_TERMS_SECTIONS.map((section) => (
         <section key={section.title}>
@@ -47,7 +54,7 @@ export default function AppTermsPage() {
       ))}
 
       <p className="small-note">
-        <Link href="/app/privacy">アプリのプライバシーポリシー</Link> ／{" "}
+        <Link href="/app/privacy">iPhoneアプリ版のプライバシーポリシー</Link> ／{" "}
         <Link href="/quality">情報の品質について</Link>
       </p>
     </>

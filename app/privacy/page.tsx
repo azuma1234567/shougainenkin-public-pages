@@ -27,11 +27,13 @@ export default function PrivacyPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
+      {/* サイト名とアプリ名が同じなので、どちらの版かは前後の語で見分けてもらう。
+          「ウェブサイト」「iPhoneアプリ」を必ず添えること。 */}
       <aside className="legal-crosslink">
-        iPhoneアプリ「障害年金申請サポート」の記録・AI機能に関するプライバシーポリシーは、
-        <Link href="/app/privacy">アプリのプライバシーポリシー</Link>
-        をご覧ください。このページは、ウェブサイト shougainenkin-note.net
-        の閲覧・お問い合わせ・広告に関する取扱いを説明するものです。
+        iPhoneアプリ「{SITE_NAME}」の記録・AI機能に関するプライバシーポリシーは、
+        <Link href="/app/privacy">iPhoneアプリ版のプライバシーポリシー</Link>
+        をご覧ください。このページは、ウェブサイト「{SITE_NAME}」
+        (shougainenkin-note.net)の閲覧・お問い合わせ・広告に関する取扱いを説明するものです。
       </aside>
 
       <h1>プライバシーポリシー</h1>
@@ -39,7 +41,7 @@ export default function PrivacyPage() {
       <p className="meta-line">最終更新日: {SITE_LEGAL_UPDATED}</p>
 
       <p>
-        本ポリシーは、「{SITE_NAME}」(shougainenkin-note.net、以下「本サイト」)を閲覧・利用する方の情報を、
+        本ポリシーは、ウェブサイト「{SITE_NAME}」(shougainenkin-note.net、以下「本サイト」)を閲覧・利用する方の情報を、
         運営者がどのように取り扱うかを説明するものです。
       </p>
 
@@ -49,8 +51,8 @@ export default function PrivacyPage() {
       <h2>2. このポリシーの範囲</h2>
       <p>
         本ポリシーは、本サイトの閲覧、お問い合わせ、広告掲載の申込みに関する情報の取扱いに適用されます。
-        iPhoneアプリ「障害年金申請サポート」で入力する記録やAI機能の取扱いは、別に定める
-        <Link href="/app/privacy">アプリのプライバシーポリシー</Link>に従います。
+        iPhoneアプリ「{SITE_NAME}」で入力する記録やAI機能の取扱いは、別に定める
+        <Link href="/app/privacy">iPhoneアプリ版のプライバシーポリシー</Link>に従います。
         本サイトからリンクする外部サイト(日本年金機構、社会保険労務士事務所、広告主のサイトなど)での情報の取扱いは、
         各サイトのポリシーに従います。
       </p>

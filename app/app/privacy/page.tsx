@@ -26,9 +26,11 @@ export default function AppPrivacyPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
 
+      {/* サイト名とアプリ名が同じなので、どちらの版かは前後の語で見分けてもらう。
+          「ウェブサイト」「iPhoneアプリ」を必ず添えること。 */}
       <aside className="legal-crosslink">
-        本サイト(shougainenkin-note.net)の閲覧・お問い合わせ・広告に関するポリシーは
-        <Link href="/privacy">プライバシーポリシー</Link>をご覧ください。
+        ウェブサイト「{SITE_NAME}」(shougainenkin-note.net)の閲覧・お問い合わせ・広告に関するポリシーは
+        <Link href="/privacy">ウェブサイト版のプライバシーポリシー</Link>をご覧ください。
         このページは、iPhoneアプリ「{SITE_NAME}」の記録・AI機能に関するものです。
       </aside>
 
@@ -37,7 +39,10 @@ export default function AppPrivacyPage() {
       <p className="meta-line">制定日: {APP_LEGAL_VERSION}</p>
       <p className="meta-line">運営者: あずまたいすけ(個人)</p>
 
-      <p>本ポリシーは、障害年金申請サポートにおける情報の取扱いを説明するものです。</p>
+      <p>
+        本ポリシーは、iPhoneアプリ「{SITE_NAME}」(以下「本アプリ」)における
+        情報の取扱いを説明するものです。
+      </p>
 
       {APP_PRIVACY_SECTIONS.map((section) => (
         <section key={section.title}>
@@ -49,7 +54,7 @@ export default function AppPrivacyPage() {
       ))}
 
       <p className="small-note">
-        <Link href="/app/terms">アプリの利用規約</Link> ／{" "}
+        <Link href="/app/terms">iPhoneアプリ版の利用規約</Link> ／{" "}
         <Link href="/quality">情報の品質について</Link>
       </p>
     </>
