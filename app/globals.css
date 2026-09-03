@@ -774,6 +774,23 @@ strong {
   margin: 0.25rem 0 1rem;
 }
 
+/* 法務ページ同士の案内ボックス。サイト向け(/privacy・/terms)とアプリ向け
+   (/app/privacy・/app/terms)は別文書なので、互いの入口を先頭に置く。 */
+.legal-crosslink {
+  margin: 0 0 1.5rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--border, #d9dee7);
+  border-left: 4px solid var(--accent, #16665f);
+  border-radius: 8px;
+  background: #f4f8f8;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.legal-crosslink a {
+  font-weight: 700;
+}
+
 .app-store-section {
   background-color: var(--card);
   border: 1px solid var(--card-border);
