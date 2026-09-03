@@ -1,6 +1,6 @@
 import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
-import ColumnFooter, { type Reference } from "@/components/ColumnFooter";
+import ColumnFooter, { NENKIN_REFERENCES, type Reference } from "@/components/ColumnFooter";
 import MarkdownArticle from "@/components/MarkdownArticle";
 import ColumnThemeBlock from "@/components/ColumnThemeBlock";
 import {
@@ -22,7 +22,7 @@ export default function ColumnArticle({
   source,
   faqs,
   relatedSlugs,
-  references,
+  references = [NENKIN_REFERENCES.seido],
   extraJsonLd = [],
 }: {
   column: Column;
@@ -37,11 +37,11 @@ export default function ColumnArticle({
     <article>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column, references)).replace(/</g, "\\u003c") }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)).replace(/</g, "\\u003c") }}
       />
       {extraJsonLd.map((item, index) => (
         <script

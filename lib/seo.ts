@@ -93,8 +93,7 @@ export function pageMetadata({
 }
 
 // 運営者と発行元。実体は /about に置き、トップの WebSite.publisher からこの @id を
-// 参照する。記事の columnJsonLd は同じ名前・URL の Organization を author/publisher に
-// 直接持っており、値は一致するが @id では結んでいない。
+// 参照する。記事の columnJsonLd も同じ @id を使い、著者・発行元を結ぶ。
 export const ABOUT_PERSON_ID = `${SITE_URL}/about#person`;
 export const ABOUT_PUBLISHER_ID = `${SITE_URL}/about#organization`;
 

@@ -7,6 +7,7 @@ import {
   type ClusterId,
 } from "@/lib/clusters";
 import { AUTHOR_NAME, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { ABOUT_PERSON_ID, ABOUT_PUBLISHER_ID } from "@/lib/seo";
 import { COLUMN_HUB_ASSIGNMENTS, type HubRole } from "@/lib/hubs";
 
 // コラム記事のメタデータ。一覧・sitemap・JSON-LDで共通利用する。
@@ -911,7 +912,10 @@ export function columnBreadcrumbParents(
   return [{ name: pillar.label, path: pillar.pillarPath }];
 }
 
-export function columnJsonLd(column: Column) {
+export function columnJsonLd(
+  column: Column,
+  references: readonly { label: string; href: string }[] = [],
+) {
   // BreadcrumbListには実際にアクセスできるURLだけを入れる。柱ページが未公開の間は
   // columnBreadcrumbParents が空になるので、従来どおりトップ>コラム>記事になる。
   const trail = [
@@ -926,6 +930,8 @@ export function columnJsonLd(column: Column) {
     "@graph": [
       {
         "@type": "Article",
+        "@id": `${SITE_URL}/columns/${column.slug}#article`,
+        url: `${SITE_URL}/columns/${column.slug}`,
         headline: column.title,
         description: column.description,
         datePublished: column.datePublished,
@@ -933,14 +939,25 @@ export function columnJsonLd(column: Column) {
         inLanguage: "ja-JP",
         author: {
           "@type": "Person",
+          "@id": ABOUT_PERSON_ID,
           name: AUTHOR_NAME,
+          url: `${SITE_URL}/about`,
         },
         publisher: {
           "@type": "Organization",
+          "@id": ABOUT_PUBLISHER_ID,
           name: SITE_NAME,
           url: SITE_URL,
         },
         mainEntityOfPage: `${SITE_URL}/columns/${column.slug}`,
+        // 画面の「参考リンク」と同じ資料だけを機械可読な引用として渡す。
+        ...(references.length > 0 ? {
+          citation: references.map((reference) => ({
+            "@type": "CreativeWork",
+            name: reference.label,
+            url: reference.href,
+          })),
+        } : {}),
       },
       {
         "@type": "BreadcrumbList",

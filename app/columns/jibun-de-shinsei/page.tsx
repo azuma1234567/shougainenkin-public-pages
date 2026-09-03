@@ -3,7 +3,7 @@ import Link from "next/link";
 import AppCta from "@/components/AppCta";
 import ArticleToc from "@/components/ArticleToc";
 import Breadcrumb from "@/components/Breadcrumb";
-import ColumnFooter from "@/components/ColumnFooter";
+import ColumnFooter, { NENKIN_REFERENCES } from "@/components/ColumnFooter";
 import {
   columnBreadcrumbParents,
   columnJsonLd,
@@ -22,7 +22,7 @@ export const metadata: Metadata = columnMetadata(column);
 export default function Page() {
   return (
     <article>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column)) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column, [NENKIN_REFERENCES.seido])).replace(/</g, "\\u003c") }} />
       <Breadcrumb
         current={column.title}
         parents={columnBreadcrumbParents(column)}
