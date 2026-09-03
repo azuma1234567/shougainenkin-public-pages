@@ -39,6 +39,7 @@ const tools = [
     number: "04",
     title: "年金事務所を探す",
     description: "相談や提出に行く年金事務所と、当日の準備を確認します。",
+    href: "/dougu/madoguchi",
   },
   {
     number: "05",

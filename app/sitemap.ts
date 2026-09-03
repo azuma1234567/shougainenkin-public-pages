@@ -37,6 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/dougu/mitate",
     "/dougu/kingaku",
     "/dougu/shorui",
+    "/dougu/madoguchi",
     "/dougu/moushitatesho",
   ].map((path) => ({
     url: `${SITE_URL}${path === "/" ? "" : path}`,
