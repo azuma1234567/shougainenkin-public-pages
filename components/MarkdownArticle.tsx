@@ -1,6 +1,26 @@
 import { cloneElement, isValidElement, type ReactElement, type ReactNode } from "react";
 import Link from "next/link";
 import AppCta from "@/components/AppCta";
+import CaseLead from "@/components/platform/CaseLead";
+import { TOOLS } from "@/data/dougu";
+import { COLUMN_SOURCE_LINKS } from "@/components/ColumnFooter";
+
+function sourceContent(text: string): ReactNode[] {
+  // 最長の資料名から完全一致で選ぶ。短い「初診日」などは引用符内の資料名だけ。
+  const nodes: ReactNode[] = [];
+  let rest = text;
+  while (rest) {
+    const candidates = COLUMN_SOURCE_LINKS.map(ref => ({ ref, index: rest.indexOf(ref.label) }))
+      .filter(({ ref, index }) => index >= 0 && (ref.label.length > 8 || rest[index - 1] === "「"))
+      .sort((a, b) => a.index - b.index || b.ref.label.length - a.ref.label.length);
+    const next = candidates[0];
+    if (!next) { nodes.push(...inlineContent(rest)); break; }
+    nodes.push(...inlineContent(rest.slice(0, next.index)));
+    nodes.push(<a key={`source-${nodes.length}`} href={next.ref.href} target="_blank" rel="noopener noreferrer">{next.ref.label}</a>);
+    rest = rest.slice(next.index + next.ref.label.length);
+  }
+  return nodes;
+}
 
 function inlineContent(text: string, keyPrefix = "inline"): ReactNode[] {
   const nodes: ReactNode[] = [];
@@ -105,11 +125,13 @@ export default function MarkdownArticle({
   source,
   appCtaSlug,
   faqAccordion = false,
+  columnStyle = false,
   leadNotice,
 }: {
   source: string;
   appCtaSlug: string;
   faqAccordion?: boolean;
+  columnStyle?: boolean;
   // リード(本文の最初のブロック)の直後に差し込む注記。
   // アフィリエイト広告の表示に使う。景表法が求める「目立つ位置」がここ。
   leadNotice?: ReactNode;
@@ -139,6 +161,29 @@ export default function MarkdownArticle({
     const line = lines[index].trim();
 
     if (!line || line === "---") {
+      index += 1;
+      continue;
+    }
+
+    const arrow = columnStyle && line.match(/^→ (.+)\((\/[^()]*)\)$/);
+    if (arrow) {
+      const [, label, href] = arrow;
+      const tool = Object.values(TOOLS).find(tool => tool.path === href);
+      blocks.push(<Link key={`arrow-${index}`} href={href} className={`column-inline-card${tool ? ` jc--${tool.id}` : href.startsWith("/gokai/") ? " column-gokai-link" : ""}`}>→ {label}</Link>);
+      index += 1;
+      continue;
+    }
+
+    const caseLine = columnStyle && line.match(/^\*\*(.+?([hr]\d\d(?:_\d\d)?(?:_r\d\d)?-\d\d_\d\d)[^*]*)\*\*\s*—\s*(.*)$/);
+    if (caseLine) {
+      blocks.push(<div className="gokai-case" key={`case-${index}`} data-yougo-skip><p><CaseLead lead={caseLine[1]} caseId={caseLine[2]} /> — {inlineContent(caseLine[3])}</p></div>);
+      index += 1;
+      continue;
+    }
+
+    if (columnStyle && /^\*\*Q[.．]/.test(line)) {
+      const question = line.replace(/^\*\*/, "").replace(/\*\*$/, "");
+      blocks.push(<h3 className="column-faq-question" data-yougo-skip key={`faq-${index}`} id={uniqueHeadingId(question, `faq-${index}`)}>{inlineContent(question)}</h3>);
       index += 1;
       continue;
     }
@@ -318,7 +363,7 @@ export default function MarkdownArticle({
       blocks.push(
         <ul key={`ul-${index}`}>
           {items.map((item, itemIndex) => (
-            <li key={itemIndex}>{inlineContent(item)}</li>
+            <li key={itemIndex}>{columnStyle && sourcesHeadingIndex >= 0 ? sourceContent(item) : inlineContent(item)}</li>
           ))}
         </ul>,
       );
@@ -348,6 +393,7 @@ export default function MarkdownArticle({
       if (
         !next ||
         next === "---" ||
+        (columnStyle && (next.startsWith("→ ") || /^\*\*Q[.．]/.test(next))) ||
         next.startsWith("## ") ||
         next.startsWith("### ") ||
         next.startsWith(">") ||
@@ -363,9 +409,14 @@ export default function MarkdownArticle({
       paragraphLines.push(next);
       index += 1;
     }
-    blocks.push(
-      <p key={`p-${index}`}>{inlineContent(paragraphLines.join(" "))}</p>,
-    );
+    const paragraph = paragraphLines.join(" ");
+    const label = columnStyle && paragraph.match(/^\*\*([^*]+)\*\*\s*(.*)$/);
+    if (label) {
+      blocks.push(<h3 key={`label-${index}`} id={uniqueHeadingId(label[1], `label-${index}`)}>{inlineContent(label[1])}</h3>);
+      if (label[2]) blocks.push(<p key={`p-${index}`}>{inlineContent(label[2])}</p>);
+    } else {
+      blocks.push(<p key={`p-${index}`}>{columnStyle && sourcesHeadingIndex >= 0 ? sourceContent(paragraph) : inlineContent(paragraph)}</p>);
+    }
   }
 
   // リードの直後へ注記を差し込む。出典見出しの位置も1つずれる。

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getColumn, parentPillar, relatedColumns } from "@/lib/columns";
 import { siblingSlugs } from "@/lib/hubs";
+import { SHORUI_URLS } from "@/data/shorui";
 
 export type Reference = { label: string; href: string };
 
@@ -46,6 +47,27 @@ export const MHLW_REFERENCES = {
     href: "https://www.mhlw.go.jp/stf/houdou/0000130041.html",
   },
 } as const satisfies Record<string, Reference>;
+
+// 追加4件は2026-09-04に curl -I -L で最終HTTP 200を確認。
+export const COLUMN_ADDITIONAL_REFERENCES = {
+  report: { label: "令和6年度の障害年金の認定状況についての調査報告書", href: "https://www.mhlw.go.jp/content/12512000/001502249.pdf" },
+  tenken: { label: "障害年金の認定状況について", href: "https://www.nenkin.go.jp/tokusetsu/tenken.html" },
+  shien: { label: "障害年金生活者支援給付金の概要", href: "https://www.nenkin.go.jp/service/jukyu/seido/sonota-kyufu/shienkyufukin/syougai.html" },
+  amounts: { label: "令和8年度の年金額", href: "https://www.nenkin.go.jp/tokusetsu/nenkingakutou_kaitei.html" },
+} satisfies Record<string, Reference>;
+
+// 資料名だけをリンク化し、原稿の発行者・確認日・説明はそのまま残す。
+// 一致する資料を確認できない場合は、リンクを推測しない。
+export const COLUMN_SOURCE_LINKS: Reference[] = [
+  ...Object.values(NENKIN_REFERENCES).map(ref => ({ ...ref, label: ref.label.match(/「(.+)」/)![1] })),
+  ...Object.values(MHLW_REFERENCES).map(ref => ({ ...ref, label: ref.label.match(/「(.+)」/)![1] })),
+  ...Object.values(COLUMN_ADDITIONAL_REFERENCES),
+  { label: "受診状況等証明書が添付できない申立書", href: SHORUI_URLS.jushinjokyo },
+  { label: "受診状況等証明書", href: SHORUI_URLS.jushinjokyo },
+  { label: "初診日に関する第三者からの申立書", href: SHORUI_URLS.daisansha },
+  { label: "障害基礎年金を受けられるとき", href: SHORUI_URLS.kisoSeikyuu },
+  { label: "障害厚生年金を受けられるとき", href: SHORUI_URLS.kouseiSeikyuu },
+].sort((a, b) => b.label.length - a.label.length);
 
 // 記事末尾に置く「参考リンク」「このテーマの全体像」「あわせて読みたい」。
 export default function ColumnFooter({

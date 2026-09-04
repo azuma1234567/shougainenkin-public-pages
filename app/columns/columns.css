@@ -1,0 +1,30 @@
+.column-article { max-width: 700px; min-width: 0; margin-inline: auto; color: var(--platform-text); overflow-wrap: anywhere; }
+.column-article h1, .column-article h2, .column-article h3 { color: var(--platform-heading); }
+.column-conclusion { margin: 24px 0; padding: 24px; border-radius: 12px; background: var(--platform-band); }
+.column-conclusion h2 { margin: 0 0 12px; padding: 0; border: 0; font-size: 1rem; }
+.column-conclusion p { margin: .7em 0 0; line-height: 1.9; }
+.column-body { min-width: 0; line-height: 1.9; }
+.column-body p { margin: 0 0 1.2em; line-height: 1.9; }
+.column-body h2 { margin: 2.4em 0 1em; padding: 0 0 0 14px; border: 0; border-left: 4px solid var(--platform-primary); }
+.column-body h3 { margin: 1.7em 0 .65em; font-size: 1.15rem; }
+.column-body strong { color: inherit; }
+.column-body .column-inline-card { display: block; margin: 1.2em 0; padding: 14px 18px; border-left: 4px solid var(--jc-accent, var(--platform-primary)); border-radius: 0 8px 8px 0; background: var(--jc-hover, var(--platform-band)); color: var(--platform-heading); font-weight: 700; text-decoration: none; }
+.column-body .column-inline-card:hover { text-decoration: underline; }
+.column-body .column-gokai-link { border-color: var(--platform-link); background: var(--platform-chip); color: var(--platform-link); }
+.column-body .gokai-case { margin: 1.2em 0; padding: 20px; border-left: 3px solid var(--platform-primary); background: var(--platform-band); border-radius: 0 10px 10px 0; }
+.column-body .gokai-case p { margin: 0; }
+.column-body .article-table-figure { max-width: 100%; min-width: 0; margin: 1.2em 0; }
+.column-body .article-table-wrap { max-width: 100%; overflow-x: auto; }
+.column-body .article-table-wrap table { display: table; width: 100%; min-width: 560px; }
+.column-body .article-table-wrap thead { display: table-header-group; }
+.column-body .article-table-wrap tbody { display: table-row-group; }
+.column-body .article-table-wrap tr { display: table-row; }
+.column-body .article-table-wrap th, .column-body .article-table-wrap td { display: table-cell; }
+.column-body .article-table-wrap td::before { display: none; }
+@media (min-width: 761px) {
+  .column-body { width: calc(100% + 28px); margin-inline: -14px; }
+}
+@media (max-width: 760px) {
+  .column-conclusion { padding: 20px; }
+  .column-body .gokai-case { padding: 16px; }
+}
