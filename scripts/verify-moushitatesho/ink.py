@@ -19,6 +19,7 @@ PAGES = {"main-front": ("docs/forms/moushitatesho/01.pdf", 0),
          "cont-back": ("docs/forms/moushitatesho/03.pdf", 1)}
 INK = 200          # これより暗い画素をインクとみなす
 MARGIN_MM = 0.05   # 触れているだけは許す(境界の丸め)
+GAP_MM = 2.0       # これ以上の白で切れていたら別の字(隣の「・」までは6mm、字と字の間は最大1mm程度)
 
 _cache = {}
 
@@ -79,19 +80,34 @@ def ellipse_bbox(sheet, r):
     x0 = max(0, int(cx - rx)); x1 = min(pm.width - 1, int(cx + rx))
     y0 = max(0, int(cy - ry)); y1 = min(pm.height - 1, int(cy + ry))
     s, w = pm.samples, pm.width
-    bx0 = by0 = 10 ** 9; bx1 = by1 = -1
+    # 楕円の内側で、列ごとにインクがあるかを見る
+    cols = {}
     for y in range(y0, y1 + 1):
         dy = (y + 0.5 - cy) / ry
         if abs(dy) > 1: continue
         half = rx * (1 - dy * dy) ** 0.5
         for x in range(max(x0, int(cx - half)), min(x1, int(cx + half)) + 1):
             if s[y * w + x] < INK:
-                if x < bx0: bx0 = x
-                if x > bx1: bx1 = x
-                if y < by0: by0 = y
-                if y > by1: by1 = y
-    if bx1 < 0:
+                a, b = cols.get(x, (10 ** 9, -1))
+                cols[x] = (min(a, y), max(b, y))
+    if not cols:
         return None
+    # 中心にいちばん近い塊だけを採る。0.8mm 以上の白で切れていたら別の字(隣の「・」など)。
+    gap = max(1, int(GAP_MM * ppm))
+    center = min(cols, key=lambda x: abs(x + 0.5 - cx))
+    keep = [center]
+    x = center
+    while True:
+        nxt = [c for c in cols if 0 < c - x <= gap]
+        if not nxt: break
+        x = min(nxt); keep.append(x)
+    x = center
+    while True:
+        prv = [c for c in cols if 0 < x - c <= gap]
+        if not prv: break
+        x = max(prv); keep.append(x)
+    bx0, bx1 = min(keep), max(keep)
+    by0 = min(cols[c][0] for c in keep); by1 = max(cols[c][1] for c in keep)
     return {"x0": bx0 / ppm, "y0": by0 / ppm, "x1": (bx1 + 1) / ppm, "y1": (by1 + 1) / ppm}
 
 

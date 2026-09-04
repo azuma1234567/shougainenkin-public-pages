@@ -43,6 +43,13 @@ export const PAPER = {
   cont: { width: 210, height: 297 },
 } as const;
 
+/* 楕円の半径は 2026-09-04 に広げた(指示書2 §1)。
+   設計 §4 の値は「字の半幅・半高より大きい」だけで、字を丸ごとは含んでいなかった。
+   中心を共有する楕円が長方形を含む条件は (a/rx)²+(b/ry)² ≤ 1(角の1点で決まる)。
+   これを満たす最小の倍率に3%の余裕を足した k = 1.03·√((a/rx)²+(b/ry)²) を、
+   rx と ry の両方に同じだけ掛けてある(縦横比は変えていない)。実測は
+   docs/verification/moushitatesho-youshiki-2026-09-04/circles.md。 */
+
 /* 元号の3択。並びは様式の印字どおり 昭和・平成・令和。 */
 export type GengouSlots = { showa: CircleSlot; heisei: CircleSlot; reiwa: CircleSlot };
 const gengou = (cxs: [number, number, number], cy: number, rx: number, ry: number): GengouSlots =>
@@ -71,10 +78,10 @@ export type PeriodRow = {
 const mainRow = (i: number): PeriodRow => {
   const T = MAIN_ROW_TOP + MAIN_ROW_H * i;
   return {
-    from: dateRow([33.8, 43.0, 52.4], [60.3, 72.1, 83.8], T + 4.1, 4.4, 2.7, 7, 12),
-    to: dateRow([33.8, 43.0, 52.4], [60.3, 72.1, 83.8], T + 11.4, 4.4, 2.7, 7, 12),
-    jushinAri: circle(42.4, T + 18.7, 9.3, 2.8),
-    jushinNashi: circle(77.8, T + 18.7, 15.5, 2.8),
+    from: dateRow([33.8, 43.0, 52.4], [60.3, 72.1, 83.8], T + 4.1, 5.4, 3.31, 7, 12),
+    to: dateRow([33.8, 43.0, 52.4], [60.3, 72.1, 83.8], T + 11.4, 5.4, 3.31, 7, 12),
+    jushinAri: circle(42.4, T + 18.7, 10.56, 3.18),
+    jushinNashi: circle(77.8, T + 18.7, 18.31, 3.31),
     hospital: text(51.5, T + 23.2, 50.5, 12.0, { pt: 10, lines: 2 }),
     body: text(104.5, T + 7.4, 173.5, 47.5, { pt: 10.5 }),
   };
@@ -84,8 +91,8 @@ export const MAIN_FRONT = {
   no: digits(241.0, 21.4, 9, 12),
   total: digits(257.5, 21.4, 9, 12),
   byoumei: text(90.0, 37.5, 187.0, 12.5, { pt: 10.5, lines: 2, valign: "middle" }),
-  hatsubyou: dateRow([59.1, 70.1, 81.3], [92.3, 110.6, 130.0], 59.4, 5.2, 3.0, 10, 12),
-  shoshin: dateRow([189.9, 200.9, 212.1], [223.0, 241.0, 260.5], 59.4, 5.2, 3.0, 10, 12),
+  hatsubyou: dateRow([59.1, 70.1, 81.3], [92.3, 110.6, 130.0], 59.4, 6.6, 3.8, 10, 12),
+  shoshin: dateRow([189.9, 200.9, 212.1], [223.0, 241.0, 260.5], 59.4, 6.6, 3.8, 10, 12),
   /* 右端。本文がここを越えていないかを検査する(§9-2 の5) */
   bodyRight: 279.1,
   rows: Array.from({ length: MAIN_FRONT_ROWS }, (_, i) => mainRow(i)),
@@ -144,9 +151,9 @@ const TECHOU_SHIFT = 23.3;
 const techouRow = (n: 0 | 1): TechouRow => {
   const d = n * TECHOU_SHIFT;
   return {
-    kinds: [148.0, 156.2, 164.4, 172.6].map((cx) => circle(cx, 329.2 + d, 2.4, 2.4)),
+    kinds: [148.0, 156.2, 164.4, 172.6].map((cx) => circle(cx, 329.2 + d, 2.78, 2.78)),
     otherName: text(180.0, 326.5 + d, 73.0, 5.5, { lines: 1 }),
-    date: dateRow([149.7, 158.9, 168.3], [179.5, 196.5, 213.0], 335.1 + d, 4.4, 2.7, 8, 12),
+    date: dateRow([149.7, 158.9, 168.3], [179.5, 196.5, 213.0], 335.1 + d, 5.4, 3.31, 8, 12),
     grade: digits(241.0, 335.1 + d, 8, 12),
     shougaimei: text(163.0, 338.6 + d, 90.0, 5.5, { lines: 1 }),
   };
@@ -160,7 +167,7 @@ export type MoushitateBlock = {
 };
 
 export const MAIN_BACK = {
-  ninteibi: dateRow([61.6, 74.0, 86.3], [97.5, 115.7, 134.0], 37.6, 5.3, 3.0, 11, 14),
+  ninteibi: dateRow([61.6, 74.0, 86.3], [97.5, 115.7, 134.0], 37.6, 6.79, 3.85, 11, 14),
   sections: [backSection(0), backSection(1)] as [BackSection, BackSection],
   /* 手帳の交付 1/2/3(受けている・受けていない・申請中) */
   techouKofu: [142.9, 180.4, 222.0].map((cx) => circle(cx, 320.5, 2.6, 2.6)),
@@ -187,10 +194,10 @@ export const CONT_ROWS_PER_SHEET = CONT_FRONT_ROWS + CONT_BACK_ROWS;   // 11期�
 const contRow = (top: number, j: number, seq: number): PeriodRow => {
   const T = top + CONT_ROW_H * j;
   return {
-    from: dateRow([33.46, 39.31, 45.16], [49.77, 57.92, 66.47], T + 2.2, 2.5, 1.5, 5, 10),
-    to: dateRow([33.46, 39.31, 45.16], [49.77, 57.92, 66.47], T + 6.75, 2.5, 1.5, 5, 10),
-    jushinAri: circle(41.34, T + 11.03, 5.8, 1.9),
-    jushinNashi: circle(63.65, T + 11.03, 9.7, 1.9),
+    from: dateRow([33.46, 39.31, 45.16], [49.77, 57.92, 66.47], T + 2.2, 2.58, 1.55, 5, 10),
+    to: dateRow([33.46, 39.31, 45.16], [49.77, 57.92, 66.47], T + 6.75, 2.58, 1.55, 5, 10),
+    jushinAri: circle(41.34, T + 11.03, 6.76, 2.21),
+    jushinNashi: circle(63.65, T + 11.03, 11.65, 2.28),
     hospital: text(43.5, T + 13.7, 33.2, 7.6, { pt: 9, lines: 2 }),
     body: text(78.8, T + 6.0, 109.0, 29.5, { pt: 10.5 }),
     num: digits(24.43, T + 18.2, 7, 10.5),

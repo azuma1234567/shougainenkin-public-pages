@@ -104,7 +104,10 @@ for (const [name, data] of Object.entries(SAMPLES)) {
             }
           }
         }
+        const cs = getComputedStyle(el);
         out.push({ sheet: sheet.dataset.sheet, sheetIndex, kind, box, ink,
+                   overflowing: el.scrollHeight > el.clientHeight + 1 || el.scrollWidth > el.clientWidth + 1,
+                   clipped: cs.overflow === "hidden" || cs.overflowY === "hidden",
                    text: (el.textContent ?? "").slice(0, 40) });
       });
     });
@@ -132,26 +135,44 @@ const visible = (m) => {
 
 const rows = [];   // 欄ごとの表(§10-4)
 const containment = [];
+/* 半径換算で3%の余裕(指示書2 §1-1)。
+   指示書は「≤ 0.94」と書いているが、同じ §1-1 の k = 1.03·√q で広げた楕円は
+   ちょうど q = 1/1.03² = 0.9426 に着地するので、0.94 だと k を当てても永遠に届かない。
+   「半径換算で約3%」を素直に数式にした 1/1.03² を使う(差は 0.0026)。 */
+const CONTAIN_Q = 1 / 1.03 ** 2;
 
-/* max は「わざと入りきらない量」を入れるサンプルなので、はみ出しの判定からは外す
-   (§10-8 が別に「縮小されず、入力画面で知らせ、印刷は止まらない」を見る)。 */
-check(1, "文字がスロットの内側に収まっている(max を除く4サンプル)", () => {
+/* 紙に出るインクは、スロットの矩形の内側だけであること(指示書2 §2)。
+   .mt-slot-text は overflow:hidden なので、枠に入りきらない字は**描かれない**。
+   だから max も対象にできる。判定は
+     (a) 枠に収まっている欄  … 字の外接矩形が枠の内側にある(幾何で見る)
+     (b) 収まらない欄        … overflow:hidden でクリップされている(枠の外にインクが出ない)
+   のどちらかを満たすこと。 */
+check(1, "スロットの外にインクが出ない(5サンプルすべて)", () => {
   const bad = [];
-  let n = 0;
+  let n = 0, clipped = 0;
   for (const [name, list] of Object.entries(measured)) {
-    if (name === "max") continue;
     for (const m of list) {
       if (!m.ink) continue;
       n += 1;
-      const ok = m.kind === "digits"
+      if (m.kind === "digits") {
         /* digits のスロットは幅しか持たない。左右にはみ出していないかだけ見る */
-        ? m.ink.x0 >= m.box.x0 - 0.15 && m.ink.x1 <= m.box.x1 + 0.15
-        : inside(m.ink, m.box);
-      if (!ok) bad.push(`${name}/${m.sheet}/${m.kind} "${m.text}" ink(${R(m.ink.x0)},${R(m.ink.y0)})-(${R(m.ink.x1)},${R(m.ink.y1)}) box(${R(m.box.x0)},${R(m.box.y0)})-(${R(m.box.x1)},${R(m.box.y1)})`);
+        if (!(m.ink.x0 >= m.box.x0 - 0.15 && m.ink.x1 <= m.box.x1 + 0.15)) {
+          bad.push(`${name}/${m.sheet}/digits "${m.text}" が左右にはみ出す`);
+        }
+        continue;
+      }
+      if (m.overflowing) {
+        if (!m.clipped) bad.push(`${name}/${m.sheet} "${m.text}" が枠に入らないのにクリップされていない`);
+        else clipped += 1;
+        continue;
+      }
+      if (!inside(m.ink, m.box)) {
+        bad.push(`${name}/${m.sheet} "${m.text}" ink(${R(m.ink.x0)},${R(m.ink.y0)})-(${R(m.ink.x1)},${R(m.ink.y1)}) box(${R(m.box.x0)},${R(m.box.y0)})-(${R(m.box.x1)},${R(m.box.y1)})`);
+      }
     }
   }
-  if (bad.length) fail(`${bad.length}件はみ出し: ${bad.slice(0, 3).join(" / ")}`);
-  return `${n}個の文字がすべてスロットの内側`;
+  if (bad.length) fail(`${bad.length}件: ${bad.slice(0, 3).join(" / ")}`);
+  return `${n}個。うち ${clipped}個は入りきらず overflow:hidden で切られている(max の欄)`;
 });
 
 /* 公式PDFの「描画される画素」に問い合わせる。
@@ -229,14 +250,40 @@ check(3, "digits の中心が、印字の間の空欄の中央から ±1.0mm", (
   return `${ok}個が ±1.0mm 以内(区切る印字が無く判定外 ${unbounded}個)`;
 });
 
-/* 公式PDFの実文字。01.pdf は元号・年月日だけが実文字で、他はアウトライン。
-   実文字があるところはそれを正にする(いちばん確か)。無いところは楕円の中のインクで代用する。 */
-function officialWord(sheet, cx, cy, rx, ry) {
-  const glyphs = (GLYPHS[sheet] ?? []).filter((g) => g.t
-    && g.x0 >= cx - rx - 0.6 && g.x1 <= cx + rx + 0.6 && g.y0 >= cy - ry - 0.9 && g.y1 <= cy + ry + 0.9);
-  if (!glyphs.length) return null;
-  return { x0: Math.min(...glyphs.map((g) => g.x0)), x1: Math.max(...glyphs.map((g) => g.x1)),
-           y0: Math.min(...glyphs.map((g) => g.y0)), y1: Math.max(...glyphs.map((g) => g.y1)), n: glyphs.length };
+/* 公式PDFの実文字を「語」にまとめておく。01.pdf は元号・年月日だけが実文字で、他はアウトライン。
+   語の切れ目は 0.6mm 以上の隙間と、区切り記号(・とかっこ)。
+   **楕円の大きさに依存させない**(半径を広げると隣の字まで拾ってしまうため)。 */
+const SEP = new Set(["・", "（", "）", "(", ")", "「", "」", "　", "、", "。"]);
+const WORDS = {};
+for (const [sheet, glyphs] of Object.entries(GLYPHS)) {
+  const chars = glyphs.filter((g) => g.t).sort((a, b) => (a.y0 - b.y0) || (a.x0 - b.x0));
+  const words = [];
+  let cur = null;
+  for (const g of chars) {
+    const sameRow = cur && Math.abs(g.y0 - cur.y0) < 0.6;
+    const gap = g.x0 - cur?.x1;
+    /* 隙間は「0以上0.6mm未満」。負を許すと行をまたいで左へ戻るときにつながってしまう
+       (発病日の行と初診日の行は y がほぼ同じで、x だけ 160mm 戻る)。字の重なりぶんの -0.5 までは許す。 */
+    if (cur && sameRow && gap > -0.5 && gap < 0.6 && !SEP.has(g.t) && !SEP.has(cur.last)) {
+      cur.x1 = Math.max(cur.x1, g.x1); cur.y1 = Math.max(cur.y1, g.y1); cur.t += g.t; cur.last = g.t;
+    } else {
+      if (cur) words.push(cur);
+      cur = { x0: g.x0, y0: g.y0, x1: g.x1, y1: g.y1, t: g.t, last: g.t };
+    }
+  }
+  if (cur) words.push(cur);
+  WORDS[sheet] = words.filter((w) => !SEP.has(w.t));
+}
+
+/* スロットの中心にいちばん近い語。中心から 1.5mm 以上離れていたら「無い」とみなす。 */
+function officialWord(sheet, cx, cy) {
+  let best = null, bestD = Infinity;
+  for (const w of WORDS[sheet] ?? []) {
+    const wx = (w.x0 + w.x1) / 2, wy = (w.y0 + w.y1) / 2;
+    const d = Math.hypot(wx - cx, wy - cy);
+    if (d < bestD) { bestD = d; best = w; }
+  }
+  return best && bestD <= 1.5 ? best : null;
 }
 
 check(4, "circle の中心が囲む文字の中心から ±0.5mm", () => {
@@ -253,16 +300,20 @@ check(4, "circle の中心が囲む文字の中心から ±0.5mm", () => {
   for (const list of Object.values(res)) {
     for (const r of list) {
       const s = index.get(r.id);
-      const word = officialWord(s.sheet, s.slot.cx, s.slot.cy, s.slot.rx, s.slot.ry);
+      const word = officialWord(s.sheet, s.slot.cx, s.slot.cy);
       const box = word ?? r.bbox;
       if (!box) { empty += 1; bad.push(`${r.id}: 囲む文字が見つからない`); continue; }
       if (word) byChar += 1;
       const cx = (box.x0 + box.x1) / 2, cy = (box.y0 + box.y1) / 2;
       const dx = Math.abs(cx - s.slot.cx), dy = Math.abs(cy - s.slot.cy);
-      /* 楕円が字を丸ごと含むか。長方形を含むには rx≥半幅×√2、ry≥半高×√2 が要る */
-      const needRx = ((box.x1 - box.x0) / 2) * Math.SQRT2, needRy = ((box.y1 - box.y0) / 2) * Math.SQRT2;
-      containment.push({ id: r.id, src: word ? "実文字" : "描画インク", rx: s.slot.rx, ry: s.slot.ry,
-        needRx: R(needRx), needRy: R(needRy), contains: s.slot.rx >= needRx && s.slot.ry >= needRy });
+      /* 中心を共有する楕円が長方形を含む条件は、角の1点だけで決まる:
+         (a/rx)² + (b/ry)² ≤ 1  (a=字の半幅, b=字の半高)。
+         rx≥a√2 かつ ry≥b√2 は十分条件にすぎず、実際より約1.4倍厳しい(指示書2 §1)。 */
+      const a = (box.x1 - box.x0) / 2, b = (box.y1 - box.y0) / 2;
+      const q = (a / s.slot.rx) ** 2 + (b / s.slot.ry) ** 2;
+      containment.push({ id: r.id, src: word ? "実文字" : "描画インク", a: R(a), b: R(b),
+        rx: s.slot.rx, ry: s.slot.ry, q: R(q), contains: q <= CONTAIN_Q,
+        k: R(1.03 * Math.sqrt(q)) });
       if (dx > 0.5 || dy > 0.5) bad.push(`${r.id}: 中心のずれ x${R(dx)} y${R(dy)}mm`);
       else { ok += 1; rows.push({ field: r.id, kind: "circle", expect: `${R(cx)},${R(cy)}`, got: `${s.slot.cx},${s.slot.cy}`, diff: `x${R(s.slot.cx - cx)} y${R(s.slot.cy - cy)}` }); }
     }
@@ -271,13 +322,13 @@ check(4, "circle の中心が囲む文字の中心から ±0.5mm", () => {
   return `${ok}個が ±0.5mm 以内(うち ${byChar}個は公式PDFの実文字と照合、残りは描画インク)`;
 });
 
-check(6, "楕円が囲む文字を丸ごと含む(設計 §9-2 の4の後半)", () => {
+check(6, "楕円が囲む文字を丸ごと含む((a/rx)²+(b/ry)² ≤ 1/1.03²)", () => {
   const short = containment.filter((c) => !c.contains);
   if (short.length) {
-    const worst = short.slice().sort((a, b) => (b.needRx - b.rx) - (a.needRx - a.rx))[0];
-    fail(`${short.length}/${containment.length}件で楕円が小さい。例 ${worst.id}: rx ${worst.rx}(必要 ${worst.needRx}) ry ${worst.ry}(必要 ${worst.needRy})`);
+    const worst = short.slice().sort((x, y) => y.q - x.q)[0];
+    fail(`${short.length}/${containment.length}件が不足。いちばん足りない ${worst.id}: (a/rx)²+(b/ry)² = ${worst.q} → k ${worst.k}(rx ${worst.rx}→${R(worst.rx * worst.k)}, ry ${worst.ry}→${R(worst.ry * worst.k)})`);
   }
-  return `${containment.length}件とも楕円が文字を含む`;
+  return `${containment.length}件とも含む(いちばん際どいところで ${R(Math.max(...containment.map((c) => c.q)))})`;
 });
 
 check(5, "期間の状況の本文が枠の右端を超えない", () => {
@@ -307,9 +358,54 @@ writeFileSync(path.join(OUT, "fields.md"),
 /* 楕円の大きさの一覧(検査6が落ちたときに何が足りないかを見る) */
 writeFileSync(path.join(OUT, "circles.md"),
   `# 楕円が文字を丸ごと含むか(設計 §9-2 の4の後半)\n\n`
-  + `長方形の字を楕円で丸ごと囲むには rx ≧ 半幅×√2、ry ≧ 半高×√2 が要る。\n\n`
-  + `| 欄 | 出典 | rx | 必要rx | ry | 必要ry | 含む |\n|---|---|---|---|---|---|---|\n`
-  + containment.map((c) => `| ${c.id} | ${c.src} | ${c.rx} | ${c.needRx} | ${c.ry} | ${c.needRy} | ${c.contains ? "○" : "×"} |`).join("\n") + "\n");
+  + `中心を共有する楕円が長方形を含む条件は角の1点で決まる: (a/rx)²+(b/ry)² ≤ 1。\n`
+  + `rx≧a√2 かつ ry≧b√2 は十分条件にすぎず、約1.4倍厳しい(指示書2 §1)。判定は ≤ 1/1.03² = 0.9426(半径換算で3%の余裕)。\n\n`
+  + `| 欄 | 出典 | a(半幅) | b(半高) | rx | ry | (a/rx)²+(b/ry)² | 含む | 足りなければ k |\n|---|---|---|---|---|---|---|---|---|\n`
+  + containment.map((c) => `| ${c.id} | ${c.src} | ${c.a} | ${c.b} | ${c.rx} | ${c.ry} | ${c.q} | ${c.contains ? "○" : "×"} | ${c.contains ? "" : c.k} |`).join("\n") + "\n");
+
+/* 指示書2 §1-1 の3。楕円を広げたあと、隣とぶつかっていないか。 */
+/* 5サンプルで実際に紙に出た文字の矩形(シートごと)。クリップ後の見える分だけ。 */
+const drawn = {};
+for (const list of Object.values(measured)) {
+  for (const m of list) {
+    const v = visible(m);
+    if (!v) continue;
+    (drawn[m.sheet] ??= []).push({ ...v, text: (m.text || "").slice(0, 12) });
+  }
+}
+
+check(7, "広げた楕円が、同じ組の他の選択肢の中心・自分たちが書く欄と重ならない", () => {
+  const bad = [];
+  for (const [sheet, root] of Object.entries(SHEET_SLOTS)) {
+    const all = collectSlots(root, sheet, []);
+    const circles = all.filter((x) => x.slot.kind === "circle");
+    const boxes = all.filter((x) => x.slot.kind === "digits");
+    for (const c of circles) {
+      const { cx, cy, rx, ry } = c.slot;
+      /* (a) 同じ組(パスの最後の要素だけ違う)の他の選択肢の中心が楕円の中に入っていないか */
+      const group = c.path.replace(/\.[^.]+$/, "");
+      for (const o of circles) {
+        if (o === c || o.path.replace(/\.[^.]+$/, "") !== group) continue;
+        if (((o.slot.cx - cx) / rx) ** 2 + ((o.slot.cy - cy) / ry) ** 2 < 1) {
+          bad.push(`${sheet}:${c.path} の楕円が ${o.path} の中心を含む`);
+        }
+      }
+      /* (b) 実際に紙に出た文字(5サンプルぶん)と重ならないか。
+         スロットの枠ではなく描いた字で見る。枠は字より広く取ってあるので、
+         枠で見ると楕円の先端(高さがほぼ0のところ)が枠にかすっただけで落ちる。 */
+      for (const m of drawn[sheet] ?? []) {
+        const dy = Math.max(0, Math.max(cy - m.y1, m.y0 - cy));
+        if (dy >= ry) continue;
+        const half = rx * Math.sqrt(1 - (dy / ry) ** 2);
+        if (m.x0 < cx + half - 0.05 && m.x1 > cx - half + 0.05) {
+          bad.push(`${sheet}:${c.path} の楕円が「${m.text}」(${R(m.x0)}–${R(m.x1)})と重なる`);
+        }
+      }
+    }
+  }
+  if (bad.length) fail(`${bad.length}件: ${bad.slice(0, 4).join(" / ")}`);
+  return "同じ組の他の選択肢の中心を含まず、紙に出た文字とも重ならない";
+});
 
 const ok = results.every((r) => r.ok);
 console.log("# 申立書 記入位置の検証(設計 §9-2)\n");

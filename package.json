@@ -27,7 +27,9 @@
     "verify:erabu-batch2": "node scripts/verify-erabu-batch2.mjs",
     "verify:joukyou-okane-batch2": "node scripts/verify-joukyou-okane-batch2.mjs",
     "test:moushitatesho": "node --import ./scripts/lib/ts-alias.mjs --test tests/wareki.test.mjs tests/moushitatesho-migrate.test.mjs tests/moushitatesho-tel.test.mjs",
-    "verify:moushitatesho:layout": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho-layout.mjs"
+    "verify:moushitatesho:layout": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho-layout.mjs",
+    "verify:moushitatesho": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho/verify.mjs",
+    "verify:moushitatesho:overlay": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho/overlay.mjs"
   },
   "dependencies": {
     "next": "^15.3.4",

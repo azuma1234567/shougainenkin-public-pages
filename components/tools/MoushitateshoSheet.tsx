@@ -16,13 +16,14 @@ const mm = (v: number) => `${v}mm`;
 
 /* ---- 3種類のスロット ---- */
 
-function Text({ slot, value, fontPt }: { slot: TextSlot; value: string; fontPt: number }) {
+function Text({ slot, value, fontPt, label }: { slot: TextSlot; value: string; fontPt: number; label?: string }) {
   if (!value) return null;                     // 空の欄は何も描かない(§4-3)
   const pt = Math.min(slot.pt ?? TEXT_DEFAULT_PT, fontPt);
   return (
     <div
       className="mt-slot-text"
       data-slot="text"
+      data-field={label}
       style={{
         left: mm(slot.x), top: mm(slot.y), width: mm(slot.w), height: mm(slot.h),
         fontSize: `${pt}pt`,
@@ -100,8 +101,8 @@ function Period({ row, waku, fontPt }: { row: PeriodRow; waku: Waku | undefined;
       <DateLine row={row.to} value={waku.to} showDay={false} />
       <Circle slot={row.jushinAri} on={waku.jushin === true} />
       <Circle slot={row.jushinNashi} on={waku.jushin === false} />
-      <Text slot={row.hospital} value={waku.jushin ? waku.kikan : ""} fontPt={fontPt} />
-      <Text slot={row.body} value={waku.text} fontPt={fontPt} />
+      <Text slot={row.hospital} value={waku.jushin ? waku.kikan : ""} fontPt={fontPt} label="医療機関名" />
+      <Text slot={row.body} value={waku.text} fontPt={fontPt} label="期間の状況" />
     </>
   );
 }
@@ -114,11 +115,11 @@ function Moushitate({ block, state, fontPt }: { block: MoushitateBlock; state: M
       <Digits slot={block.year} value={w?.year} />
       <Digits slot={block.month} value={w?.month} />
       <Digits slot={block.day} value={w?.day} />
-      <Text slot={block.address} value={state.seikyuusha.address} fontPt={fontPt} />
-      <Text slot={block.name} value={state.seikyuusha.name} fontPt={fontPt} />
+      <Text slot={block.address} value={state.seikyuusha.address} fontPt={fontPt} label="請求者 現住所" />
+      <Text slot={block.name} value={state.seikyuusha.name} fontPt={fontPt} label="請求者 氏名" />
       <Tel slot={block.tel} value={state.seikyuusha.tel} fontPt={fontPt} />
-      <Text slot={block.daihitsuName} value={state.daihitsu?.name ?? ""} fontPt={fontPt} />
-      <Text slot={block.daihitsuZokugara} value={state.daihitsu?.zokugara ?? ""} fontPt={fontPt} />
+      <Text slot={block.daihitsuName} value={state.daihitsu?.name ?? ""} fontPt={fontPt} label="代筆者 氏名" />
+      <Text slot={block.daihitsuZokugara} value={state.daihitsu?.zokugara ?? ""} fontPt={fontPt} label="代筆者 続柄" />
       <Tel slot={block.daihitsuTel} value={state.daihitsu?.tel ?? ""} fontPt={fontPt} />
     </>
   );
@@ -129,16 +130,16 @@ function BackBlock({ s, side, sonota, fontPt }: { s: 0 | 1; side: BackSide; sono
   const L = MAIN_BACK.sections[s];
   return (
     <>
-      <Text slot={L.job} value={side.job} fontPt={fontPt} />
-      <Text slot={L.commuteMethod} value={side.commuteMethod} fontPt={fontPt} />
+      <Text slot={L.job} value={side.job} fontPt={fontPt} label="職種" />
+      <Text slot={L.commuteMethod} value={side.commuteMethod} fontPt={fontPt} label="通勤方法" />
       <Digits slot={L.commuteHours} value={side.commuteHours} />
       <Digits slot={L.commuteMinutes} value={side.commuteMinutes} />
       <Digits slot={L.daysPrev} value={side.daysPrev} />
       <Digits slot={L.daysPrevPrev} value={side.daysPrevPrev} />
-      <Text slot={L.cond} value={side.cond} fontPt={fontPt} />
+      <Text slot={L.cond} value={side.cond} fontPt={fontPt} label="身体の調子" />
       {L.reasons.map((c, i) => <Circle key={i} slot={c} on={side.reasons.includes(i)} />)}
       <Text slot={L.reasonOther}
-        value={side.reasons.includes(REASON_OTHER_INDEX) ? side.reasonsOther : ""} fontPt={fontPt} />
+        value={side.reasons.includes(REASON_OTHER_INDEX) ? side.reasonsOther : ""} fontPt={fontPt} label="働いていない理由(その他)" />
       {DAILY_ITEMS.map((_, i) => {
         const level = side.daily[i];
         if (!level) return null;
@@ -146,7 +147,7 @@ function BackBlock({ s, side, sonota, fontPt }: { s: 0 | 1; side: BackSide; sono
         return <Circle key={i} slot={L.daily[row][col]} on />;
       })}
       {/* 「その他」の欄は区画ごとにある。埋める区画に同じ内容を書く */}
-      <Text slot={L.sonota} value={sonota} fontPt={fontPt} />
+      <Text slot={L.sonota} value={sonota} fontPt={fontPt} label="その他" />
     </>
   );
 }
@@ -175,7 +176,7 @@ export function Sheet({ kind, state, cont, no, total }: SheetProps) {
         <>
           <Digits slot={MAIN_FRONT.no} value={sheetNo(no, total)} />
           <Digits slot={MAIN_FRONT.total} value={sheetNo(total, total)} />
-          <Text slot={MAIN_FRONT.byoumei} value={state.byoumei} fontPt={fontPt} />
+          <Text slot={MAIN_FRONT.byoumei} value={state.byoumei} fontPt={fontPt} label="傷病名" />
           <DateLine row={MAIN_FRONT.hatsubyou} value={state.hatsubyou} />
           <DateLine row={MAIN_FRONT.shoshin} value={state.shoshin} />
           {MAIN_FRONT.rows.map((row, i) => <Period key={i} row={row} waku={state.waku[i]} fontPt={fontPt} />)}
@@ -198,10 +199,10 @@ export function Sheet({ kind, state, cont, no, total }: SheetProps) {
             return (
               <div key={i} style={{ display: "contents" }}>
                 {L.kinds.map((c, k) => <Circle key={k} slot={c} on={t.shurui === (["shin", "sei", "ryou", "ta"] as const)[k]} />)}
-                <Text slot={L.otherName} value={t.shurui === "ta" ? t.taName : ""} fontPt={fontPt} />
+                <Text slot={L.otherName} value={t.shurui === "ta" ? t.taName : ""} fontPt={fontPt} label="手帳の名前" />
                 <DateLine row={L.date} value={t.kofu} />
                 <Digits slot={L.grade} value={t.tokyu} />
-                <Text slot={L.shougaimei} value={t.shougaimei} fontPt={fontPt} />
+                <Text slot={L.shougaimei} value={t.shougaimei} fontPt={fontPt} label="障害名" />
               </div>
             );
           })}
@@ -213,7 +214,7 @@ export function Sheet({ kind, state, cont, no, total }: SheetProps) {
         <>
           <Digits slot={CONT_FRONT.no} value={sheetNo(no, total)} />
           <Digits slot={CONT_FRONT.total} value={sheetNo(total, total)} />
-          <Text slot={CONT_FRONT.byoumei} value={state.byoumei} fontPt={fontPt} />
+          <Text slot={CONT_FRONT.byoumei} value={state.byoumei} fontPt={fontPt} label="傷病名(続紙)" />
           {CONT_FRONT.rows.map((row, i) => (
             <Period key={i} row={{ ...row, seq: cont.firstSeq + i - 1 }} waku={cont.front[i]} fontPt={fontPt} />
           ))}

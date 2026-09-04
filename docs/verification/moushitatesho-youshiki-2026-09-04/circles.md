@@ -1,250 +1,251 @@
 # 楕円が文字を丸ごと含むか(設計 §9-2 の4の後半)
 
-長方形の字を楕円で丸ごと囲むには rx ≧ 半幅×√2、ry ≧ 半高×√2 が要る。
+中心を共有する楕円が長方形を含む条件は角の1点で決まる: (a/rx)²+(b/ry)² ≤ 1。
+rx≧a√2 かつ ry≧b√2 は十分条件にすぎず、約1.4倍厳しい(指示書2 §1)。判定は ≤ 1/1.03² = 0.9426(半径換算で3%の余裕)。
 
-| 欄 | 出典 | rx | 必要rx | ry | 必要ry | 含む |
-|---|---|---|---|---|---|---|
-| main-front:hatsubyou.gengou.showa | 実文字 | 5.2 | 6.46 | 3 | 3.49 | × |
-| main-front:hatsubyou.gengou.heisei | 実文字 | 5.2 | 6.47 | 3 | 3.49 | × |
-| main-front:hatsubyou.gengou.reiwa | 実文字 | 5.2 | 6.63 | 3 | 3.49 | × |
-| main-front:shoshin.gengou.showa | 実文字 | 5.2 | 6.47 | 3 | 3.49 | × |
-| main-front:shoshin.gengou.heisei | 実文字 | 5.2 | 6.47 | 3 | 3.49 | × |
-| main-front:shoshin.gengou.reiwa | 実文字 | 5.2 | 6.63 | 3 | 3.49 | × |
-| main-front:rows.0.from.gengou.showa | 実文字 | 4.4 | 5.43 | 2.7 | 2.99 | × |
-| main-front:rows.0.from.gengou.heisei | 実文字 | 4.4 | 5.42 | 2.7 | 2.99 | × |
-| main-front:rows.0.from.gengou.reiwa | 実文字 | 4.4 | 5.56 | 2.7 | 2.99 | × |
-| main-front:rows.0.to.gengou.showa | 実文字 | 4.4 | 5.43 | 2.7 | 2.99 | × |
-| main-front:rows.0.to.gengou.heisei | 実文字 | 4.4 | 5.42 | 2.7 | 2.99 | × |
-| main-front:rows.0.to.gengou.reiwa | 実文字 | 4.4 | 5.56 | 2.7 | 2.99 | × |
-| main-front:rows.0.jushinAri | 描画インク | 9.3 | 11.32 | 2.8 | 2.63 | × |
-| main-front:rows.0.jushinNashi | 描画インク | 15.5 | 20.24 | 2.8 | 2.63 | × |
-| main-front:rows.1.from.gengou.showa | 実文字 | 4.4 | 5.42 | 2.7 | 2.99 | × |
-| main-front:rows.1.from.gengou.heisei | 実文字 | 4.4 | 5.43 | 2.7 | 2.99 | × |
-| main-front:rows.1.from.gengou.reiwa | 実文字 | 4.4 | 5.57 | 2.7 | 2.99 | × |
-| main-front:rows.1.to.gengou.showa | 実文字 | 4.4 | 5.42 | 2.7 | 2.99 | × |
-| main-front:rows.1.to.gengou.heisei | 実文字 | 4.4 | 5.43 | 2.7 | 2.99 | × |
-| main-front:rows.1.to.gengou.reiwa | 実文字 | 4.4 | 5.57 | 2.7 | 2.99 | × |
-| main-front:rows.1.jushinAri | 描画インク | 9.3 | 11.37 | 2.8 | 2.57 | × |
-| main-front:rows.1.jushinNashi | 描画インク | 15.5 | 20.24 | 2.8 | 2.57 | × |
-| main-front:rows.2.from.gengou.showa | 実文字 | 4.4 | 5.42 | 2.7 | 3 | × |
-| main-front:rows.2.from.gengou.heisei | 実文字 | 4.4 | 5.43 | 2.7 | 3 | × |
-| main-front:rows.2.from.gengou.reiwa | 実文字 | 4.4 | 5.57 | 2.7 | 3 | × |
-| main-front:rows.2.to.gengou.showa | 実文字 | 4.4 | 5.42 | 2.7 | 2.99 | × |
-| main-front:rows.2.to.gengou.heisei | 実文字 | 4.4 | 5.43 | 2.7 | 2.99 | × |
-| main-front:rows.2.to.gengou.reiwa | 実文字 | 4.4 | 5.57 | 2.7 | 2.99 | × |
-| main-front:rows.2.jushinAri | 描画インク | 9.3 | 11.32 | 2.8 | 2.63 | × |
-| main-front:rows.2.jushinNashi | 描画インク | 15.5 | 20.24 | 2.8 | 2.63 | × |
-| main-front:rows.3.from.gengou.showa | 実文字 | 4.4 | 5.42 | 2.7 | 2.99 | × |
-| main-front:rows.3.from.gengou.heisei | 実文字 | 4.4 | 5.43 | 2.7 | 2.99 | × |
-| main-front:rows.3.from.gengou.reiwa | 実文字 | 4.4 | 5.57 | 2.7 | 2.99 | × |
-| main-front:rows.3.to.gengou.showa | 実文字 | 4.4 | 5.42 | 2.7 | 3 | × |
-| main-front:rows.3.to.gengou.heisei | 実文字 | 4.4 | 5.43 | 2.7 | 3 | × |
-| main-front:rows.3.to.gengou.reiwa | 実文字 | 4.4 | 5.57 | 2.7 | 3 | × |
-| main-front:rows.3.jushinAri | 描画インク | 9.3 | 11.32 | 2.8 | 2.57 | × |
-| main-front:rows.3.jushinNashi | 描画インク | 15.5 | 20.24 | 2.8 | 2.57 | × |
-| main-front:rows.4.from.gengou.showa | 実文字 | 4.4 | 5.42 | 2.7 | 2.99 | × |
-| main-front:rows.4.from.gengou.heisei | 実文字 | 4.4 | 5.43 | 2.7 | 2.99 | × |
-| main-front:rows.4.from.gengou.reiwa | 実文字 | 4.4 | 5.57 | 2.7 | 2.99 | × |
-| main-front:rows.4.to.gengou.showa | 実文字 | 4.4 | 5.42 | 2.7 | 3 | × |
-| main-front:rows.4.to.gengou.heisei | 実文字 | 4.4 | 5.43 | 2.7 | 3 | × |
-| main-front:rows.4.to.gengou.reiwa | 実文字 | 4.4 | 5.57 | 2.7 | 3 | × |
-| main-front:rows.4.jushinAri | 描画インク | 9.3 | 11.32 | 2.8 | 2.63 | × |
-| main-front:rows.4.jushinNashi | 描画インク | 15.5 | 20.24 | 2.8 | 2.63 | × |
-| main-back:ninteibi.gengou.showa | 実文字 | 5.3 | 6.98 | 3 | 3.49 | × |
-| main-back:ninteibi.gengou.heisei | 実文字 | 5.3 | 6.99 | 3 | 3.49 | × |
-| main-back:ninteibi.gengou.reiwa | 実文字 | 5.3 | 6.99 | 3 | 3.49 | × |
-| main-back:sections.0.reasons.0 | 描画インク | 2.6 | 2.33 | 2.6 | 2.22 | ○ |
-| main-back:sections.0.reasons.1 | 描画インク | 2.6 | 2.1 | 2.6 | 2.39 | ○ |
-| main-back:sections.0.reasons.2 | 描画インク | 2.6 | 1.98 | 2.6 | 2.57 | ○ |
-| main-back:sections.0.reasons.3 | 描画インク | 2.6 | 2.45 | 2.6 | 1.38 | ○ |
-| main-back:sections.0.reasons.4 | 描画インク | 2.6 | 2.63 | 2.6 | 2.33 | × |
-| main-back:sections.0.daily.0.0 | 描画インク | 2.4 | 1.14 | 2.4 | 1.98 | ○ |
-| main-back:sections.0.daily.0.1 | 描画インク | 2.4 | 1.44 | 2.4 | 1.98 | ○ |
-| main-back:sections.0.daily.0.2 | 描画インク | 2.4 | 1.38 | 2.4 | 2.1 | ○ |
-| main-back:sections.0.daily.0.3 | 描画インク | 2.4 | 1.62 | 2.4 | 1.98 | ○ |
-| main-back:sections.0.daily.0.4 | 描画インク | 2.4 | 1.14 | 2.4 | 1.98 | ○ |
-| main-back:sections.0.daily.0.5 | 描画インク | 2.4 | 1.44 | 2.4 | 1.98 | ○ |
-| main-back:sections.0.daily.0.6 | 描画インク | 2.4 | 1.44 | 2.4 | 2.1 | ○ |
-| main-back:sections.0.daily.0.7 | 描画インク | 2.4 | 1.62 | 2.4 | 1.98 | ○ |
-| main-back:sections.0.daily.1.0 | 描画インク | 2.4 | 1.14 | 2.4 | 1.98 | ○ |
-| main-back:sections.0.daily.1.1 | 描画インク | 2.4 | 1.44 | 2.4 | 1.98 | ○ |
-| main-back:sections.0.daily.1.2 | 描画インク | 2.4 | 1.38 | 2.4 | 2.1 | ○ |
-| main-back:sections.0.daily.1.3 | 描画インク | 2.4 | 1.62 | 2.4 | 1.98 | ○ |
-| main-back:sections.0.daily.1.4 | 描画インク | 2.4 | 1.14 | 2.4 | 1.98 | ○ |
-| main-back:sections.0.daily.1.5 | 描画インク | 2.4 | 1.44 | 2.4 | 1.98 | ○ |
-| main-back:sections.0.daily.1.6 | 描画インク | 2.4 | 1.44 | 2.4 | 2.1 | ○ |
-| main-back:sections.0.daily.1.7 | 描画インク | 2.4 | 1.62 | 2.4 | 1.98 | ○ |
-| main-back:sections.0.daily.2.0 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.2.1 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.2.2 | 描画インク | 2.4 | 1.38 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.2.3 | 描画インク | 2.4 | 1.62 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.2.4 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.2.5 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.2.6 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.2.7 | 描画インク | 2.4 | 1.62 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.3.0 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.3.1 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.3.2 | 描画インク | 2.4 | 1.38 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.3.3 | 描画インク | 2.4 | 1.62 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.3.4 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.3.5 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.3.6 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.3.7 | 描画インク | 2.4 | 1.62 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.4.0 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.4.1 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.4.2 | 描画インク | 2.4 | 1.38 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.4.3 | 描画インク | 2.4 | 1.62 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.4.4 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.4.5 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.4.6 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.0.daily.4.7 | 描画インク | 2.4 | 1.62 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.reasons.0 | 描画インク | 2.6 | 2.33 | 2.6 | 2.16 | ○ |
-| main-back:sections.1.reasons.1 | 描画インク | 2.6 | 2.1 | 2.6 | 2.39 | ○ |
-| main-back:sections.1.reasons.2 | 描画インク | 2.6 | 1.98 | 2.6 | 2.51 | ○ |
-| main-back:sections.1.reasons.3 | 描画インク | 2.6 | 2.51 | 2.6 | 1.38 | ○ |
-| main-back:sections.1.reasons.4 | 描画インク | 2.6 | 2.63 | 2.6 | 2.33 | × |
-| main-back:sections.1.daily.0.0 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.0.1 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.0.2 | 描画インク | 2.4 | 1.38 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.0.3 | 描画インク | 2.4 | 1.56 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.0.4 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.0.5 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.0.6 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.0.7 | 描画インク | 2.4 | 1.62 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.1.0 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.1.1 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.1.2 | 描画インク | 2.4 | 1.38 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.1.3 | 描画インク | 2.4 | 1.56 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.1.4 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.1.5 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.1.6 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.1.7 | 描画インク | 2.4 | 1.62 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.2.0 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.2.1 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.2.2 | 描画インク | 2.4 | 1.38 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.2.3 | 描画インク | 2.4 | 1.56 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.2.4 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.2.5 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.2.6 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.2.7 | 描画インク | 2.4 | 1.62 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.3.0 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.3.1 | 描画インク | 2.4 | 1.44 | 2.4 | 1.98 | ○ |
-| main-back:sections.1.daily.3.2 | 描画インク | 2.4 | 1.38 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.3.3 | 描画インク | 2.4 | 1.56 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.3.4 | 描画インク | 2.4 | 1.14 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.3.5 | 描画インク | 2.4 | 1.44 | 2.4 | 1.98 | ○ |
-| main-back:sections.1.daily.3.6 | 描画インク | 2.4 | 1.44 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.3.7 | 描画インク | 2.4 | 1.62 | 2.4 | 2.04 | ○ |
-| main-back:sections.1.daily.4.0 | 描画インク | 2.4 | 1.14 | 2.4 | 1.98 | ○ |
-| main-back:sections.1.daily.4.1 | 描画インク | 2.4 | 1.44 | 2.4 | 1.98 | ○ |
-| main-back:sections.1.daily.4.2 | 描画インク | 2.4 | 1.38 | 2.4 | 2.1 | ○ |
-| main-back:sections.1.daily.4.3 | 描画インク | 2.4 | 1.62 | 2.4 | 1.98 | ○ |
-| main-back:sections.1.daily.4.4 | 描画インク | 2.4 | 1.14 | 2.4 | 1.98 | ○ |
-| main-back:sections.1.daily.4.5 | 描画インク | 2.4 | 1.44 | 2.4 | 1.98 | ○ |
-| main-back:sections.1.daily.4.6 | 描画インク | 2.4 | 1.44 | 2.4 | 2.1 | ○ |
-| main-back:sections.1.daily.4.7 | 描画インク | 2.4 | 1.62 | 2.4 | 1.98 | ○ |
-| main-back:techouKofu.0 | 描画インク | 2.6 | 1.14 | 2.6 | 2.04 | ○ |
-| main-back:techouKofu.1 | 描画インク | 2.6 | 1.44 | 2.6 | 2.04 | ○ |
-| main-back:techouKofu.2 | 描画インク | 2.6 | 1.38 | 2.6 | 2.04 | ○ |
-| main-back:techou.0.kinds.0 | 描画インク | 2.4 | 2.69 | 2.4 | 2.69 | × |
-| main-back:techou.0.kinds.1 | 描画インク | 2.4 | 2.75 | 2.4 | 2.63 | × |
-| main-back:techou.0.kinds.2 | 描画インク | 2.4 | 2.69 | 2.4 | 2.63 | × |
-| main-back:techou.0.kinds.3 | 描画インク | 2.4 | 2.69 | 2.4 | 2.63 | × |
-| main-back:techou.0.date.gengou.showa | 実文字 | 4.4 | 5.42 | 2.7 | 3 | × |
-| main-back:techou.0.date.gengou.heisei | 実文字 | 4.4 | 5.42 | 2.7 | 3 | × |
-| main-back:techou.0.date.gengou.reiwa | 実文字 | 4.4 | 5.56 | 2.7 | 3 | × |
-| main-back:techou.1.kinds.0 | 描画インク | 2.4 | 2.69 | 2.4 | 2.69 | × |
-| main-back:techou.1.kinds.1 | 描画インク | 2.4 | 2.75 | 2.4 | 2.63 | × |
-| main-back:techou.1.kinds.2 | 描画インク | 2.4 | 2.69 | 2.4 | 2.63 | × |
-| main-back:techou.1.kinds.3 | 描画インク | 2.4 | 2.69 | 2.4 | 2.63 | × |
-| main-back:techou.1.date.gengou.showa | 実文字 | 4.4 | 5.43 | 2.7 | 3 | × |
-| main-back:techou.1.date.gengou.heisei | 実文字 | 4.4 | 5.42 | 2.7 | 3 | × |
-| main-back:techou.1.date.gengou.reiwa | 実文字 | 4.4 | 5.56 | 2.7 | 3 | × |
-| cont-front:rows.0.from.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-front:rows.0.from.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.35 | × |
-| cont-front:rows.0.from.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-front:rows.0.to.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.0.to.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.34 | × |
-| cont-front:rows.0.to.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.0.jushinAri | 実文字 | 5.8 | 7.4 | 1.9 | 1.82 | × |
-| cont-front:rows.0.jushinNashi | 実文字 | 9.7 | 12.96 | 1.9 | 1.82 | × |
-| cont-front:rows.1.from.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.1.from.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.34 | × |
-| cont-front:rows.1.from.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.1.to.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.1.to.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.34 | × |
-| cont-front:rows.1.to.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.1.jushinAri | 実文字 | 5.8 | 7.4 | 1.9 | 1.82 | × |
-| cont-front:rows.1.jushinNashi | 実文字 | 9.7 | 12.96 | 1.9 | 1.82 | × |
-| cont-front:rows.2.from.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-front:rows.2.from.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.35 | × |
-| cont-front:rows.2.from.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-front:rows.2.to.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.2.to.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.34 | × |
-| cont-front:rows.2.to.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.2.jushinAri | 実文字 | 5.8 | 7.4 | 1.9 | 1.82 | × |
-| cont-front:rows.2.jushinNashi | 実文字 | 9.7 | 12.96 | 1.9 | 1.82 | × |
-| cont-front:rows.3.from.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.3.from.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.34 | × |
-| cont-front:rows.3.from.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.3.to.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.3.to.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.34 | × |
-| cont-front:rows.3.to.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.3.jushinAri | 実文字 | 5.8 | 7.4 | 1.9 | 1.82 | × |
-| cont-front:rows.3.jushinNashi | 実文字 | 9.7 | 12.96 | 1.9 | 1.82 | × |
-| cont-front:rows.4.from.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.4.from.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.34 | × |
-| cont-front:rows.4.from.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-front:rows.4.to.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-front:rows.4.to.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.35 | × |
-| cont-front:rows.4.to.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-front:rows.4.jushinAri | 実文字 | 5.8 | 7.4 | 1.9 | 1.82 | × |
-| cont-front:rows.4.jushinNashi | 実文字 | 9.7 | 12.96 | 1.9 | 1.82 | × |
-| cont-back:rows.0.from.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-back:rows.0.from.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.34 | × |
-| cont-back:rows.0.from.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-back:rows.0.to.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.0.to.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.35 | × |
-| cont-back:rows.0.to.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.0.jushinAri | 実文字 | 5.8 | 7.4 | 1.9 | 1.82 | × |
-| cont-back:rows.0.jushinNashi | 実文字 | 9.7 | 12.96 | 1.9 | 1.82 | × |
-| cont-back:rows.1.from.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.1.from.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.35 | × |
-| cont-back:rows.1.from.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.1.to.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-back:rows.1.to.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.34 | × |
-| cont-back:rows.1.to.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-back:rows.1.jushinAri | 実文字 | 5.8 | 7.4 | 1.9 | 1.82 | × |
-| cont-back:rows.1.jushinNashi | 実文字 | 9.7 | 12.96 | 1.9 | 1.82 | × |
-| cont-back:rows.2.from.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-back:rows.2.from.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.34 | × |
-| cont-back:rows.2.from.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-back:rows.2.to.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.2.to.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.35 | × |
-| cont-back:rows.2.to.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.2.jushinAri | 実文字 | 5.8 | 7.4 | 1.9 | 1.82 | × |
-| cont-back:rows.2.jushinNashi | 実文字 | 9.7 | 12.96 | 1.9 | 1.82 | × |
-| cont-back:rows.3.from.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.3.from.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.35 | × |
-| cont-back:rows.3.from.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.3.to.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.3.to.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.35 | × |
-| cont-back:rows.3.to.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.3.jushinAri | 実文字 | 5.8 | 7.4 | 1.9 | 1.83 | × |
-| cont-back:rows.3.jushinNashi | 実文字 | 9.7 | 12.96 | 1.9 | 1.83 | × |
-| cont-back:rows.4.from.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-back:rows.4.from.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.34 | × |
-| cont-back:rows.4.from.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-back:rows.4.to.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-back:rows.4.to.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.34 | × |
-| cont-back:rows.4.to.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.34 | × |
-| cont-back:rows.4.jushinAri | 実文字 | 5.8 | 7.4 | 1.9 | 1.82 | × |
-| cont-back:rows.4.jushinNashi | 実文字 | 9.7 | 12.96 | 1.9 | 1.82 | × |
-| cont-back:rows.5.from.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.5.from.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.35 | × |
-| cont-back:rows.5.from.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.5.to.gengou.showa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.5.to.gengou.heisei | 実文字 | 2.5 | 2.74 | 1.5 | 1.35 | × |
-| cont-back:rows.5.to.gengou.reiwa | 実文字 | 2.5 | 2.72 | 1.5 | 1.35 | × |
-| cont-back:rows.5.jushinAri | 実文字 | 5.8 | 7.4 | 1.9 | 1.82 | × |
-| cont-back:rows.5.jushinNashi | 実文字 | 9.7 | 12.96 | 1.9 | 1.82 | × |
+| 欄 | 出典 | a(半幅) | b(半高) | rx | ry | (a/rx)²+(b/ry)² | 含む | 足りなければ k |
+|---|---|---|---|---|---|---|---|---|
+| main-front:hatsubyou.gengou.showa | 実文字 | 4.57 | 2.47 | 6.6 | 3.8 | 0.9 | ○ |  |
+| main-front:hatsubyou.gengou.heisei | 実文字 | 4.58 | 2.47 | 6.6 | 3.8 | 0.9 | ○ |  |
+| main-front:hatsubyou.gengou.reiwa | 実文字 | 4.69 | 2.47 | 6.6 | 3.8 | 0.93 | ○ |  |
+| main-front:shoshin.gengou.showa | 実文字 | 4.58 | 2.47 | 6.6 | 3.8 | 0.9 | ○ |  |
+| main-front:shoshin.gengou.heisei | 実文字 | 4.58 | 2.47 | 6.6 | 3.8 | 0.9 | ○ |  |
+| main-front:shoshin.gengou.reiwa | 実文字 | 4.69 | 2.47 | 6.6 | 3.8 | 0.93 | ○ |  |
+| main-front:rows.0.from.gengou.showa | 実文字 | 3.84 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.0.from.gengou.heisei | 実文字 | 3.84 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.0.from.gengou.reiwa | 実文字 | 3.93 | 2.12 | 5.4 | 3.31 | 0.94 | ○ |  |
+| main-front:rows.0.to.gengou.showa | 実文字 | 3.84 | 2.11 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.0.to.gengou.heisei | 実文字 | 3.84 | 2.11 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.0.to.gengou.reiwa | 実文字 | 3.93 | 2.11 | 5.4 | 3.31 | 0.94 | ○ |  |
+| main-front:rows.0.jushinAri | 描画インク | 8.04 | 1.91 | 10.56 | 3.18 | 0.94 | ○ |  |
+| main-front:rows.0.jushinNashi | 描画インク | 14.31 | 1.91 | 18.31 | 3.31 | 0.94 | ○ |  |
+| main-front:rows.1.from.gengou.showa | 実文字 | 3.83 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.1.from.gengou.heisei | 実文字 | 3.84 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.1.from.gengou.reiwa | 実文字 | 3.94 | 2.12 | 5.4 | 3.31 | 0.94 | ○ |  |
+| main-front:rows.1.to.gengou.showa | 実文字 | 3.83 | 2.11 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.1.to.gengou.heisei | 実文字 | 3.84 | 2.11 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.1.to.gengou.reiwa | 実文字 | 3.94 | 2.11 | 5.4 | 3.31 | 0.94 | ○ |  |
+| main-front:rows.1.jushinAri | 描画インク | 8.04 | 1.86 | 10.56 | 3.18 | 0.92 | ○ |  |
+| main-front:rows.1.jushinNashi | 描画インク | 14.31 | 1.86 | 18.31 | 3.31 | 0.93 | ○ |  |
+| main-front:rows.2.from.gengou.showa | 実文字 | 3.83 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.2.from.gengou.heisei | 実文字 | 3.84 | 2.12 | 5.4 | 3.31 | 0.92 | ○ |  |
+| main-front:rows.2.from.gengou.reiwa | 実文字 | 3.94 | 2.12 | 5.4 | 3.31 | 0.94 | ○ |  |
+| main-front:rows.2.to.gengou.showa | 実文字 | 3.83 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.2.to.gengou.heisei | 実文字 | 3.84 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.2.to.gengou.reiwa | 実文字 | 3.94 | 2.12 | 5.4 | 3.31 | 0.94 | ○ |  |
+| main-front:rows.2.jushinAri | 描画インク | 8.04 | 1.91 | 10.56 | 3.18 | 0.94 | ○ |  |
+| main-front:rows.2.jushinNashi | 描画インク | 14.31 | 1.91 | 18.31 | 3.31 | 0.94 | ○ |  |
+| main-front:rows.3.from.gengou.showa | 実文字 | 3.83 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.3.from.gengou.heisei | 実文字 | 3.84 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.3.from.gengou.reiwa | 実文字 | 3.94 | 2.12 | 5.4 | 3.31 | 0.94 | ○ |  |
+| main-front:rows.3.to.gengou.showa | 実文字 | 3.83 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.3.to.gengou.heisei | 実文字 | 3.84 | 2.12 | 5.4 | 3.31 | 0.92 | ○ |  |
+| main-front:rows.3.to.gengou.reiwa | 実文字 | 3.94 | 2.12 | 5.4 | 3.31 | 0.94 | ○ |  |
+| main-front:rows.3.jushinAri | 描画インク | 8.04 | 1.86 | 10.56 | 3.18 | 0.92 | ○ |  |
+| main-front:rows.3.jushinNashi | 描画インク | 14.31 | 1.86 | 18.31 | 3.31 | 0.93 | ○ |  |
+| main-front:rows.4.from.gengou.showa | 実文字 | 3.83 | 2.11 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.4.from.gengou.heisei | 実文字 | 3.84 | 2.11 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.4.from.gengou.reiwa | 実文字 | 3.94 | 2.11 | 5.4 | 3.31 | 0.94 | ○ |  |
+| main-front:rows.4.to.gengou.showa | 実文字 | 3.83 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-front:rows.4.to.gengou.heisei | 実文字 | 3.84 | 2.12 | 5.4 | 3.31 | 0.92 | ○ |  |
+| main-front:rows.4.to.gengou.reiwa | 実文字 | 3.94 | 2.12 | 5.4 | 3.31 | 0.94 | ○ |  |
+| main-front:rows.4.jushinAri | 描画インク | 8.04 | 1.91 | 10.56 | 3.18 | 0.94 | ○ |  |
+| main-front:rows.4.jushinNashi | 描画インク | 14.31 | 1.91 | 18.31 | 3.31 | 0.94 | ○ |  |
+| main-back:ninteibi.gengou.showa | 実文字 | 4.94 | 2.47 | 6.79 | 3.85 | 0.94 | ○ |  |
+| main-back:ninteibi.gengou.heisei | 実文字 | 4.94 | 2.47 | 6.79 | 3.85 | 0.94 | ○ |  |
+| main-back:ninteibi.gengou.reiwa | 実文字 | 4.94 | 2.47 | 6.79 | 3.85 | 0.94 | ○ |  |
+| main-back:sections.0.reasons.0 | 描画インク | 1.65 | 1.57 | 2.6 | 2.6 | 0.77 | ○ |  |
+| main-back:sections.0.reasons.1 | 描画インク | 1.48 | 1.69 | 2.6 | 2.6 | 0.75 | ○ |  |
+| main-back:sections.0.reasons.2 | 描画インク | 1.4 | 1.82 | 2.6 | 2.6 | 0.78 | ○ |  |
+| main-back:sections.0.reasons.3 | 描画インク | 1.74 | 0.97 | 2.6 | 2.6 | 0.59 | ○ |  |
+| main-back:sections.0.reasons.4 | 描画インク | 1.86 | 1.65 | 2.6 | 2.6 | 0.92 | ○ |  |
+| main-back:sections.0.daily.0.0 | 描画インク | 0.8 | 1.4 | 2.4 | 2.4 | 0.45 | ○ |  |
+| main-back:sections.0.daily.0.1 | 描画インク | 1.02 | 1.4 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.0.daily.0.2 | 描画インク | 0.97 | 1.48 | 2.4 | 2.4 | 0.55 | ○ |  |
+| main-back:sections.0.daily.0.3 | 描画インク | 1.14 | 1.4 | 2.4 | 2.4 | 0.57 | ○ |  |
+| main-back:sections.0.daily.0.4 | 描画インク | 0.8 | 1.4 | 2.4 | 2.4 | 0.45 | ○ |  |
+| main-back:sections.0.daily.0.5 | 描画インク | 1.02 | 1.4 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.0.daily.0.6 | 描画インク | 1.02 | 1.48 | 2.4 | 2.4 | 0.56 | ○ |  |
+| main-back:sections.0.daily.0.7 | 描画インク | 1.14 | 1.4 | 2.4 | 2.4 | 0.57 | ○ |  |
+| main-back:sections.0.daily.1.0 | 描画インク | 0.8 | 1.4 | 2.4 | 2.4 | 0.45 | ○ |  |
+| main-back:sections.0.daily.1.1 | 描画インク | 1.02 | 1.4 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.0.daily.1.2 | 描画インク | 0.97 | 1.48 | 2.4 | 2.4 | 0.55 | ○ |  |
+| main-back:sections.0.daily.1.3 | 描画インク | 1.14 | 1.4 | 2.4 | 2.4 | 0.57 | ○ |  |
+| main-back:sections.0.daily.1.4 | 描画インク | 0.8 | 1.4 | 2.4 | 2.4 | 0.45 | ○ |  |
+| main-back:sections.0.daily.1.5 | 描画インク | 1.02 | 1.4 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.0.daily.1.6 | 描画インク | 1.02 | 1.48 | 2.4 | 2.4 | 0.56 | ○ |  |
+| main-back:sections.0.daily.1.7 | 描画インク | 1.14 | 1.4 | 2.4 | 2.4 | 0.57 | ○ |  |
+| main-back:sections.0.daily.2.0 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.0.daily.2.1 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.0.daily.2.2 | 描画インク | 0.97 | 1.44 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.0.daily.2.3 | 描画インク | 1.14 | 1.44 | 2.4 | 2.4 | 0.59 | ○ |  |
+| main-back:sections.0.daily.2.4 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.0.daily.2.5 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.0.daily.2.6 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.0.daily.2.7 | 描画インク | 1.14 | 1.44 | 2.4 | 2.4 | 0.59 | ○ |  |
+| main-back:sections.0.daily.3.0 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.0.daily.3.1 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.0.daily.3.2 | 描画インク | 0.97 | 1.44 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.0.daily.3.3 | 描画インク | 1.14 | 1.44 | 2.4 | 2.4 | 0.59 | ○ |  |
+| main-back:sections.0.daily.3.4 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.0.daily.3.5 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.0.daily.3.6 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.0.daily.3.7 | 描画インク | 1.14 | 1.44 | 2.4 | 2.4 | 0.59 | ○ |  |
+| main-back:sections.0.daily.4.0 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.0.daily.4.1 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.0.daily.4.2 | 描画インク | 0.97 | 1.44 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.0.daily.4.3 | 描画インク | 1.14 | 1.44 | 2.4 | 2.4 | 0.59 | ○ |  |
+| main-back:sections.0.daily.4.4 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.0.daily.4.5 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.0.daily.4.6 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.0.daily.4.7 | 描画インク | 1.14 | 1.44 | 2.4 | 2.4 | 0.59 | ○ |  |
+| main-back:sections.1.reasons.0 | 描画インク | 1.65 | 1.52 | 2.6 | 2.6 | 0.75 | ○ |  |
+| main-back:sections.1.reasons.1 | 描画インク | 1.48 | 1.69 | 2.6 | 2.6 | 0.75 | ○ |  |
+| main-back:sections.1.reasons.2 | 描画インク | 1.4 | 1.78 | 2.6 | 2.6 | 0.76 | ○ |  |
+| main-back:sections.1.reasons.3 | 描画インク | 1.78 | 0.97 | 2.6 | 2.6 | 0.61 | ○ |  |
+| main-back:sections.1.reasons.4 | 描画インク | 1.86 | 1.65 | 2.6 | 2.6 | 0.92 | ○ |  |
+| main-back:sections.1.daily.0.0 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.1.daily.0.1 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.1.daily.0.2 | 描画インク | 0.97 | 1.44 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.1.daily.0.3 | 描画インク | 1.1 | 1.44 | 2.4 | 2.4 | 0.57 | ○ |  |
+| main-back:sections.1.daily.0.4 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.1.daily.0.5 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.1.daily.0.6 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.1.daily.0.7 | 描画インク | 1.14 | 1.44 | 2.4 | 2.4 | 0.59 | ○ |  |
+| main-back:sections.1.daily.1.0 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.1.daily.1.1 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.1.daily.1.2 | 描画インク | 0.97 | 1.44 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.1.daily.1.3 | 描画インク | 1.1 | 1.44 | 2.4 | 2.4 | 0.57 | ○ |  |
+| main-back:sections.1.daily.1.4 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.1.daily.1.5 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.1.daily.1.6 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.1.daily.1.7 | 描画インク | 1.14 | 1.44 | 2.4 | 2.4 | 0.59 | ○ |  |
+| main-back:sections.1.daily.2.0 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.1.daily.2.1 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.1.daily.2.2 | 描画インク | 0.97 | 1.44 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.1.daily.2.3 | 描画インク | 1.1 | 1.44 | 2.4 | 2.4 | 0.57 | ○ |  |
+| main-back:sections.1.daily.2.4 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.1.daily.2.5 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.1.daily.2.6 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.1.daily.2.7 | 描画インク | 1.14 | 1.44 | 2.4 | 2.4 | 0.59 | ○ |  |
+| main-back:sections.1.daily.3.0 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.1.daily.3.1 | 描画インク | 1.02 | 1.4 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.1.daily.3.2 | 描画インク | 0.97 | 1.44 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.1.daily.3.3 | 描画インク | 1.1 | 1.44 | 2.4 | 2.4 | 0.57 | ○ |  |
+| main-back:sections.1.daily.3.4 | 描画インク | 0.8 | 1.44 | 2.4 | 2.4 | 0.47 | ○ |  |
+| main-back:sections.1.daily.3.5 | 描画インク | 1.02 | 1.4 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.1.daily.3.6 | 描画インク | 1.02 | 1.44 | 2.4 | 2.4 | 0.54 | ○ |  |
+| main-back:sections.1.daily.3.7 | 描画インク | 1.14 | 1.44 | 2.4 | 2.4 | 0.59 | ○ |  |
+| main-back:sections.1.daily.4.0 | 描画インク | 0.8 | 1.4 | 2.4 | 2.4 | 0.45 | ○ |  |
+| main-back:sections.1.daily.4.1 | 描画インク | 1.02 | 1.4 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.1.daily.4.2 | 描画インク | 0.97 | 1.48 | 2.4 | 2.4 | 0.55 | ○ |  |
+| main-back:sections.1.daily.4.3 | 描画インク | 1.14 | 1.4 | 2.4 | 2.4 | 0.57 | ○ |  |
+| main-back:sections.1.daily.4.4 | 描画インク | 0.8 | 1.4 | 2.4 | 2.4 | 0.45 | ○ |  |
+| main-back:sections.1.daily.4.5 | 描画インク | 1.02 | 1.4 | 2.4 | 2.4 | 0.52 | ○ |  |
+| main-back:sections.1.daily.4.6 | 描画インク | 1.02 | 1.48 | 2.4 | 2.4 | 0.56 | ○ |  |
+| main-back:sections.1.daily.4.7 | 描画インク | 1.14 | 1.4 | 2.4 | 2.4 | 0.57 | ○ |  |
+| main-back:techouKofu.0 | 描画インク | 0.8 | 1.44 | 2.6 | 2.6 | 0.4 | ○ |  |
+| main-back:techouKofu.1 | 描画インク | 1.02 | 1.44 | 2.6 | 2.6 | 0.46 | ○ |  |
+| main-back:techouKofu.2 | 描画インク | 0.97 | 1.44 | 2.6 | 2.6 | 0.45 | ○ |  |
+| main-back:techou.0.kinds.0 | 描画インク | 1.91 | 1.91 | 2.78 | 2.78 | 0.94 | ○ |  |
+| main-back:techou.0.kinds.1 | 描画インク | 1.95 | 1.86 | 2.78 | 2.78 | 0.94 | ○ |  |
+| main-back:techou.0.kinds.2 | 描画インク | 1.91 | 1.86 | 2.78 | 2.78 | 0.92 | ○ |  |
+| main-back:techou.0.kinds.3 | 描画インク | 1.95 | 1.86 | 2.78 | 2.78 | 0.94 | ○ |  |
+| main-back:techou.0.date.gengou.showa | 実文字 | 3.83 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-back:techou.0.date.gengou.heisei | 実文字 | 3.83 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-back:techou.0.date.gengou.reiwa | 実文字 | 3.94 | 2.12 | 5.4 | 3.31 | 0.94 | ○ |  |
+| main-back:techou.1.kinds.0 | 描画インク | 1.91 | 1.91 | 2.78 | 2.78 | 0.94 | ○ |  |
+| main-back:techou.1.kinds.1 | 描画インク | 1.95 | 1.86 | 2.78 | 2.78 | 0.94 | ○ |  |
+| main-back:techou.1.kinds.2 | 描画インク | 1.91 | 1.86 | 2.78 | 2.78 | 0.92 | ○ |  |
+| main-back:techou.1.kinds.3 | 描画インク | 1.95 | 1.86 | 2.78 | 2.78 | 0.94 | ○ |  |
+| main-back:techou.1.date.gengou.showa | 実文字 | 3.84 | 2.12 | 5.4 | 3.31 | 0.92 | ○ |  |
+| main-back:techou.1.date.gengou.heisei | 実文字 | 3.83 | 2.12 | 5.4 | 3.31 | 0.91 | ○ |  |
+| main-back:techou.1.date.gengou.reiwa | 実文字 | 3.93 | 2.12 | 5.4 | 3.31 | 0.94 | ○ |  |
+| cont-front:rows.0.from.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.0.from.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.0.from.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.0.to.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.0.to.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.0.to.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.0.jushinAri | 実文字 | 5.23 | 1.29 | 6.76 | 2.21 | 0.94 | ○ |  |
+| cont-front:rows.0.jushinNashi | 実文字 | 9.17 | 1.29 | 11.65 | 2.28 | 0.94 | ○ |  |
+| cont-front:rows.1.from.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.1.from.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.1.from.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.1.to.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.1.to.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.1.to.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.1.jushinAri | 実文字 | 5.23 | 1.29 | 6.76 | 2.21 | 0.94 | ○ |  |
+| cont-front:rows.1.jushinNashi | 実文字 | 9.17 | 1.29 | 11.65 | 2.28 | 0.94 | ○ |  |
+| cont-front:rows.2.from.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.2.from.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.2.from.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.2.to.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.2.to.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.2.to.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.2.jushinAri | 実文字 | 5.23 | 1.29 | 6.76 | 2.21 | 0.94 | ○ |  |
+| cont-front:rows.2.jushinNashi | 実文字 | 9.17 | 1.29 | 11.65 | 2.28 | 0.94 | ○ |  |
+| cont-front:rows.3.from.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.3.from.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.3.from.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.3.to.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.3.to.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.3.to.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.3.jushinAri | 実文字 | 5.23 | 1.29 | 6.76 | 2.21 | 0.94 | ○ |  |
+| cont-front:rows.3.jushinNashi | 実文字 | 9.17 | 1.29 | 11.65 | 2.28 | 0.94 | ○ |  |
+| cont-front:rows.4.from.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.4.from.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.4.from.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-front:rows.4.to.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.4.to.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.4.to.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-front:rows.4.jushinAri | 実文字 | 5.23 | 1.29 | 6.76 | 2.21 | 0.94 | ○ |  |
+| cont-front:rows.4.jushinNashi | 実文字 | 9.17 | 1.29 | 11.65 | 2.28 | 0.94 | ○ |  |
+| cont-back:rows.0.from.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-back:rows.0.from.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.0.from.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-back:rows.0.to.gengou.showa | 実文字 | 1.93 | 0.96 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.0.to.gengou.heisei | 実文字 | 1.94 | 0.96 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.0.to.gengou.reiwa | 実文字 | 1.93 | 0.96 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.0.jushinAri | 実文字 | 5.23 | 1.29 | 6.76 | 2.21 | 0.94 | ○ |  |
+| cont-back:rows.0.jushinNashi | 実文字 | 9.17 | 1.29 | 11.65 | 2.28 | 0.94 | ○ |  |
+| cont-back:rows.1.from.gengou.showa | 実文字 | 1.93 | 0.96 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.1.from.gengou.heisei | 実文字 | 1.94 | 0.96 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.1.from.gengou.reiwa | 実文字 | 1.93 | 0.96 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.1.to.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-back:rows.1.to.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.1.to.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-back:rows.1.jushinAri | 実文字 | 5.23 | 1.29 | 6.76 | 2.21 | 0.94 | ○ |  |
+| cont-back:rows.1.jushinNashi | 実文字 | 9.17 | 1.29 | 11.65 | 2.28 | 0.94 | ○ |  |
+| cont-back:rows.2.from.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-back:rows.2.from.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.2.from.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-back:rows.2.to.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.2.to.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.2.to.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.2.jushinAri | 実文字 | 5.23 | 1.29 | 6.76 | 2.21 | 0.94 | ○ |  |
+| cont-back:rows.2.jushinNashi | 実文字 | 9.17 | 1.29 | 11.65 | 2.28 | 0.94 | ○ |  |
+| cont-back:rows.3.from.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.3.from.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.3.from.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.3.to.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.3.to.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.3.to.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.3.jushinAri | 実文字 | 5.23 | 1.3 | 6.76 | 2.21 | 0.94 | ○ |  |
+| cont-back:rows.3.jushinNashi | 実文字 | 9.17 | 1.3 | 11.65 | 2.28 | 0.94 | ○ |  |
+| cont-back:rows.4.from.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-back:rows.4.from.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.4.from.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-back:rows.4.to.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-back:rows.4.to.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.4.to.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.93 | ○ |  |
+| cont-back:rows.4.jushinAri | 実文字 | 5.23 | 1.29 | 6.76 | 2.21 | 0.94 | ○ |  |
+| cont-back:rows.4.jushinNashi | 実文字 | 9.17 | 1.29 | 11.65 | 2.28 | 0.94 | ○ |  |
+| cont-back:rows.5.from.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.5.from.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.5.from.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.5.to.gengou.showa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.5.to.gengou.heisei | 実文字 | 1.94 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.5.to.gengou.reiwa | 実文字 | 1.93 | 0.95 | 2.58 | 1.55 | 0.94 | ○ |  |
+| cont-back:rows.5.jushinAri | 実文字 | 5.23 | 1.29 | 6.76 | 2.21 | 0.94 | ○ |  |
+| cont-back:rows.5.jushinNashi | 実文字 | 9.17 | 1.29 | 11.65 | 2.28 | 0.94 | ○ |  |

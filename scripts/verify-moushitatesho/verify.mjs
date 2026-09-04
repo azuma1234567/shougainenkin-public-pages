@@ -1,55 +1,199 @@
+/* 申立書ツールの、様式の位置以外の完了条件(設計 §14 / 指示書2 §3)。
+     npm run build && node scripts/verify-moushitatesho/verify.mjs
+   位置の検証は scripts/verify-moushitatesho-layout.mjs のほう。
+   2026-09-04 に v2 用へ書き直した(旧版は v1 のデータと旧クラス名を前提にしていた)。 */
 import { chromium } from "playwright";
-import { spawn,execFileSync } from "node:child_process";
-import { existsSync,mkdirSync,writeFileSync,readFileSync } from "node:fs";
-import path from "node:path";
-import assert from "node:assert/strict";
-import { fixtures,state } from "./fixtures.mjs";
+import { execFileSync, spawn } from "node:child_process";
+import { readFileSync } from "node:fs";
+import { SAMPLES } from "./samples.mjs";
 
-const root=process.cwd(), out=path.join(root,"docs/verification/dougu-moushitatesho-2026-09-03"), pdf=path.join(out,"pdf"), png=path.join(out,"png"), overlay=path.join(out,"overlay");
-mkdirSync(pdf,{recursive:true});mkdirSync(png,{recursive:true});mkdirSync(overlay,{recursive:true});
-const chrome=process.env.CHROME_PATH||"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const server=spawn("npm",["run","start","--","-p","3110"],{cwd:root,stdio:"ignore"});
-const sleep=ms=>new Promise(r=>setTimeout(r,ms)); let ready=false;for(let i=0;i<60;i++){try{if((await fetch("http://127.0.0.1:3110/dougu/moushitatesho")).ok){ready=true;break}}catch{}await sleep(1000)}if(!ready){server.kill("SIGTERM");throw new Error("verification server did not start")}
-const browser=await chromium.launch({headless:true,executablePath:chrome,args:["--font-render-hinting=none"]});
-const rows=[], overflows=[], roundtrips=[];
-async function startAndReachFinish(page){
-  if(!await page.getByRole("button",{name:"次へ"}).isVisible().catch(()=>false)){
-    const entry=page.getByRole("button",{name:/^(はじめる|続きから)$/}).first();
-    await entry.waitFor();
-    await entry.click();
-  }
-  for(let i=0;i<30;i++){
-    if(await page.getByRole("link",{name:"印刷プレビューを開く"}).isVisible().catch(()=>false))return;
-    const next=page.getByRole("button",{name:"次へ"});
-    if(!await next.isVisible().catch(()=>false))break;
-    await next.click();
-  }
-  await page.getByRole("link",{name:"印刷プレビューを開く"}).waitFor();
+const PORT = process.env.MT_PORT ?? "3261";
+const CHROME = process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const TOOL_URL = `http://127.0.0.1:${PORT}/dougu/moushitatesho`;
+const PRINT_URL = `${TOOL_URL}/insatsu`;
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+const SOURCES = [
+  "components/tools/MoushitateshoTool.tsx", "components/tools/MoushitateshoPrint.tsx",
+  "components/tools/MoushitateshoSheet.tsx", "components/tools/MoushitateshoCapacity.tsx",
+  "lib/moushitatesho-storage.ts", "lib/moushitatesho-sheets.ts", "lib/moushitatesho-tel.ts",
+  "lib/wareki.ts", "data/moushitatesho/types.ts", "data/moushitatesho/layout.ts",
+  "app/dougu/moushitatesho/page.tsx", "app/dougu/moushitatesho/insatsu/page.tsx",
+];
+const src = (f) => readFileSync(f, "utf8");
+const stripComments = (t) => t.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/(^|[^:])\/\/[^\n]*/g, "$1 ");
+
+const results = [];
+const check = (id, label, fn) => {
+  try { results.push({ id, label, ok: true, note: fn() ?? "" }); }
+  catch (e) { results.push({ id, label, ok: false, note: e.message.split("\n")[0] }); }
+};
+const fail = (m) => { throw new Error(m); };
+
+try { execFileSync("bash", ["-c", `lsof -ti tcp:${PORT} | xargs -r kill`], { stdio: "ignore" }); } catch { /* 居なければよい */ }
+await sleep(400);
+const server = spawn("npm", ["run", "start", "--", "-p", PORT], { stdio: "ignore" });
+let ready = false;
+for (let i = 0; i < 90; i += 1) {
+  try { if ((await fetch(TOOL_URL)).ok) { ready = true; break; } } catch { /* まだ */ }
+  await sleep(1000);
 }
-async function printFixture(name,data,format){const context=await browser.newContext();const p=await context.newPage();await p.addInitScript(v=>{window.name=`moushitatesho:${JSON.stringify(v)}`},data);await p.goto("http://127.0.0.1:3110/dougu/moushitatesho/insatsu");await p.locator(".mt-preview-stage").waitFor({state:"attached"});if(format==="a3"){await p.getByLabel("A3原寸").check();await p.locator(".mt-format-a3").waitFor()}await p.emulateMedia({media:"print"});await p.evaluate(()=>document.fonts?.ready);await sleep(500);const boxes=await p.locator(".mt-paper-text").evaluateAll(es=>es.map(e=>({text:e.textContent,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight,overflow:e.scrollHeight>e.clientHeight,autoFit:e.dataset.autoFit,marked:e.dataset.overflow==="true",pt:parseFloat(e.style.fontSize)||10})));const warning=await p.evaluate(()=>{const el=document.querySelector(".mt-print-overflow");if(!el)return null;const m=(el.textContent||"").match(/収まらない欄が\s*(\d+)\s*か所/);return m?Number(m[1]):-1});overflows.push({name,format,count:boxes.filter(x=>x.overflow).length,autoFit:boxes.filter(x=>x.autoFit).length,marked:boxes.filter(x=>x.marked).length,minPt:Math.min(10,...boxes.map(x=>x.pt)),warning,boxes:boxes.filter(x=>x.overflow)});const file=path.join(pdf,`${name}-${format}.pdf`);if(!process.env.REUSE_PDFS)await p.pdf({path:file,format:format==="a3"?"A3":"A4",printBackground:true,preferCSSPageSize:true,margin:{top:"0",right:"0",bottom:"0",left:"0"}});await context.close();return file}
-for(const [name,data] of fixtures)for(const format of ["a4","a3"]){const f=await printFixture(name,data,format);if(!process.env.REUSE_PDFS)execFileSync("pdftoppm",["-png","-r","300",f,path.join(png,`${name}-${format}`)]);}
-// #6: rendering contract, 5 on the main page, 5 per continuation page, stable order and page numbers.
-for(let n=1;n<=12;n++){const data=state(n);const context=await browser.newContext();const p=await context.newPage();await p.addInitScript(v=>{window.name=`moushitatesho:${JSON.stringify(v)}`},data);await p.goto("http://127.0.0.1:3110/dougu/moushitatesho/insatsu");await p.locator(".mt-preview-stage").waitFor();if(n>5)await p.locator(".mt-a4-cont").first().waitFor();const got=await p.evaluate(()=>({continuations:[...document.querySelectorAll(".mt-a4-cont")].map(s=>({no:s.querySelector(".mt-paper-text")?.textContent,items:[...s.querySelectorAll(".mt-paper-meta")].map(x=>x.textContent)}))}));const expectedCont=Math.ceil(Math.max(0,n-5)/5);rows.push({periods:n,main:Math.min(n,5),continuationPages:got.continuations.length,expectedContinuationPages:expectedCont,distribution:[`main:${Math.min(n,5)}`,...got.continuations.map((x,i)=>`cont${i+1}:${x.items.length}`)],numbers:got.continuations.map(x=>x.no),pass:got.continuations.length===expectedCont&&got.continuations.every((x,i)=>x.no===String(i+1))});await context.close()}
-// #10 storage disabled, input to preview must complete and show an explicit save failure.
-const c10=await browser.newContext();const p10=await c10.newPage();await p10.addInitScript(()=>{Storage.prototype.getItem=()=>{throw new Error("disabled")};Storage.prototype.setItem=()=>{throw new Error("disabled")}});await p10.goto("http://127.0.0.1:3110/dougu/moushitatesho");await p10.getByRole("button",{name:"はじめる"}).click();await p10.getByLabel("この病気や症状が始まったのは、いつ頃ですか").fill("2020-01");await sleep(650);const saveMessage=await p10.getByRole("status").innerText();await startAndReachFinish(p10);await p10.getByRole("link",{name:"印刷プレビューを開く"}).click();await p10.waitForURL("**/insatsu");const storagePass=/保存できません/.test(saveMessage)&&await p10.getByRole("heading",{name:"印刷プレビュー"}).isVisible();await c10.close();
-// #11 use the exact JSON produced by the export button, then import it and compare persisted state.
-for(const [name,data] of fixtures){const c=await browser.newContext({acceptDownloads:true});const p=await c.newPage();await p.goto("http://127.0.0.1:3110/dougu/moushitatesho");await p.evaluate(v=>localStorage.setItem("shougainenkin-note:moushitatesho:v1",JSON.stringify(v)),data);await p.reload();await startAndReachFinish(p);await p.getByText("保存について",{exact:true}).click();const d1=await Promise.all([p.waitForEvent("download"),p.getByRole("button",{name:"下書きをファイルに書き出す(別の端末に持っていく)"}).click()]);const file=await d1[0].path();const exported=JSON.parse(readFileSync(file,"utf8"));await p.getByLabel("ファイルから読み込む").setInputFiles(file);const d2=await Promise.all([p.waitForEvent("download"),p.getByRole("button",{name:"下書きをファイルに書き出す(別の端末に持っていく)"}).click()]);const restored=JSON.parse(readFileSync(await d2[0].path(),"utf8"));let pass=true;try{assert.deepEqual(exported,restored);assert.equal(restored.waku.length,data.waku.length);assert.equal(restored.hatsubyou,data.hatsubyou)}catch{pass=false}roundtrips.push({name,pass});await c.close()}
-// #12 Tab-only traversal; Enter activates the final link. Count focus losses.
-const c12=await browser.newContext({viewport:{width:375,height:812}});const p12=await c12.newPage();await p12.goto("http://127.0.0.1:3110/dougu/moushitatesho");await p12.getByRole("button",{name:"はじめる"}).focus();let losses=0,reached=false;const focusState=()=>p12.evaluate(()=>{const e=document.activeElement;return{tag:e?.tagName,hidden:!e||getComputedStyle(e).display==="none"||getComputedStyle(e).visibility==="hidden",text:e?.textContent?.trim()}});await p12.keyboard.press("Enter");for(let screen=0;screen<15;screen++){if(await p12.getByRole("link",{name:"印刷プレビューを開く"}).isVisible().catch(()=>false))break;await p12.getByRole("button",{name:"次へ"}).waitFor();await p12.waitForFunction(()=>document.activeElement?.textContent?.trim()==="次へ").catch(()=>{losses++});await p12.keyboard.press("Enter")}await p12.getByRole("link",{name:"印刷プレビューを開く"}).waitFor();await p12.waitForFunction(()=>document.activeElement?.textContent?.trim()==="印刷プレビューを開く");const finalFocus=await focusState();const mobile=await p12.evaluate(()=>({scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth}));if(finalFocus.text==="印刷プレビューを開く"){reached=true;await Promise.all([p12.waitForURL(/\/insatsu$/),p12.keyboard.press("Enter")])}const keyboardPass=reached&&losses===0&&mobile.scrollWidth===mobile.clientWidth;await c12.close();
-await browser.close();server.kill("SIGTERM");
-const projection=[];const compare=(name,format,pageNo,ref,crop=null,overlayName=null)=>{const generated=path.join(png,`${name}-${format}-${pageNo}.png`);if(!existsSync(generated))return;const args=[path.join(root,"scripts/verify-moushitatesho/projection.py"),path.join(root,"public/forms/moushitatesho",ref),generated];if(crop)args.push(`--crop=${crop}`);if(overlayName)args.push(`--overlay=${path.join(overlay,overlayName)}`);const raw=execFileSync("python3",args,{encoding:"utf8"});projection.push({name,format,page:pageNo,...JSON.parse(raw)})};for(const [name,data] of fixtures){compare(name,"a3",1,"main-1.png",null,name==="empty"?"front.png":null);compare(name,"a3",2,"main-2.png",null,name==="empty"?"back.png":null);compare(name,"a4",1,"main-1.png","top");compare(name,"a4",2,"main-1.png","bottom");compare(name,"a4",3,"main-2.png","top");compare(name,"a4",4,"main-2.png","bottom");const continuationCount=Math.ceil(Math.max(0,data.waku.length-5)/5);for(let i=0;i<continuationCount;i++){compare(name,"a3",3+i,"continuation-1.png",null,name==="seven-periods"&&i===0?"continuation.png":null);compare(name,"a4",5+i,"continuation-1.png")}}
-const result={generatedAt:new Date().toISOString(),projection,distribution:rows,overflow:overflows,storage:{message:saveMessage,pass:storagePass},roundtrip:roundtrips,keyboard:{pass:keyboardPass,focusLosses:losses,reachedPrint:reached,...mobile}};
-writeFileSync(path.join(out,"results.json"),JSON.stringify(result,null,2));
-// #8 はみ出し。旧条件は「最大入力でもはみ出し0」だったが、当時の実装が 0.5pt まで
-// 自動縮小して見かけ上0にしていたため、判定として成立していなかった(2026-09-03に是正)。
-// いまは (a) 現実的な入力で縮小も警告も出ない (b) 最大入力でははみ出しを検出して
-// 赤枠と件数表示が一致する (c) どの欄も8pt未満にしない、の3つで見る。
-const byFixture=n=>overflows.filter(x=>x.name===n);
-const p8a=byFixture("three-periods").length>0&&byFixture("three-periods").every(x=>x.autoFit===0&&x.count===0&&x.warning===null);
-const p8b=byFixture("maximal").length>0&&byFixture("maximal").every(x=>x.count>0&&x.marked===x.count&&x.warning===x.count);
-const p8c=overflows.every(x=>x.minPt>=8);
-const p4=projection.every(x=>x.pass),p6=rows.every(x=>x.pass),p8=p8a&&p8b&&p8c,p11=roundtrips.every(x=>x.pass);
-const md=`# 申立書ツール §14 未完了6項目 検証結果\n\n実行日時: ${result.generatedAt}\n\n| 項目 | 判定 | 再現結果 |\n|---|---|---|\n| #4 1mm以内 | ${p4?"○":"×"} | 最大 ${Math.max(...projection.map(x=>x.maxDeltaMm)).toFixed(3)} mm |\n| #6 続紙 | ${p6?"○":"×"} | 期間1〜12: ${p6?"一致":"不一致あり"} |\n| #8 はみ出し(自動縮小に頼らない) | ${p8?"○":"×"} | 現実的3期間 ${p8a?"○":"×"}(縮小0・警告0) / 最大入力 ${p8b?"○":"×"}(検出・赤枠・件数一致) / 最小フォント ${Math.min(...overflows.map(x=>x.minPt))}pt ${p8c?"○":"×"} |\n| #10 localStorage無効 | ${storagePass?"○":"×"} | ${saveMessage} / 印刷画面到達 |\n| #11 JSON往復 | ${p11?"○":"×"} | ${roundtrips.filter(x=>x.pass).length}/5 deepEqual |\n| #12 キーボード完走 | ${keyboardPass?"○":"×"} | focus消失 ${losses}、375px ${mobile.scrollWidth}/${mobile.clientWidth} |\n\n## #4 射影計測\n\n|状態|形式|ページ|検出線|最大差(mm)|\n|---|---|---:|---:|---:|\n${projection.map(x=>`|${x.name}|${x.format}|${x.page}|${x.lineCount}|${x.maxDeltaMm}|`).join("\n")}\n\n## #6 期間振り分け\n\n|期間数|本体|続紙|配置|No|判定|\n|---:|---:|---:|---|---|---|\n${rows.map(x=>`|${x.periods}|${x.main}|${x.continuationPages}|${x.distribution.join(", ")}|${x.numbers.join(", ")}|${x.pass?"○":"×"}|`).join("\n")}\n\n## #8 はみ出し\n\n判定条件(2026-09-03に変更): (a) 3期間の現実的な入力で自動縮小0・警告0 / (b) 12期間の最大入力で8ptでも収まらない欄を検出し、赤枠の数と画面の件数表示が一致 / (c) どの欄も8pt未満にしない。\n\n旧条件は「最大入力でもはみ出し0」だったが、当時の実装が0.5ptまで縮めて0にしていたため、判定になっていなかった。\n\n${overflows.map(x=>`- ${x.name}/${x.format}: ${x.count}欄`).join("\n")}\n\n## #11 JSON往復\n\n${roundtrips.map(x=>`- ${x.name}: ${x.pass?"○":"×"}`).join("\n")}\n\n## 再現方法\n\n\`npm run build && node scripts/verify-moushitatesho/verify.mjs\`\n`;
-const lineDetails=`\n\n### 全検出線の差\n\n|状態|形式|ページ|方向|基準(px)|出力(px)|差(mm)|\n|---|---|---:|---|---:|---:|---:|\n${projection.flatMap(x=>x.lines.map(line=>`|${x.name}|${x.format}|${x.page}|${line.axis}|${line.referencePx}|${line.outputPx}|${line.deltaMm}|`)).join("\n")}\n\n50%重ね合わせ画像: \`overlay/front.png\`、\`overlay/back.png\`、\`overlay/continuation.png\``;
-let mdFinal=md.replace("\n\n## #6 期間振り分け",`${lineDetails}\n\n## #6 期間振り分け`);for(const x of overflows)mdFinal=mdFinal.replace(`- ${x.name}/${x.format}: ${x.count}欄`,`- ${x.name}/${x.format}: 8ptでも収まらない ${x.count}欄(赤枠 ${x.marked}、画面の件数表示 ${x.warning??"なし"})、縮小した欄 ${x.autoFit}、最小 ${x.minPt}pt`);
-writeFileSync(path.join(out,"RESULT.md"),mdFinal);console.log(mdFinal);if(!(p4&&p6&&p8&&storagePass&&p11&&keyboardPass))process.exitCode=1;
+if (!ready) { server.kill("SIGTERM"); throw new Error("検証用サーバーが起動しない"); }
+const browser = await chromium.launch({ headless: true, executablePath: CHROME });
+
+/* 1. 外部へ何も送らない */
+const network = [];
+{
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  page.on("request", (r) => {
+    const u = r.url();
+    network.push({ method: r.method(), url: u, body: r.postData() || "",
+      /* 同じサーバーの静的ファイル・ページ自身・画面遷移の先読みは「送信」ではない。
+         入力が外へ出ているかは、URL と本文に入力文字列が乗っているかで見る。 */
+      sameOriginStatic: u.startsWith(`http://127.0.0.1:${PORT}/`)
+        && (/\/_next\//.test(u) || /\.(png|svg|ico|jpg|css|js|woff2?)($|\?)/.test(u)
+            || /[?&]_rsc=/.test(u) || u.split("?")[0] === TOOL_URL || u.split("?")[0] === `${TOOL_URL}/`
+            || u.split("?")[0] === PRINT_URL) });
+  });
+  await page.addInitScript((v) => {
+    try { localStorage.setItem("shougainenkin-note:moushitatesho:v2", JSON.stringify(v)); } catch { /* 無くても動く */ }
+  }, SAMPLES.typical);
+  await page.goto(TOOL_URL);
+  await page.getByRole("button", { name: "続きから" }).click().catch(() => {});
+  await sleep(500);
+  /* 印刷画面まで行って、そこでも通信を見る */
+  await page.goto(PRINT_URL);
+  await sleep(1200);
+  await ctx.close();
+}
+check(1, "外部へ何も送らない", () => {
+  const BAD = ["fetch(", "XMLHttpRequest", "sendBeacon", "WebSocket", "EventSource", "new Image(", "<form"];
+  for (const f of SOURCES) {
+    const code = stripComments(src(f));
+    for (const b of BAD) if (code.includes(b)) fail(`${f} に ${b}`);
+  }
+  const outside = network.filter((n) => !n.sameOriginStatic);
+  if (outside.length) fail(`同じサーバーの静的ファイル以外への通信 ${outside.length}件: ${outside.slice(0, 3).map((n) => n.method + " " + n.url).join(" / ")}`);
+  const posts = network.filter((n) => n.method !== "GET" || n.body);
+  if (posts.length) fail(`本文つき・GET以外の通信 ${posts.length}件`);
+  /* 入力した文字が URL や本文に乗っていないか */
+  const secrets = ["うつ病", "年金 太郎", "さくら病院", "1234-5678", "西新宿"];
+  for (const n of network) {
+    const hay = decodeURIComponent(n.url) + n.body;
+    for (const w of secrets) if (hay.includes(w)) fail(`入力「${w}」が ${n.url} に乗っている`);
+  }
+  return `ソース ${SOURCES.length}本に送信コード0 / 通信 ${network.length}件はすべて同じサーバーの静的ファイル(GET・本文なし)で、入力文字は乗っていない`;
+});
+
+/* 2. 期間が6つ以上で続紙へ自動で送られる */
+{
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  await page.addInitScript((v) => { window.name = `moushitatesho:${JSON.stringify(v)}`; }, SAMPLES.seven);
+  await page.goto(PRINT_URL);
+  await page.getByLabel("A3原寸").check();
+  await page.locator("[data-sheet]").first().waitFor();
+  await sleep(400);
+  const sheets = await page.evaluate(() => [...document.querySelectorAll("[data-sheet]")].map((e) => e.dataset.sheet));
+  const seq = await page.evaluate(() => [...document.querySelectorAll('[data-sheet="cont-front"] .mt-slot-digits')].map((e) => e.textContent));
+  await ctx.close();
+  const has = sheets.includes("cont-front");
+  results.push({ id: 2, label: "期間が6つ以上になると続紙へ自動で送られる", ok: has,
+    note: has ? `紙: ${sheets.join(" / ")} / 続紙の数字 ${seq.join(",")}` : `続紙が出ない(${sheets.join(",")})` });
+}
+
+/* 3〜9 はブラウザで一気に見る */
+{
+  const ctx = await browser.newContext({ viewport: { width: 375, height: 800 } });
+  const page = await ctx.newPage();
+  await page.goto(TOOL_URL);
+  await page.getByRole("button", { name: "はじめる" }).click();
+  await sleep(300);
+
+  const wide = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1);
+  results.push({ id: 6, label: "375px で横スクロールが出ない", ok: !wide,
+    note: wide ? "横スクロールが出ている" : "scrollWidth = clientWidth" });
+
+  /* 3. 入力の気づきが消えていない */
+  const notices = ["この期間は5年を超えています", "発病より前から始まっています", "開始の月は空欄のままでも進めます"];
+  const toolSrc = src("components/tools/MoushitateshoTool.tsx");
+  check(3, "入力の気づき(期間の3つ+収まらない知らせ)が消えていない", () => {
+    for (const n of notices) if (!toolSrc.includes(n)) fail(`「${n}」が無い`);
+    if (!toolSrc.includes("Capacity")) fail("収まらない欄の知らせが無い");
+    if (!src("components/tools/MoushitateshoCapacity.tsx").includes("この枠に収まりません")) fail("収まらない文言が無い");
+    return `期間の気づき3つ + 各欄の「収まりません」`;
+  });
+
+  /* 4. localStorage に保存され、読み直しで戻る */
+  await page.evaluate(() => { localStorage.clear(); });
+  await page.reload();
+  await page.getByRole("button", { name: "はじめる" }).click();
+  await page.locator('input[type="month"]').first().fill("2020-06");
+  await sleep(900);
+  const saved = await page.evaluate(() => localStorage.getItem("shougainenkin-note:moushitatesho:v2"));
+  await page.reload();
+  await sleep(600);
+  const resumed = await page.getByText("前回の続きがあります", { exact: false }).count();
+  check(4, "localStorage に保存され、開き直すと続きから書ける", () => {
+    if (!saved) fail("v2 のキーに保存されていない");
+    if (!JSON.parse(saved).hatsubyou.startsWith("2020-06")) fail("入力が保存されていない");
+    if (!resumed) fail("開き直しても「前回の続き」が出ない");
+    return "v2 のキーに保存 / 再訪で続きから";
+  });
+
+  /* 8・9. 出してはいけない言葉 */
+  const bodyText = await page.evaluate(() => document.body.innerText);
+  check(8, "「様式第120号の4」が画面にも紙にも無い", () => {
+    for (const f of SOURCES) if (src(f).includes("様式第120号の4")) fail(`${f} にある`);
+    if (bodyText.includes("様式第120号の4")) fail("画面に出ている");
+    return "ソース・画面とも0件";
+  });
+  check(9, "判定・評価・攻略の語が無い", () => {
+    const WORDS = ["判定します", "あなたは○級", "評価します", "攻略", "通りやすく", "有利になります"];
+    for (const f of SOURCES) for (const w of WORDS) if (src(f).includes(w)) fail(`${f} に「${w}」`);
+    for (const w of WORDS) if (bodyText.includes(w)) fail(`画面に「${w}」`);
+    return `${WORDS.length}語とも0件`;
+  });
+  await ctx.close();
+}
+
+/* 5. JSON の書き出し→読み込みで往復する */
+{
+  const { normalize } = await import("../../lib/moushitatesho-storage.ts");
+  const round = normalize(JSON.parse(JSON.stringify(SAMPLES.typical)));
+  const same = JSON.stringify(round) === JSON.stringify(normalize(JSON.parse(JSON.stringify(round))));
+  results.push({ id: 5, label: "JSON の書き出し→読み込みで往復して一致する", ok: same,
+    note: same ? "typical を書き出して読み直しても同じ" : "往復で変わる" });
+}
+
+/* 7. キーボードだけで印刷まで行ける */
+{
+  const ctx = await browser.newContext();
+  const page = await ctx.newPage();
+  await page.goto(TOOL_URL);
+  let reached = false;
+  for (let i = 0; i < 400; i += 1) {
+    await page.keyboard.press("Tab");
+    const el = await page.evaluate(() => {
+      const a = document.activeElement;
+      return { tag: a?.tagName, text: (a?.textContent || "").trim().slice(0, 20), href: a?.getAttribute?.("href") };
+    });
+    if (el.text === "はじめる" || el.text === "次へ" || el.text === "続きから") {
+      await page.keyboard.press("Enter");
+      await sleep(250);
+    }
+    if (el.href === "/dougu/moushitatesho/insatsu") { reached = true; break; }
+  }
+  await ctx.close();
+  results.push({ id: 7, label: "キーボードだけで印刷まで到達できる", ok: reached,
+    note: reached ? "Tab と Enter だけで印刷プレビューのリンクに到達" : "400回の Tab で印刷まで届かなかった" });
+}
+
+await browser.close();
+server.kill("SIGTERM");
+
+const ok = results.every((r) => r.ok);
+console.log("# 申立書ツール 設計 §14 の完了条件(v2)\n");
+for (const r of results.sort((a, b) => a.id - b.id)) console.log(`${r.ok ? "○" : "×"} ${r.id}. ${r.label}\n   ${r.note}`);
+if (!ok) process.exitCode = 1;
