@@ -1,4 +1,11 @@
 {
+  "intentionalUpdates": {
+    "2026-09-04": {
+      "reason": "docs/seo-aio-audit-2026-09-04.md §4-3 / §6-2",
+      "slugs": ["shinsei-kikan", "shoshinbi-wakaranai"],
+      "fields": ["metaTitle", "htmlTitle"]
+    }
+  },
   "baseRef": "76deb22",
   "columns": [
     {
@@ -180,9 +187,9 @@
     {
       "slug": "shinsei-kikan",
       "title": "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
-      "metaTitle": null,
+      "metaTitle": "障害年金の決定通知はいつ届く？審査期間の目安と、遅いときの確認先",
       "h1": "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
-      "htmlTitle": "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方｜障害年金申請サポート",
+      "htmlTitle": "障害年金の決定通知はいつ届く？審査期間の目安と、遅いときの確認先｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/shinsei-kikan"
     },
     {
@@ -332,9 +339,9 @@
     {
       "slug": "shoshinbi-wakaranai",
       "title": "障害年金の初診日がわからないときの調べ方｜証明できない場合も解説",
-      "metaTitle": null,
+      "metaTitle": "障害年金の初診日がわからないときの探し方5つ｜証明できないときも",
       "h1": "障害年金の初診日がわからないときの調べ方｜証明できない場合も解説",
-      "htmlTitle": "障害年金の初診日がわからないときの調べ方｜証明できない場合も解説｜障害年金申請サポート",
+      "htmlTitle": "障害年金の初診日がわからないときの探し方5つ｜証明できないときも｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/shoshinbi-wakaranai"
     },
     {
