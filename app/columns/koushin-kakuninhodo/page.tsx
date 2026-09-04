@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
-import articleSource, { faqs } from "@/content/columns/koushin-kakuninhodo";
+import articleSource, { lead, faqs } from "@/content/columns/koushin-kakuninhodo";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
-const column = getColumn("koushin-kakuninhodo");
+const column = { ...getColumn("koushin-kakuninhodo"), lead };
 export const metadata: Metadata = columnMetadata(column);
 
 export default function Page() {
@@ -31,4 +31,3 @@ export default function Page() {
     />
   );
 }
-
