@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit --pretty false",
     "verify:disease-hubs": "node scripts/verify-disease-hubs.mjs",
     "verify:stats": "node scripts/verify-stats.mjs",
-    "verify:hubs": "node scripts/verify-hub-content.mjs && node scripts/verify-hub-map.mjs",
+    "verify:hubs": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-hub-content.mjs && node scripts/verify-hub-map.mjs",
     "verify:yougo": "node scripts/verify-yougo.mjs",
     "verify:gokai": "node scripts/verify-gokai.mjs",
     "verify:columns": "node scripts/verify-columns.mjs",
@@ -29,7 +29,8 @@
     "test:moushitatesho": "node --import ./scripts/lib/ts-alias.mjs --test tests/wareki.test.mjs tests/moushitatesho-migrate.test.mjs tests/moushitatesho-tel.test.mjs",
     "verify:moushitatesho:layout": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho-layout.mjs",
     "verify:moushitatesho": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho/verify.mjs",
-    "verify:moushitatesho:overlay": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho/overlay.mjs"
+    "verify:moushitatesho:overlay": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho/overlay.mjs",
+    "indexnow": "node scripts/indexnow-submit.mjs --since $(date -v-7d +%F)"
   },
   "dependencies": {
     "next": "^15.3.4",

@@ -3,8 +3,9 @@ import { DouguCards } from "@/components/platform/DouguCard";
 import { PLACEMENTS, visiblePlacements } from "@/data/dougu";
 import HubGokai from "@/components/platform/HubGokai";
 import Link from "next/link";
-import { Breadcrumb } from "@/components/platform/Platform";
-import { getHubContent } from "@/lib/hub-content";
+import { Breadcrumb, PageDate } from "@/components/platform/Platform";
+import { extractHubFaqs, getHubContent } from "@/lib/hub-content";
+import { faqJsonLd } from "@/lib/seo";
 import type { HubDefinition } from "@/lib/hubs";
 
 const siblingLinks: Record<string, string[]> = {
@@ -37,8 +38,13 @@ export default function HubLanding({ hub }: { hub: HubDefinition }) {
   const content = getHubContent(hub.path);
   if (!content) return null;
   const crumbs = content.breadcrumb.map((label, index) => ({ label, href: index === 0 ? "/" : undefined }));
+  /* FAQ の構造化データ(監査 §4-2)。本文から取り出したものだけ。画面に無い Q/A は入れない。
+     パンくずは <Breadcrumb> が BreadcrumbList を出しているので、ここでは出さない(二重になる)。
+     Article も出さない(ハブはまとめページ。無理に付けると列記事と競合する)。 */
+  const faqs = extractHubFaqs(content.source);
   return <div className={`platform hub-landing${hub.kind === "erabu" ? " hub-erabu" : ""}`}>
-    <header className="p-page-hero"><div className="p-container hub-reading-width"><Breadcrumb items={crumbs} currentPath={hub.path} /><h1>{content.title}</h1></div></header>
+    {faqs.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)).replace(/</g, "\\u003c") }} />}
+    <header className="p-page-hero"><div className="p-container hub-reading-width"><Breadcrumb items={crumbs} currentPath={hub.path} /><h1>{content.title}</h1><PageDate updated={content.dateModified} /></div></header>
     <article className="p-container hub-reading-width hub-content" {...(hub.kind === "erabu" ? { "data-yougo-skip": "" } : {})}>
       <MarkdownArticle
         source={content.source}

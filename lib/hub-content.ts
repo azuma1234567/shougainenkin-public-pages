@@ -57,7 +57,9 @@ const nayamiFushikyuPublished = {
     ),
 };
 
-export type HubContent = { title: string; breadcrumb: string[]; source: string };
+/* dateModified はハブの最終更新日(YYYY-MM-DD)。sitemap の lastModified と
+   画面の「最終更新」に使う(監査 §4-1・§4-2)。data/hubs/*.json が持つ。 */
+export type HubContent = { title: string; dateModified: string; breadcrumb: string[]; source: string };
 export const HUB_CONTENT: Record<string, HubContent> = {
   "/byoki/tougou": byokiTougou, "/byoki/chiteki": byokiChiteki, "/byoki/tenkan": byokiTenkan,
   "/byoki/jinzou-touseki": byokiJinzouTouseki, "/byoki/gan": byokiGan, "/byoki/shinzou": byokiShinzou,
@@ -92,4 +94,43 @@ export function latestHubCheckedDate(kind: string): string {
     .filter(([path]) => path.startsWith(`/${kind}/`))
     .flatMap(([, item]) => [...item.source.matchAll(/確認日[ :：]*(\d{4}-\d{2}-\d{2})/g)].map((m) => m[1]));
   return dates.sort().at(-1) ?? "2026-09-02";
+}
+
+/* ハブの本文から「よくある質問」を取り出す(監査 §4-2)。
+   抽出の規則は components/MarkdownArticle.tsx の faqAccordion 分岐と**同じ**にしてある
+   (`**Q.` で始まる行が質問、次の空行か次の `**Q.` か `## ` までが答え)。
+   画面に出ている Q/A と JSON-LD の Q/A が食い違うと Google のガイドライン違反になるので、
+   ここを直すときは MarkdownArticle 側も一緒に直すこと。scripts/verify-hub-content.mjs が
+   40本以上のハブで「抽出した question == 画面の summary」を確かめている。 */
+export function extractHubFaqs(source: string): { question: string; answer: string }[] {
+  const lines = source.split("\n").map((line) => line.trim());
+  const faqs: { question: string; answer: string }[] = [];
+  let index = 0;
+  while (index < lines.length) {
+    const line = lines[index];
+    index += 1;
+    if (!/^\*\*Q[.．]/.test(line)) continue;
+    /* 答えが同じ行に続く形(`**Q. …** 答え`)にも対応する。MarkdownArticle 側と同じ。 */
+    const inline = /^\*\*(Q[.．][^*]*?)\*\*\s*(.*)$/.exec(line);
+    const question = inline ? inline[1] : line.replace(/^\*\*/, "").replace(/\*\*$/, "");
+    const answerLines: string[] = inline && inline[2] ? [inline[2]] : [];
+    while (index < lines.length) {
+      const next = lines[index];
+      if (!next) { index += 1; break; }
+      if (/^\*\*Q[.．]/.test(next) || next.startsWith("## ")) break;
+      answerLines.push(next);
+      index += 1;
+    }
+    faqs.push({ question: plainText(question), answer: plainText(answerLines.join(" ")) });
+  }
+  return faqs;
+}
+
+/* JSON-LD に入れるのは飾りを落とした素のテキスト。**強調** と [文字](リンク) を外す。 */
+function plainText(text: string): string {
+  return text
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim();
 }
