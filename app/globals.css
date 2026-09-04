@@ -3130,3 +3130,68 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
 @media(prefers-color-scheme:dark){.mt-redesign .mt-panel,.mt-example,.mt-hint,.mt-storage{background:var(--background)}.mt-reassurance span,.mt-life label{background:#20313b}.mt-redesign .mt-field input,.mt-redesign .mt-field textarea,.mt-redesign fieldset input:not([type=radio]):not([type=checkbox]){background:#142631;color:#fff}}
 @media(max-width:600px){.mt-redesign{padding-inline:14px}.mt-period-row{grid-template-columns:1fr 1fr}.mt-period-row>span:nth-of-type(2){display:none}.mt-period-row label{grid-column:auto}.mt-redesign .mt-cross .dougu-cross{grid-template-columns:1fr}.mt-date-parts{grid-template-columns:1.5fr 1fr 1fr}.mt-redesign .mt-actions{align-items:flex-start}}
 @media print{.mt-redesign{background:#fff!important;color:#000!important}}
+
+/* ===== 申立書: 公式様式への記入(2026-09-04)。設計書 §3-2・§3-3 ===== */
+/* 背景は公式PDFから作ったSVG。用紙の大きさは要素の inline style(mm)で決める。 */
+.mt-paper{position:relative;background-repeat:no-repeat;background-color:#fff;box-shadow:0 4px 18px #21455b33}
+/* 文章を流し込む欄。縮小しない。はみ出しは隠す(入力画面で知らせる) */
+.mt-slot-text{position:absolute;overflow:hidden;white-space:pre-wrap;word-break:break-all;line-break:strict;color:#000;
+ font-family:"MS Mincho","MS 明朝","Yu Mincho","YuMincho","Hiragino Mincho ProN",serif;line-height:1.35;letter-spacing:.01em;
+ /* 役所に出す白黒の書類なので、利用者が絵文字を打っても紙は無彩色にする(2026-09-04 指示書3 §7)。
+    字は1文字も変えない。検査9「紙に有彩色は1画素も無い」に例外を作らないため。 */
+ filter:grayscale(1);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+/* 印字された「年」「月」「日」の左の空欄に置く半角数字。cx,cy が中心 */
+.mt-slot-digits{position:absolute;transform:translate(-50%,-50%);text-align:center;color:#000;
+ font-family:"MS Mincho","MS 明朝","Yu Mincho","YuMincho","Hiragino Mincho ProN",serif;line-height:1;white-space:nowrap}
+/* 印字された文字を囲む楕円。線1本、塗らない */
+.mt-slot-circle{position:absolute;overflow:visible;pointer-events:none}
+@media print{
+  .mt-main-front,.mt-main-back{page:mt-a3}
+  .mt-cont-front,.mt-cont-back{page:mt-a4-cont}
+  .mt-paper{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+.mt-print-how{margin:10px 0;color:var(--text-muted);font-size:15px;line-height:1.85}
+.mt-print-missing{margin:16px 0 0;padding:14px 16px;border:1px solid #f0e2bd;border-radius:8px;background:#fdf3dd;color:#6b5316;font-size:15px}
+/* 就労の入力と、収まらない欄の知らせ(設計 §6-2・§6-3) */
+.mt-work{margin:0 0 22px;padding:16px;border:1px solid var(--border);border-radius:10px}
+.mt-work-fields{display:grid;gap:16px;margin-top:14px}
+.mt-inline-nums{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;padding:12px;border:1px solid var(--border)}
+.mt-inline-nums label{display:flex;gap:8px;align-items:center;font-size:15px}
+.mt-inline-nums input{width:5em;padding:9px 10px;border:1px solid #9db9ca;border-radius:8px;font:inherit;font-size:16px}
+.mt-capacity-probe{position:absolute;left:-9999px;top:0;overflow:hidden;visibility:hidden}
+.mt-capacity{margin:6px 0 0;padding:10px 12px;border-radius:8px;background:#eef7fc;color:#1d4e68;font-size:14px;line-height:1.8}
+.mt-techou{display:grid;gap:16px;margin-top:14px}
+.mt-techou fieldset{display:grid;gap:14px;padding:14px;border:1px solid var(--border);border-radius:9px}
+.mt-daihitsu{margin-top:22px;padding:16px;border:1px solid var(--border);border-radius:10px}
+.mt-daihitsu .mt-fields{margin-top:14px}
+.mt-ninteibi{margin-top:22px}
+/* 申立書ページの説明(設計 §11) */
+.mt-page-h1{margin:14px 0 0;font:700 clamp(1.5rem,4.4vw,2.05rem)/1.45 var(--font-platform-heading),sans-serif}
+.mt-page-lead{margin:12px 0 22px;color:var(--text-muted);font-size:15.5px;line-height:1.9}
+.mt-about{margin-top:40px;display:grid;gap:34px}
+.mt-about h2{margin:0 0 10px;font:700 1.2rem/1.5 var(--font-platform-heading),sans-serif}
+.mt-about p{margin:0 0 10px;line-height:1.95}
+.mt-about img{width:100%;height:auto;border:1px solid var(--border);border-radius:6px}
+.mt-faq{display:grid;gap:16px;margin:0}
+.mt-faq dt{font-weight:700;line-height:1.7}
+.mt-faq dd{margin:6px 0 0;color:var(--text-muted);line-height:1.95}
+.mt-intro-h2{margin:0 0 8px;font:700 clamp(1.25rem,3.6vw,1.6rem)/1.5 var(--font-platform-heading),sans-serif}
+
+/* ===== 紙に載せてはいけないもの(2026-09-04 指示書3 §2) =====
+   position:fixed の画面用の飾りは、印刷でも要素スクリーンショットでも紙に焼き込まれる。
+   実際、読了バー(body::after)が申立書の裏面と続紙に幅いっぱいの青い線として刷り込まれていた。
+   新しく position:fixed を足すときは、必ずここに1行足すこと。紙の検査は
+   scripts/verify-moushitatesho-layout.mjs の検査9(紙の全画素が白か無彩色)が見ている。 */
+@media print {
+  /* 読了バー。@media print では animation-timeline の指定ごと打ち消す */
+  body::after { content: none !important; display: none !important; }
+  .analytics-consent-banner,
+  .analytics-preference-button,
+  .lp-sticky-cta { display: none !important; }
+}
+/* 印刷画面では、画面のうえでも出さない(紙に出る前に見えていると紛らわしい)。
+   同意の取得は他のページでできる。 */
+.mt-print-page body::after,
+body:has(.mt-print-page)::after { content: none !important; display: none !important; }
+body:has(.mt-print-page) .analytics-consent-banner,
+body:has(.mt-print-page) .analytics-preference-button { display: none !important; }
