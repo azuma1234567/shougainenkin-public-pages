@@ -173,6 +173,19 @@ export function siblingSlugs(slug: string): string[] {
   ])];
 }
 
+/* ハブ → 記事 の逆引き(指示書 2026-09-04 その2 §2 T8)。
+   HubLanding の手書き表は増やさず、COLUMN_HUB_ASSIGNMENTS だけを見る。
+   primary に指定した記事を先に、そのあと secondary。 */
+export function hubColumnSlugs(hubPath: string): string[] {
+  const primary: string[] = [];
+  const secondary: string[] = [];
+  for (const [slug, assignment] of Object.entries(COLUMN_HUB_ASSIGNMENTS)) {
+    if (assignment.primary === hubPath) primary.push(slug);
+    else if (assignment.secondary.includes(hubPath)) secondary.push(slug);
+  }
+  return [...primary, ...secondary];
+}
+
 export const PUBLISHED_CONTENT_HUBS = HUBS.filter((item) => item.published && ["byoki", "joukyou", "nayami", "okane", "erabu"].includes(item.kind));
 
 export const UNIT_PACK_TO_HUBS: Record<string, string[]> = {

@@ -6,7 +6,8 @@ import Link from "next/link";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import { extractHubFaqs, getHubContent } from "@/lib/hub-content";
 import { faqJsonLd } from "@/lib/seo";
-import type { HubDefinition } from "@/lib/hubs";
+import { hubColumnSlugs, type HubDefinition } from "@/lib/hubs";
+import { getColumn } from "@/lib/columns";
 
 const siblingLinks: Record<string, string[]> = {
   "/byoki/tounyou": ["/byoki/jinzou-touseki"],
@@ -42,6 +43,9 @@ export default function HubLanding({ hub }: { hub: HubDefinition }) {
      パンくずは <Breadcrumb> が BreadcrumbList を出しているので、ここでは出さない(二重になる)。
      Article も出さない(ハブはまとめページ。無理に付けると列記事と競合する)。 */
   const faqs = extractHubFaqs(content.source);
+  /* ハブ → 記事 の導線(指示書 2026-09-04 その2 §2 T8)。
+     手書きの siblingLinks は増やさず、記事側の棚割りを逆引きして出す。 */
+  const themeColumns = hubColumnSlugs(hub.path).map(getColumn);
   return <div className={`platform hub-landing${hub.kind === "erabu" ? " hub-erabu" : ""}`}>
     {faqs.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)).replace(/</g, "\\u003c") }} />}
     <header className="p-page-hero"><div className="p-container hub-reading-width"><Breadcrumb items={crumbs} currentPath={hub.path} /><h1>{content.title}</h1><PageDate updated={content.dateModified} /></div></header>
@@ -59,6 +63,10 @@ export default function HubLanding({ hub }: { hub: HubDefinition }) {
       {siblingLinks[hub.path]?.length ? <nav className="hub-sibling-links" aria-label="関連する病名ハブ">
         {siblingLinks[hub.path].map((path) => <Link key={path} href={path}>{siblingLabels[path]} →</Link>)}
       </nav> : null}
+      {themeColumns.length > 0 ? <section className="related-columns hub-theme-columns">
+        <h2>このテーマの記事</h2>
+        <ul>{themeColumns.map((column) => <li key={column.slug}><Link href={`/columns/${column.slug}`}>{column.title}</Link></li>)}</ul>
+      </section> : null}
     </article>
   </div>;
 }
