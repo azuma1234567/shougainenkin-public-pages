@@ -1,5 +1,11 @@
 {
   "baseRef": "5e5c897",
   "a4HtmlSha256": "814a043df752be23f729b01921ab8fc7255db420ab696a58aad1b5a479ad4453",
-  "pageCount": 166
+  "pageCount": 166,
+  "mainHashBaselineRef": "5e5c897",
+  "mainSha256": {
+    "moushitatesho-a4-insatsu": "9ee6e931e1e88182d4f173945f37e754c86a30aac0eed04ed33e362e6e9b2fd5",
+    "moushitatesho-kikan-kugiri": "4c95385b9e099f6fb95579b556d44c979fb204aefa2c183679531aa44568dc93",
+    "teishutsusaki-yuusou": "4705052fde30349cd62906115e590095600b4940dd1be6018161bec9c163d483"
+  }
 }

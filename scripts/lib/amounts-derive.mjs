@@ -5,7 +5,8 @@
 //   3. 上記の ×1.25(1級)
 //   4. 上記の ÷12(月額)、または ÷12×2(2か月分)。丸め誤差は ±100円 まで許す
 //   5. 前年度額として明示されているもの(同じ段落に「前年度」「令和7年度」がある場合のみ)
-//   6. 「超」の整数表現(amounts.ts の値 +1 円)
+//   6. 繰上げ・繰り上げの段落のみ、basicGrade2/basicGrade2Old × (1 − 0.004 × 1〜60か月)、円未満切り捨て
+//   7. 「超」の整数表現(amounts.ts の値 +1 円)
 // 説明できたときは式の文字列、できなければ null を返す。
 
 const toNumber = (text) => Number(String(text).replace(/[,円]/g, ""));
@@ -73,6 +74,16 @@ export function explainAmount(raw, AMOUNTS, context = "") {
   const near = monthlyOf.filter((c) => Math.abs(c.value - value) <= c.tolerance).sort((a, b) => Math.abs(a.value - value) - Math.abs(b.value - value) || a.terms - b.terms)[0];
   if (near) return `${near.expr} ≒ ${fmt(value)}`;
   if (/前年度|令和7年度/.test(context)) return "前年度額(本文に明示)";
+  if (/繰上げ|繰り上げ/.test(context)) {
+    for (const entry of amountEntries(AMOUNTS).filter(e => ["basicGrade2", "basicGrade2Old"].includes(e.key))) {
+      for (let n = 1; n <= 60; n++) {
+        // 整数比で計算し、浮動小数点の誤差による1円の切り捨て過ぎを防ぐ。
+        if (Math.floor(entry.value * (1000 - 4 * n) / 1000) === value) {
+          return `${entry.key}(${fmt(entry.value)}) × (1 − 0.004 × ${n})(繰上げ減額)`;
+        }
+      }
+    }
+  }
   const plusOne = amountEntries(AMOUNTS).find((e) => e.value + 1 === value);
   if (plusOne) return `${plusOne.key}(${fmt(plusOne.value)}) + 1(「超」の整数表現)`;
   return null;

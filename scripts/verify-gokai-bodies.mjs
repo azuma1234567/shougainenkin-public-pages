@@ -136,16 +136,33 @@ export async function verifyBuiltBodies() {
   console.log("生成HTML: 全48枚のメタ情報・JSON-LD・原稿本文・見出し順・PDFリンク OK");
 }
 
-// §6-11/12 は失敗も隠さず両方報告する。ビルド識別子等を除去したハッシュにはしない。
+// 2026-09-04仕上げ指示§3: ビルド識別子を含む全文でなく、main要素の生バイトを比較する。
 export async function verifyIntegration() {
   const baseline = JSON.parse(await readFile(new URL("../docs/verification/gokai-bodies-2026-09-03/baseline.json", import.meta.url), "utf8"));
-  const changed = execFileSync("git", ["diff", "--name-only", baseline.baseRef, "--", "app/columns", "content/columns", "docs/gokai", "data/gokai.ts", "app/gokai/page.tsx", "components/platform/HubGokai.tsx", "app/gokai/[slug]/opengraph-image.tsx", "app/platform.css"], { encoding: "utf8" }).trim();
-  assert.equal(changed, "", "原稿・既存記事・既存カード・一覧・ハブ・OG・CSSは変更なし");
-  const hash = createHash("sha256").update(await readFile(new URL("../.next/server/app/columns/moushitatesho-a4-insatsu.html", import.meta.url))).digest("hex");
-  const sameHtml = hash === baseline.a4HtmlSha256;
-  console.log(`11. ${sameHtml ? "○" : "×"} 保護対象ソース差分0 / A4 HTML SHA-256: ${hash}（作業前 ${baseline.a4HtmlSha256}）`);
+  const changed = execFileSync("git", ["diff", "--name-only", baseline.baseRef, "--", "app/columns", "content/columns", "data/gokai.ts", "app/gokai/page.tsx", "components/platform/HubGokai.tsx", "app/gokai/[slug]/opengraph-image.tsx", "app/platform.css"], { encoding: "utf8" }).trim();
+  assert.equal(changed, "", "既存記事・既存カード・一覧・ハブ・OG・CSSは変更なし");
+  const manuscriptPath = "docs/gokai/gokai-body-batch4-2026-09-03.md";
+  const changedManuscripts = execFileSync("git", ["diff", "--name-only", baseline.baseRef, "--", "docs/gokai"], { encoding: "utf8" }).trim().split("\n");
+  assert.deepEqual(changedManuscripts, [manuscriptPath], "許可された原稿ファイルだけを変更");
+  const oldParagraph = "老齢基礎年金の満額は年847,300円です(令和8年度)。60歳で繰り上げると24%減の643,948円になり、この額が一生続きます。";
+  const newParagraph = "老齢基礎年金の満額は年847,300円です(令和8年度)。60歳で繰り上げると、1か月あたり0.4%・60か月で24%減り、643,948円になります(昭和37年4月2日以後生まれの場合)。この額が一生続きます。";
+  const oldManuscript = execFileSync("git", ["show", `${baseline.baseRef}:${manuscriptPath}`], { encoding: "utf8" });
+  assert.equal(oldManuscript.split(oldParagraph).length, 2);
+  assert.equal(await readFile(new URL(`../${manuscriptPath}`, import.meta.url), "utf8"), oldManuscript.replace(oldParagraph, newParagraph), "kuriageの指定1段落だけを変更");
+  const protectedSlugs = ["moushitatesho-a4-insatsu", "moushitatesho-kikan-kugiri", "teishutsusaki-yuusou"];
+  assert.deepEqual(Object.keys(baseline.mainSha256).sort(), [...protectedSlugs].sort());
+  let sameHtml = true;
+  for (const slug of protectedSlugs) {
+    const html = await readFile(new URL(`../.next/server/app/columns/${slug}.html`, import.meta.url), "utf8");
+    const main = html.match(/<main(?:\s[^>]*)?>[\s\S]*?<\/main>/g);
+    assert.equal(main?.length, 1, `${slug}: mainは1つ`);
+    const hash = createHash("sha256").update(main[0]).digest("hex");
+    const same = hash === baseline.mainSha256[slug];
+    sameHtml &&= same;
+    console.log(`11. ${same ? "○" : "×"} ${slug} main SHA-256: ${hash}`);
+  }
   const before = await readFile(new URL("../docs/verification/prelaunch-2026-09-02/RESULT-gokai-bodies-before.md", import.meta.url), "utf8");
-  const after = await readFile(new URL("../docs/verification/prelaunch-2026-09-02/RESULT-gokai-bodies-after.md", import.meta.url), "utf8");
+  const after = await readFile(new URL("../docs/verification/prelaunch-2026-09-02/RESULT-gokai-bodies-shiage.md", import.meta.url), "utf8");
   const decisions = report => [...report.matchAll(/^\| ([ABC]-\d+) \| ([○×]) \|/gm)].map(m => `${m[1]} ${m[2]}`);
   const pageCount = Number(after.match(/ページ数: (\d+)/)?.[1]);
   const sameChecks = JSON.stringify(decisions(before)) === JSON.stringify(decisions(after)) && pageCount === baseline.pageCount;

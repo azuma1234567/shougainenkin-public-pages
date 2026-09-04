@@ -13,7 +13,7 @@
 //        (値そのもの / 年額2〜4個の和 / ×1.25 / ÷12・÷12×2(±100円) / 本文に明示した前年度額 / 「超」の+1)で判定する。
 //        直書きのファイル数は参考として付記に出すだけ。検算式は scripts/lib/amounts-derive.mjs。
 //   B-1: 法務・案内ページ(about/privacy/terms/quality/support)はフッターからのリンクが正常な設計なので孤立の検査から外す。
-//   B-2: パンくず(nav[aria-label="パンくずリスト"])と誤解カードの「一覧へ戻る」(.gokai-back)由来のリンクは被リンク数に数えない。
+//   B-2: パンくず(nav[aria-label="パンくずリスト"])と誤解カードの「一覧へ戻る」(.gokai-back)由来のリンクは被リンク数に数えない。宣言済みハブは上限から除外し、件数と理由は毎回付記する。
 //   B-9: BreadcrumbList が2つ以上あるページも数える(コラム記事は columnJsonLd の分だけ)。
 //   C-2: 分割sitemapは対象外(Google の分割要件は 50,000 URL / 50MB。現状は単一 sitemap.xml で十分)。
 import { execFileSync } from "node:child_process";
@@ -22,6 +22,12 @@ import path from "node:path";
 import { explainAmount, findAmounts, paragraphAround } from "./lib/amounts-derive.mjs";
 
 const toNumber = (text) => Number(String(text).replace(/[,円]/g, ""));
+
+// B-2: 意図したハブは被リンク数の上限の対象外にする。件数は付記に必ず出し、
+//      宣言していないページが50本を超えたときだけ×にする。
+const LINK_HUBS = {
+  "/jitsurei": "裁決事例集。裁決を引用した記事・誤解カードが文末で戻す導線",
+};
 
 const origin = (process.argv[2] ?? process.env.VERIFY_ORIGIN ?? "http://localhost:3000").replace(/\/$/, "");
 const root = process.cwd();
@@ -192,8 +198,9 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
   const UTILITY_PAGES = ["/about", "/privacy", "/terms", "/quality", "/support"];
   const isolated = [...inbound].filter(([p, set]) => set.size === 0 && p !== "/" && !UTILITY_PAGES.includes(p)).map(([p]) => p);
   record("B-1", "孤立ページがゼロ(本文からの内部リンクが最低1本)", isolated.length === 0, `孤立 ${isolated.length} / ${pages.size}(除外 ${UTILITY_PAGES.filter((p) => sitemapSet.has(p)).length})`, isolated, "ヘッダー・フッターのリンクは数えない。法務・案内ページ(about/privacy/terms/quality/support)はフッターのみで可");
-  const over = [...inboundCounted].filter(([, set]) => set.size > 50).map(([p, set]) => `${p} (${set.size}本)`);
-  record("B-2", "被内部リンクが50本を超えるページがゼロ", over.length === 0, `50本超 ${over.length}`, over, "パンくずと誤解カードの「一覧へ戻る」由来のリンクは数えない");
+  const over = [...inboundCounted].filter(([p, set]) => !Object.hasOwn(LINK_HUBS, p) && set.size > 50).map(([p, set]) => `${p} (${set.size}本)`);
+  globalThis.__linkHubs = Object.entries(LINK_HUBS).map(([p, reason]) => `${p} (${inboundCounted.get(p)?.size ?? 0}本・宣言済み: ${reason})`);
+  record("B-2", "宣言済みハブ以外で被内部リンクが50本を超えるページがゼロ", over.length === 0, `50本超 ${over.length}`, over, "パンくずと誤解カードの「一覧へ戻る」由来のリンクは数えない。宣言済みハブは上限の対象外（件数・理由は付記）");
   const thin = [...pages].filter(([, page]) => page.chars < 500).sort((a, b) => a[1].chars - b[1].chars).map(([p, page]) => `${p} (${page.chars}字)`);
   const jitsurei = [...pages].filter(([p]) => /^\/jitsurei\/./.test(p));
   const gokaiThin = thin.filter((t) => t.startsWith("/gokai/"));
@@ -305,6 +312,9 @@ for (const section of ["A", "B", "C"]) {
   }
 }
 const d8 = ["/columns/moushitatesho-a4-insatsu", "/columns/moushitatesho-kikan-kugiri", "/columns/teishutsusaki-yuusou"];
+lines.push("## B-2 付記: 宣言済みハブの被内部リンク", "");
+for (const hub of globalThis.__linkHubs) lines.push(`- ${hub}`);
+lines.push("");
 lines.push("## D(人が見る): 確認用の一覧", "", `全ページの URL・タイトル・文字数は \`${path.relative(root, path.join(outDir, "pages.tsv"))}\` に出力。`, "", "| URL | タイトル | 文字数 |", "|---|---|---|");
 for (const p of d8) lines.push(`| ${p} | ${pages.get(p)?.title ?? "(取得不可)"} | ${pages.get(p)?.chars ?? "-"} |`);
 lines.push("");
