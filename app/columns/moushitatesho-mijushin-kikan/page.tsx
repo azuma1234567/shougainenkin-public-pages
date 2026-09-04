@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
 import { NENKIN_REFERENCES } from "@/components/ColumnFooter";
-import articleSource, {
-  faqs,
-} from "@/content/columns/moushitatesho-mijushin-kikan";
+import articleSource, { lead, faqs } from "@/content/columns/moushitatesho-mijushin-kikan";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
-const column = getColumn("moushitatesho-mijushin-kikan");
+const column = { ...getColumn("moushitatesho-mijushin-kikan"), lead };
 export const metadata: Metadata = columnMetadata(column);
 
 export default function Page() {

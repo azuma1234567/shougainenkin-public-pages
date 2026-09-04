@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
-import articleSource, { faqs } from "@/content/columns/nenkin-jimusho-soudan";
+import articleSource, { lead, faqs } from "@/content/columns/nenkin-jimusho-soudan";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
-const column = getColumn("nenkin-jimusho-soudan");
+const column = { ...getColumn("nenkin-jimusho-soudan"), lead };
 
 // 持ち物チェックリスト(本文のカードと同じ内容)を ItemList で出す。
 const ITEMS = [
