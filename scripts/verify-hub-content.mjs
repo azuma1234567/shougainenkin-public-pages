@@ -27,3 +27,56 @@ for (const [path, item] of Object.entries(content)) {
 if (Object.keys(content).length !== 21) failures.push("本文ページ数が21ではありません");
 if (failures.length) { console.error(failures.join("\n")); process.exit(1); }
 console.log(`OK: 本文21ページ。本文一致、見出し/FAQ一致、非公開語0、予約URLリンク0。`);
+
+/* 監査 §4-2: ハブの FAQ 構造化データが、画面に出ている Q/A と完全に一致すること。
+   抽出は lib/hub-content.ts の extractHubFaqs、画面は MarkdownArticle の faqAccordion 分岐。
+   両方が同じ規則で動いていることを、全ハブの本文で確かめる。 */
+{
+  const { HUB_CONTENT, extractHubFaqs } = await import("../lib/hub-content.ts");
+
+  /* MarkdownArticle の faqAccordion 分岐と同じ手順で summary の文字列を作る(照合用の写し)。 */
+  const summariesFromMarkdown = (source) => {
+    const lines = source.split("\n").map((l) => l.trim());
+    const out = [];
+    let i = 0;
+    while (i < lines.length) {
+      const line = lines[i];
+      i += 1;
+      if (!/^\*\*Q[.．]/.test(line)) continue;
+      const inline = /^\*\*(Q[.．][^*]*?)\*\*\s*(.*)$/.exec(line);
+      out.push(inline ? inline[1] : line.replace(/^\*\*/, "").replace(/\*\*$/, ""));
+      while (i < lines.length) {
+        const next = lines[i];
+        if (!next) { i += 1; break; }
+        if (/^\*\*Q[.．]/.test(next) || next.startsWith("## ")) break;
+        i += 1;
+      }
+    }
+    return out;
+  };
+  const plain = (t) => t.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*\*(.+?)\*\*/g, "$1").replace(/\s+/g, " ").trim();
+
+  const bad = [];
+  let hubs = 0, faqs = 0, empty = [];
+  for (const [path, content] of Object.entries(HUB_CONTENT)) {
+    hubs += 1;
+    const extracted = extractHubFaqs(content.source);
+    const screen = summariesFromMarkdown(content.source).map(plain);
+    faqs += extracted.length;
+    if (!extracted.length) { empty.push(path); continue; }
+    if (extracted.length !== screen.length) {
+      bad.push(`${path}: 抽出 ${extracted.length} 件 / 画面 ${screen.length} 件`);
+      continue;
+    }
+    extracted.forEach((f, i) => {
+      if (f.question !== screen[i]) bad.push(`${path} #${i + 1}: 抽出「${f.question}」≠ 画面「${screen[i]}」`);
+      if (!f.answer) bad.push(`${path} #${i + 1}: 答えが空`);
+    });
+  }
+  if (bad.length) {
+    console.error(`画面と JSON-LD の Q/A が食い違う ${bad.length} 件:\n${bad.slice(0, 5).join("\n")}`);
+    process.exit(1);
+  }
+  console.log(`○ ハブの FAQ: ${hubs} 本中 ${hubs - empty.length} 本に計 ${faqs} 件。抽出と画面の質問が全件一致`);
+  console.log(`  Q&A の無いハブ ${empty.length} 本は FAQPage を出さない: ${empty.join(", ")}`);
+}
