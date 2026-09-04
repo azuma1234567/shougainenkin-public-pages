@@ -3130,3 +3130,22 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
 @media(prefers-color-scheme:dark){.mt-redesign .mt-panel,.mt-example,.mt-hint,.mt-storage{background:var(--background)}.mt-reassurance span,.mt-life label{background:#20313b}.mt-redesign .mt-field input,.mt-redesign .mt-field textarea,.mt-redesign fieldset input:not([type=radio]):not([type=checkbox]){background:#142631;color:#fff}}
 @media(max-width:600px){.mt-redesign{padding-inline:14px}.mt-period-row{grid-template-columns:1fr 1fr}.mt-period-row>span:nth-of-type(2){display:none}.mt-period-row label{grid-column:auto}.mt-redesign .mt-cross .dougu-cross{grid-template-columns:1fr}.mt-date-parts{grid-template-columns:1.5fr 1fr 1fr}.mt-redesign .mt-actions{align-items:flex-start}}
 @media print{.mt-redesign{background:#fff!important;color:#000!important}}
+
+/* ===== 申立書: 公式様式への記入(2026-09-04)。設計書 §3-2・§3-3 ===== */
+/* 背景は公式PDFから作ったSVG。用紙の大きさは要素の inline style(mm)で決める。 */
+.mt-paper{position:relative;background-repeat:no-repeat;background-color:#fff;box-shadow:0 4px 18px #21455b33}
+/* 文章を流し込む欄。縮小しない。はみ出しは隠す(入力画面で知らせる) */
+.mt-slot-text{position:absolute;overflow:hidden;white-space:pre-wrap;word-break:break-all;line-break:strict;color:#000;
+ font-family:"MS Mincho","MS 明朝","Yu Mincho","YuMincho","Hiragino Mincho ProN",serif;line-height:1.35;letter-spacing:.01em}
+/* 印字された「年」「月」「日」の左の空欄に置く半角数字。cx,cy が中心 */
+.mt-slot-digits{position:absolute;transform:translate(-50%,-50%);text-align:center;color:#000;
+ font-family:"MS Mincho","MS 明朝","Yu Mincho","YuMincho","Hiragino Mincho ProN",serif;line-height:1;white-space:nowrap}
+/* 印字された文字を囲む楕円。線1本、塗らない */
+.mt-slot-circle{position:absolute;overflow:visible;pointer-events:none}
+@media print{
+  .mt-main-front,.mt-main-back{page:mt-a3}
+  .mt-cont-front,.mt-cont-back{page:mt-a4-cont}
+  .mt-paper{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+.mt-print-how{margin:10px 0;color:var(--text-muted);font-size:15px;line-height:1.85}
+.mt-print-missing{margin:16px 0 0;padding:14px 16px;border:1px solid #f0e2bd;border-radius:8px;background:#fdf3dd;color:#6b5316;font-size:15px}
