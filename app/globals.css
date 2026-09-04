@@ -3136,7 +3136,10 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
 .mt-paper{position:relative;background-repeat:no-repeat;background-color:#fff;box-shadow:0 4px 18px #21455b33}
 /* 文章を流し込む欄。縮小しない。はみ出しは隠す(入力画面で知らせる) */
 .mt-slot-text{position:absolute;overflow:hidden;white-space:pre-wrap;word-break:break-all;line-break:strict;color:#000;
- font-family:"MS Mincho","MS 明朝","Yu Mincho","YuMincho","Hiragino Mincho ProN",serif;line-height:1.35;letter-spacing:.01em}
+ font-family:"MS Mincho","MS 明朝","Yu Mincho","YuMincho","Hiragino Mincho ProN",serif;line-height:1.35;letter-spacing:.01em;
+ /* 役所に出す白黒の書類なので、利用者が絵文字を打っても紙は無彩色にする(2026-09-04 指示書3 §7)。
+    字は1文字も変えない。検査9「紙に有彩色は1画素も無い」に例外を作らないため。 */
+ filter:grayscale(1);-webkit-print-color-adjust:exact;print-color-adjust:exact}
 /* 印字された「年」「月」「日」の左の空欄に置く半角数字。cx,cy が中心 */
 .mt-slot-digits{position:absolute;transform:translate(-50%,-50%);text-align:center;color:#000;
  font-family:"MS Mincho","MS 明朝","Yu Mincho","YuMincho","Hiragino Mincho ProN",serif;line-height:1;white-space:nowrap}

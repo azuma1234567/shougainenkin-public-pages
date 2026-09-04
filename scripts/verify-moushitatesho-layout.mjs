@@ -250,14 +250,6 @@ function collectSlots(node, sheet, out, trail = []) {
   return out;
 }
 const ALL_SLOTS = Object.entries(SHEET_SLOTS).flatMap(([sheet, root]) => collectSlots(root, sheet, []));
-/* text スロットだけを集める(検査9で「自分たちの文字が入ってよい枠」に使う) */
-function collectTextSlots(node, out) {
-  if (!node || typeof node !== "object") return out;
-  if (Array.isArray(node)) { node.forEach((v) => collectTextSlots(v, out)); return out; }
-  if (node.kind === "text") { out.push(node); return out; }
-  for (const v of Object.values(node)) collectTextSlots(v, out);
-  return out;
-}
 
 check(3, "digits の中心が、印字の間の空欄の中央から ±1.0mm", () => {
   const req = {}; const index = new Map();
@@ -455,41 +447,32 @@ function askChroma(payload) {
 }
 
 check(9, "紙の上に、様式の線と自分たちの文字以外のインクが無い(300dpi・全画素)", () => {
-  /* 「自分たちの文字」= text スロットの中。利用者が絵文字を打てば色が付くが、それは
-     こちらが足した飾りではなく利用者の字なので、枠の中と外を分けて数える(§12「文章を書き換えない」)。
-     落とすのは**枠の外**の有彩色。画面用の飾りが焼き込まれるのはここに出る。 */
-  const allow = {};
-  for (const [sheet, root] of Object.entries(SHEET_SLOTS)) {
-    allow[sheet] = collectTextSlots(root, []).map((t) => ({ x0: t.x, y0: t.y, x1: t.x + t.w, y1: t.y + t.h }));
-  }
+  /* 例外なし。紙の上に有彩色が1画素でもあれば落とす(2026-09-04 指示書3 §7)。
+     「枠の中は色でもよい」を入れた瞬間、次に枠の中へ紛れ込む本物の欠陥がその穴を通る。
+     利用者が絵文字を打っても紙が無彩色になるよう、.mt-slot-text に grayscale を掛けてある。 */
   const paperOf = (kind) => (kind.startsWith("main") ? PAPER.main.width : PAPER.cont.width);
-  const pdfSheets = {};
-  for (const p of pdfs) pdfSheets[p.file] = shots.filter((s2) => s2.name === p.name).map((s2) => s2.kind);
   const res = askChroma({
     files: shots.map((s2) => ({ file: s2.file, sheet: s2.kind, paperMm: paperOf(s2.kind) })),
-    pdfs: pdfs.map((p) => p.file), pdfSheets, allow,
+    pdfs: pdfs.map((p) => p.file),
   });
-  const bad = []; let inSlots = 0;
+  const bad = [];
   for (const s2 of shots) {
-    const r = res[s2.file]; if (!r) continue;
-    inSlots += r.inSlots ?? 0;
-    if (r.total > 0) {
+    const r = res[s2.file];
+    if (r && r.total > 0) {
       const c = r.colors[0];
-      bad.push(`${s2.name}/${s2.kind}: 枠の外に有彩色 ${r.total}画素 rgb(${c.color}) x${c.x0}–${c.x1} y${c.y0}–${c.y1}`);
+      bad.push(`${s2.name}/${s2.kind}: 有彩色 ${r.total}画素 rgb(${c.color}) x${c.x0}–${c.x1} y${c.y0}–${c.y1}`);
     }
   }
   for (const p of pdfs) {
-    const r = res[p.file]; if (!r) continue;
-    inSlots += r.inSlots ?? 0;
-    if (r.total > 0) {
+    const r = res[p.file];
+    if (r && r.total > 0) {
       const worst = r.pages.map((pg, i) => ({ i, ...pg })).filter((pg) => pg.total).sort((a, b) => b.total - a.total)[0];
       const c = worst.colors[0];
-      bad.push(`${p.name} の印刷PDF p${worst.i + 1}: 枠の外に有彩色 ${worst.total}画素 rgb(${c.color})`);
+      bad.push(`${p.name} の印刷PDF p${worst.i + 1}: 有彩色 ${worst.total}画素 rgb(${c.color}) x${c.x0}–${c.x1} y${c.y0}–${c.y1}`);
     }
   }
   if (bad.length) fail(`${bad.length}件: ${bad.slice(0, 5).join(" / ")}`);
-  return `紙 ${shots.length}枚と印刷PDF ${pdfs.length}本、枠の外は全画素が白か無彩色`
-    + (inSlots ? ` / 枠の中に有彩色 ${inSlots}画素(max の絵文字。利用者が打った字なので消さない)` : "");
+  return `紙 ${shots.length}枚と印刷PDF ${pdfs.length}本、全画素が白か無彩色(例外なし)`;
 });
 
 const ok = results.every((r) => r.ok);
