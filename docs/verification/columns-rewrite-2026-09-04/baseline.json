@@ -1,0 +1,507 @@
+{
+  "baseRef": "76deb22",
+  "columns": [
+    {
+      "slug": "shakaiteki-chiyu",
+      "title": "社会的治癒 — 昔の通院があっても、初診日が動くことがある",
+      "metaTitle": "障害年金の社会的治癒｜初診日が動く条件と整理のしかた",
+      "h1": "社会的治癒 — 昔の通院があっても、初診日が動くことがある",
+      "htmlTitle": "障害年金の社会的治癒｜初診日が動く条件と整理のしかた｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shakaiteki-chiyu"
+    },
+    {
+      "slug": "hikazei-shuunyuu",
+      "title": "障害年金は非課税 — でも「収入ゼロ扱い」ではありません",
+      "metaTitle": "障害年金は非課税?｜扶養で収入に数えられる場面",
+      "h1": "障害年金は非課税 — でも「収入ゼロ扱い」ではありません",
+      "htmlTitle": "障害年金は非課税?｜扶養で収入に数えられる場面｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/hikazei-shuunyuu"
+    },
+    {
+      "slug": "jukyuugo-tetsuduki",
+      "title": "障害年金が決まったあとの手続きリスト — 年金証書が届いた日から動き出すもの",
+      "metaTitle": "障害年金の受給決定後の手続き｜給付金・法定免除・扶養",
+      "h1": "障害年金が決まったあとの手続きリスト — 年金証書が届いた日から動き出すもの",
+      "htmlTitle": "障害年金の受給決定後の手続き｜給付金・法定免除・扶養｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/jukyuugo-tetsuduki"
+    },
+    {
+      "slug": "kiso-kousei-chigai",
+      "title": "障害基礎年金と障害厚生年金の違い — 初診日の1日で、生涯数百万円が変わる",
+      "metaTitle": "障害基礎年金と障害厚生年金の違い｜初診日で決まる仕組み",
+      "h1": "障害基礎年金と障害厚生年金の違い — 初診日の1日で、生涯数百万円が変わる",
+      "htmlTitle": "障害基礎年金と障害厚生年金の違い｜初診日で決まる仕組み｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/kiso-kousei-chigai"
+    },
+    {
+      "slug": "ikura-moraeru",
+      "title": "障害年金はいくらもらえる? — 令和8年度の金額と、初回入金までの流れ",
+      "metaTitle": "障害年金はいくらもらえる?｜令和8年度の金額と初回入金",
+      "h1": "障害年金はいくらもらえる? — 令和8年度の金額と、初回入金までの流れ",
+      "htmlTitle": "障害年金はいくらもらえる?｜令和8年度の金額と初回入金｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/ikura-moraeru"
+    },
+    {
+      "slug": "daisansha-shomei",
+      "title": "第三者証明 — 初診日をどうしても証明できないときの、最後の受け皿",
+      "metaTitle": "障害年金の第三者証明｜初診日が証明できないときの書き方",
+      "h1": "第三者証明 — 初診日をどうしても証明できないときの、最後の受け皿",
+      "htmlTitle": "障害年金の第三者証明｜初診日が証明できないときの書き方｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/daisansha-shomei"
+    },
+    {
+      "slug": "gaku-kaitei-seikyuu",
+      "title": "額改定請求 — 症状が重くなったときに、等級を上げてもらう手続き",
+      "metaTitle": "障害年金の額改定請求｜1年待機ルールと却下のリスク",
+      "h1": "額改定請求 — 症状が重くなったときに、等級を上げてもらう手続き",
+      "htmlTitle": "障害年金の額改定請求｜1年待機ルールと却下のリスク｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/gaku-kaitei-seikyuu"
+    },
+    {
+      "slug": "shikyuu-teishi-fukkatsu",
+      "title": "障害年金が止まったら — 支給停止の原因と、復活させる手続き",
+      "metaTitle": "障害年金の支給停止｜止まる原因と復活の手続き",
+      "h1": "障害年金が止まったら — 支給停止の原因と、復活させる手続き",
+      "htmlTitle": "障害年金の支給停止｜止まる原因と復活の手続き｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shikyuu-teishi-fukkatsu"
+    },
+    {
+      "slug": "shinsei-shindoi",
+      "title": "障害年金の申請がしんどい — 疲れ果てないための「小分け」の進め方",
+      "metaTitle": "障害年金の申請がしんどい｜疲れ果てない小分けの進め方",
+      "h1": "障害年金の申請がしんどい — 疲れ果てないための「小分け」の進め方",
+      "htmlTitle": "障害年金の申請がしんどい｜疲れ果てない小分けの進め方｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shinsei-shindoi"
+    },
+    {
+      "slug": "shinsa-shikumi-nintei-i",
+      "title": "障害年金の審査は誰がどう行う? — 認定医が見ているポイントと、厳しくなった審査の実際",
+      "metaTitle": "障害年金の審査は誰がどう行う?｜認定医が見るポイントと最新傾向",
+      "h1": "障害年金の審査は誰がどう行う? — 認定医が見ているポイントと、厳しくなった審査の実際",
+      "htmlTitle": "障害年金の審査は誰がどう行う?｜認定医が見るポイントと最新傾向｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shinsa-shikumi-nintei-i"
+    },
+    {
+      "slug": "teishutsusaki-yuusou",
+      "title": "障害年金の書類はどこに提出する? — 年金事務所・市役所・郵送の違いと、出す前の最終チェック",
+      "metaTitle": "障害年金の書類はどこに提出する?｜年金事務所・市役所・郵送",
+      "h1": "障害年金の書類はどこに提出する? — 年金事務所・市役所・郵送の違いと、出す前の最終チェック",
+      "htmlTitle": "障害年金の書類はどこに提出する?｜年金事務所・市役所・郵送｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/teishutsusaki-yuusou"
+    },
+    {
+      "slug": "shindansho-tanomikata",
+      "title": "障害年金の診断書を主治医にどう頼む? — 切り出し方の台本、渡すメモ、依頼当日の流れ",
+      "metaTitle": "障害年金の診断書を主治医にどう頼む?｜切り出し方と依頼メモ",
+      "h1": "障害年金の診断書を主治医にどう頼む? — 切り出し方の台本、渡すメモ、依頼当日の流れ",
+      "htmlTitle": "障害年金の診断書を主治医にどう頼む?｜切り出し方と依頼メモ｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shindansho-tanomikata"
+    },
+    {
+      "slug": "kazoku-enjo-kakikata",
+      "title": "障害年金の申立書に家族の援助をどう書く? — 支援内容の具体例と、「書かないと存在しない」という審査の現実",
+      "metaTitle": "障害年金の申立書に家族の援助をどう書く?｜具体例と記入ポイント",
+      "h1": "障害年金の申立書に家族の援助をどう書く? — 支援内容の具体例と、「書かないと存在しない」という審査の現実",
+      "htmlTitle": "障害年金の申立書に家族の援助をどう書く?｜具体例と記入ポイント｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/kazoku-enjo-kakikata"
+    },
+    {
+      "slug": "shindansho-ishi-ni-tsutaeru",
+      "title": "障害年金の診断書で医師に伝えること全リスト — 何を、どこまで、どう伝えるか(伝えてはいけないことも)",
+      "metaTitle": "障害年金の診断書で医師に伝えること全リスト",
+      "h1": "障害年金の診断書で医師に伝えること全リスト — 何を、どこまで、どう伝えるか(伝えてはいけないことも)",
+      "htmlTitle": "障害年金の診断書で医師に伝えること全リスト｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shindansho-ishi-ni-tsutaeru"
+    },
+    {
+      "slug": "shindansho-jittai-chigau",
+      "title": "障害年金の診断書が実態と違う・軽く書かれた — 訂正はどこまで頼める?ケース別の対処と「出す/出さない」の判断",
+      "metaTitle": "障害年金の診断書が実態と違う・軽く書かれたときの対処",
+      "h1": "障害年金の診断書が実態と違う・軽く書かれた — 訂正はどこまで頼める?ケース別の対処と「出す/出さない」の判断",
+      "htmlTitle": "障害年金の診断書が実態と違う・軽く書かれたときの対処｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shindansho-jittai-chigau"
+    },
+    {
+      "slug": "tekio-shogai-shogai-nenkin",
+      "title": "適応障害でも障害年金は申請できる? — 確認する順番と、自分の状況を整理する4つのシート",
+      "metaTitle": "適応障害でも障害年金は申請できる?｜確認する順番と4つのシート",
+      "h1": "適応障害でも障害年金は申請できる? — 確認する順番と、自分の状況を整理する4つのシート",
+      "htmlTitle": "適応障害でも障害年金は申請できる?｜確認する順番と4つのシート｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/tekio-shogai-shogai-nenkin"
+    },
+    {
+      "slug": "moushitatesho-mijushin-kikan",
+      "title": "病歴・就労状況等申立書の未受診期間はどう書く? — 空白を「軽快」と読ませないための書き方と、5パターンのフル記入例",
+      "metaTitle": "病歴・就労状況等申立書の未受診期間の書き方",
+      "h1": "病歴・就労状況等申立書の未受診期間はどう書く? — 空白を「軽快」と読ませないための書き方と、5パターンのフル記入例",
+      "htmlTitle": "病歴・就労状況等申立書の未受診期間の書き方｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/moushitatesho-mijushin-kikan"
+    },
+    {
+      "slug": "hitorigurashi-furi",
+      "title": "障害年金は一人暮らしだと不利? — 「自立している」と誤解されないための、診断書と申立書の伝え方",
+      "metaTitle": "障害年金は一人暮らしだと不利?｜診断書と申立書の伝え方",
+      "h1": "障害年金は一人暮らしだと不利? — 「自立している」と誤解されないための、診断書と申立書の伝え方",
+      "htmlTitle": "障害年金は一人暮らしだと不利?｜診断書と申立書の伝え方｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/hitorigurashi-furi"
+    },
+    {
+      "slug": "nenkin-jimusho-soudan",
+      "title": "障害年金の相談で年金事務所に持っていくもの — 初回相談の持ち物チェックリストと、予約から当日までの流れ",
+      "metaTitle": "障害年金の相談で年金事務所に持っていくもの｜初回相談の持ち物チェックリスト",
+      "h1": "障害年金の相談で年金事務所に持っていくもの — 初回相談の持ち物チェックリストと、予約から当日までの流れ",
+      "htmlTitle": "障害年金の相談で年金事務所に持っていくもの｜初回相談の持ち物チェックリスト｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/nenkin-jimusho-soudan"
+    },
+    {
+      "slug": "jushinjokyo-shomeisho",
+      "title": "受診状況等証明書とは？病院への依頼方法・郵送・確認ポイント",
+      "metaTitle": "受診状況等証明書の郵送での依頼方法｜遠方の病院からの取り寄せ手順",
+      "h1": "受診状況等証明書とは？病院への依頼方法・郵送・確認ポイント",
+      "htmlTitle": "受診状況等証明書の郵送での依頼方法｜遠方の病院からの取り寄せ手順｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/jushinjokyo-shomeisho"
+    },
+    {
+      "slug": "shindansho-irai-timing",
+      "title": "障害年金の診断書はいつ頼む? — 現症日の3か月ルールから逆算する依頼タイミングと、依頼前に準備するもの",
+      "metaTitle": "障害年金の診断書はいつ頼む?｜現症日と依頼タイミング",
+      "h1": "障害年金の診断書はいつ頼む? — 現症日の3か月ルールから逆算する依頼タイミングと、依頼前に準備するもの",
+      "htmlTitle": "障害年金の診断書はいつ頼む?｜現症日と依頼タイミング｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shindansho-irai-timing"
+    },
+    {
+      "slug": "hitsuyou-shorui-seishin",
+      "title": "精神疾患で障害年金を申請するときの必要書類チェックリスト — 入手先・費用・期間・取得順序まで一覧で",
+      "metaTitle": "精神疾患の障害年金｜必要書類チェックリスト",
+      "h1": "精神疾患で障害年金を申請するときの必要書類チェックリスト — 入手先・費用・期間・取得順序まで一覧で",
+      "htmlTitle": "精神疾患の障害年金｜必要書類チェックリスト｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/hitsuyou-shorui-seishin"
+    },
+    {
+      "slug": "shinsei-kikan",
+      "title": "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
+      "metaTitle": null,
+      "h1": "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
+      "htmlTitle": "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shinsei-kikan"
+    },
+    {
+      "slug": "moushitatesho-kikan-kugiri",
+      "title": "障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方",
+      "metaTitle": null,
+      "h1": "障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方",
+      "htmlTitle": "障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/moushitatesho-kikan-kugiri"
+    },
+    {
+      "slug": "sokyuu-seikyuu",
+      "title": "障害年金の遡及請求 — 最大5年分をさかのぼる条件と、成功を分ける「認定日の診断書」の現実",
+      "metaTitle": "障害年金の遡及請求｜最大5年分をさかのぼる条件",
+      "h1": "障害年金の遡及請求 — 最大5年分をさかのぼる条件と、成功を分ける「認定日の診断書」の現実",
+      "htmlTitle": "障害年金の遡及請求｜最大5年分をさかのぼる条件｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/sokyuu-seikyuu"
+    },
+    {
+      "slug": "taishou-shoubyou-kyoukai",
+      "title": "適応障害・不安障害・神経症は障害年金の対象外？— 「病名で門前払い」されないための境界線の知識",
+      "metaTitle": "適応障害・不安障害・神経症は障害年金の対象外？",
+      "h1": "適応障害・不安障害・神経症は障害年金の対象外？— 「病名で門前払い」されないための境界線の知識",
+      "htmlTitle": "適応障害・不安障害・神経症は障害年金の対象外？｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/taishou-shoubyou-kyoukai"
+    },
+    {
+      "slug": "shougaisha-koyou-nenkin",
+      "title": "障害者雇用で働きながら障害年金はもらえる？— フルタイム6年で受給できた実例と、「働ける＝軽い」と読ませない書類の作り方",
+      "metaTitle": "障害者雇用で働きながら障害年金はもらえる？",
+      "h1": "障害者雇用で働きながら障害年金はもらえる？— フルタイム6年で受給できた実例と、「働ける＝軽い」と読ませない書類の作り方",
+      "htmlTitle": "障害者雇用で働きながら障害年金はもらえる？｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shougaisha-koyou-nenkin"
+    },
+    {
+      "slug": "nichijo-seikatsu-7koumoku",
+      "title": "障害年金「日常生活能力の判定」7項目 — できる・できないの具体例と、医師への伝え方",
+      "metaTitle": "障害年金「日常生活能力の判定」7項目とは?できる・できないの具体例",
+      "h1": "障害年金「日常生活能力の判定」7項目 — できる・できないの具体例と、医師への伝え方",
+      "htmlTitle": "障害年金「日常生活能力の判定」7項目とは?できる・できないの具体例｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/nichijo-seikatsu-7koumoku"
+    },
+    {
+      "slug": "tokyu-hantei-guideline",
+      "title": "精神の等級判定ガイドラインと目安表 — 自分の診断書で「何級相当か」を読む方法と、目安どおりにならない理由",
+      "metaTitle": "精神の等級判定ガイドライン｜目安表の読み方",
+      "h1": "精神の等級判定ガイドラインと目安表 — 自分の診断書で「何級相当か」を読む方法と、目安どおりにならない理由",
+      "htmlTitle": "精神の等級判定ガイドライン｜目安表の読み方｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/tokyu-hantei-guideline"
+    },
+    {
+      "slug": "koushin-kakuninhodo",
+      "title": "障害年金の更新（障害状態確認届）— 何年ごと？落ちたらどうなる？受給してからが本番という話",
+      "metaTitle": "障害年金の更新（障害状態確認届）｜時期・支給停止への備え",
+      "h1": "障害年金の更新（障害状態確認届）— 何年ごと？落ちたらどうなる？受給してからが本番という話",
+      "htmlTitle": "障害年金の更新（障害状態確認届）｜時期・支給停止への備え｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/koushin-kakuninhodo"
+    },
+    {
+      "slug": "shindansho-kaitekurenai",
+      "title": "障害年金の診断書を医師が書いてくれない — 断られる理由は5つの型に分かれる。型別の対処と依頼文の完成形",
+      "metaTitle": "障害年金の診断書を医師が書いてくれないときの対処法",
+      "h1": "障害年金の診断書を医師が書いてくれない — 断られる理由は5つの型に分かれる。型別の対処と依頼文の完成形",
+      "htmlTitle": "障害年金の診断書を医師が書いてくれないときの対処法｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shindansho-kaitekurenai"
+    },
+    {
+      "slug": "ninteibi-jigojusho",
+      "title": "障害認定日請求と事後重症請求の違い｜最大5年さかのぼるための条件",
+      "metaTitle": "障害認定日請求と事後重症請求の違い｜最大5年遡及の条件",
+      "h1": "障害認定日請求と事後重症請求の違い｜最大5年さかのぼるための条件",
+      "htmlTitle": "障害認定日請求と事後重症請求の違い｜最大5年遡及の条件｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/ninteibi-jigojusho"
+    },
+    {
+      "slug": "shindansho-kakunin",
+      "title": "障害年金の診断書を受け取ったら確認すべき7つのポイント — 「実際より軽く書かれていた」を提出前に防ぐ",
+      "metaTitle": "障害年金の診断書を受け取ったら確認すべき7つのポイント",
+      "h1": "障害年金の診断書を受け取ったら確認すべき7つのポイント — 「実際より軽く書かれていた」を提出前に防ぐ",
+      "htmlTitle": "障害年金の診断書を受け取ったら確認すべき7つのポイント｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shindansho-kakunin"
+    },
+    {
+      "slug": "techou-to-nenkin",
+      "title": "障害者手帳と障害年金の違い — 手帳の等級と年金の等級は別物です",
+      "metaTitle": null,
+      "h1": "障害者手帳と障害年金の違い — 手帳の等級と年金の等級は別物です",
+      "htmlTitle": "障害者手帳と障害年金の違い — 手帳の等級と年金の等級は別物です｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/techou-to-nenkin"
+    },
+    {
+      "slug": "shoubyou-teatekin",
+      "title": "傷病手当金と障害年金は同時にもらえる？併給調整と申請準備の流れ",
+      "metaTitle": "傷病手当金と障害年金は同時にもらえる？併給調整と申請準備",
+      "h1": "傷病手当金と障害年金は同時にもらえる？併給調整と申請準備の流れ",
+      "htmlTitle": "傷病手当金と障害年金は同時にもらえる？併給調整と申請準備｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shoubyou-teatekin"
+    },
+    {
+      "slug": "hattatsu-shougai",
+      "title": "発達障害（ADHD・ASD）で障害年金を申請する方法｜初診日・診断書・申立書",
+      "metaTitle": "発達障害（ADHD・ASD）の障害年金｜初診日・診断書・申立書",
+      "h1": "発達障害（ADHD・ASD）で障害年金を申請する方法｜初診日・診断書・申立書",
+      "htmlTitle": "発達障害（ADHD・ASD）の障害年金｜初診日・診断書・申立書｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/hattatsu-shougai"
+    },
+    {
+      "slug": "hatachi-mae",
+      "title": "20歳前傷病の障害基礎年金 — 納付要件を問われない特例と、10代の記録が大切な理由",
+      "metaTitle": "20歳前傷病の障害基礎年金 — 納付要件と10代の記録",
+      "h1": "20歳前傷病の障害基礎年金 — 納付要件を問われない特例と、10代の記録が大切な理由",
+      "htmlTitle": "20歳前傷病の障害基礎年金 — 納付要件と10代の記録｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/hatachi-mae"
+    },
+    {
+      "slug": "fushikyuu-shinsa-seikyu",
+      "title": "障害年金が不支給になったら｜審査請求・再審査請求・再請求の選び方",
+      "metaTitle": "障害年金が不支給になったときの審査請求・再審査請求・再請求",
+      "h1": "障害年金が不支給になったら｜審査請求・再審査請求・再請求の選び方",
+      "htmlTitle": "障害年金が不支給になったときの審査請求・再審査請求・再請求｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/fushikyuu-shinsa-seikyu"
+    },
+    {
+      "slug": "jibun-de-shinsei",
+      "title": "障害年金は自分で申請できる?社労士に依頼する場合との違いと判断のポイント",
+      "metaTitle": "障害年金は自分で申請できる?社労士に依頼する場合との違い",
+      "h1": "障害年金は自分で申請できる?社労士に依頼する場合との違いと判断のポイント",
+      "htmlTitle": "障害年金は自分で申請できる?社労士に依頼する場合との違い｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/jibun-de-shinsei"
+    },
+    {
+      "slug": "hatarakinagara",
+      "title": "働きながら障害年金はもらえる？「働ける＝改善」と誤解されない伝え方",
+      "metaTitle": "働きながら障害年金｜就労中に医師へ伝えること",
+      "h1": "働きながら障害年金はもらえる？「働ける＝改善」と誤解されない伝え方",
+      "htmlTitle": "働きながら障害年金｜就労中に医師へ伝えること｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/hatarakinagara"
+    },
+    {
+      "slug": "nofu-yoken",
+      "title": "障害年金の保険料納付要件とは — 未納があると受け取れない?3分の2要件と直近1年の特例",
+      "metaTitle": "障害年金の保険料納付要件とは — 3分の2要件と直近1年の特例",
+      "h1": "障害年金の保険料納付要件とは — 未納があると受け取れない?3分の2要件と直近1年の特例",
+      "htmlTitle": "障害年金の保険料納付要件とは — 3分の2要件と直近1年の特例｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/nofu-yoken"
+    },
+    {
+      "slug": "shoshinbi-wakaranai",
+      "title": "障害年金の初診日がわからないときの調べ方｜証明できない場合も解説",
+      "metaTitle": null,
+      "h1": "障害年金の初診日がわからないときの調べ方｜証明できない場合も解説",
+      "htmlTitle": "障害年金の初診日がわからないときの調べ方｜証明できない場合も解説｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shoshinbi-wakaranai"
+    },
+    {
+      "slug": "shoshinbi-karute-nashi",
+      "title": "障害年金の初診日 — カルテがない・破棄されたときの証明方法と、代替資料の一覧",
+      "metaTitle": "障害年金の初診日｜カルテがない・破棄されたときの証明方法【代替資料の一覧つき】",
+      "h1": "障害年金の初診日 — カルテがない・破棄されたときの証明方法と、代替資料の一覧",
+      "htmlTitle": "障害年金の初診日｜カルテがない・破棄されたときの証明方法【代替資料の一覧つき】｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shoshinbi-karute-nashi"
+    },
+    {
+      "slug": "shoshinbi-haiin",
+      "title": "障害年金の初診日 — 昔の病院が廃院しているときの調べ方と、行き先の探し方",
+      "metaTitle": "障害年金の初診日｜昔の病院が廃院しているときの調べ方【行き先の探し方つき】",
+      "h1": "障害年金の初診日 — 昔の病院が廃院しているときの調べ方と、行き先の探し方",
+      "htmlTitle": "障害年金の初診日｜昔の病院が廃院しているときの調べ方【行き先の探し方つき】｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shoshinbi-haiin"
+    },
+    {
+      "slug": "moushitatesho-kakikata",
+      "title": "病歴・就労状況等申立書の書き方【精神疾患】— 審査で落ちる書き方と、伝わる書き方(期間別フル記入例つき)",
+      "metaTitle": "病歴・就労状況等申立書の書き方【精神疾患】審査で落ちる書き方・伝わる書き方",
+      "h1": "病歴・就労状況等申立書の書き方【精神疾患】— 審査で落ちる書き方と、伝わる書き方(期間別フル記入例つき)",
+      "htmlTitle": "病歴・就労状況等申立書の書き方【精神疾患】審査で落ちる書き方・伝わる書き方｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/moushitatesho-kakikata"
+    },
+    {
+      "slug": "moushitatesho-a4-insatsu",
+      "title": "障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説",
+      "metaTitle": null,
+      "h1": "障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説",
+      "htmlTitle": "障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/moushitatesho-a4-insatsu"
+    },
+    {
+      "slug": "shinsatsu-mae-memo",
+      "title": "障害年金の診断書のために、主治医に渡す「生活状況メモ」の書き方 — 診察で話せなくても、紙なら伝わる",
+      "metaTitle": "障害年金の診断書｜主治医に渡す「生活状況メモ」の書き方【具体例つき】",
+      "h1": "障害年金の診断書のために、主治医に渡す「生活状況メモ」の書き方 — 診察で話せなくても、紙なら伝わる",
+      "htmlTitle": "障害年金の診断書｜主治医に渡す「生活状況メモ」の書き方【具体例つき】｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shinsatsu-mae-memo"
+    }
+  ],
+  "special": {
+    "moushitatesho-a4-insatsu": {
+      "h2": [
+        "先に結論 — 印刷でつまずかないための3点",
+        "結論を先に:3つの選択肢と、選び方",
+        "様式の入手 — 「最新版を、機構から」",
+        "自宅のプリンターで印刷する方法",
+        "コンビニで印刷する方法",
+        "スマートフォンから印刷する方法",
+        "調子の波に合わせて工程を割る",
+        "完成形:アキさんの「提出物チェックリスト」",
+        "いちばん忘れやすい落とし穴:診断書のコピー",
+        "提出のしかたと、そのあと",
+        "アプリなら、記録→整形→印刷→控えまでひとつ",
+        "よくある質問(FAQ)",
+        "まとめ",
+        "参考リンク",
+        "あわせて読みたい"
+      ],
+      "links": [
+        "/",
+        "/columns",
+        "/shinsei",
+        "/shinsei#step-6",
+        "/dougu/moushitatesho",
+        "/columns/moushitatesho-kakikata",
+        "/columns/moushitatesho-kikan-kugiri",
+        "/columns/moushitatesho-mijushin-kikan",
+        "/columns/shindansho-kakunin",
+        "/columns/nichijo-seikatsu-7koumoku",
+        "/columns/koushin-kakuninhodo",
+        "/columns/fushikyuu-shinsa-seikyu",
+        "/columns/shinsatsu-mae-memo",
+        "/columns/hikazei-shuunyuu"
+      ],
+      "cta": []
+    },
+    "moushitatesho-kikan-kugiri": {
+      "h2": [
+        "先に結論 — 「変化があった時点」で区切ります",
+        "区切りの3原則 — まずはこれだけ",
+        "具体例:時系列で区切りを作ってみる",
+        "つまずきパターン別・区切りの実践",
+        "続紙の使い方 — 枠が足りないのは普通のこと",
+        "完成形:アキさんの「期間一覧」設計図",
+        "未受診期間(③)は、区切ったあとが本番",
+        "区切りと「整合性」— 書類同士の突き合わせに耐える設計",
+        "よくある失敗から逆算する、区切りの落とし穴3つ",
+        "完成形②:現在に近い期間(⑤)のフル記入例",
+        "なぜ専門家は「ワープロで」作るのか — 区切り直しに強い書類作法",
+        "提出後に「書き忘れ」を思い出したら",
+        "「一気に書けない」を前提にした作業手順",
+        "よくある質問",
+        "まとめ",
+        "参考リンク",
+        "あわせて読みたい"
+      ],
+      "links": [
+        "/",
+        "/columns",
+        "/shinsei",
+        "/shinsei#step-6",
+        "/dougu/moushitatesho#kikan",
+        "/columns/moushitatesho-kakikata",
+        "/columns/ninteibi-jigojusho",
+        "/columns/hitorigurashi-furi",
+        "/columns/hattatsu-shougai",
+        "/columns/moushitatesho-a4-insatsu",
+        "/columns/shoshinbi-wakaranai",
+        "/columns/sokyuu-seikyuu",
+        "/columns/nichijo-seikatsu-7koumoku",
+        "/columns/moushitatesho-mijushin-kikan",
+        "/columns/tokyu-hantei-guideline",
+        "/columns/hatarakinagara",
+        "/columns/koushin-kakuninhodo",
+        "/columns/fushikyuu-shinsa-seikyu",
+        "/columns/shinsatsu-mae-memo",
+        "/columns/hikazei-shuunyuu"
+      ],
+      "cta": [
+        "申請準備を、アプリでひとつずつこの記事の内容を、質問に答えるだけで進められるアプリを作りました。日々の記録が診察で医師に渡せる資料になり、申立書の下書きになります。ログイン不要・記録は端末の中に。すべての機能を無料で使えます。"
+      ]
+    },
+    "teishutsusaki-yuusou": {
+      "h2": [
+        "結論:提出先は「初診日の年金制度」で決まる",
+        "「街角の年金相談センター」という選択肢",
+        "窓口 vs 郵送 — どちらを選ぶか",
+        "郵送で出すときの実務 — 5つの手順",
+        "完成形:アキさんの送付状",
+        "窓口で出すときの実務",
+        "出す前の最終チェック — よくある失敗5つ",
+        "完成形:アキさんの提出当日タイムライン",
+        "提出先を間違えたら、どうなる?",
+        "体調が悪い人のための「提出の設計」",
+        "提出したあとに起きること",
+        "照会が来たときの対応 — 慌てないための3原則",
+        "「出す」までを分解しておくと、詰まらない",
+        "よくある質問",
+        "まとめ",
+        "参考リンク",
+        "あわせて読みたい"
+      ],
+      "links": [
+        "/",
+        "/columns",
+        "/shinsei",
+        "/shinsei#step-7",
+        "/dougu/madoguchi",
+        "/columns/shoshinbi-wakaranai",
+        "/columns/hatachi-mae",
+        "/columns/nenkin-jimusho-soudan",
+        "/columns/moushitatesho-a4-insatsu",
+        "/columns/koushin-kakuninhodo",
+        "/columns/fushikyuu-shinsa-seikyu",
+        "/columns/shoubyou-teatekin",
+        "/columns/shindansho-kakunin",
+        "/columns/shinsei-kikan",
+        "/columns/shinsatsu-mae-memo",
+        "/columns/hitsuyou-shorui-seishin",
+        "/columns/hikazei-shuunyuu",
+        "/columns/jukyuugo-tetsuduki"
+      ],
+      "cta": []
+    }
+  }
+}
