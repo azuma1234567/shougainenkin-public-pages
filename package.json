@@ -29,7 +29,8 @@
     "test:moushitatesho": "node --import ./scripts/lib/ts-alias.mjs --test tests/wareki.test.mjs tests/moushitatesho-migrate.test.mjs tests/moushitatesho-tel.test.mjs",
     "verify:moushitatesho:layout": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho-layout.mjs",
     "verify:moushitatesho": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho/verify.mjs",
-    "verify:moushitatesho:overlay": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho/overlay.mjs"
+    "verify:moushitatesho:overlay": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho/overlay.mjs",
+    "indexnow": "node scripts/indexnow-submit.mjs --since $(date -v-7d +%F)"
   },
   "dependencies": {
     "next": "^15.3.4",
