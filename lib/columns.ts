@@ -451,7 +451,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     metaTitle:
       "精神疾患の障害年金｜必要書類チェックリスト",
     description:
-      "精神疾患(うつ病・双極性障害・統合失調症・発達障害)で障害年金を申請するときの必要書類を完全チェックリスト化。全員に必要な5点と、ケース別の追加書類、入手先・費用・期間の一覧表、取得順序と逆算スケジュール、有効期限の落とし穴、提出前の最終確認まで。",
+      "精神疾患(うつ病・双極性障害・統合失調症・発達障害)の障害年金で請求に必要な書類を、全員共通/初診日の証明/人によって違う、の3段で整理しました。入手先・費用・期間の一覧表、取得順序と逆算スケジュール、有効期限の落とし穴、提出前の最終確認まで。",
     datePublished: "2026-07-23",
     dateModified: "2026-07-23",
     primaryCluster: "mental",
@@ -461,6 +461,8 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
   {
     slug: "shinsei-kikan",
     title: "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
+    /* h1 は変えない約束なので、<title> だけ metaTitle で「決定通知」に寄せる(監査 §4-3) */
+    metaTitle: "障害年金の決定通知はいつ届く？審査期間の目安と、遅いときの確認先",
     description:
       "障害年金の申請から結果が届くまでの流れを解説します。審査中の連絡、追加書類、結果が遅い場合の確認方法や、結果待ちの間にしておきたい準備も紹介します。",
     datePublished: "2026-07-23",
@@ -710,6 +712,8 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     slug: "shoshinbi-wakaranai",
     title:
       "障害年金の初診日がわからないときの調べ方｜証明できない場合も解説",
+    /* 本文の h2「方法1〜5」に合わせて数を入れる。h1 は変えない(監査 §4-3) */
+    metaTitle: "障害年金の初診日がわからないときの探し方5つ｜証明できないときも",
     description:
       "障害年金を申請したいものの初診日がわからない場合の調べ方を解説します。病院、診察券、お薬手帳、健康保険の記録など、確認の手がかりを順番に紹介します。",
     datePublished: "2026-07-17",
