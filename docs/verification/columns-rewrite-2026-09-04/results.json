@@ -1,0 +1,129 @@
+{
+  "origin": "http://localhost:3107",
+  "baseline": "76deb22",
+  "results": [
+    {
+      "number": 1,
+      "label": "47記事すべてにlead 3〜5項目・原稿との完全一致",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 2,
+      "label": "本文の文中太字0（段落頭・表・Q・裁決リードのみ）",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 3,
+      "label": "道具リンク1本以上（指定3記事を除く）",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 4,
+      "label": "裁決IDはverifiedのみ・PDFリンクとして表示",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 5,
+      "label": "本文の内部リンクが公開済み・誤解カードの文言一致",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 6,
+      "label": "10万円以上の金額がamounts-deriveまたは宣言済み仮定値で説明できる",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 7,
+      "label": "禁止文字列・変更コメントなし",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 8,
+      "label": "URL・slug・h1・title・metaTitleが作業前と一致",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 9,
+      "label": "47記事のFAQPageと画面のQ/Aが本文に一致",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 10,
+      "label": "375pxでページ横スクロールなし・目次は閉じた状態",
+      "ok": true,
+      "errors": []
+    }
+  ],
+  "assumedAmounts": [
+    {
+      "value": 300000,
+      "reason": "shoubyou-teatekin: 標準報酬月額の平均(「30万円なら」)",
+      "used": true
+    },
+    {
+      "value": 600000,
+      "reason": "shoubyou-teatekin: 報酬比例部分(「報酬比例60万円」)",
+      "used": true
+    },
+    {
+      "value": 1447300,
+      "reason": "shoubyou-teatekin: 600,000 + basicGrade2(847,300)",
+      "used": true
+    },
+    {
+      "value": 1800000,
+      "reason": "shoubyou-teatekin: 年金の合計(「年180万円なら」)",
+      "used": true
+    }
+  ],
+  "special": [
+    {
+      "slug": "moushitatesho-a4-insatsu",
+      "ok": true,
+      "missingHeadings": [],
+      "missingLinks": [],
+      "ctaOk": true,
+      "oldCharacters": 11054,
+      "newCharacters": 10813,
+      "ratio": 0.9781979373982269,
+      "leadCharacters": 295,
+      "withLeadCharacters": 11108,
+      "withLeadRatio": 1.0048851094626379
+    },
+    {
+      "slug": "moushitatesho-kikan-kugiri",
+      "ok": true,
+      "missingHeadings": [],
+      "missingLinks": [],
+      "ctaOk": true,
+      "oldCharacters": 10979,
+      "newCharacters": 11672,
+      "ratio": 1.0631205027780308,
+      "leadCharacters": 357,
+      "withLeadCharacters": 12029,
+      "withLeadRatio": 1.0956371254212587
+    },
+    {
+      "slug": "teishutsusaki-yuusou",
+      "ok": true,
+      "missingHeadings": [],
+      "missingLinks": [],
+      "ctaOk": true,
+      "oldCharacters": 8924,
+      "newCharacters": 9536,
+      "ratio": 1.0685791125056028,
+      "leadCharacters": 393,
+      "withLeadCharacters": 9929,
+      "withLeadRatio": 1.112617660242044
+    }
+  ]
+}

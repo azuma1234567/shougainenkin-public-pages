@@ -13,7 +13,7 @@ import { faqJsonLd } from "@/lib/seo";
 import { DouguCards } from "@/components/platform/DouguCard";
 import { PLACEMENTS } from "@/data/dougu";
 import AdLabel from "@/components/AdLabel";
-import Link from "next/link";
+import "@/app/columns/columns.css";
 
 type Faq = { question: string; answer: string };
 
@@ -34,7 +34,7 @@ export default function ColumnArticle({
   extraJsonLd?: Record<string, unknown>[];
 }) {
   return (
-    <article>
+    <article className="column-article">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column, references)).replace(/</g, "\\u003c") }}
@@ -61,16 +61,21 @@ export default function ColumnArticle({
         <time dateTime={column.datePublished}>
           {formatDate(column.datePublished)}
         </time>{" "}
-        / 最終更新日: {" "}
+        / 最終確認日: {" "}
         <time dateTime={column.dateModified}>
           {formatDate(column.dateModified)}
         </time>
       </p>
 
-      <ArticleToc />
+      {column.lead && <section className="column-conclusion" aria-labelledby="column-conclusion-heading">
+        <h2 id="column-conclusion-heading">この記事の結論</h2>
+        {column.lead.map((line, index) => <p key={index}>{line}</p>)}
+      </section>}
+      <ArticleToc bodyOnly />
       <ColumnThemeBlock column={column} />
       <DouguCards placements={PLACEMENTS.columns[column.slug]} position="before" />
-      <MarkdownArticle
+      <div className="column-body"><MarkdownArticle
+        columnStyle
         source={source}
         appCtaSlug={column.slug}
         leadNotice={
@@ -81,7 +86,7 @@ export default function ColumnArticle({
             </p>
           ) : undefined
         }
-      />
+      /></div>
       <DouguCards placements={PLACEMENTS.columns[column.slug]} position="after" />
       <ColumnFooter
         currentSlug={column.slug}

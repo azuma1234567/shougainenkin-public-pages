@@ -110,6 +110,7 @@ export const WORRY_SHORTCUTS: { label: string; slug: string }[] = [
 ];
 
 export type Column = {
+  lead?: string[];
   slug: string;
   title: string;
   // 検索結果用の短いtitle(全角32文字前後)。未指定ならtitleを使う。
@@ -793,6 +794,7 @@ export const COLUMNS: Column[] = BASE_COLUMNS.map((column) => {
   if (!hubAssignment) throw new Error(`ハブ棚割りがありません: ${column.slug}`);
   return {
     ...column,
+    dateModified: "2026-09-03",
     hubPrimary: hubAssignment.primary,
     hubSecondary: hubAssignment.secondary,
     role: hubAssignment.role,

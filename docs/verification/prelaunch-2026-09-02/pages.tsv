@@ -5,7 +5,7 @@ url	title	chars
 /byoki/utsu-soukyoku	うつ病・双極性障害の障害年金｜障害年金申請サポート	5850
 /jitsurei	結論が変わった実例｜障害年金の公開裁決例｜障害年金申請サポート	2989
 /nayami/fushikyu	不支給と言われたとき｜障害年金申請サポート	6615
-/columns	障害年金の申請準備コラム｜障害年金申請サポート	9009
+/columns	障害年金の申請準備コラム｜障害年金申請サポート	8962
 /about	運営者情報｜障害年金申請サポート	1883
 /support	サポート｜障害年金申請サポート	971
 /privacy	プライバシーポリシー｜障害年金申請サポート	2732
@@ -118,50 +118,50 @@ url	title	chars
 /gokai/munenkin-owari	制度に入っていなかった時代だから、もう何もない？ — 特別障害給付金という別の制度があります｜障害年金申請サポート	1982
 /gokai/kuriage	老齢年金を繰り上げても障害年金には影響しない？ — 繰上げ後は、事後重症の障害年金を請求できなくなります｜障害年金申請サポート	2062
 /gokai/dokkyo-furi	一人暮らしでも支援を受けていなければ評価されない？ — 「支援が必要な状態か」で判断されます｜障害年金申請サポート	2473
-/columns/shakaiteki-chiyu	障害年金の社会的治癒｜初診日が動く条件と整理のしかた｜障害年金申請サポート	5415
-/columns/hikazei-shuunyuu	障害年金は非課税?｜扶養で収入に数えられる場面｜障害年金申請サポート	5167
-/columns/jukyuugo-tetsuduki	障害年金の受給決定後の手続き｜給付金・法定免除・扶養｜障害年金申請サポート	5829
-/columns/ikura-moraeru	障害年金はいくらもらえる?｜令和8年度の金額と初回入金｜障害年金申請サポート	9062
-/columns/kiso-kousei-chigai	障害基礎年金と障害厚生年金の違い｜初診日で決まる仕組み｜障害年金申請サポート	9477
-/columns/daisansha-shomei	障害年金の第三者証明｜初診日が証明できないときの書き方｜障害年金申請サポート	9064
-/columns/gaku-kaitei-seikyuu	障害年金の額改定請求｜1年待機ルールと却下のリスク｜障害年金申請サポート	9124
-/columns/shikyuu-teishi-fukkatsu	障害年金の支給停止｜止まる原因と復活の手続き｜障害年金申請サポート	9081
-/columns/shinsei-shindoi	障害年金の申請がしんどい｜疲れ果てない小分けの進め方｜障害年金申請サポート	9715
-/columns/shinsa-shikumi-nintei-i	障害年金の審査は誰がどう行う?｜認定医が見るポイントと最新傾向｜障害年金申請サポート	9572
-/columns/shoshinbi-karute-nashi	障害年金の初診日｜カルテがない・破棄されたときの証明方法【代替資料の一覧つき】｜障害年金申請サポート	8518
-/columns/shoshinbi-haiin	障害年金の初診日｜昔の病院が廃院しているときの調べ方【行き先の探し方つき】｜障害年金申請サポート	8941
-/columns/shindansho-ishi-ni-tsutaeru	障害年金の診断書で医師に伝えること全リスト｜障害年金申請サポート	8466
-/columns/shindansho-jittai-chigau	障害年金の診断書が実態と違う・軽く書かれたときの対処｜障害年金申請サポート	8452
-/columns/tekio-shogai-shogai-nenkin	適応障害でも障害年金は申請できる?｜確認する順番と4つのシート｜障害年金申請サポート	9616
-/columns/teishutsusaki-yuusou	障害年金の書類はどこに提出する?｜年金事務所・市役所・郵送｜障害年金申請サポート	8604
-/columns/shindansho-tanomikata	障害年金の診断書を主治医にどう頼む?｜切り出し方と依頼メモ｜障害年金申請サポート	8425
-/columns/kazoku-enjo-kakikata	障害年金の申立書に家族の援助をどう書く?｜具体例と記入ポイント｜障害年金申請サポート	8754
-/columns/moushitatesho-mijushin-kikan	病歴・就労状況等申立書の未受診期間の書き方｜障害年金申請サポート	8854
-/columns/hitorigurashi-furi	障害年金は一人暮らしだと不利?｜診断書と申立書の伝え方｜障害年金申請サポート	8678
-/columns/nenkin-jimusho-soudan	障害年金の相談で年金事務所に持っていくもの｜初回相談の持ち物チェックリスト｜障害年金申請サポート	11510
-/columns/jushinjokyo-shomeisho	受診状況等証明書の郵送での依頼方法｜遠方の病院からの取り寄せ手順｜障害年金申請サポート	12897
-/columns/shinsei-kikan	障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方｜障害年金申請サポート	11908
-/columns/shindansho-irai-timing	障害年金の診断書はいつ頼む?｜現症日と依頼タイミング｜障害年金申請サポート	8477
-/columns/hitsuyou-shorui-seishin	精神疾患の障害年金｜必要書類チェックリスト｜障害年金申請サポート	8411
-/columns/taishou-shoubyou-kyoukai	適応障害・不安障害・神経症は障害年金の対象外？｜障害年金申請サポート	8599
-/columns/moushitatesho-kikan-kugiri	障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方｜障害年金申請サポート	10479
-/columns/sokyuu-seikyuu	障害年金の遡及請求｜最大5年分をさかのぼる条件｜障害年金申請サポート	8137
-/columns/shougaisha-koyou-nenkin	障害者雇用で働きながら障害年金はもらえる？｜障害年金申請サポート	8423
-/columns/koushin-kakuninhodo	障害年金の更新（障害状態確認届）｜時期・支給停止への備え｜障害年金申請サポート	8650
-/columns/nichijo-seikatsu-7koumoku	障害年金「日常生活能力の判定」7項目とは?できる・できないの具体例｜障害年金申請サポート	11353
-/columns/shindansho-kaitekurenai	障害年金の診断書を医師が書いてくれないときの対処法｜障害年金申請サポート	8864
-/columns/tokyu-hantei-guideline	精神の等級判定ガイドライン｜目安表の読み方｜障害年金申請サポート	8427
-/columns/ninteibi-jigojusho	障害認定日請求と事後重症請求の違い｜最大5年遡及の条件｜障害年金申請サポート	9040
-/columns/nofu-yoken	障害年金の保険料納付要件とは — 3分の2要件と直近1年の特例｜障害年金申請サポート	9259
-/columns/shoshinbi-wakaranai	障害年金の初診日がわからないときの調べ方｜証明できない場合も解説｜障害年金申請サポート	9730
-/columns/shindansho-kakunin	障害年金の診断書を受け取ったら確認すべき7つのポイント｜障害年金申請サポート	9206
-/columns/shinsatsu-mae-memo	障害年金の診断書｜主治医に渡す「生活状況メモ」の書き方【具体例つき】｜障害年金申請サポート	7627
-/columns/hatarakinagara	働きながら障害年金｜就労中に医師へ伝えること｜障害年金申請サポート	10724
-/columns/moushitatesho-kakikata	病歴・就労状況等申立書の書き方【精神疾患】審査で落ちる書き方・伝わる書き方｜障害年金申請サポート	7308
-/columns/moushitatesho-a4-insatsu	障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説｜障害年金申請サポート	10594
-/columns/jibun-de-shinsei	障害年金は自分で申請できる?社労士に依頼する場合との違い｜障害年金申請サポート	1929
-/columns/techou-to-nenkin	障害者手帳と障害年金の違い — 手帳の等級と年金の等級は別物です｜障害年金申請サポート	9537
-/columns/shoubyou-teatekin	傷病手当金と障害年金は同時にもらえる？併給調整と申請準備｜障害年金申請サポート	9573
-/columns/hattatsu-shougai	発達障害（ADHD・ASD）の障害年金｜初診日・診断書・申立書｜障害年金申請サポート	9983
-/columns/hatachi-mae	20歳前傷病の障害基礎年金 — 納付要件と10代の記録｜障害年金申請サポート	4967
-/columns/fushikyuu-shinsa-seikyu	障害年金が不支給になったときの審査請求・再審査請求・再請求｜障害年金申請サポート	8845
+/columns/shakaiteki-chiyu	障害年金の社会的治癒｜初診日が動く条件と整理のしかた｜障害年金申請サポート	6928
+/columns/hikazei-shuunyuu	障害年金は非課税?｜扶養で収入に数えられる場面｜障害年金申請サポート	6933
+/columns/jukyuugo-tetsuduki	障害年金の受給決定後の手続き｜給付金・法定免除・扶養｜障害年金申請サポート	7029
+/columns/kiso-kousei-chigai	障害基礎年金と障害厚生年金の違い｜初診日で決まる仕組み｜障害年金申請サポート	10829
+/columns/ikura-moraeru	障害年金はいくらもらえる?｜令和8年度の金額と初回入金｜障害年金申請サポート	10716
+/columns/daisansha-shomei	障害年金の第三者証明｜初診日が証明できないときの書き方｜障害年金申請サポート	9875
+/columns/gaku-kaitei-seikyuu	障害年金の額改定請求｜1年待機ルールと却下のリスク｜障害年金申請サポート	11195
+/columns/shikyuu-teishi-fukkatsu	障害年金の支給停止｜止まる原因と復活の手続き｜障害年金申請サポート	11036
+/columns/shinsei-shindoi	障害年金の申請がしんどい｜疲れ果てない小分けの進め方｜障害年金申請サポート	10894
+/columns/shinsa-shikumi-nintei-i	障害年金の審査は誰がどう行う?｜認定医が見るポイントと最新傾向｜障害年金申請サポート	10683
+/columns/shoshinbi-karute-nashi	障害年金の初診日｜カルテがない・破棄されたときの証明方法【代替資料の一覧つき】｜障害年金申請サポート	9983
+/columns/shoshinbi-haiin	障害年金の初診日｜昔の病院が廃院しているときの調べ方【行き先の探し方つき】｜障害年金申請サポート	9936
+/columns/shindansho-ishi-ni-tsutaeru	障害年金の診断書で医師に伝えること全リスト｜障害年金申請サポート	9683
+/columns/shindansho-jittai-chigau	障害年金の診断書が実態と違う・軽く書かれたときの対処｜障害年金申請サポート	9672
+/columns/tekio-shogai-shogai-nenkin	適応障害でも障害年金は申請できる?｜確認する順番と4つのシート｜障害年金申請サポート	10950
+/columns/teishutsusaki-yuusou	障害年金の書類はどこに提出する?｜年金事務所・市役所・郵送｜障害年金申請サポート	9746
+/columns/shindansho-tanomikata	障害年金の診断書を主治医にどう頼む?｜切り出し方と依頼メモ｜障害年金申請サポート	9385
+/columns/kazoku-enjo-kakikata	障害年金の申立書に家族の援助をどう書く?｜具体例と記入ポイント｜障害年金申請サポート	9990
+/columns/moushitatesho-mijushin-kikan	病歴・就労状況等申立書の未受診期間の書き方｜障害年金申請サポート	10180
+/columns/hitorigurashi-furi	障害年金は一人暮らしだと不利?｜診断書と申立書の伝え方｜障害年金申請サポート	10099
+/columns/nenkin-jimusho-soudan	障害年金の相談で年金事務所に持っていくもの｜初回相談の持ち物チェックリスト｜障害年金申請サポート	12598
+/columns/jushinjokyo-shomeisho	受診状況等証明書の郵送での依頼方法｜遠方の病院からの取り寄せ手順｜障害年金申請サポート	13148
+/columns/shindansho-irai-timing	障害年金の診断書はいつ頼む?｜現症日と依頼タイミング｜障害年金申請サポート	9512
+/columns/hitsuyou-shorui-seishin	精神疾患の障害年金｜必要書類チェックリスト｜障害年金申請サポート	9323
+/columns/shinsei-kikan	障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方｜障害年金申請サポート	13346
+/columns/moushitatesho-kikan-kugiri	障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方｜障害年金申請サポート	11672
+/columns/sokyuu-seikyuu	障害年金の遡及請求｜最大5年分をさかのぼる条件｜障害年金申請サポート	9329
+/columns/taishou-shoubyou-kyoukai	適応障害・不安障害・神経症は障害年金の対象外？｜障害年金申請サポート	10110
+/columns/shougaisha-koyou-nenkin	障害者雇用で働きながら障害年金はもらえる？｜障害年金申請サポート	9694
+/columns/nichijo-seikatsu-7koumoku	障害年金「日常生活能力の判定」7項目とは?できる・できないの具体例｜障害年金申請サポート	12307
+/columns/tokyu-hantei-guideline	精神の等級判定ガイドライン｜目安表の読み方｜障害年金申請サポート	10269
+/columns/koushin-kakuninhodo	障害年金の更新（障害状態確認届）｜時期・支給停止への備え｜障害年金申請サポート	9908
+/columns/shindansho-kaitekurenai	障害年金の診断書を医師が書いてくれないときの対処法｜障害年金申請サポート	10016
+/columns/ninteibi-jigojusho	障害認定日請求と事後重症請求の違い｜最大5年遡及の条件｜障害年金申請サポート	10907
+/columns/shindansho-kakunin	障害年金の診断書を受け取ったら確認すべき7つのポイント｜障害年金申請サポート	10053
+/columns/jibun-de-shinsei	障害年金は自分で申請できる?社労士に依頼する場合との違い｜障害年金申請サポート	5399
+/columns/hatarakinagara	働きながら障害年金｜就労中に医師へ伝えること｜障害年金申請サポート	12226
+/columns/nofu-yoken	障害年金の保険料納付要件とは — 3分の2要件と直近1年の特例｜障害年金申請サポート	10517
+/columns/shoshinbi-wakaranai	障害年金の初診日がわからないときの調べ方｜証明できない場合も解説｜障害年金申請サポート	11316
+/columns/moushitatesho-kakikata	病歴・就労状況等申立書の書き方【精神疾患】審査で落ちる書き方・伝わる書き方｜障害年金申請サポート	8400
+/columns/moushitatesho-a4-insatsu	障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説｜障害年金申請サポート	11010
+/columns/shinsatsu-mae-memo	障害年金の診断書｜主治医に渡す「生活状況メモ」の書き方【具体例つき】｜障害年金申請サポート	8209
+/columns/techou-to-nenkin	障害者手帳と障害年金の違い — 手帳の等級と年金の等級は別物です｜障害年金申請サポート	10628
+/columns/shoubyou-teatekin	傷病手当金と障害年金は同時にもらえる？併給調整と申請準備｜障害年金申請サポート	11229
+/columns/hattatsu-shougai	発達障害（ADHD・ASD）の障害年金｜初診日・診断書・申立書｜障害年金申請サポート	12122
+/columns/hatachi-mae	20歳前傷病の障害基礎年金 — 納付要件と10代の記録｜障害年金申請サポート	6692
+/columns/fushikyuu-shinsa-seikyu	障害年金が不支給になったときの審査請求・再審査請求・再請求｜障害年金申請サポート	10706

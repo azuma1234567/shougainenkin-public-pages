@@ -1,0 +1,1162 @@
+[
+  {
+    "slug": "daisansha-shomei",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "daisansha-shomei",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "fushikyuu-shinsa-seikyu",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "fushikyuu-shinsa-seikyu",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "gaku-kaitei-seikyuu",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "gaku-kaitei-seikyuu",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "gaku-kaitei-seikyuu",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "gaku-kaitei-seikyuu",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "gaku-kaitei-seikyuu",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "3,858,000円",
+    "expression": "incomeHalfFromOctober(3,858,000)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "4,918,000円",
+    "expression": "incomeFullFromOctober(4,918,000)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "3,858,000円",
+    "expression": "incomeHalfFromOctober(3,858,000)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "4,918,000円",
+    "expression": "incomeFullFromOctober(4,918,000)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "hatachi-mae",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "hatarakinagara",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "hatarakinagara",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "hatarakinagara",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "hatarakinagara",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "hatarakinagara",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "hatarakinagara",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "hatarakinagara",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "hatarakinagara",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "hatarakinagara",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "hattatsu-shougai",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "hattatsu-shougai",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "hattatsu-shougai",
+    "amount": "3,858,000円",
+    "expression": "incomeHalfFromOctober(3,858,000)"
+  },
+  {
+    "slug": "hattatsu-shougai",
+    "amount": "4,918,000円",
+    "expression": "incomeFullFromOctober(4,918,000)"
+  },
+  {
+    "slug": "hattatsu-shougai",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "hattatsu-shougai",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "1,091,100円",
+    "expression": "basicGrade2(847,300) + childFirstSecond(243,800)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "1,546,725円",
+    "expression": "basicGrade1(1,059,125) + childFirstSecond(243,800) + childFirstSecond(243,800)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "914,740円",
+    "expression": "basicGrade2(847,300) + supportGrade2Monthly×12(67,440)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "3,858,000円",
+    "expression": "incomeHalfFromOctober(3,858,000)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "4,918,000円",
+    "expression": "incomeFullFromOctober(4,918,000)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "3,858,000円",
+    "expression": "incomeHalfFromOctober(3,858,000)"
+  },
+  {
+    "slug": "hikazei-shuunyuu",
+    "amount": "4,918,000円",
+    "expression": "incomeFullFromOctober(4,918,000)"
+  },
+  {
+    "slug": "hitsuyou-shorui-seishin",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "hitsuyou-shorui-seishin",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "1,056,125円",
+    "expression": "basicGrade1Old(1,056,125)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "844,900円",
+    "expression": "basicGrade2Old(844,900)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "831,700円",
+    "expression": "前年度額(本文に明示)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "847,300",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "1,334,900円",
+    "expression": "basicGrade2(847,300) + childFirstSecond(243,800) + childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "111,242円",
+    "expression": "(basicGrade2(847,300) + childFirstSecond(243,800) + childFirstSecond(243,800)) ÷ 12 ≒ 111,242"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "1,059,125",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "1,628,025円",
+    "expression": "basicGrade1(1,059,125) + childFirstSecond(243,800) + childFirstSecond(243,800) + childThird(81,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "135,669円",
+    "expression": "(basicGrade1(1,059,125) + childFirstSecond(243,800) + childFirstSecond(243,800) + childThird(81,300)) ÷ 12 ≒ 135,669"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "633,700円",
+    "expression": "employeesGrade3MinimumOld(633,700)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "1,271,000円",
+    "expression": "disabilityAllowanceMinimum(1,271,000)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "3,858,000円",
+    "expression": "incomeHalfFromOctober(3,858,000)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "4,918,000円",
+    "expression": "incomeFullFromOctober(4,918,000)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "914,740円",
+    "expression": "basicGrade2(847,300) + supportGrade2Monthly×12(67,440)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "211,825円",
+    "expression": "(basicGrade2(847,300) + basicGrade2(847,300) + basicGrade2(847,300)) ÷ 12 ≒ 211,825"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "3,858,000円",
+    "expression": "incomeHalfFromOctober(3,858,000)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "4,918,000円",
+    "expression": "incomeFullFromOctober(4,918,000)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "ikura-moraeru",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "jibun-de-shinsei",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "jibun-de-shinsei",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "jibun-de-shinsei",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "jibun-de-shinsei",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "3,858,000円",
+    "expression": "incomeHalfFromOctober(3,858,000)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "4,918,000円",
+    "expression": "incomeFullFromOctober(4,918,000)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "3,761,001円",
+    "expression": "incomeHalfBeforeOctober(3,761,000) + 1(「超」の整数表現)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "3,858,000円",
+    "expression": "incomeHalfFromOctober(3,858,000)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "4,918,000円",
+    "expression": "incomeFullFromOctober(4,918,000)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "3,858,000円",
+    "expression": "incomeHalfFromOctober(3,858,000)"
+  },
+  {
+    "slug": "jukyuugo-tetsuduki",
+    "amount": "4,918,000円",
+    "expression": "incomeFullFromOctober(4,918,000)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "1,271,000円",
+    "expression": "disabilityAllowanceMinimum(1,271,000)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "487,600円",
+    "expression": "childFirstSecond(243,800) + childFirstSecond(243,800)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "487,600円",
+    "expression": "childFirstSecond(243,800) + childFirstSecond(243,800)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "kiso-kousei-chigai",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "koushin-kakuninhodo",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "koushin-kakuninhodo",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "koushin-kakuninhodo",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "moushitatesho-a4-insatsu",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "moushitatesho-a4-insatsu",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "ninteibi-jigojusho",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ninteibi-jigojusho",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "ninteibi-jigojusho",
+    "amount": "847,300",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ninteibi-jigojusho",
+    "amount": "243,800",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ninteibi-jigojusho",
+    "amount": "847,300",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ninteibi-jigojusho",
+    "amount": "1,059,125",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "ninteibi-jigojusho",
+    "amount": "635,500",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "ninteibi-jigojusho",
+    "amount": "111,240円",
+    "expression": "(basicGrade2(847,300) + childFirstSecond(243,800) + childFirstSecond(243,800)) ÷ 12 ≒ 111,240"
+  },
+  {
+    "slug": "ninteibi-jigojusho",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "ninteibi-jigojusho",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "ninteibi-jigojusho",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "ninteibi-jigojusho",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "nofu-yoken",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "nofu-yoken",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "nofu-yoken",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "nofu-yoken",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "nofu-yoken",
+    "amount": "3,858,000円",
+    "expression": "incomeHalfFromOctober(3,858,000)"
+  },
+  {
+    "slug": "nofu-yoken",
+    "amount": "4,918,000円",
+    "expression": "incomeFullFromOctober(4,918,000)"
+  },
+  {
+    "slug": "shikyuu-teishi-fukkatsu",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "shikyuu-teishi-fukkatsu",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "shikyuu-teishi-fukkatsu",
+    "amount": "3,761,000円",
+    "expression": "incomeHalfBeforeOctober(3,761,000)"
+  },
+  {
+    "slug": "shikyuu-teishi-fukkatsu",
+    "amount": "4,794,000円",
+    "expression": "incomeFullBeforeOctober(4,794,000)"
+  },
+  {
+    "slug": "shikyuu-teishi-fukkatsu",
+    "amount": "3,858,000円",
+    "expression": "incomeHalfFromOctober(3,858,000)"
+  },
+  {
+    "slug": "shikyuu-teishi-fukkatsu",
+    "amount": "4,918,000円",
+    "expression": "incomeFullFromOctober(4,918,000)"
+  },
+  {
+    "slug": "shikyuu-teishi-fukkatsu",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "shikyuu-teishi-fukkatsu",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "shinsa-shikumi-nintei-i",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "shinsa-shikumi-nintei-i",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "shinsa-shikumi-nintei-i",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "shinsei-kikan",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "shinsei-kikan",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "shinsei-kikan",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "shinsei-kikan",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "shinsei-kikan",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "shinsei-kikan",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "shinsei-kikan",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "shinsei-kikan",
+    "amount": "304,456",
+    "expression": "(employeesGrade3Minimum(635,500) + supportGrade2Monthly×12(67,440) + supportGrade2Monthly×12(67,440) + basicGrade1Old(1,056,125)) ÷ 12 × 2 ≒ 304,456"
+  },
+  {
+    "slug": "shinsei-kikan",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "shinsei-shindoi",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "shinsei-shindoi",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "shoubyou-teatekin",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "shoubyou-teatekin",
+    "amount": "300,000",
+    "expression": "仮定値: shoubyou-teatekin: 標準報酬月額の平均(「30万円なら」)"
+  },
+  {
+    "slug": "shoubyou-teatekin",
+    "amount": "1,800,000",
+    "expression": "仮定値: shoubyou-teatekin: 年金の合計(「年180万円なら」)"
+  },
+  {
+    "slug": "shoubyou-teatekin",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "shoubyou-teatekin",
+    "amount": "635,500",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "shoubyou-teatekin",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "shoubyou-teatekin",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "shoubyou-teatekin",
+    "amount": "1,447,300",
+    "expression": "仮定値: shoubyou-teatekin: 600,000 + basicGrade2(847,300)"
+  },
+  {
+    "slug": "shoubyou-teatekin",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "shoubyou-teatekin",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "shougaisha-koyou-nenkin",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "shougaisha-koyou-nenkin",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "shougaisha-koyou-nenkin",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "shougaisha-koyou-nenkin",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "shougaisha-koyou-nenkin",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "shougaisha-koyou-nenkin",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "sokyuu-seikyuu",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "sokyuu-seikyuu",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "techou-to-nenkin",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "techou-to-nenkin",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "techou-to-nenkin",
+    "amount": "1,059,125円",
+    "expression": "basicGrade1(1,059,125)"
+  },
+  {
+    "slug": "techou-to-nenkin",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "techou-to-nenkin",
+    "amount": "243,800円",
+    "expression": "childFirstSecond(243,800)"
+  },
+  {
+    "slug": "techou-to-nenkin",
+    "amount": "635,500円",
+    "expression": "employeesGrade3Minimum(635,500)"
+  },
+  {
+    "slug": "tokyu-hantei-guideline",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "tokyu-hantei-guideline",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  },
+  {
+    "slug": "tokyu-hantei-guideline",
+    "amount": "146,225",
+    "expression": "(childFirstSecond(243,800) + employeesGrade3MinimumOld(633,700)) ÷ 12 × 2 ≒ 146,225"
+  },
+  {
+    "slug": "tokyu-hantei-guideline",
+    "amount": "847,300円",
+    "expression": "basicGrade2(847,300)"
+  }
+]

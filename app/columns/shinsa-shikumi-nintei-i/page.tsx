@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
-import articleSource, { faqs } from "@/content/columns/shinsa-shikumi-nintei-i";
+import articleSource, { lead, faqs } from "@/content/columns/shinsa-shikumi-nintei-i";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
-const column = getColumn("shinsa-shikumi-nintei-i");
+const column = { ...getColumn("shinsa-shikumi-nintei-i"), lead };
 export const metadata: Metadata = columnMetadata(column);
 
 export default function Page() {
