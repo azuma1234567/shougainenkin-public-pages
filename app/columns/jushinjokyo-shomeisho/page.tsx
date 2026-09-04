@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
-import articleSource, { faqs } from "@/content/columns/jushinjokyo-shomeisho";
+import articleSource, { lead, faqs } from "@/content/columns/jushinjokyo-shomeisho";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
-const column = getColumn("jushinjokyo-shomeisho");
+const column = { ...getColumn("jushinjokyo-shomeisho"), lead };
 
 // 本文「依頼の流れ」の5ステップを HowTo で出す。
 const STEPS = [
