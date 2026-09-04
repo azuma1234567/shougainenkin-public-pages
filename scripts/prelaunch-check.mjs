@@ -301,25 +301,39 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
     const file = `data/hubs/${f}`;
     return { file, date: JSON.parse(readFileSync(file, "utf8")).dateModified };
   });
-  const lastCommit = (file) => {
-    try { return execFileSync("git", ["log", "-1", "--format=%cs", "--", file], { encoding: "utf8" }).trim(); }
+  /* そのファイルの中身が最後に変わった日。
+     「dateModified の行だけを直したコミット」は中身の更新ではないので飛ばす
+     (日付欄を足しただけで lastmod を今日にすると、sitemap が嘘をつくことになる)。 */
+  const lastContentCommit = (file) => {
+    let shas = [];
+    try { shas = execFileSync("git", ["log", "--format=%H %cs", "--", file], { encoding: "utf8" }).trim().split("\n").filter(Boolean); }
     catch { return ""; }
+    for (const row of shas) {
+      const [sha, date] = row.split(" ");
+      let patch = "";
+      try { patch = execFileSync("git", ["show", "--format=", "-U0", sha, "--", file], { encoding: "utf8" }); }
+      catch { return date; }
+      const changed = patch.split("\n")
+        .filter((l) => (l.startsWith("+") || l.startsWith("-")) && !l.startsWith("+++") && !l.startsWith("---"));
+      if (changed.some((l) => !/"dateModified"\s*:/.test(l))) return date;
+    }
+    return "";
   };
   const stale = [];
   for (const [path, date] of Object.entries(SITEMAP_STATIC_DATES)) {
     const file = sitemapStaticSource(path);
-    const git = lastCommit(file);
-    if (git && date < git) stale.push(`${path}: 表 ${date} < ${file} の最終コミット ${git}`);
+    const git = lastContentCommit(file);
+    if (git && date < git) stale.push(`${path}: 表 ${date} < ${file} の中身が変わった日 ${git}`);
   }
   for (const { file, date } of hubDates) {
     if (!date) { stale.push(`${file}: dateModified が無い`); continue; }
-    const git = lastCommit(file);
-    if (git && date < git) stale.push(`${file}: JSON ${date} < 最終コミット ${git}`);
+    const git = lastContentCommit(file);
+    if (git && date < git) stale.push(`${file}: JSON ${date} < 中身が変わった日 ${git}`);
   }
   const missing = Object.keys(SITEMAP_STATIC_DATES).length === 0 ? ["表が空"] : [];
   record("C-6", "sitemap の lastModified が中身より古くない",
     stale.length === 0 && missing.length === 0,
-    `静的 ${Object.keys(SITEMAP_STATIC_DATES).length} 件・ハブ ${hubDates.length} 件を git の最終コミット日と突き合わせ、古いもの ${stale.length}`,
+    `静的 ${Object.keys(SITEMAP_STATIC_DATES).length} 件・ハブ ${hubDates.length} 件を「中身が最後に変わった日」と突き合わせ、古いもの ${stale.length}`,
     [...stale, ...missing],
     "ページを変えたら lib/sitemap-static-dates.ts と data/hubs/*.json の dateModified も同じ PR で直す");
 }
