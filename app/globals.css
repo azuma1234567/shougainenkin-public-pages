@@ -3149,3 +3149,16 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
 }
 .mt-print-how{margin:10px 0;color:var(--text-muted);font-size:15px;line-height:1.85}
 .mt-print-missing{margin:16px 0 0;padding:14px 16px;border:1px solid #f0e2bd;border-radius:8px;background:#fdf3dd;color:#6b5316;font-size:15px}
+/* 就労の入力と、収まらない欄の知らせ(設計 §6-2・§6-3) */
+.mt-work{margin:0 0 22px;padding:16px;border:1px solid var(--border);border-radius:10px}
+.mt-work-fields{display:grid;gap:16px;margin-top:14px}
+.mt-inline-nums{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;padding:12px;border:1px solid var(--border)}
+.mt-inline-nums label{display:flex;gap:8px;align-items:center;font-size:15px}
+.mt-inline-nums input{width:5em;padding:9px 10px;border:1px solid #9db9ca;border-radius:8px;font:inherit;font-size:16px}
+.mt-capacity-probe{position:absolute;left:-9999px;top:0;overflow:hidden;visibility:hidden}
+.mt-capacity{margin:6px 0 0;padding:10px 12px;border-radius:8px;background:#eef7fc;color:#1d4e68;font-size:14px;line-height:1.8}
+.mt-techou{display:grid;gap:16px;margin-top:14px}
+.mt-techou fieldset{display:grid;gap:14px;padding:14px;border:1px solid var(--border);border-radius:9px}
+.mt-daihitsu{margin-top:22px;padding:16px;border:1px solid var(--border);border-radius:10px}
+.mt-daihitsu .mt-fields{margin-top:14px}
+.mt-ninteibi{margin-top:22px}

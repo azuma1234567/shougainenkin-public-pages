@@ -17,7 +17,9 @@ export type TextSlot = {
 };
 export type DigitsSlot = { kind: "digits"; cx: number; cy: number; w: number; pt: number };
 export type CircleSlot = { kind: "circle"; cx: number; cy: number; rx: number; ry: number };
-export type Slot = TextSlot | DigitsSlot | CircleSlot;
+/* 電話番号。印字された「― ―」の間の3区画。各区画は中央揃え(2026-09-04 指示書 §3-2)。 */
+export type TelSlot = { kind: "tel"; y: number; h: number; pt?: number; segments: [TextSlot, TextSlot, TextSlot] };
+export type Slot = TextSlot | DigitsSlot | CircleSlot | TelSlot;
 
 const text = (x: number, y: number, w: number, h: number, o: Partial<TextSlot> = {}): TextSlot =>
   ({ kind: "text", x, y, w, h, ...o });
@@ -25,6 +27,16 @@ const digits = (cx: number, cy: number, w: number, pt: number): DigitsSlot =>
   ({ kind: "digits", cx, cy, w, pt });
 const circle = (cx: number, cy: number, rx: number, ry: number): CircleSlot =>
   ({ kind: "circle", cx, cy, rx, ry });
+/* left/right は欄の端、d1/d2 は印字された ― の [左端, 右端]。境界は ― の外側で切る。 */
+const tel = (left: number, right: number, d1: [number, number], d2: [number, number],
+             y: number, h: number, pt?: number): TelSlot => ({
+  kind: "tel", y, h, pt,
+  segments: [
+    text(left, y, d1[0] - left, h, { pt, lines: 1, align: "center" }),
+    text(d1[1], y, d2[0] - d1[1], h, { pt, lines: 1, align: "center" }),
+    text(d2[1], y, right - d2[1], h, { pt, lines: 1, align: "center" }),
+  ],
+});
 
 export const PAPER = {
   main: { width: 297, height: 420 },
@@ -143,8 +155,8 @@ const techouRow = (n: 0 | 1): TechouRow => {
 /* 申立・請求者のブロック(本紙 裏面)。 */
 export type MoushitateBlock = {
   year: DigitsSlot; month: DigitsSlot; day: DigitsSlot;
-  address: TextSlot; name: TextSlot; tel: TextSlot;
-  daihitsuName: TextSlot; daihitsuZokugara: TextSlot; daihitsuTel: TextSlot;
+  address: TextSlot; name: TextSlot; tel: TelSlot;
+  daihitsuName: TextSlot; daihitsuZokugara: TextSlot; daihitsuTel: TelSlot;
 };
 
 export const MAIN_BACK = {
@@ -157,10 +169,10 @@ export const MAIN_BACK = {
     year: digits(40.0, 382.0, 9, 11), month: digits(59.0, 382.0, 9, 11), day: digits(78.0, 382.0, 9, 11),
     address: text(180.0, 378.5, 97.0, 11.0, { pt: 10, lines: 2 }),
     name: text(181.0, 391.5, 96.0, 6.0, { pt: 11, lines: 1 }),
-    tel: text(182.0, 397.4, 95.0, 6.0, { lines: 1 }),
+    tel: tel(182.0, 277.0, [198.19, 201.99], [221.05, 224.85], 397.4, 6.0),
     daihitsuName: text(63.0, 391.5, 68.0, 6.0, { lines: 1 }),
     daihitsuZokugara: text(85.0, 397.4, 47.0, 5.5, { lines: 1 }),
-    daihitsuTel: text(63.0, 403.2, 68.0, 6.0, { lines: 1 }),
+    daihitsuTel: tel(63.0, 131.0, [80.33, 84.13], [103.19, 106.99], 403.2, 6.0),
   } as MoushitateBlock,
 } as const;
 
@@ -202,10 +214,11 @@ export const CONT_BACK = {
     year: digits(38.15, 245.48, 9, 10), month: digits(52.14, 245.48, 9, 10), day: digits(64.65, 245.48, 9, 10),
     address: text(124.5, 243.4, 63.4, 10.5, { pt: 9, lines: 2 }),
     name: text(124.5, 253.7, 63.4, 5.8, { pt: 10, lines: 1 }),
-    tel: text(124.5, 258.9, 63.4, 5.8, { pt: 9, lines: 1 }),
+    tel: tel(124.5, 187.9, [142.9, 145.27], [160.01, 162.38], 258.9, 5.8, 9),
     daihitsuName: text(50.5, 253.7, 45.5, 5.8, { pt: 9, lines: 1 }),
     daihitsuZokugara: text(64.0, 258.9, 26.5, 5.5, { pt: 9, lines: 1 }),
-    daihitsuTel: text(50.5, 265.2, 45.5, 5.8, { pt: 9, lines: 1 }),
+    /* 代筆者の電話は右に空きがあるので、3区画目が入るところまで広げる(請求者の欄は 113.69 から) */
+    daihitsuTel: tel(50.5, 112.0, [68.83, 71.2], [85.94, 88.31], 265.2, 5.8, 9),
   } as MoushitateBlock,
 } as const;
 

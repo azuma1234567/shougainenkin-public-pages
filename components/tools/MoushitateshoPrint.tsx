@@ -75,7 +75,7 @@ export default function MoushitateshoPrint() {
           <p><strong>A3は倍率100%（等倍）</strong>にし、「用紙に合わせる」は選ばないでください。</p>
           <p>A4分割で提出できるかは、提出前に年金事務所へご確認ください。</p>
           <p>Chrome／Edgeは「その他の設定」、Safariは印刷設定で「ヘッダーとフッター」をオフにしてください。</p>
-          <p>この紙は本紙1枚{plan.conts.length > 0 && `と続紙${plan.conts.length}枚`}（No. 1 ― {plan.total}枚中）です。</p>
+          <p>この紙は本紙1枚{plan.conts.length > 0 && `と続紙${plan.conts.length}枚`}です。{plan.total >= 2 ? `No. は 1 ― ${plan.total}枚中 から順に入ります。` : "1枚だけなので No. と枚中は空欄のままです（記載要領のとおり）。"}</p>
         </div>
         {missing.length > 0 && (
           <p className="mt-print-missing">請求者の{missing.join("・")}が未記入です。様式としては書いておく欄です（印刷は止めません）。</p>
