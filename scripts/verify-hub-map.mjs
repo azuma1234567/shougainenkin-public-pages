@@ -59,13 +59,20 @@ for (const { from, href } of hrefs) {
 }
 // 一覧へ戻る導線を持つ個票が48本ある /gokai は、ハブの過剰な相互リンクとは
 // 性質が異なるため集中上限の対象外にする。
-const overFifty = [...incoming].map(([path, sources]) => [path, sources.size]).filter(([path, count]) => path !== "/gokai" && count > 50).sort((a, b) => b[1] - a[1]);
+// /jitsurei も同じ理由(裁決を引用した記事・誤解カードが文末で一覧へ戻す)で対象外。
+// prelaunch-check.mjs の B-2 の LINK_HUBS と同じ扱いにそろえる(2026-09-04)。
+const LINK_HUBS = {
+  "/gokai": "誤解カード48本が文末で戻す導線",
+  "/jitsurei": "裁決事例集。裁決を引用した記事・誤解カードが文末で戻す導線",
+};
+const overFifty = [...incoming].map(([path, sources]) => [path, sources.size]).filter(([path, count]) => !Object.hasOwn(LINK_HUBS, path) && count > 50).sort((a, b) => b[1] - a[1]);
+const linkHubs = Object.entries(LINK_HUBS).map(([path, reason]) => [path, incoming.get(path)?.size ?? 0, reason]);
 
 const result = {
   articles: articleSlugs.length, assignments: assignedSlugs.length, missingPages, isolated,
   publishedHubRoutes: starPaths.length, routeFailures, countMismatches,
   checkedPages: pages.length, pageFailures, checkedInternalTargets: normalizedTargets.length, broken,
-  reservedLinks: reservedLinks.length, overFifty,
+  reservedLinks: reservedLinks.length, overFifty, linkHubs,
 };
 console.log(JSON.stringify(result, null, 2));
 if (missingPages.length || isolated.length || routeFailures.length || countMismatches.length || pageFailures.length || broken.length || reservedLinks.length || overFifty.length) process.exitCode = 1;
