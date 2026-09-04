@@ -40,3 +40,4 @@ next-env.d.ts
 # 日本郵便の KEN_ALL(郡の展開に使う)も同じ場所に置くので、同じ扱いにする。
 # 再現用の固定資料は scripts/madoguchi/fixtures/ に代表5ファイルだけ置いている。
 /docs/verification/madoguchi-source-*/
+_to_delete/
