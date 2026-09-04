@@ -41,3 +41,6 @@ next-env.d.ts
 # 再現用の固定資料は scripts/madoguchi/fixtures/ に代表5ファイルだけ置いている。
 /docs/verification/madoguchi-source-*/
 _to_delete/
+
+# Search Console の URL 検査ログ。個人の作業記録なので commit しない(指示書 Phase D)
+docs/verification/gsc-request-log.md
