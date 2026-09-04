@@ -42,6 +42,7 @@ const { SITEMAP_EXCLUDED } = await import("../lib/sitemap-excluded.ts");
 const results = [];
 const record = (id, label, ok, count, detail = [], note = "") => results.push({ id, label, ok, count, detail, note });
 
+
 // ---------- 取得 ----------
 const fetchText = async (p) => {
   const response = await fetch(origin + p, { redirect: "manual" });
@@ -288,6 +289,39 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
     else changed.push(`/dougu (${response.status}${response.location ? ` → ${response.location}` : ""})`);
   }
   record("C-5", "旧URLの維持または301リダイレクト", changed.length === 0 && redirected.length === 1, `公開前URL ${oldUrls.length} 件のうち /dougu → /shinsei 301: ${redirected.length === 1 ? "○" : "×"}、その他200以外 ${changed.length}`, [...redirected, ...changed], "main ブランチの sitemap 静的ページ + 記事URL");
+}
+
+// ---------- C-6. sitemap の lastModified が古くなっていないか(監査 §4-1) ----------
+{
+  /* lib/hub-content.ts は `@/data` の別名を使うのでここからは読めない(このスクリプトは
+     別名ローダー無しで動く)。ハブの日付は data/hubs/*.json から直接読む。 */
+  const { SITEMAP_STATIC_DATES, sitemapStaticSource } = await import("../lib/sitemap-static-dates.ts");
+  const hubFiles = readdirSync("data/hubs").filter((f) => f.endsWith(".json"));
+  const hubDates = hubFiles.map((f) => {
+    const file = `data/hubs/${f}`;
+    return { file, date: JSON.parse(readFileSync(file, "utf8")).dateModified };
+  });
+  const lastCommit = (file) => {
+    try { return execFileSync("git", ["log", "-1", "--format=%cs", "--", file], { encoding: "utf8" }).trim(); }
+    catch { return ""; }
+  };
+  const stale = [];
+  for (const [path, date] of Object.entries(SITEMAP_STATIC_DATES)) {
+    const file = sitemapStaticSource(path);
+    const git = lastCommit(file);
+    if (git && date < git) stale.push(`${path}: 表 ${date} < ${file} の最終コミット ${git}`);
+  }
+  for (const { file, date } of hubDates) {
+    if (!date) { stale.push(`${file}: dateModified が無い`); continue; }
+    const git = lastCommit(file);
+    if (git && date < git) stale.push(`${file}: JSON ${date} < 最終コミット ${git}`);
+  }
+  const missing = Object.keys(SITEMAP_STATIC_DATES).length === 0 ? ["表が空"] : [];
+  record("C-6", "sitemap の lastModified が中身より古くない",
+    stale.length === 0 && missing.length === 0,
+    `静的 ${Object.keys(SITEMAP_STATIC_DATES).length} 件・ハブ ${hubDates.length} 件を git の最終コミット日と突き合わせ、古いもの ${stale.length}`,
+    [...stale, ...missing],
+    "ページを変えたら lib/sitemap-static-dates.ts と data/hubs/*.json の dateModified も同じ PR で直す");
 }
 
 // ---------- D. 人が見る用の一覧 ----------

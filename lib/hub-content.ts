@@ -57,7 +57,9 @@ const nayamiFushikyuPublished = {
     ),
 };
 
-export type HubContent = { title: string; breadcrumb: string[]; source: string };
+/* dateModified はハブの最終更新日(YYYY-MM-DD)。sitemap の lastModified と
+   画面の「最終更新」に使う(監査 §4-1・§4-2)。data/hubs/*.json が持つ。 */
+export type HubContent = { title: string; dateModified: string; breadcrumb: string[]; source: string };
 export const HUB_CONTENT: Record<string, HubContent> = {
   "/byoki/tougou": byokiTougou, "/byoki/chiteki": byokiChiteki, "/byoki/tenkan": byokiTenkan,
   "/byoki/jinzou-touseki": byokiJinzouTouseki, "/byoki/gan": byokiGan, "/byoki/shinzou": byokiShinzou,
