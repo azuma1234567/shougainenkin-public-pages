@@ -3173,3 +3173,22 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
 .mt-faq dt{font-weight:700;line-height:1.7}
 .mt-faq dd{margin:6px 0 0;color:var(--text-muted);line-height:1.95}
 .mt-intro-h2{margin:0 0 8px;font:700 clamp(1.25rem,3.6vw,1.6rem)/1.5 var(--font-platform-heading),sans-serif}
+
+/* ===== 紙に載せてはいけないもの(2026-09-04 指示書3 §2) =====
+   position:fixed の画面用の飾りは、印刷でも要素スクリーンショットでも紙に焼き込まれる。
+   実際、読了バー(body::after)が申立書の裏面と続紙に幅いっぱいの青い線として刷り込まれていた。
+   新しく position:fixed を足すときは、必ずここに1行足すこと。紙の検査は
+   scripts/verify-moushitatesho-layout.mjs の検査9(紙の全画素が白か無彩色)が見ている。 */
+@media print {
+  /* 読了バー。@media print では animation-timeline の指定ごと打ち消す */
+  body::after { content: none !important; display: none !important; }
+  .analytics-consent-banner,
+  .analytics-preference-button,
+  .lp-sticky-cta { display: none !important; }
+}
+/* 印刷画面では、画面のうえでも出さない(紙に出る前に見えていると紛らわしい)。
+   同意の取得は他のページでできる。 */
+.mt-print-page body::after,
+body:has(.mt-print-page)::after { content: none !important; display: none !important; }
+body:has(.mt-print-page) .analytics-consent-banner,
+body:has(.mt-print-page) .analytics-preference-button { display: none !important; }

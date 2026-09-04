@@ -27,16 +27,22 @@ const digits = (cx: number, cy: number, w: number, pt: number): DigitsSlot =>
   ({ kind: "digits", cx, cy, w, pt });
 const circle = (cx: number, cy: number, rx: number, ry: number): CircleSlot =>
   ({ kind: "circle", cx, cy, rx, ry });
-/* left/right は欄の端、d1/d2 は印字された ― の [左端, 右端]。境界は ― の外側で切る。 */
+/* left/right は欄の端、d1/d2 は印字された ― の [左端, 右端]。境界は ― の外側で切る。
+   3つ目だけは欄の右端まで伸ばさない。本紙の請求者は欄の右端まで 52mm あり、
+   中央揃えにすると最後の4桁が ― から離れて右に寄って見えるため、
+   真ん中の区画と同じ幅で切る(2026-09-04 指示書3 §4)。 */
 const tel = (left: number, right: number, d1: [number, number], d2: [number, number],
-             y: number, h: number, pt?: number): TelSlot => ({
-  kind: "tel", y, h, pt,
-  segments: [
-    text(left, y, d1[0] - left, h, { pt, lines: 1, align: "center" }),
-    text(d1[1], y, d2[0] - d1[1], h, { pt, lines: 1, align: "center" }),
-    text(d2[1], y, right - d2[1], h, { pt, lines: 1, align: "center" }),
-  ],
-});
+             y: number, h: number, pt?: number): TelSlot => {
+  const mid = d2[0] - d1[1];
+  return {
+    kind: "tel", y, h, pt,
+    segments: [
+      text(left, y, d1[0] - left, h, { pt, lines: 1, align: "center" }),
+      text(d1[1], y, mid, h, { pt, lines: 1, align: "center" }),
+      text(d2[1], y, Math.min(right - d2[1], mid), h, { pt, lines: 1, align: "center" }),
+    ],
+  };
+};
 
 export const PAPER = {
   main: { width: 297, height: 420 },

@@ -10,10 +10,11 @@
    0. (2026-09-04 指示書 §4) 背景SVG 4枚が整形式で、合計 2MB 未満 */
 import { chromium } from "playwright";
 import { execFileSync, spawn } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import path from "node:path";
 import { SAMPLES } from "./verify-moushitatesho/samples.mjs";
-import { CONT_BACK, CONT_FRONT, MAIN_BACK, MAIN_FRONT } from "../data/moushitatesho/layout.ts";
+import { CONT_BACK, CONT_FRONT, MAIN_BACK, MAIN_FRONT, PAPER } from "../data/moushitatesho/layout.ts";
 
 const PORT = process.env.MT_PORT ?? "3260";
 const CHROME = process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
@@ -64,6 +65,9 @@ const browser = await chromium.launch({ headless: true, executablePath: CHROME }
 }
 
 const measured = {};
+const SHOT = mkdtempSync(path.join(tmpdir(), "mt-chroma-"));
+const shots = [];
+const pdfs = [];
 
 for (const [name, data] of Object.entries(SAMPLES)) {
   const ctx = await browser.newContext({ viewport: { width: 1400, height: 1000 } });
@@ -113,6 +117,29 @@ for (const [name, data] of Object.entries(SAMPLES)) {
     });
     return out;
   });
+  /* 検査9用: 紙まるごとを 300dpi で撮る + 本物の印刷経路(page.pdf)も出す */
+  const dpiCtx = await browser.newContext({ viewport: { width: 1400, height: 1000 }, deviceScaleFactor: 300 / 96 });
+  const dpiPage = await dpiCtx.newPage();
+  await dpiPage.addInitScript((v) => { window.name = `moushitatesho:${JSON.stringify(v)}`; }, data);
+  await dpiPage.goto(`http://127.0.0.1:${PORT}/dougu/moushitatesho/insatsu`);
+  await dpiPage.getByLabel("A3原寸").check();
+  await dpiPage.locator("[data-sheet]").first().waitFor();
+  await dpiPage.emulateMedia({ media: "print" });
+  await dpiPage.evaluate(() => document.fonts?.ready);
+  await sleep(600);
+  const sheetEls = await dpiPage.locator("[data-sheet]").all();
+  for (let i = 0; i < sheetEls.length; i += 1) {
+    const kind = await sheetEls[i].getAttribute("data-sheet");
+    const f = path.join(SHOT, `${name}-${i + 1}-${kind}.png`);
+    await sheetEls[i].screenshot({ path: f });
+    shots.push({ file: f, name, kind });
+  }
+  const pdf = path.join(SHOT, `${name}.pdf`);
+  await dpiPage.pdf({ path: pdf, format: "A3", printBackground: true, preferCSSPageSize: true,
+    margin: { top: "0", right: "0", bottom: "0", left: "0" } });
+  pdfs.push({ file: pdf, name });
+  await dpiCtx.close();
+
   await ctx.close();
 }
 
@@ -223,6 +250,14 @@ function collectSlots(node, sheet, out, trail = []) {
   return out;
 }
 const ALL_SLOTS = Object.entries(SHEET_SLOTS).flatMap(([sheet, root]) => collectSlots(root, sheet, []));
+/* text スロットだけを集める(検査9で「自分たちの文字が入ってよい枠」に使う) */
+function collectTextSlots(node, out) {
+  if (!node || typeof node !== "object") return out;
+  if (Array.isArray(node)) { node.forEach((v) => collectTextSlots(v, out)); return out; }
+  if (node.kind === "text") { out.push(node); return out; }
+  for (const v of Object.values(node)) collectTextSlots(v, out);
+  return out;
+}
 
 check(3, "digits の中心が、印字の間の空欄の中央から ±1.0mm", () => {
   const req = {}; const index = new Map();
@@ -359,7 +394,9 @@ writeFileSync(path.join(OUT, "fields.md"),
 writeFileSync(path.join(OUT, "circles.md"),
   `# 楕円が文字を丸ごと含むか(設計 §9-2 の4の後半)\n\n`
   + `中心を共有する楕円が長方形を含む条件は角の1点で決まる: (a/rx)²+(b/ry)² ≤ 1。\n`
-  + `rx≧a√2 かつ ry≧b√2 は十分条件にすぎず、約1.4倍厳しい(指示書2 §1)。判定は ≤ 1/1.03² = 0.9426(半径換算で3%の余裕)。\n\n`
+  + `rx≧a√2 かつ ry≧b√2 は十分条件にすぎず、約1.4倍厳しい(指示書2 §1)。判定は ≤ 1/1.03² = 0.9426(半径換算で3%の余裕)。\n`
+  + `※ 元号の楕円は「昭和」を囲むと、左右の「・」に縁がかかる。9.2mm 間隔に 9.15mm 幅の字が並んでいるので、\n`
+  + `字を丸ごと含む楕円は幾何的に必ず隣の中黒にかかる。手で○を書いたときと同じなので直していない(指示書3 §4)。\n\n`
   + `| 欄 | 出典 | a(半幅) | b(半高) | rx | ry | (a/rx)²+(b/ry)² | 含む | 足りなければ k |\n|---|---|---|---|---|---|---|---|---|\n`
   + containment.map((c) => `| ${c.id} | ${c.src} | ${c.a} | ${c.b} | ${c.rx} | ${c.ry} | ${c.q} | ${c.contains ? "○" : "×"} | ${c.contains ? "" : c.k} |`).join("\n") + "\n");
 
@@ -405,6 +442,54 @@ check(7, "広げた楕円が、同じ組の他の選択肢の中心・自分た�
   }
   if (bad.length) fail(`${bad.length}件: ${bad.slice(0, 4).join(" / ")}`);
   return "同じ組の他の選択肢の中心を含まず、紙に出た文字とも重ならない";
+});
+
+/* 検査9: 紙の上に、様式の線と自分たちの文字以外のインクが無い(指示書3 §3)。
+   許すのは白と無彩色だけ。position:fixed の画面用の飾りが焼き込まれると、ここで落ちる。 */
+function askChroma(payload) {
+  /* chroma.py は numpy を使う。この環境では anaconda の numpy が壊れているので
+     既定を /usr/bin/python3 にしてある(PYTHON_CHROMA で変えられる)。 */
+  const out = execFileSync(process.env.PYTHON_CHROMA ?? "/usr/bin/python3",
+    ["scripts/verify-moushitatesho/chroma.py"], { input: JSON.stringify(payload), encoding: "utf8", maxBuffer: 256 << 20 });
+  return JSON.parse(out);
+}
+
+check(9, "紙の上に、様式の線と自分たちの文字以外のインクが無い(300dpi・全画素)", () => {
+  /* 「自分たちの文字」= text スロットの中。利用者が絵文字を打てば色が付くが、それは
+     こちらが足した飾りではなく利用者の字なので、枠の中と外を分けて数える(§12「文章を書き換えない」)。
+     落とすのは**枠の外**の有彩色。画面用の飾りが焼き込まれるのはここに出る。 */
+  const allow = {};
+  for (const [sheet, root] of Object.entries(SHEET_SLOTS)) {
+    allow[sheet] = collectTextSlots(root, []).map((t) => ({ x0: t.x, y0: t.y, x1: t.x + t.w, y1: t.y + t.h }));
+  }
+  const paperOf = (kind) => (kind.startsWith("main") ? PAPER.main.width : PAPER.cont.width);
+  const pdfSheets = {};
+  for (const p of pdfs) pdfSheets[p.file] = shots.filter((s2) => s2.name === p.name).map((s2) => s2.kind);
+  const res = askChroma({
+    files: shots.map((s2) => ({ file: s2.file, sheet: s2.kind, paperMm: paperOf(s2.kind) })),
+    pdfs: pdfs.map((p) => p.file), pdfSheets, allow,
+  });
+  const bad = []; let inSlots = 0;
+  for (const s2 of shots) {
+    const r = res[s2.file]; if (!r) continue;
+    inSlots += r.inSlots ?? 0;
+    if (r.total > 0) {
+      const c = r.colors[0];
+      bad.push(`${s2.name}/${s2.kind}: 枠の外に有彩色 ${r.total}画素 rgb(${c.color}) x${c.x0}–${c.x1} y${c.y0}–${c.y1}`);
+    }
+  }
+  for (const p of pdfs) {
+    const r = res[p.file]; if (!r) continue;
+    inSlots += r.inSlots ?? 0;
+    if (r.total > 0) {
+      const worst = r.pages.map((pg, i) => ({ i, ...pg })).filter((pg) => pg.total).sort((a, b) => b.total - a.total)[0];
+      const c = worst.colors[0];
+      bad.push(`${p.name} の印刷PDF p${worst.i + 1}: 枠の外に有彩色 ${worst.total}画素 rgb(${c.color})`);
+    }
+  }
+  if (bad.length) fail(`${bad.length}件: ${bad.slice(0, 5).join(" / ")}`);
+  return `紙 ${shots.length}枚と印刷PDF ${pdfs.length}本、枠の外は全画素が白か無彩色`
+    + (inSlots ? ` / 枠の中に有彩色 ${inSlots}画素(max の絵文字。利用者が打った字なので消さない)` : "");
 });
 
 const ok = results.every((r) => r.ok);
