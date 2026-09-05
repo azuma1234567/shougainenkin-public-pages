@@ -6,6 +6,7 @@ import ColumnThemeBlock from "@/components/ColumnThemeBlock";
 import {
   columnBreadcrumbParents,
   columnJsonLd,
+  columnParentIsHub,
   type Column,
 } from "@/lib/columns";
 import { faqJsonLd } from "@/lib/seo";
@@ -64,6 +65,7 @@ export default function ColumnArticle({
       <Breadcrumb
         current={column.title}
         parents={columnBreadcrumbParents(column)}
+        showColumns={!columnParentIsHub(column)}
       />
       <h1>{column.title}</h1>
       <PageDate published={column.datePublished} readMinutes={entry?.readMinutes} updated={column.dateModified} />

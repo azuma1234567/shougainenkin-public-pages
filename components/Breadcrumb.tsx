@@ -7,9 +7,12 @@ import Link from "next/link";
 export default function Breadcrumb({
   current,
   parents = [],
+  showColumns = true,
 }: {
   current: string;
   parents?: { name: string; path: string }[];
+  /* ハブ経由のパンくずでは「コラム」を挟まない(トップ > ハブ > 記事の3階層)。 */
+  showColumns?: boolean;
 }) {
   return (
     <nav className="breadcrumb" aria-label="パンくずリスト">
@@ -17,9 +20,11 @@ export default function Breadcrumb({
         <li>
           <Link href="/">トップ</Link>
         </li>
+        {showColumns && (
         <li>
           <Link href="/columns">コラム</Link>
         </li>
+        )}
         {parents.map((parent) => (
           <li key={parent.path}>
             <Link href={parent.path}>{parent.name}</Link>

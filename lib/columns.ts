@@ -8,7 +8,7 @@ import {
 } from "@/lib/clusters";
 import { AUTHOR_NAME, SITE_NAME, SITE_URL } from "@/lib/constants";
 import { ABOUT_PERSON_ID, ABOUT_PUBLISHER_ID } from "@/lib/seo";
-import { COLUMN_HUB_ASSIGNMENTS, type HubRole } from "@/lib/hubs";
+import { COLUMN_HUB_ASSIGNMENTS, HUBS, type HubRole } from "@/lib/hubs";
 
 // コラム記事のメタデータ。一覧・sitemap・JSON-LDで共通利用する。
 // slugは計測用キャンペーンリンクのctにも使うため変更しないこと。
@@ -910,12 +910,23 @@ export function relatedColumns(
 
 // 記事のパンくずに差し込む中間階層。柱ページが公開されるまでは空配列なので、
 // 構造化データにも表示にも、アクセスできないURLは出ない。
+/* 記事の親。柱ページが公開されていればそれ、無ければ主テーマのハブ。
+   docs/site-structure-2026-09-05-instructions.md §5。新しい語は書かず、
+   ハブの表示名(HubDefinition.label)をそのまま使う。 */
 export function columnBreadcrumbParents(
   column: Column,
 ): { name: string; path: string }[] {
   const pillar = parentPillar(column);
-  if (!pillar) return [];
-  return [{ name: pillar.label, path: pillar.pillarPath }];
+  if (pillar) return [{ name: pillar.label, path: pillar.pillarPath }];
+  const hub = HUBS.find((item) => item.path === column.hubPrimary && item.published);
+  if (hub) return [{ name: hub.label, path: hub.path }];
+  return [];
+}
+
+/* パンくずがハブ経由かどうか。ハブ経由のときは「コラム」を挟まない(3階層)。 */
+export function columnParentIsHub(column: Column): boolean {
+  if (parentPillar(column)) return false;
+  return HUBS.some((item) => item.path === column.hubPrimary && item.published);
 }
 
 export function columnJsonLd(
@@ -924,10 +935,13 @@ export function columnJsonLd(
 ) {
   // BreadcrumbListには実際にアクセスできるURLだけを入れる。柱ページが未公開の間は
   // columnBreadcrumbParents が空になるので、従来どおりトップ>コラム>記事になる。
+  const parents = columnBreadcrumbParents(column);
   const trail = [
     { name: "トップ", path: "/" },
-    { name: "コラム", path: "/columns" },
-    ...columnBreadcrumbParents(column),
+    /* ハブ経由のときは トップ > ハブ > 記事 の3階層。柱ページ経由と、親が無いときは
+       従来どおり トップ > コラム > 記事。 */
+    ...(columnParentIsHub(column) ? [] : [{ name: "コラム", path: "/columns" }]),
+    ...parents,
     { name: column.title, path: `/columns/${column.slug}` },
   ];
 
