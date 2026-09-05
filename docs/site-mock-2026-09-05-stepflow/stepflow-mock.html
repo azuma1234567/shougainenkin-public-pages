@@ -1,0 +1,75 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>申請の流れ 8ステップ — 横並び案(モック)</title>
+<style>
+:root{--p:#0284c7;--h:#14425e;--m:#4a6a80;--b:#dcebf5;--bg:#f6fafd;--tool:#e8f4fc}
+body{margin:0;font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:var(--h);background:#fff}
+.wrap{max-width:1660px;margin:0 auto;padding:40px 24px}
+h2{font-size:28px;margin:0 0 8px}
+.lead{color:var(--m);font-size:16px;margin:0 0 28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.lead a{color:var(--p);font-weight:700;text-decoration:none;white-space:nowrap}
+
+/* ---- 横並びステッパー ---- */
+.sf{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));column-gap:12px;row-gap:14px}
+.sf-phase{grid-column:span 2;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--m);padding-left:2px}
+.sf-phase::before{content:"";display:block;height:3px;border-radius:2px;background:var(--b);margin-bottom:8px}
+.sf-node{position:relative;min-width:0;display:grid;align-content:start;justify-items:center;text-align:center;gap:10px}
+.sf-node::after{content:"";position:absolute;top:19px;left:calc(50% + 22px);right:calc(-50% - 22px + 12px);height:2px;background:var(--b)}
+.sf-node[data-n="8"]::after{display:none}
+.sf-num{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--p);color:#fff;font-weight:700;font-size:15px;box-shadow:0 0 0 4px #fff}
+.sf-title{font-size:15px;line-height:1.45;font-weight:700;color:var(--h);text-decoration:none}
+.sf-title small{display:block;font-weight:400;color:var(--m);font-size:12px;margin-top:2px}
+/* 道具カード: ステップの真下に置く */
+.sf-tool{grid-row:3;margin-top:6px;min-width:0;display:grid;gap:4px;padding:14px 14px 16px;border-radius:12px;background:var(--tool);color:var(--h);text-decoration:none;align-content:start}
+.sf-tool b{font-size:15px;line-height:1.45}
+.sf-tool span{font-size:13px;line-height:1.55;color:var(--m)}
+.sf-tool.feat{background:var(--p);color:#fff}
+.sf-tool.feat span{color:#e6f4fc}
+.sf-tool:hover{box-shadow:inset 0 0 0 2px rgba(2,132,199,.25)}
+.sf-tool.feat:hover{box-shadow:inset 0 0 0 2px rgba(255,255,255,.5)}
+.sf-node.has-tool .sf-num{box-shadow:0 0 0 4px #fff,0 0 0 6px var(--tool)}
+
+/* ---- 中間幅: 2段(4+4)。DOM順のまま折り返す ---- */
+@media (max-width:1180px){
+  .sf{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .sf-node[data-n="4"]::after{display:none}
+  .sf-tool{grid-row:auto}
+  .sf-phase{display:none}
+  .sf{row-gap:36px}
+}
+/* ---- スマホ: 縦一列 ---- */
+@media (max-width:700px){
+  .sf{grid-template-columns:1fr;row-gap:0}
+  .sf-node{grid-template-columns:40px minmax(0,1fr);justify-items:start;text-align:left;column-gap:14px;padding-bottom:20px}
+  .sf-node::after{top:44px;bottom:0;left:19px;right:auto;width:2px;height:auto}
+  .sf-node[data-n="4"]::after{display:block}
+  .sf-title{padding-top:9px}
+  .sf-tool{grid-column:2;margin:-6px 0 0}
+}
+.note{margin-top:40px;padding:14px 16px;background:var(--bg);border-left:4px solid var(--p);font-size:14px;color:var(--m)}
+</style></head><body>
+<div class="wrap">
+<h2>申請の流れ ― 8つのステップ</h2>
+<p class="lead"><span>初診日の確認から結果が届くまで。左から右へ、順番に進みます。</span><a href="#">申請の流れを詳しく見る →</a></p>
+
+<ol class="sf" aria-label="申請の流れ 8つのステップ">
+  <li class="sf-phase" aria-hidden="true">確かめる</li>
+  <li class="sf-phase" aria-hidden="true">そろえる</li>
+  <li class="sf-phase" aria-hidden="true">書く</li>
+  <li class="sf-phase" aria-hidden="true">出す・待つ</li>
+
+  <li class="sf-node" data-n="1"><span class="sf-num">1</span><a class="sf-title" href="#">初診日を<br>確認する</a></li>
+  <li class="sf-node" data-n="2"><span class="sf-num">2</span><a class="sf-title" href="#">納付要件を<br>確認する</a></li>
+  <li class="sf-node has-tool" data-n="3"><span class="sf-num">3</span><a class="sf-title" href="#">年金事務所へ<br>相談する</a>
+    <a class="sf-tool" href="#"><b>→ どこに出せばいい？</b><span>管轄の年金事務所と、予約のしかた</span></a></li>
+  <li class="sf-node has-tool" data-n="4"><span class="sf-num">4</span><a class="sf-title" href="#">必要書類を<br>そろえる</a>
+    <a class="sf-tool" href="#"><b>→ 何をそろえればいい？</b><span>自分の場合に要る書類だけを一覧に</span></a></li>
+  <li class="sf-node has-tool" data-n="5"><span class="sf-num">5</span><a class="sf-title" href="#">診断書の<br>準備をする</a>
+    <a class="sf-tool" href="#"><b>→ 私は何級くらい？</b><span>受け取った診断書の裏面を、国の目安表に当てはめる</span></a></li>
+  <li class="sf-node has-tool" data-n="6"><span class="sf-num">6</span><a class="sf-title" href="#">申立書を<br>作成する</a>
+    <a class="sf-tool feat" href="#"><b>→ 申立書を、自分で書きたい</b><span>期間ごとに書いて、公式様式に重ねて印刷</span></a></li>
+  <li class="sf-node" data-n="7"><span class="sf-num">7</span><a class="sf-title" href="#">年金事務所へ<br>提出する</a></li>
+  <li class="sf-node" data-n="8"><span class="sf-num">8</span><a class="sf-title" href="#">結果を<br>待つ</a></li>
+</ol>
+
+<p class="note">モック。色・余白は本番の platform.css の変数に合わせてあります(primary #0284c7 / heading #14425e / muted #4a6a80 / border #dcebf5 / 道具カード #e8f4fc)。1180px以下で4+4の2段、700px以下で縦一列に切り替わります。</p>
+</div></body></html>

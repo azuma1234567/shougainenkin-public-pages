@@ -210,7 +210,7 @@ export default function HomePage() {
 
       <section className="p-section-lg" aria-labelledby="steps-heading">
         <div className="p-container">
-          <SectionHeader title="申請の流れ ― 8つのステップ" lead="初診日の確認から結果が届くまで。それぞれの段階で使える機能を、そのステップに置いています。" href="/shinsei" linkLabel="申請の流れを詳しく見る" />
+          <SectionHeader title="申請の流れ ― 8つのステップ" lead="初診日の確認から結果が届くまで。左から右へ、順番に進みます。" href="/shinsei" linkLabel="申請の流れを詳しく見る" />
           <StepFlow />
         </div>
       </section>

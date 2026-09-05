@@ -1,55 +1,55 @@
 import Link from "next/link";
 import { PLACEMENTS, placementCard, visiblePlacements } from "@/data/dougu";
 
+/* 8つのステップ。名前と順番は変えない。
+   split は PC で2行に割る位置(助詞の後)。スマホでは割らない。 */
 export const STEPS = [
-  "初診日を確認する",
-  "納付要件を確認する",
-  "年金事務所へ相談する",
-  "必要書類をそろえる",
-  "診断書の準備をする",
-  "申立書を作成する",
-  "年金事務所へ提出する",
-  "結果を待つ",
+  { title: "初診日を確認する", split: 4 },
+  { title: "納付要件を確認する", split: 5 },
+  { title: "年金事務所へ相談する", split: 6 },
+  { title: "必要書類をそろえる", split: 5 },
+  { title: "診断書の準備をする", split: 4 },
+  { title: "申立書を作成する", split: 4 },
+  { title: "年金事務所へ提出する", split: 6 },
+  { title: "結果を待つ", split: 3 },
 ] as const;
 
-function Step({ title, index }: { title: string; index: number }) {
-  const stepId = `step-${index + 1}`;
-  const placement = visiblePlacements(PLACEMENTS.shinseiSteps[stepId])[0];
-  const content = (
-    <>
-      <span className="step-flow-number" aria-hidden="true">{index + 1}</span>
-      <span className="step-flow-content">
-        <strong className="step-flow-title">{title}</strong>
-        {placement ? (() => {
-          const card = placementCard(placement);
-          return (
-            <span className={`step-flow-tool${stepId === "step-6" ? " is-featured" : ""}`}>
-              <strong>→ {card.title}</strong>
-              <span>{card.blurb}</span>
-            </span>
-          );
-        })() : null}
-      </span>
-    </>
-  );
+/* 上に置く4つの区切り(2ステップずつ)。ステップ名の要約であって、制度の分類ではない。
+   装飾なので aria-hidden。 */
+const PHASES = ["確かめる", "そろえる", "書く", "出す・待つ"] as const;
 
-  return placement ? (
-    <Link className="step-flow-item has-tool" href={placementCard(placement).href}>{content}</Link>
-  ) : (
-    <div className="step-flow-item">{content}</div>
+function Node({ step, index }: { step: (typeof STEPS)[number]; index: number }) {
+  const n = index + 1;
+  const stepId = `step-${n}`;
+  const placement = visiblePlacements(PLACEMENTS.shinseiSteps[stepId])[0];
+  const card = placement ? placementCard(placement) : null;
+  const head = step.title.slice(0, step.split);
+  const tail = step.title.slice(step.split);
+
+  return (
+    <li className={`step-flow-node${card ? " has-tool" : ""}`} data-n={n}>
+      <span className="step-flow-number" aria-hidden="true">{n}</span>
+      <Link className="step-flow-title" href={`/shinsei#${stepId}`}>
+        {head}
+        <span className="step-flow-break">{tail}</span>
+      </Link>
+      {card && (
+        <Link className={`step-flow-tool${stepId === "step-6" ? " is-featured" : ""}`} href={card.href}>
+          <strong>→ {card.title}</strong>
+          <span>{card.blurb}</span>
+        </Link>
+      )}
+    </li>
   );
 }
 
 export default function StepFlow() {
   return (
-    <div className="step-flow" aria-label="申請の流れ 8つのステップ">
-      {[STEPS.slice(0, 4), STEPS.slice(4)].map((column, columnIndex) => (
-        <div className="step-flow-column" key={columnIndex}>
-          {column.map((step, index) => (
-            <Step title={step} index={index + columnIndex * 4} key={step} />
-          ))}
-        </div>
+    <ol className="step-flow" aria-label="申請の流れ 8つのステップ">
+      {PHASES.map((phase) => (
+        <li className="step-flow-phase" aria-hidden="true" key={phase}>{phase}</li>
       ))}
-    </div>
+      {STEPS.map((step, index) => <Node step={step} index={index} key={step.title} />)}
+    </ol>
   );
 }
