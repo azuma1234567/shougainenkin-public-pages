@@ -236,7 +236,7 @@ export default function MarkdownArticle({
 
     if (faqAccordion && /^\*\*Q[.．]/.test(line)) {
       /* 質問は `**Q. …**`。答えは次の行から書く形と、同じ行に続けて書く形の両方がある
-         (ハブ 40 本のうち 17 本が同じ行の形)。同じ行の分を summary に飲み込ませない。 */
+         (ハブ 40 本のうち 17 本が同じ行の形)。同じ行の分を見出しに飲み込ませない。 */
       const inline = /^\*\*(Q[.．][^*]*?)\*\*\s*(.*)$/.exec(line);
       const question = inline ? inline[1] : line.replace(/^\*\*/, "").replace(/\*\*$/, "");
       index += 1;
@@ -248,7 +248,7 @@ export default function MarkdownArticle({
         answerLines.push(next);
         index += 1;
       }
-      blocks.push(<details className="hub-faq-item" key={`faq-${index}`}><summary>{inlineContent(question)}</summary><p>{inlineContent(answerLines.join(" "))}</p></details>);
+      blocks.push(<div className="hub-faq-item" key={`faq-${index}`}><h3>{inlineContent(question)}</h3><p>{inlineContent(answerLines.join(" "))}</p></div>);
       continue;
     }
 

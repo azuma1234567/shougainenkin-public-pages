@@ -6,13 +6,13 @@ import ColumnThemeBlock from "@/components/ColumnThemeBlock";
 import {
   columnBreadcrumbParents,
   columnJsonLd,
-  formatDate,
   type Column,
 } from "@/lib/columns";
 import { faqJsonLd } from "@/lib/seo";
 import { DouguCards } from "@/components/platform/DouguCard";
 import { PLACEMENTS } from "@/data/dougu";
 import AdLabel from "@/components/AdLabel";
+import { PageDate } from "@/components/platform/Platform";
 import "@/app/columns/columns.css";
 
 type Faq = { question: string; answer: string };
@@ -56,16 +56,7 @@ export default function ColumnArticle({
         parents={columnBreadcrumbParents(column)}
       />
       <h1>{column.title}</h1>
-      <p className="meta-line">
-        公開日: {" "}
-        <time dateTime={column.datePublished}>
-          {formatDate(column.datePublished)}
-        </time>{" "}
-        / 最終確認日: {" "}
-        <time dateTime={column.dateModified}>
-          {formatDate(column.dateModified)}
-        </time>
-      </p>
+      <PageDate published={column.datePublished} updated={column.dateModified} />
 
       {column.lead && <section className="column-conclusion" aria-labelledby="column-conclusion-heading">
         <h2 id="column-conclusion-heading">この記事の結論</h2>

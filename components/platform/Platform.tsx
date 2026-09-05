@@ -72,16 +72,19 @@ export function SectionHeader({ title, lead, href, linkLabel }: { title: string;
   );
 }
 
-// 最終更新日(と確認日)の表示。日付は yyyy-mm-dd で受け取り、yyyy年M月d日 で出す。
+// 日付の表示は全ページこれ1つ(指示書 §3-4)。h1 の直下に置く。
+// 出典を確かめた日 = このサイトの信頼の根なので、画面に出すのは「最終確認日」だけ。
+// 公開日は機械が読む <time> としてだけ残す。
 function formatPageDate(date: string): string {
   const [y, m, d] = date.split("-");
   return `${y}年${Number(m)}月${Number(d)}日`;
 }
-export function PageDate({ updated, checked }: { updated: string; checked?: string }) {
+export function PageDate({ updated, checked, published }: { updated: string; checked?: string; published?: string }) {
+  const confirmed = checked ?? updated;
   return (
     <p className="p-page-date">
-      <time dateTime={updated}>最終更新日 {formatPageDate(updated)}</time>
-      {checked ? <> ・ 確認日 <time dateTime={checked}>{formatPageDate(checked)}</time></> : null}
+      {published ? <time dateTime={published} /> : null}
+      <time dateTime={confirmed}>最終確認日 {formatPageDate(confirmed)}</time>
     </p>
   );
 }
