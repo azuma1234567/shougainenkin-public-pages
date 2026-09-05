@@ -1,22 +1,49 @@
-/* 2026-09 情報プラットフォーム共通トークン。
- * 既存コラムの本文レイアウトとは分離し、新設ハブと共通ナビだけへ適用する。 */
+/* デザイントークン(2026-09-05)。docs/design-system-2026-09-05-instructions.md §1。
+ * 色 11・文字 8 段・角丸 3・影 1。ここ 1 か所で決め、ほかのファイルは参照だけにする。
+ * globals.css より後に読み込まれるので、旧トークンの別名もここで上書きできる。 */
 :root {
-  --platform-bg: #f7fbfe;
-  --platform-surface: #ffffff;
-  --platform-band: #eef6fc;
-  --platform-primary: #0284c7;
-  --platform-link: #0273ad;
-  --platform-link-hover: #015d8c;
-  --platform-chip: #e3f2fc;
-  --platform-heading: #14425e;
-  --platform-text: #1e3a4d;
-  --platform-muted: #4a6a80;
-  --platform-subtle: #5b7a90;
-  --platform-meta: #6e8ba0;
-  --platform-faint: #8aa5b6;
-  --platform-border: #dcebf5;
-  --platform-border-soft: #e2eef7;
-  /* 「自分の場合を確かめる」5つの機能の色。記事カードと別物だと一目で分かるようにする。 */
+  /* 色 11 */
+  --c-text: #1e3a4d;
+  --c-heading: #14425e;        /* 見出し・数字(数字は黒 = これ) */
+  --c-body-muted: #4a6a80;     /* 説明文 */
+  --c-meta: #4f6f87;           /* メタ・注・パンくず・日付(白地 5.31 / 帯地 4.86) */
+  --c-border: #dcebf5;
+  --c-band: #eef6fc;           /* 帯・箱の背景 */
+  --c-primary: #0273ad;        /* ボタン・リンク・強調(白文字 5.17) */
+  --c-primary-deep: #015d8c;   /* hover */
+  --c-ok: #1a7f4b;  --c-ok-bg: #e9f6ee;
+  --c-warn: #b7791f; --c-warn-bg: #fdf5e6;
+  --c-danger: #b3261e; --c-danger-bg: #fdf1ef;
+  /* 文字 8 段 */
+  --fs-h1: 30px; --fs-h2: 22px; --fs-h3: 18px; --fs-num: 28px;
+  --fs-body: 17px; --fs-small: 14.5px; --fs-meta: 13px; --fs-note: 12.5px;
+  --lh-body: 1.9; --lh-heading: 1.45;
+  --font-heading: var(--font-platform-heading), "Hiragino Kaku Gothic ProN", sans-serif;
+  /* 形 */
+  --r-sm: 8px; --r-card: 14px; --r-pill: 999px;
+  --shadow: 0 1px 3px rgba(20, 66, 94, .06);
+  --card-pad: 20px 22px; --card-gap: 14px;
+  --w-read: 760px; --w-wide: 1200px;
+}
+@media (max-width: 720px) { :root { --fs-h1: 26px; --fs-h2: 20px; } }
+
+/* 旧トークンは別名として残す(一度に消すとコラム47本が崩れるため)。
+ * 値は必ず上の新トークンを参照する。直接の色はここには書かない。
+ * 新しく書く CSS は新トークンだけを使うこと。 */
+:root {
+  --green: var(--c-primary); --green-dark: var(--c-primary-deep); --green-deep: var(--c-heading);
+  --text: var(--c-text); --text-muted: var(--c-body-muted); --border: var(--c-border); --note-bg: var(--c-band);
+  --platform-primary: var(--c-primary); --platform-link: var(--c-primary); --platform-link-hover: var(--c-primary-deep);
+  --platform-heading: var(--c-heading); --platform-text: var(--c-text); --platform-muted: var(--c-body-muted);
+  --platform-subtle: var(--c-meta); --platform-meta: var(--c-meta); --platform-faint: var(--c-meta);
+  --platform-border: var(--c-border); --platform-band: var(--c-band); --platform-bg: #f7fbfe; --platform-surface: #fff;
+  --platform-border-soft: var(--c-border); --platform-chip: var(--c-band);
+  --radius-sm: var(--r-sm); --radius: var(--r-card); --radius-lg: var(--r-card); --radius-xl: var(--r-card);
+  --shadow-xs: var(--shadow); --shadow-sm: var(--shadow); --shadow-md: var(--shadow); --shadow-lg: var(--shadow);
+  --font-display: var(--font-heading);   /* 明朝 → ゴシック。これ1行で47本の見出しが揃う */
+  --platform-container: var(--w-wide);
+  --platform-gutter: clamp(20px, 4.45vw, 64px);
+  /* 「自分の場合を確かめる」5つの機能の色。§3-6 で廃止するまでの暫定。 */
   --jc-mitate: #0284c7;
   --jc-kingaku: #059669;
   --jc-shorui: #d97706;
@@ -27,8 +54,6 @@
   --jc-shorui-bg: #fdf3e3;
   --jc-madoguchi-bg: #f0eafb;
   --jc-moushitatesho-bg: #e4f3f6;
-  --platform-container: 1200px;
-  --platform-gutter: clamp(20px, 4.45vw, 64px);
 }
 
 .hub-landing .hub-column-grid .p-card-copy {
