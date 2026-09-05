@@ -276,3 +276,27 @@ JavaScript を切っても **カード21枚が全部見える**(絞り込みの�
 
 `lib/sitemap-static-dates.ts` の `/nayami` `/okane` `/erabu` を 2026-09-05 に上げた
 (`/byoki` `/joukyou` は前回上げ済み)。
+
+## 本番確認(2026-09-05)
+
+`main` への push で Vercel が本番デプロイ(`pw1kotrv4`、Ready)。
+`https://shougainenkin-note.net/byoki` の実測:
+
+| 見るところ | 結果 |
+|---|---|
+| ページ全高(1400px) | **3,198px**(ローカルと同じ) |
+| 列とカード | 3列・21枚 |
+| カードの padding | 20px 22px |
+| 絞り込みの位置 | ヒーローの中(チップと同じ行) |
+| 絞り込み ADHD | 発達障害だけ |
+| 一言 | 指示書の30件と **30/30 完全一致**、先頭12文字の禁止語 **0件** |
+
+構造化データは schema.org のバリデータに公開 URL を渡して確認した
+(`page-types-seisa §4` のとおり、リッチリザルトテストは使わない)。
+
+```
+https://shougainenkin-note.net/byoki
+→ エラー 0 / 警告 0 / 検出オブジェクト 2(CollectionPage + BreadcrumbList)
+```
+
+スクリーンショット: `prod-byoki-1400.png`。
