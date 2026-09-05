@@ -190,3 +190,20 @@ FAQ をアコーディオンから見出し+段落に変えたが、JSON-LD の�
 - 本文 17px / 1.9、1行 760px。
 - 申立書の印刷 CSS。検査9/9で確認(上の7)。
 - 道具の動作(申立書の検査9/9、公開前チェックの A 全項目○)。
+
+## 本番確認(2026-09-05)
+
+`main` への push で Vercel が本番デプロイ(`i3vz2mpcu`、Ready)。
+`https://shougainenkin-note.net` で実測した。
+
+| 見るところ | /columns/shoshinbi-wakaranai | /byoki/utsu-soukyoku |
+|---|---|---|
+| h1 | 30px Zen Kaku Gothic New | 30px Zen Kaku Gothic New |
+| h2 | 22px(節)/ 18px(結論の箱)/ 14.5px(カード・フッター) | 22px / 14.5px |
+| パンくずの文字 | rgb(79,111,135) = #4f6f87(白地 5.31) | 同左 |
+| ヘッダーのボタン | 白文字 on rgb(2,115,173) = #0273ad(5.17) | 同左 |
+| 更新日 | 最終確認日 2026年9月3日 | 最終確認日 2026年9月2日 |
+| FAQ の `<details>` | 0(見出し+段落になった) | 0 |
+
+スクリーンショット: `prod-column-1400.png` / `prod-hub-1400.png`。
+記事(旧世代)とハブ(新世代)が、同じ書体・同じ見出しの段・同じ日付の言い方になった。
