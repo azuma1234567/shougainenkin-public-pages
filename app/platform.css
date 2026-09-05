@@ -259,6 +259,9 @@
   white-space: nowrap;
 }
 
+/* いまいる区画を下線で示す(Baymard: 現在位置の表示欠如)。 */
+.site-nav a[aria-current="page"] { color: var(--c-heading); font-weight: 700; box-shadow: inset 0 -2px 0 var(--c-primary); border-radius: 0; }
+.site-nav .site-app-link[aria-current="page"] { color: #fff; box-shadow: none; border-radius: var(--r-pill); }
 .site-nav a:hover {
   color: var(--platform-link-hover);
   background: var(--platform-band);
@@ -357,9 +360,10 @@
 .site-footer nav { margin: 0; }
 .site-footer a { color: var(--c-border); font-size: var(--fs-note); }
 .site-footer a:hover { background: rgba(255,255,255,0.08); }
+/* 4区分。1181px以上は4列、761〜1180pxは2列、760px以下は1列。 */
 .site-footer .footer-links {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 2px 14px;
 }
 .site-footer .footer-links a { justify-content: flex-start; min-height: 36px; padding: 4px 8px; line-height: 1.5; }
@@ -587,6 +591,7 @@
 
 /* 中間幅: 4列×2行(1〜4 / 5〜8)。区切りは出さず、4 の右の線を消す。 */
 @media (max-width: 1180px) {
+  .site-footer .footer-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .step-flow { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 36px; }
   .step-flow-node[data-n="4"]::after { display: none; }
   .step-flow-tool { grid-row: auto; }
@@ -652,7 +657,6 @@
   .p-more { min-height: 44px; display: inline-flex; align-items: center; }
   .p-stats { flex-wrap: wrap; }
   .site-footer-inner { grid-template-columns: 1fr; gap: 24px; }
-  .site-footer .footer-links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .site-footer .footer-bottom { grid-column: 1; }
 }
 
@@ -662,7 +666,6 @@
   .site-title { font-size: var(--fs-body); gap: 8px; }
   .site-mark { width: 24px; height: 24px; }
   .site-footer-inner { padding: 28px 20px 22px; gap: 22px; }
-  .site-footer .footer-links { grid-template-columns: 1fr; width: 100%; }
   .site-footer .footer-bottom { flex-direction: column; gap: 10px; }
   .site-footer .footer-ad-disclosure { text-align: left; }
   .footer-site-name span { display: block; margin-top: 4px; }
@@ -755,6 +758,7 @@
 .columns-tail { padding-top: 22px; border-top: 1px solid var(--platform-line, var(--c-border)); }
 
 @media (max-width: 760px) {
+  .site-footer .footer-links { grid-template-columns: 1fr; width: 100%; }
   .columns-grid, .columns-grid-3 { grid-template-columns: 1fr; }
   .columns-toc-inner { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
   .columns-toc-inner::-webkit-scrollbar { display: none; }
