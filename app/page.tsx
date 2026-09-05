@@ -225,7 +225,7 @@ export default function HomePage() {
             <div className="p-stat"><b>{SAIKETSU_COUNTS.all}</b><span>結論が分かれた実例（原文つき）</span></div>
             <div className="p-stat"><b>全件</b><span>公的資料の出典・確認日つき</span></div>
           </div>
-          <p className="p-stats-note">10人のうち7人が精神の診断書で申請しています。</p>
+          <p className="p-stats-note">新しく決まった障害年金の10件のうち7件は、精神の障害です。</p>
         </div>
       </section>
 

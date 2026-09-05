@@ -340,6 +340,45 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
     "ページを変えたら lib/sitemap-static-dates.ts と data/hubs/*.json の dateModified も同じ PR で直す");
 }
 
+// ---------- C-7. 構造化データが、描画後もそのまま JSON であること ----------
+{
+  /* 用語の自動リンク(components/YougoAutoLinker.tsx)は <main> の中の文字を書き換える。
+     JSON-LD の script まで書き換えると、Search Console の「解析不能な構造化データ」になる。
+     ブラウザで描画したあとの script の中身が、テキスト1つだけで要素を含まないことを見る。 */
+  const { chromium } = await import("playwright");
+  const targets = ["/byoki/tenkan", "/byoki/utsu-soukyoku", "/nayami/fushikyu", "/erabu/jibun-ka-irai"];
+  const bad = [];
+  let checked = 0;
+  const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH });
+  const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  for (const target of targets) {
+    const page = await context.newPage();
+    await page.goto(`${origin}${target}`, { waitUntil: "networkidle" });
+    /* 自動リンクは描画のあとに走るので、少し待ってから見る。 */
+    await page.waitForTimeout(400);
+    const found = await page.evaluate(() => [...document.querySelectorAll('script[type="application/ld+json"]')]
+      .map((node, index) => {
+        const elements = node.childNodes.length - [...node.childNodes].filter((child) => child.nodeType === 3).length;
+        let parses = true;
+        try { JSON.parse(node.textContent ?? ""); } catch { parses = false; }
+        return { index, children: node.childNodes.length, elements, parses };
+      }));
+    for (const item of found) {
+      checked += 1;
+      if (item.children !== 1 || item.elements > 0 || !item.parses) {
+        bad.push(`${target} の ${item.index + 1} つ目: 子ノード ${item.children}・要素 ${item.elements}・JSONとして読める ${item.parses}`);
+      }
+    }
+    await page.close();
+  }
+  await browser.close();
+  record("C-7", "構造化データが描画後も JSON のまま(用語の自動リンクが入っていない)",
+    bad.length === 0,
+    `${targets.length} ページの ld+json ${checked} 個を確認、崩れているもの ${bad.length}`,
+    bad,
+    "ブラウザで描画したあとに見る。script の中身はテキスト1つだけで、要素を含まないこと");
+}
+
 // ---------- D. 人が見る用の一覧 ----------
 {
   const rows = [...pages].map(([p, page]) => [p, page.title, page.chars]);

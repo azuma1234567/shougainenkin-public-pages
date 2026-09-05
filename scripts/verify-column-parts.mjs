@@ -110,6 +110,8 @@ const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH 
     for (const slug of SAMPLE) {
       const page = await context.newPage();
       await page.goto(`${origin}/columns/${slug}`, { waitUntil: "networkidle" });
+      /* 目次はブラウザ側で組み立てるので、出るまで待つ。 */
+      await page.waitForSelector(".article-toc", { timeout: 15000 });
       const state = await page.evaluate(() => {
         const toc = document.querySelector(".article-toc");
         return {
@@ -144,6 +146,7 @@ const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH 
   const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const page = await context.newPage();
   await page.goto(`${origin}/columns/${SAMPLE[0]}`, { waitUntil: "networkidle" });
+  await page.waitForSelector(".article-toc.is-rail", { timeout: 15000 });
   const ratios = await page.evaluate(() => {
     const lum = ([r, g, b]) => {
       const f = (c) => { const s = c / 255; return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4; };
@@ -192,6 +195,7 @@ const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH 
   for (const slug of SAMPLE) {
     const page = await context.newPage();
     await page.goto(`${origin}/columns/${slug}`, { waitUntil: "networkidle" });
+    await page.waitForSelector(".article-toc", { timeout: 15000 });
     await page.emulateMedia({ media: "print" });
     const state = await page.evaluate(() => ({
       toc: getComputedStyle(document.querySelector(".article-toc")).display,
