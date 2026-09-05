@@ -56,3 +56,55 @@
   font-size: var(--fs-small);
   line-height: 1.8;
 }
+
+/* 固定目次(左レール)。1181px 以上でのみ本文の左に出る。
+   docs/columns-parts-2026-09-05-instructions.md §2-4。1180px 以下は従来どおり。 */
+@media (min-width: 1181px) {
+  /* 本文列の幅は、いまと1pxも変えない(§3)。main を左レールのぶんだけ広げ、
+     本文列は従来と同じ calc(--content - 左右の余白)にする。 */
+  body:has(.column-article) main { max-width: calc(var(--content) + 240px + 40px); }
+  .column-article {
+    display: grid;
+    grid-template-columns: 240px minmax(0, calc(var(--content) - var(--gutter) * 2));
+    column-gap: 40px;
+    align-items: start;
+    max-width: none;
+  }
+  .column-article > * { grid-column: 2; min-width: 0; }
+  .column-article > .article-toc {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    position: sticky;
+    top: 24px;
+    max-height: calc(100vh - 48px);
+    margin: 0;
+    overflow: auto;
+  }
+  /* 常時表示。畳む操作はしない(見出しとして置く)。 */
+  .article-toc.is-rail > summary { min-height: 0; margin-bottom: 4px; pointer-events: none; }
+  .article-toc.is-rail > summary::before { content: none; }
+  .article-toc.is-rail ol { margin: 0; padding: 0; list-style: none; }
+  .article-toc.is-rail li { margin: 0; }
+  .article-toc.is-rail a {
+    display: block;
+    padding: 5px 10px;
+    border-left: 3px solid var(--c-border);
+    color: var(--c-body-muted);
+    font-size: var(--fs-meta);
+    line-height: 1.6;
+    text-decoration: none;
+  }
+  .article-toc.is-rail a:hover { color: var(--c-primary); }
+  .article-toc.is-rail a[aria-current="true"] {
+    border-left-color: var(--c-primary);
+    background: var(--c-band);
+    color: var(--c-heading);
+    font-weight: 700;
+  }
+  .article-toc-next { margin: 10px 0 0; padding-top: 8px; border-top: 1px solid var(--c-border); }
+  .article-toc-next a { display: block; color: var(--c-primary); font-size: var(--fs-meta); font-weight: 700; }
+}
+
+@media print {
+  .column-article > .article-toc { display: none; }
+}
