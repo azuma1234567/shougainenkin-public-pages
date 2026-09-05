@@ -1228,3 +1228,25 @@
 .dougu-app-link a { color: var(--platform-primary); font-size: 14.5px; font-weight: 700; }
 /* 一覧の先頭に置く道具カード。 */
 .hub-index-tool { margin: 0 0 18px; }
+
+/* 幹10「受給が始まってから」の索引。年表が主役なので、StepFlow の縦モードと
+   同じ見せ方(番号の代わりに時点、縦線でつなぐ)を使う。
+   色・文字サイズは土台(2026-09-05 復元後)の変数と値に読み替えている
+   (docs/jukyuugo-saitounyuu-2026-09-06-instructions.md §2)。 */
+.hub-index-hint { margin: 8px 0 0; color: var(--platform-heading); font-size: 14.5px; line-height: 1.8; }
+.hub-index-h2 { margin: 0 0 12px; color: var(--platform-heading); font-family: var(--font-platform-heading), "Hiragino Kaku Gothic ProN", sans-serif; font-size: 27px; line-height: 1.45; }
+.hub-index-note-p { margin: 0 0 12px; color: var(--platform-text); font-size: 14.5px; line-height: 1.85; }
+.hub-index-sources { margin: 14px 0 0; }
+.p-timeline { display: grid; margin: 0; padding: 0; list-style: none; }
+.p-timeline-item { position: relative; display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 2px 18px; padding: 0 0 18px 22px; }
+.p-timeline-item::before { content: ""; position: absolute; top: 7px; left: 0; width: 10px; height: 10px; border-radius: 999px; background: var(--platform-primary); }
+.p-timeline-item::after { content: ""; position: absolute; top: 19px; bottom: 0; left: 4px; width: 2px; background: var(--platform-border); }
+.p-timeline-item:last-child::after { display: none; }
+.p-timeline-when { grid-column: 1; color: var(--platform-heading); font-size: 14.5px; font-weight: 700; line-height: 1.6; }
+.p-timeline-what { grid-column: 2; color: var(--platform-text); font-size: 14.5px; line-height: 1.8; }
+.p-timeline-link { grid-column: 2; color: var(--platform-primary); font-size: 13px; font-weight: 700; }
+@media (max-width: 700px) {
+  .hub-index-h2 { font-size: 23px; }
+  .p-timeline-item { grid-template-columns: 1fr; gap: 2px; }
+  .p-timeline-when, .p-timeline-what, .p-timeline-link { grid-column: 1; }
+}

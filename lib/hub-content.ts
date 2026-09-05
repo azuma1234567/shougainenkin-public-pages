@@ -60,6 +60,12 @@ const nayamiFushikyuPublished = {
 /* dateModified はハブの最終更新日(YYYY-MM-DD)。sitemap の lastModified と
    画面の「最終更新」に使う(監査 §4-1・§4-2)。data/hubs/*.json が持つ。 */
 export type HubContent = { title: string; dateModified: string; breadcrumb: string[]; source: string };
+import jukyuugoHataraku from "@/data/hubs/jukyuugo-hataraku.json";
+import jukyuugoSagyousho from "@/data/hubs/jukyuugo-sagyousho.json";
+import jukyuugoNukedasu from "@/data/hubs/jukyuugo-nukedasu.json";
+import jukyuugoOkane from "@/data/hubs/jukyuugo-okane.json";
+import jukyuugoAGataHeisa from "@/data/hubs/jukyuugo-a-gata-heisa.json";
+
 export const HUB_CONTENT: Record<string, HubContent> = {
   "/byoki/tougou": byokiTougou, "/byoki/chiteki": byokiChiteki, "/byoki/tenkan": byokiTenkan,
   "/byoki/jinzou-touseki": byokiJinzouTouseki, "/byoki/gan": byokiGan, "/byoki/shinzou": byokiShinzou,
@@ -67,6 +73,9 @@ export const HUB_CONTENT: Record<string, HubContent> = {
   "/byoki/hattatsu": byokiHattatsu, "/byoki/tekiou-fuan": byokiTekiouFuan,
   "/byoki/ninchishou": byokiNinchishou, "/byoki/koujinou": byokiKoujinou, "/byoki/izon": byokiIzon,
   "/byoki/kanzou": byokiKanzou, "/byoki/kokyuuki": byokiKokyuuki, "/byoki/ketsueki": byokiKetsueki,
+  "/jukyuugo/hataraku": jukyuugoHataraku, "/jukyuugo/sagyousho": jukyuugoSagyousho,
+  "/jukyuugo/nukedasu": jukyuugoNukedasu, "/jukyuugo/okane": jukyuugoOkane,
+  "/jukyuugo/a-gata-heisa": jukyuugoAGataHeisa,
   "/byoki/shikaku": byokiShikaku, "/byoki/choukaku": byokiChoukaku, "/byoki/gengo": byokiGengo, "/byoki/nanbyou": byokiNanbyou,
   "/erabu/jibun-ka-irai": erabuJibunKaIrai,
   "/erabu/irai-subeki-case": erabuIraiSubekiCase, "/erabu/hiyou-souba": erabuHiyouSouba,

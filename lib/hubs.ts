@@ -11,7 +11,7 @@ export type HubDefinition = {
   path: string;
   label: string;
   shortLabel: string;
-  kind: "byoki" | "joukyou" | "nayami" | "okane" | "erabu" | "existing" | "reserved";
+  kind: "byoki" | "joukyou" | "nayami" | "okane" | "erabu" | "jukyuugo" | "existing" | "reserved";
   published: boolean;
   relatedSlugs: string[];
   jitsureiFilter?: string;
@@ -94,6 +94,13 @@ export const HUBS: HubDefinition[] = [
     "/byoki/choukaku-heikou", "/byoki/soshaku-gengo", "/byoki/nanbyou-sonota",
     "/senmonka",
   ].map((path) => hub(path, path, path, "reserved", false)),
+
+  /* 幹10「受給が始まってから」。原稿 docs/jukyuugo-2026-09-05(shougainenkin repo)。 */
+  hub("/jukyuugo/hataraku", "働くと年金はどうなるか", "働くと年金はどうなるか", "jukyuugo", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "koushin-kakuninhodo", "hatachi-mae", "hikazei-shuunyuu"]),
+  hub("/jukyuugo/sagyousho", "B型・A型作業所と障害年金", "B型・A型作業所と障害年金", "jukyuugo", true, ["hatarakinagara", "hatachi-mae", "shougaisha-koyou-nenkin", "koushin-kakuninhodo"]),
+  hub("/jukyuugo/nukedasu", "抜け出すロードマップ", "抜け出すロードマップ", "jukyuugo", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "koushin-kakuninhodo", "gaku-kaitei-seikyuu", "shikyuu-teishi-fukkatsu"]),
+  hub("/jukyuugo/okane", "受給後のお金の設計", "受給後のお金の設計", "jukyuugo", true, ["hikazei-shuunyuu", "jukyuugo-tetsuduki", "ikura-moraeru", "shoubyou-teatekin"]),
+  hub("/jukyuugo/a-gata-heisa", "A型事業所が閉鎖したとき", "A型事業所が閉鎖したとき", "jukyuugo", true, ["koushin-kakuninhodo", "shoubyou-teatekin", "shougaisha-koyou-nenkin", "jukyuugo-tetsuduki"]),
 ];
 
 export const HUB_BY_PATH = new Map(HUBS.map((item) => [item.path, item]));
@@ -186,7 +193,7 @@ export function hubColumnSlugs(hubPath: string): string[] {
   return [...primary, ...secondary];
 }
 
-export const PUBLISHED_CONTENT_HUBS = HUBS.filter((item) => item.published && ["byoki", "joukyou", "nayami", "okane", "erabu"].includes(item.kind));
+export const PUBLISHED_CONTENT_HUBS = HUBS.filter((item) => item.published && ["byoki", "joukyou", "nayami", "okane", "erabu", "jukyuugo"].includes(item.kind));
 
 export const UNIT_PACK_TO_HUBS: Record<string, string[]> = {
   firstVisit: ["/shinsei#step-2", "/nayami/shoshinbi-karute"],
