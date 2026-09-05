@@ -72,20 +72,16 @@ export function SectionHeader({ title, lead, href, linkLabel }: { title: string;
   );
 }
 
-// 日付の表示は全ページこれ1つ(指示書 §3-4)。h1 の直下に置く。
-// 出典を確かめた日 = このサイトの信頼の根なので、画面に出すのは「最終確認日」だけ。
-// 公開日は機械が読む <time> としてだけ残す。
+// 最終更新日(と確認日)の表示。日付は yyyy-mm-dd で受け取り、yyyy年M月d日 で出す。
 function formatPageDate(date: string): string {
   const [y, m, d] = date.split("-");
   return `${y}年${Number(m)}月${Number(d)}日`;
 }
-export function PageDate({ updated, checked, published, readMinutes }: { updated: string; checked?: string; published?: string; readMinutes?: number }) {
-  const confirmed = checked ?? updated;
+export function PageDate({ updated, checked }: { updated: string; checked?: string }) {
   return (
     <p className="p-page-date">
-      {published ? <time dateTime={published} /> : null}
-      <time dateTime={confirmed}>最終確認日 {formatPageDate(confirmed)}</time>
-      {readMinutes ? <> / 読む目安 約{readMinutes}分</> : null}
+      <time dateTime={updated}>最終更新日 {formatPageDate(updated)}</time>
+      {checked ? <> ・ 確認日 <time dateTime={checked}>{formatPageDate(checked)}</time></> : null}
     </p>
   );
 }
@@ -100,48 +96,27 @@ export function outcomeLabel(outcome: SaiketsuCase["ketsuron"]) {
   return "認められなかった";
 }
 
-export function isAccepted(outcome: SaiketsuCase["ketsuron"]) {
-  return outcome === "容認" || outcome === "一部容認";
-}
-
 export function OutcomeBadge({ outcome }: { outcome: SaiketsuCase["ketsuron"] }) {
+  const positive = outcome === "容認" || outcome === "一部容認";
   return (
-    <span className={`p-case-badge ${isAccepted(outcome) ? "is-ok" : "is-warn"}`}>
+    <span className={`p-label ${positive ? "p-label-success" : "p-label-warning"}`}>
       {outcomeLabel(outcome)}
     </span>
   );
 }
 
-// 裁決の id の頭(r07 / h28_29 など)は、厚労省が裁決例を公表した年度。
-// r07 → 令和7年、h28_29 → 平成28・29年。
-export function saiketsuYearLabel(id: string): string {
-  const m = /^([rh])(\d+)(?:_(\d+))?/.exec(id);
-  if (!m) return "";
-  const era = m[1] === "r" ? "令和" : "平成";
-  return m[3] ? `${era}${Number(m[2])}・${Number(m[3])}年` : `${era}${Number(m[2])}年`;
-}
-
-// 実例カード。左の5px罫線とバッジで、通った/通らなかったを一目で分かるようにする。
-// 見出しは病名。要旨の1文目は病名の下に小さく置き、残りを本文に出す(文は削らない)。
 export function CaseCard({ item }: { item: SaiketsuCase }) {
-  const accepted = isAccepted(item.ketsuron);
-  const cut = item.youshi.indexOf("。");
-  const lead = cut > 0 ? item.youshi.slice(0, cut) : "";
-  const body = cut > 0 ? item.youshi.slice(cut + 1) : item.youshi;
-  const year = saiketsuYearLabel(item.id);
+  const title = `${item.shobyo} ── ${item.youshi.split("。")[0]}`;
   return (
-    <article className={`p-card p-case ${accepted ? "is-accepted" : "is-rejected"}`}>
+    <article className="p-card p-case">
       <div className="p-case-head">
         <OutcomeBadge outcome={item.ketsuron} />
-        <span className="p-case-meta">{item.seido} ・ {item.request_type_group}{year ? ` ・ ${year}` : ""}</span>
+        <span className="p-case-meta">{item.seido} ・ {item.request_type_group}</span>
       </div>
-      <h3 className="p-case-title">{item.shobyo}{lead ? <small>{lead}。</small> : null}</h3>
-      <p className="p-case-summary">{body || item.youshi}</p>
+      <h3 className="p-case-title">{title}</h3>
+      <p className="p-case-summary">{item.youshi}</p>
       <div className="p-case-foot">
-        <span className="p-case-tags">
-          争点
-          {item.soten.map((soten) => <span className="p-case-tag" key={soten}>{soten}</span>)}
-        </span>
+        <span>争点: {item.soten.join(" / ")}</span>
         <a href={item.url} target="_blank" rel="noopener noreferrer">裁決の原文(PDF)を読む →</a>
       </div>
     </article>

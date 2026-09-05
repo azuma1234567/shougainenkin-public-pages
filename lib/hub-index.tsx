@@ -4,15 +4,14 @@ import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import HubIndexList, { type HubCard, type HubGroup } from "@/components/platform/HubIndexList";
 import { DouguCards } from "@/components/platform/DouguCard";
 import type { ToolId } from "@/data/dougu";
-import { HubIndexSearch } from "@/components/platform/HubIndexSearch";
-import { HUBS, hubColumnSlugs } from "@/lib/hubs";
+import { hubColumnSlugs } from "@/lib/hubs";
 import { SAIKETSU_CASES } from "@/lib/saiketsu";
 import { SITE_URL } from "@/lib/constants";
 import { latestHubCheckedDate } from "@/lib/hub-content";
 import { PUBLISHED_CONTENT_HUBS } from "@/lib/hubs";
 import { pageMetadata } from "@/lib/seo";
 
-type Kind = "byoki" | "nayami" | "joukyou" | "okane" | "erabu" | "jukyuugo";
+type Kind = "byoki" | "nayami" | "joukyou" | "okane" | "erabu";
 
 type IndexSpec = {
   title: string;
@@ -26,67 +25,51 @@ type IndexSpec = {
   body?: string[];
   /** リードの直下に置く道具。文言は data/dougu.ts のものをそのまま使う */
   tools?: ToolId[];
-  /** ヒーローのリードの下に置く一言(原稿の文を抜いたもの) */
-  hint?: string;
-  /** 年表。カードより前に、いつ→起きること→リンク の順で縦に並べる */
-  timeline?: { when: string; what: string; label: string; href: string }[];
-  /** 年表の後に置く段落(原稿の文) */
-  notes?: { heading: string; paragraphs: string[] };
-  /** 幹のハブ以外に並べるカード(既存ページ) */
-  extraCards?: { path: string; label: string; hint: string }[];
-  /** 次の一歩(原稿の箇条書き) */
-  nextSteps?: string[];
-  /** 出典(原稿の箇条書き) */
-  sources?: string[];
   tail?: { text: string; href: string; label: string };
 };
 
 // 段落内の [ラベル](/path) を Link に変換する(HubLanding の MarkdownArticle と同じ表記)
 function inlineLinks(text: string) {
-  const parts = text.split(/(\[[^\]]+\]\(\/[^)]+\)|\*\*[^*]+\*\*)/g);
+  const parts = text.split(/(\[[^\]]+\]\(\/[^)]+\))/g);
   return parts.map((part, index) => {
     const match = part.match(/^\[([^\]]+)\]\((\/[^)]+)\)$/);
-    if (match) return <Link href={match[2]} key={index}>{match[1]}</Link>;
-    /* 原稿の **…** は問いの見出し。太字で出す。 */
-    const strong = part.match(/^\*\*([^*]+)\*\*$/);
-    if (strong) return <strong key={index}>{strong[1]}</strong>;
-    return <span key={index}>{part}</span>;
+    return match ? <Link href={match[2]} key={index}>{match[1]}</Link> : <span key={index}>{part}</span>;
   });
 }
 
 /* カードの「一言」。各ハブ本文の「リード(直答)」に書いてあることだけで書いたもの。
    docs/hub-index-sasshin-2026-09-05-instructions.md §3 の表をそのまま写している。**書き換えない。** */
 export const HUB_HINTS: Record<string, string> = {
-  "/byoki/utsu-soukyoku": "うつ病でも双極性障害でも請求できます。病名ではなく、診断書の「日常生活能力の判定」と「程度」の2欄で目安が決まります。",
-  "/byoki/tekiou-fuan": "適応障害・パニック障害・PTSDでも、精神病の病態を示していれば気分障害に準じて認定されます。門は病名で閉まっていません。",
-  "/byoki/hattatsu": "ADHDもASDも対象です。IQや学歴は関係なく、対人関係・意思疎通の困難で見られます。初診日は大人になってからで構いません。",
-  "/byoki/tougou": "認定基準に名前で書かれている病気です。悩みどころは、初診日をどこに置くかと、発病からの経過の伝え方の2つです。",
+  "/byoki/utsu-soukyoku": "いちばん標準的なケース。病名ではなく、診断書の「日常生活能力の判定」と「程度」の2欄で目安が決まります。",
+  "/byoki/tekiou-fuan": "認定基準は神経症を「原則対象外」としつつ、精神病の病態を示すものは気分障害に準じて扱う、と続けています。",
+  "/byoki/hattatsu": "ADHDもASDも対象。IQや学歴は関係なく、対人関係・意思疎通の困難で見られます。大人になってからの初診日で構いません。",
+  "/byoki/tougou": "対象になるかで悩む必要はありません。悩みどころは初診日をどこに置くかと、発病からの経過の伝え方です。",
   "/byoki/chiteki": "初診日を探す必要がなく、納付要件も問われません。20歳の誕生日の前日が障害認定日で、19歳9か月から準備できます。",
-  "/byoki/tenkan": "認定基準に名前で書かれている病気です。発作が続いているなら、その記録がそのまま評価の材料になります。見られるのは発作の型と頻度。",
-  "/byoki/ninchishou": "認知症は対象です。65歳前の発症なら、老齢年金までの空白を障害年金が埋めます。家族が進めることを前提に書いています。",
-  "/byoki/koujinou": "高次脳機能障害は「器質性精神障害」として対象です。歩けて話せるぶん困難が伝わりにくいので、伝え方が結果を分けます。",
-  "/byoki/izon": "幻覚や妄想など精神病性の症状が出ていれば対象になりえます。うつ病や肝臓の病気との併存も含め、全体で見ると道が見えます。",
+  "/byoki/tenkan": "見られるのは発作の型と頻度、発作間欠期の状態。薬で発作が抑えられていると、原則対象になりません。",
+  "/byoki/ninchishou": "65歳前の発症は、老齢年金までの空白を埋める障害年金の出番。家族が進めることを前提に書いています。",
+  "/byoki/koujinou": "歩けるし話せる。だから困難が伝わらない。「見えないこと」の伝え方が結果を分けます。",
+  "/byoki/izon": "条件つきで対象。診断名ではなく、幻覚・妄想などの精神病性の症状がいま出ているかが分かれ目です。",
   "/byoki/jinzou-touseki": "人工透析を受けている方は、原則2級です。",
-  "/byoki/shinzou": "ペースメーカー・ICD・人工弁を入れた方は、原則3級です。心不全は検査値と生活の制限度で見られます。",
-  "/byoki/tounyou": "合併症があるか、インスリンを使っても血糖が安定しないなら対象です。糖尿病そのものだけでは、原則、等級に該当しません。",
+  "/byoki/shinzou": "ペースメーカー・ICD・人工弁を入れた方は、原則3級。心不全は検査値と生活の制限度で見られます。",
+  "/byoki/tounyou": "糖尿病そのものは対象になりにくい病気。合併症か、インスリン治療をしてもなお血糖コントロールが困難な状態の2つが道です。",
   "/byoki/gan": "がんは対象です。病期や腫瘍の大きさではなく、局所の障害・全身の衰弱・治療の副作用を総合して判断されます。",
-  "/byoki/kanzou": "肝硬変などの肝疾患は対象です。検査の数値と「一般状態区分」の組み合わせで見られ、強い倦怠感も伝えるべき実態です。",
+  "/byoki/kanzou": "検査の数値と「一般状態区分」の組み合わせ。数値が届かなくても、強い倦怠感で日中の半分以上横になっているなら伝える実態です。",
   "/byoki/kokyuuki": "在宅酸素療法をしている方は、原則3級です。",
-  "/byoki/ketsueki": "白血病や悪性リンパ腫、再生不良性貧血、血友病なども対象です。検査所見と生活の制限度、治療のつらさで見られます。",
+  "/byoki/ketsueki": "白血病や悪性リンパ腫、再生不良性貧血、血友病なども対象。検査所見と生活の制限度、治療のつらさで見られます。",
   "/byoki/shitai": "人工関節、脳卒中の後遺症、脊髄損傷、リウマチ。見られるのは診断名ではなく、歩ける距離や手の動作です。",
-  "/byoki/shikaku": "視力だけでなく視野も対象です。緑内障や網膜色素変性症で見える範囲が狭いなら、視力が保たれていても該当しえます。",
+  "/byoki/shikaku": "視力だけでなく視野も対象。緑内障や網膜色素変性症で見える範囲が狭い場合、視力が保たれていても該当しえます。",
   "/byoki/choukaku": "両耳の平均純音聴力レベルと語音明瞭度で判断されます。",
-  "/byoki/gengo": "話す機能と、そしゃく・嚥下(飲み込む)の機能の障害も対象です。",
-  "/byoki/nanbyou": "どの節にもあてはまらない傷病は「その他の疾患」として総合的に判断されます。線維筋痛症や慢性疲労症候群には、医師向けの留意事項も公表されています。",
-  "/joukyou/hatarakinagara": "働きながらでも請求できます。ガイドラインは「労働に従事していることをもって直ちに日常生活能力が向上したとは捉えない」としています。",
-  "/joukyou/hatachi-mae": "納付要件が問われず、初診日の証明も緩和されています。受け取れるのは障害基礎年金で、本人の所得による調整があります。",
-  "/joukyou/hitorigurashi": "一人暮らしでも請求できます。見られるのは一人で暮らしている事実ではなく、その暮らしがどう成り立っているかです。",
-  "/joukyou/shoubyou-teatekin-kara": "傷病手当金が通算1年6か月で終わるころに、障害年金を請求できる時期(初診日から1年6か月)が来ます。手当金があるうちに準備を始めます。",
-  "/joukyou/65sai-ijou": "受給に年齢の上限はありません。ただし事後重症請求は65歳の誕生日の前々日まで。老齢年金の繰上げの前に確認してください。",
-  "/joukyou/shufu-mushoku": "収入がなくても請求できます。第3号被保険者の期間は、自分で払っていなくても「納付済期間」です。",
-  "/joukyou/gakusei": "学生でも請求できます。20歳になったら学生納付特例の手続きを。手続きをした期間は未納になりません。",
-  "/joukyou/kazoku-ga-tetsudau": "委任状があれば家族が相談や手続きを代理でき、申立書は代筆できます。家族にしかできないのは「本人が言わない事実」を診察に持ち込むことです。",
-  "/joukyou/seikatsu-hogo": "生活保護を受けていても請求できます。福祉事務所から勧められるのは、生活保護の補足性の原則(生活保護法第4条)のためです。",
+  "/byoki/gengo": "音声・言語の機能と、そしゃく・嚥下の機能の障害も対象です。",
+  "/byoki/nanbyou": "どの節にもあてはまらない傷病は「その他の疾患」として総合判断。病名が珍しいことは、対象外を意味しません。",
+  "/joukyou/hatarakinagara": "働いていること自体は対象外の理由になりません。ガイドラインは「労働に従事していることをもって直ちに日常生活能力が向上したとは捉えない」としています。",
+  "/joukyou/hatachi-mae": "納付要件が問われず、初診日の証明も緩和。ただし障害基礎年金だけで3級はなく、本人の所得による調整があります。",
+  "/joukyou/hitorigurashi": "一人暮らしをしていること自体は、等級を下げる理由ではありません。見られるのは、その暮らしがどう成り立っているかです。",
+  "/joukyou/shoubyou-teatekin-kara": "傷病手当金は通算1年6か月で終わり、障害認定日も原則初診日から1年6か月。手当金があるうちに初診日と納付要件を確かめ、記録を始めます。",
+  "/joukyou/65sai-ijou": "受給に年齢の上限はありません。ただし事後重症請求は65歳の誕生日の前々日まで。老齢年金の繰上げをすると請求できなくなります。",
+  "/joukyou/shufu-mushoku": "収入がなかったことは請求の妨げになりません。第3号被保険者の期間は、自分で払っていなくても「納付済期間」です。",
+  "/joukyou/gakusei": "学生でも請求できます。20歳になったら学生納付特例の手続きを。放置した未納は、あとから取り返しがつきません。",
+  "/joukyou/kazoku-ga-tetsudau": "委任状があれば家族が相談や手続きを代理でき、申立書は代筆できます。家族にしかできないのは「本人が言わない事実」を診察に持ち込むこと。",
+  "/joukyou/seikatsu-hogo": "福祉事務所から請求を勧められるのは、生活保護の補足性の原則(生活保護法第4条)のためです。「同じ額なら意味がない」への答えを構造で説明します。",
 };
 
 /* 絞り込みの別名(/byoki のみ)。ハブの title に既に出ている語だけ(同 §3)。 */
@@ -112,56 +95,11 @@ const BYOKI_GROUP_NOTES: Record<string, string> = {
 
 /** 一覧ページの文言。ここが「入口」の正。 */
 export const HUB_INDEX: Record<Kind, IndexSpec> = {
-  jukyuugo: {
-    title: "受給が始まってから",
-    h1: "受給が始まってから",
-    lead: "年金証書が届いたら、手続きは終わりではなく、続きが始まります。続くのは「更新」「働く」「お金」「65歳」の4つです。障害年金の受給権者は約255万人(令和4年度末)。毎年約30万件の更新(再認定)があり、そのうち96.7%はそのまま続いています。止まったのは1.1%です。多くの人は続きます。ただし、続くかどうかは診断書1枚で決まるので、普段の記録が効きます。",
-    description: "年金証書が届いてからの「更新・働く・お金・65歳」を、時間の順に並べた入口です。公的資料の出典つき。",
-    hint: "多くの人は続きます。続くかどうかは診断書1枚で決まるので、普段の記録が効きます。",
-    timeline: [
-      { when: "届いた月", what: "年金証書の3か所(等級・次回診断書提出年月・年金の種類)を確認。法定免除・給付金・扶養の届出", label: "受給が決まった後の手続き", href: "/columns/jukyuugo-tetsuduki" },
-      { when: "1〜2か月後", what: "初回の振込。決定月の翌月分からまとめて入る", label: "いくら、いつ振り込まれるか", href: "/okane/ikura" },
-      { when: "毎年", what: "20歳前傷病の人だけ、前年所得で10月〜翌9月の支給が決まる", label: "働くと年金はどうなるか", href: "/jukyuugo/hataraku" },
-      { when: "1〜5年ごと", what: "更新(障害状態確認届)。誕生月の3か月前の月末に用紙が届き、誕生月の末日までに提出", label: "更新が不安なとき", href: "/nayami/koushin" },
-      { when: "働き始めたとき", what: "等級は「働いているか」ではなく「どう働いているか」で見られる", label: "働くと年金はどうなるか", href: "/jukyuugo/hataraku" },
-      { when: "作業所・A型を使うとき", what: "工賃・賃金は原則、年金に影響しない。20歳前傷病だけ所得の線がある", label: "B型・A型作業所と障害年金", href: "/jukyuugo/sagyousho" },
-      { when: "事業所が閉鎖したとき", what: "年金は止まらない。失業給付と転所の順番がある", label: "A型事業所が閉鎖したとき", href: "/jukyuugo/a-gata-heisa" },
-      { when: "止まったとき", what: "支給停止事由消滅届か、審査請求", label: "支給停止になったとき", href: "/nayami/shikyuu-teishi" },
-      { when: "65歳の前", what: "事後重症請求は65歳の誕生日の前々日まで。65歳から老齢厚生年金と併給を選べる", label: "65歳の選択", href: "/joukyou/65sai-ijou" },
-    ],
-    notes: {
-      heading: "いちばん多い不安に、先に答えます",
-      paragraphs: [
-        "**働いたら止まる?** 止まりません。認定基準にもガイドラインにも「働いていたら対象外」とは書かれていません。ガイドラインは、就労継続支援A型・B型と障害者雇用での就労について「1級または2級の可能性を検討する」としています。見られるのは、働けているかではなく、どんな援助のもとで働けているかです。",
-        "**更新で落ちる?** 令和6年度の再認定304,456件のうち、支給停止は1.1%でした。等級が下がった人を含めても、続いた人が大多数です。判断は診断書1枚で行われるので、普段の状態が診断書に書かれているかが分かれ目です。",
-        "**お金の話は誰に聞けばいい?** 障害年金は所得税がかかりません(国民年金法25条)。健康保険の扶養は年収180万円未満、20歳前傷病の所得制限は前年所得で決まります。線は3本しかないので、自分の数字を当てるだけで分かります。→ [受給後のお金の設計](/jukyuugo/okane)",
-      ],
-    },
-    extraCards: [
-      { path: "/nayami/koushin", label: "更新が不安なとき", hint: "更新(障害状態確認届)。誕生月の3か月前の月末に用紙が届き、誕生月の末日までに提出" },
-      { path: "/nayami/shikyuu-teishi", label: "支給停止になったとき", hint: "支給停止事由消滅届か、審査請求" },
-      { path: "/columns/jukyuugo-tetsuduki", label: "受給が決まった後の手続き", hint: "年金証書の3か所(等級・次回診断書提出年月・年金の種類)を確認。法定免除・給付金・扶養の届出" },
-      { path: "/joukyou/65sai-ijou", label: "65歳の選択", hint: "事後重症請求は65歳の誕生日の前々日まで。65歳から老齢厚生年金と併給を選べる" },
-    ],
-    body: ["このページは、受給が始まった人の「これから」を時間の順に並べた入口です。読むのは、いま当てはまる1つだけで構いません。"],
-    nextSteps: [
-      "年金証書を手元に置き、「次回診断書提出年月」を書き出す → 更新の準備は、その月の1年前から",
-      "働き始める・作業所を使う予定なら、先に → [働くと年金はどうなるか](/jukyuugo/hataraku)",
-      "「働いたら負け」と感じているなら → [よくある誤解: 働いたら負け](/gokai/hataraitara-make)",
-    ],
-    sources: [
-      "厚生労働省 年金部会(第17回)資料2「障害年金の受給権者数 約255万人」(令和4年度末) 2024年7月30日",
-      "日本年金機構「障害年金業務統計(令和6年度決定分)」再認定304,456件・継続96.7%・支給停止1.1%",
-      "日本年金機構「障害状態確認届(診断書)の提出」",
-      "厚生労働省「精神の障害に係る等級判定ガイドライン」平成28年9月",
-      "確認日: 2026-09-05",
-    ],
-  },
   byoki: {
     title: "病気から探す",
     h1: "病気から探す",
     lead:
-      "障害年金は、病名で決まる制度ではありません。ただし、審査で見られるところは病気ごとに違います。自分の病気で、どこが見られるのかから確認してください。",
+      "障害年金は、病名で決まる制度ではありません。ただし、審査で見られるところは病気ごとに違います。あなたの病気で、どこが見られるのかから確認してください。",
     description:
       "障害年金で、その病気のどこが審査で見られるのか。病名ごとに、審査のポイントと結論を分けた実例をまとめています。",
     body: [
@@ -189,7 +127,7 @@ export const HUB_INDEX: Record<Kind, IndexSpec> = {
     description: "不支給、診断書、初診日、更新、支給停止、遡及。障害年金でつまずきやすい場面ごとに、次の一手をまとめています。",
     body: [
       "手続きの順番ではなく、「いま止まっているところ」で並べたページです。初診日が分からない、診断書で困っている、不支給と言われた、更新が不安、さかのぼって請求したい。どれも、同じ場所で同じようにつまずく人が多い悩みです。",
-      "各ページは、まず「いまの状況を確かめる質問」から始まります。読む前に、手元に年金証書や診断書の控えがあれば出しておいてください。",
+      "各ページは、まず「あなたの状況を確かめる質問」から始まります。読む前に、手元に年金証書や診断書の控えがあれば出しておいてください。",
       "当サイトが整理した裁決事例91件では、争点は障害の程度が57件、初診日が35件、診断書が15件、納付要件が10件でした。悩みの多くは、この4つのどれかに入ります。",
       "どれに当てはまるか分からないときは、[はじめての方へ](/hajimete)から。",
       "不支給の通知が届いた人は、通知を受けた翌日から3か月以内に審査請求ができます。期限があるのは、この悩みだけです。先に[不支給と言われた](/nayami/fushikyu)を読んでください。",
@@ -199,7 +137,6 @@ export const HUB_INDEX: Record<Kind, IndexSpec> = {
     title: "状況から探す",
     h1: "状況から探す",
     lead: "同じ病気でも、いまの暮らし方によって、見られるところと必要な準備が変わります。",
-    hint: "受給中の人はこちら → [受給が始まってから](/jukyuugo)",
     description: "働きながら、20歳前、ひとり暮らし。いまの状況ごとに、障害年金の審査で見られるところをまとめています。",
     body: [
       "病名が同じでも、働いているか、一人暮らしか、20歳前に初診があるか、で見られるところが変わります。このページは、いまの暮らし方から入る入口です。",
@@ -222,7 +159,6 @@ export const HUB_INDEX: Record<Kind, IndexSpec> = {
       "金額は毎年4月に改定されます。このページの数字は令和8年度のもので、各ページに確認日を書いています。",
       "初回の振込は、請求から年金証書が届くまで約3か月、そこから約1〜2か月後です。おおむね4〜5か月を見ておいてください。その後は偶数月の15日に、前月までの2か月分が振り込まれます。",
     ],
-    nextSteps: ["受給が始まってから → [受給後のお金の設計](/jukyuugo/okane)"],
   },
   erabu: {
     title: "自分でやるか、頼むか",
@@ -234,7 +170,7 @@ export const HUB_INDEX: Record<Kind, IndexSpec> = {
       "自分で申請するか、アプリを使うか、社会保険労務士に頼むか。ここは、その比べ方のページです。",
       "先に事実を3つ。請求に国へ払う手数料はありません。報酬を得て代行できるのは、法律上、社会保険労務士だけです。「年金機構公認」の代行はありません。",
       "自分でやる人がいちばん困るのは、申立書と診断書の整合です。頼む人がいちばん困るのは、費用の相場と、依頼先の見分け方です。どちらの困りごとも、それぞれのページに具体的に書いています。",
-      "書類集めの体力がないこと自体が、依頼を検討する十分な理由になります。逆に、体力があって時間もあるなら、自分で出して不支給でも審査請求の道は残ります。決めるのは本人ですが、材料はここに揃えました。",
+      "書類集めの体力がないこと自体が、依頼を検討する十分な理由になります。逆に、体力があって時間もあるなら、自分で出して不支給でも審査請求の道は残ります。決めるのはあなたですが、材料はここに揃えました。",
     ],
   },
 };
@@ -274,19 +210,6 @@ export function renderHubIndex(kind: Kind) {
     };
   };
 
-  /* 既存ページへのカード。件数はハブ・記事の実数から出す(0 は出さない)。 */
-  const extraCard = (item: { path: string; label: string; hint: string }): HubCard => {
-    const hub = HUBS.find((entry) => entry.path === item.path);
-    return {
-      path: item.path,
-      label: item.label,
-      hint: item.hint,
-      columns: hubColumnSlugs(item.path).length,
-      cases: caseCount(hub?.jitsureiFilter),
-      terms: item.label.toLowerCase(),
-    };
-  };
-
   const groups: HubGroup[] = (
     spec.groups
       ? spec.groups.map((group, index) => ({
@@ -297,9 +220,6 @@ export function renderHubIndex(kind: Kind) {
         }))
       : [{ label: "", note: undefined, anchor: "group-1", items: hubs.map((hub) => toCard(hub.path)).filter((card): card is HubCard => card !== null) }]
   ).filter((group) => group.items.length > 0);
-  if (spec.extraCards) {
-    groups.push({ label: "", note: undefined, anchor: "group-extra", items: spec.extraCards.map(extraCard) });
-  }
 
   const total = groups.reduce((n, group) => n + group.items.length, 0);
   /* 病名が多い /byoki だけ絞り込みを出す。9件以下のページには出さない。 */
@@ -339,72 +259,28 @@ export function renderHubIndex(kind: Kind) {
             <PageDate updated={latestHubCheckedDate(kind)} />
             <span>{total}{kind === "byoki" ? "の病気" : "ページ"}</span>
           </p>
-          {spec.hint ? <p className="hub-index-hint">{inlineLinks(spec.hint)}</p> : null}
-          {/* 分類のチップと、病名の絞り込みを1行に。モックの /byoki の板と同じ並び。 */}
-          {(groups.length > 1 && groups[0].label) || filterable ? (
-            <div className="hub-index-controls">
-              {groups.length > 1 && groups[0].label ? (
-                <nav className="hub-index-chips" aria-label="分類へ移動">
-                  {groups.map((group) => (
-                    <a className="hub-index-chip" href={`#${group.anchor}`} key={group.anchor}>
-                      {group.label} {group.items.length}
-                    </a>
-                  ))}
-                </nav>
-              ) : null}
-              {filterable ? <HubIndexSearch /> : null}
-            </div>
+          {groups.length > 1 && groups[0].label ? (
+            <nav className="hub-index-chips" aria-label="分類へ移動">
+              {groups.map((group) => (
+                <a className="hub-index-chip" href={`#${group.anchor}`} key={group.anchor}>
+                  {group.label} <b>{group.items.length}</b>
+                </a>
+              ))}
+            </nav>
           ) : null}
         </div>
       </header>
 
-      {spec.timeline ? (
-        <section className="p-section" style={{ paddingBottom: 0 }} aria-labelledby="timeline-heading">
-          <div className="p-container">
-            <h2 className="hub-index-h2" id="timeline-heading">年金証書が届いてから、何が起きるか</h2>
-            <ol className="p-timeline">
-              {spec.timeline.map((item, index) => (
-                <li className="p-timeline-item" key={item.when + index}>
-                  <span className="p-timeline-when">{item.when}</span>
-                  <span className="p-timeline-what">{item.what}</span>
-                  <Link className="p-timeline-link" href={item.href}>{item.label} →</Link>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-      ) : null}
-
-      {spec.notes ? (
-        <section className="p-section" style={{ paddingBottom: 0 }} aria-labelledby="notes-heading">
-          <div className="p-container">
-            <h2 className="hub-index-h2" id="notes-heading">{spec.notes.heading}</h2>
-            {spec.notes.paragraphs.map((paragraph, index) => <p className="hub-index-note-p" key={index}>{inlineLinks(paragraph)}</p>)}
-          </div>
-        </section>
-      ) : null}
-
       <section className="p-section">
         <div className="p-container">
           {spec.tools ? <DouguCards className="hub-index-tool" placements={[...spec.tools]} variant="hub" /> : null}
-          <HubIndexList groups={groups} />
+          <HubIndexList groups={groups} filterable={filterable} />
 
           {spec.body ? (
             <div className="hub-index-how">
-              <b>このページの使い方</b>
+              <h2>このページの使い方</h2>
               {spec.body.map((paragraph, index) => <p key={index}>{inlineLinks(paragraph)}</p>)}
             </div>
-          ) : null}
-
-          {spec.nextSteps ? (
-            <div className="hub-index-how">
-              <b>次の一歩</b>
-              <ul className="p-list">{spec.nextSteps.map((step, index) => <li key={index}>{inlineLinks(step)}</li>)}</ul>
-            </div>
-          ) : null}
-
-          {spec.sources ? (
-            <p className="p-source hub-index-sources">出典: {spec.sources.join(" ／ ")}</p>
           ) : null}
 
           {spec.tail ? (

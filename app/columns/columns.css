@@ -1,18 +1,17 @@
 .column-article { max-width: 700px; min-width: 0; margin-inline: auto; color: var(--platform-text); overflow-wrap: anywhere; }
 .column-article h1, .column-article h2, .column-article h3 { color: var(--platform-heading); }
-.column-conclusion { margin: 24px 0; padding: 24px; border-radius: var(--r-card); background: var(--platform-band); }
-.column-conclusion h2 { margin: 0 0 10px; padding: 0; border: 0; font-size: var(--fs-h3); }
-.column-conclusion { box-shadow: none; }
+.column-conclusion { margin: 24px 0; padding: 24px; border-radius: 12px; background: var(--platform-band); }
+.column-conclusion h2 { margin: 0 0 12px; padding: 0; border: 0; font-size: 1rem; }
 .column-conclusion p { margin: .7em 0 0; line-height: 1.9; }
 .column-body { min-width: 0; line-height: 1.9; }
 .column-body p { margin: 0 0 1.2em; line-height: 1.9; }
 .column-body h2 { margin: 2.4em 0 1em; padding: 0 0 0 14px; border: 0; border-left: 4px solid var(--platform-primary); }
-.column-body h3 { margin: 1.7em 0 .65em; font-size: var(--fs-h3); }
+.column-body h3 { margin: 1.7em 0 .65em; font-size: 1.15rem; }
 .column-body strong { color: inherit; }
-.column-body .column-inline-card { display: block; margin: 1.2em 0; padding: 14px 18px; border-left: 4px solid var(--c-primary); border-radius: 0 8px 8px 0; background: var(--c-band); color: var(--platform-heading); font-weight: 700; text-decoration: none; }
+.column-body .column-inline-card { display: block; margin: 1.2em 0; padding: 14px 18px; border-left: 4px solid var(--jc-accent, var(--platform-primary)); border-radius: 0 8px 8px 0; background: var(--jc-hover, var(--platform-band)); color: var(--platform-heading); font-weight: 700; text-decoration: none; }
 .column-body .column-inline-card:hover { text-decoration: underline; }
 .column-body .column-gokai-link { border-color: var(--platform-link); background: var(--platform-chip); color: var(--platform-link); }
-.column-body .gokai-case { margin: 1.2em 0; padding: 20px; border-left: 3px solid var(--platform-primary); background: var(--platform-band); border-radius: 0 var(--r-card) var(--r-card) 0; }
+.column-body .gokai-case { margin: 1.2em 0; padding: 20px; border-left: 3px solid var(--platform-primary); background: var(--platform-band); border-radius: 0 10px 10px 0; }
 .column-body .gokai-case p { margin: 0; }
 .column-body .article-table-figure { max-width: 100%; min-width: 0; margin: 1.2em 0; }
 .column-body .article-table-wrap { max-width: 100%; overflow-x: auto; }
@@ -28,118 +27,4 @@
 @media (max-width: 760px) {
   .column-conclusion { padding: 20px; }
   .column-body .gokai-case { padding: 16px; }
-}
-
-/* ここまでの要約(止まり所)。docs/columns-parts-2026-09-05-instructions.md §2-3。
-   中身はリードの再掲で、新しい文章は書かない。見出し要素は使わない(目次に入れない)。 */
-.column-body .col-check {
-  margin: 1.6em 0;
-  padding: 16px 20px;
-  border-left: 4px solid var(--c-primary);
-  border-radius: 0 var(--r-sm) var(--r-sm) 0;
-  background: var(--c-band);
-}
-.column-body .col-check-title {
-  margin: 0 0 4px;
-  color: var(--c-meta);
-  font-size: var(--fs-meta);
-  font-weight: 700;
-}
-.column-body .col-check-body {
-  margin: 0;
-  color: var(--c-text);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-}
-.column-body .col-check-rest {
-  margin: 8px 0 0;
-  color: var(--c-body-muted);
-  font-size: var(--fs-small);
-  line-height: 1.8;
-}
-
-/* 固定目次(左レール)。1181px 以上でのみ本文の左に出る。
-   docs/columns-parts-2026-09-05-instructions.md §2-4。1180px 以下は従来どおり。 */
-@media (min-width: 1181px) {
-  /* 本文列の幅は、いまと1pxも変えない(§3)。main を左レールのぶんだけ広げ、
-     本文列は従来と同じ calc(--content - 左右の余白)にする。 */
-  body:has(.column-article) main { max-width: calc(var(--content) + 240px + 40px); }
-  .column-article {
-    display: grid;
-    grid-template-columns: 240px minmax(0, calc(var(--content) - var(--gutter) * 2));
-    column-gap: 40px;
-    align-items: start;
-    max-width: none;
-  }
-  .column-article > * { grid-column: 2; min-width: 0; }
-  .column-article > .article-toc {
-    grid-column: 1;
-    grid-row: 1 / -1;
-    position: sticky;
-    top: 24px;
-    max-height: calc(100vh - 48px);
-    margin: 0;
-    overflow: auto;
-  }
-  /* 常時表示。畳む操作はしない(見出しとして置く)。 */
-  .article-toc.is-rail > summary { min-height: 0; margin-bottom: 4px; pointer-events: none; }
-  .article-toc.is-rail > summary::before { content: none; }
-  .article-toc.is-rail ol { margin: 0; padding: 0; list-style: none; }
-  .article-toc.is-rail li { margin: 0; }
-  .article-toc.is-rail a {
-    display: block;
-    padding: 5px 10px;
-    border-left: 3px solid var(--c-border);
-    color: var(--c-body-muted);
-    font-size: var(--fs-meta);
-    line-height: 1.6;
-    text-decoration: none;
-  }
-  .article-toc.is-rail a:hover { color: var(--c-primary); }
-  .article-toc.is-rail a[aria-current="true"] {
-    border-left-color: var(--c-primary);
-    background: var(--c-band);
-    color: var(--c-heading);
-    font-weight: 700;
-  }
-  .article-toc-next { margin: 10px 0 0; padding-top: 8px; border-top: 1px solid var(--c-border); }
-  .article-toc-next a { display: block; color: var(--c-primary); font-size: var(--fs-meta); font-weight: 700; }
-}
-
-@media print {
-  .column-article > .article-toc { display: none; }
-}
-
-/* 末尾「次にすること」。docs/columns-parts-2026-09-05-instructions.md §2-5。
-   結論の箱と同じ部品(帯の地・罫線・角丸14)。新しい影や枠線は増やさない。 */
-.col-next {
-  margin: 2.5rem 0 0;
-  padding: var(--card-pad);
-  border: 1px solid var(--c-border);
-  border-radius: var(--r-card);
-  background: var(--c-band);
-}
-.col-next > h2 {
-  margin: 0 0 12px;
-  padding: 0;
-  border: 0;
-  color: var(--c-heading);
-  font-size: var(--fs-h3);
-  line-height: var(--lh-heading);
-}
-.col-next-tool { margin: 0 0 14px; }
-.col-next-tool .mt-column-card { margin: 0; background: #fff; }
-.col-next-read-title {
-  margin: 0 0 6px;
-  color: var(--c-meta);
-  font-size: var(--fs-meta);
-  font-weight: 700;
-}
-.col-next-read { margin: 0; padding-left: 1.4em; }
-.col-next-read li { margin: 4px 0; font-size: var(--fs-small); line-height: 1.8; }
-.col-next-close {
-  margin: 14px 0 0;
-  color: var(--c-body-muted);
-  font-size: var(--fs-small);
-  font-weight: 400;
 }

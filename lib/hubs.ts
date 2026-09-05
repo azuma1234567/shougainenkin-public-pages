@@ -11,7 +11,7 @@ export type HubDefinition = {
   path: string;
   label: string;
   shortLabel: string;
-  kind: "byoki" | "joukyou" | "nayami" | "okane" | "erabu" | "jukyuugo" | "existing" | "reserved";
+  kind: "byoki" | "joukyou" | "nayami" | "okane" | "erabu" | "existing" | "reserved";
   published: boolean;
   relatedSlugs: string[];
   jitsureiFilter?: string;
@@ -94,13 +94,6 @@ export const HUBS: HubDefinition[] = [
     "/byoki/choukaku-heikou", "/byoki/soshaku-gengo", "/byoki/nanbyou-sonota",
     "/senmonka",
   ].map((path) => hub(path, path, path, "reserved", false)),
-
-  /* 幹10「受給が始まってから」。原稿 docs/jukyuugo-2026-09-05(shougainenkin repo)。 */
-  hub("/jukyuugo/hataraku", "働くと年金はどうなるか", "働くと年金はどうなるか", "jukyuugo", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "koushin-kakuninhodo", "hatachi-mae", "hikazei-shuunyuu"]),
-  hub("/jukyuugo/sagyousho", "B型・A型作業所と障害年金", "B型・A型作業所と障害年金", "jukyuugo", true, ["hatarakinagara", "hatachi-mae", "shougaisha-koyou-nenkin", "koushin-kakuninhodo"]),
-  hub("/jukyuugo/nukedasu", "抜け出すロードマップ", "抜け出すロードマップ", "jukyuugo", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "koushin-kakuninhodo", "gaku-kaitei-seikyuu", "shikyuu-teishi-fukkatsu"]),
-  hub("/jukyuugo/okane", "受給後のお金の設計", "受給後のお金の設計", "jukyuugo", true, ["hikazei-shuunyuu", "jukyuugo-tetsuduki", "ikura-moraeru", "shoubyou-teatekin"]),
-  hub("/jukyuugo/a-gata-heisa", "A型事業所が閉鎖したとき", "A型事業所が閉鎖したとき", "jukyuugo", true, ["koushin-kakuninhodo", "shoubyou-teatekin", "shougaisha-koyou-nenkin", "jukyuugo-tetsuduki"]),
 ];
 
 export const HUB_BY_PATH = new Map(HUBS.map((item) => [item.path, item]));
@@ -109,8 +102,8 @@ const assignment = (primary: string, role: HubRole, secondary: string[] = [], me
 
 export const COLUMN_HUB_ASSIGNMENTS: Record<string, ColumnHubAssignment> = {
   "shakaiteki-chiyu": assignment("/nayami/shoshinbi-karute", "leaf", ["/shinsei#step-2"]),
-  "hikazei-shuunyuu": assignment("/okane/ikura", "core", ["/gokai", "/jukyuugo/okane"]),
-  "jukyuugo-tetsuduki": assignment("/nayami/koushin", "leaf", ["/shinsei#step-8", "/jukyuugo/okane"]),
+  "hikazei-shuunyuu": assignment("/okane/ikura", "core", ["/gokai"]),
+  "jukyuugo-tetsuduki": assignment("/nayami/koushin", "leaf", ["/shinsei#step-8"]),
   "taishou-shoubyou-kyoukai": assignment("/byoki/tekiou-fuan", "promote", ["/gokai"], "tekio-shogai-shogai-nenkin"),
   "tekio-shogai-shogai-nenkin": assignment("/byoki/tekiou-fuan", "core", [], "taishou-shoubyou-kyoukai"),
   "hattatsu-shougai": assignment("/byoki/hattatsu", "promote", ["/shinsei"]),
@@ -118,10 +111,10 @@ export const COLUMN_HUB_ASSIGNMENTS: Record<string, ColumnHubAssignment> = {
   "ikura-moraeru": assignment("/okane/ikura", "promote", ["/shinsei"]),
   "sokyuu-seikyuu": assignment("/nayami/sokyuu", "promote", ["/okane/ikura"], "ninteibi-jigojusho"),
   "kiso-kousei-chigai": assignment("/shinsei#step-1", "core", ["/okane/ikura"]),
-  "hatachi-mae": assignment("/joukyou/hatachi-mae", "promote", ["/shinsei#step-3", "/jukyuugo/sagyousho"]),
+  "hatachi-mae": assignment("/joukyou/hatachi-mae", "promote", ["/shinsei#step-3"]),
   "shoubyou-teatekin": assignment("/joukyou/shoubyou-teatekin-kara", "promote", ["/okane/chousei"]),
   "techou-to-nenkin": assignment("/gokai", "core", ["/hajimete"]),
-  "shougaisha-koyou-nenkin": assignment("/joukyou/hatarakinagara", "core", ["/jitsurei", "/jukyuugo/a-gata-heisa"]),
+  "shougaisha-koyou-nenkin": assignment("/joukyou/hatarakinagara", "core", ["/jitsurei"]),
   "shoshinbi-wakaranai": assignment("/nayami/shoshinbi-karute", "promote", ["/shinsei#step-2"], "shoshinbi-karute-nashi"),
   "shoshinbi-karute-nashi": assignment("/nayami/shoshinbi-karute", "core", [], "shoshinbi-wakaranai"),
   "shoshinbi-haiin": assignment("/nayami/shoshinbi-karute", "leaf"),
@@ -146,15 +139,15 @@ export const COLUMN_HUB_ASSIGNMENTS: Record<string, ColumnHubAssignment> = {
   "moushitatesho-kakikata": assignment("/shinsei#step-6", "core", ["/byoki/utsu-soukyoku"]),
   "moushitatesho-kikan-kugiri": assignment("/shinsei#step-6", "leaf"),
   "moushitatesho-mijushin-kikan": assignment("/shinsei#step-6", "leaf", ["/nayami/shoshinbi-karute"]),
-  "hatarakinagara": assignment("/joukyou/hatarakinagara", "promote", ["/gokai", "/jukyuugo/hataraku"]),
+  "hatarakinagara": assignment("/joukyou/hatarakinagara", "promote", ["/gokai"]),
   "kazoku-enjo-kakikata": assignment("/shinsei#step-6", "core", ["/joukyou/kazoku-ga-tetsudau"]),
   "moushitatesho-a4-insatsu": assignment("/shinsei#step-6", "leaf"),
   "shinsa-shikumi-nintei-i": assignment("/nayami/fushikyu", "core", ["/shinsei#step-7"]),
   "shinsei-kikan": assignment("/shinsei#step-7", "core", ["/nayami/fushikyu"]),
   "fushikyuu-shinsa-seikyu": assignment("/nayami/fushikyu", "promote", ["/erabu/fushikyu-no-ato"]),
-  "koushin-kakuninhodo": assignment("/nayami/koushin", "promote", ["/shinsei#step-8", "/jukyuugo/hataraku"]),
-  "gaku-kaitei-seikyuu": assignment("/nayami/koushin", "core", ["/okane/ikura", "/jukyuugo/nukedasu"]),
-  "shikyuu-teishi-fukkatsu": assignment("/nayami/shikyuu-teishi", "promote", ["/nayami/koushin", "/jukyuugo/nukedasu"]),
+  "koushin-kakuninhodo": assignment("/nayami/koushin", "promote", ["/shinsei#step-8"]),
+  "gaku-kaitei-seikyuu": assignment("/nayami/koushin", "core", ["/okane/ikura"]),
+  "shikyuu-teishi-fukkatsu": assignment("/nayami/shikyuu-teishi", "promote", ["/nayami/koushin"]),
 };
 
 export function getHub(path: string): HubDefinition | null {
@@ -193,7 +186,7 @@ export function hubColumnSlugs(hubPath: string): string[] {
   return [...primary, ...secondary];
 }
 
-export const PUBLISHED_CONTENT_HUBS = HUBS.filter((item) => item.published && ["byoki", "joukyou", "nayami", "okane", "erabu", "jukyuugo"].includes(item.kind));
+export const PUBLISHED_CONTENT_HUBS = HUBS.filter((item) => item.published && ["byoki", "joukyou", "nayami", "okane", "erabu"].includes(item.kind));
 
 export const UNIT_PACK_TO_HUBS: Record<string, string[]> = {
   firstVisit: ["/shinsei#step-2", "/nayami/shoshinbi-karute"],

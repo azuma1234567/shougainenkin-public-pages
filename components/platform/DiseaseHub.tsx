@@ -89,7 +89,7 @@ export default function DiseaseHub({ data, showListings = false }: { data: Disea
           </div>
           <div className="p-grid" style={{ gap: 12 }}>
             <div className="p-primary-panel p-grid" style={{ gap: 12 }}>
-              <h2>この病気での次の一歩</h2>
+              <h2 style={{ fontSize: 17 }}>この病気での次の一歩</h2>
               <p className="p-card-copy" style={{ color: "#dbeefa" }}>まず「その症状で最初に病院へ行った日」を確認してください。精神科でなく、不眠や体調不良で行った内科でもかまいません。</p>
               <Link href="/shinsei#step-1">初診日の確認からはじめる →</Link>
               <Link href="/erabu/jibun-ka-irai">自分で進めるか、依頼するかを比べる →</Link>

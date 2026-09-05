@@ -3,16 +3,12 @@
 import Link from "next/link";
 import { placementCard, visiblePlacements, type Placement } from "@/data/dougu";
 
-type Variant = "column" | "hub" | "grid" | "chip";
+type Variant = "column" | "hub" | "grid";
 
 /* 1枚。variant で見た目を変える。
    column は既存記事で動いている .mt-column-card のまま(見た目を変えない)。 */
 export function DouguCard({ placement, variant = "column", className = "" }: { placement: Placement; variant?: Variant; className?: string }) {
   const c = placementCard(placement);
-  if (variant === "chip") {
-    /* ステップの footer の先頭に置く小さな道具リンク。文言は data/dougu.ts のまま。 */
-    return <Link className={`dougu-chip ${className}`.trim()} href={c.href}>{c.cta}</Link>;
-  }
   if (variant === "grid") {
     return (
       <Link className={`dougu-band-card ${className}`.trim()} href={c.href}>

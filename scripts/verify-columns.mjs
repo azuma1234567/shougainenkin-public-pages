@@ -1,6 +1,5 @@
 // node scripts/verify-columns.mjs http://localhost:3107
-// 13項目をすべて実行し、失敗をまとめて報告する。失敗時は exit 1。
-// 11〜13 は「ここまでの要約」(docs/columns-parts-2026-09-05-instructions.md §6)。
+// 10項目をすべて実行し、失敗をまとめて報告する。失敗時は exit 1。
 // 結論の箱は47本共通のデザイン要素で、記事の厚みではないため、字数の判定対象は本文に限る。
 import assert from "node:assert/strict";
 import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
@@ -249,62 +248,6 @@ for (const [slug, before] of Object.entries(baseline.special)) {
   const withLeadCharacters = length(current) + leadCharacters;
   extra.push({ slug, ok: !missingHeadings.length && !missingLinks.length && ctaOk && ratio >= .9 && ratio <= 1.1, missingHeadings, missingLinks, ctaOk, oldCharacters: length(original), newCharacters: length(current), ratio, leadCharacters, withLeadCharacters, withLeadRatio: withLeadCharacters / length(original) });
 }
-/* ---- 11〜13. ここまでの要約(コラム部品の指示書 §6) ---- */
-const CHECKPOINTS_DOC = "docs/columns-parts-2026-09-05-checkpoints.json";
-const CHECKPOINTS_DATA = "data/columns/checkpoints.json";
-{
-  const { check, finish } = failures(11, "止まり所のデータが docs と data で同一・47本×4件・h2昇順・lead 0..3を各1回");
-  const doc = readFileSync(CHECKPOINTS_DOC, "utf8");
-  const data = readFileSync(CHECKPOINTS_DATA, "utf8");
-  check(doc === data, "docs と data/columns の checkpoints.json が違う");
-  const parsed = JSON.parse(data);
-  check(Object.keys(parsed).length === 47, `slug 数 ${Object.keys(parsed).length}`);
-  for (const [slug, entry] of Object.entries(parsed)) {
-    check(entry.checkpoints.length === 4, `${slug}: ${entry.checkpoints.length}件`);
-    const h2s = entry.checkpoints.map(c => c.h2);
-    check(h2s.every((n, i) => i === 0 || n > h2s[i - 1]), `${slug}: h2 が昇順でない(${h2s.join(",")})`);
-    const leads = entry.checkpoints.map(c => c.lead).sort((x, y) => x - y);
-    check(leads.join(",") === "0,1,2,3", `${slug}: lead が 0..3 各1回でない(${leads.join(",")})`);
-  }
-  finish();
-}
-{
-  const { check, finish } = failures(12, "各記事に要約が4つ・中身が lead と完全一致・「今日は十分です」は先頭だけ");
-  const parsed = JSON.parse(readFileSync(CHECKPOINTS_DATA, "utf8"));
-  for (const a of articles) {
-    const doc = documents.get(a.slug);
-    const checks = doc.querySelectorAll(".col-check");
-    check(checks.length === 4, `${a.slug}: ${checks.length}個`);
-    const order = parsed[a.slug]?.checkpoints ?? [];
-    checks.forEach((node, index) => {
-      const body = node.querySelector(".col-check-body")?.textContent ?? "";
-      const want = a.lead[order[index]?.lead];
-      check(body === want, `${a.slug}: ${index + 1}つ目の要約が lead と違う`);
-    });
-    check(doc.querySelectorAll(".col-check-rest").length === 1, `${a.slug}: 「今日は十分です」の行が1つでない`);
-    check(checks[0]?.querySelector(".col-check-rest") !== null, `${a.slug}: 「今日は十分です」が先頭の要約にない`);
-  }
-  finish();
-}
-{
-  const { check, finish } = failures(13, "要約が、指定した h2 の後・次の h2 の前にある");
-  const parsed = JSON.parse(readFileSync(CHECKPOINTS_DATA, "utf8"));
-  for (const a of articles) {
-    const body = documents.get(a.slug).querySelector(".column-body");
-    if (!body) { check(false, `${a.slug}: 本文が無い`); continue; }
-    /* 本文の直下を順に見て、h2 の番号と要約の位置を数える。 */
-    let h2Index = -1;
-    const seen = [];
-    for (const node of body.childNodes) {
-      if (node.tagName === "H2") h2Index += 1;
-      if (node.tagName === "ASIDE" && node.classNames.includes("col-check")) seen.push(h2Index);
-    }
-    const want = (parsed[a.slug]?.checkpoints ?? []).map(c => c.h2);
-    check(JSON.stringify(seen) === JSON.stringify(want), `${a.slug}: 要約の位置 ${seen.join(",")} ≠ 指定 ${want.join(",")}`);
-  }
-  finish();
-}
-
 const report = { origin, baseline: baseline.baseRef, results, assumedAmounts, special: extra };
 writeFileSync(`${out}/results.json`, JSON.stringify(report, null, 2) + "\n");
 for (const result of results) console.log(`${result.number}. ${result.ok ? "○" : "×"} ${result.label}${result.errors.length ? ` (${result.errors.length}件)` : ""}`);

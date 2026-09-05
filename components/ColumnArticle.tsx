@@ -7,15 +7,13 @@ import {
   columnBreadcrumbParents,
   columnJsonLd,
   columnParentIsHub,
+  formatDate,
   type Column,
 } from "@/lib/columns";
 import { faqJsonLd } from "@/lib/seo";
 import { DouguCards } from "@/components/platform/DouguCard";
 import { PLACEMENTS } from "@/data/dougu";
 import AdLabel from "@/components/AdLabel";
-import { PageDate } from "@/components/platform/Platform";
-import CHECKPOINTS from "@/data/columns/checkpoints.json";
-import ColumnNext from "@/components/ColumnNext";
 import "@/app/columns/columns.css";
 
 type Faq = { question: string; answer: string };
@@ -36,14 +34,6 @@ export default function ColumnArticle({
   // 記事固有の構造化データ(ItemList / HowTo など)。FAQPage は faqs から自動で出す。
   extraJsonLd?: Record<string, unknown>[];
 }) {
-  /* ここまでの要約。文章はリード(column.lead)の再掲で、新しい文は書かない。
-     data/columns/checkpoints.json に無い記事や、リードが無い記事には出さない。 */
-  const entry = (CHECKPOINTS as Record<string, { tool?: string; readMinutes: number; checkpoints: { lead: number; h2: number }[] }>)[column.slug];
-  const lead = column.lead ?? [];
-  const checkpoints = entry?.checkpoints
-    .filter((item) => typeof lead[item.lead] === "string")
-    .map((item, index) => ({ h2: item.h2, text: lead[item.lead] as string, first: index === 0 }));
-
   return (
     <article className="column-article">
       <script
@@ -68,7 +58,16 @@ export default function ColumnArticle({
         showColumns={!columnParentIsHub(column)}
       />
       <h1>{column.title}</h1>
-      <PageDate published={column.datePublished} readMinutes={entry?.readMinutes} updated={column.dateModified} />
+      <p className="meta-line">
+        公開日: {" "}
+        <time dateTime={column.datePublished}>
+          {formatDate(column.datePublished)}
+        </time>{" "}
+        / 最終確認日: {" "}
+        <time dateTime={column.dateModified}>
+          {formatDate(column.dateModified)}
+        </time>
+      </p>
 
       {column.lead && <section className="column-conclusion" aria-labelledby="column-conclusion-heading">
         <h2 id="column-conclusion-heading">この記事の結論</h2>
@@ -78,7 +77,6 @@ export default function ColumnArticle({
       <ColumnThemeBlock column={column} />
       <DouguCards placements={PLACEMENTS.columns[column.slug]} position="before" />
       <div className="column-body"><MarkdownArticle
-        checkpoints={checkpoints}
         columnStyle
         source={source}
         appCtaSlug={column.slug}
@@ -91,7 +89,7 @@ export default function ColumnArticle({
           ) : undefined
         }
       /></div>
-      <ColumnNext relatedSlugs={relatedSlugs} slug={column.slug} tool={entry?.tool} />
+      <DouguCards placements={PLACEMENTS.columns[column.slug]} position="after" />
       <ColumnFooter
         currentSlug={column.slug}
         relatedSlugs={relatedSlugs}

@@ -4,15 +4,8 @@ import StepFlow from "@/components/platform/StepFlow";
 import Link from "next/link";
 import AppStoreBadge from "@/components/AppStoreBadge";
 import { AMOUNT_ROWS, APP_POINTS, CONSIDER_PRO, FAQ_ITEMS, SELF_OK } from "@/components/ApplicationFlowPage";
-import { Breadcrumb, CheckIcon, PageDate } from "@/components/platform/Platform";
-import ShinseiRail from "@/components/platform/ShinseiRail";
-import ShinseiTasks from "@/components/platform/ShinseiTasks";
-import { DouguCards } from "@/components/platform/DouguCard";
-import { PLACEMENTS } from "@/data/dougu";
-import { SAIKETSU_CASES, SAIKETSU_COUNTS } from "@/lib/saiketsu";
-import { formatPercent, stats } from "@/lib/stats";
-import { GOKAI } from "@/data/gokai";
-import { APP_STORE_URL, SITE_PAGES_CHECKED, SITE_URL } from "@/lib/constants";
+import { Breadcrumb, CheckIcon } from "@/components/platform/Platform";
+import { APP_STORE_URL, SITE_URL } from "@/lib/constants";
 import { pageMetadata } from "@/lib/seo";
 
 const TITLE = "障害年金の申請の流れと必要書類｜8つのステップ";
@@ -29,14 +22,11 @@ type Step = {
   tasks: string[];
   stumble: string;
   links: { href: string; label: string }[];
-  /* つまずきに対応する誤解カード(data/gokai.ts の slug)。無いステップには置かない。 */
-  gokai?: string;
 };
 
 const STEPS: Step[] = [
   {
     id: "step-1", short: "初診日を確認", title: "初診日を確認する",
-    gokai: "shindan-ga-tsuita-hi",
     oneLine: "すべての起点。制度・納付要件・金額の見通しにつながります。",
     body: "その症状で、いちばん最初に医師の診療を受けた日が初診日です。精神科とは限らず、不眠や体調不良で内科を受診した日になることもあります。",
     tasks: ["最初に行った病院を、診察券やお薬手帳から確認する", "病院へ受診状況等証明書を依頼できるか確認する", "日付があいまいなときは、断定せず手がかりをメモする"],
@@ -45,7 +35,6 @@ const STEPS: Step[] = [
   },
   {
     id: "step-2", short: "納付要件を確認", title: "納付要件を確認する",
-    gokai: "mukashi-minou",
     oneLine: "初診日の前日時点の、保険料の納め方を確認します。",
     body: "3分の2要件か直近1年要件のどちらかを満たすか、年金記録で確かめます。免除・猶予の期間は、未納とは別に扱われます。",
     tasks: ["基礎年金番号がわかるものを用意する", "ねんきんネットか年金事務所で納付記録を確認する", "免除・学生納付特例・猶予の期間も含めて確認する"],
@@ -70,7 +59,6 @@ const STEPS: Step[] = [
   },
   {
     id: "step-5", short: "診断書の準備", title: "診断書の準備をする",
-    gokai: "omoku-misenai-to",
     oneLine: "診察室の外での生活が、主治医に伝わるように整えます。",
     body: "診断書はカルテや診察で把握された内容をもとに作られます。食事・清潔・金銭管理など、普段の生活を具体例と頻度で整理します。",
     tasks: ["日常生活の7項目を、支援がない場合で振り返る", "困った場面を頻度と具体例で短くまとめる", "依頼時に渡すメモと診断書様式を用意する"],
@@ -79,7 +67,6 @@ const STEPS: Step[] = [
   },
   {
     id: "step-6", short: "申立書を作成", title: "申立書を作成する",
-    gokai: "omoku-misenai-to",
     oneLine: "病歴と生活・仕事の実態を、診断書と同じ方向で伝えます。",
     body: "病歴・就労状況等申立書は、これまでの経過を本人側から説明する書類です。一気に文章にせず、期間を区切って事実を並べます。",
     tasks: ["受診歴と生活の変化を時系列に並べる", "期間ごとに治療・仕事・生活の様子を書く", "診断書と日付や生活状況が食い違わないか確認する"],
@@ -100,7 +87,7 @@ const STEPS: Step[] = [
     body: "審査中に追加書類の照会が届くことがあります。結果が届いたら、支給開始時期、等級、次回診断書提出年月などを確認します。",
     tasks: ["追加照会が届いたら期限と内容を確認する", "通知書・年金証書を一緒に保管する", "不支給や想定と違う結果なら、通知日と選択肢を確認する"],
     stumble: "不支給が生活の行き止まりになるわけではありません。不服申立てには期限があるため、通知を知った日を記録し、相談先と次の選択肢を確認します。",
-    links: [{ href: "/jukyuugo", label: "受給が始まってから" }, { href: "/nayami/fushikyu", label: "不支給と言われたとき" }, { href: "/columns/shinsei-kikan", label: "審査期間と結果通知" }],
+    links: [{ href: "/nayami/fushikyu", label: "不支給と言われたとき" }, { href: "/columns/shinsei-kikan", label: "審査期間と結果通知" }],
   },
 ];
 
@@ -109,18 +96,6 @@ const STUMBLES = [
   { step: "ステップ5で", title: "診断書に実態が載らない", copy: "診察で「大丈夫です」と答えてしまい、普段の大変さが伝わっていない。", href: "#step-5" },
   { step: "ステップ6で", title: "申立書が書けない", copy: "何を書けばいいかわからず手が止まる。一気に書かなくて大丈夫です。", href: "#step-6" },
 ] as const;
-
-/* 各ステップの右端に出す数字。出どころは公開済みの統計と裁決データだけ。
-   数字を持たないステップには何も出さない(指示書 §2-2-5)。 */
-const GOKAI_BY_SLUG = Object.fromEntries(GOKAI.map((card) => [card.slug, card]));
-
-const STEP_DATA: Record<string, { label: string; value: string }> = {
-  "step-1": { label: "初診日が争点の裁決", value: `${SAIKETSU_COUNTS.firstVisit}件` },
-  "step-2": { label: "納付要件が争点", value: `${SAIKETSU_CASES.filter((item) => item.soten.includes("納付要件")).length}件` },
-  "step-5": { label: "診断書が争点", value: `${SAIKETSU_CASES.filter((item) => item.soten.includes("診断書の信頼性・整合性")).length}件` },
-  "step-7": { label: "標準処理期間", value: "3か月" },
-  "step-8": { label: "支給に至った割合", value: formatPercent(stats.r06["決定区分別件数"]["新規裁定・合計"]["支給"].pct ?? 0) },
-};
 
 export default function ShinseiRestyled() {
   const jsonLd = {
@@ -133,40 +108,10 @@ export default function ShinseiRestyled() {
   return (
     <div className="platform shinsei-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
-      <header className="p-page-hero shinsei-hero"><div className="p-container shinsei-reading-width"><Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "申請の流れ" }]} currentPath="/shinsei" /><h1>申請の流れ — 8つのステップ</h1><PageDate updated={SITE_PAGES_CHECKED} /><p className="p-page-intro">初診日の確認から結果が届くまで。全体の地図を先に持つと、いま自分がどこにいるかで迷いにくくなります。1ステップずつ、必要なことだけを載せています。</p><StepFlow /></div></header>
+      <header className="p-page-hero shinsei-hero"><div className="p-container shinsei-reading-width"><Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "申請の流れ" }]} currentPath="/shinsei" /><h1>申請の流れ — 8つのステップ</h1><p className="p-page-intro">初診日の確認から結果が届くまで。全体の地図を先に持つと、いま自分がどこにいるかで迷いにくくなります。1ステップずつ、必要なことだけを載せています。</p><StepFlow /></div></header>
       <div className="p-container shinsei-reading-width shinsei-content">
         <section className="shinsei-section" aria-labelledby="stumbles-heading"><h2 id="stumbles-heading">つまずくのは、たいてい同じ3か所です</h2><div className="p-grid p-grid-3 shinsei-stumbles">{STUMBLES.map((item) => <a className="p-card" href={item.href} key={item.title}><span className="p-label">{item.step}</span><strong>{item.title}</strong><p>{item.copy}</p></a>)}</div></section>
-        <div className="shinsei-layout">
-          <ShinseiRail steps={STEPS.map((step) => ({ id: step.id, short: step.short, taskCount: step.tasks.length }))} />
-          <div className="shinsei-steps">{STEPS.map((step, index) => {
-            const data = STEP_DATA[step.id];
-            return (
-            <section className="shinsei-step-card" id={step.id} aria-labelledby={`${step.id}-title`} key={step.id}>
-              <header>
-                <span className="shinsei-step-number">{index + 1}</span>
-                <div><h2 id={`${step.id}-title`}>{step.title}</h2><p>{step.oneLine}</p></div>
-                {data ? <span className="shinsei-step-data">{data.label} <b>{data.value}</b></span> : null}
-              </header>
-              <p className="shinsei-step-body">{step.body}</p>
-              <div className="shinsei-step-cols">
-                <div className="shinsei-tasks">
-                  <h3>この段階ですること</h3>
-                  <ShinseiTasks stepId={step.id} tasks={step.tasks} />
-                  <noscript><ul>{step.tasks.map((task) => <li key={task}>{task}</li>)}</ul></noscript>
-                </div>
-                <aside className="shinsei-stumble"><strong>つまずきやすいところ</strong><p>{step.stumble}</p></aside>
-              </div>
-              <footer>
-                <nav aria-label={`ステップ${index + 1}の関連記事`}>
-                  <DouguCards placements={PLACEMENTS.shinseiSteps[step.id]} variant="chip" />
-                  {step.links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}
-                  {step.gokai ? <Link href={`/gokai/${step.gokai}`}>{GOKAI_BY_SLUG[step.gokai]?.misconception}</Link> : null}
-                </nav>
-                {index < STEPS.length - 1 && <a className="shinsei-next" href={`#${STEPS[index + 1].id}`}>次へ: {STEPS[index + 1].title} →</a>}
-              </footer>
-            </section>);
-          })}</div>
-        </div>
+        <div className="shinsei-steps">{STEPS.map((step, index) => <section className="shinsei-step-card" id={step.id} aria-labelledby={`${step.id}-title`} key={step.id}><header><span className="shinsei-step-number">{index + 1}</span><div><span className="shinsei-step-label">STEP {index + 1}</span><h2 id={`${step.id}-title`}>{step.title}</h2><p>{step.oneLine}</p></div></header><p className="shinsei-step-body">{step.body}</p><div className="shinsei-tasks"><h3>この段階ですること</h3><ul>{step.tasks.map((task) => <li key={task}><CheckIcon size={16} /><span>{task}</span></li>)}</ul></div><aside className="shinsei-stumble"><strong>つまずきやすいところ</strong><p>{step.stumble}</p></aside><footer><nav aria-label={`ステップ${index + 1}の関連記事`}>{step.links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}</nav>{index < STEPS.length - 1 && <a className="shinsei-next" href={`#${STEPS[index + 1].id}`}>次へ: {STEPS[index + 1].title} →</a>}</footer></section>)}</div>
 
         <section className="shinsei-section" aria-labelledby="amount-heading"><h2 id="amount-heading">受け取れる金額の目安</h2><p>障害基礎年金は等級ごとに決まった額、障害厚生年金は加入期間と報酬に応じて一人ひとり変わります（令和8年4月分から）。</p><div className="shinsei-table-card"><div className="article-table-wrap"><table><thead><tr><th scope="col">等級</th><th scope="col">障害基礎年金（年額）</th><th scope="col">障害厚生年金（年額）</th></tr></thead><tbody>{AMOUNT_ROWS.map((row) => <tr key={row.grade}><th scope="row">{row.grade}</th><td>{row.kiso}</td><td>{row.kousei}</td></tr>)}</tbody></table></div><p>子の加算額は2人目まで1人につき243,800円、3人目以降は81,300円です。障害厚生年金の配偶者加給年金額は243,800円、3級の最低保障額は635,500円です。</p><small>出典: 日本年金機構 ・ 確認日 2026-04-01</small></div></section>
 

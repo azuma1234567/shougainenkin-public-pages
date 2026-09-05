@@ -146,18 +146,19 @@ const isContent = (url) => /^\/(byoki|joukyou|nayami|okane|erabu)\/|^\/gokai\/|^
     section.querySelector("h2").textContent.trim(),
     section.querySelectorAll("a").map((a) => a.getAttribute("href")),
   ]);
-  check(JSON.stringify(sections) === JSON.stringify(FOOTER), `フッター: ${JSON.stringify(sections.map((s) => s[0]))}`);
-  /* 古い区分名が、ヘッダー・フッター・トップの区分見出しに残っていないこと。 */
+  check(JSON.stringify(sections) === JSON.stringify(FOOTER), `フッター: ${JSON.stringify(sections)}`);
+  /* 古い区分名が、ヘッダー・フッターの区分名に残っていないこと。
+     トップの区分見出し(.p-find-title)は 09-05 午後の刷新(f38114e)の部品で、
+     復元(docs/restore-2026-09-05-instructions.md)で外したので見ない。 */
   const labels = [
     ...items.map(([, label]) => label),
     ...sections.map(([label]) => label),
-    ...root.querySelectorAll(".p-find-title, .p-section-head h2").map((el) => el.textContent.trim()),
   ];
   for (const old of OLD_LABELS) {
     const hit = labels.filter((label) => label === old);
     check(hit.length === 0, `区分名に「${old}」が残っている`);
   }
-  finish("ヘッダー・フッター・トップの区分名");
+  finish("ヘッダー・フッターの区分名");
 }
 
 /* ---------- 5. パンくず ---------- */
@@ -204,9 +205,11 @@ const isContent = (url) => /^\/(byoki|joukyou|nayami|okane|erabu)\/|^\/gokai\/|^
   const cardsOn = (url) => pages.get(url).root.querySelectorAll(".mt-column-card")
     .map((card) => card.querySelector("a")?.getAttribute("href"))
     .filter((href) => href?.startsWith("/dougu/"));
+  /* /hajimete は復元(docs/restore-2026-09-05-instructions.md §2)で昨日の版のまま。
+     道具は「自分の場合を、確かめる」の JibunCards 2枚(.jc)で、道具カード(.mt-column-card)は無い。 */
   const want = {
     "/okane": ["/dougu/kingaku"],
-    "/hajimete": ["/dougu/kingaku", "/dougu/shorui"],
+    "/hajimete": [],
     "/nayami/shindansho-komatta": ["/dougu/mitate"],
     "/joukyou/kazoku-ga-tetsudau": ["/dougu/madoguchi"],
     "/byoki/utsu-soukyoku": ["/dougu/mitate"],
@@ -215,9 +218,11 @@ const isContent = (url) => /^\/(byoki|joukyou|nayami|okane|erabu)\/|^\/gokai\/|^
     const found = cardsOn(url);
     check(JSON.stringify(found) === JSON.stringify(expected), `${url}: ${JSON.stringify(found)} ≠ ${JSON.stringify(expected)}`);
   }
-  /* /shinsei のステップ7に窓口の道具があること(チップ)。 */
-  const step7 = pages.get("/shinsei").root.querySelectorAll(".dougu-chip").map((a) => a.getAttribute("href"));
-  check(step7.filter((href) => href === "/dougu/madoguchi").length === 2, `/shinsei の窓口チップ: ${step7.join(" ")}`);
+  const hajimeteJibun = pages.get("/hajimete").root.querySelectorAll(".jc").map((a) => a.getAttribute("href"));
+  check(JSON.stringify(hajimeteJibun) === JSON.stringify(["/dougu/mitate", "/dougu/kingaku"]), `/hajimete の JibunCards: ${hajimeteJibun.join(" ")}`);
+  /* /shinsei のステップ3と7に窓口の道具があること。復元後の /shinsei は昨日の版(.step-flow-tool)。 */
+  const step7 = pages.get("/shinsei").root.querySelectorAll(".dougu-chip, .step-flow-tool").map((a) => a.getAttribute("href"));
+  check(step7.filter((href) => href === "/dougu/madoguchi").length === 2, `/shinsei の窓口の道具: ${step7.join(" ")}`);
   /* どのページでも、同じ道具のカードが2枚出ていないこと。 */
   for (const url of urls) {
     const found = cardsOn(url);
@@ -239,8 +244,9 @@ const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH 
   let ok = 0;
   for (const [url, expected] of cases) {
     const page = await context.newPage();
-    await page.goto(`${origin}${url}`, { waitUntil: "domcontentloaded" });
-    await page.waitForTimeout(150);
+    await page.goto(`${origin}${url}`, { waitUntil: "networkidle" });
+    /* aria-current はサーバーで付くが、水和の途中で一瞬外れることがある。付くまで待つ。 */
+    await page.waitForFunction(() => document.querySelector('.site-nav-desktop a[aria-current="page"]') !== null, null, { timeout: 5000 }).catch(() => {});
     const current = await page.evaluate(() => document.querySelector('.site-nav-desktop a[aria-current="page"]')?.getAttribute("href") ?? null);
     if (current === expected) ok += 1;
     check(current === expected, `${url}: ${current} ≠ ${expected}`);
@@ -257,6 +263,8 @@ const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH 
   for (const url of targets) {
     const page = await context.newPage();
     await page.goto(`${origin}${url}`, { waitUntil: "networkidle" });
+    /* 描画の途中で一時的に広がることがあるので、少し待って幅を見る。 */
+    await page.waitForTimeout(300);
     const scrolls = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
     if (!scrolls) ok += 1;
     check(!scrolls, `${url}: 横スクロールがある`);

@@ -48,11 +48,6 @@ export const LEGAL_VERSION = "2026年8月28日";
 // サイト側は広告主・解析ツールの変更のたびに改定するため、独立して動かす。
 export const SITE_LEGAL_UPDATED = "2026年9月3日";
 
-// 出典を最後に確かめた日。トップ・実例・申請の流れのように、1本の原稿ではなく
-// 複数の出典を束ねているページが使う(PageDate の「最終確認日」)。
-// ここ1か所で持ち、ページごとに書かない。出典を見直したらこの日付を上げる。
-export const SITE_PAGES_CHECKED = "2026-09-04";
-
 export const CONTACT_EMAIL = "shougainenkinsupport@gmail.com";
 
 export const AUTHOR_NAME = "あずまたいすけ";

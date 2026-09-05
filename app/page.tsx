@@ -5,7 +5,6 @@ import {
   Card,
   CaseCard,
   CheckIcon,
-  PageDate,
   SectionHeader,
   TopicIcon,
 } from "@/components/platform/Platform";
@@ -13,10 +12,8 @@ import SiteSearch, { type SearchItem } from "@/components/platform/SiteSearch";
 import AdLabel from "@/components/AdLabel";
 import { SHOW_LISTINGS } from "@/lib/ads";
 import { COLUMNS } from "@/lib/columns";
-import { SITE_NAME, SITE_PAGES_CHECKED, SITE_URL } from "@/lib/constants";
-import { findCases, SAIKETSU_CASES, SAIKETSU_COUNTS } from "@/lib/saiketsu";
-import { formatPercent, stats, type StatCell } from "@/lib/stats";
-import { AMOUNTS_2026 as A } from "@/data/amounts";
+import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { findCases, SAIKETSU_COUNTS } from "@/lib/saiketsu";
 import { ABOUT_PUBLISHER_ID, pageMetadata } from "@/lib/seo";
 import { YOUGO } from "@/data/yougo";
 import { GOKAI } from "@/data/gokai";
@@ -131,13 +128,16 @@ const diseaseGroups = [
   { label: "その他", items: [["難病・その他の病気", "/byoki/nanbyou"]] },
 ] as const;
 
-/* 病気別のチップは上位10だけ出し、残りは「…ほか11」で一覧へ送る。
-   並びは既存の diseaseGroups の順(精神・発達 → 内部 → 身体・感覚 → その他)。 */
-const topDiseases: readonly (readonly [string, string])[] = diseaseGroups
-  .flatMap((group) => group.items as readonly (readonly [string, string])[])
-  .filter(([, href]) => !["/byoki/shikaku", "/byoki/choukaku-heikou", "/byoki/nanbyou-sonota"].includes(href))
-  .slice(0, 10);
-
+const worries = [
+  { title: "不支給と言われた", copy: "一度の不支給が最終結論とは限りません。不服申立ての期限と、実際に結論が変わった裁決例へ。", href: "/nayami/fushikyu" },
+  { title: "初診日のカルテがない", copy: "閉院・カルテ破棄でも道はあります。第三者証明と、認められた実例。", href: "/columns/shoshinbi-karute-nashi" },
+  { title: "診断書を書いてもらえない", copy: "医師との向き合い方と、生活の実態を伝える準備のしかた。", href: "/columns/shindansho-kaitekurenai" },
+  { title: "働きながら申請したい", copy: "働いていること自体だけでは決まりません。ガイドラインの根拠つきで解説。", href: "/columns/hatarakinagara" },
+  { title: "更新が不安", copy: "更新で止まる場合・戻る場合。支給停止から復活した裁決例も。", href: "/columns/koushin-kakuninhodo" },
+  { title: "さかのぼって請求したい", copy: "遡及請求の条件と時効。5年という期間の正しい理解。", href: "/columns/sokyuu-seikyuu" },
+  { title: "申立書が書けない", copy: "病歴・就労状況等申立書の書き方。生活の実態をありのまま伝える方法。", href: "/columns/moushitatesho-kakikata" },
+  { title: "20歳前の障害・家族の申請", copy: "納付要件が不問になる場合や、家族が代わりに動くときの手順。", href: "/columns/hatachi-mae" },
+] as const;
 
 // 「頼むかどうか」を決めるための3本に絞る。
 // 「頼んだほうがいいケース」は jibun-ka-irai の中に、
@@ -153,20 +153,6 @@ const situations = [
 const moneyTopics = [
   ["いくらもらえる?", "/okane/ikura"], ["税金と収入の扱い", "/okane/zeikin"],
   ["他の制度との調整", "/okane/chousei"],
-] as const;
-
-/* トップの「困りごと別」の1行リスト。右の数字は SAIKETSU_CASES と公的統計から。 */
-const newDecisions = stats.r06["決定区分別件数"]["新規裁定・合計"];
-const mentalShare = stats.nintei["診断書種類別・新規裁定"]["精神障害"]["件数"] as StatCell;
-const renewalContinued = stats.nintei["再認定・抽出10000件"]["合計"]["継続"] as StatCell;
-const shindanshoIssue = SAIKETSU_CASES.filter((item) => item.soten.includes("診断書の信頼性・整合性")).length;
-
-const troubles = [
-  { label: "不支給と言われた", href: "/nayami/fushikyu", data: "期限 3か月" },
-  { label: "初診日がわからない・カルテがない", href: "/nayami/shoshinbi-karute", data: `争点 ${SAIKETSU_COUNTS.firstVisit}件` },
-  { label: "診断書で困っている", href: "/nayami/shindansho-komatta", data: `争点 ${shindanshoIssue}件` },
-  { label: "更新が不安・支給が止まった", href: "/nayami/koushin", data: `継続 ${formatPercent(renewalContinued.pct ?? 0)}` },
-  { label: "さかのぼって請求したい", href: "/nayami/sokyuu", data: "最大5年" },
 ] as const;
 
 const misconceptions = [
@@ -202,11 +188,6 @@ export default function HomePage() {
     description: DESCRIPTION,
     // 発行元の実体は /about に置いている(lib/seo.ts の publisherJsonLd)。
     publisher: { "@id": ABOUT_PUBLISHER_ID },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: { "@type": "EntryPoint", urlTemplate: `${SITE_URL}/?q={search_term_string}` },
-      "query-input": "required name=search_term_string",
-    },
   };
 
   return (
@@ -217,16 +198,14 @@ export default function HomePage() {
         <div className="p-container p-hero-inner">
           <p className="p-trust-pill"><CheckIcon size={15} />掲載情報はすべて公的資料の出典つき・確認日を明記しています</p>
           <h1 id="home-title">「自分の場合は<br className="p-title-break-mobile" />どうなる？」に、<br className="p-title-break-desktop" />根拠つきで答えます</h1>
-          <PageDate updated={SITE_PAGES_CHECKED} />
           <p className="p-hero-copy">はじめての方にも、むずかしい言葉を使わずに案内します。<br />知識240項目と、原文を確認できた公開実例{SAIKETSU_COUNTS.all}件から、あなたに近い答えを探せます。</p>
           <SiteSearch items={searchItems} />
-          <div className="p-stats" aria-label="障害年金の数字">
-            <div className="p-stat"><b>{formatPercent(newDecisions["支給"].pct ?? 0)}</b><span>支給に至った割合（令和6年度）</span></div>
-            <div className="p-stat"><b>{formatPercent(mentalShare.pct ?? 0)}</b><span>精神の障害の割合</span></div>
+          <div className="p-stats" aria-label="掲載情報の件数">
+            <div className="p-stat"><b>21</b><span>病気ごとの審査の見どころ</span></div>
             <div className="p-stat"><b>{SAIKETSU_COUNTS.all}</b><span>結論が分かれた実例（原文つき）</span></div>
+            <div className="p-stat"><b>48</b><span>よくある誤解</span></div>
             <div className="p-stat"><b>全件</b><span>公的資料の出典・確認日つき</span></div>
           </div>
-          <p className="p-stats-note">新しく決まった障害年金の10件のうち7件は、精神の障害です。</p>
         </div>
       </section>
 
@@ -256,86 +235,76 @@ export default function HomePage() {
       <section className="p-section-lg" aria-labelledby="find-heading">
         <div className="p-container">
           <SectionHeader
-            title="どこから探しますか"
+            title="探す"
             lead="入口は5つあります。どこから入っても、必要なところへつながります。"
           />
 
-          {/* 入口ごとに型を変える(原則 §3「型は内容で選ぶ」)。
-              病気別・状況別=チップ / 困りごと別=1行リスト / お金=金額の組版 / 選ぶ=2枚のカード。 */}
           <div className="p-find">
             <div className="p-find-block">
               <div className="p-find-head">
-                <h3 className="p-find-title">病気別</h3>
-                <Link className="p-find-more" href="/byoki">21の病気 →</Link>
+                <h3 className="p-find-title">病気から</h3>
+                <Link className="p-find-more" href="/byoki">一覧を見る →</Link>
               </div>
               <p className="p-find-copy">病名では決まりませんが、審査で見られるところは病気ごとに違います。</p>
-              <div className="p-chips">
-                {topDiseases.map(([item, href]) => <Link className="p-chip" href={href} key={href}>{item}</Link>)}
-                <Link className="p-chip is-soft" href="/byoki">…ほか{21 - topDiseases.length}</Link>
+              <div className="p-chip-groups">
+                {diseaseGroups.map((group) => (
+                  <div className="p-chip-row" key={group.label}>
+                    <span className="p-chip-label">{group.label}</span>
+                    <div className="p-chips">
+                      {group.items.map(([item, href]) =>
+                        href && !["/byoki/shikaku", "/byoki/choukaku-heikou", "/byoki/nanbyou-sonota"].includes(href) ? (
+                          <Link className="p-chip" href={href} key={href}>{item}</Link>
+                        ) : null,
+                      )}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="p-find-block">
               <div className="p-find-head">
-                <h3 className="p-find-title">状況別</h3>
-                <Link className="p-find-more" href="/joukyou">9つの状況 →</Link>
+                <h3 className="p-find-title">いまの状況から</h3>
+                <Link className="p-find-more" href="/joukyou">一覧を見る →</Link>
               </div>
               <p className="p-find-copy">同じ病気でも、暮らし方によって見られるところが変わります。</p>
               <div className="p-chips">
                 {situations.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
               </div>
-              <p className="p-find-tail"><Link href="/jukyuugo">受給が始まってから →</Link></p>
             </div>
 
             <div className="p-find-block">
               <div className="p-find-head">
-                <h3 className="p-find-title">困りごと別</h3>
+                <h3 className="p-find-title">いま困っていることから</h3>
                 <Link className="p-find-more" href="/nayami">一覧を見る →</Link>
               </div>
               <p className="p-find-copy">実際に申請した人がつまずいた場面を、そのまま入口にしました。</p>
-              <ul className="p-trouble-list">
-                {troubles.map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href}>{item.label}<span>{item.data}</span></Link>
-                  </li>
+              <div className="p-grid">
+                {worries.slice(0, 6).map((item) => (
+                  <Link className="p-card" href={item.href} key={item.title}>
+                    <h4 className="p-card-title">{item.title}</h4>
+                    <p className="p-card-copy">{item.copy}</p>
+                  </Link>
                 ))}
-              </ul>
+              </div>
             </div>
 
             <div className="p-find-small-grid">
               <div className="p-find-block p-find-block-small">
                 <div className="p-find-head">
-                  <h3 className="p-find-title">お金</h3>
+                  <h3 className="p-find-title">お金のことから</h3>
                   <Link className="p-find-more" href="/okane">一覧を見る →</Link>
                 </div>
                 <p className="p-find-copy">受け取れる額、税金、ほかの制度との調整。</p>
-                <div className="p-money-lines">
-                  <p><span>障害基礎年金 2級</span><strong>{A.basicGrade2}円</strong><small>/年</small></p>
-                  <p><span>上乗せ 給付金 2級</span><strong>{A.supportGrade2Monthly}円</strong><small>/月</small></p>
-                </div>
-                <p className="p-find-copy">税金はかからず、貯金があっても関係ありません</p>
                 <div className="p-chips">
                   {moneyTopics.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
                 </div>
               </div>
-              <div className="p-find-block p-find-block-small">
-                <div className="p-find-head">
-                  <h3 className="p-find-title">自分でやるか、頼むか</h3>
-                  <Link className="p-find-more" href="/erabu">ぜんぶ見る →</Link>
-                </div>
+              <Link className="p-find-block p-find-block-small p-find-choice" href="/erabu">
+                <h3 className="p-find-title">自分でやるか、頼むか</h3>
                 <p className="p-find-copy">申請は自分でもできますし、専門家に頼むこともできます。どちらが向いているかは状況によって変わります。ここでは判断材料だけを置きます。</p>
-                <div className="p-choice-grid">
-                  <Link className="p-card p-choice" href="/erabu/jibun-ka-irai">
-                    <h4 className="p-card-title">自分で進める</h4>
-                    <p className="p-card-copy">書類の集め方と、つまずきやすい場所を先に知る。</p>
-                  </Link>
-                  <Link className="p-card p-choice" href="/erabu/irai-subeki-case">
-                    <h4 className="p-card-title">専門家に頼む</h4>
-                    <p className="p-card-copy">頼めることの範囲と、依頼先の見分け方。</p>
-                  </Link>
-                </div>
-                <Link className="p-card-link" href="/erabu/hiyou-souba">費用の相場を見る →</Link>
-              </div>
+                <span className="p-card-link">ぜんぶ見る →</span>
+              </Link>
             </div>
           </div>
         </div>
@@ -366,7 +335,6 @@ export default function HomePage() {
             <Link className="p-chip is-soft" href="/jitsurei?kind=mental">精神・発達 ({SAIKETSU_COUNTS.mental})</Link>
             <Link className="p-chip is-soft" href="/jitsurei?issue=first-visit">初診日が争点 ({SAIKETSU_COUNTS.firstVisit})</Link>
             <Link className="p-chip is-soft" href="/jitsurei?outcome=accepted">容認された例 ({SAIKETSU_COUNTS.accepted})</Link>
-            <Link className="p-chip is-soft" href="/suuji">数字で見る障害年金 →</Link>
           </div>
           <div className="p-grid">
             {featuredCases.map((item) => <CaseCard key={item.id} item={item} />)}
