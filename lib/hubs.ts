@@ -121,7 +121,7 @@ export const COLUMN_HUB_ASSIGNMENTS: Record<string, ColumnHubAssignment> = {
   "hatachi-mae": assignment("/joukyou/hatachi-mae", "promote", ["/shinsei#step-3", "/jukyuugo/sagyousho"]),
   "shoubyou-teatekin": assignment("/joukyou/shoubyou-teatekin-kara", "promote", ["/okane/chousei"]),
   "techou-to-nenkin": assignment("/gokai", "core", ["/hajimete"]),
-  "shougaisha-koyou-nenkin": assignment("/joukyou/hatarakinagara", "core", ["/jitsurei", "/jukyuugo/sagyousho"]),
+  "shougaisha-koyou-nenkin": assignment("/joukyou/hatarakinagara", "core", ["/jitsurei", "/jukyuugo/a-gata-heisa"]),
   "shoshinbi-wakaranai": assignment("/nayami/shoshinbi-karute", "promote", ["/shinsei#step-2"], "shoshinbi-karute-nashi"),
   "shoshinbi-karute-nashi": assignment("/nayami/shoshinbi-karute", "core", [], "shoshinbi-wakaranai"),
   "shoshinbi-haiin": assignment("/nayami/shoshinbi-karute", "leaf"),

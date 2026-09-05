@@ -94,7 +94,17 @@ export const HUB_CONTENT: Record<string, HubContent> = {
 export function getHubContent(path: string): HubContent | null {
   const item = HUB_CONTENT[path];
   if (!item) return null;
-  return { ...item, source: apply2026Amounts(item.source).replace(/→ ([^\n(]+)\((\/[^)]+)\)/g, "→ [$1]($2)") };
+  /* 原稿の「→ ラベル(/path)」をリンクにする。1行に2本目が「、」や「/」で続くことが
+     あるので、矢印のある行だけ2本目以降も変換する(変換しないと URL が本文に出る)。 */
+  const linked = apply2026Amounts(item.source)
+    .split("\n")
+    .map((line) => {
+      if (!line.includes("→ ")) return line;
+      const first = line.replace(/→ ([^\n(]+)\((\/[^)]+)\)/g, "→ [$1]($2)");
+      return first.replace(/(^|[、,／/]\s*)([^\n、,／/(\[\]]+)\((\/[^)]+)\)/g, "$1[$2]($3)");
+    })
+    .join("\n");
+  return { ...item, source: linked };
 }
 
 // その種類(byoki/nayami/…)のハブ本文に書かれた「確認日 yyyy-mm-dd」の最大値。索引ページの最終更新日に使う。
