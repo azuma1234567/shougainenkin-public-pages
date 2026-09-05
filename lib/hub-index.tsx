@@ -5,14 +5,14 @@ import HubIndexList, { type HubCard, type HubGroup } from "@/components/platform
 import { DouguCards } from "@/components/platform/DouguCard";
 import type { ToolId } from "@/data/dougu";
 import { HubIndexSearch } from "@/components/platform/HubIndexSearch";
-import { hubColumnSlugs } from "@/lib/hubs";
+import { HUBS, hubColumnSlugs } from "@/lib/hubs";
 import { SAIKETSU_CASES } from "@/lib/saiketsu";
 import { SITE_URL } from "@/lib/constants";
 import { latestHubCheckedDate } from "@/lib/hub-content";
 import { PUBLISHED_CONTENT_HUBS } from "@/lib/hubs";
 import { pageMetadata } from "@/lib/seo";
 
-type Kind = "byoki" | "nayami" | "joukyou" | "okane" | "erabu";
+type Kind = "byoki" | "nayami" | "joukyou" | "okane" | "erabu" | "jukyuugo";
 
 type IndexSpec = {
   title: string;
@@ -26,6 +26,18 @@ type IndexSpec = {
   body?: string[];
   /** リードの直下に置く道具。文言は data/dougu.ts のものをそのまま使う */
   tools?: ToolId[];
+  /** ヒーローのリードの下に置く一言(原稿の文を抜いたもの) */
+  hint?: string;
+  /** 年表。カードより前に、いつ→起きること→リンク の順で縦に並べる */
+  timeline?: { when: string; what: string; label: string; href: string }[];
+  /** 年表の後に置く段落(原稿の文) */
+  notes?: { heading: string; paragraphs: string[] };
+  /** 幹のハブ以外に並べるカード(既存ページ) */
+  extraCards?: { path: string; label: string; hint: string }[];
+  /** 次の一歩(原稿の箇条書き) */
+  nextSteps?: string[];
+  /** 出典(原稿の箇条書き) */
+  sources?: string[];
   tail?: { text: string; href: string; label: string };
 };
 
@@ -96,6 +108,51 @@ const BYOKI_GROUP_NOTES: Record<string, string> = {
 
 /** 一覧ページの文言。ここが「入口」の正。 */
 export const HUB_INDEX: Record<Kind, IndexSpec> = {
+  jukyuugo: {
+    title: "受給が始まってから",
+    h1: "受給が始まってから",
+    lead: "年金証書が届いたら、手続きは終わりではなく、続きが始まります。続くのは「更新」「働く」「お金」「65歳」の4つです。障害年金の受給権者は約255万人(令和4年度末)。毎年約30万件の更新(再認定)があり、そのうち96.8%はそのまま続いています。止まったのは1.0%です。多くの人は続きます。ただし、続くかどうかは診断書1枚で決まるので、普段の記録が効きます。",
+    description: "年金証書が届いてからの「更新・働く・お金・65歳」を、時間の順に並べた入口です。公的資料の出典つき。",
+    hint: "多くの人は続きます。続くかどうかは診断書1枚で決まるので、普段の記録が効きます。",
+    timeline: [
+      { when: "届いた月", what: "年金証書の3か所(等級・次回診断書提出年月・年金の種類)を確認。法定免除・給付金・扶養の届出", label: "受給が決まった後の手続き", href: "/columns/jukyuugo-tetsuduki" },
+      { when: "1〜2か月後", what: "初回の振込。決定月の翌月分からまとめて入る", label: "いくら、いつ振り込まれるか", href: "/okane/ikura" },
+      { when: "毎年", what: "20歳前傷病の人だけ、前年所得で10月〜翌9月の支給が決まる", label: "働くと年金はどうなるか", href: "/jukyuugo/hataraku" },
+      { when: "1〜5年ごと", what: "更新(障害状態確認届)。誕生月の3か月前の月末に用紙が届き、誕生月の末日までに提出", label: "更新が不安なとき", href: "/nayami/koushin" },
+      { when: "働き始めたとき", what: "等級は「働いているか」ではなく「どう働いているか」で見られる", label: "働くと年金はどうなるか", href: "/jukyuugo/hataraku" },
+      { when: "作業所・A型を使うとき", what: "工賃・賃金は原則、年金に影響しない。20歳前傷病だけ所得の線がある", label: "B型・A型作業所と障害年金", href: "/jukyuugo/sagyousho" },
+      { when: "事業所が閉鎖したとき", what: "年金は止まらない。失業給付と転所の順番がある", label: "A型事業所が閉鎖したとき", href: "/jukyuugo/a-gata-heisa" },
+      { when: "止まったとき", what: "支給停止事由消滅届か、審査請求", label: "支給停止になったとき", href: "/nayami/shikyuu-teishi" },
+      { when: "65歳の前", what: "事後重症請求は65歳の誕生日の前々日まで。65歳から老齢厚生年金と併給を選べる", label: "65歳の選択", href: "/joukyou/65sai-ijou" },
+    ],
+    notes: {
+      heading: "いちばん多い不安に、先に答えます",
+      paragraphs: [
+        "**働いたら止まる?** 止まりません。認定基準にもガイドラインにも「働いていたら対象外」とは書かれていません。ガイドラインは、就労継続支援A型・B型と障害者雇用での就労について「1級または2級の可能性を検討する」としています。見られるのは、働けているかではなく、どんな援助のもとで働けているかです。",
+        "**更新で落ちる?** 令和6年度の再認定304,456件のうち、支給停止は1.0%でした。等級が下がった人を含めても、続いた人が大多数です。判断は診断書1枚で行われるので、普段の状態が診断書に書かれているかが分かれ目です。",
+        "**お金の話は誰に聞けばいい?** 障害年金は所得税がかかりません(国民年金法25条)。健康保険の扶養は年収180万円未満、20歳前傷病の所得制限は前年所得で決まります。線は3本しかないので、自分の数字を当てるだけで分かります。→ 受給後のお金の設計(/jukyuugo/okane)",
+      ],
+    },
+    extraCards: [
+      { path: "/nayami/koushin", label: "更新が不安なとき", hint: "更新(障害状態確認届)。誕生月の3か月前の月末に用紙が届き、誕生月の末日までに提出" },
+      { path: "/nayami/shikyuu-teishi", label: "支給停止になったとき", hint: "支給停止事由消滅届か、審査請求" },
+      { path: "/columns/jukyuugo-tetsuduki", label: "受給が決まった後の手続き", hint: "年金証書の3か所(等級・次回診断書提出年月・年金の種類)を確認。法定免除・給付金・扶養の届出" },
+      { path: "/joukyou/65sai-ijou", label: "65歳の選択", hint: "事後重症請求は65歳の誕生日の前々日まで。65歳から老齢厚生年金と併給を選べる" },
+    ],
+    body: ["このページは、受給が始まった人の「これから」を時間の順に並べた入口です。読むのは、いま当てはまる1つだけで構いません。"],
+    nextSteps: [
+      "年金証書を手元に置き、「次回診断書提出年月」を書き出す → 更新の準備は、その月の1年前から",
+      "働き始める・作業所を使う予定なら、先に → 働くと年金はどうなるか(/jukyuugo/hataraku)",
+      "「働いたら負け」と感じているなら → よくある誤解: 働いたら負け(/gokai/hataraitara-make)",
+    ],
+    sources: [
+      "厚生労働省 年金部会(第17回)資料2「障害年金の受給権者数 約255万人」(令和4年度末) 2024年7月30日",
+      "日本年金機構「障害年金業務統計(令和6年度)」再認定304,456件・継続96.8%・支給停止1.0%",
+      "日本年金機構「障害状態確認届(診断書)の提出」",
+      "厚生労働省「精神の障害に係る等級判定ガイドライン」平成28年9月",
+      "確認日: 2026-09-05",
+    ],
+  },
   byoki: {
     title: "病気から探す",
     h1: "病気から探す",
@@ -211,6 +268,19 @@ export function renderHubIndex(kind: Kind) {
     };
   };
 
+  /* 既存ページへのカード。件数はハブ・記事の実数から出す(0 は出さない)。 */
+  const extraCard = (item: { path: string; label: string; hint: string }): HubCard => {
+    const hub = HUBS.find((entry) => entry.path === item.path);
+    return {
+      path: item.path,
+      label: item.label,
+      hint: item.hint,
+      columns: hubColumnSlugs(item.path).length,
+      cases: caseCount(hub?.jitsureiFilter),
+      terms: item.label.toLowerCase(),
+    };
+  };
+
   const groups: HubGroup[] = (
     spec.groups
       ? spec.groups.map((group, index) => ({
@@ -221,6 +291,9 @@ export function renderHubIndex(kind: Kind) {
         }))
       : [{ label: "", note: undefined, anchor: "group-1", items: hubs.map((hub) => toCard(hub.path)).filter((card): card is HubCard => card !== null) }]
   ).filter((group) => group.items.length > 0);
+  if (spec.extraCards) {
+    groups.push({ label: "", note: undefined, anchor: "group-extra", items: spec.extraCards.map(extraCard) });
+  }
 
   const total = groups.reduce((n, group) => n + group.items.length, 0);
   /* 病名が多い /byoki だけ絞り込みを出す。9件以下のページには出さない。 */
@@ -260,6 +333,7 @@ export function renderHubIndex(kind: Kind) {
             <PageDate updated={latestHubCheckedDate(kind)} />
             <span>{total}{kind === "byoki" ? "の病気" : "ページ"}</span>
           </p>
+          {spec.hint ? <p className="hub-index-hint">{spec.hint}</p> : null}
           {/* 分類のチップと、病名の絞り込みを1行に。モックの /byoki の板と同じ並び。 */}
           {(groups.length > 1 && groups[0].label) || filterable ? (
             <div className="hub-index-controls">
@@ -278,6 +352,32 @@ export function renderHubIndex(kind: Kind) {
         </div>
       </header>
 
+      {spec.timeline ? (
+        <section className="p-section" style={{ paddingBottom: 0 }} aria-labelledby="timeline-heading">
+          <div className="p-container">
+            <h2 className="hub-index-h2" id="timeline-heading">年金証書が届いてから、何が起きるか</h2>
+            <ol className="p-timeline">
+              {spec.timeline.map((item, index) => (
+                <li className="p-timeline-item" key={item.when + index}>
+                  <span className="p-timeline-when">{item.when}</span>
+                  <span className="p-timeline-what">{item.what}</span>
+                  <Link className="p-timeline-link" href={item.href}>{item.label} →</Link>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      ) : null}
+
+      {spec.notes ? (
+        <section className="p-section" style={{ paddingBottom: 0 }} aria-labelledby="notes-heading">
+          <div className="p-container">
+            <h2 className="hub-index-h2" id="notes-heading">{spec.notes.heading}</h2>
+            {spec.notes.paragraphs.map((paragraph, index) => <p className="hub-index-note-p" key={index}>{inlineLinks(paragraph)}</p>)}
+          </div>
+        </section>
+      ) : null}
+
       <section className="p-section">
         <div className="p-container">
           {spec.tools ? <DouguCards className="hub-index-tool" placements={[...spec.tools]} variant="hub" /> : null}
@@ -288,6 +388,17 @@ export function renderHubIndex(kind: Kind) {
               <b>このページの使い方</b>
               {spec.body.map((paragraph, index) => <p key={index}>{inlineLinks(paragraph)}</p>)}
             </div>
+          ) : null}
+
+          {spec.nextSteps ? (
+            <div className="hub-index-how">
+              <b>次の一歩</b>
+              <ul className="p-list">{spec.nextSteps.map((step, index) => <li key={index}>{inlineLinks(step)}</li>)}</ul>
+            </div>
+          ) : null}
+
+          {spec.sources ? (
+            <p className="p-source hub-index-sources">出典: {spec.sources.join(" ／ ")}</p>
           ) : null}
 
           {spec.tail ? (

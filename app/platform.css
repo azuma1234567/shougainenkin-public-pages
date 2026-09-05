@@ -1602,3 +1602,22 @@
   text-decoration: none;
 }
 .platform .column-gokai-link:hover { background: var(--c-border); }
+
+/* 幹10「受給が始まってから」の索引。年表が主役なので、StepFlow の縦モードと
+   同じ見せ方(番号の代わりに時点、縦線でつなぐ)を使う。 */
+.hub-index-hint { margin: 8px 0 0; color: var(--c-heading); font-size: var(--fs-small); line-height: 1.8; }
+.hub-index-h2 { margin: 0 0 12px; color: var(--c-heading); font-family: var(--font-heading); font-size: var(--fs-h2); line-height: var(--lh-heading); }
+.hub-index-note-p { margin: 0 0 12px; color: var(--c-text); font-size: var(--fs-small); line-height: 1.85; }
+.hub-index-sources { margin: 14px 0 0; }
+.p-timeline { display: grid; margin: 0; padding: 0; list-style: none; }
+.p-timeline-item { position: relative; display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 2px 18px; padding: 0 0 18px 22px; }
+.p-timeline-item::before { content: ""; position: absolute; top: 7px; left: 0; width: 10px; height: 10px; border-radius: var(--r-pill); background: var(--c-primary); }
+.p-timeline-item::after { content: ""; position: absolute; top: 19px; bottom: 0; left: 4px; width: 2px; background: var(--c-border); }
+.p-timeline-item:last-child::after { display: none; }
+.p-timeline-when { grid-column: 1; color: var(--c-heading); font-size: var(--fs-small); font-weight: 700; line-height: 1.6; }
+.p-timeline-what { grid-column: 2; color: var(--c-text); font-size: var(--fs-small); line-height: 1.8; }
+.p-timeline-link { grid-column: 2; color: var(--c-primary); font-size: var(--fs-meta); font-weight: 700; }
+@media (max-width: 700px) {
+  .p-timeline-item { grid-template-columns: 1fr; gap: 2px; }
+  .p-timeline-when, .p-timeline-what, .p-timeline-link { grid-column: 1; }
+}
