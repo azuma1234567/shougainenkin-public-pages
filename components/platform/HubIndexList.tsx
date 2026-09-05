@@ -3,7 +3,8 @@
    絞り込みはこのブラウザの中だけで動く。何も送信しない。
    カードはサーバー側でも全部描画されるので、JS が無くても21枚すべて見える。 */
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useSyncExternalStore } from "react";
+import { getQuery, getServerQuery, subscribe } from "@/components/platform/hubIndexFilter";
 
 export type HubCard = {
   path: string;
@@ -34,8 +35,9 @@ function Card({ card }: { card: HubCard }) {
   );
 }
 
-export default function HubIndexList({ groups, filterable = false }: { groups: HubGroup[]; filterable?: boolean }) {
-  const [query, setQuery] = useState("");
+export default function HubIndexList({ groups }: { groups: HubGroup[] }) {
+  /* 絞り込み語はヒーローの検索欄(HubIndexSearch)と共有する。 */
+  const query = useSyncExternalStore(subscribe, getQuery, getServerQuery);
   const q = query.trim().toLowerCase();
 
   const shown = useMemo(
@@ -49,20 +51,6 @@ export default function HubIndexList({ groups, filterable = false }: { groups: H
 
   return (
     <>
-      {filterable && (
-        <div className="hub-index-search" role="search">
-          <label htmlFor="hub-index-q">病名で絞り込む</label>
-          <input
-            id="hub-index-q"
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="例: ADHD、透析、ペースメーカー"
-            autoComplete="off"
-          />
-        </div>
-      )}
-
       {total === 0 ? (
         <p className="hub-index-empty">
           「{query.trim()}」に当てはまる病気は見つかりませんでした。見つからないときは{" "}

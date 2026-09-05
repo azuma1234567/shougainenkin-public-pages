@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import HubIndexList, { type HubCard, type HubGroup } from "@/components/platform/HubIndexList";
+import { HubIndexSearch } from "@/components/platform/HubIndexSearch";
 import { hubColumnSlugs } from "@/lib/hubs";
 import { SAIKETSU_CASES } from "@/lib/saiketsu";
 import { SITE_URL } from "@/lib/constants";
@@ -253,25 +254,31 @@ export function renderHubIndex(kind: Kind) {
             <PageDate updated={latestHubCheckedDate(kind)} />
             <span>{total}{kind === "byoki" ? "の病気" : "ページ"}</span>
           </p>
-          {groups.length > 1 && groups[0].label ? (
-            <nav className="hub-index-chips" aria-label="分類へ移動">
-              {groups.map((group) => (
-                <a className="hub-index-chip" href={`#${group.anchor}`} key={group.anchor}>
-                  {group.label} <b>{group.items.length}</b>
-                </a>
-              ))}
-            </nav>
+          {/* 分類のチップと、病名の絞り込みを1行に。モックの /byoki の板と同じ並び。 */}
+          {(groups.length > 1 && groups[0].label) || filterable ? (
+            <div className="hub-index-controls">
+              {groups.length > 1 && groups[0].label ? (
+                <nav className="hub-index-chips" aria-label="分類へ移動">
+                  {groups.map((group) => (
+                    <a className="hub-index-chip" href={`#${group.anchor}`} key={group.anchor}>
+                      {group.label} {group.items.length}
+                    </a>
+                  ))}
+                </nav>
+              ) : null}
+              {filterable ? <HubIndexSearch /> : null}
+            </div>
           ) : null}
         </div>
       </header>
 
       <section className="p-section">
         <div className="p-container">
-          <HubIndexList groups={groups} filterable={filterable} />
+          <HubIndexList groups={groups} />
 
           {spec.body ? (
             <div className="hub-index-how">
-              <h2>このページの使い方</h2>
+              <b>このページの使い方</b>
               {spec.body.map((paragraph, index) => <p key={index}>{inlineLinks(paragraph)}</p>)}
             </div>
           ) : null}

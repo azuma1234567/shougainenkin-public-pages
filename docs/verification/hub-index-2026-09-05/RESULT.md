@@ -174,3 +174,105 @@ node scripts/prelaunch-check.mjs  → ページ数 166 / × は B-1・B-3 の2�
 (B-10 はデザインシステムの追補で解消済み)
 
 `lib/sitemap-static-dates.ts` の `/byoki` `/joukyou` を 2026-09-05 に上げた。
+
+---
+
+# モック site.html の /byoki 板に合わせる(2026-09-05)
+
+指示書の先頭の注記どおり、優先順位は
+`user-psychology-seisa §4` > `page-types-seisa §4` > `design-seisa` > `writing-techniques §4` >
+本指示書。見た目の正は `docs/site-mock-2026-09-05-all/site.html` の **/byoki の板**。
+色・文字サイズ・角丸・影は design-system のトークンだけを使い、新しい hex を書いていない。
+
+## 直したところ(モックとの差)
+
+| 箇所 | 前 | 後(モックの板) |
+|---|---|---|
+| 絞り込み | 一覧の上に、ラベル付きの四角い入力欄 | **ヒーローの分類チップと同じ行**、右端に寄せた丸い欄。虫めがね + 「病名で絞り込む(ADHD、透析…)」 |
+| 分類チップ | 文字は見出し色、件数は薄い別書式 | 白地・主色の文字・件数も同じ書式(`精神・発達 9`) |
+| カード | padding 18px、min-height 150px、影なし | **padding 20px 22px(`--card-pad`)・影 1つ(`--shadow`)・min-height なし** |
+| 「このページの使い方」 | 見出し h2 + 大きめの箱 | モックの `.sum`(帯の地・角丸8・小さい見出し語) |
+| ヒーローの余白 | 上44px 下32px | **上28px 下24px**(モックの `.hero`) |
+| 節の余白 | 上26px 下32px | 上26px 下26px |
+
+絞り込みの欄はヒーローに移したので、検索の状態を
+`components/platform/hubIndexFilter.ts`(モジュール内の小さなストア)で持ち、
+ヒーローの `HubIndexSearch` と一覧の `HubIndexList` が同じ語を見る形にした。
+どちらもブラウザの中だけで動き、何も送信しない。
+
+欄の枠線はモックが `#9db9ca` だったが、新しい hex を書かない決まりなので
+`1px solid var(--c-primary)` にした(操作できるものは主色、という原則どおり)。
+
+## §6 の検証
+
+**1. typecheck / build / 公開前チェック → ○**
+```
+npm run typecheck / npm run build → エラーなし
+node scripts/prelaunch-check.mjs  → ページ数 166 / × は B-1・B-3 の2つ
+```
+B-10 は 2026-09-05 の design-system 追補で解消済みなので、いまの × は
+**B-1(/app が孤立)と B-3(/dougu/mitate 323字)だけ**。増えていない。
+`verify-hub-content` の `/nayami/shikyuu-teishi: 本文不一致` は作業前からのもので無関係。
+
+**2. スクリーンショット → ○**
+`mock-{byoki,joukyou,nayami}-{1400,1000,390}.png` の9枚と、
+`mock-byoki-hero.png` / `mock-byoki-filter-adhd.png` / `mock-byoki-filter-none.png` /
+`mock-byoki-nojs.png`。
+
+| ページ | 1400px | 1000px | 390px |
+|---|---|---|---|
+| /byoki | 3列・21枚 | 2列・21枚 | 1列・21枚 |
+| /joukyou | 3列・9枚 | 2列・9枚 | 1列・9枚 |
+| /nayami | 3列・6枚 | 2列・6枚 | 1列・6枚 |
+
+**3. 1400px で /byoki の全21カードが 3,200px 以内 → ○(3,198px)**
+サイト共通のヘッダー(73px)とフッター(442px)を含めて **3,198px**。
+モックにはヘッダー・フッターが無いので、同じ条件で比べると 2,683px。
+本番の変更前は 4,095px だった。
+
+**4. 一言が §3 と完全一致 + 先頭12文字の禁止語 → ○**
+`npm run verify:hub-hints`(指示書の表と実装の突き合わせ):
+```
+指示書の一言 30件 / 実装 30件
+指示書の別名 10件 / 実装 10件
+先頭12文字に 不支給・対象外・却下・打ち切り・無理・通らない があるもの: 0件
+○ すべて一致。
+```
+描画された HTML から取り出した30件との突き合わせも **30/30 完全一致**、
+画面の一言の**先頭12文字**にも禁止語 **0件**。
+
+**5. 記事数・実例数 → ○**
+`hubColumnSlugs` と `SAIKETSU_CASES` の実数。0 のものは出さない。
+
+| ハブ | 画面のメタ行 |
+|---|---|
+| /byoki/utsu-soukyoku | 記事 5本 · 実例 13件 |
+| /byoki/tekiou-fuan | 記事 3本 |
+| /byoki/tougou | 実例 12件 |
+| /byoki/tenkan | (空) |
+
+**6. 絞り込み → ○**
+`ADHD` → 発達障害だけ、`透析` → 腎臓病・人工透析だけ、`xyz` → 0件で
+「「xyz」に当てはまる病気は見つかりませんでした。見つからないときは 悩みから探す か はじめての方へ へ。」
+JavaScript を切っても **カード21枚が全部見える**(絞り込みの欄も出るが、
+カードはサーバー側で描画しているので一覧は成立する)。
+
+**7. JSON-LD → ○**
+`CollectionPage` + `ItemList`、`numberOfItems: 21`、`itemListElement` 21件、
+`ListItem` の `@type`/`position`/`name`/`url` に欠けなし。
+`page-types-seisa §4` のとおり、リッチリザルトテストではなく **schema.org のバリデータ**で見る
+(公開 URL が要るので、デプロイ後に本番 URL で実施し、下に追記する)。
+
+## 変えていないもの(§5)
+
+- 各ハブ本文(`data/hubs/*.json`)。
+- `HUB_INDEX` の `title` `h1` `lead` `description` `groups` の中身。
+- URL・パンくず・メタデータ。
+- `/nayami` `/okane` `/erabu` は同じ部品なので見た目が変わる(それでよい)。
+
+`lead` の「あなたの病気で、どこが見られるのかから確認してください。」は、
+`writing-techniques §5` の「『あなた』は使わない」に反しているが、
+§5 で「lead は変えない」と決まっているので**触っていない**(直すなら別の指示で)。
+
+`lib/sitemap-static-dates.ts` の `/nayami` `/okane` `/erabu` を 2026-09-05 に上げた
+(`/byoki` `/joukyou` は前回上げ済み)。

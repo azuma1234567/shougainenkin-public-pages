@@ -1209,45 +1209,52 @@
 }
 
 /* ===== 一覧ページ(/byoki /joukyou /nayami /okane /erabu)。
-   docs/site-mock-2026-09-05-hubindex/byoki-mock.html のとおり。 ===== */
+   見た目の正は docs/site-mock-2026-09-05-all/site.html の /byoki の板。
+   色・文字サイズ・角丸・影はデザインシステムのトークンだけを使う。 ===== */
 .hub-index-lead { max-width: 820px; }
-.hub-index-count { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; margin: 8px 0 0; color: var(--platform-faint); font-size: var(--fs-note); }
-.hub-index-count .p-page-date { margin: 0; }
+.hub-index-count { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; margin: 6px 0 0; color: var(--c-meta); font-size: var(--fs-meta); }
+.hub-index-count .p-page-date { margin: 0; color: var(--c-meta); font-size: var(--fs-meta); }
 .hub-index-count > span::before { content: "· "; }
-.hub-index-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
-.hub-index-chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 13px; border: 1px solid var(--platform-border); border-radius: var(--r-pill); background: #fff; color: var(--platform-heading); font-size: var(--fs-meta); font-weight: 700; text-decoration: none; }
-.hub-index-chip:hover { border-color: var(--platform-primary); }
-.hub-index-chip b { color: var(--platform-faint); font-size: var(--fs-note); font-weight: 400; }
 
-.hub-index-search { display: grid; gap: 6px; margin: 0 0 22px; max-width: 420px; }
-.hub-index-search label { color: var(--platform-heading); font-size: var(--fs-meta); font-weight: 700; }
-.hub-index-search input { width: 100%; padding: 10px 13px; border: 1px solid var(--c-border); border-radius: var(--r-sm); background: #fff; color: var(--platform-text); font-family: inherit; font-size: var(--fs-body); }
-.hub-index-search input:focus-visible { outline: 2px solid var(--platform-primary); outline-offset: 1px; }
-.hub-index-empty { margin: 8px 0 0; padding: 16px 18px; border-radius: var(--r-card); background: var(--platform-band); color: var(--platform-muted); font-size: var(--fs-small); line-height: 1.85; }
+/* 分類のチップと絞り込みを1行に。絞り込みは右端へ寄せる。 */
+.hub-index-controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 14px 0 0; }
+.hub-index-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.hub-index-chip { display: inline-flex; align-items: center; gap: 5px; min-height: 34px; padding: 6px 12px; border: 1px solid var(--c-border); border-radius: var(--r-pill); background: #fff; color: var(--c-primary); font-size: var(--fs-meta); font-weight: 700; text-decoration: none; }
+.hub-index-chip:hover { border-color: var(--c-primary); background: var(--c-band); }
+
+.hub-index-search { display: flex; align-items: center; gap: 8px; width: 100%; max-width: 360px; margin: 0 0 0 auto; padding: 4px 6px 4px 14px; border: 1px solid var(--c-primary); border-radius: var(--r-pill); background: #fff; color: var(--c-meta); }
+.hub-index-search svg { flex: none; }
+.hub-index-search input { width: 100%; min-height: 36px; padding: 0; border: 0; background: transparent; color: var(--c-text); font-family: inherit; font-size: var(--fs-small); }
+.hub-index-search input::placeholder { color: var(--c-meta); }
+.hub-index-search input:focus { outline: none; }
+.hub-index-search:focus-within { outline: 2px solid var(--c-primary); outline-offset: 2px; }
+.hub-index-empty { margin: 8px 0 0; padding: 16px 18px; border-radius: var(--r-card); background: var(--c-band); color: var(--c-body-muted); font-size: var(--fs-small); line-height: 1.85; }
 .hub-index-empty a { font-weight: 700; }
 
-/* モックの .sec は上 26px・下 0。サイト共通の .p-section(上下40px)より詰まっているので、
-   一覧ページの中だけモックに合わせる。 */
-.hub-index .p-section { padding-top: 26px; padding-bottom: 32px; }
-.hub-index-group { margin: 0 0 30px; scroll-margin-top: 90px; }
+/* モックのヒーローは上28px・下24px、.sec は上26px・下0。
+   サイト共通(ヒーロー44/32・セクション上下40)より詰まっているので、一覧ページだけ合わせる。 */
+.hub-index .p-page-hero { padding-block: 28px 24px; }
+.hub-index .p-section { padding-top: 26px; padding-bottom: 26px; }
+.hub-index-group { margin: 0 0 26px; scroll-margin-top: 90px; }
 .hub-index-group:last-of-type { margin-bottom: 0; }
-.hub-index-group-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; margin: 0 0 6px; }
-.hub-index-group-head h2 { margin: 0; color: var(--platform-heading); font-family: var(--font-heading); font-size: var(--fs-h2); line-height: 1.5; }
-.hub-index-group-head small { color: var(--platform-faint); font-size: var(--fs-meta); }
-.hub-index-group-note { margin: 0 0 14px; color: var(--platform-muted); font-size: var(--fs-small); line-height: 1.8; }
-.hub-index-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
-.hub-card { display: grid; align-content: start; gap: 8px; min-height: 150px; min-width: 0; padding: 18px 18px 16px; border: 1px solid var(--platform-border); border-radius: var(--r-card); background: #fff; color: var(--platform-heading); text-decoration: none; transition: border-color .15s, box-shadow .15s; }
-.hub-card:hover { border-color: var(--platform-primary); box-shadow: var(--shadow); }
-.hub-card h3 { margin: 0; color: var(--platform-heading); font-family: var(--font-heading); font-size: var(--fs-h3); line-height: 1.45; }
-.hub-card p { margin: 0; color: var(--platform-muted); font-size: var(--fs-small); line-height: 1.65; }
-.hub-card-meta { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 6px; color: var(--platform-faint); font-size: var(--fs-note); }
-.hub-card-meta b { color: var(--platform-primary); font-size: var(--fs-meta); font-weight: 700; }
+.hub-index-group-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin: 0 0 4px; }
+.hub-index-group-head h2 { margin: 0; color: var(--c-heading); font-family: var(--font-heading); font-size: var(--fs-h2); line-height: var(--lh-heading); }
+.hub-index-group-head small { color: var(--c-meta); font-size: var(--fs-meta); }
+.hub-index-group-note { margin: 0 0 14px; color: var(--c-body-muted); font-size: var(--fs-small); line-height: 1.8; }
+.hub-index-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--card-gap); }
+.hub-card { display: grid; align-content: start; gap: 6px; min-width: 0; padding: var(--card-pad); border: 1px solid var(--c-border); border-radius: var(--r-card); background: #fff; box-shadow: var(--shadow); color: var(--c-heading); text-decoration: none; transition: border-color .15s; }
+.hub-card:hover { border-color: var(--c-primary); }
+.hub-card h3 { margin: 0; color: var(--c-heading); font-family: var(--font-heading); font-size: var(--fs-h3); line-height: var(--lh-heading); }
+.hub-card p { margin: 0; color: var(--c-body-muted); font-size: var(--fs-small); line-height: 1.7; }
+.hub-card-meta { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 8px; color: var(--c-meta); font-size: var(--fs-note); }
+.hub-card-meta b { color: var(--c-primary); font-weight: 700; }
 
-.hub-index-how { margin: 34px 0 0; padding: 22px 24px; border-radius: var(--r-card); background: var(--c-band); }
-.hub-index-how h2 { margin: 0 0 10px; color: var(--platform-heading); font-family: var(--font-heading); font-size: var(--fs-h2); }
-.hub-index-how p { margin: 0 0 10px; color: var(--platform-muted); font-size: var(--fs-small); line-height: 1.9; }
+/* 「このページの使い方」。モックの .sum(帯の地・小さい見出し語)。 */
+.hub-index-how { margin: 20px 0 0; padding: 12px 14px; border-radius: var(--r-sm); background: var(--c-band); }
+.hub-index-how b { display: block; margin-bottom: 2px; color: var(--c-meta); font-size: var(--fs-note); }
+.hub-index-how p { margin: 0 0 8px; color: var(--c-text); font-size: var(--fs-small); line-height: 1.8; }
 .hub-index-how p:last-child { margin-bottom: 0; }
-.hub-index-tail { margin-top: 18px; }
+.hub-index-tail { margin-top: 14px; }
 
 @media (max-width: 1000px) {
   .hub-index-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1255,7 +1262,6 @@
 }
 @media (max-width: 640px) {
   .hub-index-grid { grid-template-columns: 1fr; }
-  .hub-card { min-height: 0; }
 }
 
 /* ===== 1部品1実装(2026-09-05・指示書 §3) =====
