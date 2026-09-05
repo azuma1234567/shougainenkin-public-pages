@@ -126,6 +126,7 @@ export default function MarkdownArticle({
   faqAccordion = false,
   columnStyle = false,
   leadNotice,
+  checkpoints,
 }: {
   source: string;
   appCtaSlug: string;
@@ -134,6 +135,9 @@ export default function MarkdownArticle({
   // リード(本文の最初のブロック)の直後に差し込む注記。
   // アフィリエイト広告の表示に使う。景表法が求める「目立つ位置」がここ。
   leadNotice?: ReactNode;
+  // ここまでの要約(止まり所)。h2 は「## 」見出しの0始まりの順番。
+  // text はリードの再掲で、新しい文章は書かない(指示書 §2-3)。
+  checkpoints?: { h2: number; text: string; first: boolean }[];
 }) {
   const lines = source.replace(/\r\n/g, "\n").split("\n");
   const blocks: ReactNode[] = [];
@@ -141,6 +145,22 @@ export default function MarkdownArticle({
   let index = 0;
   // 出典ブロックは用語辞典の自動リンク対象外にするため、見出しの位置を覚えておく。
   let sourcesHeadingIndex = -1;
+
+  /* ここまでの要約は、その節の最後のブロックとして差し込む。
+     次の「## 」に出会った時点と、原稿の終わりで流し込む。 */
+  let h2Ordinal = -1;
+  const checkpointAt = new Map((checkpoints ?? []).map((item) => [item.h2, item]));
+  const flushCheckpoint = () => {
+    const item = checkpointAt.get(h2Ordinal);
+    if (!item) return;
+    blocks.push(
+      <aside className="col-check" aria-label="ここまでの要約" key={`check-${h2Ordinal}`}>
+        <p className="col-check-title">ここまでの要約</p>
+        <p className="col-check-body">{item.text}</p>
+        {item.first ? <p className="col-check-rest">ここまで読めば、今日は十分です。続きは、次に開いたときで大丈夫です。</p> : null}
+      </aside>,
+    );
+  };
 
   // 同じ見出しが2回出てくる記事でもidが重複しないようにする。
   const usedHeadingIds = new Set<string>();
@@ -327,6 +347,8 @@ export default function MarkdownArticle({
 
     if (line.startsWith("## ")) {
       const text = line.slice(3);
+      flushCheckpoint();
+      h2Ordinal += 1;
       if (text.startsWith("出典")) sourcesHeadingIndex = blocks.length;
       blocks.push(
         <h2 key={`h2-${index}`} id={uniqueHeadingId(text, `heading-${index}`)}>
@@ -419,6 +441,8 @@ export default function MarkdownArticle({
       blocks.push(<p key={`p-${index}`}>{columnStyle && sourcesHeadingIndex >= 0 ? sourceContent(paragraph) : inlineContent(paragraph)}</p>);
     }
   }
+
+  flushCheckpoint();
 
   // リードの直後へ注記を差し込む。出典見出しの位置も1つずれる。
   if (leadNotice && blocks.length > 0) {

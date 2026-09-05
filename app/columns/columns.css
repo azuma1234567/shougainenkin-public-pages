@@ -28,3 +28,31 @@
   .column-conclusion { padding: 20px; }
   .column-body .gokai-case { padding: 16px; }
 }
+
+/* ここまでの要約(止まり所)。docs/columns-parts-2026-09-05-instructions.md §2-3。
+   中身はリードの再掲で、新しい文章は書かない。見出し要素は使わない(目次に入れない)。 */
+.column-body .col-check {
+  margin: 1.6em 0;
+  padding: 16px 20px;
+  border-left: 4px solid var(--c-primary);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: var(--c-band);
+}
+.column-body .col-check-title {
+  margin: 0 0 4px;
+  color: var(--c-meta);
+  font-size: var(--fs-meta);
+  font-weight: 700;
+}
+.column-body .col-check-body {
+  margin: 0;
+  color: var(--c-text);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+.column-body .col-check-rest {
+  margin: 8px 0 0;
+  color: var(--c-body-muted);
+  font-size: var(--fs-small);
+  line-height: 1.8;
+}

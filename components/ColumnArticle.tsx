@@ -13,6 +13,7 @@ import { DouguCards } from "@/components/platform/DouguCard";
 import { PLACEMENTS } from "@/data/dougu";
 import AdLabel from "@/components/AdLabel";
 import { PageDate } from "@/components/platform/Platform";
+import CHECKPOINTS from "@/data/columns/checkpoints.json";
 import "@/app/columns/columns.css";
 
 type Faq = { question: string; answer: string };
@@ -33,6 +34,14 @@ export default function ColumnArticle({
   // 記事固有の構造化データ(ItemList / HowTo など)。FAQPage は faqs から自動で出す。
   extraJsonLd?: Record<string, unknown>[];
 }) {
+  /* ここまでの要約。文章はリード(column.lead)の再掲で、新しい文は書かない。
+     data/columns/checkpoints.json に無い記事や、リードが無い記事には出さない。 */
+  const entry = (CHECKPOINTS as Record<string, { readMinutes: number; checkpoints: { lead: number; h2: number }[] }>)[column.slug];
+  const lead = column.lead ?? [];
+  const checkpoints = entry?.checkpoints
+    .filter((item) => typeof lead[item.lead] === "string")
+    .map((item, index) => ({ h2: item.h2, text: lead[item.lead] as string, first: index === 0 }));
+
   return (
     <article className="column-article">
       <script
@@ -66,6 +75,7 @@ export default function ColumnArticle({
       <ColumnThemeBlock column={column} />
       <DouguCards placements={PLACEMENTS.columns[column.slug]} position="before" />
       <div className="column-body"><MarkdownArticle
+        checkpoints={checkpoints}
         columnStyle
         source={source}
         appCtaSlug={column.slug}
