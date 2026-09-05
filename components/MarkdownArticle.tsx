@@ -2,7 +2,6 @@ import { cloneElement, isValidElement, type ReactElement, type ReactNode } from 
 import Link from "next/link";
 import AppCta from "@/components/AppCta";
 import CaseLead from "@/components/platform/CaseLead";
-import { TOOLS } from "@/data/dougu";
 import { COLUMN_SOURCE_LINKS } from "@/components/ColumnFooter";
 
 function sourceContent(text: string): ReactNode[] {
@@ -168,8 +167,7 @@ export default function MarkdownArticle({
     const arrow = columnStyle && line.match(/^→ (.+)\((\/[^()]*)\)$/);
     if (arrow) {
       const [, label, href] = arrow;
-      const tool = Object.values(TOOLS).find(tool => tool.path === href);
-      blocks.push(<Link key={`arrow-${index}`} href={href} className={`column-inline-card${tool ? ` jc--${tool.id}` : href.startsWith("/gokai/") ? " column-gokai-link" : ""}`}>→ {label}</Link>);
+      blocks.push(<Link key={`arrow-${index}`} href={href} className={`column-inline-card${href.startsWith("/gokai/") ? " column-gokai-link" : ""}`}>→ {label}</Link>);
       index += 1;
       continue;
     }

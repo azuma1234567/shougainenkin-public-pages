@@ -8,7 +8,7 @@
 .column-body h2 { margin: 2.4em 0 1em; padding: 0 0 0 14px; border: 0; border-left: 4px solid var(--platform-primary); }
 .column-body h3 { margin: 1.7em 0 .65em; font-size: 1.15rem; }
 .column-body strong { color: inherit; }
-.column-body .column-inline-card { display: block; margin: 1.2em 0; padding: 14px 18px; border-left: 4px solid var(--jc-accent, var(--platform-primary)); border-radius: 0 8px 8px 0; background: var(--jc-hover, var(--platform-band)); color: var(--platform-heading); font-weight: 700; text-decoration: none; }
+.column-body .column-inline-card { display: block; margin: 1.2em 0; padding: 14px 18px; border-left: 4px solid var(--c-primary); border-radius: 0 8px 8px 0; background: var(--c-band); color: var(--platform-heading); font-weight: 700; text-decoration: none; }
 .column-body .column-inline-card:hover { text-decoration: underline; }
 .column-body .column-gokai-link { border-color: var(--platform-link); background: var(--platform-chip); color: var(--platform-link); }
 .column-body .gokai-case { margin: 1.2em 0; padding: 20px; border-left: 3px solid var(--platform-primary); background: var(--platform-band); border-radius: 0 10px 10px 0; }

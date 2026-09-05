@@ -9,7 +9,7 @@ const LEAD: ToolId[] = ["mitate", "kingaku"];
 export function JibunCard({ id }: { id: ToolId }) {
   const t = TOOLS[id];
   return (
-    <Link className={`jc jc--${id}`} href={t.path}>
+    <Link className="jc" href={t.path}>
       <span className="jc-q">{t.question}</span>
       <span className="jc-what">{t.what}</span>
       <span className="jc-meta">
