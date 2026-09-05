@@ -14,6 +14,7 @@ import { PLACEMENTS } from "@/data/dougu";
 import AdLabel from "@/components/AdLabel";
 import { PageDate } from "@/components/platform/Platform";
 import CHECKPOINTS from "@/data/columns/checkpoints.json";
+import ColumnNext from "@/components/ColumnNext";
 import "@/app/columns/columns.css";
 
 type Faq = { question: string; answer: string };
@@ -36,7 +37,7 @@ export default function ColumnArticle({
 }) {
   /* ここまでの要約。文章はリード(column.lead)の再掲で、新しい文は書かない。
      data/columns/checkpoints.json に無い記事や、リードが無い記事には出さない。 */
-  const entry = (CHECKPOINTS as Record<string, { readMinutes: number; checkpoints: { lead: number; h2: number }[] }>)[column.slug];
+  const entry = (CHECKPOINTS as Record<string, { tool?: string; readMinutes: number; checkpoints: { lead: number; h2: number }[] }>)[column.slug];
   const lead = column.lead ?? [];
   const checkpoints = entry?.checkpoints
     .filter((item) => typeof lead[item.lead] === "string")
@@ -65,7 +66,7 @@ export default function ColumnArticle({
         parents={columnBreadcrumbParents(column)}
       />
       <h1>{column.title}</h1>
-      <PageDate published={column.datePublished} updated={column.dateModified} />
+      <PageDate published={column.datePublished} readMinutes={entry?.readMinutes} updated={column.dateModified} />
 
       {column.lead && <section className="column-conclusion" aria-labelledby="column-conclusion-heading">
         <h2 id="column-conclusion-heading">この記事の結論</h2>
@@ -88,7 +89,7 @@ export default function ColumnArticle({
           ) : undefined
         }
       /></div>
-      <DouguCards placements={PLACEMENTS.columns[column.slug]} position="after" />
+      <ColumnNext relatedSlugs={relatedSlugs} slug={column.slug} tool={entry?.tool} />
       <ColumnFooter
         currentSlug={column.slug}
         relatedSlugs={relatedSlugs}

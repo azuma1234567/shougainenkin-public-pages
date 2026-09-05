@@ -79,12 +79,13 @@ function formatPageDate(date: string): string {
   const [y, m, d] = date.split("-");
   return `${y}年${Number(m)}月${Number(d)}日`;
 }
-export function PageDate({ updated, checked, published }: { updated: string; checked?: string; published?: string }) {
+export function PageDate({ updated, checked, published, readMinutes }: { updated: string; checked?: string; published?: string; readMinutes?: number }) {
   const confirmed = checked ?? updated;
   return (
     <p className="p-page-date">
       {published ? <time dateTime={published} /> : null}
       <time dateTime={confirmed}>最終確認日 {formatPageDate(confirmed)}</time>
+      {readMinutes ? <> / 読む目安 約{readMinutes}分</> : null}
     </p>
   );
 }

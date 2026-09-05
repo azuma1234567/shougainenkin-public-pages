@@ -2,6 +2,7 @@
 .column-article h1, .column-article h2, .column-article h3 { color: var(--platform-heading); }
 .column-conclusion { margin: 24px 0; padding: 24px; border-radius: var(--r-card); background: var(--platform-band); }
 .column-conclusion h2 { margin: 0 0 10px; padding: 0; border: 0; font-size: var(--fs-h3); }
+.column-conclusion { box-shadow: none; }
 .column-conclusion p { margin: .7em 0 0; line-height: 1.9; }
 .column-body { min-width: 0; line-height: 1.9; }
 .column-body p { margin: 0 0 1.2em; line-height: 1.9; }
@@ -107,4 +108,38 @@
 
 @media print {
   .column-article > .article-toc { display: none; }
+}
+
+/* 末尾「次にすること」。docs/columns-parts-2026-09-05-instructions.md §2-5。
+   結論の箱と同じ部品(帯の地・罫線・角丸14)。新しい影や枠線は増やさない。 */
+.col-next {
+  margin: 2.5rem 0 0;
+  padding: var(--card-pad);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-card);
+  background: var(--c-band);
+}
+.col-next > h2 {
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+  color: var(--c-heading);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-heading);
+}
+.col-next-tool { margin: 0 0 14px; }
+.col-next-tool .mt-column-card { margin: 0; background: #fff; }
+.col-next-read-title {
+  margin: 0 0 6px;
+  color: var(--c-meta);
+  font-size: var(--fs-meta);
+  font-weight: 700;
+}
+.col-next-read { margin: 0; padding-left: 1.4em; }
+.col-next-read li { margin: 4px 0; font-size: var(--fs-small); line-height: 1.8; }
+.col-next-close {
+  margin: 14px 0 0;
+  color: var(--c-body-muted);
+  font-size: var(--fs-small);
+  font-weight: 400;
 }
