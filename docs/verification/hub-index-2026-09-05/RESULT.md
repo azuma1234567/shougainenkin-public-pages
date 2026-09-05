@@ -124,3 +124,53 @@ JavaScript を切った状態(`javaScriptEnabled: false`)でも **カード 21�
 | JSON-LD | CollectionPage + ItemList、numberOfItems 21 |
 
 スクリーンショット: `prod-byoki.png` `prod-joukyou.png` `prod-byoki-390.png`
+
+---
+
+# §3 改稿の反映(2026-09-05)
+
+指示書 `docs/hub-index-sasshin-2026-09-05-instructions.md` の §3 が改稿され、
+**30件すべてが「当てはまる側」から書き直された**ので、実装を差し替えた。
+今回は §3 だけ。§2・§4〜§5 は 36309e4 のまま触っていない。
+
+例(/byoki/utsu-soukyoku):
+
+```
+前: いちばん標準的なケース。病名ではなく、診断書の…
+後: うつ病でも双極性障害でも請求できます。病名ではなく、診断書の…
+```
+
+## 検証
+
+**1. 指示書との一致 → ○**
+
+`npm run verify:hub-hints`(新設)。指示書の表と `lib/hub-index.tsx` の
+`HUB_HINTS` / `HUB_ALIASES` を突き合わせる。
+
+```
+指示書の一言 30件 / 実装 30件
+指示書の別名 10件 / 実装 10件
+先頭に 不支給・対象外・却下・打ち切り・無理・通らない を置いたもの: 0件
+○ すべて一致。
+```
+
+**2. 画面に出た文字列との一致 → ○**
+描画された HTML から取り出した30件と、指示書の表が **30/30 完全一致**。
+
+**3. 絞り込み → ○**
+`ADHD` → 発達障害 / `透析` → 腎臓病・人工透析 / `線維筋痛症` → 難病・その他の病気。
+別名10件は指示書のまま。
+
+**4. 見た目 → ○**
+/byoki は3列21枚(1400px)・1列21枚(390px)、/joukyou は9枚。
+ページ全高は 1400px で 3,367px(一言が少し長くなったぶん 3,302 → 3,367)。
+`hints-byoki-1400.png` / `hints-byoki-390.png` / `hints-joukyou-1400.png`。
+
+**5. typecheck / build / 公開前チェック → ○**
+```
+npm run typecheck / npm run build → エラーなし
+node scripts/prelaunch-check.mjs  → ページ数 166 / × は B-1・B-3 の2つだけ
+```
+(B-10 はデザインシステムの追補で解消済み)
+
+`lib/sitemap-static-dates.ts` の `/byoki` `/joukyou` を 2026-09-05 に上げた。

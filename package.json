@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit --pretty false",
     "verify:disease-hubs": "node scripts/verify-disease-hubs.mjs",
     "verify:stats": "node scripts/verify-stats.mjs",
+    "verify:hub-hints": "node scripts/verify-hub-hints.mjs",
     "verify:hubs": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-hub-content.mjs && node scripts/verify-hub-map.mjs",
     "verify:yougo": "node scripts/verify-yougo.mjs",
     "verify:gokai": "node scripts/verify-gokai.mjs",
