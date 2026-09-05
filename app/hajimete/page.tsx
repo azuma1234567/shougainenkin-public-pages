@@ -115,7 +115,7 @@ export default function HajimetePage() {
         <div className="p-container">
           <SectionHeader title="障害年金ってなに？ — 1分でわかる説明" />
           <Card className="p-card-lg">
-            <p style={{ fontSize: 15.5, lineHeight: 2.1 }}>
+            <p className="p-card-copy" style={{ fontSize: "var(--fs-body)", lineHeight: 2.1 }}>
               病気やけがのせいで、生活や仕事がむずかしくなったときに、<strong style={{ color: "#0273ad" }}>国から定期的に受け取れるお金</strong>です。
             </p>
             <div className="p-grid" style={{ gap: 8, borderTop: "1px solid #ecf4fa", paddingTop: 14 }}>
@@ -188,7 +188,7 @@ export default function HajimetePage() {
       <section className="p-section" aria-labelledby="time-heading">
         <div className="p-container p-split">
           <Card className="p-card-lg">
-            <h2 style={{ fontSize: 20 }}>どのくらい時間がかかるか</h2>
+            <h2>どのくらい時間がかかるか</h2>
             <p className="p-card-copy">心の準備のために、先に知っておいてください。</p>
             <ul className="p-list">
               <li><strong>初診日を確認して、書類をそろえる</strong> — 人によって大きく違います。数週間から数か月</li>
@@ -200,7 +200,7 @@ export default function HajimetePage() {
             </p>
           </Card>
           <div className="p-primary-panel p-grid" style={{ gap: 14 }}>
-            <h2 style={{ fontSize: 20 }}>最初の一歩は、ひとつだけ</h2>
+            <h2>最初の一歩は、ひとつだけ</h2>
             <p className="p-card-copy" style={{ color: "#dbeefa" }}>
               「その症状で、いちばん最初に病院へ行ったのはいつだったか」を思い出してみてください。手がかりになるもの:
             </p>

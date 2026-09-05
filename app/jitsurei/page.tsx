@@ -76,7 +76,7 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
         <div className="p-container">
           <div className="p-grid p-grid-2">
             <div className="p-card">
-              <h2 id="howto-heading" style={{ fontSize: 15 }}>この実例が、どこから来たものか</h2>
+              <h2 className="p-card-heading" id="howto-heading">この実例が、どこから来たものか</h2>
               <p className="p-card-copy">
                 障害年金の結果に納得できないとき、2段階の不服申立てがあります。①<strong>審査請求</strong>（社会保険審査官へ。決定を知った日の翌日から3か月以内）、②<strong>再審査請求</strong>（社会保険審査会へ。審査請求の決定書の謄本が送られた日の翌日から2か月以内）。ここに集めているのは、その<strong>2段階目の裁決</strong>です。
               </p>
@@ -85,7 +85,7 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
               </p>
             </div>
             <div className="p-card">
-              <h2 style={{ fontSize: 15 }}>読み方 — どこを見るか</h2>
+              <h2 className="p-card-heading">読み方 — どこを見るか</h2>
               <p className="p-card-copy">見てほしいのは結論そのものではなく、<strong>その手前</strong>です。</p>
               <ul className="p-list">
                 <li>何が足りなくて、原処分では認められなかったのか</li>
@@ -126,7 +126,7 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
 
           <aside className="p-sidebar" aria-label="収録実例の傾向">
             <div className="p-card">
-              <h2 style={{ fontSize: 14.5 }}>争点になりやすいのは</h2>
+              <h2 className="p-card-heading">争点になりやすいのは</h2>
               <div className="p-grid" style={{ gap: 10 }}>
                 {issueCounts.map(([label, count]) => (
                   <div className="p-bar-row" key={label}>
@@ -139,12 +139,12 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
               <p className="p-note" style={{ marginTop: 8 }}><strong>この割合は、申請全体の支給割合ではありません。</strong>公開されている裁決から集めたものです。「審査請求すれば6割通る」という意味にはなりません。申請全体では、令和6年度に新しく決まった146,225件のうち非該当は18,982件（13.0%）でした。</p>
             </div>
             <div className="p-card" style={{ background: "#eef6fc", borderColor: "#d7e9f5" }}>
-              <h2 style={{ fontSize: 13.5 }}>不支給の通知を受け取った方へ</h2>
+              <h2 className="p-card-heading">不支給の通知を受け取った方へ</h2>
               <p className="p-card-copy">不服申立てには期限があります（通知を知った日の翌日から3か月）。まずは選択肢を確認してください。</p>
               <Link className="p-card-link" href="/nayami/fushikyu">「不支給と言われたとき」を読む →</Link>
             </div>
             <div className="p-card">
-              <h2 style={{ fontSize: 13.5 }}>申請全体の数字を見る</h2>
+              <h2 className="p-card-heading">申請全体の数字を見る</h2>
               <p className="p-card-copy">新規裁定、支給割合、診断書の種類、更新結果を、公的統計から確認できます。</p>
               <Link className="p-card-link" href="/suuji">「数字で見る障害年金」を読む →</Link>
             </div>
@@ -156,7 +156,7 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
         <div className="p-container">
           <div className="p-grid p-grid-2">
             <div className="p-card">
-              <h2 id="caution-heading" style={{ fontSize: 15 }}>気をつけてほしいこと</h2>
+              <h2 className="p-card-heading" id="caution-heading">気をつけてほしいこと</h2>
               <ul className="p-list">
                 <li>裁決は、<strong>その事案の事実関係にもとづく個別の判断</strong>です。似ていても、結論が同じになるとは限りません</li>
                 <li>ここにあるのは<strong>争いになった事例</strong>です。ふつうに通った申請はここに現れません</li>
@@ -164,7 +164,7 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
               </ul>
             </div>
             <div className="p-card">
-              <h2 style={{ fontSize: 15 }}>ここからできること</h2>
+              <h2 className="p-card-heading">ここからできること</h2>
               <ul className="p-list">
                 <li>自分と同じ争点の実例を3件読む</li>
                 <li><Link href="/columns/tokyu-hantei-guideline">等級の目安を、国の表で確かめる</Link></li>
