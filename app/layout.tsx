@@ -6,7 +6,6 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import YougoAutoLinker from "@/components/YougoAutoLinker";
 import {
-  APP_STORE_ID,
   SITE_NAME,
   SITE_URL,
 } from "@/lib/constants";
@@ -52,7 +51,6 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: [OG_IMAGE],
   },
-  other: { "apple-itunes-app": `app-id=${APP_STORE_ID}` },
 };
 
 export default function RootLayout({

@@ -14,7 +14,7 @@ const DESCRIPTION =
 const isPublished = isPublishedInternalPath("/dougu/shorui");
 
 export const metadata: Metadata = {
-  ...pageMetadata({ title: TOOLS.shorui.question, description: DESCRIPTION, path: "/dougu/shorui" }),
+  ...pageMetadata({ title: TOOLS.shorui.question, description: DESCRIPTION, path: "/dougu/shorui", showAppBanner: true, appBannerArgument: "https://shougainenkin-note.net/dougu/shorui" }),
   ...(!isPublished && { robots: { index: false, follow: false } }),
 };
 

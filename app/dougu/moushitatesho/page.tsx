@@ -30,7 +30,7 @@ const FAQ: { q: string; a: string }[] = [
 ];
 
 export const metadata: Metadata = {
-  ...pageMetadata({ title: TITLE, description: DESCRIPTION, path: PATH }),
+  ...pageMetadata({ title: TITLE, description: DESCRIPTION, path: PATH, showAppBanner: true, appBannerArgument: "https://shougainenkin-note.net/dougu/moushitatesho" }),
   ...(!isPublished && { robots: { index: false, follow: false } }),
 };
 

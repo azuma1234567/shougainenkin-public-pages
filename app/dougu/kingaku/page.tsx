@@ -14,7 +14,7 @@ const DESCRIPTION =
 const isPublished = isPublishedInternalPath("/dougu/kingaku");
 
 export const metadata: Metadata = {
-  ...pageMetadata({ title: "障害年金は、いくらになるか", description: DESCRIPTION, path: "/dougu/kingaku" }),
+  ...pageMetadata({ title: "障害年金は、いくらになるか", description: DESCRIPTION, path: "/dougu/kingaku", showAppBanner: true, appBannerArgument: "https://shougainenkin-note.net/dougu/kingaku" }),
   ...(!isPublished && { robots: { index: false, follow: false } }),
 };
 

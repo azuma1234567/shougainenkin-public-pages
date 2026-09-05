@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AUTHOR_NAME, CONTACT_EMAIL, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { APP_STORE_ID, AUTHOR_NAME, CONTACT_EMAIL, SITE_NAME, SITE_URL } from "@/lib/constants";
 
 export const OG_IMAGE = {
   url: "/opengraph-image",
@@ -60,16 +60,29 @@ export function faqJsonLd(faqs: { question: string; answer: string }[]) {
   };
 }
 
+/* Smart App Banner。全ページに出すと記事の上に常に帯が出るので、
+   アプリと機能が対応するページにだけ付ける
+   (docs/site-structure-2026-09-05-instructions.md §6)。
+   appArgument を渡すと、アプリ側が対応するページを開ける。 */
+export function appBanner(appArgument?: string) {
+  return { "apple-itunes-app": `app-id=${APP_STORE_ID}${appArgument ? `, app-argument=${appArgument}` : ""}` };
+}
+
 export function pageMetadata({
   title,
   description,
   path,
   absoluteTitle = false,
+  appBannerArgument,
+  showAppBanner = false,
 }: {
   title: string;
   description: string;
   path: string;
   absoluteTitle?: boolean;
+  /* Smart App Banner を出すページだけ true。道具のページは app-argument も付ける。 */
+  showAppBanner?: boolean;
+  appBannerArgument?: string;
 }): Metadata {
   const fullTitle = title.includes(SITE_NAME)
     ? title
@@ -89,6 +102,7 @@ export function pageMetadata({
       images: [OG_IMAGE],
     },
     robots: { index: true, follow: true },
+    ...(showAppBanner ? { other: appBanner(appBannerArgument) } : {}),
   };
 }
 

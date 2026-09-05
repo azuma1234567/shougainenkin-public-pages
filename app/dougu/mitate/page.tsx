@@ -13,7 +13,7 @@ const DESCRIPTION =
 const isPublished = isPublishedInternalPath("/dougu/mitate");
 
 export const metadata: Metadata = {
-  ...pageMetadata({ title: "国が公表している目安に、当てはめてみる", description: DESCRIPTION, path: "/dougu/mitate" }),
+  ...pageMetadata({ title: "国が公表している目安に、当てはめてみる", description: DESCRIPTION, path: "/dougu/mitate", showAppBanner: true, appBannerArgument: "https://shougainenkin-note.net/dougu/mitate" }),
   ...(!isPublished && { robots: { index: false, follow: false } }),
 };
 

@@ -15,7 +15,7 @@ const DESCRIPTION =
 const isPublished = isPublishedInternalPath("/dougu/madoguchi");
 
 export const metadata: Metadata = {
-  ...pageMetadata({ title: TOOLS.madoguchi.question, description: DESCRIPTION, path: "/dougu/madoguchi" }),
+  ...pageMetadata({ title: TOOLS.madoguchi.question, description: DESCRIPTION, path: "/dougu/madoguchi", showAppBanner: true, appBannerArgument: "https://shougainenkin-note.net/dougu/madoguchi" }),
   ...(!isPublished && { robots: { index: false, follow: false } }),
 };
 

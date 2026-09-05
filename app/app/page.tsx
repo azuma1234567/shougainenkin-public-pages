@@ -9,7 +9,7 @@ import { pageMetadata } from "@/lib/seo";
 const TITLE = "障害年金申請サポート｜AI相談・申請ガイドアプリ";
 const DESCRIPTION = "障害年金の申請準備を8つの段階で案内する無料iPhoneアプリ。AI相談、日々の記録、診察メモ、病歴・就労状況等申立書の下書きに対応。アカウント登録は不要です。";
 
-export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: "/app", absoluteTitle: true });
+export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: "/app", absoluteTitle: true, showAppBanner: true });
 
 const features = [
   ["AIに相談", "診察で話しきれなかったことや日々の不安を、一言から自分のペースで整理できます。"],

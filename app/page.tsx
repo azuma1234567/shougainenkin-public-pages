@@ -92,6 +92,7 @@ const searchItems: SearchItem[] = [
 ];
 
 export const metadata: Metadata = pageMetadata({
+  showAppBanner: true,
   title: TITLE,
   description: DESCRIPTION,
   path: "/",
