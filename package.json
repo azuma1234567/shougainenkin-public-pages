@@ -15,6 +15,7 @@
     "verify:yougo": "node scripts/verify-yougo.mjs",
     "verify:gokai": "node scripts/verify-gokai.mjs",
     "verify:columns": "node scripts/verify-columns.mjs",
+    "verify:column-parts": "node scripts/verify-column-parts.mjs",
     "verify:kingaku": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-kingaku.mjs",
     "verify:mitate": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-mitate/verify.mjs",
     "verify:mitate:print": "node scripts/verify-mitate/print.mjs",
