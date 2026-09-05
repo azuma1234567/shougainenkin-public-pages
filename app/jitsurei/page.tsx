@@ -159,6 +159,8 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
               <li><span className="is-rejected" />認められなかった <strong>{REJECTED_COUNT}件</strong></li>
             </ul>
             <p className="p-issue-lead">収録 <strong>{SAIKETSU_COUNTS.all}件</strong>のうち、結論が変わったのは <strong>{SAIKETSU_COUNTS.accepted}件</strong>。全件、原文 PDF つき。</p>
+            {/* 帯を見た人が「6割通る制度」と読まないよう、注記は帯の直下に置く(文はサイドバーにあったものをそのまま移した)。 */}
+            <p className="p-note" style={{ marginTop: 8 }}><strong>この割合は、申請全体の支給割合ではありません。</strong>公開されている裁決から集めたものです。「審査請求すれば6割通る」という意味にはなりません。申請全体では、令和6年度に新しく決まった146,225件のうち非該当は18,982件（13.0%）でした。</p>
           </div>
         </div>
       </header>
@@ -229,7 +231,6 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
                 ))}
               </div>
               <p className="p-source" style={{ marginTop: 10 }}>収録{SAIKETSU_COUNTS.all}件のうち、容認・一部容認は{SAIKETSU_COUNTS.accepted}件です。</p>
-              <p className="p-note" style={{ marginTop: 8 }}><strong>この割合は、申請全体の支給割合ではありません。</strong>公開されている裁決から集めたものです。「審査請求すれば6割通る」という意味にはなりません。申請全体では、令和6年度に新しく決まった146,225件のうち非該当は18,982件（13.0%）でした。</p>
             </div>
             <div className="p-flag p-flag-danger">
               <strong>不支給の通知を受け取った方へ</strong><br />
