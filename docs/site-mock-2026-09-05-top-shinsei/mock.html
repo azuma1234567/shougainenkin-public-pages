@@ -1,0 +1,73 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>トップ / 申請の流れ — 刷新モック</title>
+<style>
+:root{--p:#0284c7;--h:#14425e;--t:#2a4a60;--m:#4a6a80;--b:#dcebf5;--band:#eef6fc;--faint:#6b8799;--ok:#1a7f4b;--ok-bg:#e9f6ee;--warn:#b7791f;--warn-bg:#fdf5e6;--danger:#b3261e;--danger-bg:#fdf1ef}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:var(--t);background:#fff;line-height:1.75}
+a{color:inherit;text-decoration:none}.c{max-width:1240px;margin:0 auto;padding:0 24px}h1,h2,h3{color:var(--h);margin:0}
+.label{font-size:12px;color:var(--faint);letter-spacing:.06em;padding:20px 0 8px}.divider{margin:40px 0;border:0;border-top:2px dashed #c9dbe6}
+/* tiles */
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tile{padding:16px 18px;border:1px solid #cfe4f2;border-radius:12px;background:#fff}.tile span{display:block;font-size:12.5px;font-weight:700;color:var(--m)}.tile strong{display:block;font-size:28px;line-height:1.2;color:var(--h);margin-top:4px;font-variant-numeric:tabular-nums}.tile small{display:block;color:var(--faint);font-size:12px;margin-top:6px}
+.sec{padding:30px 0 0}.sec h2{font-size:24px;margin-bottom:4px}.sec .lead{margin:0 0 14px;color:var(--m)}
+/* top: 探す — 型を変える */
+.find{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.blk{border:1px solid var(--b);border-radius:14px;padding:18px 20px;background:#fff}.blk h3{font-size:17px;display:flex;justify-content:space-between}.blk h3 a{font-size:13px;color:var(--p)}.blk p{margin:4px 0 12px;font-size:13.5px;color:var(--m)}
+.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{padding:6px 11px;border:1px solid var(--b);border-radius:999px;font-size:13px;font-weight:700;color:var(--p)}
+.qlist{display:grid;gap:8px}.q{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-radius:10px;background:var(--band);font-size:14px;font-weight:700;color:var(--h)}.q small{font-weight:400;color:var(--faint)}
+.money{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.money .tile{padding:12px 14px}.money .tile strong{font-size:22px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.two a{padding:12px;border-radius:10px;border:1px solid var(--b);font-size:14px;font-weight:700;color:var(--h)}.two a small{display:block;font-weight:400;color:var(--m);font-size:12.5px}
+/* shinsei: rail + compact card */
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;margin-top:18px}
+.rail{position:sticky;top:16px;align-self:start;display:grid;gap:4px}.rail a{display:grid;grid-template-columns:26px 1fr;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;font-size:13.5px;color:var(--m)}.rail a b{width:24px;height:24px;border-radius:50%;background:var(--band);color:var(--p);display:grid;place-items:center;font-size:12px}.rail a.on{background:var(--band);color:var(--h);font-weight:700}.rail a.on b{background:var(--p);color:#fff}.rail a.done b{background:var(--ok);color:#fff}
+.prog{margin:4px 0 10px;font-size:12.5px;color:var(--faint)}.prog i{display:block;height:6px;border-radius:3px;background:#e8f3fa;margin-top:6px}.prog i::after{content:"";display:block;width:25%;height:100%;border-radius:3px;background:var(--ok)}
+.step{border:1px solid var(--b);border-radius:14px;background:#fff;padding:20px 22px;margin-bottom:16px;scroll-margin-top:80px}
+.step header{display:grid;grid-template-columns:40px 1fr auto;gap:14px;align-items:start}.step .n{width:40px;height:40px;border-radius:50%;background:var(--p);color:#fff;display:grid;place-items:center;font-weight:700}
+.step h2{font-size:20px}.step .one{margin:2px 0 0;font-size:13.5px;color:var(--m)}
+.data{padding:6px 10px;border-radius:8px;background:var(--band);font-size:12.5px;color:var(--h);white-space:nowrap}.data b{color:var(--h);font-size:15px}
+.step .body{margin:12px 0 10px;font-size:14.5px}
+.cols{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}
+.tasks{padding:12px 14px;border-radius:10px;border:1px solid var(--b)}.tasks h3{font-size:13px;margin-bottom:6px}.tasks label{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;margin:6px 0}.tasks input{margin-top:3px}
+.stum{padding:12px 14px;border-left:4px solid var(--warn);background:var(--warn-bg);border-radius:0 10px 10px 0;font-size:13.5px;color:#5d4210}.stum b{display:block;color:var(--warn);font-size:12.5px;margin-bottom:2px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid #edf4f9}.foot .chips .chip{font-size:12.5px;padding:4px 10px}.foot a.next{color:var(--p);font-weight:700;font-size:13.5px}
+@media(max-width:900px){.tiles{grid-template-columns:repeat(2,1fr)}.find,.cols{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.rail{position:static;display:flex;overflow-x:auto}.rail a{white-space:nowrap}}
+</style></head><body>
+<p class="label c">▼ トップ — 「探す」を内容の型ごとに部品を変えて2列に。その後に、実態を2行の文と帯1本で</p>
+
+<section class="sec"><div class="c">
+ <h2>探す</h2><p class="lead">入口は5つ。どこから入っても、必要なところへつながります。</p>
+ <div class="find">
+  <div class="blk"><h3>病気から <a href="#">21の病気 →</a></h3><p>病名では決まりませんが、審査で見られるところは病気ごとに違います。</p>
+   <div class="chips"><a class="chip">うつ病・双極性障害</a><a class="chip">適応障害・不安障害</a><a class="chip">発達障害</a><a class="chip">統合失調症</a><a class="chip">知的障害</a><a class="chip">てんかん</a><a class="chip">腎臓病・人工透析</a><a class="chip">心臓病</a><a class="chip">がん</a><a class="chip">肢体の障害</a><a class="chip">…ほか11</a></div></div>
+  <div class="blk"><h3>いまの状況から <a href="#">9つの状況 →</a></h3><p>同じ病気でも、暮らし方によって見られるところが変わります。</p>
+   <div class="chips"><a class="chip">働きながら</a><a class="chip">20歳前</a><a class="chip">一人暮らし</a><a class="chip">傷病手当金から</a><a class="chip">65歳以上</a><a class="chip">主婦(主夫)・無職</a><a class="chip">学生</a><a class="chip">家族が手伝う</a><a class="chip">生活保護</a></div></div>
+  <div class="blk"><h3>悩みから <a href="#">6つの悩み →</a></h3><p>手続きの順番ではなく、いま止まっているところで。</p>
+   <div class="qlist"><a class="q">不支給と言われた <small>期限 3か月</small></a><a class="q">初診日がわからない・カルテがない <small>争点 35件</small></a><a class="q">診断書で困っている <small>争点 15件</small></a><a class="q">更新が不安 / 支給が止まった <small>継続 96.8%</small></a><a class="q">さかのぼって請求したい <small>最大5年</small></a></div></div>
+  <div class="blk"><h3>お金の話 <a href="#">くわしく →</a></h3><p>令和8年度の額。税金はかからず、貯金があっても関係ありません。</p>
+   <div class="money"><div class="tile"><span>基礎 2級(年)</span><strong>847,300円</strong></div><div class="tile"><span>基礎 1級(年)</span><strong>1,059,125円</strong></div><div class="tile"><span>厚生 3級 最低保障</span><strong>635,500円</strong></div><div class="tile"><span>給付金 2級(月)</span><strong>5,620円</strong></div></div></div>
+ </div>
+</div></section>
+
+<section class="sec"><div class="c">
+ <h2>実態を、数字で</h2>
+ <p class="lead" style="max-width:820px">令和6年度、障害年金は<b style="color:var(--h)">146,225件</b>が新しく決まり、<b style="color:var(--h)">87.0%</b>が支給に至りました。そのうち<b style="color:var(--h)">70.3%</b>は精神の障害の診断書によるものです。 <a href="#" style="color:var(--p);font-weight:700">数字で見る障害年金 →</a></p>
+ <div style="max-width:720px"><div style="display:flex;height:18px;border-radius:6px;overflow:hidden"><span style="width:87%;background:var(--p)"></span><span style="width:13%;background:var(--band)"></span></div>
+ <div style="display:flex;gap:18px;margin-top:6px;font-size:13px;color:var(--m)"><span>支給 <b style="color:var(--h)">87.0%</b></span><span>非該当 <b style="color:var(--h)">13.0%</b>(前年度 8.4%)</span></div></div>
+</div></section>
+<hr class="divider"><p class="label c">▼ /shinsei — 左に固定の目次(進捗つき)、ステップカードは高さを半分に。「この段階ですること」はチェックできる(この端末だけに保存)</p>
+<div class="c layout">
+ <nav class="rail"><div class="prog">進み具合 2/8<i></i></div>
+  <a class="done"><b>✓</b>初診日を確認</a><a class="done"><b>✓</b>納付要件を確認</a><a class="on"><b>3</b>年金事務所へ相談</a><a><b>4</b>必要書類をそろえる</a><a><b>5</b>診断書の準備</a><a><b>6</b>申立書を作成</a><a><b>7</b>提出する</a><a><b>8</b>結果を待つ</a></nav>
+ <div>
+  <article class="step"><header><span class="n">3</span><div><h2>年金事務所へ相談する</h2><p class="one">初診日と納付要件が見えたら、管轄の年金事務所に予約して相談します。</p></div></header>
+   <p class="body">年金事務所の相談は予約制です。基礎年金番号がわかるものと、初診日のメモを持って行けば、必要な書類の一覧と様式をもらえます。</p>
+   <div class="cols"><div class="tasks"><h3>この段階ですること</h3><label><input type="checkbox" checked> 管轄の年金事務所を調べ、予約する</label><label><input type="checkbox"> 基礎年金番号・初診日のメモ・お薬手帳を持って行く</label><label><input type="checkbox"> 受け取った様式と説明を、その日のうちに控える</label></div>
+    <div class="stum"><b>つまずきやすいところ</b>窓口で「対象外」と言われても、それは審査の結果ではありません。何が足りないと言われたかをメモして帰ってください。</div></div>
+   <div class="foot"><div class="chips"><a class="chip">→ どこに出せばいい？(道具)</a><a class="chip">年金事務所での相談</a><a class="chip">持ち物</a></div><a class="next">次へ: 必要書類をそろえる →</a></div></article>
+  <article class="step"><header><span class="n">4</span><div><h2>必要書類をそろえる</h2><p class="one">全員共通の書類と、人によって違う書類があります。</p></div><span class="data">初診日の証明が争点の裁決 <b>35</b>件</span></header>
+   <p class="body">受診状況等証明書、診断書、申立書が中心。初診の病院が閉院していたり記録が無いときは、別の証明の道があります。</p>
+   <div class="cols"><div class="tasks"><h3>この段階ですること</h3><label><input type="checkbox"> 自分に要る書類だけの一覧を作る</label><label><input type="checkbox"> 受診状況等証明書を初診の病院に依頼する</label><label><input type="checkbox"> 依頼した日と受け取り予定日をメモする</label></div>
+    <div class="stum"><b>つまずきやすいところ</b>カルテが無い=終わり、ではありません。診察券・薬袋・第三者証明など確認できる道が残る場合があります。</div></div>
+   <div class="foot"><div class="chips"><a class="chip">→ 何をそろえればいい？(道具)</a><a class="chip">受診状況等証明書</a><a class="chip">カルテがないとき</a></div><a class="next">次へ: 診断書の準備をする →</a></div></article>
+ </div>
+</div>
+</body></html>

@@ -1,0 +1,87 @@
+{
+  "origin": "http://localhost:3205",
+  "results": [
+    {
+      "number": 14,
+      "label": "本文のテキスト(要約を除く)と JSON-LD が変更前と一致",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 15,
+      "label": "末尾ブロックが47本にある(次に読む3本・道具1枚・固定文・道具の重複なし)",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 16,
+      "label": "1280pxで目次が固定・現在地が動く / 1180px・390pxは従来どおり・横スクロールなし",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 17,
+      "label": "新しい部品の文字色と地のコントラストが4.5:1以上・--c-* 以外の色を書いていない",
+      "ok": true,
+      "errors": [],
+      "ratios": [
+        {
+          "selector": ".col-check-title",
+          "ratio": 20.18
+        },
+        {
+          "selector": ".col-check-body",
+          "ratio": 20.18
+        },
+        {
+          "selector": ".col-check-rest",
+          "ratio": 20.18
+        },
+        {
+          "selector": ".col-next h2",
+          "ratio": 20.18
+        },
+        {
+          "selector": ".col-next-read-title",
+          "ratio": 20.18
+        },
+        {
+          "selector": ".col-next-read a",
+          "ratio": 20.18
+        },
+        {
+          "selector": ".col-next-close",
+          "ratio": 20.18
+        },
+        {
+          "selector": ".article-toc.is-rail a",
+          "ratio": 21
+        },
+        {
+          "selector": ".article-toc.is-rail a[aria-current=\"true\"]",
+          "ratio": null
+        },
+        {
+          "selector": ".article-toc-next a",
+          "ratio": 21
+        },
+        {
+          "selector": ".p-page-date",
+          "ratio": 20.18
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "label": "印刷で左レールが出ない・要約は出る",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 19,
+      "label": "目次の項目と文言・FAQ の JSON-LD の件数が変更前と一致",
+      "ok": true,
+      "errors": []
+    }
+  ]
+}

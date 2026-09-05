@@ -1,5 +1,10 @@
 # 「申請の流れ ― 8つのステップ」を左→右に読める形にする (2026-09-05)
 
+> **2026-09-05 精査**: `docs/user-psychology-seisa-2026-09-05.md`(§4)> `docs/page-types-seisa-2026-09-05.md`(§4)> `docs/design-seisa-2026-09-05.md` の順で、この指示書より優先。数字タイルの列は置かない・数字は黒・共通定数を使う。食い違う箇所はそちらに従う。
+
+> **2026-09-05 追記(design-system 後)**: 着手条件は `docs/design-system-2026-09-05-instructions.md` のマージ済み。色・文字サイズ・角丸・影は同書 §1〜§2 のトークン(`--c-*`、8段の文字サイズ)だけを使い、本書やモックに書かれた hex 値・px 値はトークンに読み替える(新しい hex を書かない。数字は黒 `--c-heading`)。部品(結論の箱・カード・道具カード・FAQ・日付ラベル「最終確認日」)は同書 §3 の共通部品を使う。見た目の正は `docs/site-mock-2026-09-05-all/site.html` の該当ボードで、本書のモックはレイアウトの参考。文章は `docs/writing-techniques-2026-09-05.md` §5 の規則に従う。実行順: design-system → ハブ一言 → コラム部品 → stepflow → hub-index → hajimete-jitsurei → top-shinsei(同じ作業ツリーで同時に走らせない)。
+
+
 対象: `components/platform/StepFlow.tsx` と `app/platform.css` の `.step-flow*`。
 使われている場所: トップ(`app/page.tsx`)と `/shinsei` のヒーロー(`ShinseiRestyled.tsx`)。**両方で同じ部品**なので、直すのは1か所。
 モック: `docs/site-mock-2026-09-05-stepflow/stepflow-mock.html`(ブラウザで開いて幅を変えると3段階が見える)。

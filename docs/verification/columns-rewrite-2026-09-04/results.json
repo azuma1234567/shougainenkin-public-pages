@@ -61,6 +61,24 @@
       "label": "375pxでページ横スクロールなし・目次は閉じた状態",
       "ok": true,
       "errors": []
+    },
+    {
+      "number": 11,
+      "label": "止まり所のデータが docs と data で同一・47本×4件・h2昇順・lead 0..3を各1回",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 12,
+      "label": "各記事に要約が4つ・中身が lead と完全一致・「今日は十分です」は先頭だけ",
+      "ok": true,
+      "errors": []
+    },
+    {
+      "number": 13,
+      "label": "要約が、指定した h2 の後・次の h2 の前にある",
+      "ok": true,
+      "errors": []
     }
   ],
   "assumedAmounts": [

@@ -1,0 +1,75 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>デザインシステム モック — 記事とハブを同じ部品で</title>
+<style>
+:root{--c-text:#1e3a4d;--c-heading:#14425e;--c-body-muted:#4a6a80;--c-meta:#4f6f87;--c-border:#dcebf5;--c-band:#eef6fc;--c-primary:#0273ad;--c-primary-deep:#015d8c;--c-ok:#1a7f4b;--c-ok-bg:#e9f6ee;--c-warn:#b7791f;--c-warn-bg:#fdf5e6;--c-danger:#b3261e;--c-danger-bg:#fdf1ef;
+--fs-h1:30px;--fs-h2:22px;--fs-h3:18px;--fs-num:28px;--fs-body:17px;--fs-small:14.5px;--fs-meta:13px;--fs-note:12.5px;--lh-body:1.9;--r-sm:8px;--r-card:14px;--shadow:0 1px 3px rgba(20,66,94,.06);--card-pad:20px 22px;--card-gap:14px;--w-read:760px}
+@media(max-width:720px){:root{--fs-h1:26px;--fs-h2:20px}}
+*{box-sizing:border-box}body{margin:0;font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:var(--c-text);font-size:var(--fs-body);line-height:var(--lh-body);background:#f7fbfe}
+h1,h2,h3{color:var(--c-heading);font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;line-height:1.45;margin:0}
+h1{font-size:var(--fs-h1)}h2{font-size:var(--fs-h2)}h3{font-size:var(--fs-h3)}
+a{color:var(--c-primary)}
+.hdr{background:#fff;border-bottom:1px solid var(--c-border)}.hdr .in{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center}.hdr b{font-family:"Zen Kaku Gothic New",sans-serif;font-size:20px;color:var(--c-heading)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border-radius:var(--r-pill,999px);background:var(--c-primary);color:#fff;font-weight:700;font-size:15px;text-decoration:none}
+.btn2{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--c-primary);color:var(--c-primary);background:#fff;font-weight:700;font-size:15px;text-decoration:none}
+.page{max-width:var(--w-read);margin:0 auto;padding:28px 24px 40px}
+.crumb{font-size:var(--fs-meta);color:var(--c-meta);margin-bottom:10px}.crumb a{color:var(--c-meta)}
+.date{font-size:var(--fs-meta);color:var(--c-meta);margin:8px 0 18px}
+.conc{padding:var(--card-pad);border-left:4px solid var(--c-primary);background:var(--c-band);border-radius:0 var(--r-card) var(--r-card) 0;margin:0 0 26px}.conc h2{font-size:var(--fs-h3);margin-bottom:8px}.conc p{margin:0 0 8px}
+p{margin:0 0 1.1em}
+.sec h2{margin:30px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--c-border)}
+.tbl{overflow-x:auto;border:1px solid var(--c-border);border-radius:var(--r-card);background:#fff;margin:14px 0 20px}table{width:100%;border-collapse:collapse;font-size:var(--fs-small)}th,td{padding:11px 14px;text-align:left;border-top:1px solid var(--c-border)}thead th{background:var(--c-band);color:var(--c-heading);border-top:0}td.num{text-align:right;color:var(--c-heading);font-weight:700;font-variant-numeric:tabular-nums}
+.tool{display:grid;gap:4px;padding:var(--card-pad);border:1px solid var(--c-border);border-left:4px solid var(--c-primary);border-radius:var(--r-card);background:#fff;box-shadow:var(--shadow);margin:14px 0 20px;text-decoration:none;color:inherit}.tool b{color:var(--c-primary);font-size:var(--fs-body)}.tool span{font-size:var(--fs-small);color:var(--c-body-muted)}
+.faq h3{margin:18px 0 6px;font-size:var(--fs-body)}.faq p{font-size:var(--fs-small);color:var(--c-text)}
+.note{padding:12px 14px;border-left:4px solid var(--c-ok);background:var(--c-ok-bg);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:var(--fs-small);margin:0 0 20px}
+.note.d{border-color:var(--c-danger);background:var(--c-danger-bg)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--card-gap)}.card{padding:var(--card-pad);border:1px solid var(--c-border);border-radius:var(--r-card);background:#fff;box-shadow:var(--shadow)}.card h3{margin-bottom:6px}.card p{font-size:var(--fs-small);color:var(--c-body-muted);margin:0}
+.meta{font-size:var(--fs-note);color:var(--c-meta)}
+.tokens{max-width:1200px;margin:0 auto;padding:24px}.sw{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 16px}.sw div{width:96px;padding:8px;border-radius:var(--r-sm);font-size:11px;border:1px solid var(--c-border)}.scale{display:grid;gap:4px;margin-bottom:12px}
+.label{font-size:12px;color:var(--c-meta);letter-spacing:.06em;max-width:1200px;margin:20px auto 0;padding:0 24px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1560px;margin:0 auto}.two>div{background:#f7fbfe;border:1px dashed #c9dbe6}
+@media(max-width:1000px){.two{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+</style></head><body>
+<header class="hdr"><div class="in"><b>▢ 障害年金申請サポート</b><a class="btn" href="#">無料アプリ</a></div></header>
+
+<p class="label">▼ トークン(色 11・文字 8 段・角丸 3・影 1)。数字と見出しは黒(#14425e)、主色は #0273ad の 1 つ</p>
+<section class="tokens">
+ <div class="sw">
+  <div style="background:#1e3a4d;color:#fff">text<br>#1e3a4d</div><div style="background:#14425e;color:#fff">heading/数字<br>#14425e</div><div style="background:#4a6a80;color:#fff">muted<br>#4a6a80</div><div style="background:#4f6f87;color:#fff">meta 5.31<br>#4f6f87</div><div style="background:#dcebf5">border<br>#dcebf5</div><div style="background:#eef6fc">band<br>#eef6fc</div><div style="background:#0273ad;color:#fff">primary 5.17<br>#0273ad</div><div style="background:#015d8c;color:#fff">deep<br>#015d8c</div><div style="background:#e9f6ee;color:#1a7f4b;border-left:4px solid #1a7f4b">ok</div><div style="background:#fdf5e6;color:#b7791f;border-left:4px solid #b7791f">warn</div><div style="background:#fdf1ef;color:#b3261e;border-left:4px solid #b3261e">danger</div>
+ </div>
+ <div class="scale"><h1>h1 30px 見出しはゴシック 1 書体</h1><h2>h2 22px 見出しだけで筋が通る文</h2><h3>h3 18px</h3><span style="font-size:28px;font-weight:700;color:var(--c-heading)">28px 数字 146,225件</span><span>本文 17px / 1.9 は変えない</span><span style="font-size:14.5px;color:var(--c-body-muted)">14.5px カードの説明</span><span class="meta" style="font-size:13px">13px メタ</span><span class="meta">12.5px 注(最小)</span></div>
+ <a class="btn" href="#">主ボタン 44px</a> &nbsp; <a class="btn2" href="#">副ボタン</a>
+</section>
+
+<p class="label">▼ 同じ部品で組んだ 2 ページ。左: コラム(読ませる) / 右: 病気ハブ(読ませる)。結論の箱・表・道具カード・FAQ・更新日・パンくずが同じ形</p>
+<div class="two">
+<div><article class="page">
+ <div class="crumb"><a href="#">トップ</a> › <a href="#">コラム</a> › 初診日がわからないとき</div>
+ <h1>障害年金の初診日がわからないときの調べ方｜証明できない場合も解説</h1>
+ <p class="date">最終確認日 2026年9月3日</p>
+ <section class="conc"><h2>この記事の結論</h2><p>初診日が思い出せなくても、申請はできます。制度には、証明書が取れない人のための手順(参考資料・添付できない申立書・第三者証明)が用意されています。</p><p>調べる順番は、いまの病院の記録 → 家族 → 診察券・お薬手帳 → 領収書 → 健康保険の記録 → 初診と思われる病院 → 年金事務所。1〜5は家の中と電話で済みます。</p></section>
+ <div class="sec"><h2>調べる順番 — 上から順にたどってください</h2>
+ <p>障害年金の申請で、最初に立ちはだかり、そして最も多くの人を止めてしまうのが初診日です。昔のことすぎて、いつ・どこに行ったか覚えていない。病院が閉院していて、記録があるか分からない。</p>
+ <a class="tool" href="#"><b>→ どこに出せばいい？</b><span>管轄の年金事務所と、予約のしかた。入力はこの端末の中だけで処理します。</span></a>
+ <div class="note">思い出せなくても、あきらめないでください。何月何日まで特定できなくても、請求できる取り扱いがあります。</div>
+ <h2>同じ状況の人が、どうなったか</h2>
+ <div class="tbl"><table><thead><tr><th>傷病・請求</th><th>結論</th><th style="text-align:right">年</th></tr></thead><tbody><tr><td>うつ病・新規裁定(診察券と薬袋から初診日を認定)</td><td><span style="color:var(--c-ok);font-weight:700">結論が変わった</span></td><td class="num">令和2〜3</td></tr><tr><td>統合失調症・不登校時の受診を初診とする主張</td><td><span style="color:var(--c-warn);font-weight:700">認められなかった</span></td><td class="num">令和2〜3</td></tr></tbody></table></div>
+ <div class="faq"><h2>よくある質問</h2><h3>Q. 初診日が2つ候補にあるときは？</h3><p>先に年金事務所で、どちらを初診日にすると納付要件と制度がどうなるかを確認してから、証明を取りに行きます。</p></div>
+ </div>
+</article></div>
+<div><article class="page">
+ <div class="crumb"><a href="#">トップ</a> › <a href="#">病気から探す</a> › うつ病・双極性障害</div>
+ <h1>うつ病・双極性障害の障害年金</h1>
+ <p class="date">最終確認日 2026年9月2日</p>
+ <section class="conc"><h2>この記事の結論</h2><p>うつ病でも双極性障害でも、障害年金は請求できます。新しく決まった障害年金のうち70.3%が精神の障害によるもの(令和6年度)。10人のうち7人が精神の診断書で申請しています。</p></section>
+ <div class="sec"><h2>数字で見る、うつ病・双極性障害の位置</h2>
+ <div class="tbl"><table><thead><tr><th>項目</th><th style="text-align:right">数字</th></tr></thead><tbody><tr><td>新規に決まった障害年金のうち、精神の障害によるもの</td><td class="num">70.3%</td></tr><tr><td>精神の障害の非該当(不支給)の割合</td><td class="num">12.1%</td></tr></tbody></table></div>
+ <p>精神の障害だけは、国が「障害等級の目安」という表を公表していて、診断書に書かれる2つの欄の組み合わせで目安が決まります。病名では決まりません。</p>
+ <a class="tool" href="#"><b>→ 私は何級くらい？</b><span>受け取った診断書の裏面を、国の目安表に当てはめる。約3分。</span></a>
+ <div class="note d">不支給の通知を受け取った方は、通知を知った日の翌日から3か月以内に審査請求ができます。期限があるのは、この手続きだけです。</div>
+ <h2>このテーマの記事</h2>
+ <div class="grid"><a class="card" href="#" style="text-decoration:none"><h3>日常生活能力の7項目</h3><p>診断書の裏面の見方</p></a><a class="card" href="#" style="text-decoration:none"><h3>働きながら申請する</h3><p>ガイドラインの原文から</p></a></div>
+ <div class="faq"><h2>よくある質問</h2><h3>Q. 診断書の2つの欄とは？</h3><p>「日常生活能力の判定」(7項目)と「日常生活能力の程度」(5段階)です。</p></div>
+ </div>
+</article></div>
+</div>
+</body></html>

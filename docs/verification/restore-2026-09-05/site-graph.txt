@@ -1,0 +1,24 @@
+1. ○ sitemap の全 URL が / から3クリック以内 (3クリック超 0 / 166)
+2. ○ ハブ・誤解・コラム・道具が、ナビと一覧以外から2本以上(報告のみ) (未達 23 / 144)
+2.1. ○   未達の一覧 (23件)
+     - /byoki/tougou: 0本
+     - /byoki/tenkan: 0本
+     - /byoki/shinzou: 1本
+     - /byoki/ninchishou: 1本
+     - /byoki/izon: 0本
+     - /byoki/kokyuuki: 0本
+     - /byoki/shikaku: 1本
+     - /byoki/choukaku: 0本
+     - /byoki/nanbyou: 0本
+     - /joukyou/65sai-ijou: 1本
+     - /joukyou/shufu-mushoku: 1本
+     - /joukyou/gakusei: 1本
+     …ほか 11 件
+3. ○ 孤立 URL(被リンク0)が無い (孤立 0)
+4. ○ ヘッダー8項目・フッター4区分が指示書の表と一致 (ヘッダー・フッターの区分名)
+5. ○ BreadcrumbList の item がすべて 200・表示と経路が同じ (165 ページ)
+6. ○ apple-itunes-app が指定の7 URL にだけある (7 / 7)
+7. ○ 道具カードが指定の場所にある・同じページに同じ道具が2枚ない (配置5か所 + ステップ7 + 重複)
+8. ○ ヘッダーの aria-current が正しく付く (9 / 9)
+9. ○ 390px で横スクロールが無い (4 / 4)
+10. ○ 内部リンク切れが無い (sitemap 外のリンク 1 本を確認、切れ 0)

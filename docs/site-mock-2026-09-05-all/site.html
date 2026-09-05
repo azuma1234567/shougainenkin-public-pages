@@ -1,0 +1,242 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>障害年金申請サポート — サイト全体モック(統一デザイン)</title>
+<style>
+:root{--c-text:#1e3a4d;--c-heading:#14425e;--c-muted:#4a6a80;--c-meta:#4f6f87;--c-border:#dcebf5;--c-band:#eef6fc;--c-p:#0273ad;--c-pd:#015d8c;--c-ok:#1a7f4b;--c-ok-bg:#e9f6ee;--c-warn:#b7791f;--c-warn-bg:#fdf5e6;--c-danger:#b3261e;--c-danger-bg:#fdf1ef;--r:14px;--rs:8px;--sh:0 1px 3px rgba(20,66,94,.06)}
+*{box-sizing:border-box}body{margin:0;background:#dfe9f0;font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:var(--c-text);font-size:17px;line-height:1.9}
+h1,h2,h3{font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;color:var(--c-heading);line-height:1.45;margin:0}h1{font-size:30px}h2{font-size:22px}h3{font-size:18px}
+a{color:var(--c-p);text-decoration:none}p{margin:0 0 1em}
+.board{width:1280px;background:#f7fbfe;margin:24px auto;box-shadow:0 2px 12px rgba(0,0,0,.08)}.tag{font:12px/1 monospace;color:#fff;background:#14425e;display:inline-block;padding:6px 10px}
+.hdr{background:#fff;border-bottom:1px solid var(--c-border)}.hdr .in{max-width:1200px;margin:0 auto;padding:12px 24px;display:flex;justify-content:space-between;align-items:center;gap:20px}.hdr b{font-family:"Zen Kaku Gothic New",sans-serif;font-size:20px;color:var(--c-heading)}.nav{display:flex;gap:18px;font-size:14px;color:var(--c-muted);align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border-radius:999px;background:var(--c-p);color:#fff;font-weight:700;font-size:15px}.btn2{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--c-p);color:var(--c-p);background:#fff;font-weight:700;font-size:15px}
+.c{max-width:1200px;margin:0 auto;padding:0 24px}.read{max-width:760px;margin:0 auto;padding:0 24px}
+.hero{background:linear-gradient(#eef6fc,#f7fbfe);padding:28px 0 24px}.crumb{font-size:13px;color:var(--c-meta);margin-bottom:8px}.lead{color:var(--c-muted);margin:6px 0 0;max-width:820px}.date{font-size:13px;color:var(--c-meta);margin:6px 0 0}
+.sec{padding:26px 0 0}.sec>.c>h2,.sec>.read>h2{margin-bottom:4px}.sec .sub{color:var(--c-muted);font-size:15px;margin:0 0 14px}
+.card{padding:20px 22px;border:1px solid var(--c-border);border-radius:var(--r);background:#fff;box-shadow:var(--sh)}.card h3{margin-bottom:6px}.card p{font-size:14.5px;color:var(--c-muted);margin:0}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.chip{display:inline-block;padding:6px 12px;border:1px solid var(--c-border);border-radius:999px;font-size:13.5px;font-weight:700;color:var(--c-p);background:#fff;margin:0 6px 6px 0}.chip.on{background:var(--c-p);color:#fff;border-color:var(--c-p)}.chip.ok{background:var(--c-ok-bg);color:var(--c-ok);border-color:transparent}.chip.warn{background:var(--c-warn-bg);color:var(--c-warn);border-color:transparent}
+.conc{padding:20px 22px;border-left:4px solid var(--c-p);background:var(--c-band);border-radius:0 var(--r) var(--r) 0;margin:16px 0 22px}.conc h2{font-size:18px;margin-bottom:6px}.conc p{margin:0 0 6px}
+.note{padding:12px 14px;border-left:4px solid var(--c-ok);background:var(--c-ok-bg);border-radius:0 var(--rs) var(--rs) 0;font-size:14.5px;margin:0 0 18px}.note.w{border-color:var(--c-warn);background:var(--c-warn-bg)}.note.d{border-color:var(--c-danger);background:var(--c-danger-bg)}
+.tool{display:grid;gap:3px;padding:16px 18px;border:1px solid var(--c-border);border-left:4px solid var(--c-p);border-radius:var(--r);background:#fff;box-shadow:var(--sh);margin:12px 0 18px}.tool b{color:var(--c-p)}.tool span{font-size:14px;color:var(--c-muted)}
+.tbl{overflow-x:auto;border:1px solid var(--c-border);border-radius:var(--r);background:#fff;margin:12px 0 18px}table{width:100%;border-collapse:collapse;font-size:14.5px}th,td{padding:10px 14px;text-align:left;border-top:1px solid var(--c-border)}thead th{background:var(--c-band);color:var(--c-heading);border-top:0}td.n{text-align:right;color:var(--c-heading);font-weight:700}
+.band{max-width:720px}.bar{display:flex;height:18px;border-radius:6px;overflow:hidden}.bar span{display:block}.legend{display:flex;gap:18px;font-size:13.5px;color:var(--c-muted);margin-top:6px}.legend b{color:var(--c-heading)}
+.num{font-size:28px;color:var(--c-heading);font-weight:700;line-height:1.2}.tile{padding:14px 16px;border:1px solid var(--c-border);border-radius:var(--r);background:#fff}.tile span{display:block;font-size:13px;color:var(--c-meta);font-weight:700}.tile small{display:block;font-size:12.5px;color:var(--c-meta);margin-top:4px}
+.faq h3{font-size:17px;margin:14px 0 4px}.faq p{font-size:14.5px}
+.search{display:flex;align-items:center;gap:10px;max-width:700px;margin:18px auto 0;padding:6px 6px 6px 16px;border:2px solid var(--c-p);border-radius:999px;background:#fff;color:var(--c-meta);font-size:15px}.search span{flex:1}
+/* stepflow */
+.sf{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(8,1fr);column-gap:12px;row-gap:14px}.sf-phase{grid-column:span 2;font-size:12px;font-weight:700;color:var(--c-meta)}.sf-phase::before{content:"";display:block;height:3px;border-radius:2px;background:var(--c-border);margin-bottom:6px}
+.sf-node{position:relative;display:grid;align-content:start;justify-items:center;text-align:center;gap:8px}.sf-node::after{content:"";position:absolute;top:19px;left:calc(50% + 22px);right:calc(-50% - 10px);height:2px;background:var(--c-border)}.sf-node.last::after{display:none}
+.sf-num{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--c-p);color:#fff;font-weight:700;box-shadow:0 0 0 4px #f7fbfe}.sf-t{font-size:14.5px;font-weight:700;color:var(--c-heading)}
+.sf-tool{grid-row:3;display:grid;gap:3px;padding:12px;border-radius:12px;background:var(--c-band);color:var(--c-heading);font-size:13px;text-align:center}.sf-tool b{font-size:14px}
+/* rail */
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px}.rail{position:sticky;top:16px;align-self:start;display:grid;gap:4px}.rail a{display:grid;grid-template-columns:24px 1fr;gap:8px;align-items:center;padding:6px 8px;border-radius:8px;font-size:13.5px;color:var(--c-muted)}.rail a b{width:22px;height:22px;border-radius:50%;background:var(--c-band);color:var(--c-p);display:grid;place-items:center;font-size:11px}.rail a.on{background:var(--c-band);color:var(--c-heading);font-weight:700}.rail a.on b{background:var(--c-p);color:#fff}.rail a.done b{background:var(--c-heading);color:#fff}
+.prog{font-size:12.5px;color:var(--c-meta)}.prog i{display:block;height:6px;border-radius:3px;background:#e8f3fa;margin-top:4px}.prog i::after{content:"";display:block;width:25%;height:100%;border-radius:3px;background:var(--c-ok)}
+.step{border:1px solid var(--c-border);border-radius:var(--r);background:#fff;padding:18px 20px;margin-bottom:14px}.step header{display:grid;grid-template-columns:40px 1fr auto;gap:14px;align-items:start}.step .n{width:40px;height:40px;border-radius:50%;background:var(--c-p);color:#fff;display:grid;place-items:center;font-weight:700}.step h2{font-size:20px}.step .one{font-size:13.5px;color:var(--c-muted);margin:0}.data{padding:5px 10px;border-radius:8px;background:var(--c-band);font-size:12.5px;color:var(--c-heading);white-space:nowrap}.data b{font-size:15px}
+.cols{display:grid;grid-template-columns:1.2fr 1fr;gap:12px;margin-top:10px}.tasks{padding:12px 14px;border-radius:10px;border:1px solid var(--c-border);font-size:13.5px}.tasks b{display:block;font-size:13px;margin-bottom:4px}.tasks label{display:flex;gap:8px;margin:4px 0}
+/* case */
+.case{border:1px solid var(--c-border);border-left:5px solid var(--c-ok);border-radius:12px;background:#fff;padding:14px 16px;margin-bottom:10px}.case.no{border-left-color:var(--c-warn)}.badge{padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:700;background:var(--c-ok-bg);color:var(--c-ok)}.case.no .badge{background:var(--c-warn-bg);color:var(--c-warn)}.case h3{font-size:17px;margin:6px 0 2px}.case p{font-size:14px;margin:0 0 6px}.case .meta{font-size:12.5px;color:var(--c-meta)}
+.side{display:grid;gap:12px;align-content:start}.barrow{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}.barrow b{color:var(--c-heading)}.track{height:9px;border-radius:3px;background:#e8f3fa;margin-bottom:10px}.track span{display:block;height:100%;border-radius:inherit;background:var(--c-p)}
+.toc{position:sticky;top:16px;align-self:start;font-size:13px;display:grid;gap:4px}.toc a{color:var(--c-muted);padding:4px 8px;border-left:2px solid var(--c-border)}.toc a.on{color:var(--c-heading);font-weight:700;border-color:var(--c-p)}
+.sum{padding:12px 14px;background:var(--c-band);border-radius:var(--rs);font-size:14.5px;margin:0 0 18px}.sum b{display:block;font-size:12.5px;color:var(--c-meta);margin-bottom:2px}
+.q{display:flex;justify-content:space-between;padding:9px 12px;border-radius:10px;background:var(--c-band);font-size:14px;font-weight:700;color:var(--c-heading);margin-bottom:6px}.q small{font-weight:400;color:var(--c-meta)}
+.pager{display:flex;gap:6px;margin:10px 0}.pager a{min-width:34px;height:34px;display:grid;place-items:center;border-radius:8px;border:1px solid var(--c-border);font-size:14px;font-weight:700}.pager a.on{background:var(--c-p);color:#fff;border-color:var(--c-p)}
+.footer{background:#fff;border-top:1px solid var(--c-border);padding:20px 0;margin-top:30px;font-size:13px;color:var(--c-meta)}
+.term{padding:14px 16px;border:1px solid var(--c-border);border-radius:var(--r);background:#fff}.term b{color:var(--c-heading);font-size:16px;display:block}.term p{font-size:14px;color:var(--c-muted);margin:4px 0 0}
+.cta{display:grid;gap:12px;padding:22px;border-radius:var(--r);background:var(--c-p);color:#dbeefa}.cta h2{color:#fff}.cta .btn{background:#fff;color:var(--c-p)}
+</style></head><body>
+
+<!-- ============ 1 トップ ============ -->
+<section class="board" id="b-top"><span class="tag">/ トップ(選ぶ)</span>
+<div class="hdr"><div class="in"><b>▢ 障害年金申請サポート</b><div class="nav"><span>はじめての方へ</span><span>病気から</span><span>状況から</span><span>悩みから</span><span>申請の流れ</span><span>実例と数字</span><span>コラム</span><a class="btn">無料アプリ</a></div></div></div>
+<div class="hero" style="text-align:center;padding:36px 0 28px"><div class="c">
+ <span class="chip" style="background:#fff">✓ 掲載情報はすべて公的資料の出典つき・確認日を明記</span>
+ <h1 style="font-size:36px;margin:12px 0 6px">「自分の場合はどうなる？」に、根拠つきで答えます</h1>
+ <p class="lead" style="margin:0 auto">はじめての方にも、むずかしい言葉を使わずに案内します。知識240項目と、原文を確認できた公開実例91件から、あなたに近い答えを探せます。</p>
+ <div class="search">🔍 <span>例: うつ病 働きながら / 初診日 カルテがない / 不支給</span><a class="btn">調べる</a></div>
+ <div style="display:flex;gap:40px;justify-content:center;margin-top:18px;font-size:13px;color:var(--c-meta)"><span><b style="font-size:20px;color:var(--c-heading)">21</b> 病気ごとの見どころ</span><span><b style="font-size:20px;color:var(--c-heading)">91</b> 実例(原文つき)</span><span><b style="font-size:20px;color:var(--c-heading)">48</b> よくある誤解</span></div>
+</div></div>
+<div class="sec"><div class="c"><h2>申請の流れ ― 8つのステップ</h2><p class="sub">初診日の確認から結果が届くまで。左から右へ、順番に進みます。</p>
+ <ol class="sf"><li class="sf-phase">確かめる</li><li class="sf-phase">そろえる</li><li class="sf-phase">書く</li><li class="sf-phase">出す・待つ</li>
+ <li class="sf-node"><span class="sf-num">1</span><span class="sf-t">初診日を<br>確認する</span></li><li class="sf-node"><span class="sf-num">2</span><span class="sf-t">納付要件を<br>確認する</span></li>
+ <li class="sf-node"><span class="sf-num">3</span><span class="sf-t">年金事務所へ<br>相談する</span><span class="sf-tool"><b>→ どこに出せばいい？</b>管轄と予約のしかた</span></li>
+ <li class="sf-node"><span class="sf-num">4</span><span class="sf-t">必要書類を<br>そろえる</span><span class="sf-tool"><b>→ 何をそろえればいい？</b>要る書類だけ一覧に</span></li>
+ <li class="sf-node"><span class="sf-num">5</span><span class="sf-t">診断書の<br>準備をする</span><span class="sf-tool"><b>→ 私は何級くらい？</b>診断書の裏面を目安表に</span></li>
+ <li class="sf-node"><span class="sf-num">6</span><span class="sf-t">申立書を<br>作成する</span><span class="sf-tool" style="background:var(--c-p);color:#fff"><b style="color:#fff">→ 申立書を自分で書きたい</b>公式様式に重ねて印刷</span></li>
+ <li class="sf-node"><span class="sf-num">7</span><span class="sf-t">年金事務所へ<br>提出する</span></li><li class="sf-node last"><span class="sf-num">8</span><span class="sf-t">結果を<br>待つ</span></li></ol></div></div>
+<div class="sec"><div class="c"><h2>障害年金、はじめてですか？</h2><p class="sub">知識ゼロで大丈夫です。この3つから始めてください。</p>
+ <div class="g3"><div class="card"><h3>1. 障害年金ってなに？</h3><p>1分でわかる説明。高齢者だけのものではありません。</p></div><div class="card"><h3>2. わたしはもらえる？</h3><p>確認することは3つだけ。いま全部わからなくても大丈夫です。</p></div><div class="card"><h3>3. 家族が調べている方へ</h3><p>委任状があれば家族が相談や手続きを代理できます。</p></div></div></div></div>
+<div class="sec"><div class="c"><h2>探す</h2><p class="sub">入口は5つ。どこから入っても、必要なところへつながります。</p>
+ <div class="g2">
+  <div class="card"><h3>病気から <a style="font-size:13px;float:right">21の病気 →</a></h3><p style="margin-bottom:10px">病名では決まりませんが、審査で見られるところは病気ごとに違います。</p><span class="chip">うつ病・双極性障害</span><span class="chip">適応障害・不安障害</span><span class="chip">発達障害</span><span class="chip">統合失調症</span><span class="chip">知的障害</span><span class="chip">てんかん</span><span class="chip">腎臓病・人工透析</span><span class="chip">心臓病</span><span class="chip">がん</span><span class="chip">肢体の障害</span><span class="chip">…ほか11</span></div>
+  <div class="card"><h3>いまの状況から <a style="font-size:13px;float:right">9つの状況 →</a></h3><p style="margin-bottom:10px">同じ病気でも、暮らし方によって見られるところが変わります。</p><span class="chip">働きながら</span><span class="chip">20歳前</span><span class="chip">一人暮らし</span><span class="chip">傷病手当金から</span><span class="chip">65歳以上</span><span class="chip">主婦(主夫)・無職</span><span class="chip">学生</span><span class="chip">家族が手伝う</span><span class="chip">生活保護</span></div>
+  <div class="card"><h3>悩みから <a style="font-size:13px;float:right">6つの悩み →</a></h3><p style="margin-bottom:10px">手続きの順番ではなく、いま止まっているところで。</p><div class="q">不支給と言われた <small>期限 3か月</small></div><div class="q">初診日がわからない・カルテがない <small>争点 35件</small></div><div class="q">診断書で困っている <small>争点 15件</small></div><div class="q">更新が不安 / 支給が止まった <small>継続 96.8%</small></div></div>
+  <div class="card"><h3>お金の話 <a style="font-size:13px;float:right">くわしく →</a></h3><p style="margin-bottom:10px">令和8年度の額。税金はかからず、貯金があっても関係ありません。</p><div class="g2"><div class="tile"><span>基礎 2級(年)</span><div class="num" style="font-size:22px">847,300円</div></div><div class="tile"><span>基礎 1級(年)</span><div class="num" style="font-size:22px">1,059,125円</div></div><div class="tile"><span>厚生 3級 最低保障</span><div class="num" style="font-size:22px">635,500円</div></div><div class="tile"><span>給付金 2級(月)</span><div class="num" style="font-size:22px">5,620円</div></div></div></div>
+ </div>
+ <div class="g2" style="margin-top:14px"><div class="card"><h3>自分で進める</h3><p>請求に国へ払う手数料はありません。道具と記事でここまでできます。</p></div><div class="card"><h3>専門家に頼むことを考える</h3><p>報酬を得て代行できるのは社会保険労務士だけ。費用の相場と選び方。</p></div></div>
+</div></div>
+<div class="sec"><div class="c"><h2>実態を、数字で</h2><p class="sub" style="max-width:820px">令和6年度、障害年金は<b style="color:var(--c-heading)">146,225件</b>が新しく決まり、<b style="color:var(--c-heading)">87.0%</b>が支給に至りました。そのうち<b style="color:var(--c-heading)">70.3%</b>は精神の障害の診断書によるものです。10人のうち7人が精神の診断書で申請しています。 <a>数字で見る障害年金 →</a></p>
+ <div class="band"><div class="bar"><span style="width:87%;background:var(--c-p)"></span><span style="width:13%;background:var(--c-band)"></span></div><div class="legend"><span>支給 <b>87.0%</b></span><span>非該当 <b>13.0%</b>(前年度 8.4%)</span></div></div></div></div>
+<div class="sec"><div class="c"><h2>その心配、誤解かもしれません</h2><p class="sub">あきらめる前に確認してほしい、よくある思い込みです。</p>
+ <div class="g3"><div class="card"><h3>「働いていたら、無理」</h3><p>働いていること自体は対象外の理由になりません。</p></div><div class="card"><h3>「手帳がないと、もらえない」</h3><p>手帳と年金は別の制度。手帳がなくても請求できます。</p></div><div class="card"><h3>「申請するのは甘えでは」</h3><p>保険料を納めてきた人のための制度上の正当な権利です。</p></div></div></div></div>
+<div class="footer"><div class="c">出典・確認日つき ・ 運営者 ・ プライバシー ・ 広告について</div></div>
+</section>
+
+<!-- ============ 2 病気から探す(一覧) ============ -->
+<section class="board"><span class="tag">/byoki 病気から探す(選ぶ)</span>
+<div class="hdr"><div class="in"><b>▢ 障害年金申請サポート</b><div class="nav"><span>はじめての方へ</span><span style="color:var(--c-p);font-weight:700">病気から</span><span>状況から</span><span>悩みから</span><span>申請の流れ</span><span>実例と数字</span><span>コラム</span><a class="btn">無料アプリ</a></div></div></div>
+<div class="hero"><div class="c"><div class="crumb">トップ / 病気から探す</div><h1>病気から探す</h1><p class="lead">障害年金は病名で決まる制度ではありません。ただ、審査で見られるところは病気ごとに違います。あなたの病気で、どこが見られるのかから確認してください。</p><p class="date">最終確認日 2026年8月31日 · 21の病気</p>
+ <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap"><span class="chip on">精神・発達 9</span><span class="chip">内部の病気 7</span><span class="chip">体・感覚 4</span><span class="chip">その他 1</span><span class="search" style="margin:0 0 0 auto;max-width:360px;border-width:1px;border-color:#9db9ca">🔍 <span>病名で絞り込む(ADHD、透析…)</span></span></div></div></div>
+<div class="sec"><div class="c"><h2>精神・発達 <small style="font-size:13px;color:var(--c-meta)">9ページ</small></h2><p class="sub">新しく決まった障害年金の70.3%が精神の障害によるものです(令和6年度)。病名ではなく、診断書の2つの欄の組み合わせで目安が決まります。</p>
+ <div class="g3">
+  <div class="card"><h3>うつ病・双極性障害</h3><p>いちばん標準的なケース。病名ではなく、診断書の「日常生活能力の判定」と「程度」の2欄で目安が決まります。</p><div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12.5px;color:var(--c-meta)"><span>記事 7本 · 実例 12件</span><b style="color:var(--c-p)">読む →</b></div></div>
+  <div class="card"><h3>適応障害・不安障害・神経症・PTSD</h3><p>精神病の病態を示すものは気分障害に準じて扱う、と認定基準に続きがあります。「原則対象外」で終わりではありません。</p><div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12.5px;color:var(--c-meta)"><span>記事 3本 · 実例 4件</span><b style="color:var(--c-p)">読む →</b></div></div>
+  <div class="card"><h3>発達障害</h3><p>ADHDもASDも対象。IQや学歴は関係なく、対人関係・意思疎通の困難で見られます。大人になってからの初診日で構いません。</p><div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12.5px;color:var(--c-meta)"><span>記事 2本 · 実例 5件</span><b style="color:var(--c-p)">読む →</b></div></div>
+  <div class="card"><h3>統合失調症</h3><p>対象になるかで悩む必要はありません。悩みどころは初診日をどこに置くかと、発病からの経過の伝え方です。</p><div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12.5px;color:var(--c-meta)"><span>実例 9件</span><b style="color:var(--c-p)">読む →</b></div></div>
+  <div class="card"><h3>知的障害</h3><p>初診日を探す必要がなく、納付要件も問われません。20歳の誕生日の前日が障害認定日で、19歳9か月から準備できます。</p><div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12.5px;color:var(--c-meta)"><span>実例 3件</span><b style="color:var(--c-p)">読む →</b></div></div>
+  <div class="card"><h3>てんかん</h3><p>発作が続いているなら、その記録がそのまま評価の材料になります。見られるのは発作の型と頻度、発作間欠期の状態。</p><div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12.5px;color:var(--c-meta)"><span>&nbsp;</span><b style="color:var(--c-p)">読む →</b></div></div>
+ </div></div></div>
+<div class="sec"><div class="c"><h2>内部の病気 <small style="font-size:13px;color:var(--c-meta)">7ページ</small></h2><p class="sub">検査の数値と、生活の制限度の組み合わせで見られます。不支給の割合が20.6%と、精神(12.1%)・外部障害(10.8%)より高い分野なので、数値の基準を先に確認してください。</p>
+ <div class="g3"><div class="card"><h3>腎臓病・人工透析</h3><p>人工透析を受けている方は、原則2級です。</p><div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12.5px;color:var(--c-meta)"><span>実例 6件</span><b style="color:var(--c-p)">読む →</b></div></div><div class="card"><h3>心臓病</h3><p>ペースメーカー・ICD・人工弁を入れた方は、原則3級。心不全は検査値と生活の制限度で見られます。</p><div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12.5px;color:var(--c-meta)"><span>実例 3件</span><b style="color:var(--c-p)">読む →</b></div></div><div class="card"><h3>糖尿病</h3><p>合併症があるか、インスリンを使っても血糖が安定しないなら対象です。糖尿病そのものだけでは、原則、等級に該当しません。</p><div style="display:flex;justify-content:space-between;margin-top:8px;font-size:12.5px;color:var(--c-meta)"><span>実例 4件</span><b style="color:var(--c-p)">読む →</b></div></div></div>
+ <p class="sub" style="margin-top:14px">…(がん・肝臓・呼吸器・血液)</p></div></div>
+<div class="sec"><div class="c"><div class="sum"><b>このページの使い方</b>同じ「うつ病」でも、初診日にどの制度に入っていたか、いまの生活にどれだけ支障があるかで結果は変わります。だから各ページは、病名の説明ではなく、「その病気で審査に見られるところ」「診断書の様式」「つまずきやすい場所」の順に並べています。</div><p class="sub">ここに無い病気でも、障害年金の対象になることがあります。決まるのは病名ではなく、生活や仕事にどれだけ支障があるかです。 <a>悩みから探す →</a> · <a>はじめての方へ →</a></p></div></div>
+<div class="footer"><div class="c">出典・確認日つき ・ 運営者 ・ プライバシー ・ 広告について</div></div>
+</section>
+
+<!-- ============ 3 病気ハブ本文 ============ -->
+<section class="board"><span class="tag">/byoki/utsu-soukyoku 病気ハブ(読ませる)</span>
+<div class="hdr"><div class="in"><b>▢ 障害年金申請サポート</b><div class="nav"><span>はじめての方へ</span><span style="color:var(--c-p);font-weight:700">病気から</span><span>状況から</span><span>悩みから</span><span>申請の流れ</span><span>実例と数字</span><span>コラム</span><a class="btn">無料アプリ</a></div></div></div>
+<div class="hero"><div class="read"><div class="crumb">トップ / 病気から探す / うつ病・双極性障害</div><h1>うつ病・双極性障害の障害年金</h1><p class="date">最終確認日 2026年9月2日</p></div></div>
+<div class="c" style="display:grid;grid-template-columns:200px 760px;gap:40px;justify-content:center;padding-top:20px">
+ <nav class="toc"><a class="on">この記事の結論</a><a>数字で見る位置</a><a>目安は2つの欄で決まる</a><a>審査で見られる5つ</a><a>双極性障害で気をつけること</a><a>同じ状況の人が、どうなったか</a><a>よくある質問</a><a>次の一歩</a></nav>
+ <article>
+  <section class="conc"><h2>この記事の結論</h2><p>うつ病でも双極性障害でも、障害年金は請求できます。新しく決まった障害年金のうち70.3%が精神の障害によるもの(令和6年度)。10人のうち7人が精神の診断書で申請しています。</p><p>決まり方には型があります。病名ではなく、診断書に書かれる2つの欄の組み合わせで目安が決まります。</p></section>
+  <h2 style="margin-bottom:10px">数字で見る、うつ病・双極性障害の位置</h2>
+  <div class="tbl"><table><thead><tr><th>項目</th><th style="text-align:right">数字</th></tr></thead><tbody><tr><td>新規に決まった障害年金のうち、精神の障害によるもの</td><td class="n">70.3%</td></tr><tr><td>精神の障害の非該当(不支給)の割合</td><td class="n">12.1%</td></tr><tr><td>精神の不支給のうち、目安が下位だった割合</td><td class="n">75.3%</td></tr></tbody></table></div>
+  <p>「精神疾患で申請していいのか」というためらいは、この数字と逆です。この制度の中で、いちばん標準的なケースです。</p>
+  <div class="sum"><b>ここまでの要約</b>対象になるかで悩む必要はない。見られるのは病名ではなく診断書の2つの欄。</div>
+  <h2 style="margin-bottom:10px">目安は、この2つの欄で決まる</h2>
+  <p>「日常生活能力の判定」(7項目)と「日常生活能力の程度」(5段階)。あなたの生活が、この2つの欄にどう映っているか。ここが結果を分けます。</p>
+  <a class="tool"><b>→ 私は何級くらい？</b><span>受け取った診断書の裏面を、国の目安表に当てはめる。約3分。入力はこの端末の中だけ。</span></a>
+  <div class="note">一人暮らしをしていること自体は、等級を下げる理由ではありません。見られるのは、その暮らしがどう成り立っているかです。</div>
+  <h2 style="margin-bottom:10px">同じ状況の人が、どうなったか</h2>
+  <div class="case"><span class="badge">結論が変わった</span> <span class="meta">国民年金 · 事後重症 · 令和2〜3年</span><h3>うつ病 — 診察券と薬袋から初診日を認定</h3><p>初診日を確認できないとした原処分を取り消した。</p></div>
+  <div class="case no"><span class="badge">認められなかった</span> <span class="meta">厚生年金 · 新規裁定 · 令和2〜3年</span><h3>反復性うつ病性障害 — 復職期間の社会的治癒</h3><p>復職して就労した期間にも症状と治療が継続しており、治癒とは認められないとした。</p></div>
+  <p><a>→ ほかの実例も読む</a></p>
+  <div class="faq"><h2>よくある質問</h2><h3>Q. 診断書の2つの欄とは？</h3><p>「日常生活能力の判定」(7項目)と「日常生活能力の程度」(5段階)です。</p></div>
+  <div class="cta" style="margin-top:22px"><h2>次の一歩は、ひとつだけ</h2><p style="margin:0">受け取った診断書の裏面を、目安表に当ててみる。まだ診断書が無ければ、「その症状で最初に病院へ行った日」を思い出す。</p><div><a class="btn">私は何級くらい？ →</a></div><p style="margin:0;font-size:13px;color:#dbeefa">今日はここまでで大丈夫です。</p></div>
+ </article></div>
+<div class="footer"><div class="c">出典・確認日つき ・ 運営者 ・ プライバシー ・ 広告について</div></div>
+</section>
+
+<!-- ============ 4 コラム ============ -->
+<section class="board"><span class="tag">/columns/shoshinbi-wakaranai コラム(読ませる・1万字)</span>
+<div class="hdr"><div class="in"><b>▢ 障害年金申請サポート</b><div class="nav"><span>はじめての方へ</span><span>病気から</span><span>状況から</span><span>悩みから</span><span>申請の流れ</span><span>実例と数字</span><span style="color:var(--c-p);font-weight:700">コラム</span><a class="btn">無料アプリ</a></div></div></div>
+<div class="hero"><div class="read"><div class="crumb">トップ / コラム / 初診日がわからないとき</div><h1>障害年金の初診日がわからないときの調べ方｜証明できない場合も解説</h1><p class="date">最終確認日 2026年9月3日 · 読む目安 18分</p></div></div>
+<div class="c" style="display:grid;grid-template-columns:200px 760px;gap:40px;justify-content:center;padding-top:20px">
+ <nav class="toc"><a class="on">この記事の結論</a><a>調べる順番</a><a>なぜ初診日が重要か</a><a>定義を間違えていないか</a><a>方法1 あたりをつける</a><a>方法2 受診状況等証明書</a><a>方法3 参考資料</a><a>方法4 添付できない申立書</a><a>方法5 第三者証明</a><a>同じ状況の人</a><a>調査シート</a><a>年金事務所での相談</a><a>よくある質問</a><a>まとめ</a></nav>
+ <article>
+  <section class="conc"><h2>この記事の結論</h2><p>初診日が思い出せなくても、申請はできます。制度には、証明書が取れない人のための手順(参考資料・添付できない申立書・第三者証明)が用意されています。</p><p>調べる順番は、いまの病院の記録 → 家族 → 診察券・お薬手帳 → 領収書 → 健康保険の記録 → 初診と思われる病院 → 年金事務所。1〜5は家の中と電話で済みます。</p><p>証明を取りに行く前に、年金事務所で「どの日を初診日にするか」「納付要件を満たすか」を確認してください。</p></section>
+  <p>障害年金の申請で、最初に立ちはだかり、そして最も多くの人を止めてしまうのが初診日です。昔のことすぎて、いつ・どこに行ったか覚えていない。病院が閉院していて、記録があるか分からない。</p>
+  <div class="sum"><b>ここまで読めば、今日は十分です</b>上の順番の1〜5だけ、家の中で試してみてください。続きは、見つかったものを持って読めば足ります。</div>
+  <h2 style="margin-bottom:10px">調べる順番 — 上から順にたどってください</h2>
+  <ol style="font-size:16px;padding-left:22px"><li>いまの病院の記録を確認する</li><li>家族に確認する</li><li>診察券やお薬手帳を確認する</li><li>古い領収書や医療費通知を確認する</li><li>健康保険の記録について確認する</li><li>初診と思われる医療機関へ問い合わせる</li><li>年金事務所へ相談する</li></ol>
+  <a class="tool"><b>→ どこに出せばいい？</b><span>管轄の年金事務所と、予約のしかた。入力はこの端末の中だけ。</span></a>
+  <div class="note">思い出せなくても、あきらめないでください。何月何日まで特定できなくても、請求できる取り扱いがあります。</div>
+  <h2 style="margin-bottom:10px">その前に:なぜ初診日がそこまで重要なのか</h2><p>初診日で、制度(基礎か厚生か)・納付要件・障害認定日の3つが決まるからです。…</p>
+  <div class="sum"><b>ここまでの要約</b>初診日 = その症状で最初に医師にかかった日。病名がついた日ではない。制度・納付要件・認定日の3つがここで決まる。</div>
+  <p class="sub">…(方法1〜5、実例、調査シート、FAQ、まとめ)</p>
+  <div class="cta"><h2>次にすること、ひとつ</h2><p style="margin:0">診察券とお薬手帳を1か所に集める。それだけで、方法1と3が終わります。</p><div><a class="btn">何をそろえればいい？ →</a></div><p style="margin:0;font-size:14px;color:#dbeefa">次に読む: 受診状況等証明書の取り方 / カルテがないとき / 年金事務所での相談 ・ 今日はここまでで大丈夫です。</p></div>
+ </article></div>
+<div class="footer"><div class="c">出典・確認日つき ・ 運営者 ・ プライバシー ・ 広告について</div></div>
+</section>
+
+<!-- ============ 5 はじめて ============ -->
+<section class="board"><span class="tag">/hajimete はじめての方へ(読ませる)</span>
+<div class="hdr"><div class="in"><b>▢ 障害年金申請サポート</b><div class="nav"><span style="color:var(--c-p);font-weight:700">はじめての方へ</span><span>病気から</span><span>状況から</span><span>悩みから</span><span>申請の流れ</span><span>実例と数字</span><span>コラム</span><a class="btn">無料アプリ</a></div></div></div>
+<div class="hero"><div class="c"><div class="crumb">トップ / はじめての方へ</div><h1>障害年金が、ゼロからわかる</h1><p class="lead">「障害年金」という言葉を今日はじめて知った方のためのページです。読み終わるころには、自分が対象になりそうか、いくらぐらいか、最初に何をすればいいかが分かります。</p>
+ <div style="margin-top:14px"><span class="chip on">なに？</span><span class="chip">もらえる？</span><span class="chip">いくら？</span><span class="chip">確かめる</span><span class="chip">時間と最初の一歩</span><span class="chip">よくある不安</span></div></div></div>
+<div class="sec"><div class="c"><h2>障害年金ってなに？ — 1分でわかる説明</h2>
+ <div class="card"><p style="font-size:21px;color:var(--c-heading);line-height:1.6;margin-bottom:12px">病気やけがのせいで、生活や仕事がむずかしくなったときに、<b style="color:var(--c-p)">国から定期的に受け取れるお金</b>です。</p>
+ <div class="g3"><div class="sum" style="margin:0"><b style="font-size:14.5px;color:var(--c-heading)">高齢者だけのものではない</b>20代でも30代でも受け取れます</div><div class="sum" style="margin:0"><b style="font-size:14.5px;color:var(--c-heading)">心の病気も対象</b>新しく受け取り始める人の70.3%が精神の障害。10人のうち7人です</div><div class="sum" style="margin:0"><b style="font-size:14.5px;color:var(--c-heading)">制度上の正当な権利</b>保険料を納めてきた人のための制度。申請は甘えではありません</div></div>
+ <p style="font-size:14px;color:var(--c-muted);margin:12px 0 0">令和6年度、新しく決まったのは146,225件。数十万人が受け取っている、めずらしくない制度です。 出典: 厚生労働省・確認日 2026-08-31</p></div></div></div>
+<div class="sec"><div class="c"><h2>わたしはもらえる？ — 確認することは3つだけ</h2><p class="sub">この3つがそろっていると、受け取れる可能性があります。いま全部わからなくても大丈夫です。</p>
+ <div class="g3">
+  <div class="card" style="display:grid;gap:8px"><span class="chip" style="justify-self:start">確認 1</span><h3>その症状で、最初に病院へ行った日がわかる</h3><p>この日を「初診日」と呼びます。すべてはこの日を起点に決まります。</p><ul style="font-size:14px;margin:0;padding-left:18px"><li>精神科でなくてもかまいません</li><li>薬が出ていなくてもかまいません</li><li>病名がついた日ではありません</li></ul><div class="note" style="margin:0">思い出せなくても、あきらめないでください。</div><a style="font-size:14px;font-weight:700">初診日がわからないときの調べ方 →</a></div>
+  <div class="card" style="display:grid;gap:8px"><span class="chip" style="justify-self:start">確認 2</span><h3>年金の保険料を、ある程度納めていた</h3><p>初診日の前日の時点で、保険料を一定期間納めていた(または免除の手続きをしていた)ことが条件です。</p><ul style="font-size:14px;margin:0;padding-left:18px"><li>「免除」や「猶予」は未納とは違います</li><li>判定は初診日ごと</li><li>20歳前の病気やけがなら問われません</li></ul><div class="note" style="margin:0">記録は年金事務所で確認できます。</div><a style="font-size:14px;font-weight:700">納付要件をくわしく →</a></div>
+  <div class="card" style="display:grid;gap:8px"><span class="chip" style="justify-self:start">確認 3</span><h3>生活や仕事に、はっきりした支障がある</h3><p>「生活の実態」で審査されます。</p><ul style="font-size:14px;margin:0;padding-left:18px"><li>入院しているかどうかは条件ではありません</li><li>働いていても対象になります</li><li>貯金や持ち家は審査されません</li></ul><a style="font-size:14px;font-weight:700;margin-top:auto">審査で見られる「日常生活能力」の7項目 →</a></div>
+ </div></div></div>
+<div class="sec"><div class="c"><h2>いくらぐらい受け取れるの？</h2><p class="sub">金額は「等級」と「初診日にどの年金に入っていたか」で決まります。令和8年度の額です。</p>
+ <div class="g4"><div class="tile"><span>障害基礎年金 2級</span><div class="num">年 847,300円</div><small>月あたり約70,600円。定額</small></div><div class="tile"><span>障害基礎年金 1級</span><div class="num">年 1,059,125円</div><small>2級の1.25倍</small></div><div class="tile"><span>障害厚生年金 3級(最低保障)</span><div class="num">年 635,500円</div><small>3級は厚生年金だけの等級</small></div><div class="tile"><span>年金生活者支援給付金</span><div class="num">月 5,620円</div><small>2級。1級は月7,025円</small></div></div>
+ <div class="note d" style="margin-top:14px">急ぐ理由がひとつだけあります。事後重症という請求は、請求した月の翌月分からなので、1か月遅れれば1か月分が消えます。ただし、体調を崩してまで急ぐ制度ではありません。</div></div></div>
+<div class="footer"><div class="c">出典・確認日つき ・ 運営者 ・ プライバシー ・ 広告について</div></div>
+</section>
+
+<!-- ============ 6 申請の流れ ============ -->
+<section class="board"><span class="tag">/shinsei 申請の流れ(読ませる+手続き)</span>
+<div class="hdr"><div class="in"><b>▢ 障害年金申請サポート</b><div class="nav"><span>はじめての方へ</span><span>病気から</span><span>状況から</span><span>悩みから</span><span style="color:var(--c-p);font-weight:700">申請の流れ</span><span>実例と数字</span><span>コラム</span><a class="btn">無料アプリ</a></div></div></div>
+<div class="hero"><div class="c"><div class="crumb">トップ / 申請の流れ</div><h1>申請の流れ — 8つのステップ</h1><p class="lead">初診日の確認から結果が届くまで。全体の地図を先に持つと、いま自分がどこにいるかで迷いにくくなります。</p></div></div>
+<div class="c layout" style="padding-top:22px">
+ <nav class="rail"><div class="sum" style="margin:0 0 6px;padding:10px 12px"><b>今日は1つだけで大丈夫</b>やったことは、この端末だけに残ります。</div><div class="prog">進み具合 2/8<i></i></div><a class="done"><b>✓</b>初診日を確認</a><a class="done"><b>✓</b>納付要件を確認</a><a class="on"><b>3</b>年金事務所へ相談</a><a><b>4</b>必要書類をそろえる</a><a><b>5</b>診断書の準備</a><a><b>6</b>申立書を作成</a><a><b>7</b>提出する</a><a><b>8</b>結果を待つ</a></nav>
+ <div>
+  <article class="step"><header><span class="n">3</span><div><h2>年金事務所へ相談する</h2><p class="one">初診日と納付要件が見えたら、管轄の年金事務所に予約して相談します。</p></div></header>
+   <p style="font-size:15px;margin:10px 0 0">(既存 STEPS の本文をそのまま)</p>
+   <div class="cols"><div class="tasks"><b>この段階ですること</b><label><input type="checkbox" checked>(既存 tasks 1)</label><label><input type="checkbox">(既存 tasks 2)</label><label><input type="checkbox">(既存 tasks 3)</label></div><div class="note w" style="margin:0"><b style="display:block;font-size:12.5px;color:var(--c-warn)">つまずきやすいところ</b>(既存 stumble)</div></div>
+   <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid #edf4f9"><span><span class="chip">→ どこに出せばいい？(道具)</span><span class="chip">年金事務所での相談</span></span><a style="font-weight:700;font-size:14px">次へ: 必要書類をそろえる →</a></div></article>
+  <article class="step"><header><span class="n">4</span><div><h2>必要書類をそろえる</h2><p class="one">全員共通の書類と、人によって違う書類があります。</p></div><span class="data">初診日が争点の裁決 <b>35</b>件</span></header>
+   <p style="font-size:15px;margin:10px 0 0">(既存 STEPS の本文をそのまま)</p>
+   <div class="cols"><div class="tasks"><b>この段階ですること</b><label><input type="checkbox">(既存 tasks 1)</label><label><input type="checkbox">(既存 tasks 2)</label></div><div class="note w" style="margin:0"><b style="display:block;font-size:12.5px;color:var(--c-warn)">つまずきやすいところ</b>(既存 stumble)</div></div></article>
+ </div></div>
+<div class="footer"><div class="c">出典・確認日つき ・ 運営者 ・ プライバシー ・ 広告について</div></div>
+</section>
+
+<!-- ============ 7 実例 ============ -->
+<section class="board"><span class="tag">/jitsurei 結論が変わった実例(選ぶ)</span>
+<div class="hdr"><div class="in"><b>▢ 障害年金申請サポート</b><div class="nav"><span>はじめての方へ</span><span>病気から</span><span>状況から</span><span>悩みから</span><span>申請の流れ</span><span style="color:var(--c-p);font-weight:700">実例と数字</span><span>コラム</span><a class="btn">無料アプリ</a></div></div></div>
+<div class="hero"><div class="c"><div class="crumb">トップ / 結論が変わった実例</div><h1>結論が変わった実例</h1><p class="lead">同じような状況なのに結論が分かれた事例を、国の再審査(社会保険審査会)の裁決から集めています。体験談ではなく、全件が原文PDFつきです。</p>
+ <div class="band" style="margin-top:14px"><div style="font-size:13.5px;color:var(--c-muted)">収録した裁決 <b style="color:var(--c-heading)">91件</b></div><div class="bar" style="height:20px"><span style="width:65%;background:var(--c-ok)"></span><span style="width:35%;background:var(--c-warn)"></span></div><div class="legend"><span>● 結論が変わった <b>59件</b></span><span style="color:var(--c-warn)">● 認められなかった <b>32件</b></span></div><p style="font-size:14.5px;margin:6px 0 0">通ったものだけを並べていません。通らなかったものも、同じ密度で載せています。</p></div>
+ <div class="g3" style="margin-top:14px"><div class="sum" style="margin:0"><b style="color:var(--c-p)">1 何が足りなかったか</b>原処分で認められなかった理由</div><div class="sum" style="margin:0"><b style="color:var(--c-p)">2 何が加わったか</b>診察券、薬袋、修正した診断書、就労や援助の実態</div><div class="sum" style="margin:0"><b style="color:var(--c-p)">3 自分との違いはどこか</b>同じ争点の3件だけ読めば十分です</div></div></div></div>
+<div style="background:#fff;border-bottom:1px solid var(--c-border);padding:10px 0"><div class="c"><span style="font-size:12.5px;color:var(--c-meta);font-weight:700;margin-right:6px">結果</span><span class="chip on">全件 91</span><span class="chip ok">結論が変わった 59</span><span class="chip warn">認められなかった 32</span><span style="font-size:12.5px;color:var(--c-meta);font-weight:700;margin:0 6px 0 14px">争点</span><span class="chip">障害の程度 57</span><span class="chip">初診日 35</span><span class="chip">診断書 15</span><span class="chip">納付要件 10</span><span style="font-size:12.5px;color:var(--c-meta);font-weight:700;margin:0 6px 0 14px">病気</span><span class="chip">精神・発達 39</span></div></div>
+<div class="c" style="display:grid;grid-template-columns:1fr 300px;gap:24px;padding-top:16px">
+ <div><p class="meta" style="font-size:13px;color:var(--c-meta);margin:0 0 8px">全件 · 91件(1/8ページ)</p>
+  <article class="case"><span class="badge">結論が変わった</span> <span class="meta">厚生年金 · 更新・支給停止 · 令和7年</span><h3>全身型重症筋無力症 <small style="font-weight:400;color:var(--c-muted);font-size:13px">3級受給中に支給停止</small></h3><p>3級受給中に支給停止。全身の筋力低下だけで判断せず、疲労に応じて休息が必要な状況等を総合評価し3級該当を認め、原処分を取り消した。</p><div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--c-meta)"><span class="chip" style="font-size:12px;padding:2px 9px;margin:0">障害の程度・等級該当性</span><a style="font-weight:700;font-size:13px">裁決の原文(PDF) →</a></div></article>
+  <article class="case no"><span class="badge">認められなかった</span> <span class="meta">厚生年金 · 更新・支給停止 · 令和7年</span><h3>眼瞼けいれん <small style="font-weight:400;color:var(--c-muted);font-size:13px">3級受給中の支給停止処分</small></h3><p>審査会は治療による一時的効果しか認められない状態が継続し、認定基準上の症状固定に至ったと判断して原処分を維持した。</p><div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--c-meta)"><span class="chip" style="font-size:12px;padding:2px 9px;margin:0">障害の程度・等級該当性</span><a style="font-weight:700;font-size:13px">裁決の原文(PDF) →</a></div></article>
+  <article class="case"><span class="badge">結論が変わった</span> <span class="meta">厚生年金 · 初回 · 令和7年</span><h3>乳癌(肝転移) <small style="font-weight:400;color:var(--c-muted);font-size:13px">事後重症請求</small></h3><p>一般状態区分エ、肝転移、抗がん剤の副作用や予後等を総合評価し2級該当と認定し、原処分を取り消した。</p><div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--c-meta)"><span class="chip" style="font-size:12px;padding:2px 9px;margin:0">障害の程度・等級該当性</span><a style="font-weight:700;font-size:13px">裁決の原文(PDF) →</a></div></article>
+  <div class="pager"><a class="on">1</a><a>2</a><a>3</a><a>…</a><a>8</a><a>次へ →</a></div></div>
+ <aside class="side"><div class="card"><h3 style="font-size:15px">争点になりやすいのは</h3><div class="barrow"><span>障害の程度・等級該当性</span><b>57件</b></div><div class="track"><span style="width:100%"></span></div><div class="barrow"><span>初診日</span><b>35件</b></div><div class="track"><span style="width:61%"></span></div><div class="barrow"><span>診断書の信頼性・整合性</span><b>15件</b></div><div class="track"><span style="width:26%"></span></div><div class="barrow"><span>納付要件</span><b>10件</b></div><div class="track"><span style="width:18%"></span></div><p style="font-size:12.5px;color:var(--c-meta);margin:0">この割合は申請全体の支給割合ではありません。</p></div>
+  <div class="note d" style="margin:0"><b style="display:block">不支給の通知を受け取った方へ</b>不服申立てには期限があります(通知を知った日の翌日から3か月)。<a style="color:var(--c-danger);font-weight:700">「不支給と言われたとき」を読む →</a></div></aside></div>
+<div class="footer"><div class="c">出典・確認日つき ・ 運営者 ・ プライバシー ・ 広告について</div></div>
+</section>
+
+<!-- ============ 8 誤解 ============ -->
+<section class="board"><span class="tag">/gokai/hataraitetara-muri よくある誤解(読ませる・短い)</span>
+<div class="hdr"><div class="in"><b>▢ 障害年金申請サポート</b><div class="nav"><span>はじめての方へ</span><span>病気から</span><span>状況から</span><span>悩みから</span><span>申請の流れ</span><span>実例と数字</span><span>コラム</span><a class="btn">無料アプリ</a></div></div></div>
+<div class="hero"><div class="read"><div class="crumb">トップ / よくある誤解 / 制度の入口</div><span class="chip on" style="margin-bottom:8px">よくある誤解</span><p style="margin:0;color:var(--c-muted)">「働いていたら、障害年金は無理」</p><h1>働いていたら障害年金は無理？ — 国のガイドラインは「働いている事実だけで判断しない」と書いています</h1><p class="date">最終確認日 2026年9月3日</p></div></div>
+<div class="read" style="padding-top:20px">
+ <section class="conc"><h2>この記事の結論</h2><p>働いていることは、障害年金の対象外になる理由ではありません。国のガイドラインは、労働に従事していることをもって直ちに日常生活能力が向上したものと捉えない、と書いています。</p></section>
+ <h2 style="margin-bottom:10px">なぜ、そう言えるのか</h2><p>見られるのは「働いているか」ではなく「どんな支えの中で働けているか」です。…</p>
+ <h2 style="margin-bottom:10px">こういうときに、この誤解で止まります</h2><p>「正社員だから」「厚生年金を払っているから」と、申請の準備を止めてしまうとき。…</p>
+ <div class="sum"><b>確かめること</b>勤務時間・欠勤の実数・職場の配慮を、診断書と申立書に残す。</div>
+ <div class="g2"><a class="card"><h3>働きながら申請する</h3><p>ガイドラインの原文と裁決から</p></a><a class="card"><h3>私は何級くらい？</h3><p>診断書の裏面を目安表に</p></a></div>
+ <p style="font-size:13px;color:var(--c-meta);margin-top:12px">出典: 厚生労働省「精神の障害に係る等級判定ガイドライン」・確認日 2026-09-03</p></div>
+<div class="footer"><div class="c">出典・確認日つき ・ 運営者 ・ プライバシー ・ 広告について</div></div>
+</section>
+
+<!-- ============ 9 道具 ============ -->
+<section class="board"><span class="tag">/dougu/mitate 道具(使う)</span>
+<div class="hdr"><div class="in"><b>▢ 障害年金申請サポート</b><div class="nav"><span>はじめての方へ</span><span>病気から</span><span>状況から</span><span>悩みから</span><span>申請の流れ</span><span>実例と数字</span><span>コラム</span><a class="btn">無料アプリ</a></div></div></div>
+<div class="hero"><div class="read"><div class="crumb">トップ / 申請の流れ / 等級の目安をしらべる</div><h1>「私は、障害年金の対象になるのかな」と思ったら</h1><p class="lead">精神の障害の審査では、国が公表している「等級判定ガイドライン」の目安表が使われます。診断書に書かれる、毎日の生活の7つの項目と、全体の程度の組み合わせで、目安が決まります。</p>
+ <div style="margin:14px 0"><span class="chip" style="color:var(--c-muted)">約3分</span><span class="chip" style="color:var(--c-muted)">判定ではありません</span><span class="chip" style="color:var(--c-muted)">入力はこの端末の中だけ。送信も保存もしません</span></div><a class="btn">はじめる</a> &nbsp; <a style="font-size:14px">診断書をもう持っている方は、書かれた内容をそのまま写せます →</a></div></div>
+<div class="read" style="padding-top:22px"><div class="card"><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:14px"><span class="chip on" style="text-align:center;margin:0">1</span><span class="chip" style="text-align:center;margin:0">2</span><span class="chip" style="text-align:center;margin:0">3</span><span class="chip" style="text-align:center;margin:0">4</span><span class="chip" style="text-align:center;margin:0">5</span><span class="chip" style="text-align:center;margin:0">6</span><span class="chip" style="text-align:center;margin:0">7</span></div><h2 style="margin-bottom:6px">1. 適切な食事</h2><p style="color:var(--c-muted);font-size:15px">配膳などの準備も含めて、栄養のバランスを考えて食事をとることができますか。</p><div style="display:grid;gap:8px"><label class="card" style="padding:14px 16px;font-size:15px"><input type="radio" name="a"> できる</label><label class="card" style="padding:14px 16px;font-size:15px"><input type="radio" name="a" checked> 自発的にできるが、時には助言や指導を必要とする</label><label class="card" style="padding:14px 16px;font-size:15px"><input type="radio" name="a"> 助言や指導があればできる</label><label class="card" style="padding:14px 16px;font-size:15px"><input type="radio" name="a"> 助言や指導をしてもできない、または行わない</label></div><div style="display:flex;justify-content:space-between;margin-top:16px"><a class="btn2">← 戻る</a><a class="btn">次へ →</a></div></div>
+ <p style="font-size:13px;color:var(--c-meta);margin-top:12px">出典: 厚生労働省「精神の障害に係る等級判定ガイドライン」・確認日 2026-09-02 ・ 目安であり、判定ではありません。</p></div>
+<div class="footer"><div class="c">出典・確認日つき ・ 運営者 ・ プライバシー ・ 広告について</div></div>
+</section>
+
+<!-- ============ 10 数字 ============ -->
+<section class="board"><span class="tag">/suuji 数字で見る(読ませる)— 現状維持、トークンだけ統一</span>
+<div class="hdr"><div class="in"><b>▢ 障害年金申請サポート</b><div class="nav"><span>はじめての方へ</span><span>病気から</span><span>状況から</span><span>悩みから</span><span>申請の流れ</span><span style="color:var(--c-p);font-weight:700">実例と数字</span><span>コラム</span><a class="btn">無料アプリ</a></div></div></div>
+<div class="hero"><div class="read"><div class="crumb">トップ / 実例と数字 / 数字で見る障害年金</div><h1>数字で見る障害年金</h1><p class="lead">障害年金は、年に約15万人が新しく申請し、そのうち87.0%が支給に至っています。更新で止まる人は100人に1人。精神の障害での申請が7割を占め、いちばん標準的なケースです。</p></div></div>
+<div class="read" style="padding-top:22px"><h2 style="margin-bottom:10px">大きな数字(令和6年度)</h2><div class="g2"><div class="tile"><span>新規に決まった件数</span><div class="num" style="font-size:34px">146,225件</div><small>障害基礎年金+障害厚生年金</small></div><div class="tile"><span>支給に至った割合</span><div class="num" style="font-size:34px">87.0%</div><small>非該当 13.0%・18,982件</small></div></div>
+ <p style="margin-top:14px">「精神疾患で申請していいのか」というためらいは、この数字と逆です。10人のうち7人が精神の診断書で申請しています。</p>
+ <div class="card"><div class="barrow"><span>精神障害</span><b>703件 · 70.3%</b></div><div class="track"><span style="width:70%"></span></div><div class="barrow"><span>外部障害</span><b>194件 · 19.4%</b></div><div class="track"><span style="width:19%"></span></div><div class="barrow"><span>内部障害</span><b>131件 · 13.1%</b></div><div class="track" style="margin:0"><span style="width:13%"></span></div></div></div>
+<div class="footer"><div class="c">出典・確認日つき ・ 運営者 ・ プライバシー ・ 広告について</div></div>
+</section>
+</body></html>
