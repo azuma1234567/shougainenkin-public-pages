@@ -104,3 +104,23 @@ JavaScript を切った状態(`javaScriptEnabled: false`)でも **カード 21�
 - `HUB_INDEX` の `title` `h1` `lead` `description` `groups` の中身。
   `body` は byoki の統計段落だけを群メモへ移し、残りは一覧の下に「このページの使い方」として残した。
 - URL・パンくず・メタデータ。
+
+## 本番確認(2026-09-05)
+
+`main` への push で Vercel が本番デプロイ(`dpl_6rg3UW9HmZdtnSoy3FAFrpzhFR4j`、Ready)。
+`https://shougainenkin-note.net` の別名が付いていることを確認した。
+`npx vercel --prod` は "Not authorized" で失敗したが、Git 連携の本番デプロイが同じコミットで
+すでに通っていたため、こちらを本番として検証した。
+
+| 項目 | 結果 |
+|---|---|
+| /byoki 1400px | 3列・21枚・全高 3,302px(ローカルと一致) |
+| /joukyou 1400px | 3列・9枚・全高 1,742px |
+| /byoki 390px | 1列・21枚 |
+| 一言 | §3 の30件と **30/30 完全一致** |
+| 件数 | utsu-soukyoku「記事 5本 · 実例 13件」/ tekiou-fuan「記事 3本」/ tougou「実例 12件」/ tenkan メタなし |
+| 絞り込み | ADHD→発達障害、透析→腎臓病・人工透析、xyz→0件の案内 |
+| JS 無効 | カード21枚が表示される |
+| JSON-LD | CollectionPage + ItemList、numberOfItems 21 |
+
+スクリーンショット: `prod-byoki.png` `prod-joukyou.png` `prod-byoki-390.png`
