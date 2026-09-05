@@ -529,11 +529,8 @@
 
 /* 申請の流れ 8ステップ。1行に 1→8 を横に並べ、道具カードはそのステップの真下。
    DOM の順序は常に 1→8 で、並びは grid だけで変える。
-   区切り(.step-flow-phase)も <ol> の子なので li。nth-of-type は区切りを数えてずれるため、
-   線の制御は [data-n="N"] で当てる。 */
+   線の制御は [data-n="N"] で当てる(2026-09-05 に上の区切りは削除した)。 */
 .step-flow { list-style: none; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: 12px; row-gap: 14px; }
-.step-flow-phase { grid-column: span 2; padding-left: 2px; color: var(--platform-muted); font-size: 12px; font-weight: 700; letter-spacing: .06em; }
-.step-flow-phase::before { content: ""; display: block; height: 3px; margin-bottom: 8px; border-radius: 2px; background: var(--platform-border); }
 .step-flow-node { position: relative; min-width: 0; display: grid; align-content: start; justify-items: center; gap: 10px; text-align: center; }
 .step-flow-node::after { content: ""; position: absolute; top: 19px; left: calc(50% + 22px); right: calc(-50% - 22px + 12px); height: 2px; background: var(--platform-border); }
 .step-flow-node[data-n="8"]::after { display: none; }
@@ -553,7 +550,6 @@
 /* 中間幅: 4列×2行(1〜4 / 5〜8)。区切りは出さず、4 の右の線を消す。 */
 @media (max-width: 1180px) {
   .step-flow { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 36px; }
-  .step-flow-phase { display: none; }
   .step-flow-node[data-n="4"]::after { display: none; }
   .step-flow-tool { grid-row: auto; }
 }

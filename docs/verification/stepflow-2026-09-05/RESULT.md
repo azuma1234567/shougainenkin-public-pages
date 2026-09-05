@@ -18,8 +18,8 @@ npm run build      → ✓ Compiled successfully / 271ページを生成
 
 | 幅 | 実装 | モック | 形 |
 |---|---|---|---|
-| 1500px | `top-1500.png` / `shinsei-1500.png` | `mock-1500.png` | 1行×8列。上に4つの区切り。線は左から右へ。カードは 3・4・5・6 の真下。6 は塗りつぶし |
-| 1000px | `top-1000.png` / `shinsei-1000.png` | `mock-1000.png` | 4列×2行(1〜4 / 5〜8)。区切りなし。4 の右の線は消えている |
+| 1500px | `top-1500.png` / `shinsei-1500.png` | `mock-1500.png` | 1行×8列。線は左から右へ。カードは 3・4・5・6 の真下。6 は塗りつぶし |
+| 1000px | `top-1000.png` / `shinsei-1000.png` | `mock-1000.png` | 4列×2行(1〜4 / 5〜8)。4 の右の線は消えている |
 | 390px | `top-390.png` / `shinsei-390.png` | `mock-390.png` | 縦一列。番号の下に縦線、カードは番号の右の列。ステップ名は1行 |
 
 番号の並び・線・カードの位置は、3つの幅ともモックと同じ形になっている。
@@ -71,7 +71,7 @@ npm run build      → ✓ Compiled successfully / 271ページを生成
 | 12 | 8 | ステップ名 | 結果を待つ |
 
 **1→8 の順**に、ステップ名 → (あれば)その段の道具カード、と止まる。
-DOM は区切り4つ → ステップ1〜8 の順で、区切りは `aria-hidden` かつリンクを持たないので Tab では止まらない。
+`1 → 2 → 3 → 3道具 → 4 → 4道具 → 5 → 5道具 → 6 → 6道具 → 7 → 8`。
 
 ## 6. 公開前チェック
 
@@ -85,15 +85,13 @@ node scripts/prelaunch-check.mjs http://localhost:3200
 
 ## 実装のメモ
 
-- ルートは `<ol class="step-flow">`、各ステップは `<li class="step-flow-node" data-n="1..8">`、
-  区切りは `<li class="step-flow-phase" aria-hidden="true">`。
-  区切りも `<ol>` の子なので `nth-of-type` はずれる。線の制御は `[data-n="4"]` `[data-n="8"]` で当てている。
+- ルートは `<ol class="step-flow">`、各ステップは `<li class="step-flow-node" data-n="1..8">`。
+  線の制御は `[data-n="4"]` `[data-n="8"]` で当てている(`nth-of-type` は使っていない)。
 - ステップ名は `STEPS` の文字列のまま。PC で2行に割るために `{title, split}` の形にして、
   `split` の位置で `<span class="step-flow-break">` に分けた(文字列に `<br>` は入れていない)。
   スマホでは `.step-flow-break` を `display: inline` に戻して1行にする。
 - ステップ名は `/shinsei#step-N` へのリンク、道具カードは `placementCard(placement).href`。
   カードの文言は `data/dougu.ts` の `shinseiSteps` をそのまま使っている(変えていない)。
-- 区切りの文言は `StepFlow.tsx` の定数 `PHASES = ["確かめる","そろえる","書く","出す・待つ"]`。
 
 ## 変えていないもの(§4)
 
@@ -104,3 +102,21 @@ node scripts/prelaunch-check.mjs http://localhost:3200
 
 トップのリードだけ、指示書 §2 のとおり
 「初診日の確認から結果が届くまで。左から右へ、順番に進みます。」に差し替えた。
+
+## 追記(2026-09-05): 上の4つの区切りを削除した
+
+指示書 §2 で入れていた「確かめる / そろえる / 書く / 出す・待つ」の区切りを、
+利用者の指示により**まるごと消した**(`PHASES` 定数、`<li class="step-flow-phase">`、
+`.step-flow-phase` の CSS)。`<ol>` の子は `<li class="step-flow-node">` の8個だけになった。
+
+消したあとで測り直した結果:
+
+| 幅 | / | /shinsei |
+|---|---|---|
+| 1500px | 円8個・y ばらつき 0px | 円8個・y ばらつき 0px |
+| 1000px | 1〜4 / 5〜8 とも 0px | 1〜4 / 5〜8 とも 0px |
+| 390px | x 全部同じ | x 全部同じ |
+
+Tab の順: `1 → 2 → 3 → 3道具 → 4 → 4道具 → 5 → 5道具 → 6 → 6道具 → 7 → 8`。
+スクリーンショット6枚は、区切りを消した状態で撮り直した(モックの3枚はそのまま)。
+モックには区切りがあるので、**この1点だけモックと形が違う**。

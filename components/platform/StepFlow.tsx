@@ -14,10 +14,6 @@ export const STEPS = [
   { title: "結果を待つ", split: 3 },
 ] as const;
 
-/* 上に置く4つの区切り(2ステップずつ)。ステップ名の要約であって、制度の分類ではない。
-   装飾なので aria-hidden。 */
-const PHASES = ["確かめる", "そろえる", "書く", "出す・待つ"] as const;
-
 function Node({ step, index }: { step: (typeof STEPS)[number]; index: number }) {
   const n = index + 1;
   const stepId = `step-${n}`;
@@ -46,9 +42,6 @@ function Node({ step, index }: { step: (typeof STEPS)[number]; index: number }) 
 export default function StepFlow() {
   return (
     <ol className="step-flow" aria-label="申請の流れ 8つのステップ">
-      {PHASES.map((phase) => (
-        <li className="step-flow-phase" aria-hidden="true" key={phase}>{phase}</li>
-      ))}
       {STEPS.map((step, index) => <Node step={step} index={index} key={step.title} />)}
     </ol>
   );
