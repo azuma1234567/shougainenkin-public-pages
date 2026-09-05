@@ -28,7 +28,7 @@ origin: http://localhost:3200 / ページ数: 166 / 基準: git main
 | B-5 | ○ | titleとmeta descriptionが全ページにある | 空 0、description重複 0組 |
 | B-6 | ○ | titleの重複がない | 重複 0組 |
 | B-7 | ○ | OGP画像が全ページにある | og:image なし 0。誤解カードの自動生成画像 48/48 |
-| B-8 | ○ | 構造化データが妥当 | 型別件数 WebSite:1 BreadcrumbList:165 undefined:98 HowTo:2 FAQPage:136 Person:1 Organization:1 MobileApplication:1 DefinedTermSet:1 Article:95 ItemList:1、エラー 0<br>※スキーマ必須項目の静的検査。Google のリッチリザルトテストは公開URLで別途実施 |
+| B-8 | ○ | 構造化データが妥当 | 型別件数 WebSite:1 BreadcrumbList:165 undefined:98 HowTo:2 FAQPage:136 Person:1 Organization:1 MobileApplication:1 DefinedTermSet:1 CollectionPage:5 Article:95 ItemList:1、エラー 0<br>※スキーマ必須項目の静的検査。Google のリッチリザルトテストは公開URLで別途実施 |
 | B-9 | ○ | パンくずが全ページにある(BreadcrumbList を含む・二重なし) | 表示なし 0、BreadcrumbList(構造化データ)なし 0、2つ以上 0<br>※表示のパンくずはあるが構造化データが無いページと、二重に出ているページを別に数える |
 | B-10 | × | 更新日が全ページに表示されている | 更新日/確認日の表示なし 3 |
 

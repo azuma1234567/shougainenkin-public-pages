@@ -1168,3 +1168,53 @@
   .jc-row-lead, .jc-row-rest { grid-template-columns: 1fr; }
   .jc { padding: 18px; }
 }
+
+/* ===== 一覧ページ(/byoki /joukyou /nayami /okane /erabu)。
+   docs/site-mock-2026-09-05-hubindex/byoki-mock.html のとおり。 ===== */
+.hub-index-lead { max-width: 820px; }
+.hub-index-count { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; margin: 8px 0 0; color: var(--platform-faint); font-size: 12.5px; }
+.hub-index-count .p-page-date { margin: 0; }
+.hub-index-count > span::before { content: "· "; }
+.hub-index-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; }
+.hub-index-chip { display: inline-flex; align-items: center; gap: 6px; padding: 7px 13px; border: 1px solid var(--platform-border); border-radius: 999px; background: #fff; color: var(--platform-heading); font-size: 13.5px; font-weight: 700; text-decoration: none; }
+.hub-index-chip:hover { border-color: var(--platform-primary); }
+.hub-index-chip b { color: var(--platform-faint); font-size: 12px; font-weight: 400; }
+
+.hub-index-search { display: grid; gap: 6px; margin: 0 0 22px; max-width: 420px; }
+.hub-index-search label { color: var(--platform-heading); font-size: 13.5px; font-weight: 700; }
+.hub-index-search input { width: 100%; padding: 10px 13px; border: 1px solid #9db9ca; border-radius: 10px; background: #fff; color: var(--platform-text); font-family: inherit; font-size: 16px; }
+.hub-index-search input:focus-visible { outline: 2px solid var(--platform-primary); outline-offset: 1px; }
+.hub-index-empty { margin: 8px 0 0; padding: 16px 18px; border-radius: 12px; background: var(--platform-band); color: var(--platform-muted); font-size: 14.5px; line-height: 1.85; }
+.hub-index-empty a { font-weight: 700; }
+
+/* モックの .sec は上 26px・下 0。サイト共通の .p-section(上下40px)より詰まっているので、
+   一覧ページの中だけモックに合わせる。 */
+.hub-index .p-section { padding-top: 26px; padding-bottom: 32px; }
+.hub-index-group { margin: 0 0 30px; scroll-margin-top: 90px; }
+.hub-index-group:last-of-type { margin-bottom: 0; }
+.hub-index-group-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; margin: 0 0 6px; }
+.hub-index-group-head h2 { margin: 0; color: var(--platform-heading); font-family: var(--font-platform-heading), "Hiragino Kaku Gothic ProN", sans-serif; font-size: 20px; line-height: 1.5; }
+.hub-index-group-head small { color: var(--platform-faint); font-size: 13px; }
+.hub-index-group-note { margin: 0 0 14px; color: var(--platform-muted); font-size: 14px; line-height: 1.8; }
+.hub-index-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.hub-card { display: grid; align-content: start; gap: 8px; min-height: 150px; min-width: 0; padding: 18px 18px 16px; border: 1px solid var(--platform-border); border-radius: 14px; background: #fff; color: var(--platform-heading); text-decoration: none; transition: border-color .15s, box-shadow .15s; }
+.hub-card:hover { border-color: var(--platform-primary); box-shadow: 0 4px 18px rgba(20, 66, 94, .10); }
+.hub-card h3 { margin: 0; color: var(--platform-heading); font-family: var(--font-platform-heading), "Hiragino Kaku Gothic ProN", sans-serif; font-size: 17px; line-height: 1.45; }
+.hub-card p { margin: 0; color: var(--platform-muted); font-size: 14px; line-height: 1.65; }
+.hub-card-meta { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 6px; color: var(--platform-faint); font-size: 12.5px; }
+.hub-card-meta b { color: var(--platform-primary); font-size: 13px; font-weight: 700; }
+
+.hub-index-how { margin: 34px 0 0; padding: 22px 24px; border-radius: 14px; background: #f6fafd; }
+.hub-index-how h2 { margin: 0 0 10px; color: var(--platform-heading); font-family: var(--font-platform-heading), "Hiragino Kaku Gothic ProN", sans-serif; font-size: 18px; }
+.hub-index-how p { margin: 0 0 10px; color: var(--platform-muted); font-size: 15px; line-height: 1.9; }
+.hub-index-how p:last-child { margin-bottom: 0; }
+.hub-index-tail { margin-top: 18px; }
+
+@media (max-width: 1000px) {
+  .hub-index-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hub-index-search { max-width: none; }
+}
+@media (max-width: 640px) {
+  .hub-index-grid { grid-template-columns: 1fr; }
+  .hub-card { min-height: 0; }
+}

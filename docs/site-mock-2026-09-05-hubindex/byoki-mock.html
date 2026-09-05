@@ -1,0 +1,113 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>病気から探す — 一覧ページ刷新モック</title>
+<style>
+:root{--p:#0284c7;--h:#14425e;--m:#4a6a80;--b:#dcebf5;--bg:#f6fafd;--tool:#e8f4fc;--faint:#6b8799}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;color:var(--h);background:#fff;line-height:1.7}
+a{color:inherit;text-decoration:none}
+.hero{background:linear-gradient(#eef6fc,#fff);padding:28px 24px 22px}
+.c{max-width:1240px;margin:0 auto}
+.crumb{font-size:12.5px;color:var(--faint)}
+h1{font-size:34px;margin:8px 0 6px}
+.lead{margin:0;font-size:16px;color:var(--m);max-width:820px}
+.date{font-size:12.5px;color:var(--faint);margin-top:8px}
+/* 絞り込み行 */
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border:1px solid var(--b);border-radius:999px;background:#fff;font-size:13.5px;font-weight:700}
+.chip b{font-weight:400;color:var(--faint);font-size:12px}
+.search{margin-left:auto;display:flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #9db9ca;border-radius:10px;background:#fff;min-width:280px;font-size:14px;color:var(--faint)}
+.search span{flex:1}
+/* 一覧 */
+.sec{padding:26px 24px 0}
+.g{display:flex;align-items:baseline;gap:12px;margin:0 0 6px}
+.g h2{font-size:20px;margin:0}
+.g small{font-size:13px;color:var(--faint)}
+.gnote{margin:0 0 14px;font-size:14px;color:var(--m)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.card{display:grid;gap:8px;align-content:start;padding:18px 18px 16px;border:1px solid var(--b);border-radius:14px;background:#fff;min-height:150px;transition:box-shadow .15s,border-color .15s}
+.card:hover{border-color:var(--p);box-shadow:0 4px 18px rgba(20,66,94,.10)}
+.card h3{margin:0;font-size:17px;line-height:1.45}
+.card p{margin:0;font-size:14px;color:var(--m);line-height:1.65}
+.meta{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:6px;font-size:12.5px;color:var(--faint)}
+.meta b{color:var(--p);font-weight:700;font-size:13px}
+/* 使い方(下へ) */
+.how{margin:34px 24px 0;padding:22px 24px;background:var(--bg);border-radius:14px}
+.how h2{font-size:18px;margin:0 0 10px}
+.how p{margin:0 0 10px;font-size:15px;color:var(--m)}
+.tail{margin:18px 24px 40px;font-size:14px;color:var(--m)}
+.tail a{color:var(--p);font-weight:700}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.search{margin-left:0;width:100%}}
+@media(max-width:640px){.grid{grid-template-columns:1fr}h1{font-size:28px}.card{min-height:0}}
+</style></head><body>
+<header class="hero"><div class="c">
+  <div class="crumb">トップ / 病気から探す</div>
+  <h1>病気から探す</h1>
+  <p class="lead">障害年金は病名で決まる制度ではありません。ただ、審査で見られるところは病気ごとに違います。あなたの病気で、どこが見られるのかから確認してください。</p>
+  <div class="date">最終更新日 2026年8月31日 · 21の病気</div>
+  <div class="bar">
+    <nav class="chips" aria-label="分類へ移動">
+      <a class="chip" href="#seishin">精神・発達 <b>9</b></a>
+      <a class="chip" href="#naibu">内部の病気 <b>7</b></a>
+      <a class="chip" href="#karada">体・感覚の障害 <b>4</b></a>
+      <a class="chip" href="#sonota">その他 <b>1</b></a>
+    </nav>
+    <div class="search" role="search">🔍 <span>病名で絞り込む(例: ADHD、透析、ペースメーカー)</span></div>
+  </div>
+</div></header>
+
+<section class="sec" id="seishin"><div class="c">
+  <div class="g"><h2>精神・発達</h2><small>9ページ</small></div>
+  <p class="gnote">新しく決まった障害年金の70.3%が精神の障害によるものです(令和6年度)。病名ではなく、診断書の2つの欄の組み合わせで目安が決まります。</p>
+  <div class="grid">
+    <a class="card" href="#"><h3>うつ病・双極性障害</h3><p>いちばん標準的なケース。病名ではなく、診断書の「日常生活能力の判定」と「程度」の2欄で目安が決まります。</p><div class="meta"><span>記事 7本 · 実例 12件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>適応障害・不安障害・神経症・PTSD</h3><p>認定基準は神経症を「原則対象外」としつつ、精神病の病態を示すものは気分障害に準じて扱う、と続けています。</p><div class="meta"><span>記事 3本 · 実例 4件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>発達障害</h3><p>ADHD も ASD も対象。IQ や学歴は関係なく、対人関係・意思疎通の困難で見られます。大人になってからの初診日で構いません。</p><div class="meta"><span>記事 2本 · 実例 5件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>統合失調症</h3><p>対象になるかで悩む必要はありません。悩みどころは初診日をどこに置くかと、発病からの経過の伝え方です。</p><div class="meta"><span>実例 9件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>知的障害</h3><p>初診日を探す必要がなく、納付要件も問われません。20歳の誕生日の前日が障害認定日で、19歳9か月から準備できます。</p><div class="meta"><span>実例 3件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>てんかん</h3><p>見られるのは発作の型と頻度、発作間欠期の状態。薬で発作が抑えられていると、原則対象になりません。</p><div class="meta"><span>&nbsp;</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>認知症(若年性を含む)</h3><p>65歳前の発症は、老齢年金までの空白を埋める障害年金の出番。家族が進めることを前提に書いています。</p><div class="meta"><span>&nbsp;</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>高次脳機能障害</h3><p>歩けるし話せる。だから困難が伝わらない。「見えないこと」の伝え方が結果を分けます。</p><div class="meta"><span>実例 2件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>依存症</h3><p>条件つきで対象。診断名ではなく、幻覚・妄想などの精神病性の症状がいま出ているかが分かれ目です。</p><div class="meta"><span>実例 1件</span><b>読む →</b></div></a>
+  </div>
+</div></section>
+
+<section class="sec" id="naibu"><div class="c">
+  <div class="g"><h2>内部の病気</h2><small>7ページ</small></div>
+  <p class="gnote">不支給の割合が20.6%と、精神(12.1%)・外部障害(10.8%)より高い分野です。検査の数値と、生活の制限度の組み合わせで見られます。</p>
+  <div class="grid">
+    <a class="card" href="#"><h3>腎臓病・人工透析</h3><p>人工透析を受けている方は、原則2級です。</p><div class="meta"><span>実例 6件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>心臓病</h3><p>ペースメーカー・ICD・人工弁を入れた方は、原則3級。心不全は検査値と生活の制限度で見られます。</p><div class="meta"><span>実例 3件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>糖尿病</h3><p>糖尿病そのものは対象になりにくい病気。合併症か、インスリン治療をしてもなお血糖コントロールが困難な状態の2つが道です。</p><div class="meta"><span>実例 4件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>がん</h3><p>がんは対象です。病期や腫瘍の大きさではなく、局所の障害・全身の衰弱・治療の副作用を総合して判断されます。</p><div class="meta"><span>実例 2件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>肝臓の病気</h3><p>検査の数値と「一般状態区分」の組み合わせ。数値が届かなくても、強い倦怠感で日中の半分以上横になっているなら伝える実態です。</p><div class="meta"><span>&nbsp;</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>呼吸器の病気</h3><p>在宅酸素療法をしている方は、原則3級です。</p><div class="meta"><span>実例 1件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>血液・造血器の病気</h3><p>白血病や悪性リンパ腫、再生不良性貧血、血友病なども対象。検査所見と生活の制限度、治療のつらさで見られます。</p><div class="meta"><span>実例 1件</span><b>読む →</b></div></a>
+  </div>
+</div></section>
+
+<section class="sec" id="karada"><div class="c">
+  <div class="g"><h2>体・感覚の障害</h2><small>4ページ</small></div>
+  <p class="gnote">診断名ではなく、動作や検査の数値で見られます。認定基準がいちばん細かく決まっている分野です。</p>
+  <div class="grid">
+    <a class="card" href="#"><h3>肢体の障害</h3><p>人工関節、脳卒中の後遺症、脊髄損傷、リウマチ。見られるのは診断名ではなく、歩ける距離や手の動作です。</p><div class="meta"><span>実例 8件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>目の障害</h3><p>視力だけでなく視野も対象。緑内障や網膜色素変性症で見える範囲が狭い場合、視力が保たれていても該当しえます。</p><div class="meta"><span>実例 3件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>耳の障害・めまい</h3><p>両耳の平均純音聴力レベルと語音明瞭度で判断されます。</p><div class="meta"><span>実例 2件</span><b>読む →</b></div></a>
+    <a class="card" href="#"><h3>話す・食べる機能の障害</h3><p>音声・言語の機能と、そしゃく・嚥下の機能の障害も対象です。</p><div class="meta"><span>実例 1件</span><b>読む →</b></div></a>
+  </div>
+</div></section>
+
+<section class="sec" id="sonota"><div class="c">
+  <div class="g"><h2>その他の疾患</h2><small>1ページ</small></div>
+  <div class="grid">
+    <a class="card" href="#"><h3>難病・その他の病気</h3><p>どの節にもあてはまらない傷病は「その他の疾患」として総合判断。病名が珍しいことは、対象外を意味しません。</p><div class="meta"><span>実例 5件</span><b>読む →</b></div></a>
+  </div>
+</div></section>
+
+<div class="c"><div class="how">
+  <h2>このページの使い方</h2>
+  <p>同じ「うつ病」でも、初診日にどの制度に入っていたか、いまの生活にどれだけ支障があるかで結果は変わります。だから各ページは、病名の説明ではなく、「その病気で審査に見られるところ」「診断書の様式」「つまずきやすい場所」の順に並べています。</p>
+  <p>病名が2つ以上ある人は、生活の支障がいちばん大きい病気のページから読んでください。精神と身体の両方がある場合は、診断書が2枚になることがあります。</p>
+</div></div>
+<p class="c tail">ここに無い病気でも、障害年金の対象になることがあります。決まるのは病名ではなく、生活や仕事にどれだけ支障があるかです。 <a href="#">悩みから探す →</a> · <a href="#">はじめての方へ →</a></p>
+</body></html>
