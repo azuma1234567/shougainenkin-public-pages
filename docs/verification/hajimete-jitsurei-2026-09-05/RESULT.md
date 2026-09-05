@@ -131,3 +131,23 @@ JavaScript を切っても一覧・絞り込み・ページ送りは動く(`?fil
 - URL・h1・パンくず・metadata。
 - 既存の絞り込み URL の互換(上の5)。
 - `SAIKETSU_CASES`。
+
+## 本番確認(2026-09-05)
+
+`main` への push で Vercel が本番デプロイ。`https://shougainenkin-note.net` の実測:
+
+| 見るところ | 結果 |
+|---|---|
+| /hajimete の問いの帯 | 3つ |
+| /hajimete の金額タイル | 4枚。数字はすべて rgb(20,66,94) = `--c-heading`(黒) |
+| /jitsurei の帯 | 65%(`--chart-1`)/ 35%(`--chart-4`)、凡例「結論が変わった 59件」「認められなかった 32件」 |
+| /jitsurei の争点の棒 | 4本。`--chart-1`〜`4`、名前と件数つき |
+| /jitsurei のカード | 12件 |
+
+構造化データは schema.org のバリデータに公開 URL を渡して確認
+(`page-types-seisa §4` のとおり、リッチリザルトテストは使わない)。
+
+```
+/hajimete → エラー 0 / 警告 0 / 検出 2(FAQPage + BreadcrumbList)
+/jitsurei → エラー 0 / 警告 0 / 検出 2(ItemList + BreadcrumbList)
+```
