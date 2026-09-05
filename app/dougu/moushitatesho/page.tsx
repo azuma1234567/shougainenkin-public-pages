@@ -124,6 +124,7 @@ export default function Page() {
         <AppCta ct="日々の記録から、この申立書の下書きを作る" />
 
         <p><Link href="/shinsei">申請の流れへ戻る</Link></p>
+        <p className="dougu-app-link"><Link href="/app">同じ機能をアプリで続ける →</Link></p>
         <PageDate updated={UPDATED} />
       </div>
     </div>

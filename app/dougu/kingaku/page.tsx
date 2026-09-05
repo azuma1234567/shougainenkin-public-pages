@@ -28,7 +28,7 @@ export default function Page() {
       <header className="dougu-hero">
         <div className="p-container kg-width">
           <Breadcrumb
-            items={[{ href: "/", label: "トップ" }, { href: "/okane", label: "お金の話" }, { label: "障害年金の金額" }]}
+            items={[{ href: "/", label: "トップ" }, { href: "/okane", label: "お金" }, { label: "障害年金の金額" }]}
             currentPath="/dougu/kingaku"
           />
           <h1>障害年金は、いくらになるか</h1>
@@ -58,6 +58,7 @@ export default function Page() {
           </div>
         </section>
         <p><Link href="/okane">お金の話へ戻る</Link></p>
+        <p className="dougu-app-link"><Link href="/app">同じ機能をアプリで続ける →</Link></p>
       </div>
     </div>
   );

@@ -34,7 +34,7 @@ export default function Page() {
           国が公表している目安に当てはめた結果です（障害年金申請サポート / 精神の障害に係る等級判定ガイドライン 平成28年9月）。このサイトが判定したものではありません。
         </p>
         <MitateTool />
-        <div className="no-print"><p><Link href="/shinsei">申請の流れへ戻る</Link></p><PageDate updated={UPDATED} /></div>
+        <div className="no-print"><p><Link href="/shinsei">申請の流れへ戻る</Link></p><p className="dougu-app-link"><Link href="/app">同じ機能をアプリで続ける →</Link></p><PageDate updated={UPDATED} /></div>
       </div>
     </div>
   );

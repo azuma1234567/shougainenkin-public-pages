@@ -159,12 +159,17 @@ export const PLACEMENTS: {
     "/byoki/tougou": ["mitate"],
     "/byoki/hattatsu": ["mitate"],
     "/byoki/chiteki": ["mitate"],
+    /* 診断書で困っている人・家族が手伝う人も、目安表と窓口の入口が要る。 */
+    "/nayami/shindansho-komatta": ["mitate"],
+    "/joukyou/kazoku-ga-tetsudau": ["madoguchi"],
   },
   shinseiSteps: {
     "step-3": [{ tool: "madoguchi", title: "どこに出せばいい？", blurb: "管轄の年金事務所と、予約のしかた" }],
     "step-4": [{ tool: "shorui", title: "何をそろえればいい？", blurb: "自分の場合に要る書類だけを一覧に" }],
     "step-5": [{ tool: "mitate", title: "私は何級くらい？", blurb: "受け取った診断書の裏面を、国の目安表に当てはめる" }],
     "step-6": [{ tool: "moushitatesho", title: "申立書を、自分で書きたい", blurb: "期間ごとに書いて、公式様式に重ねて印刷" }],
+    /* 出す段でもう一度。文言はステップ3と同じ(新しい説明文は書かない)。 */
+    "step-7": [{ tool: "madoguchi", title: "どこに出せばいい？", blurb: "管轄の年金事務所と、予約のしかた" }],
   },
 };
 

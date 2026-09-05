@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JibunCards } from "@/components/platform/JibunCard";
+import { DouguCards } from "@/components/platform/DouguCard";
 import { PRIVACY_LINE } from "@/data/dougu";
 import HubGokai from "@/components/platform/HubGokai";
 import Link from "next/link";
@@ -27,6 +28,8 @@ const checks = [
       "病名がついた日ではありません。その症状ではじめて医師にかかった日です",
     ],
     more: [],
+    tool: null,
+    toolLabel: null,
     note: "思い出せなくても、あきらめないでください。何月何日まで特定できなくても、請求できる取り扱いがあります。",
     href: "/columns/shoshinbi-wakaranai",
     label: "初診日がわからないときの調べ方",
@@ -43,6 +46,8 @@ const checks = [
     more: [
       "会社員・公務員の配偶者に扶養されていた期間（第3号被保険者）は、自分で払っていなくても納付済期間です",
     ],
+    tool: null,
+    toolLabel: null,
     note: "記録は年金事務所で確認できます。思い込みで諦める前に、記録を見てください。",
     href: "/columns/nofu-yoken",
     label: "納付要件をくわしく",
@@ -59,6 +64,9 @@ const checks = [
     note: "",
     href: "/columns/nichijo-seikatsu-7koumoku",
     label: "審査で見られる「日常生活能力」の7項目",
+    /* 程度の話なので、国の目安表に当てはめる道具をこのカードの最後に置く。 */
+    tool: "/dougu/mitate",
+    toolLabel: "国の目安に当てはめてみる",
   },
 ] as const;
 
@@ -178,6 +186,7 @@ export default function HajimetePage() {
                 )}
                 {item.note ? <p className="p-flag p-flag-ok">{item.note}</p> : null}
                 <Link className="p-card-link" href={item.href}>{item.label} →</Link>
+                {item.tool ? <Link className="p-card-link" href={item.tool}>{item.toolLabel} →</Link> : null}
               </Card>
             ))}
           </div>
@@ -194,6 +203,7 @@ export default function HajimetePage() {
             <article className="p-money-tile"><span>障害厚生年金 3級（最低保障）</span><strong>年 {A.employeesGrade3Minimum}<em>円</em></strong><small>3級は厚生年金だけの等級</small></article>
             <article className="p-money-tile"><span>年金生活者支援給付金</span><strong>月 {A.supportGrade2Monthly}<em>円</em></strong><small>2級。1級は月{A.supportGrade1Monthly}円。所得が一定以下のとき</small></article>
           </div>
+          <DouguCards placements={["kingaku"]} variant="hub" />
           <div className="p-grid p-grid-3">
             <Card className="p-card-lg">
               <span className="p-label">障害基礎年金</span>
@@ -221,7 +231,7 @@ export default function HajimetePage() {
       <section className="p-section" aria-labelledby="dougu-heading">
         <div className="p-container">
           <SectionHeader title="自分の場合を、確かめる" lead={PRIVACY_LINE} />
-          <JibunCards ids={["mitate", "kingaku"]} />
+          <JibunCards ids={["mitate"]} />
         </div>
       </section>
 
@@ -235,6 +245,7 @@ export default function HajimetePage() {
               <li><strong>診断書を依頼してから受け取るまで</strong> — すぐには出ません。1か月近くかかることもあると語られています</li>
               <li><strong>提出してから結果が届くまで</strong> — 機構が公表している標準的な処理期間があります。<Link href="/columns/shinsei-kikan">申請から結果までの期間</Link></li>
             </ul>
+            <DouguCards placements={["shorui"]} variant="hub" />
             <p className="p-flag p-flag-danger">
               急ぐ理由がひとつだけあります。<strong>事後重症という請求のしかたは、請求した月の翌月分から</strong>なので、1か月遅れれば1か月分が消えます。ただし、体調を崩してまで急ぐ制度ではありません。動ける日に、少しずつで大丈夫です。
             </p>

@@ -43,6 +43,7 @@ export default function Page() {
         <ShoruiTool />
         <div className="no-print">
           <p><Link href="/shinsei">申請の流れへ戻る</Link></p>
+          <p className="dougu-app-link"><Link href="/app">同じ機能をアプリで続ける →</Link></p>
           <PageDate updated={UPDATED} />
         </div>
       </div>

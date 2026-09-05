@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import HubIndexList, { type HubCard, type HubGroup } from "@/components/platform/HubIndexList";
+import { DouguCards } from "@/components/platform/DouguCard";
+import type { ToolId } from "@/data/dougu";
 import { HubIndexSearch } from "@/components/platform/HubIndexSearch";
 import { hubColumnSlugs } from "@/lib/hubs";
 import { SAIKETSU_CASES } from "@/lib/saiketsu";
@@ -22,6 +24,8 @@ type IndexSpec = {
   groupNotes?: Record<string, string>;
   /** hero の後・カード一覧の前に出す本文(段落の配列)。[ラベル](/path) はリンクになる */
   body?: string[];
+  /** リードの直下に置く道具。文言は data/dougu.ts のものをそのまま使う */
+  tools?: ToolId[];
   tail?: { text: string; href: string; label: string };
 };
 
@@ -143,6 +147,8 @@ export const HUB_INDEX: Record<Kind, IndexSpec> = {
     ],
   },
   okane: {
+    /* 金額の計算は「いくら?」の答えそのものなので、一覧の先頭に置く。 */
+    tools: ["kingaku"],
     title: "お金の話",
     h1: "お金の話",
     lead: "いくら受け取れるのか。税金はどうなるのか。ほかの制度との関係はどうか。お金まわりの疑問をここにまとめています。",
@@ -274,6 +280,7 @@ export function renderHubIndex(kind: Kind) {
 
       <section className="p-section">
         <div className="p-container">
+          {spec.tools ? <DouguCards className="hub-index-tool" placements={[...spec.tools]} variant="hub" /> : null}
           <HubIndexList groups={groups} />
 
           {spec.body ? (

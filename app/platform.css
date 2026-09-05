@@ -1580,3 +1580,9 @@
   .shinsei-step-cols { grid-template-columns: 1fr; }
   .shinsei-step-card > header { flex-wrap: wrap; }
 }
+
+/* 道具ページの末尾。アプリへはテキストリンク1本だけ(バッジは置かない)。 */
+.dougu-app-link { margin: 6px 0 0; }
+.dougu-app-link a { color: var(--c-primary); font-size: var(--fs-small); font-weight: 700; }
+/* 一覧の先頭に置く道具カード。 */
+.hub-index-tool { margin: 0 0 18px; }
