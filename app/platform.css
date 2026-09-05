@@ -1371,3 +1371,130 @@
 .badge-ok { background: var(--c-ok-bg); color: var(--c-ok); }
 .badge-warn { background: var(--c-warn-bg); color: var(--c-warn-text); }
 .badge-danger { background: var(--c-danger-bg); color: var(--c-danger); }
+
+/* ===== /hajimete・/jitsurei(2026-09-05・改訂2) =====
+ * docs/hajimete-jitsurei-sasshin-2026-09-05-instructions.md と、
+ * 優先する精査メモ(user-psychology §4 / page-types §4 / design-seisa)。
+ * 数字は黒(--c-heading)。意味の色は左罫線とバッジだけ。新しい hex は書かない。 */
+
+/* 意味の色の注記。左4pxの罫線 + うすい地。面では塗らない。 */
+.p-flag { padding: 12px 15px; border-radius: 0 var(--r-sm) var(--r-sm) 0; font-size: var(--fs-small); line-height: 1.8; }
+.p-flag-ok { border-left: 4px solid var(--c-ok); background: var(--c-ok-bg); color: var(--c-ok); }
+.p-flag-danger { border-left: 4px solid var(--c-danger); background: var(--c-danger-bg); color: var(--c-danger); }
+.p-flag strong, .p-flag b { color: inherit; }
+.p-flag a { color: inherit; font-weight: 700; text-decoration: underline; }
+
+/* 畳んだ本文(文は削らず、開いて読める形にする) */
+.p-details { margin: 0; }
+.p-details > summary { color: var(--c-primary); font-size: var(--fs-meta); font-weight: 700; cursor: pointer; list-style: none; }
+.p-details > summary::-webkit-details-marker { display: none; }
+.p-details > summary::before { content: "＋ "; }
+.p-details[open] > summary::before { content: "－ "; }
+.p-details > summary:focus-visible { outline: 2px solid var(--c-primary); outline-offset: 2px; }
+
+/* /hajimete のヒーロー: このページが答える3つの問い。目次を兼ねる(sticky にしない)。 */
+.p-questions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--card-gap); margin-top: 20px; }
+.p-question { display: grid; align-content: start; gap: 6px; padding: var(--card-pad); border: 1px solid var(--c-border); border-radius: var(--r-card); background: #fff; }
+.p-question > span { color: var(--c-body-muted); font-size: var(--fs-meta); font-weight: 700; }
+.p-question > b { color: var(--c-heading); font-size: var(--fs-h3); line-height: var(--lh-heading); font-variant-numeric: tabular-nums; }
+.p-question > a { margin-top: 2px; color: var(--c-primary); font-size: var(--fs-meta); font-weight: 700; }
+
+/* 金額のタイル。数字は黒。ラベル(小・上)/ 数字(大)/ 補足(小・下)の組版。 */
+.p-money-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--card-gap); margin: 0 0 18px; }
+.p-money-tile { display: grid; align-content: start; gap: 2px; padding: 16px 18px; border: 1px solid var(--c-border); border-radius: var(--r-card); background: #fff; }
+.p-money-tile > span { color: var(--c-meta); font-size: var(--fs-meta); font-weight: 700; }
+.p-money-tile > strong { color: var(--c-heading); font-size: var(--fs-num); line-height: 1.25; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.p-money-tile > strong em { font-size: .55em; font-style: normal; font-weight: 700; }
+.p-money-tile > small { margin-top: 4px; color: var(--c-meta); font-size: var(--fs-note); line-height: 1.7; }
+
+/* 定義の1文。ページの中で1つだけ大きくする。 */
+.p-big-line { margin: 0 0 14px; color: var(--c-heading); font-size: var(--fs-h2); line-height: 1.7; }
+.p-big-line strong { color: var(--c-primary); }
+
+/* 3つの確認カード。注記とリンクを下端にそろえる。 */
+.p-check-card { align-content: start; gap: 10px; }
+.p-check-card .p-list { margin: 0; }
+.p-check-card .p-flag { margin-top: auto; }
+.p-check-card .p-card-link { margin-top: auto; }
+.p-check-card .p-flag + .p-card-link { margin-top: 0; }
+
+/* 小タイル(3つ並び)。箇条書きの代わりに、塊を小さくするために使う。 */
+.p-mini-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--card-gap); }
+.p-mini { display: grid; align-content: start; gap: 5px; padding: 13px 15px; border-radius: var(--r-sm); background: var(--c-band); }
+.p-mini b { color: var(--c-heading); font-size: var(--fs-small); line-height: 1.6; }
+.p-mini span { color: var(--c-body-muted); font-size: var(--fs-small); line-height: 1.8; }
+.p-mini-grid.is-numbered { counter-reset: p-mini; }
+.p-mini-grid.is-numbered .p-mini b::before { counter-increment: p-mini; content: counter(p-mini) " "; color: var(--c-primary); }
+
+/* /jitsurei のヒーロー: 争点の横棒。棒がそのまま絞り込みのリンク。右端に実数(黒)。
+   棒の色は図表の色(--chart-1〜4)。どの棒にも名前と件数を直接書く。 */
+.p-issue-bars { display: grid; gap: 10px; margin-top: 18px; padding: var(--card-pad); border: 1px solid var(--c-border); border-radius: var(--r-card); background: #fff; }
+.p-issue-bar { display: grid; gap: 5px; color: inherit; text-decoration: none; }
+.p-issue-bar-label { display: flex; justify-content: space-between; gap: 12px; color: var(--c-body-muted); font-size: var(--fs-small); }
+.p-issue-bar-label strong { color: var(--c-heading); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.p-issue-bar-track { height: 10px; border-radius: var(--r-sm); background: var(--c-band); }
+.p-issue-bar-track span { display: block; height: 100%; border-radius: inherit; }
+.p-issue-bar[data-rank="1"] .p-issue-bar-track span { background: var(--chart-1); }
+.p-issue-bar[data-rank="2"] .p-issue-bar-track span { background: var(--chart-2); }
+.p-issue-bar[data-rank="3"] .p-issue-bar-track span { background: var(--chart-3); }
+.p-issue-bar[data-rank="4"] .p-issue-bar-track span { background: var(--chart-4); }
+.p-issue-bar:hover .p-issue-bar-label, .p-issue-bar:hover .p-issue-bar-label strong { color: var(--c-primary); }
+.p-issue-lead { margin: 12px 0 0; color: var(--c-text); font-size: var(--fs-small); line-height: 1.85; }
+.p-issue-lead strong { color: var(--c-heading); font-variant-numeric: tabular-nums; }
+
+/* /jitsurei: 絞り込みバー(sticky)と、結果の色をまとった実例カード。 */
+.p-filter-bar { position: sticky; top: 0; z-index: 5; margin-bottom: 16px; border-bottom: 1px solid var(--c-border); background: #fff; }
+.p-filter-bar .p-container { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-block: 10px; }
+.p-filter-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.p-filter-group + .p-filter-group { margin-left: 10px; }
+.p-filter-bar .p-filter-label { flex: none; padding: 0; color: var(--c-meta); font-size: var(--fs-note); }
+.p-filter-bar .p-chip { color: var(--c-heading); }
+.p-filter-bar .p-chip.is-active { color: #fff; }
+.p-chip.is-ok { border-color: transparent; background: var(--c-ok-bg); color: var(--c-ok); }
+.p-chip.is-warn { border-color: transparent; background: var(--c-warn-bg); color: var(--c-warn-text); }
+.p-chip.is-ok.is-active { background: var(--c-ok); color: #fff; }
+.p-chip.is-warn.is-active { background: var(--c-warn); color: #fff; }
+
+.p-case-anchor { scroll-margin-top: 74px; }
+.p-case { border-left: 5px solid var(--c-border); }
+.p-case.is-accepted { border-left-color: var(--c-ok); }
+.p-case.is-rejected { border-left-color: var(--c-warn); }
+.p-case-badge { flex: none; padding: 4px 11px; border-radius: var(--r-pill); font-size: var(--fs-meta); font-weight: 700; }
+.p-case-badge.is-ok { background: var(--c-ok-bg); color: var(--c-ok); }
+.p-case-badge.is-warn { background: var(--c-warn-bg); color: var(--c-warn-text); }
+.p-case-title { font-size: var(--fs-h3); line-height: 1.45; }
+.p-case-title small { display: block; margin-top: 2px; color: var(--c-body-muted); font-size: var(--fs-meta); font-weight: 400; line-height: 1.7; }
+.p-case-foot { justify-content: space-between; align-items: center; }
+.p-case-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.p-case-tag { padding: 2px 9px; border-radius: var(--r-pill); background: var(--c-band); color: var(--c-heading); font-size: var(--fs-note); font-weight: 700; }
+
+/* ページ送り。いま何ページ目かが分かる形に。 */
+.p-pager { display: flex; flex-wrap: wrap; gap: 6px; }
+.p-pager a, .p-pager span { display: grid; place-items: center; min-width: 36px; height: 36px; padding: 0 10px; border: 1px solid var(--c-border); border-radius: var(--r-sm); color: var(--c-body-muted); font-size: var(--fs-small); font-weight: 700; }
+.p-pager span { border-color: transparent; }
+.p-pager a:hover { border-color: var(--c-primary); }
+.p-pager a[aria-current="page"] { border-color: var(--c-primary); background: var(--c-primary); color: #fff; }
+
+@media (max-width: 900px) {
+  .p-questions, .p-mini-grid { grid-template-columns: 1fr; }
+  .p-money-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .p-filter-group + .p-filter-group { margin-left: 0; }
+}
+
+/* /jitsurei のヒーロー: 収録の内訳の帯。左から「結論が変わった」→「認められなかった」。
+   色は図表の色(--chart-*)で、意味の色は使わない。帯の中に割合、凡例に名前と実数。 */
+.p-outcome-band { max-width: 720px; margin-top: 16px; }
+.p-outcome-total { margin: 0 0 6px; color: var(--c-body-muted); font-size: var(--fs-small); }
+.p-outcome-total strong { color: var(--c-heading); font-variant-numeric: tabular-nums; }
+.p-outcome-bar { display: flex; height: 22px; overflow: hidden; border-radius: var(--r-sm); }
+.p-outcome-bar span { display: grid; place-items: center; font-size: var(--fs-note); font-weight: 700; font-variant-numeric: tabular-nums; }
+.p-outcome-bar .is-accepted { background: var(--chart-1); color: #fff; }
+.p-outcome-bar .is-rejected { background: var(--chart-4); color: var(--c-heading); }
+.p-outcome-legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 8px 0 0; padding: 0; list-style: none; }
+.p-outcome-legend li { display: flex; align-items: center; gap: 7px; color: var(--c-body-muted); font-size: var(--fs-small); }
+.p-outcome-legend li strong { color: var(--c-heading); font-variant-numeric: tabular-nums; }
+.p-outcome-legend span { width: 10px; height: 10px; border-radius: var(--r-pill); }
+.p-outcome-legend .is-accepted { background: var(--chart-1); }
+.p-outcome-legend .is-rejected { background: var(--chart-4); }
