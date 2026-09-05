@@ -260,8 +260,8 @@
 }
 
 /* いまいる区画を下線で示す(Baymard: 現在位置の表示欠如)。 */
-.site-nav a[aria-current="page"] { color: var(--c-heading); font-weight: 700; box-shadow: inset 0 -2px 0 var(--c-primary); border-radius: 0; }
-.site-nav .site-app-link[aria-current="page"] { color: #fff; box-shadow: none; border-radius: var(--r-pill); }
+.site-nav a[aria-current="page"] { color: var(--c-heading); font-weight: 700; text-decoration: underline; text-decoration-color: var(--c-primary); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.site-nav .site-app-link[aria-current="page"] { color: #fff; text-decoration: none; }
 .site-nav a:hover {
   color: var(--platform-link-hover);
   background: var(--platform-band);
@@ -1586,3 +1586,19 @@
 .dougu-app-link a { color: var(--c-primary); font-size: var(--fs-small); font-weight: 700; }
 /* 一覧の先頭に置く道具カード。 */
 .hub-index-tool { margin: 0 0 18px; }
+
+/* 誤解カードへの1本(記事の外で使うとき)。文言は data/gokai.ts の misconception。 */
+.platform .column-gokai-link {
+  display: block;
+  margin-top: auto;
+  padding: 10px 12px;
+  border-left: 4px solid var(--c-primary);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: var(--c-band);
+  color: var(--c-primary);
+  font-size: var(--fs-meta);
+  font-weight: 700;
+  line-height: 1.6;
+  text-decoration: none;
+}
+.platform .column-gokai-link:hover { background: var(--c-border); }

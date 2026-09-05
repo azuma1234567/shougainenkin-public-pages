@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Breadcrumb, Card, CheckIcon, SectionHeader } from "@/components/platform/Platform";
 import { AMOUNTS_2026 as A } from "@/data/amounts";
 import { SAIKETSU_COUNTS } from "@/lib/saiketsu";
+import { GOKAI } from "@/data/gokai";
 import { faqJsonLd, pageMetadata } from "@/lib/seo";
 
 const TITLE = "障害年金がゼロからわかる｜はじめての方へ";
@@ -87,26 +88,32 @@ const terms = [
 const anxieties = [
   {
     title: "「申請するのは甘えでは…」",
+    gokai: "amae",
     copy: "障害年金は、保険料を納めてきた人のための制度上の正当な権利です。新しく決まった障害年金の70.3%が精神の障害によるもので、制度の中でもっとも標準的なケースです。この迷い自体が、症状の一部であることもあります。",
   },
   {
     title: "「周りに知られたくない…」",
+    gokai: "kaisha-ni-shirareru",
     copy: "受給が戸籍・住民票・運転免許に載ることはありません。請求は年金事務所か市区町村に出す手続きで、勤務先を経由しません。受給が始まっても、機構から会社へ通知は行きません。",
   },
   {
     title: "「手帳を持っていないけど…」",
+    gokai: "techou-ga-nai",
     copy: "手帳と障害年金は別々の制度です。手帳がなくても請求できますし、等級も連動しません。手帳3級で年金2級の人もいます。",
   },
   {
     title: "「働いているから無理では…」",
+    gokai: "hataraitetara-muri",
     copy: "働いていること自体は、対象外の理由になりません。見られるのは、どんな支えの中で働けているかです。就労継続支援A型・B型や障害者雇用で働いている場合、ガイドラインは1級または2級の可能性を検討するとしています。",
   },
   {
     title: "「昔、保険料を払っていなかった…」",
+    gokai: "mukashi-minou",
     copy: "判定は初診日ごとです。免除や猶予の手続きをした期間は未納ではありません。まず年金事務所で記録を見てください。",
   },
   {
     title: "「もう何年も前のことだから…」",
+    gokai: "jikou-de-muri",
     copy: "申請そのものに時効はありません。初診日が30年前でも請求できます。時効があるのは、さかのぼって受け取れる分（直近5年）のほうです。",
   },
 ] as const;
@@ -118,6 +125,8 @@ const QUESTIONS = [
   { q: "いくら？", a: `障害基礎年金 2級で年 ${A.basicGrade2}円`, href: "#money" },
   { q: "まず何を？", a: "初診日を思い出す", href: "#first" },
 ] as const;
+
+const GOKAI_BY_SLUG = Object.fromEntries(GOKAI.map((card) => [card.slug, card]));
 
 const faqSchema = faqJsonLd(anxieties.map((item) => ({ question: item.title, answer: item.copy })));
 
@@ -283,7 +292,14 @@ export default function HajimetePage() {
         <div className="p-container">
           <SectionHeader title="最後に、よくある不安へ" href="/gokai" linkLabel="よくある誤解をもっと見る" />
           <div className="p-grid p-grid-3" style={{ marginBottom: 18 }}>
-            {anxieties.map((item) => <Card key={item.title}><h3 className="p-card-title">{item.title}</h3><p className="p-card-copy">{item.copy}</p></Card>)}
+            {anxieties.map((item) => (
+              <Card key={item.title}>
+                <h3 className="p-card-title">{item.title}</h3>
+                <p className="p-card-copy">{item.copy}</p>
+                {/* 対応する誤解カードへ1本。文言は data/gokai.ts の misconception そのまま。 */}
+                <Link className="column-gokai-link" href={`/gokai/${item.gokai}`}>{GOKAI_BY_SLUG[item.gokai]?.misconception}</Link>
+              </Card>
+            ))}
           </div>
           <div className="p-cta-row">
             <strong>準備ができたら</strong>
