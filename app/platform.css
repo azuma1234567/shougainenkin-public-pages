@@ -1252,7 +1252,7 @@
 }
 
 /* トップ「どこから探しますか」の状況ブロック末尾、幹10への1行(828ed71)。
-   --fs-small → 14.5px、--c-primary-deep(#015d8c) → --platform-link-hover(同じ値)。 */
+   午後の小文字サイズ → 14.5px、午後の濃い主色(#015d8c) → --platform-link-hover(同じ値)。 */
 .p-find-tail { margin: 10px 0 0; font-size: 14.5px; }
 .p-find-tail a { color: var(--platform-link-hover); text-decoration: none; font-weight: 600; }
 .p-find-tail a:hover { text-decoration: underline; }
