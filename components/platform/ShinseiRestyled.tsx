@@ -100,7 +100,7 @@ const STEPS: Step[] = [
     body: "審査中に追加書類の照会が届くことがあります。結果が届いたら、支給開始時期、等級、次回診断書提出年月などを確認します。",
     tasks: ["追加照会が届いたら期限と内容を確認する", "通知書・年金証書を一緒に保管する", "不支給や想定と違う結果なら、通知日と選択肢を確認する"],
     stumble: "不支給が生活の行き止まりになるわけではありません。不服申立てには期限があるため、通知を知った日を記録し、相談先と次の選択肢を確認します。",
-    links: [{ href: "/nayami/fushikyu", label: "不支給と言われたとき" }, { href: "/columns/shinsei-kikan", label: "審査期間と結果通知" }],
+    links: [{ href: "/jukyuugo", label: "受給が始まってから" }, { href: "/nayami/fushikyu", label: "不支給と言われたとき" }, { href: "/columns/shinsei-kikan", label: "審査期間と結果通知" }],
   },
 ];
 

@@ -284,6 +284,7 @@ export default function HomePage() {
               <div className="p-chips">
                 {situations.map(([label, href]) => <Link className="p-chip" href={href} key={href}>{label}</Link>)}
               </div>
+              <p className="p-find-tail"><Link href="/jukyuugo">受給が始まってから →</Link></p>
             </div>
 
             <div className="p-find-block">

@@ -195,6 +195,7 @@ export const HUB_INDEX: Record<Kind, IndexSpec> = {
     title: "状況から探す",
     h1: "状況から探す",
     lead: "同じ病気でも、いまの暮らし方によって、見られるところと必要な準備が変わります。",
+    hint: "受給中の人はこちら → [受給が始まってから](/jukyuugo)",
     description: "働きながら、20歳前、ひとり暮らし。いまの状況ごとに、障害年金の審査で見られるところをまとめています。",
     body: [
       "病名が同じでも、働いているか、一人暮らしか、20歳前に初診があるか、で見られるところが変わります。このページは、いまの暮らし方から入る入口です。",
@@ -217,6 +218,7 @@ export const HUB_INDEX: Record<Kind, IndexSpec> = {
       "金額は毎年4月に改定されます。このページの数字は令和8年度のもので、各ページに確認日を書いています。",
       "初回の振込は、請求から年金証書が届くまで約3か月、そこから約1〜2か月後です。おおむね4〜5か月を見ておいてください。その後は偶数月の15日に、前月までの2か月分が振り込まれます。",
     ],
+    nextSteps: ["受給が始まってから → [受給後のお金の設計](/jukyuugo/okane)"],
   },
   erabu: {
     title: "自分でやるか、頼むか",
@@ -333,7 +335,7 @@ export function renderHubIndex(kind: Kind) {
             <PageDate updated={latestHubCheckedDate(kind)} />
             <span>{total}{kind === "byoki" ? "の病気" : "ページ"}</span>
           </p>
-          {spec.hint ? <p className="hub-index-hint">{spec.hint}</p> : null}
+          {spec.hint ? <p className="hub-index-hint">{inlineLinks(spec.hint)}</p> : null}
           {/* 分類のチップと、病名の絞り込みを1行に。モックの /byoki の板と同じ並び。 */}
           {(groups.length > 1 && groups[0].label) || filterable ? (
             <div className="hub-index-controls">
