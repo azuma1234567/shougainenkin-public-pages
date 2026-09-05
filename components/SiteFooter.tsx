@@ -9,7 +9,7 @@ export default function SiteFooter() {
       <div className="site-footer-inner">
         <nav className="footer-links" aria-label="フッターメニュー">
           <section><h2>病気・状況・困りごと別</h2><Link href="/byoki">病気別</Link><Link href="/joukyou">状況別</Link><Link href="/nayami">困りごと別</Link><Link href="/dougu/mitate">等級の目安をしらべる</Link><Link href="/erabu">自分でやるか、頼むか</Link></section>
-          <section><h2>申請の進め方</h2><Link href="/hajimete">はじめての方へ</Link><Link href="/shinsei">申請の流れ</Link><Link href="/dougu/shorui">必要書類チェックリスト</Link><Link href="/dougu/madoguchi">年金事務所を探す</Link><Link href="/dougu/moushitatesho">申立書をつくる</Link><Link href="/gokai">よくある誤解</Link><Link href="/columns">コラム</Link><Link href="/yougo">用語辞典</Link></section>
+          <section><h2>申請の進め方</h2><Link href="/hajimete">はじめての方へ</Link><Link href="/shinsei">申請の流れ</Link><Link href="/dougu/shorui">必要書類チェックリスト</Link><Link href="/dougu/madoguchi">年金事務所を探す</Link><Link href="/dougu/moushitatesho">申立書をつくる</Link><Link href="/gokai">よくある誤解</Link><Link href="/columns">コラム</Link><Link href="/yougo">用語辞典</Link><Link href="/jukyuugo">受給が始まってから</Link></section>
           <section><h2>お金と数字</h2><Link href="/dougu/kingaku">障害年金の金額(計算)</Link><Link href="/okane">お金</Link><Link href="/jitsurei">実例</Link><Link href="/suuji">数字で見る障害年金</Link></section>
           <section><h2>このサイトについて</h2><Link href="/about">運営者情報</Link><Link href="/quality">情報の品質について</Link><Link href="/support">お問い合わせ</Link><Link href="/privacy">プライバシーポリシー</Link><Link href="/terms">利用規約</Link><Link href="/ads">広告掲載について</Link><Link href="/app">無料iPhoneアプリ</Link><Link href="/app/terms">アプリの利用規約・プライバシーポリシー</Link></section>
         </nav>

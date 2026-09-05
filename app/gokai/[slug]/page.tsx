@@ -37,6 +37,10 @@ export default async function GokaiDetailPage({ params }: Props) {
   if (!card) notFound();
   const body = GOKAI_BODIES[slug];
   if (!body) throw new Error(`誤解カード本文なし: ${slug}`);
+  const faqs = body.sections.flatMap(section => section.blocks).filter(block => block.type === "faq").map(block => ({
+    "@type": "Question", name: block.q,
+    acceptedAnswer: { "@type": "Answer", text: block.a },
+  }));
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -47,13 +51,9 @@ export default async function GokaiDetailPage({ params }: Props) {
         publisher: { "@type": "Organization", name: SITE_NAME },
         mainEntityOfPage: `${SITE_URL}/gokai/${slug}`,
       },
-      {
-        "@type": "FAQPage",
-        mainEntity: body.sections.flatMap(section => section.blocks).filter(block => block.type === "faq").map(block => ({
-          "@type": "Question", name: block.q,
-          acceptedAnswer: { "@type": "Answer", text: block.a },
-        })),
-      },
+      /* FAQ を持たないカードでは FAQPage を出さない。中身のない FAQPage は
+         構造化データの検査(prelaunch B-8)で不正になる。 */
+      ...(faqs.length > 0 ? [{ "@type": "FAQPage", mainEntity: faqs }] : []),
     ],
   };
   return (
