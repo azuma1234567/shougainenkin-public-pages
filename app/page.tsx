@@ -5,6 +5,7 @@ import {
   Card,
   CaseCard,
   CheckIcon,
+  PageDate,
   SectionHeader,
   TopicIcon,
 } from "@/components/platform/Platform";
@@ -12,7 +13,7 @@ import SiteSearch, { type SearchItem } from "@/components/platform/SiteSearch";
 import AdLabel from "@/components/AdLabel";
 import { SHOW_LISTINGS } from "@/lib/ads";
 import { COLUMNS } from "@/lib/columns";
-import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { SITE_NAME, SITE_PAGES_CHECKED, SITE_URL } from "@/lib/constants";
 import { findCases, SAIKETSU_COUNTS } from "@/lib/saiketsu";
 import { ABOUT_PUBLISHER_ID, pageMetadata } from "@/lib/seo";
 import { YOUGO } from "@/data/yougo";
@@ -197,6 +198,7 @@ export default function HomePage() {
         <div className="p-container p-hero-inner">
           <p className="p-trust-pill"><CheckIcon size={15} />掲載情報はすべて公的資料の出典つき・確認日を明記しています</p>
           <h1 id="home-title">「自分の場合は<br className="p-title-break-mobile" />どうなる？」に、<br className="p-title-break-desktop" />根拠つきで答えます</h1>
+          <PageDate updated={SITE_PAGES_CHECKED} />
           <p className="p-hero-copy">はじめての方にも、むずかしい言葉を使わずに案内します。<br />知識240項目と、原文を確認できた公開実例{SAIKETSU_COUNTS.all}件から、あなたに近い答えを探せます。</p>
           <SiteSearch items={searchItems} />
           <div className="p-stats" aria-label="掲載情報の件数">

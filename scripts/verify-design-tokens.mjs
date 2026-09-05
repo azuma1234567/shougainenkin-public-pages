@@ -6,13 +6,15 @@
  *   node scripts/verify-design-tokens.mjs --ref main main の CSS と比べる
  *
  * 数えるのは app/globals.css と app/platform.css の 2 本だけ。
- * 目標: 色 ≤ 20 / font-size ≤ 12 / 角丸 ≤ 3 / 影 ≤ 1 / コントラスト 4.5 未満 0。
+ * 目標: 色 ≤ 16 / font-size ≤ 12 / 角丸 ≤ 3 / 影 ≤ 1 / コントラスト 4.5 未満 0。
+ * 加えて、--c-warn を color: に使っていないこと(白地 3.64 で AA に届かないため。
+ * 文字には --c-warn-text を使う)。
  */
 import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 
 const FILES = ["app/globals.css", "app/platform.css"];
-const LIMITS = { colors: 20, fontSizes: 12, radii: 3, shadows: 1 };
+const LIMITS = { colors: 16, fontSizes: 12, radii: 3, shadows: 1 };
 
 const args = process.argv.slice(2);
 const refIndex = args.indexOf("--ref");
@@ -241,8 +243,14 @@ if (ng.length > 0) {
   fail.push(`コントラスト 4.5 未満 ${ng.length}`);
 }
 
-/* 直接の色コードと廃止したトークンが残っていないか(§6-3)。 */
-const banned = [["#0284c7", /#0284c7/gi], ["--jc-", /--jc-[\w-]+/g]];
+/* 直接の色コードと廃止したトークン、禁止した使い方が残っていないか(§6-3)。
+ * --c-warn は左罫線とバッジの地の色。文字に使うと白地 3.64 で AA に届かないので、
+ * color: には使わない(文字は --c-warn-text)。 */
+const banned = [
+  ["#0284c7", /#0284c7/gi],
+  ["--jc-", /--jc-[\w-]+/g],
+  ["color: var(--c-warn)", /(?<![-\w])color\s*:\s*var\(\s*--c-warn\s*\)/g],
+];
 console.log("");
 console.log("## 廃止したもの");
 console.log("");
@@ -252,6 +260,25 @@ for (const [label, re] of banned) {
   const count = FILES.reduce((sum, f) => sum + (read(f).match(re) ?? []).length, 0);
   console.log(`| ${label} | ${count} |`);
   if (count > 0) fail.push(`${label} が ${count} 箇所残っている`);
+}
+
+/* 使ってよい色の一覧(§1 の11色 + 図表の色4段)。ここに無いトークンを新しく作らない。 */
+console.log("");
+console.log("## 許容一覧");
+console.log("");
+console.log("| 役割 | トークン |");
+console.log("|---|---|");
+console.log("| 文字・見出し・説明・メタ | `--c-text` `--c-heading` `--c-body-muted` `--c-meta` |");
+console.log("| 罫線・帯 | `--c-border` `--c-band` |");
+console.log("| 主色 | `--c-primary` `--c-primary-deep` |");
+console.log("| 意味(左罫線とバッジだけ) | `--c-ok` `--c-warn` `--c-danger`(+ 地の3つ、文字は `--c-warn-text`) |");
+console.log("| 図表の色(帯グラフ・棒グラフ) | `--chart-1` 〜 `--chart-4`(主色の色相200を明度で4段) |");
+{
+  const css = FILES.map((f) => read(f)).join("\n");
+  const declared = ["--chart-1", "--chart-2", "--chart-3", "--chart-4"].filter((t) => css.includes(`${t}:`));
+  console.log("");
+  console.log(`図表の色の定義: ${declared.length}/4`);
+  if (declared.length !== 4) fail.push("--chart-1〜4 が揃っていない");
 }
 
 console.log("");

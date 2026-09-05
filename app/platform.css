@@ -18,6 +18,18 @@
      どちらの値を正とするかは docs/verification/design-system-2026-09-05/leftover-colors.md に残した。 */
   --c-warn-text: #8b6a1f;
   --c-danger: #b3261e; --c-danger-bg: #fdf1ef;
+  /* 図表の色(2026-09-05 追補)。主色 #0273ad の色相(200)を明度で4段にしたもの。
+     区分の「多い/少ない」ではなく、並び順を濃さで表すためだけに使う。
+     色だけに意味を持たせないため、どの区分にもラベルか数値を直接書く。
+     意味の色(--c-ok / --c-warn / --c-danger)とは混ぜない。 */
+  --chart-1: hsl(200 92% 22%);
+  --chart-2: var(--c-primary);
+  --chart-3: hsl(200 62% 62%);
+  --chart-4: hsl(200 47% 84%);
+  --chart-1-on: #fff;   /* 濃い2段の上に置く文字 */
+  --chart-2-on: #fff;
+  --chart-3-on: var(--c-heading);   /* 淡い2段の上に置く文字 */
+  --chart-4-on: var(--c-heading);
   /* 文字 8 段 */
   --fs-h1: 30px; --fs-h2: 22px; --fs-h3: 18px; --fs-num: 28px;
   --fs-body: 17px; --fs-small: 14.5px; --fs-meta: 13px; --fs-note: 12.5px;
@@ -105,11 +117,11 @@
 .suuji-table thead th { background: var(--platform-band); color: var(--platform-heading); }
 .suuji-table th:first-child { text-align: left; }
 .suuji-stacked { display: flex; width: 100%; min-height: 34px; overflow: hidden; border-radius: var(--r-sm); background: var(--platform-band); }
-.suuji-stacked span { min-width: 2px; }
-.suuji-stacked .is-1級, .suuji-dot.is-1級 { background: #075985; }
-.suuji-stacked .is-2級, .suuji-dot.is-2級 { background: var(--c-primary); }
-.suuji-stacked .is-3級, .suuji-dot.is-3級 { background: #69b7dd; }
-.suuji-stacked .is-非該当, .suuji-dot.is-非該当 { background: #c5dfea; }
+.suuji-stacked span { display: grid; place-items: center; min-width: 2px; font-size: var(--fs-note); font-weight: 700; font-variant-numeric: tabular-nums; }
+.suuji-stacked .is-1級, .suuji-dot.is-1級 { background: var(--chart-1); color: var(--chart-1-on); }
+.suuji-stacked .is-2級, .suuji-dot.is-2級 { background: var(--chart-2); color: var(--chart-2-on); }
+.suuji-stacked .is-3級, .suuji-dot.is-3級 { background: var(--chart-3); color: var(--chart-3-on); }
+.suuji-stacked .is-非該当, .suuji-dot.is-非該当 { background: var(--chart-4); color: var(--chart-4-on); }
 .suuji-legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 20px; margin: 18px 0 0; padding: 0; list-style: none; }
 .suuji-legend li { display: grid; grid-template-columns: 12px 1fr; align-items: center; column-gap: 8px; color: var(--platform-muted); font-size: var(--fs-small); }
 .suuji-legend li strong { grid-column: 2; color: var(--platform-heading); font-size: var(--fs-meta); font-variant-numeric: tabular-nums; }
@@ -121,10 +133,10 @@
 .suuji-donut::before { grid-area: 1 / 1; width: 122px; aspect-ratio: 1; border-radius: var(--r-pill); background: #fff; content: ""; }
 .suuji-donut span { z-index: 1; display: grid; grid-area: 1 / 1; color: var(--platform-muted); text-align: center; }
 .suuji-donut strong { color: var(--platform-heading); font-size: var(--fs-h2); }
-.suuji-dot.renewal-継続 { background: var(--c-primary); }
-.suuji-dot.renewal-増額改定 { background: #38a8dc; }
-.suuji-dot.renewal-減額改定 { background: #8fc9e7; }
-.suuji-dot.renewal-支給停止 { background: #c5dfea; }
+.suuji-dot.renewal-継続 { background: var(--chart-1); }
+.suuji-dot.renewal-増額改定 { background: var(--chart-2); }
+.suuji-dot.renewal-減額改定 { background: var(--chart-3); }
+.suuji-dot.renewal-支給停止 { background: var(--chart-4); }
 .suuji-check-card { margin: 22px 0; padding: 22px; border-left: 4px solid var(--platform-primary); background: var(--platform-band); }
 .suuji-check-card p { margin: 0 0 14px; }
 .suuji-check-card dl { display: grid; gap: 10px; }
@@ -611,7 +623,12 @@
 .p-bar-row { display: grid; gap: 4px; }
 .p-bar-label { display: flex; justify-content: space-between; gap: 12px; color: var(--platform-muted); font-size: var(--fs-note); }
 .p-bar { height: 8px; border-radius: var(--r-pill); background: var(--c-band); overflow: hidden; }
-.p-bar > span { display: block; height: 100%; border-radius: inherit; background: var(--platform-primary); }
+.p-bar > span { display: block; height: 100%; border-radius: inherit; background: var(--chart-2); }
+/* 争点の棒は4本。並び順を濃さで表す(図表の色)。件数は棒の脇に必ず出す。 */
+.p-bar-row:nth-of-type(1) .p-bar > span { background: var(--chart-1); }
+.p-bar-row:nth-of-type(2) .p-bar > span { background: var(--chart-2); }
+.p-bar-row:nth-of-type(3) .p-bar > span { background: var(--chart-3); }
+.p-bar-row:nth-of-type(4) .p-bar > span { background: var(--chart-4); }
 
 /* ナビが11項目になったので、横並びは1200px超から。 */
 @media (max-width: 1200px) {

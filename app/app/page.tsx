@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import AppStoreBadge from "@/components/AppStoreBadge";
-import { Breadcrumb, Card, CheckIcon, SectionHeader } from "@/components/platform/Platform";
-import { APP_STORE_URL, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { Breadcrumb, Card, CheckIcon, PageDate, SectionHeader } from "@/components/platform/Platform";
+import { APP_STORE_URL, SITE_NAME, SITE_PAGES_CHECKED, SITE_URL } from "@/lib/constants";
 import { pageMetadata } from "@/lib/seo";
 
 const TITLE = "障害年金申請サポート｜AI相談・申請ガイドアプリ";
@@ -42,6 +42,7 @@ export default function AppPage() {
       <section className="p-hero" aria-labelledby="app-title"><div className="p-container p-hero-inner">
         <p className="p-trust-pill"><CheckIcon size={15} />すべての機能が無料・アカウント登録不要</p>
         <h1 id="app-title">障害年金の申請準備を、<br />ひとつずつ手元で。</h1>
+        <PageDate updated={SITE_PAGES_CHECKED} />
         <p className="p-hero-copy">「障害年金申請サポート」は、AI相談、日々の記録、診察メモ、申立書の下書きを一つにまとめたiPhoneアプリです。申請を代行せず、ご自身の準備を支えます。</p>
         <AppStoreBadge href={APP_STORE_URL} />
       </div></section>

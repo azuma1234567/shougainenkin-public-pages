@@ -86,7 +86,9 @@ for (const p of sitemapPaths) {
     // 被リンク数の集計用: パンくず(nav[aria-label="パンくずリスト"])と誤解カードの「一覧へ戻る」(.gokai-back)は数えない(2026-09-02)
     countedLinks: [...new Set([...main.replace(/<nav[^>]*aria-label="パンくずリスト"[\s\S]*?<\/nav>/g, " ").replace(/<a[^>]*class="gokai-back"[^>]*>[\s\S]*?<\/a>/g, " ").matchAll(/href="([^"]+)"/g)].map((m) => normalizePath(m[1])).filter(Boolean))],
     allLinks: [...new Set([...text.matchAll(/href="([^"]+)"/g)].map((m) => normalizePath(m[1])).filter(Boolean))],
-    hasDate: /<time dateTime=|最終更新日|更新日|確認日/.test(stripTags(main)),
+    /* 「制定日」「最終改定日」は法務ページが使う日付の言い方。読者に「いつ時点のものか」が
+       伝わる点は同じなので、これも日付の表示として数える(2026-09-05)。 */
+    hasDate: /<time dateTime=|最終更新日|更新日|確認日|制定日|最終改定日/.test(stripTags(main)),
   });
 }
 const sitemapSet = new Set(pages.keys());

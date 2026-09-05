@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Breadcrumb, CaseCard } from "@/components/platform/Platform";
+import { Breadcrumb, CaseCard, PageDate } from "@/components/platform/Platform";
 import { SAIKETSU_CASES, SAIKETSU_COUNTS, type SaiketsuCase } from "@/lib/saiketsu";
+import { SITE_PAGES_CHECKED } from "@/lib/constants";
 import { pageMetadata } from "@/lib/seo";
 
 const TITLE = "結論が変わった実例｜障害年金の公開裁決例";
@@ -66,6 +67,7 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
         <div className="p-container">
           <Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "結論が変わった実例" }]} currentPath="/jitsurei" />
           <h1>結論が変わった実例</h1>
+          <PageDate updated={SITE_PAGES_CHECKED} />
           <p className="p-page-intro">
             同じような状況なのに、結論が分かれた事例を{SAIKETSU_COUNTS.all}件集めています。体験談ではありません。<strong>国の再審査（社会保険審査会）の裁決</strong>から取ったもので、全件、裁決の原文（PDF）へのリンクつきです。<strong>通ったものだけを並べていません。</strong>通らなかったものも、同じ密度で載せています。通った話だけを見せられても、自分がどちらに近いかは分からないからです。
           </p>

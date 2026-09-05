@@ -128,8 +128,14 @@ export default function SuujiPage() {
         <section className="suuji-section" aria-labelledby="suuji-awards">
           <h2 id="suuji-awards">3. どれくらいの割合で支給になるか</h2>
           <div className="suuji-chart-card">
+            {/* 色だけに意味を持たせない。幅のある区分には割合を帯の中に直接書き、
+                全区分の名前と実数は下の凡例に出す。 */}
             <div className="suuji-stacked" aria-hidden="true">
-              {gradeBars.map(({ name, cell }) => <span className={`is-${name}`} key={name} style={{ width: `${cell.pct ?? 0}%` }} />)}
+              {gradeBars.map(({ name, cell }) => (
+                <span className={`is-${name}`} key={name} style={{ width: `${cell.pct ?? 0}%` }}>
+                  {(cell.pct ?? 0) >= 8 ? formatPercent(cell.pct ?? 0) : ""}
+                </span>
+              ))}
             </div>
             <ul className="suuji-legend" aria-label="等級別の割合">
               {gradeBars.map(({ name, cell }) => <li key={name}><span className={`suuji-dot is-${name}`} />{name} <strong>{formatCount(cell)}・{formatPercent(cell.pct ?? 0)}</strong></li>)}
