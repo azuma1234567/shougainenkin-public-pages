@@ -5,6 +5,12 @@ import Link from "next/link";
 import AppStoreBadge from "@/components/AppStoreBadge";
 import { AMOUNT_ROWS, APP_POINTS, CONSIDER_PRO, FAQ_ITEMS, SELF_OK } from "@/components/ApplicationFlowPage";
 import { Breadcrumb, CheckIcon, PageDate } from "@/components/platform/Platform";
+import ShinseiRail from "@/components/platform/ShinseiRail";
+import ShinseiTasks from "@/components/platform/ShinseiTasks";
+import { DouguCards } from "@/components/platform/DouguCard";
+import { PLACEMENTS } from "@/data/dougu";
+import { SAIKETSU_CASES, SAIKETSU_COUNTS } from "@/lib/saiketsu";
+import { formatPercent, stats } from "@/lib/stats";
 import { APP_STORE_URL, SITE_PAGES_CHECKED, SITE_URL } from "@/lib/constants";
 import { pageMetadata } from "@/lib/seo";
 
@@ -97,6 +103,16 @@ const STUMBLES = [
   { step: "ステップ6で", title: "申立書が書けない", copy: "何を書けばいいかわからず手が止まる。一気に書かなくて大丈夫です。", href: "#step-6" },
 ] as const;
 
+/* 各ステップの右端に出す数字。出どころは公開済みの統計と裁決データだけ。
+   数字を持たないステップには何も出さない(指示書 §2-2-5)。 */
+const STEP_DATA: Record<string, { label: string; value: string }> = {
+  "step-1": { label: "初診日が争点の裁決", value: `${SAIKETSU_COUNTS.firstVisit}件` },
+  "step-2": { label: "納付要件が争点", value: `${SAIKETSU_CASES.filter((item) => item.soten.includes("納付要件")).length}件` },
+  "step-5": { label: "診断書が争点", value: `${SAIKETSU_CASES.filter((item) => item.soten.includes("診断書の信頼性・整合性")).length}件` },
+  "step-7": { label: "標準処理期間", value: "3か月" },
+  "step-8": { label: "支給に至った割合", value: formatPercent(stats.r06["決定区分別件数"]["新規裁定・合計"]["支給"].pct ?? 0) },
+};
+
 export default function ShinseiRestyled() {
   const jsonLd = {
     "@context": "https://schema.org",
@@ -111,7 +127,36 @@ export default function ShinseiRestyled() {
       <header className="p-page-hero shinsei-hero"><div className="p-container shinsei-reading-width"><Breadcrumb items={[{ href: "/", label: "トップ" }, { label: "申請の流れ" }]} currentPath="/shinsei" /><h1>申請の流れ — 8つのステップ</h1><PageDate updated={SITE_PAGES_CHECKED} /><p className="p-page-intro">初診日の確認から結果が届くまで。全体の地図を先に持つと、いま自分がどこにいるかで迷いにくくなります。1ステップずつ、必要なことだけを載せています。</p><StepFlow /></div></header>
       <div className="p-container shinsei-reading-width shinsei-content">
         <section className="shinsei-section" aria-labelledby="stumbles-heading"><h2 id="stumbles-heading">つまずくのは、たいてい同じ3か所です</h2><div className="p-grid p-grid-3 shinsei-stumbles">{STUMBLES.map((item) => <a className="p-card" href={item.href} key={item.title}><span className="p-label">{item.step}</span><strong>{item.title}</strong><p>{item.copy}</p></a>)}</div></section>
-        <div className="shinsei-steps">{STEPS.map((step, index) => <section className="shinsei-step-card" id={step.id} aria-labelledby={`${step.id}-title`} key={step.id}><header><span className="shinsei-step-number">{index + 1}</span><div><span className="shinsei-step-label">STEP {index + 1}</span><h2 id={`${step.id}-title`}>{step.title}</h2><p>{step.oneLine}</p></div></header><p className="shinsei-step-body">{step.body}</p><div className="shinsei-tasks"><h3>この段階ですること</h3><ul>{step.tasks.map((task) => <li key={task}><CheckIcon size={16} /><span>{task}</span></li>)}</ul></div><aside className="shinsei-stumble"><strong>つまずきやすいところ</strong><p>{step.stumble}</p></aside><footer><nav aria-label={`ステップ${index + 1}の関連記事`}>{step.links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}</nav>{index < STEPS.length - 1 && <a className="shinsei-next" href={`#${STEPS[index + 1].id}`}>次へ: {STEPS[index + 1].title} →</a>}</footer></section>)}</div>
+        <div className="shinsei-layout">
+          <ShinseiRail steps={STEPS.map((step) => ({ id: step.id, short: step.short, taskCount: step.tasks.length }))} />
+          <div className="shinsei-steps">{STEPS.map((step, index) => {
+            const data = STEP_DATA[step.id];
+            return (
+            <section className="shinsei-step-card" id={step.id} aria-labelledby={`${step.id}-title`} key={step.id}>
+              <header>
+                <span className="shinsei-step-number">{index + 1}</span>
+                <div><h2 id={`${step.id}-title`}>{step.title}</h2><p>{step.oneLine}</p></div>
+                {data ? <span className="shinsei-step-data">{data.label} <b>{data.value}</b></span> : null}
+              </header>
+              <p className="shinsei-step-body">{step.body}</p>
+              <div className="shinsei-step-cols">
+                <div className="shinsei-tasks">
+                  <h3>この段階ですること</h3>
+                  <ShinseiTasks stepId={step.id} tasks={step.tasks} />
+                  <noscript><ul>{step.tasks.map((task) => <li key={task}>{task}</li>)}</ul></noscript>
+                </div>
+                <aside className="shinsei-stumble"><strong>つまずきやすいところ</strong><p>{step.stumble}</p></aside>
+              </div>
+              <footer>
+                <nav aria-label={`ステップ${index + 1}の関連記事`}>
+                  <DouguCards placements={PLACEMENTS.shinseiSteps[step.id]} variant="chip" />
+                  {step.links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}
+                </nav>
+                {index < STEPS.length - 1 && <a className="shinsei-next" href={`#${STEPS[index + 1].id}`}>次へ: {STEPS[index + 1].title} →</a>}
+              </footer>
+            </section>);
+          })}</div>
+        </div>
 
         <section className="shinsei-section" aria-labelledby="amount-heading"><h2 id="amount-heading">受け取れる金額の目安</h2><p>障害基礎年金は等級ごとに決まった額、障害厚生年金は加入期間と報酬に応じて一人ひとり変わります（令和8年4月分から）。</p><div className="shinsei-table-card"><div className="article-table-wrap"><table><thead><tr><th scope="col">等級</th><th scope="col">障害基礎年金（年額）</th><th scope="col">障害厚生年金（年額）</th></tr></thead><tbody>{AMOUNT_ROWS.map((row) => <tr key={row.grade}><th scope="row">{row.grade}</th><td>{row.kiso}</td><td>{row.kousei}</td></tr>)}</tbody></table></div><p>子の加算額は2人目まで1人につき243,800円、3人目以降は81,300円です。障害厚生年金の配偶者加給年金額は243,800円、3級の最低保障額は635,500円です。</p><small>出典: 日本年金機構 ・ 確認日 2026-04-01</small></div></section>
 

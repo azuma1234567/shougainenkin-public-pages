@@ -487,7 +487,7 @@
 .p-search-empty { color: var(--platform-muted); font-size: var(--fs-meta); line-height: 1.8; }
 .p-stats { display: flex; justify-content: center; gap: clamp(18px, 3.2vw, 40px); margin-top: 6px; }
 .p-stat { display: grid; gap: 2px; }
-.p-stat b { color: var(--platform-link); font-size: var(--fs-num); }
+.p-stat b { color: var(--c-heading); font-size: var(--fs-num); }
 .p-stat span { color: var(--platform-meta); font-size: var(--fs-note); }
 
 .p-page-hero { padding-block: 44px 32px; background: linear-gradient(180deg, var(--c-band) 0%, #f7fbfe 100%); }
@@ -1498,3 +1498,81 @@
 .p-outcome-legend span { width: 10px; height: 10px; border-radius: var(--r-pill); }
 .p-outcome-legend .is-accepted { background: var(--chart-1); }
 .p-outcome-legend .is-rejected { background: var(--chart-4); }
+
+/* ===== トップの「どこから探しますか」(2026-09-05) =====
+ * 入口ごとに型を変える。数字は黒。 */
+.p-stats-note { margin: 8px 0 0; color: var(--c-body-muted); font-size: var(--fs-small); }
+.p-trouble-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.p-trouble-list li + li { border-top: 1px solid var(--c-border); }
+.p-trouble-list a { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; min-height: 44px; padding: 10px 2px; color: var(--c-heading); font-size: var(--fs-small); font-weight: 700; text-decoration: none; }
+.p-trouble-list a:hover { color: var(--c-primary); }
+.p-trouble-list span { flex: none; color: var(--c-heading); font-size: var(--fs-note); font-weight: 400; font-variant-numeric: tabular-nums; }
+.p-money-lines { display: grid; gap: 6px; margin: 4px 0 10px; }
+.p-money-lines p { display: flex; align-items: baseline; gap: 8px; margin: 0; }
+.p-money-lines span { color: var(--c-meta); font-size: var(--fs-meta); }
+.p-money-lines strong { color: var(--c-heading); font-size: var(--fs-num); line-height: 1.2; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.p-money-lines small { color: var(--c-meta); font-size: var(--fs-meta); }
+.p-choice-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 4px 0 10px; }
+.p-choice { display: grid; align-content: start; gap: 4px; text-decoration: none; }
+@media (max-width: 560px) {
+  .p-choice-grid { grid-template-columns: 1fr; }
+  .p-money-lines p { flex-wrap: wrap; }
+}
+
+/* ===== /shinsei: 固定目次と圧縮したステップカード(2026-09-05) =====
+ * docs/top-shinsei-sasshin-2026-09-05-instructions.md §2。 */
+/* 目次のぶんだけ、この列だけ広げる。ステップカードの幅は目次を足す前と同じ(900px)に保つ。
+   ほかの節は読みやすさのため 900px のまま。 */
+.shinsei-content.shinsei-reading-width { max-width: calc(900px + 200px + 24px); }
+.shinsei-content > .shinsei-section, .shinsei-content > .shinsei-breather, .shinsei-content > .shinsei-app { max-width: 900px; width: 100%; }
+.shinsei-layout { display: grid; grid-template-columns: 200px minmax(0, 900px); gap: 24px; align-items: start; }
+.shinsei-rail { position: sticky; top: 16px; align-self: start; display: grid; gap: 8px; }
+.shinsei-rail-progress { margin: 0; color: var(--c-meta); font-size: var(--fs-note); }
+.shinsei-rail-progress strong { color: var(--c-heading); font-variant-numeric: tabular-nums; }
+.shinsei-rail-progress > span { display: block; height: 6px; margin-top: 4px; border-radius: var(--r-sm); background: var(--c-band); overflow: hidden; }
+.shinsei-rail-progress i { display: block; height: 100%; border-radius: inherit; background: var(--c-ok); transition: width .2s; }
+.shinsei-rail ol { display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+.shinsei-rail a { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; align-items: center; min-height: 34px; padding: 4px 8px; border-radius: var(--r-sm); color: var(--c-body-muted); font-size: var(--fs-meta); line-height: 1.5; text-decoration: none; }
+.shinsei-rail a b { width: 22px; height: 22px; display: grid; place-items: center; border-radius: var(--r-pill); background: var(--c-band); color: var(--c-primary); font-size: var(--fs-note); }
+.shinsei-rail a.is-done b { background: var(--c-ok); color: #fff; }
+.shinsei-rail a[aria-current="true"] { background: var(--c-band); color: var(--c-heading); font-weight: 700; }
+.shinsei-rail a[aria-current="true"] b { background: var(--c-primary); color: #fff; }
+.shinsei-rail-note { margin: 4px 0 0; color: var(--c-meta); font-size: var(--fs-note); line-height: 1.6; }
+.shinsei-rail-note button { min-height: 32px; padding: 0 6px; border: 0; background: none; color: var(--c-primary); font: inherit; font-size: var(--fs-note); font-weight: 700; cursor: pointer; text-decoration: underline; }
+
+/* カードを圧縮する: 本文と2列を詰め、余白を小さくする。 */
+.shinsei-steps { gap: 14px; }
+.shinsei-step-card { gap: 8px; padding: 14px 18px; }
+.shinsei-step-card > header { align-items: center; gap: 12px; }
+.shinsei-step-card header p { font-size: var(--fs-note); line-height: 1.6; }
+.shinsei-step-body { font-size: var(--fs-small); line-height: 1.8; }
+.shinsei-step-number { flex: 0 0 40px; width: 40px; height: 40px; font-size: var(--fs-small); }
+.shinsei-step-card header > div { flex: 1 1 auto; }
+.shinsei-step-card h2 { font-size: var(--fs-h3); }
+.shinsei-step-data { flex: 0 0 auto; padding: 5px 10px; border-radius: var(--r-sm); background: var(--c-band); color: var(--c-meta); font-size: var(--fs-note); white-space: nowrap; }
+.shinsei-step-data b { color: var(--c-heading); font-size: var(--fs-small); font-variant-numeric: tabular-nums; }
+.shinsei-step-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: start; }
+.shinsei-step-cols .shinsei-tasks { gap: 3px; padding: 9px 12px; border: 1px solid var(--c-border); border-radius: var(--r-sm); }
+.shinsei-step-cols .shinsei-tasks h3 { font-size: var(--fs-note); }
+.shinsei-task-list { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.shinsei-task-list label { display: flex; align-items: flex-start; gap: 8px; min-height: 30px; padding: 1px 0; color: var(--c-text); font-size: var(--fs-meta); line-height: 1.6; cursor: pointer; }
+.shinsei-task-list input { width: 18px; height: 18px; margin-top: 3px; accent-color: var(--c-ok); }
+.shinsei-step-cols .shinsei-stumble { gap: 3px; border-radius: 0 var(--r-sm) var(--r-sm) 0; border-left: 4px solid var(--c-warn); background: var(--c-warn-bg); padding: 9px 12px; }
+.shinsei-step-cols .shinsei-stumble p { line-height: 1.65; }
+.shinsei-step-cols .shinsei-stumble strong { color: var(--c-warn-text); }
+.shinsei-step-cols .shinsei-stumble p { color: var(--c-text); }
+.dougu-chip { min-height: 36px; display: inline-flex; align-items: center; padding: 6px 12px; border: 1px solid var(--c-primary); border-radius: var(--r-pill); background: #fff; color: var(--c-primary); font-size: var(--fs-note); font-weight: 700; text-decoration: none; }
+
+@media (max-width: 999px) {
+  /* 目次は横に流れるチップ列(sticky)。 */
+  .shinsei-layout { grid-template-columns: 1fr; gap: 14px; }
+  .shinsei-rail { position: sticky; top: 0; z-index: 4; padding: 8px 0; background: #fff; border-bottom: 1px solid var(--c-border); }
+  .shinsei-rail ol { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+  .shinsei-rail ol::-webkit-scrollbar { display: none; }
+  .shinsei-rail li { flex: none; }
+  .shinsei-rail a { grid-template-columns: 22px auto; white-space: nowrap; border: 1px solid var(--c-border); }
+}
+@media (max-width: 700px) {
+  .shinsei-step-cols { grid-template-columns: 1fr; }
+  .shinsei-step-card > header { flex-wrap: wrap; }
+}
