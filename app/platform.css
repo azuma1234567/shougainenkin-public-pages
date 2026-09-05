@@ -570,7 +570,10 @@
 .step-flow-node::after { content: ""; position: absolute; top: 19px; left: calc(50% + 22px); right: calc(-50% - 22px + 12px); height: 2px; background: var(--platform-border); }
 .step-flow-node[data-n="8"]::after { display: none; }
 .step-flow-number { width: 40px; height: 40px; display: grid; place-items: center; border-radius: var(--r-pill); background: var(--platform-primary); color: #fff; font-size: var(--fs-small); font-weight: 700; box-shadow: var(--shadow); }
-.step-flow-node.has-tool .step-flow-number { box-shadow: var(--shadow); }
+/* 道具のあるステップは、円の外に輪を出して「ここに道具がある」を示す。
+   指示書は box-shadow で二重の輪を作る形だが、影は1つだけという決まり
+   (design-seisa §5-3)を守るため outline で描く。色はトークンのまま。 */
+.step-flow-node.has-tool .step-flow-number { outline: 2px solid var(--c-border); outline-offset: 4px; }
 .step-flow-title { color: var(--platform-heading); font-size: var(--fs-small); font-weight: 700; line-height: 1.45; text-decoration: none; }
 .step-flow-title:hover { text-decoration: underline; }
 .step-flow-break { display: block; }
