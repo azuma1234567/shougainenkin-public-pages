@@ -38,7 +38,13 @@ const siblingLabels: Record<string, string> = {
 export default function HubLanding({ hub }: { hub: HubDefinition }) {
   const content = getHubContent(hub.path);
   if (!content) return null;
-  const crumbs = content.breadcrumb.map((label, index) => ({ label, href: index === 0 ? "/" : undefined }));
+  /* 途中の階層(病気から探す など)にも href を付ける。付けないと BreadcrumbList から
+     落ちてしまい、表示のパンくずと構造化データの経路がずれる(site-structure §8 検査5)。 */
+  const sectionPath = `/${hub.path.split("/")[1]}`;
+  const crumbs = content.breadcrumb.map((label, index, all) => ({
+    label,
+    href: index === 0 ? "/" : index === all.length - 1 ? undefined : sectionPath,
+  }));
   /* FAQ の構造化データ(監査 §4-2)。本文から取り出したものだけ。画面に無い Q/A は入れない。
      パンくずは <Breadcrumb> が BreadcrumbList を出しているので、ここでは出さない(二重になる)。
      Article も出さない(ハブはまとめページ。無理に付けると列記事と競合する)。 */

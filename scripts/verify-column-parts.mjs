@@ -54,11 +54,17 @@ const jsonLdOf = (html) => [...html.matchAll(/<script type="application\/ld\+jso
 /* ---------- 14. 本文と構造化データ ---------- */
 {
   const { check, finish } = failures(14, "本文のテキスト(要約を除く)と JSON-LD が変更前と一致");
+  /* パンくず(BreadcrumbList)は site-structure 指示書 §5 で意図して変えたので、
+     ここでは比べない(経路は verify-site-graph の検査5で見る)。 */
+  const withoutBreadcrumb = (list) => list.flatMap((item) => {
+    const entries = item["@graph"] ?? [item];
+    return entries.filter((entry) => entry["@type"] !== "BreadcrumbList");
+  });
   for (const slug of slugs) {
     const html = documents.get(slug);
     check(textOf(html, "col-check") === baseline[slug].bodyText, `${slug}: 本文が変わっている`);
-    const now = JSON.stringify(jsonLdOf(html));
-    check(now === JSON.stringify(baseline[slug].jsonLd), `${slug}: JSON-LD が変わっている`);
+    const now = JSON.stringify(withoutBreadcrumb(jsonLdOf(html)));
+    check(now === JSON.stringify(withoutBreadcrumb(baseline[slug].jsonLd)), `${slug}: JSON-LD(パンくず以外)が変わっている`);
   }
   finish();
 }
