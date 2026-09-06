@@ -57,7 +57,7 @@ const network = [];
             || u.split("?")[0] === PRINT_URL) });
   });
   await page.addInitScript((v) => {
-    try { localStorage.setItem("shougainenkin-note:moushitatesho:v2", JSON.stringify(v)); } catch { /* 無くても動く */ }
+    try { localStorage.setItem("shougainenkin-note:moushitatesho:v3", JSON.stringify(v)); } catch { /* 無くても動く */ }
   }, SAMPLES.typical);
   await page.goto(TOOL_URL);
   await page.getByRole("button", { name: "続きから" }).click().catch(() => {});
@@ -131,7 +131,7 @@ check(1, "外部へ何も送らない", () => {
   await page.getByRole("button", { name: "はじめる" }).click();
   await page.locator('input[type="month"]').first().fill("2020-06");
   await sleep(900);
-  const saved = await page.evaluate(() => localStorage.getItem("shougainenkin-note:moushitatesho:v2"));
+  const saved = await page.evaluate(() => localStorage.getItem("shougainenkin-note:moushitatesho:v3"));
   await page.reload();
   await sleep(600);
   const resumed = await page.getByText("前回の続きがあります", { exact: false }).count();

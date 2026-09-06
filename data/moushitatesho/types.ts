@@ -1,13 +1,18 @@
-/* 申立書の入力データ。version 2(設計書 §6-1)。
+/* 申立書の入力データ。version 3(docs/moushitatesho-kinyuu-ran-2026-09-06-instructions.md §1-2・§1-3)。
+   v2 との違い: 発病日・初診日は YYYY-MM-DD または YYYY-MM(日が分からないとき。紙の日欄は空欄)。
+   「その他日常生活で不便に感じたこと」は裏面の1・2それぞれ(back.*.sonota)。期間ごとに work(紙には出さない)。
    v1 との違い: 様式にあって v1 に無かった欄を足し、様式に無い seinengappi を捨てた。
    移行は lib/moushitatesho-storage.ts の migrate。 */
 
-export type Waku = { id: string; from: string; to: string; jushin: boolean; kikan: string; text: string };
+/* work は「この期間、働いていましたか」。紙には出さず、仕事の欄を出すかの分岐だけに使う(最後の期間は back.genzai.work にも写す)。 */
+export type Waku = { id: string; from: string; to: string; jushin: boolean; kikan: string; text: string; work: boolean | null };
 
 export type BackSide = {
   work: boolean | null; reasons: number[]; reasonsOther: string;
   job: string; commuteMethod: string; commuteHours: string; commuteMinutes: string;
   daysPrev: string; daysPrevPrev: string; cond: string; daily: Record<number, 1 | 2 | 3 | 4>;
+  /* その他日常生活で不便に感じたこと(裏面の1・2それぞれ) */
+  sonota: string;
 };
 
 /* 障害者手帳。様式は2冊ぶん(①②)ある。 */
@@ -18,13 +23,13 @@ export type Seikyuusha = { name: string; address: string; tel: string };
 export type Daihitsu = { name: string; zokugara: string; tel: string };
 
 export type MoushitateshoState = {
-  version: 2;
+  version: 3;
+  /* hatsubyou / shoshin: YYYY-MM-DD。日が分からないときは YYYY-MM */
   byoumei: string; hatsubyou: string; shoshin: string;
   /* 障害認定日 YYYY-MM-DD。初診日+1年6か月を既定、変更可(§6-2) */
   ninteibi: string;
   waku: Waku[];
   back: { nintei: BackSide; genzai: BackSide };
-  sonota: string;
   techou: null | "ari" | "nashi" | "shinsei";
   techouList: Techou[];               // 最大2
   seikyuusha: Seikyuusha;
@@ -49,15 +54,15 @@ export const TECHOU_KINDS: { key: TechouKind; label: string }[] = [
 
 export const emptyBack = (): BackSide => ({
   work: null, reasons: [], reasonsOther: "", job: "", commuteMethod: "", commuteHours: "",
-  commuteMinutes: "", daysPrev: "", daysPrevPrev: "", cond: "", daily: {},
+  commuteMinutes: "", daysPrev: "", daysPrevPrev: "", cond: "", daily: {}, sonota: "",
 });
 export const emptyTechou = (): Techou => ({ shurui: null, taName: "", kofu: "", tokyu: "", shougaimei: "" });
-export const newWaku = (): Waku => ({ id: crypto.randomUUID(), from: "", to: "", jushin: true, kikan: "", text: "" });
+export const newWaku = (): Waku => ({ id: crypto.randomUUID(), from: "", to: "", jushin: true, kikan: "", text: "", work: null });
 export const today = () => new Date().toISOString().slice(0, 10);
 
 export const emptyState = (): MoushitateshoState => ({
-  version: 2, byoumei: "", hatsubyou: "", shoshin: "", ninteibi: "",
-  waku: [newWaku()], back: { nintei: emptyBack(), genzai: emptyBack() }, sonota: "",
+  version: 3, byoumei: "", hatsubyou: "", shoshin: "", ninteibi: "",
+  waku: [newWaku()], back: { nintei: emptyBack(), genzai: emptyBack() },
   techou: null, techouList: [], seikyuusha: { name: "", address: "", tel: "" },
   moushitateDate: today(), daihitsu: null, seikyuuType: null, fontPt: 10.5,
   updatedAt: new Date().toISOString(),

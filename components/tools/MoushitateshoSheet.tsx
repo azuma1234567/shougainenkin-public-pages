@@ -126,7 +126,7 @@ function Moushitate({ block, state, fontPt }: { block: MoushitateBlock; state: M
 }
 
 /* 裏面の就労・日常生活の1区画。 */
-function BackBlock({ s, side, sonota, fontPt }: { s: 0 | 1; side: BackSide; sonota: string; fontPt: number }) {
+function BackBlock({ s, side, fontPt }: { s: 0 | 1; side: BackSide; fontPt: number }) {
   const L = MAIN_BACK.sections[s];
   return (
     <>
@@ -147,7 +147,7 @@ function BackBlock({ s, side, sonota, fontPt }: { s: 0 | 1; side: BackSide; sono
         return <Circle key={i} slot={L.daily[row][col]} on />;
       })}
       {/* 「その他」の欄は区画ごとにある。埋める区画に同じ内容を書く */}
-      <Text slot={L.sonota} value={sonota} fontPt={fontPt} label="その他" />
+      <Text slot={L.sonota} value={side.sonota} fontPt={fontPt} label="その他" />
     </>
   );
 }
@@ -187,8 +187,8 @@ export function Sheet({ kind, state, cont, no, total }: SheetProps) {
         <>
           {/* 「1．障害認定日（ 年 月 日）頃」は、その区画を埋めるときだけ書く(§4-3) */}
           {sides.nintei && <DateLine row={MAIN_BACK.ninteibi} value={state.ninteibi} />}
-          {sides.nintei && <BackBlock s={0} side={state.back.nintei} sonota={state.sonota} fontPt={fontPt} />}
-          {sides.genzai && <BackBlock s={1} side={state.back.genzai} sonota={state.sonota} fontPt={fontPt} />}
+          {sides.nintei && <BackBlock s={0} side={state.back.nintei} fontPt={fontPt} />}
+          {sides.genzai && <BackBlock s={1} side={state.back.genzai} fontPt={fontPt} />}
           {/* 手帳。1(受けている)のときだけ①②を書く(§5) */}
           {MAIN_BACK.techouKofu.map((c, i) => (
             <Circle key={i} slot={c} on={state.techou === (["ari", "nashi", "shinsei"] as const)[i]} />

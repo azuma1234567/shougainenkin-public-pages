@@ -1,14 +1,19 @@
 /* 検証用の5サンプル(設計 §9-2)。実在しない架空の人。 */
 const back = (o = {}) => ({ work: null, reasons: [], reasonsOther: "", job: "", commuteMethod: "",
-  commuteHours: "", commuteMinutes: "", daysPrev: "", daysPrevPrev: "", cond: "", daily: {}, ...o });
+  commuteHours: "", commuteMinutes: "", daysPrev: "", daysPrevPrev: "", cond: "", daily: {}, sonota: "", ...o });
 const waku = (i, o = {}) => ({ id: `w${i}`, from: "2020-06", to: "2021-03", jushin: true,
-  kikan: "さくら病院", text: "通院を続けた。", ...o });
-const base = (o = {}) => ({
-  version: 2, byoumei: "", hatsubyou: "", shoshin: "", ninteibi: "", waku: [],
-  back: { nintei: back(), genzai: back() }, sonota: "", techou: null, techouList: [],
-  seikyuusha: { name: "", address: "", tel: "" }, moushitateDate: "2026-09-04",
-  daihitsu: null, seikyuuType: null, fontPt: 10.5, updatedAt: "", ...o,
-});
+  kikan: "さくら病院", text: "通院を続けた。", work: null, ...o });
+/* v3: 「その他」は裏面の1・2それぞれ(back.*.sonota)。サンプルの sonota は両区画に写す。 */
+const base = ({ sonota, ...o } = {}) => {
+  const v = {
+    version: 3, byoumei: "", hatsubyou: "", shoshin: "", ninteibi: "", waku: [],
+    back: { nintei: back(), genzai: back() }, techou: null, techouList: [],
+    seikyuusha: { name: "", address: "", tel: "" }, moushitateDate: "2026-09-04",
+    daihitsu: null, seikyuuType: null, fontPt: 10.5, updatedAt: "", ...o,
+  };
+  if (sonota !== undefined) v.back = { nintei: { ...v.back.nintei, sonota }, genzai: { ...v.back.genzai, sonota } };
+  return v;
+};
 
 const LONG = "朝は起き上がれず、家族に声をかけられてやっと動けることが多かった。"
   + "食事は用意されたものを少し食べるだけで、片づけまでは手が回らなかった。"
@@ -20,14 +25,14 @@ export const SAMPLES = {
 
   /* 表1期間・裏 S=0。§10-5 が見るサンプル */
   minimal: base({
-    byoumei: "うつ病", hatsubyou: "2020-01-01", shoshin: "2020-06-15", ninteibi: "2021-12-15",
+    byoumei: "うつ病", hatsubyou: "2020-01", shoshin: "2020-06-15", ninteibi: "2021-12-15",
     seikyuuType: "honrai", waku: [waku(1)],
     seikyuusha: { name: "年金 太郎", address: "東京都新宿区西新宿1-2-3", tel: "03-1234-5678" },
   }),
 
   /* 3期間・裏 S=0/S=1 両方・手帳①・代筆者なし。就労は S=0「はい」/ S=1「いいえ・オ」 */
   typical: base({
-    byoumei: "双極性障害", hatsubyou: "2015-04-01", shoshin: "2015-09-10", ninteibi: "2017-03-10",
+    byoumei: "双極性障害", hatsubyou: "2015-04", shoshin: "2015-09-10", ninteibi: "2017-03-10",
     seikyuuType: "sokyuu",
     waku: [waku(1, { from: "2015-09", to: "2017-03" }),
            waku(2, { from: "2017-04", to: "2020-03", kikan: "みどり病院", jushin: true }),
@@ -48,7 +53,7 @@ export const SAMPLES = {
 
   /* 7期間 → 続紙1枚(表2行・裏なし)。No.2 / 枚中2 */
   seven: base({
-    byoumei: "統合失調症", hatsubyou: "2010-01-01", shoshin: "2010-05-20", ninteibi: "2011-11-20",
+    byoumei: "統合失調症", hatsubyou: "2010-01", shoshin: "2010-05-20", ninteibi: "2011-11-20",
     seikyuuType: "jigojuushou",
     waku: Array.from({ length: 7 }, (_, i) => waku(i + 1, { from: `201${i}-01`, to: `201${i}-12` })),
     back: { nintei: back(), genzai: back({ work: false, reasons: [1], daily: { 0: 3, 2: 3 } }) },
@@ -58,7 +63,7 @@ export const SAMPLES = {
 
   /* 16期間 → 続紙2枚。全欄最長。絵文字・URL・半角英数・改行を混ぜる */
   max: base({
-    byoumei: "気分障害（うつ病）・不安障害・パニック障害の併発", hatsubyou: "2005-03-01",
+    byoumei: "気分障害（うつ病）・不安障害・パニック障害の併発", hatsubyou: "2005-03",
     shoshin: "2005-08-08", ninteibi: "2007-02-08", seikyuuType: "sokyuu", fontPt: 10.5,
     waku: Array.from({ length: 16 }, (_, i) => waku(i + 1, {
       from: `20${String(5 + i).padStart(2, "0")}-01`, to: `20${String(5 + i).padStart(2, "0")}-12`,
