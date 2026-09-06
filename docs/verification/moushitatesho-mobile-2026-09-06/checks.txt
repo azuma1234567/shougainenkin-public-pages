@@ -1,0 +1,20 @@
+390px /dougu/moushitatesho: viewport 390 scrollWidth 390 (横はみ出しなし) / .mt-tool box-sizing=border-box padding=20px
+   パンくず: left=20.0 right=20.0 ○
+   h1: left=20.0 right=20.0 ○
+   リード: left=20.0 right=20.0 ○
+   白いパネル: left=20.0 right=20.0 ○
+   下の説明 h2: left=20.0 right=20.0 ○
+   下の説明 本文: left=20.0 right=20.0 ○
+390px /dougu/moushitatesho/insatsu: viewport 390 scrollWidth 390 (横はみ出しなし) / .mt-tool box-sizing=border-box padding=20px
+   操作欄: left=0.0 right=0.0 ×
+   操作欄の中身: left=20.0 right=20.0 ○
+720px /dougu/moushitatesho: viewport 720 scrollWidth 720 (横はみ出しなし) / .mt-tool box-sizing=border-box padding=20px
+   パンくず: left=20.0 right=20.0 ○
+   h1: left=20.0 right=20.0 ○
+   リード: left=20.0 right=20.0 ○
+   白いパネル: left=20.0 right=20.0 ○
+   下の説明 h2: left=20.0 right=20.0 ○
+   下の説明 本文: left=20.0 right=20.0 ○
+720px /dougu/moushitatesho/insatsu: viewport 720 scrollWidth 720 (横はみ出しなし) / .mt-tool box-sizing=border-box padding=20px
+   操作欄: left=0.0 right=0.0 ×
+   操作欄の中身: left=20.0 right=20.0 ○
