@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { DouguCards } from "@/components/platform/DouguCard";
+import { TOOLS } from "@/data/dougu";
 import { MITATE_ABILITY_ITEMS, MITATE_AVERAGE_BANDS, MITATE_DEGREE_CHOICES, MITATE_GRADE_TABLE, MITATE_GUIDE_AUTO, MITATE_SOURCE, type MitateAbilityValue, type MitateDegree, type MitateGuideItem, type MitateKind } from "@/data/mitate";
 import { emptyMitateState, hasBias, isNearBoundary, mitateAverage, mitateBandLabel, mitateGuideHits, mitateGuideSet, mitateLookup, type MitateState } from "@/lib/mitate";
 import { saveMitate } from "@/lib/mitate-storage";
@@ -42,7 +43,8 @@ const DIAGNOSES: { label: string; kind?: MitateKind }[] = [
 /* 診断書(精神の障害用)様式第120号の4 記載要領: 判断にあたっては、単身で生活するとしたら可能かどうかで判断する。 */
 const PREMISE_LINE = "ひとりで暮らすとしたら、を前提に。家族がしてくれていることは「できる」に入れません。";
 
-export default function MitateTool() {
+/* children = page.tsx の静的な本文。入口(step 0)のときだけ道具の下に描く(SSR は step 0 なので HTML に載る)。 */
+export default function MitateTool({ children }: { children?: React.ReactNode }) {
   const [state, setState] = useState<MitateState>(emptyMitateState);
   const [step, setStep] = useState(0);
   const [shindansho, setShindansho] = useState(false);
@@ -59,14 +61,16 @@ export default function MitateTool() {
   const move = (next: number) => { setStep(next); window.scrollTo({ top: 0, behavior: "smooth" }); };
   const back = (to: number) => { setRevisit(false); move(to); };
 
-  if (step === 0) return <section className="mi-intro" aria-labelledby="mi-intro-title">
-    <h1 id="mi-intro-title">「私は、障害年金の対象になるのかな」と思ったら</h1>
-    {shindansho && <p className="mi-shindansho-lead">診断書の裏面の欄を、そのまま写してください</p>}
-    <p>精神の障害の審査では、国が公表している「等級判定ガイドライン」の目安表が使われます。<br />診断書に書かれる、毎日の生活の7つの項目と、全体の程度の組み合わせで、目安が決まります。<br />ここでは、その表に、いまの毎日を当てはめてみます。</p>
-    <div className="mi-assurances" aria-label="この機能について"><span>約3分</span><span>判定ではありません</span><span>入力はこの端末の中だけ。送信も保存もしません</span></div>
-    <button type="button" className="mi-start" onClick={() => move(1)}>はじめる</button>
-    {!shindansho && <Link className="mi-mode-link" href="?mode=shindansho">診断書をもう持っている方は、書かれた内容をそのまま写せます →</Link>}
-  </section>;
+  if (step === 0) return <>
+    <section className="mi-intro" aria-labelledby="mi-intro-title">
+      <h1 id="mi-intro-title">等級の目安をしらべる</h1>
+      {shindansho ? <p className="mi-shindansho-lead">診断書の裏面の欄を、そのまま写してください</p> : <p className="mi-big-line">「私は、障害年金の対象になるのかな」と思ったら、3分で。</p>}
+      <p>精神の障害の審査では、国が公表している「等級判定ガイドライン」の目安表が使われます。<br />診断書に書かれる、毎日の生活の7つの項目と、全体の程度の組み合わせで、目安が決まります。<br />ここでは、その表に、いまの毎日を当てはめてみます。</p>
+      <div className="mi-assurances" aria-label="この機能について"><span>約3分</span><span>判定ではありません</span><span>入力はこの端末の中だけ。送信も保存もしません</span></div>
+      <div className="mi-start-row"><button type="button" className="mi-start" onClick={() => move(1)}>はじめる</button>{!shindansho && <Link className="mi-start mi-start-alt" href="?mode=shindansho">診断書を持っている</Link>}</div>
+    </section>
+    {children}
+  </>;
 
   if (step >= 1 && step <= 7) {
     const index = step - 1, item = MITATE_ABILITY_ITEMS[index], [plainQuestion, formalQuestion] = QUESTIONS[index];
@@ -138,7 +142,8 @@ function Result({ state, shindansho, onRevisit, onGuide }: { state: MitateState;
       {pressed.length > 0 && <p className="mi-answers-note">押したことが、診断書と申立書に事実として書かれているかを確認してください。書かれていなければ、審査には届きません。</p>}
     </section>
     <section className="mi-result-section mi-next-lines"><h3>もし申請するなら、次に</h3>{shindansho ? <><Link href="/dougu/shorui">→ 何をそろえればいい？</Link><Link href="/dougu/moushitatesho">→ 申立書を、自分で書きたい</Link><Link href="/nayami/shindansho-komatta">→ 診断書で困ったとき</Link></> : <><Link href="/hajimete">→ はじめての方へ</Link><Link href="/nayami/shoshinbi-karute">→ 初診日がわからないとき</Link><Link href="/shinsei">→ 申請の流れ</Link></>}
-      <div className="dougu-band mi-dougu"><DouguCards placements={shindansho ? ["moushitatesho", "madoguchi"] : ["shorui", "moushitatesho"]} variant="grid" /></div>
+      {/* shorui の既定の一言(blurb)は二人称を含む(この道具では使わない語)ので、同じ道具の what(既存文)を使う */}
+      <div className="dougu-band mi-dougu"><DouguCards placements={shindansho ? ["moushitatesho", "madoguchi"] : [{ tool: "shorui", blurb: TOOLS.shorui.what }, "moushitatesho"]} variant="grid" /></div>
       <Link href="/columns/nichijo-seikatsu-7koumoku">→ 7項目は、こう書かれる</Link><Link href="/columns/shindansho-tanomikata">→ 診断書の頼み方</Link>
     </section>
     <p className="mi-calm-note">{shindansho ? "診断書の記載をそのまま当てはめた結果です。" : "この結果は、本人の答えから出しています。実際の審査は医師の診断書をもとに行われるので、違う結果になることがあります。"}</p>

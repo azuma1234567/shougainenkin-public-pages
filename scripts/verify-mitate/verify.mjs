@@ -156,7 +156,23 @@ check(10, "結果画面に目安表の全体が出て、該当セルが強調さ
   assert.match(text, /hit = row\.label === band && degree === state\.degree/, "該当セルの判定が無い");
   assert.match(text, /hit \? "mi-hit"/, "強調クラスが無い");
   assert.match(src("app/globals.css"), /table\.mi-gt td\.mi-hit\{/, "強調のスタイルが無い");
-  return "6行×5列を常に描画し、該当セルに mi-hit と aria-current";
+  // 2026-09-06 刷新: 静的な本文(page.tsx)にも同じ data/mitate.ts から目安表を描く(強調なし)。FAQPage 5問、JSON-LD に <a 無し。
+  const page = src(PAGE);
+  assert.match(page, /MITATE_AVERAGE_BANDS\.map\(\(row\) =>/, "静的本文の目安表が全行を回していない");
+  assert.match(page, /\[1,2,3,4,5\]\.map\(\(degree\) => \{/, "静的本文の目安表が全列を回していない");
+  assert.match(page, /MITATE_GRADE_TABLE\[row\.label\]\[degree - 1\]/, "静的本文の目安表が data/mitate.ts から描かれていない");
+  assert.ok(!page.includes("mi-hit"), "静的本文の目安表に強調がある");
+  assert.equal((page.match(/\{ q: "/g) ?? []).length, 5, "FAQ が5問でない");
+  assert.match(page, /faqJsonLd\(FAQ\.map/, "FAQPage の JSON-LD が無い");
+  assert.ok(!/a: "[^"]*<a/.test(page), "FAQ の回答に <a がある(JSON-LD に入る)");
+  assert.match(page, /<MitateTool><StaticBody \/><\/MitateTool>/, "静的本文を children で渡していない");
+  assert.match(src(TOOL), /\{children\}/, "MitateTool が children を描いていない");
+  // 名前: <title> / h1 / パンくず / 道具カード
+  assert.match(page, /title: "等級の目安をしらべる｜/, "<title> が「等級の目安をしらべる」で始まらない");
+  assert.match(src(TOOL), /<h1 id="mi-intro-title">等級の目安をしらべる<\/h1>/, "h1 が「等級の目安をしらべる」でない");
+  assert.match(page, /\{ label: "等級の目安をしらべる" \}/, "パンくずの名前が違う");
+  assert.match(src("data/dougu.ts"), /path: "\/dougu\/mitate", name: "等級の目安をしらべる"/, "道具カードの名前が違う");
+  return "6行×5列を常に描画し、該当セルに mi-hit と aria-current / 静的本文の目安表も data/mitate.ts から(強調なし) / FAQ 5問・JSON-LD に <a 無し / 名前は title・h1・パンくず・道具カードで「等級の目安をしらべる」";
 });
 
 // 11. ネットワーク送信が0件
