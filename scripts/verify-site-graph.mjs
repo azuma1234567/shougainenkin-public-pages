@@ -40,7 +40,7 @@ const HEADER = [
 ];
 const FOOTER = [
   ["病気・状況・困りごと別", ["/byoki", "/joukyou", "/nayami", "/dougu/mitate", "/erabu"]],
-  ["申請の進め方", ["/hajimete", "/shinsei", "/dougu/shorui", "/dougu/madoguchi", "/dougu/moushitatesho", "/gokai", "/columns", "/yougo"]],
+  ["申請の進め方", ["/hajimete", "/shinsei", "/dougu/shorui", "/dougu/madoguchi", "/dougu/moushitatesho", "/gokai", "/columns", "/yougo", "/jukyuugo"]],
   ["お金と数字", ["/dougu/kingaku", "/okane", "/jitsurei", "/suuji"]],
   ["このサイトについて", ["/about", "/quality", "/support", "/privacy", "/terms", "/ads", "/app", "/app/terms"]],
 ];
