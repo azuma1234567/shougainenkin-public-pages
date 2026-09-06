@@ -49,6 +49,8 @@ const network = [];
   page.on("request", (r) => {
     const u = r.url();
     network.push({ method: r.method(), url: u, body: r.postData() || "",
+      /* 2026-09-05 に全ページへ入れた AdSense の読み込み。道具の入力とは無関係だが、入力文字が乗っていないかは下で全通信を見る */
+      ads: /googlesyndication\.com|doubleclick\.net|adtrafficquality\.google|google\.com\/recaptcha/.test(u),
       /* 同じサーバーの静的ファイル・ページ自身・画面遷移の先読みは「送信」ではない。
          入力が外へ出ているかは、URL と本文に入力文字列が乗っているかで見る。 */
       sameOriginStatic: u.startsWith(`http://127.0.0.1:${PORT}/`)
@@ -73,8 +75,8 @@ check(1, "外部へ何も送らない", () => {
     const code = stripComments(src(f));
     for (const b of BAD) if (code.includes(b)) fail(`${f} に ${b}`);
   }
-  const outside = network.filter((n) => !n.sameOriginStatic);
-  if (outside.length) fail(`同じサーバーの静的ファイル以外への通信 ${outside.length}件: ${outside.slice(0, 3).map((n) => n.method + " " + n.url).join(" / ")}`);
+  const outside = network.filter((n) => !n.sameOriginStatic && !n.ads);
+  if (outside.length) fail(`同じサーバーの静的ファイル・広告以外への通信 ${outside.length}件: ${outside.slice(0, 3).map((n) => n.method + " " + n.url).join(" / ")}`);
   const posts = network.filter((n) => n.method !== "GET" || n.body);
   if (posts.length) fail(`本文つき・GET以外の通信 ${posts.length}件`);
   /* 入力した文字が URL や本文に乗っていないか */
@@ -83,7 +85,8 @@ check(1, "外部へ何も送らない", () => {
     const hay = decodeURIComponent(n.url) + n.body;
     for (const w of secrets) if (hay.includes(w)) fail(`入力「${w}」が ${n.url} に乗っている`);
   }
-  return `ソース ${SOURCES.length}本に送信コード0 / 通信 ${network.length}件はすべて同じサーバーの静的ファイル(GET・本文なし)で、入力文字は乗っていない`;
+  const ads = network.filter((n) => n.ads).length;
+  return `ソース ${SOURCES.length}本に送信コード0 / 通信 ${network.length}件は同じサーバーの静的ファイル ${network.length - ads}件と全ページ共通の広告 ${ads}件(いずれも GET・本文なし)で、入力文字は乗っていない`;
 });
 
 /* 2. 期間が6つ以上で続紙へ自動で送られる */
@@ -125,22 +128,70 @@ check(1, "外部へ何も送らない", () => {
     return `期間の気づき3つ + 各欄の「収まりません」`;
   });
 
-  /* 4. localStorage に保存され、読み直しで戻る */
+  /* 4. localStorage に保存され、読み直しで戻る。
+     2026-09-06 に v3 の画面へ合わせた: 最初の画面は 傷病名(text)→ 発病日・初診日(date と「日は分からない」)。
+     はじめる → 入力 → 印刷まで通しで動くことを、年月日あり / 日は分からない の2ケースで見る。 */
+  const { MAIN_FRONT } = await import("../../data/moushitatesho/layout.ts");
+  const readDate = (row) => page.evaluate((r) => {
+    const find = (slot) => [...document.querySelectorAll('[data-sheet="main-front"] .mt-slot-digits')]
+      .find((e) => e.style.left === `${slot.cx}mm` && e.style.top === `${slot.cy}mm`)?.textContent ?? "";
+    return { year: find(r.year), month: find(r.month), day: find(r.day) };
+  }, row);
+  const savedV3 = () => page.evaluate(() => localStorage.getItem("shougainenkin-note:moushitatesho:v3"));
+
   await page.evaluate(() => { localStorage.clear(); });
   await page.reload();
   await page.getByRole("button", { name: "はじめる" }).click();
-  await page.locator('input[type="month"]').first().fill("2020-06");
+  await page.locator(".mt-fields input").first().fill("テスト傷病");
+  await page.locator('input[type="date"]').nth(0).fill("2020-01-15");
+  await page.locator('input[type="date"]').nth(1).fill("2020-06-15");
   await sleep(900);
-  const saved = await page.evaluate(() => localStorage.getItem("shougainenkin-note:moushitatesho:v3"));
+  const saved = await savedV3();
   await page.reload();
   await sleep(600);
   const resumed = await page.getByText("前回の続きがあります", { exact: false }).count();
   check(4, "localStorage に保存され、開き直すと続きから書ける", () => {
-    if (!saved) fail("v2 のキーに保存されていない");
-    if (!JSON.parse(saved).hatsubyou.startsWith("2020-06")) fail("入力が保存されていない");
+    if (!saved) fail("v3 のキーに保存されていない");
+    const v = JSON.parse(saved);
+    if (v.byoumei !== "テスト傷病") fail("傷病名が保存されていない");
+    if (v.hatsubyou !== "2020-01-15" || v.shoshin !== "2020-06-15") fail(`年月日が保存されていない(${v.hatsubyou} / ${v.shoshin})`);
     if (!resumed) fail("開き直しても「前回の続き」が出ない");
-    return "v2 のキーに保存 / 再訪で続きから";
+    return "傷病名・発病日 2020-01-15・初診日 2020-06-15 を v3 のキーに保存 / 再訪で続きから";
   });
+
+  /* 4.1 年月日あり → 紙に 令和2年1月15日 / 令和2年6月15日 */
+  await page.goto(PRINT_URL);
+  await page.locator('[data-sheet="main-front"]').first().waitFor();
+  await sleep(500);
+  const withDay = { hatsubyou: await readDate(MAIN_FRONT.hatsubyou), shoshin: await readDate(MAIN_FRONT.shoshin) };
+  check(4.1, "発病日 2020-01-15・初診日 2020-06-15 が紙に 令和2年1月15日 / 令和2年6月15日 で出る", () => {
+    const want = (d, m) => d.year === "2" && d.month === m && d.day === "15";
+    if (!want(withDay.hatsubyou, "1")) fail(`発病日 ${JSON.stringify(withDay.hatsubyou)}`);
+    if (!want(withDay.shoshin, "6")) fail(`初診日 ${JSON.stringify(withDay.shoshin)}`);
+    return `発病日 {年 ${withDay.hatsubyou.year}, 月 ${withDay.hatsubyou.month}, 日 ${withDay.hatsubyou.day}} / 初診日 {年 ${withDay.shoshin.year}, 月 ${withDay.shoshin.month}, 日 ${withDay.shoshin.day}}`;
+  });
+
+  /* 4.2 「日は分からない」→ 保存は YYYY-MM、紙の日欄が空欄 */
+  await page.goto(TOOL_URL);
+  await page.getByRole("button", { name: "続きから" }).click();
+  await page.locator(".mt-datefield .mt-check input").nth(0).check();
+  await page.locator(".mt-datefield .mt-check input").nth(1).check();
+  await sleep(900);
+  const savedNoDay = JSON.parse((await savedV3()) ?? "{}");
+  await page.goto(PRINT_URL);
+  await page.locator('[data-sheet="main-front"]').first().waitFor();
+  await sleep(500);
+  const noDay = { hatsubyou: await readDate(MAIN_FRONT.hatsubyou), shoshin: await readDate(MAIN_FRONT.shoshin) };
+  check(4.2, "「日は分からない」で年月だけ保存され、紙の日欄が空欄になる", () => {
+    if (savedNoDay.hatsubyou !== "2020-01" || savedNoDay.shoshin !== "2020-06") fail(`保存が年月でない(${savedNoDay.hatsubyou} / ${savedNoDay.shoshin})`);
+    const want = (d, m) => d.year === "2" && d.month === m && d.day === "";
+    if (!want(noDay.hatsubyou, "1")) fail(`発病日 ${JSON.stringify(noDay.hatsubyou)}`);
+    if (!want(noDay.shoshin, "6")) fail(`初診日 ${JSON.stringify(noDay.shoshin)}`);
+    return `保存 2020-01 / 2020-06 → 紙の日欄 "" / ""(年 2・月 1 / 年 2・月 6 は出る)`;
+  });
+  await page.goto(TOOL_URL);
+  await page.getByRole("button", { name: "続きから" }).click();
+  await sleep(300);
 
   /* 8・9. 出してはいけない言葉 */
   const bodyText = await page.evaluate(() => document.body.innerText);
@@ -179,11 +230,15 @@ check(1, "外部へ何も送らない", () => {
       const a = document.activeElement;
       return { tag: a?.tagName, text: (a?.textContent || "").trim().slice(0, 20), href: a?.getAttribute?.("href") };
     });
+    const isPrintLink = (e) => e.href === "/dougu/moushitatesho/insatsu";
+    if (isPrintLink(el)) { reached = true; break; }
     if (el.text === "はじめる" || el.text === "次へ" || el.text === "続きから") {
       await page.keyboard.press("Enter");
       await sleep(250);
+      /* 最後の画面は印刷リンクに自動でフォーカスが移る。Tab で通り過ぎる前に見る */
+      const after = await page.evaluate(() => ({ href: document.activeElement?.getAttribute?.("href") }));
+      if (isPrintLink(after)) { reached = true; break; }
     }
-    if (el.href === "/dougu/moushitatesho/insatsu") { reached = true; break; }
   }
   await ctx.close();
   results.push({ id: 7, label: "キーボードだけで印刷まで到達できる", ok: reached,
