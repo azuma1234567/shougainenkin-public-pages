@@ -27,6 +27,9 @@ ok(2, two.every((t) => t.includes(": 200") && t.includes("sitemap=有") && t.end
 const bodyText = {};
 for (const url of URLS) {
   await page.goto(BASE + url, { waitUntil: "networkidle" });
+  /* 土台(復元後)のハブは FAQ を <details> で畳むので、innerText に答えが入らない。
+     開いてから読む(文の有無を見る検査なので、畳まれているかは問わない)。 */
+  await page.evaluate(() => document.querySelectorAll("details").forEach((d) => { d.open = true; }));
   bodyText[url] = await page.locator("main, .platform").first().innerText();
 }
 
