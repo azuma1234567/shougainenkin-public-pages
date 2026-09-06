@@ -18,3 +18,9 @@
 720px /dougu/moushitatesho/insatsu: viewport 720 scrollWidth 720 (横はみ出しなし) / .mt-tool box-sizing=border-box padding=20px
    操作欄: left=0.0 right=0.0 ×
    操作欄の中身: left=20.0 right=20.0 ○
+
+
+# 印刷プレビューの用紙(2つ目の直し)
+390px(minimal): 用紙 4枚 left=20 right=323 幅=303 / stage left=0 justify=start / scrollWidth 390 = viewport 390 (横スクロール 0) → ○
+390px(typical): 用紙 4枚 left=20 right=323 幅=303 / stage left=0 justify=start / scrollWidth 390 = viewport 390 (横スクロール 0) → ○
+720px(minimal): 用紙 4枚 left=20 right=323 幅=303 / stage left=0 justify=start / scrollWidth 720 = viewport 720 (横スクロール 0) → ○
