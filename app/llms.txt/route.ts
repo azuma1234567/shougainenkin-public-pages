@@ -36,7 +36,7 @@ export function GET() {
 
 ${tools.join("\n")}
 
-## 病気・状況・お金・悩みから探す
+## 病気・状況・困りごと・お金から探す
 
 ${hubs.join("\n")}
 

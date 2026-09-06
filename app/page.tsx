@@ -48,7 +48,7 @@ const searchItems: SearchItem[] = [
     href: "/nayami/fushikyu",
     title: "不支給と言われたとき",
     description: "不支給通知を受け取った後の期限と、確認できる選択肢をまとめています。",
-    category: "悩みから探す",
+    category: "困りごと別",
     keywords: "不服申立て 審査請求 再審査請求 却下 認められない",
   },
   {

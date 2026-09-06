@@ -237,7 +237,7 @@ export default function HajimetePage() {
           <div className="p-cta-row">
             <strong>準備ができたら</strong>
             <Link className="p-button" href="/shinsei">申請の流れを見る（8つのステップ） →</Link>
-            <Link href="/nayami">困りごとがある方は「悩みから探す」へ</Link>
+            <Link href="/nayami">困りごとがある方は「困りごと別」へ</Link>
             <Link href="/jitsurei">結論が分かれた実例（{SAIKETSU_COUNTS.all}件）を見る</Link>
           </div>
           <p className="p-source" style={{ marginTop: 14 }}>

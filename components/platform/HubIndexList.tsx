@@ -66,7 +66,7 @@ export default function HubIndexList({ groups, filterable = false }: { groups: H
       {total === 0 ? (
         <p className="hub-index-empty">
           「{query.trim()}」に当てはまる病気は見つかりませんでした。見つからないときは{" "}
-          <Link href="/nayami">悩みから探す</Link> か <Link href="/hajimete">はじめての方へ</Link> へ。
+          <Link href="/nayami">困りごと別</Link> か <Link href="/hajimete">はじめての方へ</Link> へ。
         </p>
       ) : (
         shown.map((group) => (

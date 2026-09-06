@@ -162,7 +162,7 @@ export default function ColumnsPage() {
           </div>
           <nav className="columns-worry-chips" aria-label="まとめページ">
             <Link href="/byoki">病気から探す</Link>
-            <Link href="/nayami">悩みから探す</Link>
+            <Link href="/nayami">困りごと別</Link>
             <Link href="/joukyou">状況から探す</Link>
             <Link href="/gokai">よくある誤解</Link>
             <Link href="/jitsurei">結論が変わった実例</Link>
