@@ -23,10 +23,12 @@ export function planSheets(waku: Waku[]): SheetPlan {
 }
 
 /* 裏面の2区画のどちらを埋めるか(§4-3、記載要領 p2)。
-   本来請求(障害認定日請求) → 障害認定日頃だけ / 事後重症 → 現在だけ / 遡及 → 両方。 */
+   本来請求(障害認定日請求) → 障害認定日頃だけ / 事後重症 → 現在だけ / 遡及 → 両方。
+   「あとで決める」(null)でも 2(現在)は書く。現在の状況は事後重症でも認定日請求でも必ず書く欄
+   (記載要領「2. 現在(請求日頃)の状況」は両方で記入)。 */
 export function backSidesFor(t: MoushitateshoState["seikyuuType"]): { nintei: boolean; genzai: boolean } {
   if (t === "honrai") return { nintei: true, genzai: false };
   if (t === "jigojuushou") return { nintei: false, genzai: true };
   if (t === "sokyuu") return { nintei: true, genzai: true };
-  return { nintei: false, genzai: false };
+  return { nintei: false, genzai: true };
 }

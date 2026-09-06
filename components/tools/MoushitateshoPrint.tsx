@@ -108,6 +108,9 @@ export default function MoushitateshoPrint() {
         {missing.length > 0 && (
           <p className="mt-print-missing">請求者の{missing.join("・")}が未記入です。様式としては書いておく欄です（印刷は止めません）。</p>
         )}
+        {state.seikyuuType === null && (
+          <p className="mt-print-missing">認定日頃も書くかを決めていません。いまの状態だけで印刷します。</p>
+        )}
         <button className="mt-primary" onClick={() => window.print()}>印刷画面を開く</button>
       </section>
 
