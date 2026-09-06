@@ -126,7 +126,7 @@ export default function HajimetePage() {
             <div className="p-note" style={{ marginTop: 14 }}>
               <strong>どのくらいの人が受け取っているか。</strong>令和6年度、新しく決まったのは <strong>146,225件</strong>。同じ年に更新（再認定）の対象になったのは <strong>304,456件</strong>。数十万人が受け取っている、めずらしくない制度です。
             </div>
-            <p className="p-source">出典: 厚生労働省「障害年金の業務統計等（令和6年度）」・日本年金機構「障害年金ガイド」 ・ 確認日 2026-08-31</p>
+            <p className="p-source">出典: 日本年金機構「障害年金業務統計(令和6年度決定分)」・日本年金機構「障害年金ガイド」 ・ 確認日 2026-08-31</p>
           </Card>
         </div>
       </section>
@@ -241,7 +241,7 @@ export default function HajimetePage() {
             <Link href="/jitsurei">結論が分かれた実例（{SAIKETSU_COUNTS.all}件）を見る</Link>
           </div>
           <p className="p-source" style={{ marginTop: 14 }}>
-            出典: 日本年金機構「障害年金ガイド」／厚生労働省「障害年金の業務統計等（令和6年度）」／厚生労働省「精神の障害に係る等級判定ガイドライン」／国民年金法・厚生年金保険法 ・ 確認日 2026-08-31
+            出典: 日本年金機構「障害年金ガイド」／日本年金機構「障害年金業務統計(令和6年度決定分)」／厚生労働省「精神の障害に係る等級判定ガイドライン」／国民年金法・厚生年金保険法 ・ 確認日 2026-08-31
           </p>
         </div>
       </section>

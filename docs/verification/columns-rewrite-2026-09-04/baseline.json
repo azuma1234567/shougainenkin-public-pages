@@ -2,8 +2,55 @@
   "intentionalUpdates": {
     "2026-09-04": {
       "reason": "docs/seo-aio-audit-2026-09-04.md §4-3 / §6-2",
-      "slugs": ["shinsei-kikan", "shoshinbi-wakaranai"],
-      "fields": ["metaTitle", "htmlTitle"]
+      "slugs": [
+        "shinsei-kikan",
+        "shoshinbi-wakaranai"
+      ],
+      "fields": [
+        "metaTitle",
+        "htmlTitle"
+      ]
+    },
+    "2026-09-06": {
+      "reason": "業務統計との整合(docs/suuji-kongzai-2026-09-06-instructions.md): 304,456件と組み合わせる継続率を 96.8/1.0 → 96.7/1.1 に、出典表記を日本年金機構「障害年金業務統計(令和6年度決定分)」に",
+      "slugs": [
+        "daisansha-shomei",
+        "gaku-kaitei-seikyuu",
+        "hatarakinagara",
+        "hattatsu-shougai",
+        "hitorigurashi-furi",
+        "hitsuyou-shorui-seishin",
+        "ikura-moraeru",
+        "jibun-de-shinsei",
+        "kazoku-enjo-kakikata",
+        "kiso-kousei-chigai",
+        "koushin-kakuninhodo",
+        "moushitatesho-a4-insatsu",
+        "moushitatesho-kakikata",
+        "moushitatesho-kikan-kugiri",
+        "nenkin-jimusho-soudan",
+        "nichijo-seikatsu-7koumoku",
+        "shikyuu-teishi-fukkatsu",
+        "shindansho-irai-timing",
+        "shindansho-ishi-ni-tsutaeru",
+        "shindansho-jittai-chigau",
+        "shindansho-kaitekurenai",
+        "shindansho-kakunin",
+        "shindansho-tanomikata",
+        "shinsa-shikumi-nintei-i",
+        "shinsatsu-mae-memo",
+        "shinsei-kikan",
+        "shinsei-shindoi",
+        "shoshinbi-wakaranai",
+        "shoubyou-teatekin",
+        "shougaisha-koyou-nenkin",
+        "tokyu-hantei-guideline"
+      ],
+      "fields": [
+        "lead",
+        "content",
+        "sources"
+      ]
     }
   },
   "baseRef": "76deb22",

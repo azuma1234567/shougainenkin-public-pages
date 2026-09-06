@@ -171,7 +171,7 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
                 <li><Link href="/suuji">数字で見る障害年金</Link>で、全体の分布を確認する</li>
                 <li><Link href="/nayami/fushikyu">不支給と言われたとき</Link>で、次の一手を決める</li>
               </ul>
-              <p className="p-source">出典: 社会保険審査会 裁決例（厚生労働省が公開）／厚生労働省「障害年金の業務統計等（令和6年度）」／社会保険審査官及び社会保険審査会法 ・ 確認日 2026-08-31</p>
+              <p className="p-source">出典: 社会保険審査会 裁決例（厚生労働省が公開）／日本年金機構「障害年金業務統計(令和6年度決定分)」／社会保険審査官及び社会保険審査会法 ・ 確認日 2026-08-31</p>
             </div>
           </div>
         </div>
