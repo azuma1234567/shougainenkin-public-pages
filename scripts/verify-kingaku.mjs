@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { AMOUNTS_2026, KINGAKU_2026 as A } from "../data/amounts.ts";
 import { calcKingaku, emptyInput, houshuHirei, kyuufukinMonthly, monthly, yearly } from "../lib/kingaku.ts";
-import { approx100, hyoujunFromNenshu } from "../lib/kingaku-hosoku.ts";
+import { SAKANOBORI_MAX_MONTHS, approx100, hyoujunFromNenshu, ninteiFromShoshin, sakanobori, sakanoboriMonths } from "../lib/kingaku-hosoku.ts";
 
 const results = [];
 const check = (id, label, fn) => {
@@ -216,6 +216,36 @@ check(14, "「年収から」が年収÷12を平均標準報酬額として使�
   assert.match(src(TOOL), /標準報酬月額と賞与には上限があるため/, "目安の但し書きが無い");
   assert.equal(approx100(monthly(A.basicGrade2)), Math.round(A.basicGrade2 / 12 / 100) * 100, "月額の「約」の丸めが百円単位でない");
   return `360万 → ${hyoujunFromNenshu(3600000).toLocaleString("ja-JP")} → 合計 ${yearly(direct.total).toLocaleString("ja-JP")}円(平均標準報酬額から と同じ)/ 切替で消す / 目安の但し書き`;
+});
+
+// 15. さかのぼり(A-4-6): 初診日 2023-01 → 認定日 2024-07 → 翌月 2024-08 から 2026-09 まで 26か月 → 約70,600×26。2015-01 → 60か月で頭打ち
+check(15, "さかのぼって受け取れる分の目安(認定日 = 初診日+1年6か月、翌月から今月まで、60か月で頭打ち)", () => {
+  assert.equal(ninteiFromShoshin("2023-01"), "2024-07");
+  assert.equal(sakanoboriMonths("2024-07", "2026-09-06"), 26);
+  const r = sakanobori(A.basicGrade2, "2024-07", "2026-09-06");
+  assert.equal(r.months, 26); assert.equal(r.counted, 26); assert.equal(r.capped, false);
+  assert.equal(r.amount, approx100(monthly(A.basicGrade2)) * 26, "額 = 約月額 × 月数 でない");
+  const old = sakanobori(A.basicGrade2, ninteiFromShoshin("2015-01"), "2026-09-06");
+  assert.equal(old.counted, SAKANOBORI_MAX_MONTHS); assert.equal(old.capped, true); assert.equal(old.months, 122);
+  assert.equal(sakanobori(A.basicGrade2, "2026-09", "2026-09-06"), null, "認定日が今月なのに出ている");
+  assert.equal(sakanobori(A.basicGrade2, "2027-01", "2026-09-06"), null, "認定日が未来なのに出ている");
+  assert.match(src(TOOL), /\{saka\.months\}か月のうち \$\{saka\.counted\}か月分/, "頭打ちの表示が無い");
+  assert.match(src(TOOL), /認定日請求が認められた場合の目安です/, "但し書きが無い");
+  return `2023-01 → 認定日 2024-07 → 26か月 → 約${r.amount.toLocaleString("ja-JP")}円(2級・国民年金)/ 2015-01 → ${old.months}か月のうち ${old.counted}か月分`;
+});
+
+// 16. 静的な本文(A-4-9): 表の値が AMOUNTS_2026、FAQPage 5問、<a 0
+check(16, "静的な表が AMOUNTS_2026 から描かれ、FAQPage 5問で <a が無い", () => {
+  const page = src(PAGE);
+  for (const key of ["basicGrade1", "basicGrade2", "childFirstSecond", "childThird", "spouseAddition", "employeesGrade3Minimum", "supportGrade1Monthly", "supportGrade2Monthly"]) {
+    assert.ok(page.includes(`AMOUNTS_2026.${key}`), `表に ${key} が無い`);
+  }
+  assert.equal((page.match(/\{ q: "/g) ?? []).length, 5, "FAQ が5問でない");
+  assert.match(page, /faqJsonLd\(FAQ\.map/, "FAQPage の JSON-LD が無い");
+  assert.ok(!/a: [`"][^`"]*<a/.test(page), "FAQ の回答に <a がある");
+  assert.match(page, /stats\.sources\.sources/, "出典を data/stats/sources.json から読んでいない");
+  assert.match(page, /\(A\.rateNew \* 1000\)\.toFixed\(3\)/, "乗率を data/amounts.ts から出していない");
+  return "表8行が AMOUNTS_2026 / FAQ 5問・JSON-LD・<a 0 / 出典は sources.json / 乗率・年度も data から";
 });
 
 // 補助: §4-2 の旧・新の分割計算と1級の1.25倍(モックの houshuHirei と一致するか)

@@ -29,7 +29,7 @@ export const SITEMAP_STATIC_DATES: Record<string, string> = {
   "/erabu": "2026-09-06",
   "/jukyuugo": "2026-09-06",
   "/dougu/mitate": "2026-09-06",
-  "/dougu/kingaku": "2026-09-05",
+  "/dougu/kingaku": "2026-09-06",
   "/dougu/shorui": "2026-09-05",
   "/dougu/madoguchi": "2026-09-05",
   "/dougu/moushitatesho": "2026-09-05",

@@ -38,7 +38,34 @@
       "url": "https://www.nenkin.go.jp/tokusetsu/tenken.html",
       "publishedAt": "2026-08-31",
       "checkedAt": "2026-09-02",
-      "notes": ["進行中の点検であるため、取得日をデータに保持する。"]
+      "notes": [
+        "進行中の点検であるため、取得日をデータに保持する。"
+      ]
+    },
+    "shougaiKisoGakuR08": {
+      "title": "日本年金機構『障害基礎年金の受給要件・請求時期・年金額』(令和8年4月分から)",
+      "url": "https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/jukyu-yoken/20150514.html",
+      "checkedAt": "2026-09-06",
+      "notes": [
+        "障害基礎年金 1級 1,059,125円・2級 847,300円、子の加算 1人目・2人目 243,800円・3人目以降 81,300円(昭和31年4月2日以後生まれ)を確認した。"
+      ]
+    },
+    "shougaiKouseiGakuR08": {
+      "title": "日本年金機構『障害厚生年金の受給要件・請求時期・年金額』(令和8年4月分から)",
+      "url": "https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/jukyu-yoken/20150401-02.html",
+      "checkedAt": "2026-09-06",
+      "notes": [
+        "配偶者加給年金額 243,800円、3級の最低保障 635,500円(昭和31年4月2日以後生まれ)、1級は報酬比例×1.25、300月未満は300月とみなす計算を確認した。"
+      ]
+    },
+    "nenkingakuKaiteiR08": {
+      "title": "日本年金機構『令和8年4月分からの年金額等について』",
+      "url": "https://www.nenkin.go.jp/oshirase/taisetu/kojin/2026/202604/0401.html",
+      "publishedAt": "2026-04-01",
+      "checkedAt": "2026-09-06",
+      "notes": [
+        "年金生活者支援給付金(障害)1級 7,025円・2級 5,620円(月額)を確認した。障害年金の年額そのものはこのページに無い。"
+      ]
     }
   }
 }

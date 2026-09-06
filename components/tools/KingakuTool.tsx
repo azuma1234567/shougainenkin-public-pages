@@ -8,7 +8,7 @@ import { useState } from "react";
 import { DouguCards } from "@/components/platform/DouguCard";
 import { KINGAKU_2026 as A } from "@/data/amounts";
 import { bimonthly, calcKingaku, emptyInput, houshuHirei, kyuufukinMonthly, monthly, num, yearly, type Grade, type KingakuInput, type Seido } from "@/lib/kingaku";
-import { approx100, hyoujunFromNenshu } from "@/lib/kingaku-hosoku";
+import { SAKANOBORI_MAX_MONTHS, approx100, hyoujunFromNenshu, ninteiFromShoshin, sakanobori, todayYm } from "@/lib/kingaku-hosoku";
 import { stats } from "@/lib/stats";
 
 const GRADES: Grade[] = [1, 2, 3];
@@ -25,6 +25,9 @@ export default function KingakuTool() {
   const [seidoChoice, setSeidoChoice] = useState<Seido | "fumei" | null>(null);
   const [salaryMode, setSalaryMode] = useState<"nenshu" | "hyoujun">("nenshu");
   const [nenshu, setNenshu] = useState<number | null>(null);
+  /* さかのぼり(任意): 初診日(年月)と、直せる障害認定日(年月) */
+  const [shoshin, setShoshin] = useState("");
+  const [ninteiEdited, setNinteiEdited] = useState<string | null>(null);
   const patch = (p: Partial<KingakuInput>) => setS((prev) => ({ ...prev, ...p }));
   // マイナスや指数表記が入ると §4 の式が意味を失うので、欄の段階で0以上の整数に丸める。
   const numberField = (value: string) => {
@@ -39,6 +42,8 @@ export default function KingakuTool() {
   const kyuufukin = kyuufukinMonthly(s.grade);
   const hh = houshuHirei(s);
   const example = houshuHirei({ ...emptyInput(), seido: "kousei", hyoujun: EXAMPLE.hyoujun, tsuki: EXAMPLE.tsuki });
+  const nintei = ninteiEdited ?? (shoshin ? ninteiFromShoshin(shoshin) ?? "" : "");
+  const saka = result.known && nintei ? sakanobori(result.total, nintei, todayYm()) : null;
 
   const chooseSeido = (v: Seido | null) => {
     setSeidoChoice(v === null ? "fumei" : v);
@@ -182,7 +187,36 @@ export default function KingakuTool() {
           </tbody>
         </table>
 
-        <h3>上乗せ(参考)</h3>
+      </section>
+
+      {/* さかのぼって受け取れる分の目安(任意)。認定日請求が認められた場合の目安。 */}
+      <details className="kg-card kg-fold">
+        <summary>さかのぼって受け取れる分の目安(任意)</summary>
+        <div className="kg-fold-in">
+          <div className="kg-grid2">
+            <div>
+              <label className="kg-f" htmlFor="kg-shoshin">初診日(年月)</label>
+              <input type="month" id="kg-shoshin" value={shoshin} onChange={(e) => { setShoshin(e.target.value); setNinteiEdited(null); }} />
+            </div>
+            <div>
+              <label className="kg-f" htmlFor="kg-nintei">障害認定日(年月)</label>
+              <input type="month" id="kg-nintei" value={nintei} onChange={(e) => setNinteiEdited(e.target.value)} />
+              <p className="kg-hintline">原則、初診日から1年6か月後。直せます。</p>
+            </div>
+          </div>
+          {nintei && !saka && <p className="kg-hintline">障害認定日が今月以降のため、さかのぼる分はまだありません。</p>}
+          {saka && (
+            <p className="kg-note">
+              障害認定日の翌月分から今月分まで {saka.months}か月。時効で受け取れるのは直近5年分({SAKANOBORI_MAX_MONTHS}か月)まで。<br />
+              いまの年額で概算すると 約{num(saka.amount)}円{saka.capped ? `(${saka.months}か月のうち ${saka.counted}か月分)` : ""}(年ごとの改定は反映していません。認定日請求が認められた場合の目安です)
+            </p>
+          )}
+        </div>
+      </details>
+
+      <section className="kg-card" aria-labelledby="kg-more-heading">
+        <h2 id="kg-more-heading" className="kg-sr">上乗せと知っておくこと</h2>
+        <h3 className="kg-h3-first">上乗せ(参考)</h3>
         <div className="kg-note">
           {kyuufukin === null ? (
             <><strong>年金生活者支援給付金は、3級では受け取れません。</strong>この給付金は障害基礎年金の受給者が対象で、障害厚生年金3級のみの方は対象外です。</>
