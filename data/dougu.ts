@@ -173,6 +173,12 @@ export const PLACEMENTS: {
     }],
     /* 提出先・郵送の記事。クリック上位3本の1つで、まさに「どこへ出すか」を扱っている。 */
     "teishutsusaki-yuusou": ["madoguchi"],
+    /* 受給後の道具2本(docs/dougu-2hon-2026-09-06-instructions.md §0)。記事の末尾に。 */
+    "hatachi-mae": [{ tool: "kougin", position: "after" }],
+    "hatarakinagara": [{ tool: "kougin", position: "after" }],
+    "hikazei-shuunyuu": [{ tool: "kougin", position: "after" }],
+    "koushin-kakuninhodo": [{ tool: "koushin", position: "after" }],
+    "jukyuugo-tetsuduki": [{ tool: "koushin", position: "after" }],
   },
   hubs: {
     "/okane/ikura": ["kingaku"],
@@ -185,6 +191,14 @@ export const PLACEMENTS: {
     /* 診断書で困っている人・家族が手伝う人も、目安表と窓口の入口が要る。 */
     "/nayami/shindansho-komatta": ["mitate"],
     "/joukyou/kazoku-ga-tetsudau": ["madoguchi"],
+    /* 受給後の道具2本(docs/dougu-2hon-2026-09-06-instructions.md §0)。リードの直後に。 */
+    "/jukyuugo/hataraku": ["kougin", "koushin"],
+    "/jukyuugo/sagyousho": ["kougin"],
+    "/jukyuugo/nukedasu": ["kougin"],
+    "/jukyuugo/a-gata-heisa": ["koushin"],
+    "/joukyou/hatachi-mae": ["kougin"],
+    "/nayami/koushin": ["koushin"],
+    "/nayami/shikyuu-teishi": ["koushin"],
   },
   shinseiSteps: {
     "step-3": [{ tool: "madoguchi", title: "どこに出せばいい？", blurb: "管轄の年金事務所と、予約のしかた" }],
@@ -193,6 +207,8 @@ export const PLACEMENTS: {
     "step-6": [{ tool: "moushitatesho", title: "申立書を、自分で書きたい", blurb: "期間ごとに書いて、公式様式に重ねて印刷" }],
     /* 出す段でもう一度。文言はステップ3と同じ(新しい説明文は書かない)。 */
     "step-7": [{ tool: "madoguchi", title: "どこに出せばいい？", blurb: "管轄の年金事務所と、予約のしかた" }],
+    /* 結果を待つ段の先、受給後の更新へ。文言は TOOLS の既定。 */
+    "step-8": ["koushin"],
   },
 };
 

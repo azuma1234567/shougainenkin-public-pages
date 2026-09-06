@@ -45,7 +45,7 @@ const FOOTER = [
   ["このサイトについて", ["/about", "/quality", "/support", "/privacy", "/terms", "/ads", "/app", "/app/terms"]],
 ];
 const OLD_LABELS = ["探す", "読む", "道具", "悩みから", "病気から", "状況から"];
-const APP_BANNER_URLS = ["/", "/app", "/dougu/mitate", "/dougu/kingaku", "/dougu/shorui", "/dougu/madoguchi", "/dougu/moushitatesho"];
+const APP_BANNER_URLS = ["/", "/app", "/dougu/mitate", "/dougu/kingaku", "/dougu/shorui", "/dougu/madoguchi", "/dougu/moushitatesho", "/dougu/kougin", "/dougu/koushin"];
 /* 被リンクを数えるとき、入口として除く一覧ページ(検査2)。 */
 const LIST_PAGES = new Set(["/", "/byoki", "/joukyou", "/nayami", "/okane", "/erabu", "/gokai", "/columns"]);
 
@@ -213,6 +213,14 @@ const isContent = (url) => /^\/(byoki|joukyou|nayami|okane|erabu)\/|^\/gokai\/|^
     "/nayami/shindansho-komatta": ["/dougu/mitate"],
     "/joukyou/kazoku-ga-tetsudau": ["/dougu/madoguchi"],
     "/byoki/utsu-soukyoku": ["/dougu/mitate"],
+    /* 受給後の道具2本(docs/dougu-2hon-2026-09-06-instructions.md §0) */
+    "/jukyuugo/hataraku": ["/dougu/kougin", "/dougu/koushin"],
+    "/jukyuugo/sagyousho": ["/dougu/kougin"],
+    "/jukyuugo/nukedasu": ["/dougu/kougin"],
+    "/jukyuugo/a-gata-heisa": ["/dougu/koushin"],
+    "/joukyou/hatachi-mae": ["/dougu/kougin"],
+    "/nayami/koushin": ["/dougu/koushin"],
+    "/nayami/shikyuu-teishi": ["/dougu/koushin"],
   };
   for (const [url, expected] of Object.entries(want)) {
     const found = cardsOn(url);

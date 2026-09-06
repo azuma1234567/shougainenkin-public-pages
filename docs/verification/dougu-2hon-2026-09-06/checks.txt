@@ -1,0 +1,41 @@
+
+### /dougu/kougin
+  title: 工賃・賃金と障害年金の計算 — 働いたら、年金は減るか｜障害年金申請サポート
+  description: 所得で年金が止まる仕組みがあるのは、初診日が20歳前にある障害基礎年金だけです。20歳前の人は、前年の所得を令和8年度の線に当てると、全額・2分の1停止・全額停止のどれになるかが分かります。健康保険の扶養の線(年収180万円未満)にも当てます。入力は送信されません。
+  h1: 工賃・賃金と障害年金の計算 — 働いたら、年金は減るか
+  BreadcrumbList: トップ / 受給が始まってから / 工賃・賃金と年金の計算 / <a in ld+json: false
+  §C-2 外部リクエスト(広告・フォント除く): 5 https://ep1.adtrafficquality.google/getconfig/sodar?sv=200&tid=gda&tv=r20260902&st=env&sjk=4067606611676149 https://ep2.adtrafficquality.google/sodar/sodar2.js https://ep2.adtrafficquality.google/sodar/sodar2/255/runner.html / /api/: 0
+  §C-6 あなた 0 / 判定語 []
+  保存: 保存あり
+  結果の冒頭: 
+
+### /dougu/koushin
+  title: 更新カウントダウン — 障害状態確認届の提出期限まで｜障害年金申請サポート
+  description: 年金証書の「次回診断書提出年月」を入れると、用紙が届く時期、診断書の現症日として使える期間、提出期限が日付で出ます。準備の順番も日付つき。入力は送信されません。
+  h1: 更新カウントダウン — 障害状態確認届の提出期限まで
+  BreadcrumbList: トップ / 受給が始まってから / 更新カウントダウン / <a in ld+json: false
+  §C-2 外部リクエスト(広告・フォント除く): 5 https://ep1.adtrafficquality.google/getconfig/sodar?sv=200&tid=gda&tv=r20260902&st=env&sjk=3294969910698731 https://ep2.adtrafficquality.google/sodar/sodar2.js https://ep2.adtrafficquality.google/sodar/sodar2/255/runner.html / /api/: 0
+  §C-6 あなた 0 / 判定語 []
+  保存: 保存あり
+  結果の冒頭: 
+
+§C-8 配置(道具カード・チップ・本文リンク)
+  /jukyuugo/hataraku: 期待 [kougin,koushin] カード ["/dougu/kougin","/dougu/koushin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /jukyuugo/sagyousho: 期待 [kougin] カード ["/dougu/kougin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /jukyuugo/nukedasu: 期待 [kougin] カード ["/dougu/kougin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /jukyuugo/a-gata-heisa: 期待 [koushin] カード ["/dougu/koushin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /joukyou/hatachi-mae: 期待 [kougin] カード ["/dougu/kougin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /nayami/koushin: 期待 [koushin] カード ["/dougu/koushin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /nayami/shikyuu-teishi: 期待 [koushin] カード ["/dougu/koushin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /gokai/hataraitara-make: 期待 [] カード [] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /jukyuugo: 期待 [] カード [] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /shinsei: 期待 [koushin] カード ["/dougu/koushin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /columns/hatachi-mae: 期待 [kougin] カード ["/dougu/kougin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /columns/hatarakinagara: 期待 [kougin] カード ["/dougu/kougin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /columns/hikazei-shuunyuu: 期待 [kougin] カード ["/dougu/kougin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /columns/koushin-kakuninhodo: 期待 [koushin] カード ["/dougu/koushin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+  /columns/jukyuugo-tetsuduki: 期待 [koushin] カード ["/dougu/koushin"] ○ / 本文リンク [] / 重複 [] / 準備中 0 / コメント ["<!-- --","<!-- --"]
+§C-7 1400px /dougu/kougin: はみ出し 0px
+§C-7 1400px /dougu/koushin: はみ出し 0px
+§C-7 390px /dougu/kougin: はみ出し 0px
+§C-7 390px /dougu/koushin: はみ出し 0px
