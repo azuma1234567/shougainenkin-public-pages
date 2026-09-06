@@ -59,7 +59,7 @@ check(2, "最初の操作が市区町村名の検索欄(一覧から選ぶも残
   assert.match(t, /const starts = all\.filter\(\(m\) => m\.name\.startsWith\(q\)\);/, "前方一致を先にしていない");
   assert.match(t, /\.slice\(0, SEARCH_MAX\)/, "候補の上限が無い");
   assert.match(t, /const SEARCH_MAX = 10;/, "候補の上限が10でない");
-  assert.match(t, /if \(q\.length < 2\) return \[\];/, "2文字未満で候補を出している");
+  assert.match(t, /const includes = q\.length < 2 \? \[\] : all\.filter/, "1文字のとき部分一致まで出している(前方一致だけにする)");
   assert.match(t, /useMemo<Muni\[\]>\(\(\) => PREFECTURES\.flatMap/, "全件の配列をメモ化していない");
   assert.ok(!t.includes("gun-map"), "郡の表を使っている(町村名で引く)");
   assert.match(t, /<h2 id="md-h1">お住まい<\/h2>/, "最初の見出しが「お住まい」でない");
@@ -69,12 +69,12 @@ check(2, "最初の操作が市区町村名の検索欄(一覧から選ぶも残
   assert.ok(!src("app/globals.css").includes(".md-warnbox"), "黄色の箱の CSS が残っている");
   // 検索: 旭川 / 世田谷 / 堺 / 大阪(lib のデータで、画面と同じ規則を再現)
   const all = PREFECTURES.flatMap((p) => municipalitiesOf(p).map((m) => ({ pref: p, ...m })));
-  const search = (q) => { const s = all.filter((m) => m.name.startsWith(q)), i = all.filter((m) => !m.name.startsWith(q) && m.name.includes(q)); return [...s, ...i].slice(0, 10); };
+  const search = (q) => { const s = all.filter((m) => m.name.startsWith(q)), i = q.length < 2 ? [] : all.filter((m) => !m.name.startsWith(q) && m.name.includes(q)); return [...s, ...i].slice(0, 10); };
   assert.equal(search("旭川")[0].pref + " " + search("旭川")[0].name, "北海道 旭川市");
   assert.equal(search("世田谷")[0].pref + " " + search("世田谷")[0].name, "東京都 世田谷区");
   assert.ok(search("堺").length >= 6 && search("堺").every((m) => m.pref === "大阪府"), `堺 → ${search("堺").map((m) => m.name).join(",")}`);
   assert.ok(search("大阪").length <= 10 && search("大阪").every((m) => m.name.startsWith("大阪市")), `大阪 → ${search("大阪").map((m) => m.name).join(",")}`);
-  assert.equal(search("旭").length, 0 + search("旭").length, "");
+  assert.ok(search("堺").every((m) => m.name.startsWith("堺")), "1文字は前方一致だけ");
   // B-5-4 「1.」〜「5.」と「提出先を調べる」が画面に無い
   assert.ok(!t.includes("提出先を調べる"), "「提出先を調べる」が残っている");
   for (const n of [1, 2, 3, 4, 5]) {
@@ -207,9 +207,13 @@ check(11, "外部の地図SDK・埋め込みが無い。回答内容を含む送
   if (existsSync(file)) {
     const m = JSON.parse(src(file));
     const net = m.network ?? [];
-    const sending = net.filter((n) => n.method !== "GET" || n.hasBody || !n.prefetch);
+    /* 2026-09-05 に全ページへ入れた AdSense の通信(googlesyndication / doubleclick / adtrafficquality / recaptcha)は道具の入力とは無関係なので除く */
+    const sending = net.filter((n) => n.method !== "GET" || n.hasBody || (!n.prefetch && !n.ads));
     assert.deepEqual(sending.map((n) => `${n.method} ${n.url}`), [], "回答内容を含む送信または先読み以外の通信がある");
-    return `地図SDK・iframe なし(検索URLのリンクのみ) / 回答内容を含む送信0件・先読み以外の通信0件(先読みとアイコン ${net.length}件)`;
+    /* 選んだ住所(茨城県 水戸市 / code 082015)が広告の通信に載っていない */
+    const chosen = [encodeURIComponent("水戸"), encodeURIComponent("茨城"), "082015"];
+    assert.ok(net.filter((n) => n.ads).every((n) => !n.hasBody && !chosen.some((c) => n.url.includes(c))), "広告の通信に入力内容が混ざっている");
+    return `地図SDK・iframe なし(検索URLのリンクのみ) / 回答内容を含む送信0件・先読み以外の自サイトへの通信0件(先読みとアイコン ${net.filter((n) => n.prefetch).length}件、全ページ共通の広告 ${net.filter((n) => n.ads).length}件)`;
   }
   return "地図SDK・iframe なし / 送信コード0(実測は print.mjs 未実行)";
 });
@@ -223,6 +227,22 @@ check(12, "モバイル375pxで横スクロールなし", () => {
   assert.equal(m.mobile.scrollWidth, m.mobile.clientWidth, `375px で横スクロール(${m.mobile.scrollWidth}/${m.mobile.clientWidth})`);
   assert.equal(m.mobile.overflowing, 0, `はみ出し要素 ${m.mobile.overflowing} 件`);
   return `実測 scrollWidth ${m.mobile.scrollWidth} = clientWidth、はみ出し0`;
+});
+
+// 13. 2026-09-06 刷新(B-1-5・B-2-8): 静的な本文3節 + FAQPage 5問(<a 無し)。名前は title・h1「年金事務所を探す — 管轄と予約のしかた」、パンくず「年金事務所を探す」
+check(13, "静的な本文と FAQPage 5問、名前がそろっている", () => {
+  const page = src(PAGE);
+  for (const h of ["年金事務所と街角の年金相談センターの違い", "市区町村の窓口に出せる場合", "郵送で出す", "よくある質問"]) assert.ok(page.includes(`>${h}</h2>`), `節「${h}」が無い`);
+  assert.equal((page.match(/\{ q: "/g) ?? []).length, 5, "FAQ が5問でない");
+  assert.match(page, /faqJsonLd\(FAQ\.map/, "FAQPage の JSON-LD が無い");
+  assert.ok(!/a: [`"][^`"]*<a/.test(page), "FAQ の回答に <a がある");
+  assert.match(page, /\$\{COMMON_TEL\.yoyaku\}/, "FAQ の電話番号が COMMON_TEL 経由でない");
+  assert.match(page, /const TITLE = "年金事務所を探す — 管轄と予約のしかた";/, "title/h1 の名前が違う");
+  assert.match(page, /<h1>\{TITLE\}<\/h1>/, "h1 が TITLE でない");
+  assert.match(page, /\{ label: "年金事務所を探す" \}/, "パンくずが「年金事務所を探す」でない");
+  assert.equal(TOOLS.madoguchi.name, "年金事務所を探す", "道具カードの名前が違う");
+  assert.ok(!page.includes("あなた"), "page.tsx に「あなた」がある");
+  return "3節 + FAQ 5問・JSON-LD・<a 0・電話は COMMON_TEL / title・h1「年金事務所を探す — 管轄と予約のしかた」、パンくず・道具カード「年金事務所を探す」";
 });
 
 const ok = results.every((r) => r.ok);

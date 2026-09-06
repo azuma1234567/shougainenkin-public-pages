@@ -1,16 +1,18 @@
 {
- "generatedAt": "2026-09-03T21:35:18.330Z",
+ "generatedAt": "2026-09-06T11:45:01.808Z",
  "cases": [
   {
    "name": "横浜市南区(厚年と国年で違う)",
-   "pages": 1,
+   "pages": 2,
    "splitItems": [],
    "itemCount": 2,
-   "contentMm": 240.9,
+   "contentMm": 284.9,
    "office": true,
    "yoyaku": true,
    "mochimono": true,
    "ask": true,
+   "say": true,
+   "kokuminLink": true,
    "printHead": true,
    "machikadoOnPrint": false,
    "pickedOnPrint": true,
@@ -21,11 +23,13 @@
    "pages": 2,
    "splitItems": [],
    "itemCount": 3,
-   "contentMm": 297.8,
+   "contentMm": 341.9,
    "office": true,
    "yoyaku": true,
    "mochimono": true,
    "ask": true,
+   "say": true,
+   "kokuminLink": true,
    "printHead": true,
    "machikadoOnPrint": false,
    "pickedOnPrint": true,
@@ -36,11 +40,13 @@
    "pages": 1,
    "splitItems": [],
    "itemCount": 1,
-   "contentMm": 198.6,
+   "contentMm": 242.7,
    "office": true,
    "yoyaku": true,
    "mochimono": true,
    "ask": true,
+   "say": true,
+   "kokuminLink": true,
    "printHead": true,
    "machikadoOnPrint": false,
    "pickedOnPrint": true,
@@ -55,26 +61,121 @@
  "network": [
   {
    "method": "GET",
-   "url": "http://127.0.0.1:3230/icon.png?456ec51301557816",
-   "prefetch": true,
+   "url": "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7767241090011854",
+   "prefetch": false,
+   "ads": true,
    "hasBody": false
   },
   {
    "method": "GET",
    "url": "http://127.0.0.1:3230/?_rsc=lC_5L_1F_ta4WuWH",
    "prefetch": true,
+   "ads": false,
    "hasBody": false
   },
   {
    "method": "GET",
    "url": "http://127.0.0.1:3230/shinsei?_rsc=lC_5L_1F_ta4WuWH",
    "prefetch": true,
+   "ads": false,
    "hasBody": false
   },
   {
    "method": "GET",
    "url": "http://127.0.0.1:3230/privacy?_rsc=lC_5L_1F_ta4WuWH",
    "prefetch": true,
+   "ads": false,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "https://pagead2.googlesyndication.com/pagead/managed/js/adsense/m202608310101/show_ads_impl.js",
+   "prefetch": false,
+   "ads": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "https://googleads.g.doubleclick.net/pagead/html/r20260902/r20190131/zrt_lookup.html",
+   "prefetch": false,
+   "ads": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "https://pagead2.googlesyndication.com/pagead/gen_204?id=ach_evt&tn=SECTION&cls=analytics-consent-banner&ign=false&pw=375&ph=900&x=187.5&y=826",
+   "prefetch": false,
+   "ads": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "https://googleads.g.doubleclick.net/pagead/ads?client=ca-pub-7767241090011854&output=html&adk=1812271804&adf=3025194257&abgtt=6&lmt=1788695098&plat=1%3A16777216%2C3%3A65536%2C4%3A65536%2C16%3A8388608%2C17%3A32%2C24%3A32%2C25%3A32%2C30%3A1048576%2C32%3A32%2C41%3A32%2C42%3A32%2C43%3A32%2C44%3A32&format=0x0&url=http%3A%2F%2F127.0.0.1%3A3230%2Fdougu%2Fmadoguchi&pra=5&asro=0&aimartd=4&uach=WyJtYWNPUyIsIjE1LjcuOSIsIng4NiIsIiIsIjE1Mi4wLjc5NzcuNzYiLG51bGwsMCxudWxsLCI2NCIsW1siQ2hyb21pdW0iLCIxNTIuMC43OTc3Ljc2Il0sWyJOb3Q_QV9CcmFuZCIsIjI0LjAuMC4wIl0sWyJHb29nbGUgQ2hyb21lIiwiMTUyLjAuNzk3Ny43NiJdXSwwXQ..&dt=1788695098758&bpp=11&bdt=1482&idt=105&shv=r20260902&mjsv=m202608310101&ptt=9&saldr=aa&abxe=1&cookie_enabled=1&eoidce=1&nras=1&correlator=5220201219557&frm=20&pv=2&u_tz=540&u_his=2&u_h=900&u_w=375&u_ah=900&u_aw=375&u_cd=24&u_sd=1&dmc=16&adx=-12245933&ady=-12245933&biw=375&bih=900&scr_x=0&scr_y=0&eid=95399629%2C95400774%2C95401044%2C95390278&oid=2&pvsid=2700477083901880&tmod=1946246730&uas=0&nvt=1&fsapi=1&fc=1920&brdim=22%2C22%2C22%2C22%2C375%2C0%2C500%2C900%2C375%2C900&vis=1&rsz=%7C%7Cs%7C&abl=NS&fu=32768&bc=31&bz=1.33&pgls=CAk.&ifi=1&uci=a!1&fsb=1&dtd=162",
+   "prefetch": false,
+   "ads": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "https://ep1.adtrafficquality.google/getconfig/sodar?sv=200&tid=gda&tv=r20260902&st=env&sjk=2700477083901880",
+   "prefetch": false,
+   "ads": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "http://127.0.0.1:3230/icon.png?456ec51301557816",
+   "prefetch": true,
+   "ads": false,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "https://ep2.adtrafficquality.google/sodar/sodar2.js",
+   "prefetch": false,
+   "ads": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "https://ep2.adtrafficquality.google/sodar/sodar2/255/runner.html",
+   "prefetch": false,
+   "ads": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "https://www.google.com/recaptcha/api2/aframe",
+   "prefetch": false,
+   "ads": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "https://pagead2.googlesyndication.com/bg/Jhthcvb0ZYORISlOG0EY8Jt9IY-F7giycWwm4Iy5AJ4.js",
+   "prefetch": false,
+   "ads": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "https://ep2.adtrafficquality.google/generate_204?OE8YEQ",
+   "prefetch": false,
+   "ads": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "https://pagead2.googlesyndication.com/pagead/sodar?id=sodar2&v=255&li=gda_r20260902&jk=2700477083901880&rc=",
+   "prefetch": false,
+   "ads": true,
+   "hasBody": false
+  },
+  {
+   "method": "GET",
+   "url": "https://ep1.adtrafficquality.google/pagead/sodar?id=sodar2&v=255&t=2&li=gda_r20260902&jk=2700477083901880&bg=!wMOlw6HNAAYb2RKDO9k7AEcBe5WfOMQcwD_Sn7cEsDfgi3di9X2GRX0esujF1TRpFmzVEp9i0OSrmUSZcj43GeRV5zCWmhBejBET3jgXUQMdDC_r1wdicgIAAAEGUgAAAAZoAQd-ADa7kinuyN-RSQcnPB-KNr5zWd8aGlZZFLk9GEllz8bT3RdEkbGQ6BUkpuOsMV8O_UT-CjpH2dCZAoPqWZmN8JkWmvpfaJnkFr_WujI7y-I0NGzD0JssBE0vGx3OpWd10mpdoHP3gJR0sSjBcWxk9uHLNd1eiI8Hd-cTKj6F91_0y_xx3BfPj0kOBChh7wBBiW8IVoiig5XkV4DvaIBQM-QFa-Ry5pvFlwovwNhL-EkCUIB59rtb9CLJ1KVMEdx8zF8jRY8qSw_fIstlaVJyaEmgJ0Q0vN9BUzyhAneVkde6-JzM_3MzVtsVwsbXZir0Sc_dAUtKwvp9_Piz2NOZvIXN0fBQtTQ0q2B-_xDLogtMoiqqZv65h5KtCTYNXfXOgwkuvVQQ6pQ6Gzv5zkPeHgKNuH1ZYijapj49ZvQHRgDbZ3cBxJjrwgwijRmeqZ9RNytgqTOEun_aLhXWdM2-IauLNcBfPEZCp3fd6l489kkD_PDlNv9pHQXMCKBwHK98jhchSJnL-RsZKeL4CFpTeDCoa0oWFJPlQeUt5BW5yXQmRHrNXAdzRSl6lNReYVCFQV8pmG3AO2oHtgQs8-Zf2n678XrrOs4lKOUuHzpg-JkwuwEAmId_xVstpiWyz4Lb43G9YBgDCzhA07Q3ipfv6IkOwSwBndmADo9nHjT-P7qUVJZOdly3TpRU3HPnzY-cgotWua29KG1Yw75HQpZlYYPMWDCUE51TbP-GXsKWL2WI_xLqVSx509mS4lSqoHUh3HVgDpApMDaIHOMZhJqSTCVDNP1gXF4S8QpM37QcR6VvCWXAuRUdCK1BWZ9oMLJG-J7_5z0b91aUlws87wgnrkeD2hv6NWwfndIy8Ukjd_soZ2yQdf9utd1EM9O4Rekc5u246o4uUS7Ci1etnlIuy7WJQlQVO7QD-qIremDA",
+   "prefetch": false,
+   "ads": true,
    "hasBody": false
   }
  ]

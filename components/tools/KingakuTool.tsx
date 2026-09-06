@@ -70,7 +70,7 @@ export default function KingakuTool() {
       <section className="kg-card kg-answer" aria-labelledby="kg-answer-heading">
         <h2 id="kg-answer-heading" className="kg-sr">計算の結果</h2>
         <div className="kg-big" aria-live="polite">
-          <p className="kg-y">{result.known ? <>年 {num(yearly(result.total))}<small>円</small></> : "年 —"}<span className="kg-m-inline">月 <b>{result.known ? `約${num(approx100(monthly(result.total)))}円` : "—"}</b></span></p>
+          <p className="kg-y"><span>{result.known ? <>年 {num(yearly(result.total))}<small>円</small></> : "年 —"}</span><span className="kg-m-inline">月 <b>{result.known ? `約${num(approx100(monthly(result.total)))}円` : "—"}</b></span></p>
           <p className="kg-pay">偶数月の15日に、前2か月分{result.known ? `(約${num(approx100(bimonthly(result.total)))}円)` : ""}が振り込まれます。15日が土日祝なら前の平日です。</p>
           <p className="kg-caption">{caption}</p>
         </div>

@@ -21,13 +21,14 @@ const KAISHO_CHECKED = "2026-09-06";
 const SEARCH_MAX = 10;
 
 /* 市区町村名の検索(B-1-1)。全件を1つの配列にしてメモ化し、前方一致 → 部分一致の順に最大10件。
-   データは client.json にあるものだけ(新しいファイルは作らない)。政令市は区で持っているので「札幌」で区が並ぶ。 */
+   1文字のとき(「堺」など)は前方一致だけ。データは client.json にあるものだけ(新しいファイルは作らない)。
+   政令市は区で持っているので「札幌」で区が並ぶ。郡は使わず、町村名で引く。 */
 type Muni = { pref: string; code: string; name: string };
 function searchMunicipalities(all: Muni[], query: string): Muni[] {
   const q = query.trim();
-  if (q.length < 2) return [];
+  if (q.length < 1) return [];
   const starts = all.filter((m) => m.name.startsWith(q));
-  const includes = all.filter((m) => !m.name.startsWith(q) && m.name.includes(q));
+  const includes = q.length < 2 ? [] : all.filter((m) => !m.name.startsWith(q) && m.name.includes(q));
   return [...starts, ...includes].slice(0, SEARCH_MAX);
 }
 /* 市区町村の国民年金窓口は機構のデータに無いので、検索URLへのリンクだけ(地図と同じ扱い)。 */
@@ -85,7 +86,7 @@ export default function MadoguchiTool() {
           <label className="md-label" htmlFor="md-search">市区町村名で探す</label>
           <input type="search" id="md-search" className="md-search" placeholder="市区町村名(例: 旭川、世田谷、堺)" autoComplete="off"
             value={query} onChange={(e) => setQuery(e.target.value)} aria-describedby="md-search-note" />
-          {query.trim().length >= 2 && (
+          {query.trim().length >= 1 && (
             hits.length > 0 ? (
               <ul className="md-hits" aria-label="候補">
                 {hits.map((m) => (
@@ -96,7 +97,7 @@ export default function MadoguchiTool() {
               </ul>
             ) : <p className="md-note md-note-tight" id="md-search-note">見つかりません。町村は町村名で、政令指定都市は区の名前でも探せます。下の一覧からも選べます。</p>
           )}
-          {query.trim().length < 2 && <p className="md-hint" id="md-search-note">2文字以上で候補が出ます。押すと管轄の年金事務所が出ます。</p>}
+          {query.trim().length < 1 && <p className="md-hint" id="md-search-note">打つと候補が出ます。押すと管轄の年金事務所が出ます。</p>}
           <details className="md-select-fold" open={!!pref && !code}>
           <summary>一覧から選ぶ</summary>
           <div className="md-grid2">

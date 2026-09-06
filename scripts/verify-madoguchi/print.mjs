@@ -97,7 +97,7 @@ const network = [];
 mp.on("request", (r) => {
   const u = r.url();
   if (/\/_next\/static\//.test(u) || u === url) return;
-  network.push({ method: r.method(), url: u, prefetch: /[?&]_rsc=/.test(u) || /\/icon\.png|favicon/.test(u), hasBody: !!r.postData() });
+  network.push({ method: r.method(), url: u, prefetch: /[?&]_rsc=/.test(u) || /\/icon\.png|favicon/.test(u), ads: /googlesyndication\.com|doubleclick\.net|adtrafficquality\.google|google\.com\/recaptcha/.test(u), hasBody: !!r.postData() });
 });
 await mp.goto(url);
 await mp.locator("#md-search").waitFor();
@@ -116,4 +116,4 @@ server.kill("SIGTERM");
 writeFileSync(out, `${JSON.stringify({ generatedAt: new Date().toISOString(), cases, mobile, network }, null, 1)}\n`);
 for (const c of cases) console.log(`${c.name}: ${c.pages}ページ / ${c.contentMm}mm / 窓口${c.office} 予約${c.yoyaku} 持ち物${c.mochimono} 聞くこと${c.ask} / 地名${c.pickedOnPrint} 選択欄${c.selectsOnPrint} / 割れた項目 ${c.splitItems.length}`);
 console.log(`375px: ${mobile.scrollWidth}/${mobile.clientWidth} はみ出し ${mobile.overflowing}`);
-console.log(`通信: 先読み以外 ${network.filter((n) => !n.prefetch).length} / 先読み・アイコン ${network.filter((n) => n.prefetch).length}`);
+console.log(`通信: 先読み・広告以外 ${network.filter((n) => !n.prefetch && !n.ads).length} / 先読み・アイコン ${network.filter((n) => n.prefetch).length} / 広告(全ページ共通) ${network.filter((n) => n.ads).length}`);
