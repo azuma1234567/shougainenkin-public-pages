@@ -6,25 +6,29 @@ import Link from "next/link";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import { extractHubFaqs, getHubContent } from "@/lib/hub-content";
 import { faqJsonLd } from "@/lib/seo";
-import { hubColumnSlugs, type HubDefinition } from "@/lib/hubs";
+import { hubColumnSlugs, type HubDefinition, HUBS } from "@/lib/hubs";
 import { getColumn } from "@/lib/columns";
 
 const siblingLinks: Record<string, string[]> = {
-  "/byoki/tounyou": ["/byoki/jinzou-touseki"],
-  "/byoki/jinzou-touseki": ["/byoki/tounyou"],
-  "/byoki/shinzou": ["/byoki/shitai"],
+  "/byoki/utsu-soukyoku": ["/byoki/tougou"],
+  "/byoki/tekiou-fuan": ["/byoki/tougou", "/byoki/izon"],
+  "/byoki/tougou": ["/byoki/izon"],
+  "/byoki/tounyou": ["/byoki/jinzou-touseki", "/byoki/shikaku"],
+  "/byoki/jinzou-touseki": ["/byoki/tounyou", "/byoki/shinzou"],
+  "/byoki/shinzou": ["/byoki/shitai", "/byoki/kokyuuki"],
+  "/byoki/shitai": ["/byoki/nanbyou"],
   "/byoki/chiteki": ["/byoki/hattatsu"],
   "/byoki/hattatsu": ["/byoki/chiteki"],
   "/byoki/ninchishou": ["/byoki/koujinou"],
-  "/byoki/koujinou": ["/byoki/ninchishou", "/byoki/gengo", "/byoki/shitai"],
-  "/byoki/gengo": ["/byoki/koujinou"],
+  "/byoki/koujinou": ["/byoki/ninchishou", "/byoki/gengo", "/byoki/nanbyou"],
+  "/byoki/gengo": ["/byoki/koujinou", "/byoki/choukaku"],
   "/byoki/kanzou": ["/byoki/gan"],
   "/byoki/gan": ["/byoki/kanzou", "/byoki/ketsueki"],
-  "/byoki/ketsueki": ["/byoki/gan"],
+  "/byoki/ketsueki": ["/byoki/gan", "/byoki/kokyuuki"],
   "/byoki/kokyuuki": ["/byoki/shinzou"],
-  "/byoki/shikaku": ["/byoki/tounyou"],
-  "/byoki/choukaku": ["/byoki/gengo"],
-  "/byoki/nanbyou": ["/byoki/shitai"],
+  "/byoki/shikaku": ["/byoki/tounyou", "/byoki/choukaku"],
+  "/byoki/choukaku": ["/byoki/gengo", "/byoki/shikaku"],
+  "/byoki/nanbyou": ["/byoki/shitai", "/byoki/ninchishou", "/byoki/tenkan"],
 };
 const siblingLabels: Record<string, string> = {
   "/byoki/tounyou": "糖尿病", "/byoki/jinzou-touseki": "腎臓病・人工透析",
@@ -67,7 +71,7 @@ export default function HubLanding({ hub }: { hub: HubDefinition }) {
       />
       {hub.kind !== "erabu" ? <HubGokai hubPath={hub.path} /> : null}
       {siblingLinks[hub.path]?.length ? <nav className="hub-sibling-links" aria-label="関連する病名ハブ">
-        {siblingLinks[hub.path].map((path) => <Link key={path} href={path}>{siblingLabels[path]} →</Link>)}
+        {siblingLinks[hub.path].map((path) => <Link key={path} href={path}>{siblingLabels[path] ?? HUBS.find((item) => item.path === path)?.shortLabel ?? path} →</Link>)}
       </nav> : null}
       {themeColumns.length > 0 ? <section className="related-columns hub-theme-columns">
         <h2>このテーマの記事</h2>

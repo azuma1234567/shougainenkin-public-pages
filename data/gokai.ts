@@ -450,7 +450,8 @@ export const GOKAI: GokaiCard[] = [
       "日本年金機構「障害年金ガイド」 ・ 確認日 2026-08-31"
     ],
     "hubs": [
-      "/nayami/shindansho-komatta"
+      "/nayami/shindansho-komatta",
+      "/nayami/sokyuu"
     ],
     "category": "手続き",
     "check": [
@@ -503,7 +504,8 @@ export const GOKAI: GokaiCard[] = [
       "厚生労働省 被扶養者認定の収入基準に関する通知 ・ 確認日 2026-08-31"
     ],
     "hubs": [
-      "/okane/ikura"
+      "/okane/ikura",
+      "/joukyou/shufu-mushoku"
     ],
     "category": "受給後",
     "check": [
@@ -530,7 +532,9 @@ export const GOKAI: GokaiCard[] = [
       "国民年金法・厚生年金保険法(納付要件、第3号被保険者、支給停止事由、二階建て、事後重症の年齢要件) ・ 確認日 2026-08-31"
     ],
     "hubs": [
-      "/okane/ikura"
+      "/okane/ikura",
+      "/joukyou/65sai-ijou",
+      "/nayami/sokyuu"
     ],
     "category": "制度の入口",
     "check": [
@@ -560,7 +564,8 @@ export const GOKAI: GokaiCard[] = [
       "国民年金法・厚生年金保険法(納付要件、第3号被保険者、支給停止事由、二階建て、事後重症の年齢要件) ・ 確認日 2026-08-31"
     ],
     "hubs": [
-      "/okane/ikura"
+      "/okane/ikura",
+      "/joukyou/shoubyou-teatekin-kara"
     ],
     "category": "お金",
     "check": [
@@ -1256,7 +1261,8 @@ export const GOKAI: GokaiCard[] = [
       "特別障害者手当・障害児福祉手当・特別児童扶養手当の各法令/特別障害給付金法 ・ 確認日 2026-08-31"
     ],
     "hubs": [
-      "/shinsei"
+      "/shinsei",
+      "/joukyou/gakusei"
     ],
     "category": "制度の入口",
     "check": [
