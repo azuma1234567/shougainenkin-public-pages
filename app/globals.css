@@ -3127,7 +3127,6 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
 .mt-redesign .mt-cross .dougu-cross{grid-template-columns:repeat(2,minmax(0,1fr))}
 .mt-redesign .mt-cross .dougu-band-card{font-size:16px}
 .mt-redesign .mt-actions{align-items:center}
-@media(prefers-color-scheme:dark){.mt-redesign .mt-panel,.mt-example,.mt-hint,.mt-storage{background:var(--background)}.mt-reassurance span,.mt-life label{background:#20313b}.mt-redesign .mt-field input,.mt-redesign .mt-field textarea,.mt-redesign fieldset input:not([type=radio]):not([type=checkbox]){background:#142631;color:#fff}}
 @media(max-width:600px){.mt-redesign{padding-inline:14px}.mt-period-row{grid-template-columns:1fr 1fr}.mt-period-row>span:nth-of-type(2){display:none}.mt-period-row label{grid-column:auto}.mt-redesign .mt-cross .dougu-cross{grid-template-columns:1fr}.mt-date-parts{grid-template-columns:1.5fr 1fr 1fr}.mt-redesign .mt-actions{align-items:flex-start}}
 @media print{.mt-redesign{background:#fff!important;color:#000!important}}
 
