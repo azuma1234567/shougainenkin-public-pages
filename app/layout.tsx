@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Zen_Kaku_Gothic_New, Zen_Old_Mincho } from "next/font/google";
 import "./globals.css";
 import "./platform.css";
@@ -10,6 +11,7 @@ import {
   SITE_URL,
 } from "@/lib/constants";
 import { OG_IMAGE } from "@/lib/seo";
+import { ADSENSE_CLIENT, ADSENSE_ENABLED } from "@/lib/ads";
 
 // 見出し専用の明朝体。本文は現行のシステムゴシックスタックのまま(パフォーマンス優先)。
 const zenOldMincho = Zen_Old_Mincho({
@@ -64,6 +66,18 @@ export default function RootLayout({
       className={`${zenOldMincho.variable} ${zenKakuGothic.variable}`}
     >
       <body>
+        {/* AdSense のサイト所有権確認用。広告ユニットはまだ置いていない
+            (自動広告も管理画面で OFF のまま)。開示の文面は lib/ads.ts の
+            ADSENSE_ENABLED と連動して /privacy 第6条・/terms・/about・
+            フッターに出る。 */}
+        {ADSENSE_ENABLED && (
+          <Script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+        )}
         <SiteHeader />
         <main>{children}</main>
         <YougoAutoLinker />

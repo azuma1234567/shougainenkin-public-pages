@@ -46,7 +46,7 @@ export const LEGAL_VERSION = "2026年8月28日";
 // 公開サイト自身の利用規約・プライバシーポリシー・広告掲載規約・運営者情報の
 // 最終更新日。アプリ側の制定日(LEGAL_VERSION)とは系統が別で、混ぜないこと。
 // サイト側は広告主・解析ツールの変更のたびに改定するため、独立して動かす。
-export const SITE_LEGAL_UPDATED = "2026年9月3日";
+export const SITE_LEGAL_UPDATED = "2026年9月5日";
 
 export const CONTACT_EMAIL = "shougainenkinsupport@gmail.com";
 

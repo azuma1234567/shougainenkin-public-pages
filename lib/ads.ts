@@ -6,7 +6,11 @@
 // 開示漏れになる。導入・停止と同時にここを動かせば、4か所が一度にそろう。
 
 // Google AdSense のタグをサイトに入れたら true にする。
-export const ADSENSE_ENABLED = false;
+export const ADSENSE_ENABLED = true;
+
+// AdSense のパブリッシャーID。app/layout.tsx のスクリプトと public/ads.txt の
+// pub- 番号は、必ずこれと同じものにする。
+export const ADSENSE_CLIENT = "ca-pub-7767241090011854";
 
 // 参加しているアフィリエイト・サービス・プロバイダ(ASP)。
 // 登録していない事業者の名前は書かないこと(/privacy 第7条)。
