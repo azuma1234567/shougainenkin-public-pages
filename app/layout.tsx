@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Zen_Kaku_Gothic_New, Zen_Old_Mincho } from "next/font/google";
 import "./globals.css";
 import "./platform.css";
@@ -69,13 +68,18 @@ export default function RootLayout({
         {/* AdSense のサイト所有権確認用。広告ユニットはまだ置いていない
             (自動広告も管理画面で OFF のまま)。開示の文面は lib/ads.ts の
             ADSENSE_ENABLED と連動して /privacy 第6条・/terms・/about・
-            フッターに出る。 */}
+            フッターに出る。
+            next/script は使わない。App Router の afterInteractive も
+            beforeInteractive も、配信される HTML に script タグを出さず
+            (前者は水和後に差し込み、後者は preload だけ)、審査の
+            「コードが見つかりません」になる。素の <script async> なら
+            React が <head> に持ち上げ、HTML にそのまま出る
+            (指示書 §5-2 の curl 確認)。 */}
         {ADSENSE_ENABLED && (
-          <Script
+          <script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
             crossOrigin="anonymous"
-            strategy="afterInteractive"
           />
         )}
         <SiteHeader />
