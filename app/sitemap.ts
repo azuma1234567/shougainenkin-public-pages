@@ -52,6 +52,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/dougu/shorui",
     "/dougu/madoguchi",
     "/dougu/moushitatesho",
+    "/dougu/kougin",
+    "/dougu/koushin",
   ].map((path) => ({
     url: `${SITE_URL}${path === "/" ? "" : path}`,
     /* 一覧に入れているがハブが中身を持つページ(/byoki/utsu-soukyoku など)は、ハブの日付を使う */

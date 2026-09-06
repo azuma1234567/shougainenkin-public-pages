@@ -6,7 +6,7 @@
    カードはコンポーネント側の挿入で出す。 */
 import { isPublishedInternalPath } from "@/lib/published-links";
 
-export type ToolId = "mitate" | "kingaku" | "shorui" | "madoguchi" | "moushitatesho";
+export type ToolId = "mitate" | "kingaku" | "shorui" | "madoguchi" | "moushitatesho" | "kougin" | "koushin";
 
 export type Tool = {
   id: ToolId;
@@ -87,6 +87,29 @@ export const TOOLS: Record<ToolId, Tool> = {
     title: "申立書の下書きをつくる",
     blurb: "期間ごとに入力し、公式様式に重ねて印刷できます。入力内容はこの端末の中だけに保存します。",
     cta: "申立書をつくる",
+  },
+  /* 受給後の道具2本(docs/dougu-2hon-2026-09-06-instructions.md §A-4・§B-4 の文言そのまま)。 */
+  kougin: {
+    id: "kougin", path: "/dougu/kougin", name: "工賃・賃金と年金の計算",
+    question: "働いたら、年金は減る?",
+    what: "初診日の時期と年収を入れると、20歳前の所得制限の線と、健康保険の扶養の線に当てた結果が出ます。",
+    basis: "日本年金機構が公表している令和8年度の所得制限の基準額と、厚生労働省の被扶養者の認定基準。",
+    basisShort: "令和8年度の基準額に当てはめる",
+    time: "約1分",
+    title: "自分の年収を、国の線に当てる",
+    blurb: "20歳前の所得制限と、健康保険の扶養の線。入力は送信されません。",
+    cta: "年収を当ててみる",
+  },
+  koushin: {
+    id: "koushin", path: "/dougu/koushin", name: "更新カウントダウン",
+    question: "次の更新は、いつ?",
+    what: "年金証書の「次回診断書提出年月」を入れると、用紙が届く時期・現症日の期間・提出期限が日付で出ます。",
+    basis: "日本年金機構が公表している障害状態確認届の送付時期と提出期限の決まり。",
+    basisShort: "機構の公表どおりに日付を計算",
+    time: "約30秒",
+    title: "次の更新まで、あと何日か",
+    blurb: "年金証書の提出年月を入れるだけ。準備の順番も日付つきで出ます。",
+    cta: "更新の日付を出す",
   },
 };
 
@@ -186,4 +209,6 @@ export const TOOL_CROSS_LINKS: Record<ToolId, ToolId[]> = {
   shorui: ["madoguchi", "moushitatesho"],
   moushitatesho: ["madoguchi", "shorui"],
   madoguchi: ["shorui", "moushitatesho"],
+  kougin: ["koushin", "kingaku"],
+  koushin: ["kougin", "mitate"],
 };
