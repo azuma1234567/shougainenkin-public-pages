@@ -6,6 +6,7 @@ import assert from "node:assert/strict";
 import { readFileSync, existsSync } from "node:fs";
 import { AMOUNTS_2026, KINGAKU_2026 as A } from "../data/amounts.ts";
 import { calcKingaku, emptyInput, houshuHirei, kyuufukinMonthly, monthly, yearly } from "../lib/kingaku.ts";
+import { approx100, hyoujunFromNenshu } from "../lib/kingaku-hosoku.ts";
 
 const results = [];
 const check = (id, label, fn) => {
@@ -20,13 +21,19 @@ const TOOL = "components/tools/KingakuTool.tsx";
 const CALC = "lib/kingaku.ts";
 const PAGE = "app/dougu/kingaku/page.tsx";
 const src = (f) => readFileSync(f, "utf8");
-const sources = [TOOL, CALC, PAGE].map((f) => [f, src(f)]);
+const HOSOKU = "lib/kingaku-hosoku.ts";
+const sources = [TOOL, CALC, PAGE, HOSOKU].map((f) => [f, src(f)]);
 
 // 1. /dougu/kingaku が動く。/dougu から行ける。
-check(1, "/dougu/kingaku が存在し、/dougu から行ける", () => {
+// (2026-09-06 に書き換え。/dougu の一覧ページは無く /shinsei へ301するので、
+//  sitemap・公開判定・道具カードの配置(data/dougu.ts)・パンくずの親 /okane で見る)
+check(1, "/dougu/kingaku が存在し、公開導線につながっている", () => {
   assert.ok(existsSync(PAGE), `${PAGE} が無い`);
-  assert.match(src("app/dougu/page.tsx"), /href: "\/dougu\/kingaku"/, "/dougu の一覧に href が無い");
-  return "page.tsx あり / 一覧カードに href あり";
+  assert.match(src("app/sitemap.ts"), /"\/dougu\/kingaku"/, "sitemap に無い");
+  assert.match(src("lib/published-links.ts"), /"\/dougu\/kingaku"/, "公開判定に無い");
+  assert.match(src("data/dougu.ts"), /"kingaku"\]|tool: "kingaku"/, "道具カードの配置に無い");
+  assert.match(src(PAGE), /href: "\/okane", label: "お金"/, "パンくずの親が /okane でない");
+  return "page.tsx あり / sitemap・公開判定・道具カードの配置あり / パンくずの親は /okane";
 });
 
 // 2. 300月みなし(加入120月・平均標準報酬額30万・2級 → 約493,290円)
@@ -117,11 +124,12 @@ check(8, "金額の直書きが0件", () => {
     for (const v of literals) if (text.includes(v)) hits.push(`${file}: ${v}`);
     for (const v of bare) if (new RegExp(`(?<![\\d.])${v}(?![\\d.])`).test(text)) hits.push(`${file}: ${v}`);
     for (const v of ["5.481", "7.125", "1.25", "令和8年度"]) if (text.includes(v)) hits.push(`${file}: ${v}`);
-    if (/minashiMonths|A\.rate|A\.grade1Rate|A\.basic|A\.child|A\.spouse|A\.employees|A\.support|A\.fiscalYear/.test(text) === false && file !== PAGE) hits.push(`${file}: amounts.ts を参照していない`);
+    if (/minashiMonths|A\.rate|A\.grade1Rate|A\.basic|A\.child|A\.spouse|A\.employees|A\.support|A\.fiscalYear/.test(text) === false && file !== PAGE && file !== HOSOKU) hits.push(`${file}: amounts.ts を参照していない`);
   }
   assert.deepEqual(hits, [], `直書き: ${hits.join(" / ")}`);
   assert.match(src(CALC), /from "@\/data\/amounts"/, "lib/kingaku.ts が amounts.ts を読んでいない");
-  return `${literals.length}個の金額・乗率・年度をソース3ファイルで検索して0件`;
+  assert.match(src(PAGE), /FISCAL_YEAR/, "page.tsx が年度を data/amounts.ts から読んでいない");
+  return `${literals.length}個の金額・乗率・年度をソース4ファイルで検索して0件`;
 });
 
 // 9. 内訳表に0円の行も理由つきで出る
@@ -143,6 +151,9 @@ check(10, "§7 の4つの但し書き", () => {
     ["4月改定と年度", /毎年4月に改定[\s\S]*A\.fiscalYear/],
     ["他制度との調整", /調整があります[\s\S]*\/okane\/chousei/],
     ["非課税と扶養認定", /非課税[\s\S]*扶養認定では収入[\s\S]*\/gokai\/hikazei-shuunyuu-zero/],
+    // 2026-09-06 刷新で足した2行
+    ["配偶者加給が止まる条件", /配偶者自身が20年以上[\s\S]*受けている間は止まります/],
+    ["20歳前の所得制限", /所得で止まることがあります[\s\S]*\/dougu\/kougin/],
   ];
   for (const [name, re] of notes) assert.match(text, re, `${name} が無い`);
   return notes.map(([n]) => n).join(" / ");
@@ -168,6 +179,43 @@ check(12, "キーボードだけで操作できる作り", () => {
   assert.match(src("app/globals.css"), /\.kg-chips button:focus-visible/, "フォーカスリングの指定が無い");
   assert.match(src("app/globals.css"), /@media\(max-width:560px\)\{\.kg-grid2\{grid-template-columns:1fr\}/, "375pxの1列指定が無い");
   return `label付きフィールド ${ids.length}個 / チップは <button type="button"> / focus-visible あり`;
+});
+
+// 13. 2026-09-06 刷新(A-4-3・7・8): 答えの箱が最上部、3問、加入月数の説明、「準備中」「あなた」黄色の箱が 0
+check(13, "答えの箱が最上部にあり、3問で近づける。加入月数の説明が「障害認定日の月まで」", () => {
+  const t = src(TOOL), page = src(PAGE);
+  assert.ok(t.indexOf('className="kg-card kg-answer"') < t.indexOf('id="kg-seido-label"'), "答えの箱が3問より下にある");
+  assert.match(t, /aria-live="polite"/, "答えの箱に aria-live が無い");
+  assert.match(t, /偶数月の15日に、前2か月分/, "振込日の1行が無い");
+  assert.match(t, /新しく決まる人の \{GRADE2_SHARE\}% が2級です/, "2級の割合が無い");
+  assert.match(t, /stats\.nintei\["新規裁定・抽出1000件"\]\["合計"\]\["2級"\]\.pct/, "2級の割合を lib/stats.ts から読んでいない");
+  assert.ok(!/53\.9/.test(t), "2級の割合が直書き");
+  for (const q of ["初診日のとき、会社員・公務員でしたか(厚生年金)", "18歳までの子ども", "生計を維持している65歳未満の配偶者"]) assert.ok(t.includes(q), `質問「${q}」が無い`);
+  assert.match(t, /\{spouseActive && \(/, "配偶者の質問が「はい」のときだけになっていない");
+  assert.match(t, /障害認定日\(原則、初診日から1年6か月後\)の月までの、厚生年金に入っていた月数/, "加入月数の説明が「障害認定日の月まで」でない");
+  for (const f of [TOOL, PAGE]) {
+    for (const bad of ["初診日の前月", "準備中", "あなた", "kg-warnbox"]) assert.ok(!src(f).includes(bad), `${f} に「${bad}」がある`);
+  }
+  assert.match(t, /placements=\{\["mitate"\]\}/, "等級の目安をしらべる への道具カードが無い");
+  assert.match(page, /placements=\{\["shorui", "koushin"\]\}/, "ここからできること の道具カードが無い");
+  assert.match(t, /配偶者自身が20年以上/, "配偶者加給が止まる条件が無い");
+  return "答えの箱 → 3問 → 上乗せ → 内訳 の順 / 振込日・2級の割合(stats 経由)/ 加入月数は障害認定日の月まで / 準備中・あなた・黄色の箱 0";
+});
+
+// 14. 年収から: 360万 → 平均標準報酬額 300,000 → #2 と同じ結果
+check(14, "「年収から」が年収÷12を平均標準報酬額として使う", () => {
+  assert.equal(hyoujunFromNenshu(3600000), 300000);
+  assert.equal(hyoujunFromNenshu(null), null);
+  assert.equal(hyoujunFromNenshu(0), null);
+  const viaNenshu = calcKingaku(input({ seido: "kousei", tsuki: 120, hyoujun: hyoujunFromNenshu(3600000) }));
+  const direct = calcKingaku(input({ seido: "kousei", tsuki: 120, hyoujun: 300000 }));
+  assert.equal(yearly(viaNenshu.total), yearly(direct.total));
+  assert.equal(yearly(direct.total), Math.round(A.basicGrade2 + 300000 * A.rateNew * A.minashiMonths), "厚生2級・月30万・120月の合計が合わない");
+  assert.match(src(TOOL), /patch\(\{ hyoujun: hyoujunFromNenshu\(v\) \}\)/, "年収から hyoujun に入れていない");
+  assert.match(src(TOOL), /const switchSalary = \(mode[^)]*\) => \{ setSalaryMode\(mode\); setNenshu\(null\); patch\(\{ hyoujun: null \}\); \}/, "入れ方を切り替えたとき、もう一方の値を消していない");
+  assert.match(src(TOOL), /標準報酬月額と賞与には上限があるため/, "目安の但し書きが無い");
+  assert.equal(approx100(monthly(A.basicGrade2)), Math.round(A.basicGrade2 / 12 / 100) * 100, "月額の「約」の丸めが百円単位でない");
+  return `360万 → ${hyoujunFromNenshu(3600000).toLocaleString("ja-JP")} → 合計 ${yearly(direct.total).toLocaleString("ja-JP")}円(平均標準報酬額から と同じ)/ 切替で消す / 目安の但し書き`;
 });
 
 // 補助: §4-2 の旧・新の分割計算と1級の1.25倍(モックの houshuHirei と一致するか)
