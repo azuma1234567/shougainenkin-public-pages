@@ -1,45 +1,57 @@
 {
- "generatedAt": "2026-09-03T11:25:53.645Z",
+ "generatedAt": "2026-09-06T10:58:08.909Z",
  "a4ContentMm": 273,
  "cases": [
   {
-   "name": "modeA-guides3",
+   "name": "modeA-guides0",
    "mode": "A",
-   "guides": 3,
-   "pages": 2,
-   "screenOnlyVisible": 0,
+   "guides": 0,
+   "withGrade": false,
+   "pages": 1,
+   "gradeInPdf": false,
+   "screenResultVisible": 0,
+   "sheetVisible": 1,
    "hasSource": true,
    "hasPrintHead": true,
-   "contentMm": 377.2,
+   "answerRows": 7,
+   "hitsPrinted": 0,
+   "contentMm": 146.5,
    "tableStartPage": 1,
-   "tableEndPage": 1,
-   "tableHeightMm": 52.2
+   "tableEndPage": 1
   },
   {
    "name": "modeB-guides3",
    "mode": "B",
    "guides": 3,
-   "pages": 2,
-   "screenOnlyVisible": 0,
+   "withGrade": false,
+   "pages": 1,
+   "gradeInPdf": false,
+   "screenResultVisible": 0,
+   "sheetVisible": 1,
    "hasSource": true,
    "hasPrintHead": true,
-   "contentMm": 383.4,
+   "answerRows": 7,
+   "hitsPrinted": 3,
+   "contentMm": 174.7,
    "tableStartPage": 1,
-   "tableEndPage": 1,
-   "tableHeightMm": 52.2
+   "tableEndPage": 1
   },
   {
-   "name": "modeB-guides6",
+   "name": "modeB-guides7-grade",
    "mode": "B",
-   "guides": 6,
-   "pages": 2,
-   "screenOnlyVisible": 0,
+   "guides": 7,
+   "withGrade": true,
+   "pages": 1,
+   "gradeInPdf": true,
+   "screenResultVisible": 0,
+   "sheetVisible": 1,
    "hasSource": true,
    "hasPrintHead": true,
-   "contentMm": 423.9,
+   "answerRows": 7,
+   "hitsPrinted": 6,
+   "contentMm": 201.7,
    "tableStartPage": 1,
-   "tableEndPage": 1,
-   "tableHeightMm": 52.2
+   "tableEndPage": 1
   }
  ]
 }

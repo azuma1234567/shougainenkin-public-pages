@@ -181,32 +181,53 @@ check(12, "禁止語が1つも出ない", () => {
     for (const re of BANNED) if (re.test(text)) hits.push(`${f}: ${re}`);
   }
   assert.deepEqual(hits, [], hits.join(" / "));
-  return `${BANNED.length}パターンをソース6ファイルで検索して0件`;
+  // 2026-09-06 刷新: 「あなた」は道具の全画面と静的本文で0。数字 75.3 は lib/stats.ts 経由(直書き0)。
+  for (const f of [TOOL, PAGE]) {
+    assert.ok(!src(f).includes("あなた"), `${f} に「あなた」がある`);
+    assert.ok(!/75\.3/.test(src(f)), `${f} に 75.3 の直書きがある`);
+  }
+  assert.match(src(TOOL), /stats\.nintei\["精神障害・不支給事案"\]\["上記2区分の合計"\]\["割合"\]\.value/, "不支給の割合を lib/stats.ts から読んでいない");
+  return `${BANNED.length}パターンをソース6ファイルで検索して0件 / 「あなた」0 / 75.3 の直書き0`;
 });
 
-// 13. 結果を A4 2枚以内で印刷でき、出典と主語が載る。目安表を割らない。
-// (§13-13。当初の「1枚」は #10「目安表の全体を常に表示」と両立せず、2026-09-03 に条件を変更)
-check(13, "A4 2枚以内で印刷でき、目安表が割れず、出典と主語が載る", () => {
-  const css = src("app/globals.css");
+// 13. 「主治医に見せる1枚」が A4 1枚に収まり、7項目の正式文言・程度・押した項目・出典が載る。
+// 画面の結果は印刷に出ない。「目安表の位置も載せる」オフのとき等級の文字が紙に出ない。
+// (2026-09-06 刷新 §2-3-8・§5-11。当初の「結果を2枚以内」から条件を変更。目安表の break-inside は残す)
+check(13, "主治医に見せる1枚が A4 1枚で印刷でき、7項目・程度・押した項目・出典が載る", () => {
+  const css = src("app/globals.css"), tool = src(TOOL);
   assert.match(css, /@page\{size:A4;margin:12mm\}/, "A4の指定が無い");
   assert.match(css, /\.mi-printhead\{display:block/, "印刷時の見出しが出ない");
   assert.match(src(PAGE), /国が公表している目安に当てはめた結果です/, "印刷物の主語が無い");
   assert.match(src(PAGE), /このサイトが判定したものではありません。/);
-  assert.match(src(TOOL), /MITATE_SOURCE\.url/, "出典URLが無い");
+  assert.match(tool, /MITATE_SOURCE\.url/, "出典URLが無い");
   assert.match(css, /\.no-print,\.mi-screen-only,\.mi-next-lines\{display:none!important\}/, "画面用要素が印刷から落ちない");
-  assert.match(css, /\.mi-tbl-scroll,table\.mi-gt\{break-inside:avoid/, "目安表に break-inside: avoid が無い");
-  assert.match(css, /\.mi-guide\{break-inside:avoid/, "引用に break-inside: avoid が無い");
+  assert.match(css, /\.mi-result>\*:not\(\.mi-doctor-sheet\)\{display:none!important\}/, "画面の結果が印刷から落ちない");
+  assert.match(css, /\.mi-doctor-sheet\{display:none\}/, "主治医に見せる1枚が画面に出てしまう");
+  assert.match(css, /\.mi-doctor-sheet\{display:block/, "主治医に見せる1枚が印刷に出ない");
+  assert.match(css, /\.mi-ds-table\{[^}]*break-inside:avoid/, "答えの表に break-inside: avoid が無い");
+  assert.match(css, /\.mi-tbl-scroll,table\.mi-gt\{break-inside:avoid/, "目安表の break-inside: avoid を消している");
+  assert.match(tool, /主治医に見せる用に印刷する/, "印刷ボタンの文言が無い");
+  assert.match(tool, /目安表の位置も載せる/, "「目安表の位置も載せる」のチェックが無い");
+  assert.match(tool, /出典: 精神の障害に係る等級判定ガイドライン\(平成28年9月\)。判断の前提: 単身で生活するとしたら可能かどうか\(診断書 記載要領\)/, "紙の末尾の出典が無い");
+  assert.match(tool, /ABILITY_CHOICES\.find\(\(c\) => c\.value === value\)\?\.formal/, "紙に正式文言を載せていない");
+  assert.match(tool, /hits\.map\(\(h\) => <li key=\{h\.id\}>\{h\.question\}<\/li>\)/, "押した項目(mitateGuideHits)を紙に載せていない");
+  assert.ok(!/mi-doctor-sheet[\s\S]*\.quote/.test(tool.slice(tool.indexOf("function DoctorSheet"), tool.indexOf("function GuideBlock"))), "紙に原文引用が載っている");
   const file = "scripts/verify-mitate/fixtures/print.json";
   assert.ok(existsSync(file), `${file} が無い。npm run verify:mitate:print を先に実行する`);
   const measured = JSON.parse(src(file));
   for (const c of measured.cases) {
-    assert.ok(c.pages <= 2, `${c.name}: ${c.pages}ページ(2枚を超えている)`);
+    assert.equal(c.pages, 1, `${c.name}: ${c.pages}ページ(1枚を超えている)`);
+    assert.equal(c.screenResultVisible, 0, `${c.name}: 画面の結果が印刷に出ている(${c.screenResultVisible})`);
+    assert.equal(c.sheetVisible, 1, `${c.name}: 主治医に見せる1枚が印刷に無い`);
     assert.ok(c.hasSource, `${c.name}: 出典が印刷に無い`);
     assert.ok(c.hasPrintHead, `${c.name}: 主語の但し書きが印刷に無い`);
-    assert.equal(c.tableStartPage, c.tableEndPage, `${c.name}: 目安表が ${c.tableStartPage}〜${c.tableEndPage}ページ目にまたがっている`);
+    assert.equal(c.answerRows, 7, `${c.name}: 7項目の答えが ${c.answerRows} 行`);
+    assert.equal(c.hitsPrinted, Math.min(c.guides, 6), `${c.name}: 押した項目 ${c.guides} 件のうち ${c.hitsPrinted} 件が紙に(最大6)`);
+    assert.equal(c.gradeInPdf, c.withGrade, `${c.name}: 等級の文字が紙に ${c.gradeInPdf ? "出ている" : "出ていない"}(チェック ${c.withGrade})`);
+    assert.equal(c.tableStartPage, c.tableEndPage, `${c.name}: 答えの表がページをまたいでいる`);
   }
-  const line = measured.cases.map((c) => `${c.name} ${c.pages}ページ(${c.contentMm}mm)`).join(" / ");
-  return `実測 ${line}。目安表はページをまたがらない / 測定 ${measured.generatedAt}`;
+  const line = measured.cases.map((c) => `${c.name} ${c.pages}ページ(${c.contentMm}mm・押した項目 ${c.hitsPrinted}件・等級の文字 ${c.gradeInPdf ? "あり" : "なし"})`).join(" / ");
+  return `実測 ${line}。画面の結果は印刷に出ない / 測定 ${measured.generatedAt}`;
 });
 
 // 14. localStorage が無効でも入力と結果表示ができる

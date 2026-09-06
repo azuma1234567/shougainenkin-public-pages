@@ -2915,13 +2915,27 @@ table.kg-br{width:100%;margin:8px 0;border-collapse:collapse;font-size:14.5px}ta
 .mi-premise{margin:-14px 0 20px;color:#71808d;font-size:13px;line-height:1.7}
 .mi-answers{display:grid;gap:6px;margin:4px 0 8px}.mi-answers-head,.mi-answer-row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr) 44px;gap:10px;align-items:center;text-align:left}.mi-answers-head{padding:0 12px;color:#71808d;font-size:12px}.mi-answer-row{width:100%;min-height:44px;padding:9px 12px;border:1px solid #cbd5df;border-radius:8px;background:#fff;color:#263746;font:inherit;font-size:14px;line-height:1.6;cursor:pointer}.mi-answer-row:hover,.mi-answer-row:focus-visible{border-color:#0284c7;outline:2px solid #0284c7;outline-offset:1px}.mi-answer-row span:first-child{color:#263746;font-weight:600}.mi-answer-row span:nth-child(2){color:#526575}.mi-answer-row span:last-child{color:#263746;font-weight:700;text-align:center}
 .mi-answers-hint{margin:0 0 6px;color:#71808d;font-size:12px!important}.mi-answers-note{margin:6px 0 0;color:#71808d;font-size:13px!important;line-height:1.7}
-@media(max-width:520px){.mi-card{padding:18px 16px}table.mi-gt{font-size:11.5px}.mi-intro{padding:26px 0 44px}.mi-question-screen{min-height:560px;padding:25px 0 48px}.mi-question{font-size:20px}.mi-result-heading,.mi-result-section{padding:18px 16px}.mi-result-heading h2{font-size:22px}.mi-answers-head,.mi-answer-row{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) 34px;gap:8px;font-size:13px}}
+/* 総合評価の押せる行(.mi-opt と同じ骨格)。押した行は左枠線 3px primary。自動で当たった2件は小さな表示つき。 */
+.mi-guide-list{display:grid;gap:8px;margin:12px 0 4px}.mi-guide-row{border:1px solid #cbd5df;border-left:3px solid #cbd5df;border-radius:8px;background:#fff}.mi-guide-row.is-on,.mi-guide-row.is-auto{border-left-color:#0284c7}.mi-guide-btn{display:flex;gap:12px;align-items:flex-start;width:100%;min-height:48px;padding:12px 14px;border:0;background:transparent;color:#263746;font:inherit;font-size:14.5px;line-height:1.7;text-align:left;cursor:pointer}.mi-guide-btn:hover,.mi-guide-btn:focus-visible{outline:2px solid #0284c7;outline-offset:-2px;border-radius:8px}.mi-guide-mark{flex:none;position:relative;width:18px;height:18px;margin-top:4px;border:1.5px solid #9aa8b4;border-radius:4px}.mi-guide-btn[aria-pressed=true] .mi-guide-mark{border-color:#0284c7;background:#0284c7}.mi-guide-btn[aria-pressed=true] .mi-guide-mark::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}.mi-guide-row .mi-guide{margin:0;padding:0 14px 12px 44px}.mi-guide-row.is-auto{padding:12px 14px}.mi-guide-row.is-auto .mi-guide{padding:0}.mi-guide-q{margin:0 0 6px!important;color:#263746!important;font-size:14.5px!important;font-weight:600}.mi-auto-tag{display:inline-block;margin:0 8px 4px 0;padding:1px 8px;border:1px solid #cbd5df;border-radius:999px;color:#526575;font-size:11.5px;font-weight:400;vertical-align:middle}
+.mi-dougu{margin:14px 0 10px}.mi-print-opt{display:flex;gap:6px;align-items:center;color:#526575;font-size:12px;cursor:pointer}.mi-print-opt input{margin:0;accent-color:#0284c7}
+/* 主治医に見せる1枚。画面では出さない(印刷だけ)。 */
+.mi-doctor-sheet{display:none}
+@media(max-width:520px){.mi-card{padding:18px 16px}table.mi-gt{font-size:11.5px}.mi-intro{padding:26px 0 44px}.mi-question-screen{min-height:560px;padding:25px 0 48px}.mi-question{font-size:20px}.mi-result-heading,.mi-result-section{padding:18px 16px}.mi-result-heading h2{font-size:22px}.mi-answers-head,.mi-answer-row{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) 34px;gap:8px;font-size:13px}.mi-guide-row .mi-guide{padding-left:14px}}
 @media print{
-  /* 診察に持っていく紙。載せるのは 目安(目安表を含む)・総合評価・留保・出典 の4つだけ。
-     「数字で見る実際」と「ここからできること」は画面用の導線なので落とす。
-     目標は A4 2枚以内。1枚に詰め込むと目安表が読めなくなる
-     (docs/mitate-tool-design-2026-09-02.md §13-13、2026-09-03に条件を変更)。 */
+  /* 主治医に見せる1枚(2026-09-06 刷新)。画面の結果は落とし、.mi-doctor-sheet だけを A4 1枚に出す。
+     載せるのは 7項目の正式文言・全体の程度・押した総合評価の項目・出典。原文引用と目安表は載せない
+     (docs/mitate-sasshin-2026-09-06-instructions.md §2-3-8)。.mi-printhead(主語の1行)は残す。 */
   .no-print,.mi-screen-only,.mi-next-lines{display:none!important}
+  .mi-result>*:not(.mi-doctor-sheet){display:none!important}
+  .mi-doctor-sheet{display:block;color:#000;font-size:10pt;line-height:1.6}
+  .mi-doctor-sheet h2{margin:0 0 4pt;font-size:14pt;line-height:1.4}
+  .mi-ds-meta{margin:0 0 8pt;font-size:9pt;color:#333}
+  .mi-ds-table{width:100%;margin:0 0 8pt;border-collapse:collapse;break-inside:avoid;page-break-inside:avoid}
+  .mi-ds-table th,.mi-ds-table td{padding:5pt 6pt;border:1px solid #666;text-align:left;font-size:10pt;vertical-align:top}
+  .mi-ds-table thead th{background:#eee;font-weight:700}.mi-ds-table tbody th{width:38%;font-weight:600}
+  .mi-ds-line{margin:6pt 0;font-size:10pt}.mi-ds-line b{display:block;font-weight:700}.mi-ds-line ul{margin:2pt 0 0;padding-left:1.4em}.mi-ds-line li{margin:1pt 0}
+  .mi-ds-grade{padding:4pt 6pt;border:1px solid #666}
+  .mi-ds-src{margin:10pt 0 0;padding-top:4pt;border-top:1px solid #999;font-size:8.5pt;color:#333}
   .mi-page{background:#fff}
   .mi-main{padding:0}
   .mi-printhead{display:block;margin:0 0 8pt;color:#000;font-size:9.5pt;line-height:1.55}

@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { MITATE_ABILITY_ITEMS, MITATE_AVERAGE_BANDS, MITATE_DEGREE_CHOICES, MITATE_GRADE_TABLE, MITATE_GUIDE_COMMON, MITATE_SOURCE, type MitateAbilityValue, type MitateDegree, type MitateGuideItem, type MitateKind } from "@/data/mitate";
-import { emptyMitateState, isNearBoundary, mitateAverage, mitateBandLabel, mitateGuideSet, mitateLookup, type MitateState } from "@/lib/mitate";
+import { DouguCards } from "@/components/platform/DouguCard";
+import { MITATE_ABILITY_ITEMS, MITATE_AVERAGE_BANDS, MITATE_DEGREE_CHOICES, MITATE_GRADE_TABLE, MITATE_GUIDE_AUTO, MITATE_SOURCE, type MitateAbilityValue, type MitateDegree, type MitateGuideItem, type MitateKind } from "@/data/mitate";
+import { emptyMitateState, hasBias, isNearBoundary, mitateAverage, mitateBandLabel, mitateGuideHits, mitateGuideSet, mitateLookup, type MitateState } from "@/lib/mitate";
 import { saveMitate } from "@/lib/mitate-storage";
+import { stats } from "@/lib/stats";
 
 const QUESTIONS = [
   ["食事は、自分で用意して食べられていますか", "適切な食事"],
@@ -43,8 +45,6 @@ const PREMISE_LINE = "ひとりで暮らすとしたら、を前提に。家族�
 export default function MitateTool() {
   const [state, setState] = useState<MitateState>(emptyMitateState);
   const [step, setStep] = useState(0);
-  const [diagnosis, setDiagnosis] = useState("");
-  const [diagnosisSelected, setDiagnosisSelected] = useState(false);
   const [shindansho, setShindansho] = useState(false);
   /* 結果の「答えの一覧」から1問だけ戻ったとき true。選び直すと結果へ直行する。 */
   const [revisit, setRevisit] = useState(false);
@@ -87,11 +87,11 @@ export default function MitateTool() {
 
   if (step === 9) return <QuestionShell onBack={() => back(8)}>
     <h2 className="mi-question">診断名に近いものはありますか</h2><p className="mi-formal-name">ガイドラインが、診断名ごとに見るところを出すために使います</p>
-    <div className="mi-answer-list mi-diagnoses" role="group" aria-label="診断名に近いものはありますか">{DIAGNOSES.map((choice) => <button type="button" key={choice.label} onClick={() => { setDiagnosis(choice.label); setDiagnosisSelected(true); patch({ kind: choice.kind }); move(10); }}><strong>{choice.label}</strong></button>)}</div>
-    <button type="button" className="mi-skip-large" onClick={() => { setDiagnosis(""); setDiagnosisSelected(false); patch({ kind: undefined }); move(10); }}>飛ばす</button>
+    <div className="mi-answer-list mi-diagnoses" role="group" aria-label="診断名に近いものはありますか">{DIAGNOSES.map((choice) => <button type="button" key={choice.label} onClick={() => { patch({ kind: choice.kind }); move(10); }}><strong>{choice.label}</strong></button>)}</div>
+    <button type="button" className="mi-skip-large" onClick={() => { patch({ kind: undefined }); move(10); }}>飛ばす</button>
   </QuestionShell>;
 
-  return <Result state={state} shindansho={shindansho} diagnosis={diagnosis} diagnosisSelected={diagnosisSelected} onRevisit={(index) => { setRevisit(true); move(index + 1); }} />;
+  return <Result state={state} shindansho={shindansho} onRevisit={(index) => { setRevisit(true); move(index + 1); }} onGuide={(id, on) => { const guide = { ...state.guide }; if (on) guide[id] = true; else delete guide[id]; patch({ guide }); }} />;
 }
 
 function QuestionShell({ progress, onBack, children }: { progress?: string; onBack: () => void; children: React.ReactNode }) {
@@ -104,11 +104,15 @@ function nearestBoundary(average: number): number {
     .reduce((best, min) => (Math.abs(average - min) < Math.abs(average - best) ? min : best));
 }
 
-function Result({ state, shindansho, diagnosis, diagnosisSelected, onRevisit }: { state: MitateState; shindansho: boolean; diagnosis: string; diagnosisSelected: boolean; onRevisit: (index: number) => void }) {
-  const [expanded, setExpanded] = useState(false), [saved, setSaved] = useState(false);
+function Result({ state, shindansho, onRevisit, onGuide }: { state: MitateState; shindansho: boolean; onRevisit: (index: number) => void; onGuide: (id: string, on: boolean) => void }) {
+  const [saved, setSaved] = useState(false), [withGrade, setWithGrade] = useState(false);
   const average = mitateAverage(state), lookup = mitateLookup(state), band = lookup.kind === "none" ? null : lookup.band;
-  const guides = (diagnosisSelected && diagnosis !== "その他・わからない" ? mitateGuideSet(state.kind) : MITATE_GUIDE_COMMON).slice(0, 6);
-  const visibleGuides = expanded ? guides : guides.slice(0, 3);
+  /* 共通8 + 診断名別。診断名を飛ばしたら共通8だけ(mitateGuideSet は kind 未指定を精神として扱うので、ここで絞る)。 */
+  const guides = state.kind ? mitateGuideSet(state.kind) : mitateGuideSet(state.kind).filter((g) => /^g\d/.test(g.id));
+  const autoGuides = [...(lookup.kind === "blank" ? [MITATE_GUIDE_AUTO.gap] : []), ...(hasBias(state) ? [MITATE_GUIDE_AUTO.bias] : [])];
+  const pressed = guides.filter((g) => state.guide[g.id]);
+  const hits = mitateGuideHits(state, lookup);
+  const rejectedPct = stats.nintei["精神障害・不支給事案"]["上記2区分の合計"]["割合"].value;
   const heading = lookup.kind === "found" ? `国の目安表では、この組み合わせは「${lookup.grade}」のところにあります。` : lookup.kind === "blank" ? "国の目安表では、この組み合わせに目安が定められていません。" : "国の目安表に当てはめるには、7項目の回答と全体の程度が必要です。";
   const avg = average.value, unanswered = average.total - average.answered;
   return <div className="mi-result">
@@ -125,12 +129,22 @@ function Result({ state, shindansho, diagnosis, diagnosisSelected, onRevisit }: 
     </section>
     <section className="mi-result-section"><h3>答えは、表のここ</h3><p>行が7項目の平均、列が全体の程度です</p><div className="mi-tbl-scroll"><table className="mi-gt"><thead><tr><th>判定平均</th>{[1,2,3,4,5].map((degree) => <th key={degree}>程度({degree})</th>)}</tr></thead><tbody>{MITATE_AVERAGE_BANDS.map((row) => <tr key={row.label}><th scope="row">{row.label}</th>{[1,2,3,4,5].map((degree) => { const value = MITATE_GRADE_TABLE[row.label][degree - 1], hit = row.label === band && degree === state.degree; return <td key={degree} className={hit ? "mi-hit" : value === null ? "mi-na" : ""} aria-current={hit ? "true" : undefined}>{value === null ? "—" : value}</td>; })}</tr>)}</tbody></table></div></section>
     <section className="mi-result-section"><h3>これが意味すること</h3>{meaningLines(lookup).map((line) => <p key={line}>{line}</p>)}</section>
-    <section className="mi-result-section mi-next-lines"><h3>もし申請するなら、次に</h3>{shindansho ? <><Link href="/dougu/shorui">→ 何をそろえればいい？</Link><Link href="/dougu/moushitatesho">→ 申立書を、自分で書きたい</Link><Link href="/nayami/shindansho-komatta">→ 診断書で困ったとき</Link></> : <><Link href="/hajimete">→ はじめての方へ</Link><Link href="/nayami/shoshinbi-karute">→ 初診日がわからないとき</Link><Link href="/shinsei">→ 申請の流れ</Link></>}</section>
-    <section className="mi-result-section"><h3>診断書では、ここも見られます</h3>{visibleGuides.map((item) => <GuideBlock key={item.id} item={item} />)}{!expanded && guides.length > 3 && <button type="button" className="mi-more" onClick={() => setExpanded(true)}>もっと見る</button>}</section>
+    <section className="mi-result-section mi-screen-only"><h3>数字で見る</h3><p>目安表の位置は保証ではありません。令和6年度の調査では、精神の障害で不支給になった事案のうち {rejectedPct}% が、目安表の位置より下の結論でした。診断書に生活の実態が載っているかで、同じ位置でも結論が分かれます。</p><p><Link href="/suuji">→ 数字で見る障害年金</Link></p></section>
+    <section className="mi-result-section"><h3>ガイドラインが、ほかに見るところ</h3><p>当てはまるものがあれば押してください。ガイドラインの原文が出ます。点数にはしません。</p>
+      <div className="mi-guide-list">
+        {autoGuides.map((item) => <div key={item.id} className="mi-guide-row is-auto"><p className="mi-guide-q"><span className="mi-auto-tag">答えから自動で当たりました</span>{item.question}</p><GuideBlock item={item} /></div>)}
+        {guides.map((item) => { const on = !!state.guide[item.id]; return <div key={item.id} className={`mi-guide-row ${on ? "is-on" : ""}`}><button type="button" className="mi-guide-btn" aria-pressed={on} onClick={() => onGuide(item.id, !on)}><span className="mi-guide-mark" aria-hidden="true" /><span>{item.question}</span></button>{on && <GuideBlock item={item} />}</div>; })}
+      </div>
+      {pressed.length > 0 && <p className="mi-answers-note">押したことが、診断書と申立書に事実として書かれているかを確認してください。書かれていなければ、審査には届きません。</p>}
+    </section>
+    <section className="mi-result-section mi-next-lines"><h3>もし申請するなら、次に</h3>{shindansho ? <><Link href="/dougu/shorui">→ 何をそろえればいい？</Link><Link href="/dougu/moushitatesho">→ 申立書を、自分で書きたい</Link><Link href="/nayami/shindansho-komatta">→ 診断書で困ったとき</Link></> : <><Link href="/hajimete">→ はじめての方へ</Link><Link href="/nayami/shoshinbi-karute">→ 初診日がわからないとき</Link><Link href="/shinsei">→ 申請の流れ</Link></>}
+      <div className="dougu-band mi-dougu"><DouguCards placements={shindansho ? ["moushitatesho", "madoguchi"] : ["shorui", "moushitatesho"]} variant="grid" /></div>
+      <Link href="/columns/nichijo-seikatsu-7koumoku">→ 7項目は、こう書かれる</Link><Link href="/columns/shindansho-tanomikata">→ 診断書の頼み方</Link>
+    </section>
     <p className="mi-calm-note">{shindansho ? "診断書の記載をそのまま当てはめた結果です。" : "この結果は、本人の答えから出しています。実際の審査は医師の診断書をもとに行われるので、違う結果になることがあります。"}</p>
-    <section className="mi-result-actions no-print"><div><button type="button" onClick={() => setSaved(saveMitate(state))}>この結果を、この端末に残す</button><small>共用のパソコンでは押さないでください</small></div><button type="button" onClick={() => window.print()}>印刷する</button>{saved && <p role="status">この端末に残しました</p>}</section>
-    <section className="mi-result-section"><h3>出典</h3><p className="mi-src">{MITATE_SOURCE.name} 表1「障害等級の目安」/ 第3「総合評価」<br /><a href={MITATE_SOURCE.url}>{MITATE_SOURCE.url}</a><br />このサイトが判定したものではなく、国が公表している表に当てはめた結果です。</p></section>
-    <p className="mi-screen-only"><Link href="/suuji">→ 数字で見る障害年金</Link></p>
+    <section className="mi-result-actions no-print"><div><button type="button" onClick={() => setSaved(saveMitate(state))}>この結果を、この端末に残す</button><small>共用のパソコンでは押さないでください</small></div><div><button type="button" onClick={() => window.print()}>主治医に見せる用に印刷する</button><label className="mi-print-opt"><input type="checkbox" checked={withGrade} onChange={(e) => setWithGrade(e.target.checked)} />目安表の位置も載せる</label></div>{saved && <p role="status">この端末に残しました</p>}</section>
+    <section className="mi-result-section"><h3>出典</h3><p className="mi-src">{MITATE_SOURCE.name} 表1「障害等級の目安」/ 第3「総合評価」<br /><a href={MITATE_SOURCE.url}>{MITATE_SOURCE.url}</a><br />日本年金機構 診断書(精神の障害用)様式第120号の4 記載要領(単身で生活するとしたら可能かどうかで判断)<br />このサイトが判定したものではなく、国が公表している表に当てはめた結果です。</p></section>
+    <DoctorSheet state={state} hits={hits} grade={withGrade && lookup.kind === "found" ? lookup.grade : null} />
   </div>;
 }
 
@@ -139,6 +153,22 @@ function meaningLines(lookup: ReturnType<typeof mitateLookup>): string[] {
   if (lookup.kind === "found" && ["1級", "2級", "1級又は2級"].includes(lookup.grade)) return ["国の表の上では、障害年金の対象になりうる位置です。", "次に必要なのは、初診日(その症状で最初に医師にかかった日)と、診断書を書いてもらえる医師です。", "初診日が国民年金でも厚生年金でも、1級・2級は対象です。"];
   if (lookup.kind === "found") return ["初診日に厚生年金に入っていたなら、3級があります。", "初診日が国民年金のときは3級が無いので、2級に当たるかどうかが分かれ目になります。", "分かれ目は、診断書に生活の実態がどれだけ書かれているかです。"];
   return ["7項目の回答と全体の程度を選ぶと、国の目安表に当てはめられます。"];
+}
+
+/* 主治医に見せる1枚。画面では出さず、印刷のときだけ A4 1枚に出す(app/globals.css の @media print)。
+   載せるのは 7項目の正式文言・全体の程度・押した総合評価の項目(最大6)・出典。原文引用は載せない。 */
+function DoctorSheet({ state, hits, grade }: { state: MitateState; hits: MitateGuideItem[]; grade: string | null }) {
+  const today = new Date(), date = `${today.getFullYear()}年${today.getMonth() + 1}月${today.getDate()}日`;
+  const degree = MITATE_DEGREE_CHOICES.find((c) => c.value === state.degree);
+  return <section className="mi-doctor-sheet" aria-hidden="true">
+    <h2>日常生活の状態(本人の記録)</h2>
+    <p className="mi-ds-meta">{date} / 障害年金申請サポート /dougu/mitate で本人が答えたもの</p>
+    <table className="mi-ds-table"><thead><tr><th>日常生活能力の判定</th><th>本人の答え</th></tr></thead><tbody>{MITATE_ABILITY_ITEMS.map((item) => { const value = state.ability[item.id]; return <tr key={item.id}><th scope="row">{item.label}</th><td>{value ? ABILITY_CHOICES.find((c) => c.value === value)?.formal : ""}</td></tr>; })}</tbody></table>
+    <p className="mi-ds-line"><b>日常生活能力の程度</b> {degree ? degree.label : ""}</p>
+    {hits.length > 0 && <div className="mi-ds-line"><b>ガイドラインの総合評価で、当てはまると本人が押した項目</b><ul>{hits.map((h) => <li key={h.id}>{h.question}</li>)}</ul></div>}
+    {grade && <p className="mi-ds-line mi-ds-grade">国の目安表では「{grade}」の位置(本人の答えを当てはめたもの。等級の判定ではない)</p>}
+    <p className="mi-ds-src">出典: 精神の障害に係る等級判定ガイドライン(平成28年9月)。判断の前提: 単身で生活するとしたら可能かどうか(診断書 記載要領)</p>
+  </section>;
 }
 
 function GuideBlock({ item }: { item: MitateGuideItem }) { return <div className="mi-guide"><blockquote className="mi-quote">{item.quote}</blockquote><p className="mi-qsrc">{MITATE_SOURCE.name} {item.source}</p></div>; }
