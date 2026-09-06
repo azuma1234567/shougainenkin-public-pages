@@ -532,6 +532,7 @@
 .p-learning { padding: 10px 12px; border-radius: 8px; background: var(--platform-band); color: var(--platform-link); font-size: 12px; line-height: 1.7; }
 
 /* 申請の流れ 8ステップ。1行に 1→8 を横に並べ、道具カードはそのステップの真下。
+   道具カードはトップだけ。/shinsei は tools={false} で外し、本文のステップカードの中に出す(2026-09-06)。
    DOM の順序は常に 1→8 で、並びは grid だけで変える。
    線の制御は [data-n="N"] で当てる(2026-09-05 に上の区切りは削除した)。 */
 .step-flow { list-style: none; margin: 26px 0 0; padding: 0; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: 12px; row-gap: 14px; }

@@ -14,10 +14,12 @@ export const STEPS = [
   { title: "結果を待つ", split: 3 },
 ] as const;
 
-function Node({ step, index }: { step: (typeof STEPS)[number]; index: number }) {
+/* tools=false のときは道具カードを求めず、has-tool も .step-flow-tool も描かない(/shinsei 用。
+   docs/shinsei-stepflow-2026-09-06-instructions.md §1-1)。トップは既定の true のまま。 */
+function Node({ step, index, tools }: { step: (typeof STEPS)[number]; index: number; tools: boolean }) {
   const n = index + 1;
   const stepId = `step-${n}`;
-  const placement = visiblePlacements(PLACEMENTS.shinseiSteps[stepId])[0];
+  const placement = tools ? visiblePlacements(PLACEMENTS.shinseiSteps[stepId])[0] : undefined;
   const card = placement ? placementCard(placement) : null;
   const head = step.title.slice(0, step.split);
   const tail = step.title.slice(step.split);
@@ -39,10 +41,10 @@ function Node({ step, index }: { step: (typeof STEPS)[number]; index: number }) 
   );
 }
 
-export default function StepFlow() {
+export default function StepFlow({ tools = true }: { tools?: boolean } = {}) {
   return (
     <ol className="step-flow" aria-label="申請の流れ 8つのステップ">
-      {STEPS.map((step, index) => <Node step={step} index={index} key={step.title} />)}
+      {STEPS.map((step, index) => <Node step={step} index={index} tools={tools} key={step.title} />)}
     </ol>
   );
 }

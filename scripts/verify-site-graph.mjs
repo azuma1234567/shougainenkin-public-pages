@@ -228,8 +228,9 @@ const isContent = (url) => /^\/(byoki|joukyou|nayami|okane|erabu)\/|^\/gokai\/|^
   }
   const hajimeteJibun = pages.get("/hajimete").root.querySelectorAll(".jc").map((a) => a.getAttribute("href"));
   check(JSON.stringify(hajimeteJibun) === JSON.stringify(["/dougu/mitate", "/dougu/kingaku"]), `/hajimete の JibunCards: ${hajimeteJibun.join(" ")}`);
-  /* /shinsei のステップ3と7に窓口の道具があること。復元後の /shinsei は昨日の版(.step-flow-tool)。 */
-  const step7 = pages.get("/shinsei").root.querySelectorAll(".dougu-chip, .step-flow-tool").map((a) => a.getAttribute("href"));
+  /* /shinsei のステップ3と7に窓口の道具があること。2026-09-06 からヒーローの8ステップには
+     道具を置かず、本文のステップカードの中(.dougu-band-card)に出す。 */
+  const step7 = pages.get("/shinsei").root.querySelectorAll(".shinsei-step-card .dougu-band-card, .dougu-chip, .step-flow-tool").map((a) => a.getAttribute("href"));
   check(step7.filter((href) => href === "/dougu/madoguchi").length === 2, `/shinsei の窓口の道具: ${step7.join(" ")}`);
   /* どのページでも、同じ道具のカードが2枚出ていないこと。 */
   for (const url of urls) {
