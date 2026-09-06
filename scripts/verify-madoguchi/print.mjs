@@ -27,16 +27,18 @@ if (!ready) { server.kill("SIGTERM"); throw new Error("検証用サーバーが�
 
 const browser = await chromium.launch({ headless: true, executablePath: chrome, args: ["--font-render-hinting=none"] });
 
+/* 2026-09-06 の刷新で最初の操作は市区町村名の検索欄(B-1-1)。候補から「{都道府県} {市区町村}」を押す。 */
 async function pick(page, pref, city) {
-  /* ハイドレーション前に選ぶと onChange が付いておらず市区町村が埋まらない。埋まるまで選び直す。 */
+  /* ハイドレーション前に打つと onChange が付いておらず候補が出ない。出るまで打ち直す。 */
   for (let i = 0; i < 20; i += 1) {
-    await page.selectOption("#md-pref", pref);
+    await page.fill("#md-search", "");
+    await page.fill("#md-search", city);
     await sleep(300);
-    if (await page.locator("#md-city option").count() > 1) break;
+    if (await page.locator(".md-hits button").count() > 0) break;
   }
-  const value = await page.locator("#md-city option").filter({ hasText: new RegExp(`^${city}$`) }).first().getAttribute("value");
-  if (!value) throw new Error(`${pref} に ${city} が無い`);
-  await page.selectOption("#md-city", value);
+  const hit = page.locator(".md-hits button").filter({ hasText: new RegExp(`^${pref} ${city}$`) }).first();
+  if (await hit.count() === 0) throw new Error(`候補に ${pref} ${city} が無い`);
+  await hit.click();
   await page.locator(".md-office").first().waitFor();
   await sleep(300);
 }
@@ -46,7 +48,7 @@ async function run(name, { pref, city }) {
   const context = await browser.newContext();
   const page = await context.newPage();
   await page.goto(url);
-  await page.locator("#md-pref").waitFor();
+  await page.locator("#md-search").waitFor();
   await sleep(600);
   /* 2026-09-03 の作り直しで、制度と20歳前の設問は消えた。最初の操作は住所だけ(指示書 B-3)。 */
   await pick(page, pref, city);
@@ -62,6 +64,8 @@ async function run(name, { pref, city }) {
       yoyaku: t.includes("予約受付専用電話"),
       mochimono: t.includes("行く日の持ち物"),
       ask: t.includes("窓口で聞くこと"),
+      say: t.includes("電話で言うこと"),
+      kokuminLink: t.includes("国民年金の窓口を検索する"),
       printHead: document.querySelector(".md-printhead")?.offsetParent !== null,
       /* 印刷で消える要素(街角の一覧)は数えない */
       items: [...document.querySelectorAll(".md-office, ul.md-list li")]
@@ -96,7 +100,7 @@ mp.on("request", (r) => {
   network.push({ method: r.method(), url: u, prefetch: /[?&]_rsc=/.test(u) || /\/icon\.png|favicon/.test(u), hasBody: !!r.postData() });
 });
 await mp.goto(url);
-await mp.locator("#md-pref").waitFor();
+await mp.locator("#md-search").waitFor();
 await sleep(600);
 await pick(mp, "茨城県", "水戸市");
 await sleep(500);

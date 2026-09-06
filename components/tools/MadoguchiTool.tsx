@@ -1,19 +1,38 @@
 "use client";
-/* /dougu/madoguchi。docs/shorui-madoguchi-redesign-2026-09-03-instructions.md B が画面の正。
+/* /dougu/madoguchi。docs/kingaku-madoguchi-sasshin-2026-09-06-instructions.md B が画面の正
+   (09-03 の作り直し docs/shorui-madoguchi-redesign-2026-09-03-instructions.md B を土台に、検索欄・電話で言うこと・国民年金窓口の検索リンクを足した)。
    (もとの設計は docs/madoguchi-tool-design-2026-09-02.md §3・§6。順番と言葉だけ差し替えた)
    窓口データは data/madoguchi(機構サイトから 2026-09-03 に取得)。lib/madoguchi は触っていない。
    住所・電話を自サイトの言い切りにしない。各件から機構ページへリンクする。
    地図は埋め込まず検索URLへのリンクだけ。入力はサーバーへ送らない。 */
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
-  CHECKED_ON, PREFECTURES, jurisdictionOf, kankatsuUrl, machikadoOf, mapUrl,
+  CHECKED_ON, COMMON_TEL, PREFECTURES, jurisdictionOf, kankatsuUrl, machikadoOf, mapUrl,
   municipalitiesOf, telHref, type Office,
 } from "@/lib/madoguchi";
 import { SHORUI_ASK, SHORUI_MOCHIMONO } from "@/data/shorui";
 
 const STORAGE_KEY = "shougainenkin-note:madoguchi:v1";
 const asOf = `${CHECKED_ON.slice(0, 4)}年${Number(CHECKED_ON.slice(5, 7))}月${Number(CHECKED_ON.slice(8, 10))}日`;
+/* 年金事務所の開所時間。日本年金機構「受付時間のご案内」で確認(2026-09-06)。 */
+const KAISHO_URL = "https://www.nenkin.go.jp/section/guidance/uketukejikan.html";
+const KAISHO_CHECKED = "2026-09-06";
+const SEARCH_MAX = 10;
+
+/* 市区町村名の検索(B-1-1)。全件を1つの配列にしてメモ化し、前方一致 → 部分一致の順に最大10件。
+   データは client.json にあるものだけ(新しいファイルは作らない)。政令市は区で持っているので「札幌」で区が並ぶ。 */
+type Muni = { pref: string; code: string; name: string };
+function searchMunicipalities(all: Muni[], query: string): Muni[] {
+  const q = query.trim();
+  if (q.length < 2) return [];
+  const starts = all.filter((m) => m.name.startsWith(q));
+  const includes = all.filter((m) => !m.name.startsWith(q) && m.name.includes(q));
+  return [...starts, ...includes].slice(0, SEARCH_MAX);
+}
+/* 市区町村の国民年金窓口は機構のデータに無いので、検索URLへのリンクだけ(地図と同じ扱い)。 */
+const kokuminMadoguchiSearchUrl = (pref: string, cityName: string) =>
+  `https://www.google.com/search?q=${encodeURIComponent(`${pref}${cityName} 国民年金 窓口`)}`;
 
 export default function MadoguchiTool() {
   const [pref, setPref] = useState("");
@@ -21,6 +40,9 @@ export default function MadoguchiTool() {
   const [shared, setShared] = useState(false);
   /* 選び終わったら選択欄を1行に畳む。「変える」で戻す(仕上げ指示 4)。 */
   const [editing, setEditing] = useState(false);
+  const [query, setQuery] = useState("");
+  const all = useMemo<Muni[]>(() => PREFECTURES.flatMap((p) => municipalitiesOf(p).map((m) => ({ pref: p, ...m }))), []);
+  const hits = useMemo(() => searchMunicipalities(all, query), [all, query]);
 
   useEffect(() => {
     try {
@@ -60,6 +82,23 @@ export default function MadoguchiTool() {
       {!collapsed && (
         <section className="md-card no-print" aria-labelledby="md-h1">
           <h2 id="md-h1">お住まい</h2>
+          <label className="md-label" htmlFor="md-search">市区町村名で探す</label>
+          <input type="search" id="md-search" className="md-search" placeholder="市区町村名(例: 旭川、世田谷、堺)" autoComplete="off"
+            value={query} onChange={(e) => setQuery(e.target.value)} aria-describedby="md-search-note" />
+          {query.trim().length >= 2 && (
+            hits.length > 0 ? (
+              <ul className="md-hits" aria-label="候補">
+                {hits.map((m) => (
+                  <li key={m.code}><button type="button" onClick={() => { setPref(m.pref); setCode(m.code); setEditing(false); setQuery(""); }}>
+                    <span className="md-hit-pref">{m.pref}</span> {m.name}
+                  </button></li>
+                ))}
+              </ul>
+            ) : <p className="md-note md-note-tight" id="md-search-note">見つかりません。町村は町村名で、政令指定都市は区の名前でも探せます。下の一覧からも選べます。</p>
+          )}
+          {query.trim().length < 2 && <p className="md-hint" id="md-search-note">2文字以上で候補が出ます。押すと管轄の年金事務所が出ます。</p>}
+          <details className="md-select-fold" open={!!pref && !code}>
+          <summary>一覧から選ぶ</summary>
           <div className="md-grid2">
             <div>
               <label className="md-label" htmlFor="md-pref">都道府県</label>
@@ -76,17 +115,17 @@ export default function MadoguchiTool() {
               </select>
             </div>
           </div>
-          {!pref && <p className="md-note">都道府県と市区町村を選ぶと、管轄の窓口が出ます。</p>}
           {pref && !code && <p className="md-note">市区町村を選ぶと、管轄の年金事務所が出ます。街角の年金相談センターは下に出しています。</p>}
+          </details>
         </section>
       )}
 
       {jur && city && (
         <section className="md-card" aria-labelledby="md-h2">
-          <h2 id="md-h2">あなたの年金事務所</h2>
+          <h2 id="md-h2">管轄の年金事務所</h2>
           {jur.differs && (
-            <p className="md-warnbox">
-              <b>{city.name}は、厚生年金と国民年金で管轄の年金事務所が違います。</b>
+            <p className="md-note">
+              <strong>{city.name}は、厚生年金と国民年金で管轄の年金事務所が違います。</strong>
               相談と提出で行く場所が違うことがあります。どちらに行けばよいか迷ったら、窓口で確かめてください。
             </p>
           )}
@@ -107,6 +146,7 @@ export default function MadoguchiTool() {
             国民年金だけの請求(障害基礎年金)は、お住まいの市区町村の国民年金の窓口にも出せます。20歳前に初診日がある方も同じです。
             初診日が第3号被保険者(会社員の配偶者)の期間にある方は年金事務所へ。
           </p>
+          <p className="md-hint md-kokumin-link">→ <a href={kokuminMadoguchiSearchUrl(pref, city.name)} rel="noreferrer">{city.name}の国民年金の窓口を検索する</a>(検索結果へのリンクです。窓口の情報は自治体のページで確かめてください)</p>
           <p className="md-note no-print">
             郵送でも出せます。控えを取り、送った記録が残る方法で送ってください。 → <Link href="/columns/teishutsusaki-yuusou" prefetch={false}>提出先と郵送のしかた</Link>
           </p>
@@ -131,11 +171,19 @@ export default function MadoguchiTool() {
 
       <section className="md-card" aria-labelledby="md-h4">
         <h2 id="md-h4">予約のしかた</h2>
-        <p className="md-warnbox"><b>予約なしで行くと、長く待つことがあります。</b>相談は予約制です。当日に相談したい場合は、直接年金事務所へ行くことになります。</p>
+        <p className="md-hint">相談は予約制です。予約なしで行くと長く待つことがあります。当日に相談したい場合は、直接年金事務所へ行くことになります。</p>
+        <div className="md-say" aria-labelledby="md-say-title">
+          <p className="md-say-title" id="md-say-title">電話で言うこと</p>
+          <ol className="md-say-lines">
+            <li>「障害年金の請求について、初めての相談を予約したいです」</li>
+            <li>「基礎年金番号は ◯◯◯◯-◯◯◯◯◯◯ です」(手元に年金手帳か通知書)</li>
+            <li>「初診日は ◯◯◯◯年◯月ごろ、いまの病院は ◯◯です」(分からなければ「分かりません」でよい)</li>
+          </ol>
+        </div>
         <table className="md-yoyaku">
           <tbody>
             <tr><th scope="row">予約受付専用電話</th><td>
-              <a className="md-tel" href={telHref("0570-05-4890")}>0570-05-4890</a>(ナビダイヤル)<br />
+              <a className="md-tel" href={telHref(COMMON_TEL.yoyaku)}>{COMMON_TEL.yoyaku}</a>(ナビダイヤル)<br />
               <a className="md-tel" href={telHref("03-6631-7521")}>03-6631-7521</a>(一般電話)<br />
               <span className="md-small">ナビダイヤルは通話料がかかります。一般電話のほうが安くなることがあります。</span>
             </td></tr>
@@ -143,6 +191,7 @@ export default function MadoguchiTool() {
             <tr><th scope="row">いつの予約が取れるか</th><td>翌日以降<br /><span className="md-small">当日に相談したい場合は、直接年金事務所へ</span></td></tr>
             <tr><th scope="row">電話するとき手元に</th><td>基礎年金番号がわかるもの<br /><span className="md-small">または、通知書などに書かれた照会番号</span></td></tr>
             <tr><th scope="row">窓口の相談開始時間</th><td>平日 9:00〜16:00 ／ 土曜開所日 10:00〜15:00 ／ 延長開所日 9:00〜18:00</td></tr>
+            <tr><th scope="row">年金事務所の開所時間</th><td>平日(月曜〜金曜)8:30〜17:15<br /><span className="md-small">週初の開所日は 17:15〜19:00 まで時間延長、第2土曜日は 9:30〜16:00 に週末相談(<a href={KAISHO_URL} rel="noreferrer">受付時間のご案内</a>、確認日 {KAISHO_CHECKED})</span></td></tr>
             <tr><th scope="row">ネット予約</th><td>年金請求の手続きのみ(マイナポータル・ねんきんネット・インターネット予約サイト)<br /><span className="md-small">「老齢」「障害年金の請求に関する手続き」「遺族・未支給」の3つが対象。受付は全日 8:00〜23:30</span></td></tr>
           </tbody>
         </table>
@@ -193,8 +242,8 @@ function OfficeGroup({ title, offices, split, splitText, pref, cityName }: {
     <div className="md-group">
       <h3>{title}</h3>
       {split && offices.length > 1 && (
-        <p className="md-warnbox">
-          <b>{cityName}は、町名によって事務所が分かれます。</b>下の2か所のどちらになるかは、機構の管轄区域表で確認してください。
+        <p className="md-note">
+          <strong>{cityName}は、町名によって事務所が分かれます。</strong>下の2か所のどちらになるかは、機構の管轄区域表で確認してください。
           {splitText[0] && <><br /><span className="md-splittext">機構の記載: {splitText[0].slice(0, 60)}…ほか</span></>}
           <br /><a href={kankatsuUrl(pref)} rel="noreferrer">{pref}の年金事務所管轄区域(機構)</a>
         </p>

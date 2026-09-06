@@ -3,7 +3,7 @@
 // 印刷(10)と375px(12)の実測は scripts/verify-madoguchi/print.mjs の結果を読む。
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
-import { jurisdictionOf, machikadoOf, municipalitiesOf, office, PREFECTURES, CHECKED_ON } from "../../lib/madoguchi.ts";
+import { jurisdictionOf, machikadoOf, municipalitiesOf, office, PREFECTURES, CHECKED_ON, COMMON_TEL } from "../../lib/madoguchi.ts";
 import { PLACEMENTS, TOOLS } from "../../data/dougu.ts";
 
 const results = [];
@@ -27,9 +27,11 @@ const codeOf = (pref, name) => municipalitiesOf(pref).find((m) => m.name === nam
 check(1, "/shinsei の申請の流れから /dougu/madoguchi へ行ける", () => {
   assert.ok(existsSync(PAGE), `${PAGE} が無い`);
   // /shinsei の8ステップの中に、この道具への導線がある
+  // (2026-09-06: トップの StepFlow はカードの href、/shinsei のステップカードは DouguCards で道具へリンクする)
   const flow = src("components/platform/StepFlow.tsx");
   assert.match(flow, /PLACEMENTS\.shinseiSteps\[stepId\]/, "申請の流れが道具の配置を読んでいない");
-  assert.match(flow, /href=\{placementCard\(placement\)\.href\}/, "ステップから道具へリンクしていない");
+  assert.match(flow, /href=\{card\.href\}/, "ステップから道具へリンクしていない");
+  assert.match(src("components/platform/ShinseiRestyled.tsx"), /<DouguCards placements=\{PLACEMENTS\.shinseiSteps\[step\.id\]\} variant="grid" \/>/, "/shinsei のステップカードが道具を出していない");
   const steps = Object.entries(PLACEMENTS.shinseiSteps)
     .filter(([, list]) => (list ?? []).some((x) => x.tool === "madoguchi")).map(([id]) => id);
   assert.ok(steps.length > 0, "申請の流れのどのステップにも置かれていない");
@@ -44,21 +46,42 @@ check(1, "/shinsei の申請の流れから /dougu/madoguchi へ行ける", () =
 /* 2026-09-03 の作り直しで、制度と20歳前の2問は消した(指示書 B-3)。
    提出先の判定は lib/madoguchi.ts の submission に残してあるが、画面では使わず、
    両方を並べて1行で説明する。§8-2/§8-3 の検査を、その1行に置き換えた。 */
-check(2, "最初の操作が都道府県の選択。節の番号と「提出先を調べる」が無い", () => {
+// 2026-09-06 刷新(B-1-1): 最初の操作は市区町村名の検索欄。2段のプルダウンは「一覧から選ぶ」に残す。見出しは「管轄の年金事務所」。
+check(2, "最初の操作が市区町村名の検索欄(一覧から選ぶも残る)。節の番号と「提出先を調べる」が無い", () => {
   const t = src(TOOL);
-  // 都道府県の選択より前に、質問(チップ)が無い
+  // 検索欄より前に、質問(チップ)が無い
   assert.ok(!t.includes("md-chips"), "質問のチップが残っている");
   assert.ok(!/aria-labelledby="md-q[12]"/.test(t), "制度・20歳前の設問が残っている");
-  assert.ok(t.indexOf('id="md-pref"') < t.indexOf('id="md-h2"'), "都道府県より前に別の操作がある");
+  assert.ok(t.indexOf('id="md-search"') < t.indexOf('id="md-pref"'), "検索欄が都道府県の選択より下にある");
+  assert.ok(t.indexOf('id="md-pref"') < t.indexOf('id="md-h2"'), "選択欄より前に別の操作がある");
+  assert.match(t, /type="search" id="md-search"/, "検索欄が無い");
+  assert.match(t, /<summary>一覧から選ぶ<\/summary>/, "「一覧から選ぶ」が無い");
+  assert.match(t, /const starts = all\.filter\(\(m\) => m\.name\.startsWith\(q\)\);/, "前方一致を先にしていない");
+  assert.match(t, /\.slice\(0, SEARCH_MAX\)/, "候補の上限が無い");
+  assert.match(t, /const SEARCH_MAX = 10;/, "候補の上限が10でない");
+  assert.match(t, /if \(q\.length < 2\) return \[\];/, "2文字未満で候補を出している");
+  assert.match(t, /useMemo<Muni\[\]>\(\(\) => PREFECTURES\.flatMap/, "全件の配列をメモ化していない");
+  assert.ok(!t.includes("gun-map"), "郡の表を使っている(町村名で引く)");
   assert.match(t, /<h2 id="md-h1">お住まい<\/h2>/, "最初の見出しが「お住まい」でない");
-  assert.match(t, /<h2 id="md-h2">あなたの年金事務所<\/h2>/, "「あなたの年金事務所」の見出しが無い");
+  assert.match(t, /<h2 id="md-h2">管轄の年金事務所<\/h2>/, "「管轄の年金事務所」の見出しが無い");
+  assert.ok(!t.includes("あなた"), "「あなた」が残っている");
+  assert.ok(!t.includes("md-warnbox") && !src(PAGE).includes("md-warnbox"), "黄色の箱が残っている");
+  assert.ok(!src("app/globals.css").includes(".md-warnbox"), "黄色の箱の CSS が残っている");
+  // 検索: 旭川 / 世田谷 / 堺 / 大阪(lib のデータで、画面と同じ規則を再現)
+  const all = PREFECTURES.flatMap((p) => municipalitiesOf(p).map((m) => ({ pref: p, ...m })));
+  const search = (q) => { const s = all.filter((m) => m.name.startsWith(q)), i = all.filter((m) => !m.name.startsWith(q) && m.name.includes(q)); return [...s, ...i].slice(0, 10); };
+  assert.equal(search("旭川")[0].pref + " " + search("旭川")[0].name, "北海道 旭川市");
+  assert.equal(search("世田谷")[0].pref + " " + search("世田谷")[0].name, "東京都 世田谷区");
+  assert.ok(search("堺").length >= 6 && search("堺").every((m) => m.pref === "大阪府"), `堺 → ${search("堺").map((m) => m.name).join(",")}`);
+  assert.ok(search("大阪").length <= 10 && search("大阪").every((m) => m.name.startsWith("大阪市")), `大阪 → ${search("大阪").map((m) => m.name).join(",")}`);
+  assert.equal(search("旭").length, 0 + search("旭").length, "");
   // B-5-4 「1.」〜「5.」と「提出先を調べる」が画面に無い
   assert.ok(!t.includes("提出先を調べる"), "「提出先を調べる」が残っている");
   for (const n of [1, 2, 3, 4, 5]) {
     assert.ok(!new RegExp(`>${n}\\. `).test(t), `節の番号「${n}.」が残っている`);
   }
   assert.ok(!t.includes("submission"), "画面が提出先の判定を呼んでいる");
-  return "お住まい → あなたの年金事務所 の順。制度・20歳前の設問と節の番号は無い";
+  return `検索欄 → 一覧から選ぶ → 管轄の年金事務所 の順 / 旭川→旭川市・世田谷→世田谷区・堺→堺市の区 ${search("堺").length}件・大阪→大阪市の区 ${search("大阪").length}件 / 「あなた」黄色の箱 0`;
 });
 
 check(3, "提出先の1行の説明が、事務所カードの下に出ている", () => {
@@ -71,7 +94,10 @@ check(3, "提出先の1行の説明が、事務所カードの下に出ている
   assert.match(t, /title="会社員だった方\(厚生年金\)の請求・相談"/, "厚生年金の見出しが無い");
   assert.match(t, /title="国民年金の方の相談"/, "国民年金の見出しが無い");
   assert.match(t, /title="厚生年金・国民年金とも"/, "同じ事務所のときにまとめる扱いが無い");
-  return "国民年金だけ／20歳前／第3号 の1行が事務所カードの下。厚年・国年は質問なしで両方出す";
+  assert.match(t, /kokuminMadoguchiSearchUrl\(pref, city\.name\)/, "国民年金窓口の検索リンクが無い");
+  assert.match(t, /encodeURIComponent\(`\$\{pref\}\$\{cityName\} 国民年金 窓口`\)/, "検索語が「都道府県+市区町村 国民年金 窓口」でない");
+  assert.match(t, /\{city\.name\}の国民年金の窓口を検索する/, "リンク文言に市区町村名が無い");
+  return "国民年金だけ／20歳前／第3号 の1行が事務所カードの下。その直後に国民年金窓口の検索リンク(市区町村名入り)。厚年・国年は質問なしで両方出す";
 });
 
 check(4, "都道府県 → 市区町村で管轄の年金事務所が出る。47都道府県ぶんある", () => {
@@ -125,19 +151,28 @@ check(7, "ページに取得日が表示されている", () => {
 
 check(8, "予約の情報が公式と一致している(2026-09-03 再確認)", () => {
   const t = src(TOOL);
-  for (const s of ["0570-05-4890", "03-6631-7521", "月曜〜金曜 8:30〜17:15", "翌日以降",
+  assert.equal(COMMON_TEL.yoyaku, "0570-05-4890", "data の予約電話が違う");
+  assert.match(t, /\{COMMON_TEL\.yoyaku\}/, "予約電話を COMMON_TEL から出していない");
+  assert.ok(!t.includes('"0570-05-4890"') && !src(PAGE).includes("0570-05-4890"), "予約電話の直書きがある");
+  // 電話で言うこと(3行)と開所時間(機構「受付時間のご案内」で確認できた分だけ)
+  assert.equal((t.match(/<li>「/g) ?? []).length, 3, "「電話で言うこと」が3行でない");
+  assert.match(t, /初めての相談を予約したいです/);
+  assert.match(t, /https:\/\/www\.nenkin\.go\.jp\/section\/guidance\/uketukejikan\.html/, "開所時間の出典URLが無い");
+  assert.match(t, /平日\(月曜〜金曜\)8:30〜17:15/, "開所時間が無い");
+  assert.match(t, /KAISHO_CHECKED = "2026-09-06"/, "開所時間の確認日が無い");
+  for (const s of ["03-6631-7521", "月曜〜金曜 8:30〜17:15", "翌日以降",
     "基礎年金番号がわかるもの", "照会番号", "平日 9:00〜16:00", "全日 8:00〜23:30",
     "障害年金の請求に関する手続き"]) assert.ok(t.includes(s), `${s} が無い`);
   assert.ok(!t.includes("照査番号"), "誤記の「照査番号」が残っている");
   assert.match(t, /https:\/\/www\.nenkin\.go\.jp\/section\/tel\/yoyaku\.html/);
   assert.match(t, /https:\/\/www\.nenkin\.go\.jp\/section\/guidance\/yoyaku\.html/);
-  return "電話2本・受付時間・翌日以降・照会番号・相談開始・ネット予約(障害年金明示)・出典2本";
+  return "予約電話は COMMON_TEL 経由(一般電話 03- は data に無いので文字のまま)・受付時間・翌日以降・照会番号・相談開始・ネット予約(障害年金明示)・出典2本 / 電話で言うこと3行 / 開所時間(受付時間のご案内、確認日 2026-09-06)";
 });
 
 check(9, "電話番号が tel: リンクになっている", () => {
   assert.match(src(CORE), /export const telHref = \(tel: string\) => `tel:\$\{tel\.replace\(\/-\/g, ""\)\}`;/);
   assert.match(src(TOOL), /href=\{telHref\(o\.tel\)\}/, "窓口の電話が tel: でない");
-  assert.match(src(TOOL), /href=\{telHref\("0570-05-4890"\)\}/, "予約電話が tel: でない");
+  assert.match(src(TOOL), /href=\{telHref\(COMMON_TEL\.yoyaku\)\}/, "予約電話が tel: でない");
   const withTel = all.filter((o) => o.tel);
   assert.equal(withTel.length, all.length, `電話が空の窓口 ${all.length - withTel.length} 件`);
   return `窓口 ${all.length}件と予約電話2本すべて tel:`;
