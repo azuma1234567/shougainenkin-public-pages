@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MITATE_ABILITY_ITEMS, MITATE_AVERAGE_BANDS, MITATE_DEGREE_CHOICES, MITATE_GRADE_TABLE, MITATE_GUIDE_COMMON, MITATE_SOURCE, type MitateAbilityValue, type MitateDegree, type MitateGuideItem, type MitateKind } from "@/data/mitate";
-import { emptyMitateState, mitateAverage, mitateGuideSet, mitateLookup, type MitateState } from "@/lib/mitate";
+import { emptyMitateState, isNearBoundary, mitateAverage, mitateBandLabel, mitateGuideSet, mitateLookup, type MitateState } from "@/lib/mitate";
 import { saveMitate } from "@/lib/mitate-storage";
 
 const QUESTIONS = [
@@ -37,12 +37,17 @@ const DIAGNOSES: { label: string; kind?: MitateKind }[] = [
   { label: "知的障害", kind: "chiteki" }, { label: "その他・わからない" },
 ];
 
+/* 診断書(精神の障害用)様式第120号の4 記載要領: 判断にあたっては、単身で生活するとしたら可能かどうかで判断する。 */
+const PREMISE_LINE = "ひとりで暮らすとしたら、を前提に。家族がしてくれていることは「できる」に入れません。";
+
 export default function MitateTool() {
   const [state, setState] = useState<MitateState>(emptyMitateState);
   const [step, setStep] = useState(0);
   const [diagnosis, setDiagnosis] = useState("");
   const [diagnosisSelected, setDiagnosisSelected] = useState(false);
   const [shindansho, setShindansho] = useState(false);
+  /* 結果の「答えの一覧」から1問だけ戻ったとき true。選び直すと結果へ直行する。 */
+  const [revisit, setRevisit] = useState(false);
 
   useEffect(() => {
     const selected = new URLSearchParams(window.location.search).get("mode") === "shindansho";
@@ -52,11 +57,12 @@ export default function MitateTool() {
 
   const patch = (next: Partial<MitateState>) => setState((current) => ({ ...current, ...next }));
   const move = (next: number) => { setStep(next); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const back = (to: number) => { setRevisit(false); move(to); };
 
   if (step === 0) return <section className="mi-intro" aria-labelledby="mi-intro-title">
     <h1 id="mi-intro-title">「私は、障害年金の対象になるのかな」と思ったら</h1>
     {shindansho && <p className="mi-shindansho-lead">診断書の裏面の欄を、そのまま写してください</p>}
-    <p>精神の障害の審査では、国が公表している「等級判定ガイドライン」の目安表が使われます。<br />診断書に書かれる、毎日の生活の7つの項目と、全体の程度の組み合わせで、目安が決まります。<br />ここでは、その表にあなたの毎日を当てはめてみます。</p>
+    <p>精神の障害の審査では、国が公表している「等級判定ガイドライン」の目安表が使われます。<br />診断書に書かれる、毎日の生活の7つの項目と、全体の程度の組み合わせで、目安が決まります。<br />ここでは、その表に、いまの毎日を当てはめてみます。</p>
     <div className="mi-assurances" aria-label="この機能について"><span>約3分</span><span>判定ではありません</span><span>入力はこの端末の中だけ。送信も保存もしません</span></div>
     <button type="button" className="mi-start" onClick={() => move(1)}>はじめる</button>
     {!shindansho && <Link className="mi-mode-link" href="?mode=shindansho">診断書をもう持っている方は、書かれた内容をそのまま写せます →</Link>}
@@ -64,46 +70,64 @@ export default function MitateTool() {
 
   if (step >= 1 && step <= 7) {
     const index = step - 1, item = MITATE_ABILITY_ITEMS[index], [plainQuestion, formalQuestion] = QUESTIONS[index];
-    const next = () => move(step === 7 ? 8 : step + 1);
-    return <QuestionShell progress={`${step}/8`} onBack={() => move(step - 1)}>
+    const next = () => { if (revisit) { setRevisit(false); move(10); } else move(step === 7 ? 8 : step + 1); };
+    return <QuestionShell progress={`${step}/8`} onBack={() => back(step - 1)}>
       {step === 1 && <p className="mi-one-line">調子のいい日ではなく、ふつうの日を思い浮かべて答えてください。</p>}
       <h2 className="mi-question">{plainQuestion}</h2><p className="mi-formal-name">{formalQuestion}</p>
+      {!shindansho && <p className="mi-premise">{PREMISE_LINE}</p>}
       <div className={`mi-answer-list ${shindansho ? "is-shindansho" : ""}`} role="group" aria-label={plainQuestion}>{ABILITY_CHOICES.map((choice) => <button type="button" key={choice.value} onClick={() => { patch({ ability: { ...state.ability, [item.id]: choice.value } }); next(); }}><strong>{shindansho ? choice.formal : choice.plain}</strong><small>{shindansho ? choice.plain : choice.formal}</small></button>)}</div>
       <button type="button" className="mi-quiet-action" onClick={() => { const ability = { ...state.ability }; delete ability[item.id]; patch({ ability }); next(); }}>わからない・答えたくない</button>
     </QuestionShell>;
   }
 
-  if (step === 8) return <QuestionShell progress="8/8" onBack={() => move(7)}>
+  if (step === 8) return <QuestionShell progress="8/8" onBack={() => back(7)}>
     <h2 className="mi-question">全体として、いまの生活はどれに近いですか</h2>
     <div className={`mi-answer-list ${shindansho ? "is-shindansho" : ""}`} role="group" aria-label="全体として、いまの生活はどれに近いですか">{MITATE_DEGREE_CHOICES.map((choice, index) => <button type="button" key={choice.value} onClick={() => { patch({ degree: choice.value as MitateDegree }); move(9); }}><strong>{shindansho ? choice.label : DEGREE_PLAIN[index]}</strong><small>{shindansho ? DEGREE_PLAIN[index] : choice.label}</small></button>)}</div>
   </QuestionShell>;
 
-  if (step === 9) return <QuestionShell onBack={() => move(8)}>
-    <h2 className="mi-question">診断名に近いものはありますか</h2><p className="mi-formal-name">総合評価の注記を選ぶために使う</p>
+  if (step === 9) return <QuestionShell onBack={() => back(8)}>
+    <h2 className="mi-question">診断名に近いものはありますか</h2><p className="mi-formal-name">ガイドラインが、診断名ごとに見るところを出すために使います</p>
     <div className="mi-answer-list mi-diagnoses" role="group" aria-label="診断名に近いものはありますか">{DIAGNOSES.map((choice) => <button type="button" key={choice.label} onClick={() => { setDiagnosis(choice.label); setDiagnosisSelected(true); patch({ kind: choice.kind }); move(10); }}><strong>{choice.label}</strong></button>)}</div>
     <button type="button" className="mi-skip-large" onClick={() => { setDiagnosis(""); setDiagnosisSelected(false); patch({ kind: undefined }); move(10); }}>飛ばす</button>
   </QuestionShell>;
 
-  return <Result state={state} shindansho={shindansho} diagnosis={diagnosis} diagnosisSelected={diagnosisSelected} />;
+  return <Result state={state} shindansho={shindansho} diagnosis={diagnosis} diagnosisSelected={diagnosisSelected} onRevisit={(index) => { setRevisit(true); move(index + 1); }} />;
 }
 
 function QuestionShell({ progress, onBack, children }: { progress?: string; onBack: () => void; children: React.ReactNode }) {
   return <section className="mi-question-screen">{progress && <><div className="mi-progress"><span style={{ width: `${(Number(progress.split("/")[0]) / 8) * 100}%` }} /></div><p className="mi-progress-text">{progress}</p></>}<button type="button" className="mi-back" onClick={onBack}>戻る</button>{children}</section>;
 }
 
-function Result({ state, shindansho, diagnosis, diagnosisSelected }: { state: MitateState; shindansho: boolean; diagnosis: string; diagnosisSelected: boolean }) {
+/* 表の行の区切り(min)のうち、平均にいちばん近いもの。 */
+function nearestBoundary(average: number): number {
+  return MITATE_AVERAGE_BANDS.map((b) => b.min).filter((min) => min > 0)
+    .reduce((best, min) => (Math.abs(average - min) < Math.abs(average - best) ? min : best));
+}
+
+function Result({ state, shindansho, diagnosis, diagnosisSelected, onRevisit }: { state: MitateState; shindansho: boolean; diagnosis: string; diagnosisSelected: boolean; onRevisit: (index: number) => void }) {
   const [expanded, setExpanded] = useState(false), [saved, setSaved] = useState(false);
   const average = mitateAverage(state), lookup = mitateLookup(state), band = lookup.kind === "none" ? null : lookup.band;
   const guides = (diagnosisSelected && diagnosis !== "その他・わからない" ? mitateGuideSet(state.kind) : MITATE_GUIDE_COMMON).slice(0, 6);
   const visibleGuides = expanded ? guides : guides.slice(0, 3);
   const heading = lookup.kind === "found" ? `国の目安表では、この組み合わせは「${lookup.grade}」のところにあります。` : lookup.kind === "blank" ? "国の目安表では、この組み合わせに目安が定められていません。" : "国の目安表に当てはめるには、7項目の回答と全体の程度が必要です。";
+  const avg = average.value, unanswered = average.total - average.answered;
   return <div className="mi-result">
-    <section className="mi-result-heading"><h2>{heading}</h2><p>これはあなたの等級ではありません。実際は、医師が診断書に書く内容と、働き方や生活の実態を合わせて、国が判断します。</p></section>
+    <section className="mi-result-heading"><h2>{heading}</h2><p>これは等級の判定ではありません。判定するのは国で、材料は医師が書く診断書と、働き方や生活の実態です。</p></section>
+    <section className="mi-result-section"><h3>7項目に、こう答えました</h3>
+      <div className="mi-answers" role="table" aria-label="7項目に、こう答えました">
+        <div className="mi-answers-head" role="row"><span role="columnheader">項目</span><span role="columnheader">答え</span><span role="columnheader">数値</span></div>
+        {MITATE_ABILITY_ITEMS.map((item, index) => { const value = state.ability[item.id], choice = ABILITY_CHOICES.find((c) => c.value === value); return <button type="button" key={item.id} className="mi-answer-row" role="row" onClick={() => onRevisit(index)} aria-label={`${item.label}: ${choice ? choice.plain : "答えていない"}。この質問へ戻る`}><span role="cell">{item.label}</span><span role="cell">{choice ? (shindansho ? choice.formal : choice.plain) : "—"}</span><span role="cell">{value ?? "—"}</span></button>; })}
+      </div>
+      <p className="mi-answers-hint">行を押すと、その質問へ戻って選び直せます。</p>
+      {avg !== null && <p className="mi-result-number">7項目の平均 {avg.toFixed(2)}(表の行「{mitateBandLabel(avg)}」)× 全体の程度({state.degree ?? "—"})</p>}
+      {avg !== null && unanswered > 0 && <p className="mi-answers-note">答えなかった項目が {unanswered} つ。答えた {average.answered} 項目の平均で当てはめています。診断書では7項目すべてに記入されます。</p>}
+      {avg !== null && isNearBoundary(avg) && <p className="mi-answers-note">平均 {avg.toFixed(2)} は、表の行の区切り({nearestBoundary(avg).toFixed(1)}) に近い位置です。1項目の答えが1段階変わると、行が変わります。</p>}
+    </section>
+    <section className="mi-result-section"><h3>答えは、表のここ</h3><p>行が7項目の平均、列が全体の程度です</p><div className="mi-tbl-scroll"><table className="mi-gt"><thead><tr><th>判定平均</th>{[1,2,3,4,5].map((degree) => <th key={degree}>程度({degree})</th>)}</tr></thead><tbody>{MITATE_AVERAGE_BANDS.map((row) => <tr key={row.label}><th scope="row">{row.label}</th>{[1,2,3,4,5].map((degree) => { const value = MITATE_GRADE_TABLE[row.label][degree - 1], hit = row.label === band && degree === state.degree; return <td key={degree} className={hit ? "mi-hit" : value === null ? "mi-na" : ""} aria-current={hit ? "true" : undefined}>{value === null ? "—" : value}</td>; })}</tr>)}</tbody></table></div></section>
     <section className="mi-result-section"><h3>これが意味すること</h3>{meaningLines(lookup).map((line) => <p key={line}>{line}</p>)}</section>
     <section className="mi-result-section mi-next-lines"><h3>もし申請するなら、次に</h3>{shindansho ? <><Link href="/dougu/shorui">→ 何をそろえればいい？</Link><Link href="/dougu/moushitatesho">→ 申立書を、自分で書きたい</Link><Link href="/nayami/shindansho-komatta">→ 診断書で困ったとき</Link></> : <><Link href="/hajimete">→ はじめての方へ</Link><Link href="/nayami/shoshinbi-karute">→ 初診日がわからないとき</Link><Link href="/shinsei">→ 申請の流れ</Link></>}</section>
-    <section className="mi-result-section"><h3>あなたの答えは、表のここ</h3><p>行が7項目の平均、列が全体の程度です</p><div className="mi-tbl-scroll"><table className="mi-gt"><thead><tr><th>判定平均</th>{[1,2,3,4,5].map((degree) => <th key={degree}>程度({degree})</th>)}</tr></thead><tbody>{MITATE_AVERAGE_BANDS.map((row) => <tr key={row.label}><th scope="row">{row.label}</th>{[1,2,3,4,5].map((degree) => { const value = MITATE_GRADE_TABLE[row.label][degree - 1], hit = row.label === band && degree === state.degree; return <td key={degree} className={hit ? "mi-hit" : value === null ? "mi-na" : ""} aria-current={hit ? "true" : undefined}>{value === null ? "—" : value}</td>; })}</tr>)}</tbody></table></div>{average.value !== null && state.degree !== undefined && <p className="mi-result-number">7項目の平均 {average.value.toFixed(1)} × 程度({state.degree})</p>}</section>
     <section className="mi-result-section"><h3>診断書では、ここも見られます</h3>{visibleGuides.map((item) => <GuideBlock key={item.id} item={item} />)}{!expanded && guides.length > 3 && <button type="button" className="mi-more" onClick={() => setExpanded(true)}>もっと見る</button>}</section>
-    <p className="mi-calm-note">{shindansho ? "診断書の記載をそのまま当てはめた結果です。" : "この結果は、あなた自身の答えから出しています。実際の審査は医師の診断書をもとに行われるので、違う結果になることがあります。"}</p>
+    <p className="mi-calm-note">{shindansho ? "診断書の記載をそのまま当てはめた結果です。" : "この結果は、本人の答えから出しています。実際の審査は医師の診断書をもとに行われるので、違う結果になることがあります。"}</p>
     <section className="mi-result-actions no-print"><div><button type="button" onClick={() => setSaved(saveMitate(state))}>この結果を、この端末に残す</button><small>共用のパソコンでは押さないでください</small></div><button type="button" onClick={() => window.print()}>印刷する</button>{saved && <p role="status">この端末に残しました</p>}</section>
     <section className="mi-result-section"><h3>出典</h3><p className="mi-src">{MITATE_SOURCE.name} 表1「障害等級の目安」/ 第3「総合評価」<br /><a href={MITATE_SOURCE.url}>{MITATE_SOURCE.url}</a><br />このサイトが判定したものではなく、国が公表している表に当てはめた結果です。</p></section>
     <p className="mi-screen-only"><Link href="/suuji">→ 数字で見る障害年金</Link></p>
