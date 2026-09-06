@@ -2,12 +2,13 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import HubIndexList, { type HubCard, type HubGroup } from "@/components/platform/HubIndexList";
+import MarkdownArticle from "@/components/MarkdownArticle";
 import { DouguCards } from "@/components/platform/DouguCard";
 import type { ToolId } from "@/data/dougu";
 import { HUBS, hubColumnSlugs } from "@/lib/hubs";
 import { SAIKETSU_CASES } from "@/lib/saiketsu";
 import { SITE_URL } from "@/lib/constants";
-import { latestHubCheckedDate } from "@/lib/hub-content";
+import { latestHubCheckedDate, prepareHubSource } from "@/lib/hub-content";
 import { PUBLISHED_CONTENT_HUBS } from "@/lib/hubs";
 import { pageMetadata } from "@/lib/seo";
 
@@ -25,8 +26,10 @@ type IndexSpec = {
   body?: string[];
   /** リードの直下に置く道具。文言は data/dougu.ts のものをそのまま使う */
   tools?: ToolId[];
-  /** ヒーローのリードの下に置く一言(原稿の文を抜いたもの) */
-  hint?: string;
+  /** ヒーローのリードの下に置く一言(原稿の文を抜いたもの)。複数段落なら配列 */
+  hint?: string | string[];
+  /** 年表の直下に MarkdownArticle で描く本文(原稿の markdown をそのまま) */
+  markdown?: string;
   /** 年表。カードより前に、いつ→起きること→リンク の順で縦に並べる */
   timeline?: { when: string; what: string; label: string; href: string }[];
   /** 年表の後に置く段落(原稿の文) */
@@ -114,47 +117,29 @@ export const HUB_INDEX: Record<Kind, IndexSpec> = {
   jukyuugo: {
     title: "受給が始まってから",
     h1: "受給が始まってから",
-    lead: "年金証書が届いたら、手続きは終わりではなく、続きが始まります。続くのは「更新」「働く」「お金」「65歳」の4つです。障害年金の受給権者は約255万人(令和4年度末)。毎年約30万件の更新(再認定)があり、そのうち96.7%はそのまま続いています。止まったのは1.1%です。多くの人は続きます。ただし、続くかどうかは診断書1枚で決まるので、普段の記録が効きます。",
+    /* 第2稿(docs/jukyuugo-2026-09-06/00-index-jukyuugo.md)。リード4段落は1段落目を lead、
+       残りを hint に。年表の下の本文は markdown をそのまま MarkdownArticle で描く。 */
+    lead: "年金証書が届いた日、封筒を開けて、等級の数字を見て、それから何をすればいいのか分からなくなった。そういう人が多い。申請の情報は山ほどあるのに、「決まったあと」の情報は、なぜか薄い。",
     description: "年金証書が届いてからの「更新・働く・お金・65歳」を、時間の順に並べた入口です。公的資料の出典つき。",
-    hint: "多くの人は続きます。続くかどうかは診断書1枚で決まるので、普段の記録が効きます。",
+    hint: [
+      "先に、いちばん多い不安に答えます。**障害年金は、そう簡単には止まりません。** 令和6年度に更新(再認定)の審査を受けた304,456件のうち、そのまま続いたのは96.7%。増額が1.4%、減額が0.8%、支給停止は1.1%でした。100人のうち約97人は、前と同じ額を受け取り続けています。障害年金を受けている人は全国で約255万人(令和4年度末)。「もらい続けている人」は、珍しくありません。",
+      "止まる1.1%と続く96.7%を分けているのは、病名ではありません。働いているかどうかでもありません。**更新のときに出す診断書1枚に、普段の生活がどれだけ正確に書かれているか**です。だから、受給が始まってからいちばん効くのは、記録を続けること。これはこのサイト全体で繰り返し言っていることで、受給後も同じです。",
+      "このページは、受給が始まった人の「これから」を、時間の順に並べた入口です。全部を読む必要はありません。いま当てはまる行だけ開いてください。",
+    ],
     timeline: [
-      { when: "届いた月", what: "年金証書の3か所(等級・次回診断書提出年月・年金の種類)を確認。法定免除・給付金・扶養の届出", label: "受給が決まった後の手続き", href: "/columns/jukyuugo-tetsuduki" },
-      { when: "1〜2か月後", what: "初回の振込。決定月の翌月分からまとめて入る", label: "いくら、いつ振り込まれるか", href: "/okane/ikura" },
-      { when: "毎年", what: "20歳前傷病の人だけ、前年所得で10月〜翌9月の支給が決まる", label: "働くと年金はどうなるか", href: "/jukyuugo/hataraku" },
+      { when: "届いた月", what: "年金証書の3か所を見る: 等級、**次回診断書提出年月**、年金の種類。法定免除・年金生活者支援給付金・手帳の届出を済ませる", label: "受給が決まった後の手続き", href: "/columns/jukyuugo-tetsuduki" },
+      { when: "1〜2か月後", what: "最初の振込。決定月の翌月分からまとめて入る。以後は偶数月に2か月分ずつ", label: "いくら、いつ振り込まれるか", href: "/okane/ikura" },
+      { when: "毎年", what: "20歳前傷病の人だけ、前年の所得で10月分〜翌年9月分の支給が決まる。それ以外の人に所得の審査はない", label: "働くと年金はどうなるか", href: "/jukyuugo/hataraku" },
+      { when: "働き始めたとき", what: "年金は止まらない。見られるのは「働いているか」ではなく「どんな援助の中で、どう働けているか」", label: "働くと年金はどうなるか", href: "/jukyuugo/hataraku" },
+      { when: "作業所・A型に通うとき", what: "工賃・賃金は年金を減らさない。むしろ「援助を受けて働いている」事実として審査に効く", label: "B型・A型作業所と障害年金", href: "/jukyuugo/sagyousho" },
+      { when: "次の段階に進むとき", what: "B型→A型→障害者雇用→一般就労。段階を上がっても年金は自動では止まらない。戻る道もある", label: "抜け出すロードマップ", href: "/jukyuugo/nukedasu" },
+      { when: "事業所が閉鎖したとき", what: "年金は止まらない。離職票・受給者証・相談先の3つを最初の7日で", label: "A型事業所が閉鎖したとき", href: "/jukyuugo/a-gata-heisa" },
       { when: "1〜5年ごと", what: "更新(障害状態確認届)。誕生月の3か月前の月末に用紙が届き、誕生月の末日までに提出", label: "更新が不安なとき", href: "/nayami/koushin" },
-      { when: "働き始めたとき", what: "等級は「働いているか」ではなく「どう働いているか」で見られる", label: "働くと年金はどうなるか", href: "/jukyuugo/hataraku" },
-      { when: "作業所・A型を使うとき", what: "工賃・賃金は原則、年金に影響しない。20歳前傷病だけ所得の線がある", label: "B型・A型作業所と障害年金", href: "/jukyuugo/sagyousho" },
-      { when: "事業所が閉鎖したとき", what: "年金は止まらない。失業給付と転所の順番がある", label: "A型事業所が閉鎖したとき", href: "/jukyuugo/a-gata-heisa" },
-      { when: "止まったとき", what: "支給停止事由消滅届か、審査請求", label: "支給停止になったとき", href: "/nayami/shikyuu-teishi" },
-      { when: "65歳の前", what: "事後重症請求は65歳の誕生日の前々日まで。65歳から老齢厚生年金と併給を選べる", label: "65歳の選択", href: "/joukyou/65sai-ijou" },
+      { when: "止まったとき", what: "状態が悪化していれば「支給停止事由消滅届」で再開を求められる。決定に納得できなければ審査請求(3か月以内)", label: "支給停止になったとき", href: "/nayami/shikyuu-teishi" },
+      { when: "悪化したとき", what: "額改定請求(等級を上げる請求)。原則、前回の決定から1年後", label: "額改定請求", href: "/columns/gaku-kaitei-seikyuu" },
+      { when: "65歳の前", what: "事後重症請求は65歳の誕生日の前々日まで。65歳からは老齢厚生年金との組み合わせを選べる。老齢年金の繰上げは、障害年金の道を閉じる", label: "65歳の選択", href: "/joukyou/65sai-ijou" },
     ],
-    notes: {
-      heading: "いちばん多い不安に、先に答えます",
-      paragraphs: [
-        "**働いたら止まる?** 止まりません。認定基準にもガイドラインにも「働いていたら対象外」とは書かれていません。ガイドラインは、就労継続支援A型・B型と障害者雇用での就労について「1級または2級の可能性を検討する」としています。見られるのは、働けているかではなく、どんな援助のもとで働けているかです。",
-        "**更新で落ちる?** 令和6年度の再認定304,456件のうち、支給停止は1.1%でした。等級が下がった人を含めても、続いた人が大多数です。判断は診断書1枚で行われるので、普段の状態が診断書に書かれているかが分かれ目です。",
-        "**お金の話は誰に聞けばいい?** 障害年金は所得税がかかりません(国民年金法25条)。健康保険の扶養は年収180万円未満、20歳前傷病の所得制限は前年所得で決まります。線は3本しかないので、自分の数字を当てるだけで分かります。→ [受給後のお金の設計](/jukyuugo/okane)",
-      ],
-    },
-    extraCards: [
-      { path: "/nayami/koushin", label: "更新が不安なとき", hint: "更新(障害状態確認届)。誕生月の3か月前の月末に用紙が届き、誕生月の末日までに提出" },
-      { path: "/nayami/shikyuu-teishi", label: "支給停止になったとき", hint: "支給停止事由消滅届か、審査請求" },
-      { path: "/columns/jukyuugo-tetsuduki", label: "受給が決まった後の手続き", hint: "年金証書の3か所(等級・次回診断書提出年月・年金の種類)を確認。法定免除・給付金・扶養の届出" },
-      { path: "/joukyou/65sai-ijou", label: "65歳の選択", hint: "事後重症請求は65歳の誕生日の前々日まで。65歳から老齢厚生年金と併給を選べる" },
-    ],
-    body: ["このページは、受給が始まった人の「これから」を時間の順に並べた入口です。読むのは、いま当てはまる1つだけで構いません。"],
-    nextSteps: [
-      "年金証書を手元に置き、「次回診断書提出年月」を書き出す → 更新の準備は、その月の1年前から",
-      "働き始める・作業所を使う予定なら、先に → [働くと年金はどうなるか](/jukyuugo/hataraku)",
-      "「働いたら負け」と感じているなら → [よくある誤解: 働いたら負け](/gokai/hataraitara-make)",
-    ],
-    sources: [
-      "厚生労働省 年金部会(第17回)資料2「障害年金の受給権者数 約255万人」(令和4年度末) 2024年7月30日",
-      "日本年金機構「障害年金業務統計(令和6年度決定分)」再認定304,456件・継続96.7%・支給停止1.1%",
-      "日本年金機構「障害状態確認届(診断書)の提出」",
-      "厚生労働省「精神の障害に係る等級判定ガイドライン」平成28年9月",
-      "確認日: 2026-09-05",
-    ],
+    markdown: "## 数字で見る、受給が始まってから\n\n| 項目 | 数字 |\n|---|---|\n| 障害年金を受けている人 | 約255万人(令和4年度末) |\n| 更新(再認定)の件数 | 304,456件(令和6年度) |\n| そのまま続いた | 294,405件(96.7%) |\n| 増額 / 減額 | 4,359件(1.4%) / 2,451件(0.8%) |\n| 支給停止 | 3,241件(1.1%) |\n| 精神障害・知的障害の更新 | 継続 238,772件 に対して 支給停止 1,026件 |\n| B型作業所の平均工賃 / A型の平均賃金 | 月24,141円 / 月91,451円(令和6年度) |\n| A型事業所の閉鎖などで解雇された利用者 | 7,292人(令和6年度)。うちB型などへ3,834人、再就職2,171人 |\n\n出典は日本年金機構「障害年金業務統計(令和6年度決定分)」、厚生労働省 年金部会資料・工賃(賃金)実績・障害者部会資料。確認日 2026-09-06。\n\n## いちばん多い不安3つに、先に答えます\n\n**「働いたら止まる?」** 止まりません。認定基準にもガイドラインにも「働いていたら対象外」とは書かれていません。精神の障害に係る等級判定ガイドラインは、逆のことを書いています。「労働に従事していることをもって、直ちに日常生活能力が向上したものと捉えない」。就労継続支援A型・B型と障害者雇用での就労は「1級または2級の可能性を検討する」。見られるのは、働けているかではなく、どんな援助のもとで、何が起きながら働いているかです。→ 働くと年金はどうなるか(/jukyuugo/hataraku)\n\n**「更新で落ちる?」** 落ちる人は1.1%です。落ちた人の多くは、実態が変わったのではなく、診断書に実態が載らなかった人です。公開されている国の再審査の裁決に、こんな例があります。進行性の病気なのに、前回の診断書から全項目「改善」と書かれていた。審査会がその矛盾を指摘し、減額処分は取り消されました。前回の診断書の控えと突き合わせる。それだけで防げる失敗があります。→ 更新の仕組みと備え(/columns/koushin-kakuninhodo)\n\n**「お金の話は、どこまで気にすればいい?」** 線は6本だけです。税金(かからない)、健康保険の扶養(年収180万円未満)、国民年金の保険料(1級・2級は法定免除)、20歳前傷病の所得制限、生活保護との関係、65歳からの選択。自分に関係するのは、このうち2〜3本です。→ 受給後のお金の設計(/jukyuugo/okane)\n\n## 受給が始まった人が、意外と知らない5つ\n\n1. **更新で下がっても、受け取った分を返す必要はない。** 変わるのはその後の支払い分だけです(不正があった場合は別)。「下がったら借金になる」は誤解です。\n2. **更新で審査されるのは障害の状態だけ。** 初診日や納付要件がやり直しになることはありません。受給権が白紙に戻る手続きではありません。\n3. **年金証書があれば、精神の手帳は診断書なしで取れる。** 年金証書の写しで申請でき、等級は年金の等級に対応します。手帳の診断書代が浮きます。\n4. **結婚しても、貯金があっても、年金はそのまま。** 結婚は停止事由ではありません。貯金や資産は審査に関係ありません。変わるのは健康保険の扶養など周辺の話です。\n5. **受給しながら厚生年金に入って働ける。** 払った保険料は将来の老齢厚生年金に積み上がります。「もらいながら払うのは二重」ではありません。\n\n## 次の一歩\n\n- 年金証書を手元に置いて、「次回診断書提出年月」を紙に書き出す。更新の準備は、その月の1年前から\n- 働き始める・作業所に通う予定なら、先に → 働くと年金はどうなるか(/jukyuugo/hataraku)\n- 「働いたら負け」と感じているなら → よくある誤解: 働いたら負け(/gokai/hataraitara-make)\n- 日々の記録を続けるなら、無料アプリで(入力した内容はサーバーへ送りません) → 無料iPhoneアプリ(/app)\n\n## 出典\n\n- 日本年金機構「障害年金業務統計(令和6年度決定分)」再認定304,456件・継続96.7%・増額1.4%・減額0.8%・支給停止1.1%、診断書種類別(精神障害・知的障害)継続238,772件・支給停止1,026件\n- 厚生労働省 社会保障審議会年金部会(第17回)資料2「障害年金の受給権者数 約255万人」(令和4年度末) 2024年7月30日\n- 厚生労働省「令和6年度工賃(賃金)の実績について」\n- 厚生労働省 社会保障審議会障害者部会(第147回)参考資料9(令和7年6月26日)\n- 日本年金機構「障害状態確認届(診断書)が届いたとき」「障害の程度が変わったとき」「年金の決定に不服があるとき」\n- 厚生労働省「精神の障害に係る等級判定ガイドライン」平成28年9月\n- 厚生労働省通知「年金証書等の写しによる精神障害者保健福祉手帳の障害等級の認定事務について」\n- 社会保険審査会 裁決集(令和6年3月分)\n- 確認日: 2026-09-06\n",
   },
   byoki: {
     title: "病気から探す",
@@ -338,7 +323,7 @@ export function renderHubIndex(kind: Kind) {
             <PageDate updated={latestHubCheckedDate(kind)} />
             <span>{total}{kind === "byoki" ? "の病気" : "ページ"}</span>
           </p>
-          {spec.hint ? <p className="hub-index-hint">{inlineLinks(spec.hint)}</p> : null}
+          {spec.hint ? (Array.isArray(spec.hint) ? spec.hint : [spec.hint]).map((text, index) => <p className="hub-index-hint" key={index}>{inlineLinks(text)}</p>) : null}
           {groups.length > 1 && groups[0].label ? (
             <nav className="hub-index-chips" aria-label="分類へ移動">
               {groups.map((group) => (
@@ -359,13 +344,19 @@ export function renderHubIndex(kind: Kind) {
               {spec.timeline.map((item, index) => (
                 <li className="p-timeline-item" key={item.when + index}>
                   <span className="p-timeline-when">{item.when}</span>
-                  <span className="p-timeline-what">{item.what}</span>
+                  <span className="p-timeline-what">{inlineLinks(item.what)}</span>
                   <Link className="p-timeline-link" href={item.href}>{item.label} →</Link>
                 </li>
               ))}
             </ol>
           </div>
         </section>
+      ) : null}
+
+      {spec.markdown ? (
+        <article className="p-container hub-reading-width hub-content hub-index-markdown">
+          <MarkdownArticle source={prepareHubSource(spec.markdown)} appCtaSlug={`hub-${kind}`} faqAccordion />
+        </article>
       ) : null}
 
       {spec.notes ? (

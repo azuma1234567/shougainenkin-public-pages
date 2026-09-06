@@ -97,10 +97,10 @@ export const HUBS: HubDefinition[] = [
 
   /* 幹10「受給が始まってから」。原稿 docs/jukyuugo-2026-09-05(shougainenkin repo)。 */
   hub("/jukyuugo/hataraku", "働くと年金はどうなるか", "働くと年金はどうなるか", "jukyuugo", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "koushin-kakuninhodo", "hatachi-mae", "hikazei-shuunyuu"]),
-  hub("/jukyuugo/sagyousho", "B型・A型作業所と障害年金", "B型・A型作業所と障害年金", "jukyuugo", true, ["hatarakinagara", "hatachi-mae", "shougaisha-koyou-nenkin", "koushin-kakuninhodo"]),
+  hub("/jukyuugo/sagyousho", "B型・A型作業所と障害年金", "B型・A型作業所と障害年金", "jukyuugo", true, ["hatarakinagara", "hatachi-mae", "shougaisha-koyou-nenkin", "koushin-kakuninhodo", "techou-to-nenkin"]),
   hub("/jukyuugo/nukedasu", "抜け出すロードマップ", "抜け出すロードマップ", "jukyuugo", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "koushin-kakuninhodo", "gaku-kaitei-seikyuu", "shikyuu-teishi-fukkatsu"]),
-  hub("/jukyuugo/okane", "受給後のお金の設計", "受給後のお金の設計", "jukyuugo", true, ["hikazei-shuunyuu", "jukyuugo-tetsuduki", "ikura-moraeru", "shoubyou-teatekin"]),
-  hub("/jukyuugo/a-gata-heisa", "A型事業所が閉鎖したとき", "A型事業所が閉鎖したとき", "jukyuugo", true, ["koushin-kakuninhodo", "shoubyou-teatekin", "shougaisha-koyou-nenkin", "jukyuugo-tetsuduki"]),
+  hub("/jukyuugo/okane", "受給後のお金の設計", "受給後のお金の設計", "jukyuugo", true, ["hikazei-shuunyuu", "jukyuugo-tetsuduki", "ikura-moraeru", "shoubyou-teatekin", "gaku-kaitei-seikyuu"]),
+  hub("/jukyuugo/a-gata-heisa", "A型事業所が閉鎖したとき", "A型事業所が閉鎖したとき", "jukyuugo", true, ["koushin-kakuninhodo", "shoubyou-teatekin", "shougaisha-koyou-nenkin", "jukyuugo-tetsuduki", "shikyuu-teishi-fukkatsu"]),
 ];
 
 export const HUB_BY_PATH = new Map(HUBS.map((item) => [item.path, item]));

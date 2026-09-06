@@ -1,0 +1,18 @@
+§2-6 /jukyuugo/hataraku: 期待 8 / JSON-LD 8 / 画面 8 / 一致 true
+§2-6 /jukyuugo/sagyousho: 期待 6 / JSON-LD 6 / 画面 6 / 一致 true
+§2-6 /jukyuugo/nukedasu: 期待 5 / JSON-LD 5 / 画面 5 / 一致 true
+§2-6 /jukyuugo/okane: 期待 5 / JSON-LD 5 / 画面 5 / 一致 true
+§2-6 /jukyuugo/a-gata-heisa: 期待 5 / JSON-LD 5 / 画面 5 / 一致 true
+§2-9 年表 11 行 / h2: 年金証書が届いてから、何が起きるか | 数字で見る、受給が始まってから | いちばん多い不安3つに、先に答えます | 受給が始まった人が、意外と知らない5つ | 次の一歩 | 出典 / extraCards(旧) 0 / カード 5 / hint 段落 3
+§2-8 1400px /jukyuugo: はみ出し 0px 表 1(横スクロール枠内 1) あなた 0 伏せ字 0
+§2-8 1400px /jukyuugo/hataraku: はみ出し 0px 表 3(横スクロール枠内 3) あなた 0 伏せ字 0
+§2-8 1400px /jukyuugo/sagyousho: はみ出し 0px 表 2(横スクロール枠内 2) あなた 0 伏せ字 0
+§2-8 1400px /jukyuugo/nukedasu: はみ出し 0px 表 1(横スクロール枠内 1) あなた 0 伏せ字 0
+§2-8 1400px /jukyuugo/okane: はみ出し 0px 表 3(横スクロール枠内 3) あなた 0 伏せ字 0
+§2-8 1400px /jukyuugo/a-gata-heisa: はみ出し 0px 表 2(横スクロール枠内 2) あなた 0 伏せ字 0
+§2-8 390px /jukyuugo: はみ出し 0px 表 1(横スクロール枠内 1) あなた 0 伏せ字 0
+§2-8 390px /jukyuugo/hataraku: はみ出し 0px 表 3(横スクロール枠内 0) あなた 0 伏せ字 0
+§2-8 390px /jukyuugo/sagyousho: はみ出し 0px 表 2(横スクロール枠内 1) あなた 0 伏せ字 0
+§2-8 390px /jukyuugo/nukedasu: はみ出し 0px 表 1(横スクロール枠内 0) あなた 0 伏せ字 0
+§2-8 390px /jukyuugo/okane: はみ出し 0px 表 3(横スクロール枠内 2) あなた 0 伏せ字 0
+§2-8 390px /jukyuugo/a-gata-heisa: はみ出し 0px 表 2(横スクロール枠内 1) あなた 0 伏せ字 0

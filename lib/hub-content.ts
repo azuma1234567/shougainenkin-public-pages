@@ -91,12 +91,11 @@ export const HUB_CONTENT: Record<string, HubContent> = {
   "/byoki/utsu-soukyoku": byokiUtsuSoukyoku, "/okane/ikura": okaneIkura,
   "/okane/zeikin": okaneZeikin, "/okane/chousei": okaneChousei,
 };
-export function getHubContent(path: string): HubContent | null {
-  const item = HUB_CONTENT[path];
-  if (!item) return null;
-  /* 原稿の「→ ラベル(/path)」をリンクにする。1行に2本目が「、」や「/」で続くことが
-     あるので、矢印のある行だけ2本目以降も変換する(変換しないと URL が本文に出る)。 */
-  const linked = apply2026Amounts(item.source)
+/* 原稿の markdown を描画用に整える。金額トークンを展開し、「→ ラベル(/path)」をリンクにする。
+   1行に2本目が「、」や「/」で続くことがあるので、矢印のある行だけ2本目以降も変換する
+   (変換しないと URL が本文に出る)。索引(/jukyuugo)の本文も同じ規則で描く。 */
+export function prepareHubSource(source: string): string {
+  return apply2026Amounts(source)
     .split("\n")
     .map((line) => {
       if (!line.includes("→ ")) return line;
@@ -104,7 +103,12 @@ export function getHubContent(path: string): HubContent | null {
       return first.replace(/(^|[、,／/]\s*)([^\n、,／/(\[\]]+)\((\/[^)]+)\)/g, "$1[$2]($3)");
     })
     .join("\n");
-  return { ...item, source: linked };
+}
+
+export function getHubContent(path: string): HubContent | null {
+  const item = HUB_CONTENT[path];
+  if (!item) return null;
+  return { ...item, source: prepareHubSource(item.source) };
 }
 
 // その種類(byoki/nayami/…)のハブ本文に書かれた「確認日 yyyy-mm-dd」の最大値。索引ページの最終更新日に使う。

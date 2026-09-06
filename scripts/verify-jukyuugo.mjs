@@ -4,7 +4,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const BASE = process.env.BASE ?? "http://localhost:3000";
-const SRC = "/Users/azumataisuke/Projects/shougainenkin/docs/jukyuugo-2026-09-05";
+const SRC = "/Users/azumataisuke/Projects/shougainenkin/docs/jukyuugo-2026-09-06";
 const URLS = ["/jukyuugo", "/jukyuugo/hataraku", "/jukyuugo/sagyousho", "/jukyuugo/nukedasu", "/jukyuugo/okane", "/jukyuugo/a-gata-heisa", "/gokai/hataraitara-make"];
 const results = [];
 const ok = (n, pass, detail) => results.push({ n, pass, detail });
@@ -62,7 +62,7 @@ const MANUSCRIPT = {
   "/jukyuugo/nukedasu": "03-nukedasu.md",
   "/jukyuugo/okane": "04-okane-sekkei.md",
   "/jukyuugo/a-gata-heisa": "06-a-gata-heisa.md",
-  "/gokai/hataraitara-make": "07-gokai-hataraitara-make.md",
+  "/gokai/hataraitara-make": "../jukyuugo-2026-09-05/07-gokai-hataraitara-make.md",  /* 誤解カードは第1稿のまま */
 };
 const three = [];
 for (const [url, file] of Object.entries(MANUSCRIPT)) {
@@ -77,7 +77,8 @@ three.push("/joukyou/65sai-ijou: 既存⊆新は commit 93ecccc で確認済み(
 ok(3, three.every((t) => t.includes("実装に無い 0") || t.startsWith("/joukyou")), three.join("\n  "));
 
 /* 4. 数字 */
-const NUMS = ["24,141", "91,451", "22,649", "86,752", "18,245", "4,220", "9,312", "7,292", "3,834", "2,171", "1,573", "4,884", "4,279", "2,073", "936", "304,456", "96.7", "1.1", "255万", "180万", "38万", "48万", "63万", "150", "300", "360", "520万"];
+/* README-codex-jukyuugo-v2-2026-09-06.md §3 の一覧 */
+const NUMS = ["304,456", "294,405", "96.7", "4,359", "1.4", "2,451", "0.8", "3,241", "1.1", "238,772", "1,026", "255万", "24,141", "22,649", "91,451", "86,752", "18,245", "4,220", "約29万", "約110万", "約114万", "約194万", "520万", "9,312", "7,292", "3,834", "2,171", "1,573", "4,884", "4,279", "2,073", "936", "1,059,125", "635,500", "243,800", "5,620", "7,025", "4,794,000", "38万", "48万", "63万", "180万", "130万", "150", "300", "360", "45歳", "65歳", "最長4年", "3か月", "2か月", "1年", "10年", "3年", "2分の1", "偶数月"];
 const allBody = Object.values(bodyText).join("\n");
 const missNum = NUMS.filter((n) => !allBody.includes(n));
 /* 実装に出る数字のうち、原稿にも共通部品にも無いもの */
