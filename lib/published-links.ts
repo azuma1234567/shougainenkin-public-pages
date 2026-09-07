@@ -2,8 +2,8 @@ import { HUB_BY_PATH } from "@/lib/hubs";
 
 // 本文から張る内部リンクのうち、公開済みのページへのものだけを通す。
 // 未公開のハブ(/erabu/hiyou-souba など)へのリンクは、公開されるまで出さない。
-/* /jitsurei#<裁決id> は実例集の各事案へのアンカー(記事の本文から張る) */
-const ALWAYS_PUBLISHED_PREFIXES = ["/columns/", "/yougo#", "/gokai/", "/jitsurei#"];
+/* /jitsurei?case=<裁決id> は実例集の該当事案のページを開く(記事の本文から張る) */
+const ALWAYS_PUBLISHED_PREFIXES = ["/columns/", "/yougo#", "/gokai/", "/jitsurei?case="];
 const ALWAYS_PUBLISHED_PATHS = ["/jitsurei", "/dougu/moushitatesho", "/dougu/kingaku", "/dougu/mitate", "/dougu/shorui", "/dougu/madoguchi", "/dougu/kougin", "/dougu/koushin"];
 // 実装が入るまで非公開にしているページ。ここにある間は本文からリンクしない。
 const UNPUBLISHED_PATHS: string[] = [];

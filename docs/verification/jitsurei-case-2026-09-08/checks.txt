@@ -1,0 +1,21 @@
+1400px /jitsurei?case=r04_05-06_04: 要素あり=true 画面内=true(top 81px, ヘッダー下端 73px, scrollY 1683) / 全件の実例 ・ 91件（3/8ページ）
+390px /jitsurei?case=r04_05-06_04: 要素あり=true 画面内=true(top 73px, ヘッダー下端 65px, scrollY 2897) / 全件の実例 ・ 91件（3/8ページ）
+1400px /jitsurei?case=r06-07_01: 要素あり=true 画面内=true(top 81px, ヘッダー下端 73px, scrollY 2749) / 全件の実例 ・ 91件（2/8ページ）
+390px /jitsurei?case=r06-07_01: 要素あり=true 画面内=true(top 73px, ヘッダー下端 65px, scrollY 4556) / 全件の実例 ・ 91件（2/8ページ）
+1400px /jitsurei?case=r07-07_02: 要素あり=true 画面内=true(top 81px, ヘッダー下端 73px, scrollY 3073) / 全件の実例 ・ 91件（1/8ページ）
+390px /jitsurei?case=r07-07_02: 要素あり=true 画面内=true(top 73px, ヘッダー下端 65px, scrollY 4794) / 全件の実例 ・ 91件（1/8ページ）
+1400px /jitsurei?case=r06-03_05: 要素あり=true 画面内=true(top 81px, ヘッダー下端 73px, scrollY 2120) / 全件の実例 ・ 91件（2/8ページ）
+390px /jitsurei?case=r06-03_05: 要素あり=true 画面内=true(top 73px, ヘッダー下端 65px, scrollY 3540) / 全件の実例 ・ 91件（2/8ページ）
+併用 /jitsurei?issue=first-visit&case=r06-07_01: 要素あり=true 画面内=true / 初診日の実例 ・ 35件（1/3ページ）
+併用 /jitsurei?filter=accepted&case=r06-03_05: 要素あり=true 画面内=true / 結論が変わったの実例 ・ 59件（2/5ページ）
+併用 /jitsurei?filter=first-visit&case=r06-03_05: 要素あり=false 画面内=false / 初診日の実例 ・ 35件（1/3ページ）
+/jitsurei?case=nope-01: 全件の実例 ・ 91件（1/8ページ） / 先頭の事案 r07-03_01 / scrollY 0
+/jitsurei: 全件の実例 ・ 91件（1/8ページ） / 先頭の事案 r07-03_01 / scrollY 0
+/jitsurei?page=2: 全件の実例 ・ 91件（2/8ページ） / 先頭の事案 r07-07_03 / scrollY 0
+記事の /jitsurei リンク: /jitsurei → 200 / /jitsurei?case=r04_05-06_04 → 200 / /jitsurei?case=r06-07_01 → 200 / /jitsurei?case=r07-07_02 → 200 / /jitsurei?case=r06-03_05 → 200 / #id の残り 0
+
+# まとめ(2026-09-08)
+- ?case=<id> は絞り込み後の並び(SAIKETSU_CASES → 傷病 → filter)でその id の載るページを描き、描画後に ScrollToCase が #<id> へスクロール(sticky ヘッダーの高さぶん下げる)。
+- 4本とも 1400px / 390px で開いた直後に該当事案がヘッダーの直下(画面内)。ページは 3/8・2/8・1/8・2/8。
+- ?issue=first-visit(旧)・?filter=accepted との併用 ○。絞り込みで外れる id(first-visit × r06-03_05)は1ページ目を普通に描く。無い id・id なし・?page=2 も従来どおり。
+- 記事 sharoushi-kawaranai-koto の4本は /jitsurei?case=<id> に(#id の残り 0)、すべて 200。verify:columns 10項目 + ★3記事 ○。

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb, CaseCard } from "@/components/platform/Platform";
+import ScrollToCase from "@/components/platform/ScrollToCase";
 import { SAIKETSU_CASES, SAIKETSU_COUNTS, type SaiketsuCase } from "@/lib/saiketsu";
 import { pageMetadata } from "@/lib/seo";
 
@@ -49,7 +50,12 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
   const diseaseFiltered = disease ? SAIKETSU_CASES.filter((item) => item.shobyo.includes(disease)) : SAIKETSU_CASES;
   const filtered = applyFilter(diseaseFiltered, filter);
   const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const currentPage = Number.isFinite(requestedPage) ? Math.min(Math.max(requestedPage, 1), pageCount) : 1;
+  /* ?case=<裁決id>: 絞り込み後の並びでその id が載るページを開き、描画後に #<id> へスクロールする(記事本文からの導線)。
+     id が無い(絞り込みで外れた・存在しない)ときは、page の指定どおり(既定は1ページ目)に描く。 */
+  const caseId = typeof params.case === "string" && /^[\w-]+$/.test(params.case) ? params.case : undefined;
+  const caseIndex = caseId ? filtered.findIndex((item) => item.id === caseId) : -1;
+  const pageFromRequest = Number.isFinite(requestedPage) ? Math.min(Math.max(requestedPage, 1), pageCount) : 1;
+  const currentPage = caseIndex >= 0 ? Math.floor(caseIndex / PAGE_SIZE) + 1 : pageFromRequest;
   const visible = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
   const resultLabel = disease ? `傷病「${disease}」` : filters.find((item) => item.key === filter)?.label ?? "実例";
   const issueCounts = [
@@ -113,6 +119,7 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
               </div>
             </nav>
             <p className="p-results">{resultLabel}の実例 ・ {filtered.length}件（{currentPage}/{pageCount}ページ）</p>
+            {caseIndex >= 0 && caseId ? <ScrollToCase id={caseId} /> : null}
             <div className="p-grid" style={{ gap: 12 }}>
               {visible.map((item) => <div key={item.id} id={item.id}><CaseCard item={item} /></div>)}
             </div>
