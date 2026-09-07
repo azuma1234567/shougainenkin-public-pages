@@ -279,6 +279,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     primaryCluster: "application",
     secondaryClusters: ["mental"],
     category: "相談・進め方",
+    orderInCategory: 10,
   },
   {
     slug: "shinsa-shikumi-nintei-i",
@@ -416,6 +417,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     dateModified: "2026-09-02",
     primaryCluster: "application",
     category: "相談・進め方",
+    orderInCategory: 20,
   },
   {
     slug: "jushinjokyo-shomeisho",
@@ -682,6 +684,21 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     dateModified: "2026-07-17",
     primaryCluster: "application",
     category: "相談・進め方",
+    orderInCategory: 30,
+  },
+  {
+    slug: "sharoushi-kawaranai-koto",
+    title:
+      "社労士に頼んでも変わらないこと、頼むと変わること — 障害年金の審査は、誰が何を決めているか",
+    metaTitle: "社労士に頼んでも変わらないこと、頼むと変わること|障害年金",
+    description:
+      "障害年金の等級を決めるのは医師の診断書で、社労士は診察室にいません。頼んでも変わらない3つと、初診日の証明・書類の整合・審査請求・体力の4つの頼むと変わることを、認定状況調査と裁決事例91件の数字で整理します。",
+    datePublished: "2026-09-07",
+    dateModified: "2026-09-07",
+    primaryCluster: "application",
+    category: "相談・進め方",
+    /* 相談・進め方は読む順: 無理のない進め方 → 年金事務所 → 自分で申請 → この記事(jibun-de-shinsei の直後) */
+    orderInCategory: 40,
   },
   {
     slug: "hatarakinagara",
@@ -798,7 +815,8 @@ export const COLUMNS: Column[] = BASE_COLUMNS.map((column) => {
   if (!hubAssignment) throw new Error(`ハブ棚割りがありません: ${column.slug}`);
   return {
     ...column,
-    dateModified: "2026-09-03",
+    /* 2026-09-03 の全記事の書き直し以降に公開・更新した記事は、自分の日付を使う */
+    dateModified: column.dateModified > "2026-09-03" ? column.dateModified : "2026-09-03",
     hubPrimary: hubAssignment.primary,
     hubSecondary: hubAssignment.secondary,
     role: hubAssignment.role,

@@ -47,8 +47,8 @@ for (const a of articles) {
 }
 
 {
-  const { check, finish } = failures(1, "47記事すべてにlead 3〜5項目・原稿との完全一致");
-  check(articles.length === 47, "記事数");
+  const { check, finish } = failures(1, "48記事すべてにlead 3〜5項目・原稿との完全一致");
+  check(articles.length === 48, "記事数");
   for (const a of articles) {
     check(a.lead.length >= 3 && a.lead.length <= 5, a.slug);
     check(readFileSync(`content/columns/${a.slug}.ts`, "utf8") === generatedColumn(a), `${a.slug}: 生成結果に差異`);
@@ -61,7 +61,8 @@ for (const a of articles) {
   const { check, finish } = failures(2, "本文の文中太字0（段落頭・表・Q・裁決リードのみ）");
   for (const a of articles) for (const line of a.content.split("\n")) {
     if (!line.includes("**") || line.startsWith("|")) continue;
-    check(/^\*\*[^*]+\*\*[^*]*$/.test(line), `${a.slug}: ${line}`);
+    /* 箇条書き・番号つきの項目の頭の太字(「1. **記録を始める。** …」)は段落頭と同じ扱い(2026-09-08) */
+    check(/^(?:[-*] |\d+\. )?\*\*[^*]+\*\*[^*]*$/.test(line), `${a.slug}: ${line}`);
   }
   finish();
 }

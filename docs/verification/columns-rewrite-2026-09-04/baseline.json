@@ -51,6 +51,16 @@
         "content",
         "sources"
       ]
+    },
+    "2026-09-08": {
+      "reason": "新記事の追加(docs/sharoushi-kawaranai-koto-2026-09-07-instructions.md)。48本目",
+      "slugs": [
+        "sharoushi-kawaranai-koto"
+      ],
+      "fields": [
+        "(新規)",
+        "special.links: あわせて読みたい(同じクラスタの自動補充)に新記事が入り、a4-insatsu・kikan-kugiri の /columns/hikazei-shuunyuu、teishutsusaki-yuusou の /columns/jukyuugo-tetsuduki が押し出された"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -430,6 +440,14 @@
       "h1": "障害年金の診断書のために、主治医に渡す「生活状況メモ」の書き方 — 診察で話せなくても、紙なら伝わる",
       "htmlTitle": "障害年金の診断書｜主治医に渡す「生活状況メモ」の書き方【具体例つき】｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/shinsatsu-mae-memo"
+    },
+    {
+      "slug": "sharoushi-kawaranai-koto",
+      "title": "社労士に頼んでも変わらないこと、頼むと変わること — 障害年金の審査は、誰が何を決めているか",
+      "metaTitle": "社労士に頼んでも変わらないこと、頼むと変わること|障害年金",
+      "h1": "社労士に頼んでも変わらないこと、頼むと変わること — 障害年金の審査は、誰が何を決めているか",
+      "htmlTitle": "社労士に頼んでも変わらないこと、頼むと変わること|障害年金｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/sharoushi-kawaranai-koto"
     }
   ],
   "special": {
@@ -465,7 +483,7 @@
         "/columns/koushin-kakuninhodo",
         "/columns/fushikyuu-shinsa-seikyu",
         "/columns/shinsatsu-mae-memo",
-        "/columns/hikazei-shuunyuu"
+        "/columns/sharoushi-kawaranai-koto"
       ],
       "cta": []
     },
@@ -509,7 +527,7 @@
         "/columns/koushin-kakuninhodo",
         "/columns/fushikyuu-shinsa-seikyu",
         "/columns/shinsatsu-mae-memo",
-        "/columns/hikazei-shuunyuu"
+        "/columns/sharoushi-kawaranai-koto"
       ],
       "cta": [
         "申請準備を、アプリでひとつずつこの記事の内容を、質問に答えるだけで進められるアプリを作りました。日々の記録が診察で医師に渡せる資料になり、申立書の下書きになります。ログイン不要・記録は端末の中に。すべての機能を無料で使えます。"
@@ -553,7 +571,7 @@
         "/columns/shinsatsu-mae-memo",
         "/columns/hitsuyou-shorui-seishin",
         "/columns/hikazei-shuunyuu",
-        "/columns/jukyuugo-tetsuduki"
+        "/columns/sharoushi-kawaranai-koto"
       ],
       "cta": []
     }

@@ -1,0 +1,12 @@
+2. lead 4 行 / faqs 6 問 / FAQPage 1 個(質問 6) / JSON-LD と faqs の Q が一致=true / 画面の Q 0 / JSON-LD 全体に <a: 0
+3. 本文の内部リンク 20 種類: 200 でないもの 0 
+3. /jitsurei#id 4 本: r04_05-06_04 → /jitsurei の 3 ページ目に id あり / r06-07_01 → /jitsurei の 2 ページ目に id あり / r07-07_02 → /jitsurei の 1 ページ目に id あり / r06-03_05 → /jitsurei の 2 ページ目に id あり
+4. 本文(.column-body): あなた=0 あなたは◯級=0 ◯級相当=0 通りそう=0 もらえそう=0 難しそう=0 厳しそう=0 道具=0 X・アカウント名=0 執筆メモ=0 / <main> 全体の「道具」=0「あなた」=0
+6. 記事末尾のテーマ導線のリンク: /erabu/jibun-ka-irai, /erabu/irai-subeki-case, /nayami/shindansho-komatta
+6. /erabu/jibun-ka-irai に新記事へのリンク: 1 本
+6. /erabu/irai-subeki-case に新記事へのリンク: 1 本
+6. /erabu/erabikata に新記事へのリンク: 0 本
+6. /erabu/hiyou-souba に新記事へのリンク: 0 本
+8. sitemap: 2026-09-07T00:00:00.000Z
+7. 1400px: 表 2 個(枠 wrap/auto, wrap/auto) / 矢印カード 16 枚(機能カード: /dougu/mitate, /dougu/moushitatesho) / 幅超え 0 / 横はみ出し 0px
+7. 390px: 表 2 個(枠 wrap/auto/横スクロール, wrap/auto/横スクロール) / 矢印カード 16 枚(機能カード: /dougu/mitate, /dougu/moushitatesho) / 幅超え 0 / 横はみ出し 0px
