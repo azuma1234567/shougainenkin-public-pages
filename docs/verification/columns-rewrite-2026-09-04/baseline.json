@@ -61,6 +61,29 @@
         "(新規)",
         "special.links: あわせて読みたい(同じクラスタの自動補充)に新記事が入り、a4-insatsu・kikan-kugiri の /columns/hikazei-shuunyuu、teishutsusaki-yuusou の /columns/jukyuugo-tetsuduki が押し出された"
       ]
+    },
+    "2026-09-08-dougu": {
+      "reason": "表示語の統一(道具→機能)",
+      "slugs": [
+        "hitsuyou-shorui-seishin",
+        "jibun-de-shinsei",
+        "kazoku-enjo-kakikata",
+        "moushitatesho-a4-insatsu",
+        "moushitatesho-kakikata",
+        "moushitatesho-kikan-kugiri",
+        "moushitatesho-mijushin-kikan",
+        "nenkin-jimusho-soudan",
+        "nichijo-seikatsu-7koumoku",
+        "shindansho-jittai-chigau",
+        "shindansho-kakunin",
+        "shinsatsu-mae-memo",
+        "shinsei-shindoi",
+        "teishutsusaki-yuusou",
+        "tokyu-hantei-guideline"
+      ],
+      "fields": [
+        "content(本文・lead の「道具」→「機能」。shinsatsu-mae-memo の1か所は「手段」)"
+      ]
     }
   },
   "baseRef": "76deb22",

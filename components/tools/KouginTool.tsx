@@ -122,7 +122,7 @@ export default function KouginTool() {
             <label className="kg-f" htmlFor="kg-shakai">前年に払った社会保険料(円)</label>
             <input type="number" inputMode="numeric" min={0} step={1} id="kg-shakai" placeholder="例: 180000"
               value={s.shakaiHoken ?? ""} onChange={(e) => patch({ shakaiHoken: numberField(e.target.value) })} />
-            <p className="kg-hintline">所得から引けるもののうち、この道具で扱うのは社会保険料控除だけです(国民年金法施行令 第6条の2)。本人の障害者控除は、20歳前傷病の障害基礎年金の受給権者については引けないと定められているので、入力欄を置いていません。入れなければ厳しめの結果になります。</p>
+            <p className="kg-hintline">所得から引けるもののうち、この機能で扱うのは社会保険料控除だけです(国民年金法施行令 第6条の2)。本人の障害者控除は、20歳前傷病の障害基礎年金の受給権者については引けないと定められているので、入力欄を置いていません。入れなければ厳しめの結果になります。</p>
           </div>
         </details>
 

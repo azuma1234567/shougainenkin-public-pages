@@ -121,7 +121,7 @@ export default function ShinseiRestyled() {
 
         <section className="shinsei-breather" aria-labelledby="breather-heading"><h2 id="breather-heading">申請の途中で、しんどくなったら</h2><p>全部を一度にやる必要はありません。今日は1つ思い出すだけ、書類の名前を確認するだけでも構いません。体調がいちばん優先です。止まることは失敗ではありません。</p><Link href="/columns/shinsei-shindoi">疲れ果てない小分けの進め方 →</Link></section>
 
-        <section className="shinsei-app" aria-labelledby="app-heading"><span className="p-label">申請準備の道具</span><h2 id="app-heading">申請の現在地と、次の一歩を、いつでも手元に</h2><p>「障害年金申請サポート」は、申請を代行するアプリではありません。日々の記録・診察メモ・申立書の準備を、自分のペースで進めるための道具です。</p><ul>{APP_POINTS.map((item) => <li key={item}><CheckIcon size={15} />{item}</li>)}</ul><AppStoreBadge href={APP_STORE_URL} /></section>
+        <section className="shinsei-app" aria-labelledby="app-heading"><span className="p-label">申請準備の味方</span><h2 id="app-heading">申請の現在地と、次の一歩を、いつでも手元に</h2><p>「障害年金申請サポート」は、申請を代行するアプリではありません。日々の記録・診察メモ・申立書の準備を、自分のペースで進めるための味方です。</p><ul>{APP_POINTS.map((item) => <li key={item}><CheckIcon size={15} />{item}</li>)}</ul><AppStoreBadge href={APP_STORE_URL} /></section>
 
         <section className="shinsei-section"><HubGokai hubPath="/shinsei" /></section>
 

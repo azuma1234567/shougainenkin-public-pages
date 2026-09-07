@@ -1,0 +1,22 @@
+(node:14212) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/azumataisuke/Projects/shougainenkin-public-pages/lib/columns.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/azumataisuke/Projects/shougainenkin-public-pages/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+仮定値: 300,000(shoubyou-teatekin: 標準報酬月額の平均(「30万円なら」))
+仮定値: 600,000(shoubyou-teatekin: 報酬比例部分(「報酬比例60万円」))
+仮定値: 1,447,300(shoubyou-teatekin: 600,000 + basicGrade2(847,300))
+仮定値: 1,800,000(shoubyou-teatekin: 年金の合計(「年180万円なら」))
+未説明額: 0件
+1. ○ 48記事すべてにlead 3〜5項目・原稿との完全一致
+2. ○ 本文の文中太字0（段落頭・表・Q・裁決リードのみ）
+3. ○ 道具リンク1本以上（指定3記事を除く）
+4. ○ 裁決IDはverifiedのみ・PDFリンクとして表示
+5. ○ 本文の内部リンクが公開済み・誤解カードの文言一致
+6. ○ 10万円以上の金額がamounts-deriveまたは宣言済み仮定値で説明できる
+7. ○ 禁止文字列・変更コメントなし
+8. ○ URL・slug・h1・title・metaTitleが作業前と一致
+9. ○ 47記事のFAQPageと画面のQ/Aが本文に一致
+10. ○ 375pxでページ横スクロールなし・目次は閉じた状態
+★ ○ moushitatesho-a4-insatsu: {"slug":"moushitatesho-a4-insatsu","ok":true,"missingHeadings":[],"missingLinks":[],"ctaOk":true,"oldCharacters":11054,"newCharacters":10816,"ratio":0.9784693323683734,"leadCharacters":295,"withLeadCharacters":11111,"withLeadRatio":1.0051565044327846}
+★ ○ moushitatesho-kikan-kugiri: {"slug":"moushitatesho-kikan-kugiri","ok":true,"missingHeadings":[],"missingLinks":[],"ctaOk":true,"oldCharacters":10979,"newCharacters":11705,"ratio":1.066126241005556,"leadCharacters":357,"withLeadCharacters":12062,"withLeadRatio":1.098642863648784}
+★ ○ teishutsusaki-yuusou: {"slug":"teishutsusaki-yuusou","ok":true,"missingHeadings":[],"missingLinks":[],"ctaOk":true,"oldCharacters":8924,"newCharacters":9536,"ratio":1.0685791125056028,"leadCharacters":393,"withLeadCharacters":9929,"withLeadRatio":1.112617660242044}
