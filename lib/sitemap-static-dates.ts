@@ -10,7 +10,7 @@ export const SITEMAP_STATIC_DATES: Record<string, string> = {
   "/shinsei": "2026-09-06",
   "/jitsurei": "2026-09-06",
   "/columns": "2026-09-06",
-  "/about": "2026-09-05",
+  "/about": "2026-09-08",
   "/support": "2026-09-02",
   "/privacy": "2026-09-05",
   "/terms": "2026-09-05",
