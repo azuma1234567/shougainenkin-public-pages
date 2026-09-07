@@ -33,8 +33,8 @@ export const SITEMAP_STATIC_DATES: Record<string, string> = {
   "/dougu/shorui": "2026-09-08",
   "/dougu/madoguchi": "2026-09-06",
   "/dougu/moushitatesho": "2026-09-05",
-  "/dougu/kougin": "2026-09-06",
-  "/dougu/koushin": "2026-09-06",
+  "/dougu/kougin": "2026-09-08",
+  "/dougu/koushin": "2026-09-08",
 };
 
 /* この表が対応する page.tsx の場所。公開前チェックが git の日付と突き合わせるのに使う。 */

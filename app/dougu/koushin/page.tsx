@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import KoushinTool from "@/components/tools/KoushinTool";
 import { TOOLS, TOOL_CROSS_LINKS } from "@/data/dougu";
-import { pageMetadata } from "@/lib/seo";
+import { faqJsonLd, pageMetadata } from "@/lib/seo";
 import { isPublishedInternalPath } from "@/lib/published-links";
 import { formatCount, formatPercent, stats, type StatCell } from "@/lib/stats";
 
@@ -32,6 +32,9 @@ const FAQ = [
   { q: "更新は毎年ありますか。", a: "毎年ではありません。障害の状態に応じて1〜5年ごとに個別に決まります。時期は年金証書の「次回診断書提出年月」で確認できます。" },
 ] as const;
 
+/* FAQPage の JSON-LD(質問・答えは上の FAQ のまま。答えに内部リンクは無い) */
+const faqLd = faqJsonLd(FAQ.map((f) => ({ question: f.q, answer: f.a })));
+
 const SOURCES = [
   "日本年金機構「障害状態確認届(診断書)が届いたとき」「障害の程度が変わったとき」「年金の決定に不服があるとき」",
   "日本年金機構「障害年金業務統計(令和6年度決定分)」",
@@ -47,6 +50,7 @@ const NEXT = [
 export default function Page() {
   return (
     <div className="platform kg-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <header className="dougu-hero">
         <div className="p-container kg-width">
           <Breadcrumb

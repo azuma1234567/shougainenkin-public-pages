@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import KouginTool from "@/components/tools/KouginTool";
+import { AMOUNTS_2026, FISCAL_YEAR, KOUGIN_2026 as K } from "@/data/amounts";
 import { TOOLS, TOOL_CROSS_LINKS } from "@/data/dougu";
-import { pageMetadata } from "@/lib/seo";
+import { num } from "@/lib/kougin";
+import { faqJsonLd, pageMetadata } from "@/lib/seo";
 import { isPublishedInternalPath } from "@/lib/published-links";
 
 /* docs/dougu-2hon-2026-09-06-instructions.md §A-4 の文言をそのまま使う。 */
@@ -27,6 +29,26 @@ const FAQ = [
   { q: "10月から線が変わるのはなぜですか。", a: "所得制限は前年(1〜12月)の所得で決まり、その年の10月分から翌年9月分までの支給に反映されます。区切りが10月なので、9月分までと10月分からで当てる基準額が違います。" },
 ] as const;
 
+/* FAQPage の JSON-LD(質問・答えは上の FAQ のまま。答えに内部リンクは無い) */
+const faqLd = faqJsonLd(FAQ.map((f) => ({ question: f.q, answer: f.a })));
+
+/* 線の一覧(静的な本文。docs/seo-nokori-2026-09-07-instructions.md §2-2)。値は data/amounts.ts から。 */
+const yen = (n: number) => `${num(n)}円`;
+const LINE_ROWS = [
+  { label: "2分の1停止の線(扶養親族なし)", before: yen(K.halfBeforeOctober), after: yen(K.halfFromOctober) },
+  { label: "全額停止の線(扶養親族なし)", before: yen(K.fullBeforeOctober), after: yen(K.fullFromOctober) },
+] as const;
+const ADDITION_ROWS = [
+  { label: "扶養親族等1人につき(2分の1停止の線に足す)", value: yen(K.dependentAddition) },
+  { label: "70歳以上の同一生計配偶者・老人扶養親族1人につき", value: yen(K.dependentElderlyAddition) },
+  { label: "特定扶養親族・19歳未満の控除対象扶養親族1人につき", value: yen(K.dependentSpecifiedAddition) },
+  { label: "全額停止の線に足す額(扶養親族等1人につき)", value: yen(K.fullLineDependentAddition) },
+] as const;
+const FUYOU_ROWS = [
+  { label: "障害年金を受けられる程度の障害がある人", value: `年収${AMOUNTS_2026.dependentDisabledIncomeLimit}万円未満(${yen(K.dependentLimitDisabled)}未満)` },
+  { label: "一般", value: `年収${AMOUNTS_2026.dependentGeneralIncomeLimit}万円未満(${yen(K.dependentLimitGeneral)}未満)` },
+] as const;
+
 const SOURCES = [
   "日本年金機構「20歳前の傷病による障害基礎年金にかかる支給制限等」",
   "厚生労働省 障発0715第2号・年発0715第1号(令和8年7月15日)",
@@ -46,6 +68,7 @@ const NEXT = [
 export default function Page() {
   return (
     <div className="platform kg-page">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       <header className="dougu-hero">
         <div className="p-container kg-width">
           <Breadcrumb
@@ -88,6 +111,16 @@ export default function Page() {
             })}
           </div>
         </section>
+
+        <div className="kg-static">
+          <section aria-labelledby="kg-static-lines">
+            <h2 id="kg-static-lines">線の一覧({FISCAL_YEAR})</h2>
+            <p>所得で年金が止まる仕組みがあるのは、初診日が20歳前にある障害基礎年金だけです。前年の所得を、9月分までと10月分からで違う線に当てます。</p>
+            <div className="article-table-wrap"><table className="kg-amounts"><thead><tr><th scope="col">20歳前傷病の所得制限の基準額</th><th scope="col">9月分まで</th><th scope="col">10月分から</th></tr></thead><tbody>{LINE_ROWS.map((r) => <tr key={r.label}><th scope="row">{r.label}</th><td>{r.before}</td><td>{r.after}</td></tr>)}</tbody></table></div>
+            <div className="article-table-wrap"><table className="kg-amounts"><thead><tr><th scope="col">扶養親族等の加算</th><th scope="col">額</th></tr></thead><tbody>{ADDITION_ROWS.map((r) => <tr key={r.label}><th scope="row">{r.label}</th><td>{r.value}</td></tr>)}</tbody></table></div>
+            <div className="article-table-wrap"><table className="kg-amounts"><thead><tr><th scope="col">健康保険の扶養の線</th><th scope="col">額</th></tr></thead><tbody>{FUYOU_ROWS.map((r) => <tr key={r.label}><th scope="row">{r.label}</th><td>{r.value}</td></tr>)}</tbody></table></div>
+          </section>
+        </div>
 
         <p className="p-source">出典: {SOURCES.join(" ／ ")}</p>
         <p><Link href="/jukyuugo">受給が始まってからへ戻る</Link></p>
