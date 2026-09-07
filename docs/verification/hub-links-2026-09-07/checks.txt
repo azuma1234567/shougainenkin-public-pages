@@ -1,0 +1,12 @@
+3. ハブ49本 + /jukyuugo の <main> のテキストノードにある「(/columns/」などの残り: 1 → /erabu/fushikyu-no-ato: (/jitsurei ×1 / 「[[」を含むページ 0
+4. 変更前に無く変更後に本文に現れたリンク先 32 種類 → 200 でないもの 0
+7. ハブ50ページの本文リンク(ナビ・パンくず除く) 合計 345 → 505(+160) / 減った先 0 / 増えた先 44 種類
+6. /nayami/fushikyu の「→ 」の段落 5 → 5 / outerHTML 一致=true
+5. 1400px /byoki/utsu-soukyoku: 「(/columns/」の文字 0 / 記事リンクつき li 15 / リンク色 rgb(2, 115, 173) / はみ出し 0px
+5. 390px /byoki/utsu-soukyoku: 「(/columns/」の文字 0 / 記事リンクつき li 15 / リンク色 rgb(2, 115, 173) / はみ出し 0px
+5. 1400px /joukyou/hatarakinagara: 「(/columns/」の文字 0 / 記事リンクつき li 11 / リンク色 rgb(2, 115, 173) / はみ出し 0px
+5. 390px /joukyou/hatarakinagara: 「(/columns/」の文字 0 / 記事リンクつき li 11 / リンク色 rgb(2, 115, 173) / はみ出し 0px
+5. 1400px /nayami/fushikyu: 「(/columns/」の文字 0 / 記事リンクつき li 11 / リンク色 rgb(2, 115, 173) / はみ出し 0px
+5. 390px /nayami/fushikyu: 「(/columns/」の文字 0 / 記事リンクつき li 11 / リンク色 rgb(2, 115, 173) / はみ出し 0px
+5. 1400px /okane/ikura: 「(/columns/」の文字 0 / 記事リンクつき li 14 / リンク色 rgb(2, 115, 173) / はみ出し 0px
+5. 390px /okane/ikura: 「(/columns/」の文字 0 / 記事リンクつき li 14 / リンク色 rgb(2, 115, 173) / はみ出し 0px
