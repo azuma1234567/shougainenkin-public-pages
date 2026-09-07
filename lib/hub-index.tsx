@@ -33,6 +33,8 @@ type IndexSpec = {
   markdown?: string;
   /** 年表。カードより前に、いつ→起きること→リンク の順で縦に並べる */
   timeline?: { when: string; what: string; label: string; href: string }[];
+  /** true のとき、道具カードとハブカードの一覧を年表の直後(markdown の前)に描き、下には描かない(/jukyuugo だけ) */
+  listFirst?: boolean;
   /** 年表の後に置く段落(原稿の文) */
   notes?: { heading: string; paragraphs: string[] };
   /** 幹のハブ以外に並べるカード(既存ページ) */
@@ -133,6 +135,8 @@ export const HUB_INDEX: Record<Kind, IndexSpec> = {
   jukyuugo: {
     title: "受給が始まってから",
     h1: "受給が始まってから",
+    /* markdown が長く、5ページへの入口が出典の下に沈むので、カードを年表の直後に出す(docs/seo-nokori-2026-09-07-instructions.md §1) */
+    listFirst: true,
     /* 第2稿(docs/jukyuugo-2026-09-06/00-index-jukyuugo.md)。リード4段落は1段落目を lead、
        残りを hint に。年表の下の本文は markdown をそのまま MarkdownArticle で描く。 */
     lead: "年金証書が届いた日、封筒を開けて、等級の数字を見て、それから何をすればいいのか分からなくなった。そういう人が多い。申請の情報は山ほどあるのに、「決まったあと」の情報は、なぜか薄い。",
@@ -372,6 +376,16 @@ export function renderHubIndex(kind: Kind) {
         </section>
       ) : null}
 
+      {spec.listFirst ? (
+        <section className="p-section" style={{ paddingBottom: 0 }} aria-labelledby="list-heading">
+          <div className="p-container">
+            <h2 className="hub-index-h2" id="list-heading">受給が始まってからの5ページ</h2>
+            {spec.tools ? <DouguCards className="hub-index-tool" placements={[...spec.tools]} variant="hub" /> : null}
+            <HubIndexList groups={groups} filterable={filterable} />
+          </div>
+        </section>
+      ) : null}
+
       {spec.markdown ? (
         <article className="p-container hub-reading-width hub-content hub-index-markdown">
           <MarkdownArticle source={prepareHubSource(spec.markdown)} appCtaSlug={`hub-${kind}`} faqAccordion />
@@ -387,10 +401,12 @@ export function renderHubIndex(kind: Kind) {
         </section>
       ) : null}
 
+      {/* listFirst で一覧を上に出したハブは、下に描くものが無ければこの節ごと出さない(空の余白を残さない) */}
+      {spec.listFirst && !spec.body && !spec.nextSteps && !spec.sources && !spec.tail ? null : (
       <section className="p-section">
         <div className="p-container">
-          {spec.tools ? <DouguCards className="hub-index-tool" placements={[...spec.tools]} variant="hub" /> : null}
-          <HubIndexList groups={groups} filterable={filterable} />
+          {spec.tools && !spec.listFirst ? <DouguCards className="hub-index-tool" placements={[...spec.tools]} variant="hub" /> : null}
+          {spec.listFirst ? null : <HubIndexList groups={groups} filterable={filterable} />}
 
           {spec.body ? (
             <div className="hub-index-how">
@@ -417,6 +433,7 @@ export function renderHubIndex(kind: Kind) {
           ) : null}
         </div>
       </section>
+      )}
     </div>
   );
 }
