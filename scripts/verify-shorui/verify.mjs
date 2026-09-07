@@ -28,9 +28,11 @@ const ids = (s) => shoruiDocs(s).map((d) => d.id);
 check(1, "/shinsei の申請の流れから /dougu/shorui へ行ける", () => {
   assert.ok(existsSync(PAGE), `${PAGE} が無い`);
   // /shinsei の8ステップの中に、この道具への導線がある
+  // (2026-09-07: トップの StepFlow はカードの href、/shinsei のステップカードは DouguCards で道具へリンクする)
   const flow = src("components/platform/StepFlow.tsx");
   assert.match(flow, /PLACEMENTS\.shinseiSteps\[stepId\]/, "申請の流れが道具の配置を読んでいない");
-  assert.match(flow, /href=\{placementCard\(placement\)\.href\}/, "ステップから道具へリンクしていない");
+  assert.match(flow, /href=\{card\.href\}/, "ステップから道具へリンクしていない");
+  assert.match(src("components/platform/ShinseiRestyled.tsx"), /<DouguCards placements=\{PLACEMENTS\.shinseiSteps\[step\.id\]\} variant="grid" \/>/, "/shinsei のステップカードが道具を出していない");
   const steps = Object.entries(PLACEMENTS.shinseiSteps)
     .filter(([, list]) => (list ?? []).some((x) => x.tool === "shorui")).map(([id]) => id);
   assert.ok(steps.length > 0, "申請の流れのどのステップにも置かれていない");
@@ -158,6 +160,8 @@ check(7, "様式のリンクがすべて機構の公式URL", () => {
   // ソースにも機構以外の外部URLが無いこと
   for (const f of SOURCES) {
     for (const m of src(f).matchAll(/https?:\/\/[^"'\s)]+/g)) {
+      /* 自サイトの URL(Smart App Banner の app-argument)は外部ではない(2026-09-05 に追加) */
+      if (m[0].startsWith("https://shougainenkin-note.net/")) continue;
       assert.ok(m[0].startsWith("https://www.nenkin.go.jp/"), `${f} に ${m[0]}`);
     }
   }
