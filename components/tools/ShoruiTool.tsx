@@ -74,7 +74,7 @@ export default function ShoruiTool() {
       </section>
 
       <section className="sr-card no-print" aria-labelledby="sr-q">
-        <h2 id="sr-q">あなたの場合に足すもの</h2>
+        <h2 id="sr-q">自分の場合に足すもの</h2>
         {SHORUI_QUESTIONS.map((q) => (
           <div className="sr-q" key={q.id}>
             <p className="sr-t" id={`sr-q-${q.id}`}>{q.t}</p>
@@ -152,7 +152,7 @@ function DocRow({ d, checked, onToggle, extra, hint }: { d: ShoruiDoc; checked: 
       <div className="sr-b">
         <label className="sr-n" htmlFor={`c-${d.id}`}>
           {d.n}
-          {added && <span className="sr-mine">あなたの場合</span>}
+          {added && <span className="sr-mine">自分の場合</span>}
           {d.why && <span className="sr-why">{d.why}</span>}
         </label>
         <span className="sr-links no-print">
