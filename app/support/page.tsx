@@ -10,7 +10,7 @@ import { PageDate } from "@/components/platform/Platform";
    端末に残るものは各道具の実装(lib/*-storage.ts と components/tools/*)のとおり。 */
 
 const DESCRIPTION =
-  "サイトの道具(等級の目安・金額・書類・年金事務所・申立書・工賃・更新)で何が端末に残るか、不具合の連絡に添えるもの、iPhoneアプリのよくある質問、連絡先。";
+  "サイトの機能(等級の目安・金額・書類・年金事務所・申立書・工賃・更新)で何が端末に残るか、不具合の連絡に添えるもの、iPhoneアプリのよくある質問、連絡先。";
 
 export const metadata: Metadata = pageMetadata({
   title: "お問い合わせ・サポート",
@@ -48,14 +48,14 @@ export default function SupportPage() {
       <h1>お問い合わせ・サポート</h1>
       <PageDate updated={UPDATED} />
 
-      <h2>サイトの道具について</h2>
+      <h2>サイトの機能について</h2>
       <p>
-        7本の道具は、どれも入力した内容をサーバーへ送りません。計算は端末のブラウザの中だけで行います。何が端末に残るかは、道具ごとに違います。
+        7つの機能は、どれも入力した内容をサーバーへ送りません。計算は端末のブラウザの中だけで行います。何が端末に残るかは、機能ごとに違います。
       </p>
       <div className="article-table-wrap" tabIndex={0}>
         <table>
           <thead>
-            <tr><th scope="col">道具</th><th scope="col">端末に残るもの</th><th scope="col">残さない方法</th></tr>
+            <tr><th scope="col">機能</th><th scope="col">端末に残るもの</th><th scope="col">残さない方法</th></tr>
           </thead>
           <tbody>
             {TOOL_STORAGE.map((row) => (
@@ -72,13 +72,13 @@ export default function SupportPage() {
         残るのは、お使いのブラウザの保存領域(localStorage)です。ブラウザの閲覧データを消すと、一緒に消えます。運営者はこの内容を見ることができません。
       </p>
 
-      <h3>道具がうまく動かないとき</h3>
+      <h3>機能がうまく動かないとき</h3>
       <p>
         次を添えて <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> へお知らせください。入力した内容(病名・日付・金額など)は書かないでください。不具合の再現に必要ありません。
       </p>
       <ul>
         <li>お使いの端末とブラウザ(例: iPhone の Safari、Windows の Chrome)</li>
-        <li>どの道具の、どの画面で</li>
+        <li>どの機能の、どの画面で</li>
         <li>何をしたら、何が起きたか(できれば画面の写真。入力内容が写らないように)</li>
       </ul>
 
@@ -135,7 +135,7 @@ export default function SupportPage() {
       </p>
 
       <p>
-        記事の誤り、道具の不具合、アプリの使い方、広告掲載のご相談は、いずれもこのアドレスへ。返信に数日いただくことがあります。病歴などの記載は不要です。
+        記事の誤り、機能の不具合、アプリの使い方、広告掲載のご相談は、いずれもこのアドレスへ。返信に数日いただくことがあります。病歴などの記載は不要です。
       </p>
     </>
   );
