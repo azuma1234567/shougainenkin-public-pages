@@ -1,12 +1,13 @@
 # /about /quality /support の書き直し(2026-09-07 指示書)結果報告
 
-指示書: docs/about-quality-support-2026-09-07-instructions.md §1〜§6。3ページとも server component で、文言は §1〜§3 の原稿のとおり。「任意の1段落」は入れていない(§4。判断が無いため)。「あなた」は新しい文で 0(残るのは原稿にある引用「あなたは◯級」だけ)。「個人で運営」「個人運営」0。黄色い箱・新しい CSS クラスなし。push はしていない。作業日は 2026-09-08。
+指示書: docs/about-quality-support-2026-09-07-instructions.md §1〜§6。3ページとも server component で、文言は §1〜§3 の原稿のとおり。「任意の1段落」は、最初の指示(9/8 朝)では判断が無かったので入れず、同日の再指示「任意の1段落は入れてください」で **入れた**(コミット5)。「あなた」は新しい文で 0(残るのは原稿にある引用「あなたは◯級」だけ)。「個人で運営」「個人運営」0。黄色い箱・新しい CSS クラスなし。push はしていない。作業日は 2026-09-08。
 
 コミット:
 1. `content(about): 「このサイトについて」に書き直す`(フッターの表示変更・SITE_LEGAL_UPDATED を含む)
 2. `content(quality): 情報の作り方と訂正の記録`(`data/corrections.ts` 新設)
 3. `content(support): サイトの道具の節を足し、アプリの節を整理`(この報告を含む)
 4. `fix(shorui): 「あなたの場合」を「自分の場合」に(2語)`((b) の検証ログを含む)
+5. `content(about): 任意の1段落を入れる`(再指示。1〜4 は push 済み)
 
 ## ★ アプリ側の確認(§3)
 
@@ -20,7 +21,7 @@
 | # | 内容 | 結果 |
 |---|---|---|
 | 1 | typecheck / build / prelaunch / site-graph | ○ / ○ / × は **B-10 だけ**(B-3・C-6・C-7 ○)/ **10 項目 ○** |
-| 2 | 本文が原稿と一致、「あなた」0、「個人で運営」「個人運営」0 | ○ 原稿のコードブロックの各行(「[…]」の指示行・★を除く)が本文にあるかを機械で照合: /about 16 本中、無いのは「任意の1段落」と「(/ads)(/privacy)のパス表記」の2行だけ(パスは本文ではリンク)。/quality 36 本すべて。/support 33 本すべて。「あなた」: /about 0・/support 0・/quality 2(原稿にある引用「あなたは◯級」の2か所)。「個人で運営」「個人運営」: 3ページとも 0 |
+| 2 | 本文が原稿と一致、「あなた」0、「個人で運営」「個人運営」0 | ○ 原稿のコードブロックの各行(「[…]」の指示行・★を除く)が本文にあるかを機械で照合: /about 16 本中、無いのは「(/ads)(/privacy)のパス表記」の1行だけ(パスは本文ではリンク。任意の1段落もコミット5で入り、一致)。/quality 36 本すべて。/support 33 本すべて。「あなた」: /about 0・/support 0・/quality 2(原稿にある引用「あなたは◯級」の2か所)。「個人で運営」「個人運営」: 3ページとも 0 |
 | 3 | `/about#ad-promises` と、`/terms` `/ads` `/quality` からのリンク | id は残した(h2「お金のこと」に `id="ad-promises"`)。**`/terms` `/ads` に `/about#ad-promises` へのリンクは刷新前から無く**(repo 全体で `ad-promises` を参照していたのは旧 `/quality` の1文だけ)、その1文は §2 の原稿に無いので消えた。いま `#ad-promises` への内部リンクは 0 本(下記) |
 | 4 | 訂正の記録が `data/corrections.ts` から3行 | ○ 3 行(2026-09-06 × 3: 申立書 / 更新関連の記事・カード(/columns/koushin-kakuninhodo ほか)/ 障害年金の金額) |
 | 5 | 道具の表7行が `TOOLS` の名前と一致、保存の挙動が実装と一致 | ○ 7 行の名前が `TOOLS[id].name` と完全一致。挙動をコードで確認: mitate = `saveMitate` はボタン「この結果を、この端末に残す」の1回だけ / kingaku = `localStorage` 参照なし / shorui = `saveShoruiChecks` を変更のたびに自動 + 「共用のパソコンを使っています(この端末に保存しない)」/ madoguchi = `useEffect` で pref/code を自動保存 + 同じボタン / moushitatesho = 500ms 後に自動保存(`noSave` で止まる)+ チェック「共用のパソコンなので、この端末に残さない」+ 「この端末の下書きを消す → 確認」/ kougin・koushin = ボタン「この端末に保存する」と「入力を消す」 |
@@ -31,7 +32,7 @@
 
 ## 変えたもの
 
-- `app/about/page.tsx`: §1 の原稿。title「このサイトについて(運営者情報)」、h1「このサイトについて」、パンくず「このサイトについて」。JSON-LD(BreadcrumbList・publisher)は現行のまま。「お金のこと」の h2 に `id="ad-promises"`、6項目・`adSourceList`・`HAS_ACTIVE_ADS` の切替は現行のまま。
+- `app/about/page.tsx`: §1 の原稿(任意の1段落「運営者自身が、申請する側の立場で…」を「誰が作っているか」の3段落目の後に入れた)。title「このサイトについて(運営者情報)」、h1「このサイトについて」、パンくず「このサイトについて」。JSON-LD(BreadcrumbList・publisher)は現行のまま。「お金のこと」の h2 に `id="ad-promises"`、6項目・`adSourceList`・`HAS_ACTIVE_ADS` の切替は現行のまま。
 - `app/quality/page.tsx`: §2 の原稿。title「情報の作り方と、訂正の記録」、h1「情報の作り方」。訂正の記録は `data/corrections.ts` から `article-table-wrap` の表で描く(h2 に `id="corrections"`)。アプリの知識は `QUALITY_METRICS` から。
 - `app/support/page.tsx`: §3 の原稿。道具の表は `TOOLS[id].name`(リンクつき)。旧「購入を復元できますか」を統合、「あなたが書いた言葉」→「本人が書いた言葉」、「※個人で運営しているため」を削除。
 - `data/corrections.ts`(新設): `Correction { date, page, path, others?, what, why }`。以後の訂正は報告と同時にここへ1行足す。
