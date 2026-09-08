@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb, CaseCard } from "@/components/platform/Platform";
 import ScrollToCase from "@/components/platform/ScrollToCase";
+import { resolveDiseaseFilter, resolveSotenFilter } from "@/lib/jitsurei-filters";
 import { SAIKETSU_CASES, SAIKETSU_COUNTS, type SaiketsuCase } from "@/lib/saiketsu";
 import { pageMetadata } from "@/lib/seo";
 
@@ -31,10 +32,11 @@ function applyFilter(items: SaiketsuCase[], filter: FilterKey) {
   return items;
 }
 
-function hrefFor(filter: FilterKey, page = 1, disease?: string) {
+function hrefFor(filter: FilterKey, page = 1, disease?: string, soten?: string) {
   const params = new URLSearchParams();
   if (filter !== "all") params.set("filter", filter);
   if (disease) params.set("傷病", disease);
+  if (soten) params.set("争点", soten);
   if (page > 1) params.set("page", String(page));
   const query = params.toString();
   return `/jitsurei${query ? `?${query}` : ""}`;
@@ -44,11 +46,24 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
   const params = await searchParams;
   const legacyFilter = params.kind === "mental" ? "mental" : params.issue === "first-visit" ? "first-visit" : params.outcome === "accepted" ? "accepted" : undefined;
   const filter = normalizeFilter(typeof params.filter === "string" ? params.filter : legacyFilter);
-  const diseaseParam = params["傷病"];
-  const disease = typeof diseaseParam === "string" && diseaseParam.trim() ? diseaseParam.trim() : undefined;
   const requestedPage = typeof params.page === "string" ? Number.parseInt(params.page, 10) : 1;
-  const diseaseFiltered = disease ? SAIKETSU_CASES.filter((item) => item.shobyo.includes(disease)) : SAIKETSU_CASES;
-  const filtered = applyFilter(diseaseFiltered, filter);
+  /* ?傷病=<語> は shobyo の部分一致、?争点=<語> は lib/jitsurei-filters.ts の対応表(soten・request_type_group など)。
+     旧 ?issue=teido は 争点「teido」として同じ表で引く。対応が無い語、または 1 件も残らない語は絞り込まない。
+     ?filter= ?kind= ?issue= ?outcome= の絞り込みと重ねられる(積集合)。 */
+  const diseaseParam = params["傷病"];
+  const sotenParam = typeof params["争点"] === "string" ? params["争点"] : params.issue === "teido" ? "teido" : undefined;
+  const diseaseResolved = resolveDiseaseFilter(typeof diseaseParam === "string" ? diseaseParam : undefined);
+  const sotenResolved = resolveSotenFilter(sotenParam);
+  const keepIfAny = (items: SaiketsuCase[], resolved: { predicate: (item: SaiketsuCase) => boolean } | null) => {
+    if (!resolved) return { items, applied: false };
+    const next = items.filter(resolved.predicate);
+    return next.length ? { items: next, applied: true } : { items, applied: false };
+  };
+  const byDisease = keepIfAny(SAIKETSU_CASES, diseaseResolved);
+  const bySoten = keepIfAny(byDisease.items, sotenResolved);
+  const disease = byDisease.applied && diseaseResolved ? diseaseResolved.matched[0] : undefined;
+  const soten = bySoten.applied && sotenResolved ? sotenResolved.matched.join("・") : undefined;
+  const filtered = applyFilter(bySoten.items, filter);
   const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   /* ?case=<裁決id>: 絞り込み後の並びでその id が載るページを開き、描画後に #<id> へスクロールする(記事本文からの導線)。
      id が無い(絞り込みで外れた・存在しない)ときは、page の指定どおり(既定は1ページ目)に描く。 */
@@ -57,7 +72,8 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
   const pageFromRequest = Number.isFinite(requestedPage) ? Math.min(Math.max(requestedPage, 1), pageCount) : 1;
   const currentPage = caseIndex >= 0 ? Math.floor(caseIndex / PAGE_SIZE) + 1 : pageFromRequest;
   const visible = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
-  const resultLabel = disease ? `傷病「${disease}」` : filters.find((item) => item.key === filter)?.label ?? "実例";
+  const narrowed = [disease ? `傷病「${disease}」` : "", soten ? `争点「${soten}」` : ""].filter(Boolean).join("・");
+  const resultLabel = narrowed || (filters.find((item) => item.key === filter)?.label ?? "実例");
   const issueCounts = [
     ["障害の程度・等級該当性", SAIKETSU_CASES.filter((item) => item.soten.includes("障害の程度・等級該当性")).length],
     ["初診日", SAIKETSU_COUNTS.firstVisit],
@@ -125,8 +141,8 @@ export default async function JitsureiPage({ searchParams }: { searchParams: Pro
             </div>
             {pageCount > 1 && (
               <nav className="p-chips" aria-label="実例一覧のページ">
-                {currentPage > 1 && <Link className="p-chip" href={hrefFor(filter, currentPage - 1, disease)}>← 前のページ</Link>}
-                {currentPage < pageCount && <Link className="p-chip" href={hrefFor(filter, currentPage + 1, disease)}>次のページ →</Link>}
+                {currentPage > 1 && <Link className="p-chip" href={hrefFor(filter, currentPage - 1, disease, soten)}>← 前のページ</Link>}
+                {currentPage < pageCount && <Link className="p-chip" href={hrefFor(filter, currentPage + 1, disease, soten)}>次のページ →</Link>}
               </nav>
             )}
           </div>
