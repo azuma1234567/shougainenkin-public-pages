@@ -83,9 +83,9 @@ export const HUBS: HubDefinition[] = [
   hub("/okane/chousei", "他の制度との調整", "制度との調整", "okane", true),
   hub("/erabu/jibun-ka-irai", "自分で申請するか、依頼するか", "自分で・依頼", "erabu", true, ["jibun-de-shinsei", "sharoushi-kawaranai-koto", "nenkin-jimusho-soudan", "shinsei-shindoi"]),
   hub("/erabu/irai-subeki-case", "専門家に頼んだほうがいいケース", "頼んだほうがいいケース", "erabu", true, ["sharoushi-kawaranai-koto"]),
-  hub("/erabu/hiyou-souba", "障害年金にかかるお金の話", "かかるお金", "erabu", true),
-  hub("/erabu/erabikata", "社労士の選び方", "社労士の選び方", "erabu", true),
-  hub("/erabu/fushikyu-no-ato", "不支給と言われたあと、何ができるか", "不支給のあと", "erabu", true),
+  hub("/erabu/hiyou-souba", "障害年金にかかるお金の話", "かかるお金", "erabu", true, ["sharoushi-kawaranai-koto"]),
+  hub("/erabu/erabikata", "社労士の選び方", "社労士の選び方", "erabu", true, ["sharoushi-kawaranai-koto"]),
+  hub("/erabu/fushikyu-no-ato", "不支給と言われたあと、何ができるか", "不支給のあと", "erabu", true, ["sharoushi-kawaranai-koto"]),
   // /senmonka を公開するときは、一覧テンプレートに次の2つを常時表示すること
   // (2026-09-03 の法務ページ刷新の指示書 §8-6)。無料掲載にも広告掲載規約が及ぶ。
   //   1. <AdLabel kind="掲載(広告)" /> と /ads(広告掲載について)へのリンク
