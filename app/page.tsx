@@ -14,7 +14,7 @@ import { SHOW_LISTINGS } from "@/lib/ads";
 import { COLUMNS } from "@/lib/columns";
 import { SITE_NAME, SITE_URL } from "@/lib/constants";
 import { findCases, SAIKETSU_COUNTS } from "@/lib/saiketsu";
-import { ABOUT_PUBLISHER_ID, pageMetadata } from "@/lib/seo";
+import { ABOUT_PUBLISHER_ID, organizationJsonLd, pageMetadata } from "@/lib/seo";
 import { YOUGO } from "@/data/yougo";
 import { GOKAI } from "@/data/gokai";
 import { searchableYomi } from "@/lib/yougo";
@@ -179,15 +179,22 @@ function Listings() {
 }
 
 export default function HomePage() {
+  /* WebSite と Organization を1つの @graph で結ぶ(docs/seo-2026-09-08-instructions.md §2)。
+     script は1つだけにする。サイト内検索が無いので SearchAction は入れない。 */
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${SITE_URL}/#website`,
-    name: SITE_NAME,
-    url: SITE_URL,
-    description: DESCRIPTION,
-    // 発行元の実体は /about に置いている(lib/seo.ts の publisherJsonLd)。
-    publisher: { "@id": ABOUT_PUBLISHER_ID },
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        name: SITE_NAME,
+        url: SITE_URL,
+        description: DESCRIPTION,
+        inLanguage: "ja",
+        publisher: { "@id": ABOUT_PUBLISHER_ID },
+      },
+      organizationJsonLd,
+    ],
   };
 
   return (

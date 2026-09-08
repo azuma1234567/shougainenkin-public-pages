@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { APP_STORE_ID, AUTHOR_NAME, CONTACT_EMAIL, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { APP_STORE_ID, APP_STORE_URL, AUTHOR_NAME, CONTACT_EMAIL, SITE_NAME, SITE_URL, X_PROFILE_URL } from "@/lib/constants";
 
 export const OG_IMAGE = {
   url: "/opengraph-image",
@@ -106,10 +106,23 @@ export function pageMetadata({
   };
 }
 
-// 運営者と発行元。実体は /about に置き、トップの WebSite.publisher からこの @id を
-// 参照する。記事の columnJsonLd も同じ @id を使い、著者・発行元を結ぶ。
+// 運営者と発行元。Person の実体は /about、Organization はサイト全体のものなので
+// トップ(/#organization)に置き、/about と記事の columnJsonLd は同じ @id を参照する。
 export const ABOUT_PERSON_ID = `${SITE_URL}/about#person`;
-export const ABOUT_PUBLISHER_ID = `${SITE_URL}/about#organization`;
+export const ABOUT_PUBLISHER_ID = `${SITE_URL}/#organization`;
+
+/* Organization の実体。トップと /about の両方に出すので、定義はここ1か所にする
+   (docs/seo-2026-09-08-instructions.md §2)。sameAs は運営が同じだと確かめられる
+   外部の場所だけを書く。サイト内検索が無いので SearchAction は入れない。 */
+export const organizationJsonLd = {
+  "@type": "Organization",
+  "@id": ABOUT_PUBLISHER_ID,
+  name: SITE_NAME,
+  url: SITE_URL,
+  email: CONTACT_EMAIL,
+  founder: { "@id": ABOUT_PERSON_ID },
+  sameAs: [X_PROFILE_URL, APP_STORE_URL],
+};
 
 // /about に出す Person / Organization。
 export const publisherJsonLd = {
@@ -121,13 +134,6 @@ export const publisherJsonLd = {
       name: AUTHOR_NAME,
       url: `${SITE_URL}/about`,
     },
-    {
-      "@type": "Organization",
-      "@id": ABOUT_PUBLISHER_ID,
-      name: SITE_NAME,
-      url: SITE_URL,
-      email: CONTACT_EMAIL,
-      founder: { "@id": ABOUT_PERSON_ID },
-    },
+    organizationJsonLd,
   ],
 };

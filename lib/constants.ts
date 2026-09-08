@@ -23,6 +23,10 @@ function resolveAppStoreUrl(): string {
 
 export const APP_STORE_URL = resolveAppStoreUrl();
 
+/* 運営の X。構造化データの Organization.sameAs で、サイトと同じ運営であることを示す
+   (docs/seo-2026-09-08-instructions.md §2)。画面には出さない。 */
+export const X_PROFILE_URL = "https://x.com/shougainenkinn";
+
 // 記事ごとの流入計測用キャンペーンリンクを生成する
 // ct = キャンペーン名(記事slugを渡す)
 export const appStoreLink = (_ct: string) => APP_STORE_URL;
