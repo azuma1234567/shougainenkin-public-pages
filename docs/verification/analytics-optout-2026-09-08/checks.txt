@@ -1,0 +1,15 @@
+2. 空の状態で / を開く: バナー要素 0 個 / gtag/js 1 本 / collect 1 回
+2. クライアント遷移で /privacy へ: collect が 1 → 2 回(遷移で +1)
+2. さらに /about を開く: collect 3 回(累計)。ページごと1回=true
+2. localStorage: null(未設定のまま計測している)
+3. denied で2ページ開く: gtag/js の読み込み 0 本 / script タグ 0 個 / collect 0 回 / ボタン「アクセス解析を再開する」
+4. 停止する: Cookie ["_ga_PHHDYX0H53","_ga"] → [] / localStorage=denied / 押したあと〜次のページで collect 増分 0
+4. 停止後の /privacy: ボタン「アクセス解析を再開する」 collect 累計 1
+5. 再開する前: ボタン「アクセス解析を再開する」 collect 0
+5. 再開する: localStorage=granted / collect 1 回 / ボタン「アクセス解析を停止する」
+6. /privacy 第5条: §2-2 の文 12 本中、無いもの 0
+6b. 公開 11 ページの本文に「同意バナー」「同意する」「拒否する」: 0 件
+7. /privacy を印刷メディアで: ボタンの display=none
+7. 申立書の印刷ページ(/dougu/moushitatesho/insatsu)を印刷メディアで: .mt-print-page=true / オプトアウトのボタン 0 個 / バナー 0 個 / フッター display=none / 画面固定で見えている要素 []
+8. 1400px /privacy: 横はみ出し 0px / バナー 0 個 / 画面固定の要素 [] / フッター下の余白 0px
+8. 390px /privacy: 横はみ出し 0px / バナー 0 個 / 画面固定の要素 [] / フッター下の余白 0px
