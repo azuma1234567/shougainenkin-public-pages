@@ -7,7 +7,8 @@ import { Breadcrumb, PageDate } from "@/components/platform/Platform";
 import { extractHubFaqs, getHubContent } from "@/lib/hub-content";
 import { faqJsonLd } from "@/lib/seo";
 import { hubColumnSlugs, type HubDefinition, HUBS } from "@/lib/hubs";
-import { getColumn } from "@/lib/columns";
+import { COLUMNS, type Column } from "@/lib/columns";
+import { isPublishedInternalPath } from "@/lib/published-links";
 
 const siblingLinks: Record<string, string[]> = {
   "/byoki/utsu-soukyoku": ["/byoki/tougou"],
@@ -39,6 +40,23 @@ const siblingLabels: Record<string, string> = {
   "/byoki/shikaku": "目の障害", "/byoki/choukaku": "耳の障害・めまい", "/byoki/gengo": "話す・食べる機能の障害", "/byoki/nanbyou": "難病・その他の病気",
 };
 
+export const HUB_RELATED_LIMIT = 8;
+
+/* ハブの関連記事: 逆引き(primary → secondary)→ relatedSlugs の順。重複は1枚、存在しない slug と未公開の記事は除き、上限8枚。 */
+export function relatedColumnsOfHub(hub: HubDefinition): Column[] {
+  const bySlug = new Map(COLUMNS.map((column) => [column.slug, column] as const));
+  const seen = new Set<string>();
+  const out: Column[] = [];
+  for (const slug of [...hubColumnSlugs(hub.path), ...hub.relatedSlugs]) {
+    if (seen.has(slug)) continue;
+    const column = bySlug.get(slug);
+    if (!column || !isPublishedInternalPath(`/columns/${slug}`)) continue;
+    seen.add(slug);
+    out.push(column);
+  }
+  return out.slice(0, HUB_RELATED_LIMIT);
+}
+
 export default function HubLanding({ hub }: { hub: HubDefinition }) {
   const content = getHubContent(hub.path);
   if (!content) return null;
@@ -54,8 +72,10 @@ export default function HubLanding({ hub }: { hub: HubDefinition }) {
      Article も出さない(ハブはまとめページ。無理に付けると列記事と競合する)。 */
   const faqs = extractHubFaqs(content.source);
   /* ハブ → 記事 の導線(指示書 2026-09-04 その2 §2 T8)。
-     手書きの siblingLinks は増やさず、記事側の棚割りを逆引きして出す。 */
-  const themeColumns = hubColumnSlugs(hub.path).map(getColumn);
+     手書きの siblingLinks は増やさず、記事側の棚割りを逆引き(primary → secondary)して出し、
+     そのあとに hub の relatedSlugs を足す(2026-09-08)。重複は1枚、存在しない slug と未公開の記事は出さない。
+     1ハブの上限は8枚(超える分は relatedSlugs の後ろから落とす)。 */
+  const themeColumns = relatedColumnsOfHub(hub);
   return <div className={`platform hub-landing${hub.kind === "erabu" ? " hub-erabu" : ""}`}>
     {faqs.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)).replace(/</g, "\\u003c") }} />}
     <header className="p-page-hero"><div className="p-container hub-reading-width"><Breadcrumb items={crumbs} currentPath={hub.path} /><h1>{content.title}</h1><PageDate updated={content.dateModified} /></div></header>

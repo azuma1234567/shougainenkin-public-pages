@@ -1,0 +1,40 @@
+関連記事が変わったハブ 19 件:
+  /byoki/hattatsu: 1 → 2 枚
+  /byoki/utsu-soukyoku: 5 → 7 枚
+  /erabu/erabikata: 0 → 1 枚
+  /erabu/fushikyu-no-ato: 2 → 3 枚
+  /erabu/hiyou-souba: 0 → 1 枚
+  /erabu/jibun-ka-irai: 3 → 4 枚
+  /joukyou/hatarakinagara: 2 → 3 枚
+  /joukyou/hitorigurashi: 1 → 2 枚
+  /joukyou/shoubyou-teatekin-kara: 1 → 2 枚
+  /jukyuugo/a-gata-heisa: 1 → 5 枚
+  /jukyuugo/hataraku: 2 → 5 枚
+  /jukyuugo/nukedasu: 2 → 5 枚
+  /jukyuugo/okane: 2 → 5 枚
+  /jukyuugo/sagyousho: 1 → 5 枚
+  /nayami/fushikyu: 4 → 5 枚
+  /nayami/shikyuu-teishi: 1 → 2 枚
+  /nayami/shindansho-komatta: 8 → 8 枚 / 落とした: shindansho-ishi-ni-tsutaeru, nichijo-seikatsu-7koumoku
+  /nayami/sokyuu: 2 → 3 枚
+  /okane/ikura: 5 → 6 枚
+被リンク(ハブ49ページの本文から、ナビ・パンくず除く): 合計 489 → 520(+31) / 減った先 0 / 増えた先 19 種類
+/erabu/jibun-ka-irai の関連記事に /columns/sharoushi-kawaranai-koto: ○(4 枚)
+/erabu/irai-subeki-case の関連記事に /columns/sharoushi-kawaranai-koto: ○(3 枚)
+/erabu/erabikata の関連記事に /columns/sharoushi-kawaranai-koto: ○(1 枚)
+/erabu/hiyou-souba の関連記事に /columns/sharoushi-kawaranai-koto: ○(1 枚)
+/erabu/fushikyu-no-ato の関連記事に /columns/sharoushi-kawaranai-koto: ○(3 枚)
+/nayami/fushikyu の関連記事に /columns/fushikyu-85ken: ○(5 枚)
+/erabu/fushikyu-no-ato の関連記事に /columns/fushikyu-85ken: ○(3 枚)
+1400px /erabu/erabikata: 関連記事 1 枚 / 幅超え 0 / 横はみ出し 0px
+390px /erabu/erabikata: 関連記事 1 枚 / 幅超え 0 / 横はみ出し 0px
+1400px /jukyuugo/sagyousho: 関連記事 5 枚 / 幅超え 0 / 横はみ出し 0px
+390px /jukyuugo/sagyousho: 関連記事 5 枚 / 幅超え 0 / 横はみ出し 0px
+1400px /nayami/fushikyu: 関連記事 5 枚 / 幅超え 0 / 横はみ出し 0px
+390px /nayami/fushikyu: 関連記事 5 枚 / 幅超え 0 / 横はみ出し 0px
+
+# まとめ(2026-09-08)
+- HubLanding の関連記事 = 逆引き(primary → secondary)→ hub.relatedSlugs。重複は1枚、存在しない slug・未公開は除く、上限8枚。
+- 変わったハブ 19 件(+31 枚)。上限に当たったのは /nayami/shindansho-komatta だけ(逆引き8枚で満杯。relatedSlugs の shindansho-ishi-ni-tsutaeru・nichijo-seikatsu-7koumoku の2枚を落とした)。
+- 被リンク(ハブ49ページの本文から)は 489 → 520、減った先 0。verify:site-graph 10 項目 ○、検査2の未達は変更前と同じ2件(gokai の2枚)。
+- /erabu 5ページ全部に sharoushi-kawaranai-koto、/nayami/fushikyu と /erabu/fushikyu-no-ato に fushikyu-85ken。1400/390 で幅超え・横はみ出し 0。
