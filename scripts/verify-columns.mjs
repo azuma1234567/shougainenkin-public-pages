@@ -47,8 +47,8 @@ for (const a of articles) {
 }
 
 {
-  const { check, finish } = failures(1, "48記事すべてにlead 3〜5項目・原稿との完全一致");
-  check(articles.length === 48, "記事数");
+  const { check, finish } = failures(1, "49記事すべてにlead 3〜5項目・原稿との完全一致");
+  check(articles.length === 49, "記事数");
   for (const a of articles) {
     check(a.lead.length >= 3 && a.lead.length <= 5, a.slug);
     check(readFileSync(`content/columns/${a.slug}.ts`, "utf8") === generatedColumn(a), `${a.slug}: 生成結果に差異`);

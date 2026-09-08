@@ -293,6 +293,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     primaryCluster: "application",
     secondaryClusters: ["medical-certificate", "mental"],
     category: "結果を待つ・不支給のとき",
+    orderInCategory: 10,
   },
   {
     slug: "teishutsusaki-yuusou",
@@ -471,6 +472,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     dateModified: "2026-09-02",
     primaryCluster: "application",
     category: "結果を待つ・不支給のとき",
+    orderInCategory: 20,
   },
   {
     slug: "moushitatesho-kikan-kugiri",
@@ -662,6 +664,19 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     orderInCategory: 80,
   },
   {
+    slug: "fushikyu-85ken",
+    title: "不支給になった85人が教えること — 精神の障害年金で落ちた理由、4つの型",
+    metaTitle: "障害年金の不支給、落ちた理由の4つの型|85件の調査から",
+    description:
+      "厚生労働省が精神の障害の不支給85件を1件ずつ調べた結果、落ちた理由は4つの型に分かれます。4人に3人は診断書の目安表では2級の位置にいました。不支給率の推移、点検で覆った444件、これから申請する人と通知が来た人がやることを整理します。",
+    datePublished: "2026-09-08",
+    dateModified: "2026-09-08",
+    primaryCluster: "application",
+    category: "結果を待つ・不支給のとき",
+    /* 結果を待つ・不支給のとき は読む順: 審査のしくみ → 申請期間 → この記事(理由) → 審査請求(手続き) */
+    orderInCategory: 30,
+  },
+  {
     slug: "fushikyuu-shinsa-seikyu",
     title:
       "障害年金が不支給になったら｜審査請求・再審査請求・再請求の選び方",
@@ -672,6 +687,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     dateModified: "2026-08-27",
     primaryCluster: "application",
     category: "結果を待つ・不支給のとき",
+    orderInCategory: 40,
   },
   {
     slug: "jibun-de-shinsei",

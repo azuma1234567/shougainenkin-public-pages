@@ -84,6 +84,16 @@
       "fields": [
         "content(本文・lead の「道具」→「機能」。shinsatsu-mae-memo の1か所は「手段」)"
       ]
+    },
+    "2026-09-08-fushikyu-85ken": {
+      "reason": "新記事の追加(docs/fushikyu-85ken-2026-09-08-instructions.md)。49本目",
+      "slugs": [
+        "fushikyu-85ken"
+      ],
+      "fields": [
+        "(新規)",
+        "special.links: あわせて読みたい(同じクラスタの自動補充)に新記事が入り、a4-insatsu・kikan-kugiri の /columns/sharoushi-kawaranai-koto、teishutsusaki-yuusou の /columns/hikazei-shuunyuu が押し出された"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -471,6 +481,14 @@
       "h1": "社労士に頼んでも変わらないこと、頼むと変わること — 障害年金の審査は、誰が何を決めているか",
       "htmlTitle": "社労士に頼んでも変わらないこと、頼むと変わること|障害年金｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/sharoushi-kawaranai-koto"
+    },
+    {
+      "slug": "fushikyu-85ken",
+      "title": "不支給になった85人が教えること — 精神の障害年金で落ちた理由、4つの型",
+      "metaTitle": "障害年金の不支給、落ちた理由の4つの型|85件の調査から",
+      "h1": "不支給になった85人が教えること — 精神の障害年金で落ちた理由、4つの型",
+      "htmlTitle": "障害年金の不支給、落ちた理由の4つの型|85件の調査から｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/fushikyu-85ken"
     }
   ],
   "special": {
@@ -506,7 +524,7 @@
         "/columns/koushin-kakuninhodo",
         "/columns/fushikyuu-shinsa-seikyu",
         "/columns/shinsatsu-mae-memo",
-        "/columns/sharoushi-kawaranai-koto"
+        "/columns/fushikyu-85ken"
       ],
       "cta": []
     },
@@ -550,7 +568,7 @@
         "/columns/koushin-kakuninhodo",
         "/columns/fushikyuu-shinsa-seikyu",
         "/columns/shinsatsu-mae-memo",
-        "/columns/sharoushi-kawaranai-koto"
+        "/columns/fushikyu-85ken"
       ],
       "cta": [
         "申請準備を、アプリでひとつずつこの記事の内容を、質問に答えるだけで進められるアプリを作りました。日々の記録が診察で医師に渡せる資料になり、申立書の下書きになります。ログイン不要・記録は端末の中に。すべての機能を無料で使えます。"
@@ -593,7 +611,7 @@
         "/columns/shinsei-kikan",
         "/columns/shinsatsu-mae-memo",
         "/columns/hitsuyou-shorui-seishin",
-        "/columns/hikazei-shuunyuu",
+        "/columns/fushikyu-85ken",
         "/columns/sharoushi-kawaranai-koto"
       ],
       "cta": []

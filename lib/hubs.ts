@@ -72,7 +72,7 @@ export const HUBS: HubDefinition[] = [
   hub("/joukyou/gakusei", "学生のとき", "学生", "joukyou", true),
   hub("/joukyou/kazoku-ga-tetsudau", "家族が申請を手伝うとき", "家族が手伝う", "joukyou", true),
   hub("/joukyou/seikatsu-hogo", "生活保護を受けているとき", "生活保護", "joukyou", true),
-  hub("/nayami/fushikyu", "不支給と言われたとき", "不支給", "nayami", true, ["fushikyuu-shinsa-seikyu", "shinsa-shikumi-nintei-i", "shinsei-kikan", "shindansho-jittai-chigau"], "結論=棄却・一部容認"),
+  hub("/nayami/fushikyu", "不支給と言われたとき", "不支給", "nayami", true, ["fushikyu-85ken", "fushikyuu-shinsa-seikyu", "shinsa-shikumi-nintei-i", "shinsei-kikan", "shindansho-jittai-chigau"], "結論=棄却・一部容認"),
   hub("/nayami/shindansho-komatta", "診断書で困ったとき", "診断書で困った", "nayami", true, ["shindansho-irai-timing", "shindansho-tanomikata", "shindansho-kaitekurenai", "shindansho-ishi-ni-tsutaeru", "nichijo-seikatsu-7koumoku", "shinsatsu-mae-memo", "shindansho-kakunin", "shindansho-jittai-chigau"], "争点=診断書"),
   hub("/nayami/shoshinbi-karute", "初診日のカルテがないとき", "初診日・カルテ", "nayami", true, ["shakaiteki-chiyu", "shoshinbi-wakaranai", "shoshinbi-karute-nashi", "shoshinbi-haiin", "daisansha-shomei", "jushinjokyo-shomeisho", "moushitatesho-mijushin-kikan"], "争点=初診日"),
   hub("/nayami/koushin", "更新や額改定で困ったとき", "更新・額改定", "nayami", true, ["jukyuugo-tetsuduki", "koushin-kakuninhodo", "gaku-kaitei-seikyuu", "shikyuu-teishi-fukkatsu"], "争点=更新・額改定"),
@@ -85,7 +85,7 @@ export const HUBS: HubDefinition[] = [
   hub("/erabu/irai-subeki-case", "専門家に頼んだほうがいいケース", "頼んだほうがいいケース", "erabu", true, ["sharoushi-kawaranai-koto"]),
   hub("/erabu/hiyou-souba", "障害年金にかかるお金の話", "かかるお金", "erabu", true, ["sharoushi-kawaranai-koto"]),
   hub("/erabu/erabikata", "社労士の選び方", "社労士の選び方", "erabu", true, ["sharoushi-kawaranai-koto"]),
-  hub("/erabu/fushikyu-no-ato", "不支給と言われたあと、何ができるか", "不支給のあと", "erabu", true, ["sharoushi-kawaranai-koto"]),
+  hub("/erabu/fushikyu-no-ato", "不支給と言われたあと、何ができるか", "不支給のあと", "erabu", true, ["sharoushi-kawaranai-koto", "fushikyu-85ken"]),
   // /senmonka を公開するときは、一覧テンプレートに次の2つを常時表示すること
   // (2026-09-03 の法務ページ刷新の指示書 §8-6)。無料掲載にも広告掲載規約が及ぶ。
   //   1. <AdLabel kind="掲載(広告)" /> と /ads(広告掲載について)へのリンク
@@ -153,6 +153,7 @@ export const COLUMN_HUB_ASSIGNMENTS: Record<string, ColumnHubAssignment> = {
   "shinsa-shikumi-nintei-i": assignment("/nayami/fushikyu", "core", ["/shinsei#step-7"]),
   "shinsei-kikan": assignment("/shinsei#step-7", "core", ["/nayami/fushikyu"]),
   "fushikyuu-shinsa-seikyu": assignment("/nayami/fushikyu", "promote", ["/erabu/fushikyu-no-ato"]),
+  "fushikyu-85ken": assignment("/nayami/fushikyu", "promote", ["/erabu/fushikyu-no-ato", "/nayami/shindansho-komatta"]),
   "koushin-kakuninhodo": assignment("/nayami/koushin", "promote", ["/shinsei#step-8", "/jukyuugo/hataraku"]),
   "gaku-kaitei-seikyuu": assignment("/nayami/koushin", "core", ["/okane/ikura", "/jukyuugo/nukedasu"]),
   "shikyuu-teishi-fukkatsu": assignment("/nayami/shikyuu-teishi", "promote", ["/nayami/koushin", "/jukyuugo/nukedasu"]),

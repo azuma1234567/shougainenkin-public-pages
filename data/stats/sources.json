@@ -31,7 +31,10 @@
       "publishedAt": "2025-06-11",
       "publishedLabel": "令和7年6月11日",
       "checkedAt": "2026-09-02",
-      "extraction": "pdftotext -layout"
+      "extraction": "pdftotext -layout",
+      "notes": [
+        "別添1 の非該当率の推移(令和元年度 12.4%〜令和6年度 13.0%)を転記(2026-09-08)。令和元年度の値は業務統計の JSON に無く、この報告書だけが出所。"
+      ]
     },
     "tenken": {
       "title": "日本年金機構『障害年金の認定状況について』",

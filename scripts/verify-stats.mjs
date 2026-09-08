@@ -47,6 +47,12 @@ expect("精神 非該当率", types["精神障害"]["非該当"].pct, 12.1);
 expect("外部 非該当率", types["外部障害"]["非該当"].pct, 10.8);
 expect("内部 非該当率", types["内部障害"]["非該当"].pct, 20.6);
 expect("精神 不支給の目安下位合計", nintei["精神障害・不支給事案"]["上記2区分の合計"]["割合"].value, 75.3);
+/* 別添1 の非該当率の推移。令和2〜6年度は業務統計の JSON と一致すること(令和元年度は報告書だけ) */
+const trend = nintei["非該当率の推移(報告書 別添1)"];
+expect("推移 令和元年度", trend["令和元年度"].pct, 12.4);
+for (const [label, year] of [["令和2年度", r02], ["令和3年度", r03], ["令和4年度", r04], ["令和5年度", r05], ["令和6年度", r06]]) {
+  expect(`推移 ${label}(業務統計と一致)`, trend[label].pct, year["決定区分別件数"]["新規裁定・合計"]["非該当"].pct);
+}
 
 const renewalSample = nintei["再認定・抽出10000件"]["合計"];
 expect("抽出 再認定合計", renewalSample["計"].value, 10000);

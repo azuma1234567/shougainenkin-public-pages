@@ -29,7 +29,7 @@ export function parseColumns() {
     articles[slug] = { slug, dateModified, lead, rawContent, content, faqs, amounts };
   }
   assert.deepEqual(Object.keys(articles).sort(), COLUMNS.map(c => c.slug).sort());
-  assert.equal(Object.keys(articles).length, 48);
+  assert.equal(Object.keys(articles).length, 49);
   return articles;
 }
 export function generatedColumn(article) {
@@ -42,5 +42,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     if (process.argv.includes("--check")) assert.equal(readFileSync(target, "utf8"), output, `${article.slug}: 再現性`);
     else writeFileSync(target, output);
   }
-  console.log("コラム48本: lead・本文・FAQ生成 / 変更コメント除去 OK");
+  console.log("コラム49本: lead・本文・FAQ生成 / 変更コメント除去 OK");
 }
