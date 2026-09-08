@@ -465,7 +465,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     slug: "shinsei-kikan",
     title: "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
     /* h1 は変えない約束なので、<title> だけ metaTitle で「決定通知」に寄せる(監査 §4-3) */
-    metaTitle: "障害年金の決定通知はいつ届く？審査期間の目安と、遅いときの確認先",
+    metaTitle: "障害年金の決定通知はいつ届く？審査期間の目安と、結果待ちの過ごし方",
     description:
       "障害年金の申請から結果が届くまでの流れを解説します。審査中の連絡、追加書類、結果が遅い場合の確認方法や、結果待ちの間にしておきたい準備も紹介します。",
     datePublished: "2026-07-23",

@@ -1,0 +1,16 @@
+5. /llms.txt: status 200 / Content-Type text/plain; charset=utf-8
+5. 1行目「# 障害年金申請サポート」/ 収録 URL 177 件 ・ sitemap 177 件 ・ 一致=true
+5. 題名がパスのままの行: 0
+5. 節: 主要ページ / 機能(入力はブラウザの中だけで処理し、サーバーへ送りません) / 病気・状況・困りごと・お金から探す / よくある誤解 / 記事 / 一覧 / 全体 26943 字
+6. トップの ld+json は 1 個 / @graph の型 WebSite, Organization
+6. WebSite: @id=https://shougainenkin-note.net/#website inLanguage=ja publisher={"@id":"https://shougainenkin-note.net/#organization"}
+6. Organization: @id=https://shougainenkin-note.net/#organization sameAs=["https://x.com/shougainenkinn","https://apps.apple.com/jp/app/%E9%9A%9C%E5%AE%B3%E5%B9%B4%E9%87%91%E7%94%B3%E8%AB%8B%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88/id6790402509"](2 件)
+6. SearchAction: なし
+6. /about の Organization: @id=https://shougainenkin-note.net/#organization sameAs 2 件(トップと同じ @id=true)
+7. /columns/shinsei-kikan「結果待ち」: title=true「障害年金の決定通知はいつ届く？審査期間の目安と、結果待ちの過ごし方｜障害年金申請サポート」/ 見出し 2 本 → 審査期間はどれくらい? — 「結果待ち」の間に起きること / 結果待ちの間に記録しておきたいこと
+7. /dougu/moushitatesho「スマホ」: title=true「病歴・就労状況等申立書を、スマホで公式の様式にそのまま入力して印刷する｜障害年金申請サポート」/ 見出し 0 本
+7. /columns/jushinjokyo-shomeisho「郵送」: title=true「受診状況等証明書の郵送での依頼方法｜遠方の病院からの取り寄せ手順｜障害年金申請サポート」/ 見出し 2 本 → 受診状況等証明書を郵送で依頼する方法 / 完成形:郵送で依頼するときの添え状
+7. /columns/nenkin-jimusho-soudan「持ち物」: title=true「障害年金の相談で年金事務所に持っていくもの｜初回相談の持ち物チェックリスト｜障害年金申請サポート」/ 見出し 1 本 → 持ち物の3分類 — 必ず/あると早い/不要
+7. /nayami/koushin「落ちる」: title=false「更新が不安なとき・等級が下がったとき — 障害年金の更新の仕組みと備え｜障害年金申請サポート」/ 見出し 1 本 → 更新で落ちる理由 — 審査で本当に見られているのは、この3つ
+7. /columns/shoshinbi-wakaranai「初診日」: title=true「障害年金の初診日がわからないときの探し方5つ｜証明できないときも｜障害年金申請サポート」/ 見出し 10 本 → その前に:なぜ初診日がそこまで重要なのか / そもそも「初診日」の定義を間違えていませんか
+8. 「道具」: 177 ページ中 0 ページ(0件)

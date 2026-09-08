@@ -104,6 +104,15 @@
       "fields": [
         "content"
       ]
+    },
+    "2026-09-09-seo-metatitle": {
+      "reason": "すでに順位がある語をタイトルにそろえる(docs/seo-2026-09-08-instructions.md §3)。「障害年金 申請 結果待ち」で40位・0クリックだったので metaTitle に「結果待ち」を入れた。本文は変えていない",
+      "slugs": [
+        "shinsei-kikan"
+      ],
+      "fields": [
+        "metaTitle"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -287,9 +296,9 @@
     {
       "slug": "shinsei-kikan",
       "title": "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
-      "metaTitle": "障害年金の決定通知はいつ届く？審査期間の目安と、遅いときの確認先",
+      "metaTitle": "障害年金の決定通知はいつ届く？審査期間の目安と、結果待ちの過ごし方",
       "h1": "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
-      "htmlTitle": "障害年金の決定通知はいつ届く？審査期間の目安と、遅いときの確認先｜障害年金申請サポート",
+      "htmlTitle": "障害年金の決定通知はいつ届く？審査期間の目安と、結果待ちの過ごし方｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/shinsei-kikan"
     },
     {

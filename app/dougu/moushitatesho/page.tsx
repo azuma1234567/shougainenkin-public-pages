@@ -11,7 +11,7 @@ const UPDATED = "2026-09-04";
 const PATH = "/dougu/moushitatesho";
 const isPublished = isPublishedInternalPath(PATH);
 
-const TITLE = "病歴・就労状況等申立書を、公式の様式にそのまま入力して印刷する";
+const TITLE = "病歴・就労状況等申立書を、スマホで公式の様式にそのまま入力して印刷する";
 const DESCRIPTION =
   "日本年金機構の様式(A3・続紙A4)に、パソコンの文字で記入した紙が出ます。元号は○、年月日は数字。記入していない欄は空欄のまま。入力内容はこの端末の中にだけ残ります。送信しません。";
 
