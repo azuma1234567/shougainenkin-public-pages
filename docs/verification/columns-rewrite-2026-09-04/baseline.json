@@ -94,6 +94,16 @@
         "(新規)",
         "special.links: あわせて読みたい(同じクラスタの自動補充)に新記事が入り、a4-insatsu・kikan-kugiri の /columns/sharoushi-kawaranai-koto、teishutsusaki-yuusou の /columns/hikazei-shuunyuu が押し出された"
       ]
+    },
+    "2026-09-08-anata": {
+      "reason": "表示語の統一(あなた)(docs/jukyuugo-links-2026-09-08 §C)。文は変えず1語ずつ本人/自分に",
+      "slugs": [
+        "gaku-kaitei-seikyuu",
+        "koushin-kakuninhodo"
+      ],
+      "fields": [
+        "content"
+      ]
     }
   },
   "baseRef": "76deb22",

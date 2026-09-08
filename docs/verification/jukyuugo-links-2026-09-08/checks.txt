@@ -1,0 +1,47 @@
+2. /nayami/koushin: 原稿の単位 163、HTML に無いもの 0
+2. /nayami/shikyuu-teishi: 原稿の単位 121、HTML に無いもの 0
+2. /joukyou/65sai-ijou: 原稿の単位 118、HTML に無いもの 0
+2. /okane/ikura: 原稿の単位 106、HTML に無いもの 0
+3. /nayami/koushin: 「{{」 0 件、「[[」 0 件、?case= リンク 4 本
+3. /nayami/shikyuu-teishi: 「{{」 0 件、「[[」 0 件、?case= リンク 4 本
+3. /joukyou/65sai-ijou: 「{{」 0 件、「[[」 0 件、?case= リンク 1 本
+3. /okane/ikura: 「{{」 0 件、「[[」 0 件、?case= リンク 0 本
+5. /nayami/koushin: extractHubFaqs 6 / 画面 6 / JSON-LD 6 / Q 一致=true / <a: 0
+5. /nayami/shikyuu-teishi: extractHubFaqs 6 / 画面 6 / JSON-LD 6 / Q 一致=true / <a: 0
+5. /joukyou/65sai-ijou: extractHubFaqs 6 / 画面 6 / JSON-LD 6 / Q 一致=true / <a: 0
+5. /okane/ikura: extractHubFaqs 6 / 画面 6 / JSON-LD 6 / Q 一致=true / <a: 0
+6. /nayami/koushin: あなた=0 道具=0 あなたは◯級=0 ◯級相当=0 通りそう=0 もらえそう=0 難しそう=0 厳しそう=0 X=19 執筆メモ=0
+6. /nayami/shikyuu-teishi: あなた=0 道具=0 あなたは◯級=0 ◯級相当=0 通りそう=0 もらえそう=0 難しそう=0 厳しそう=0 X=19 執筆メモ=0
+6. /joukyou/65sai-ijou: あなた=0 道具=0 あなたは◯級=0 ◯級相当=0 通りそう=0 もらえそう=0 難しそう=0 厳しそう=0 X=19 執筆メモ=0
+6. /okane/ikura: あなた=0 道具=0 あなたは◯級=0 ◯級相当=1 通りそう=0 もらえそう=0 難しそう=0 厳しそう=0 X=19 執筆メモ=0
+6. /columns/gaku-kaitei-seikyuu: あなた=0 道具=0 あなたは◯級=0 ◯級相当=1 通りそう=0 もらえそう=0 難しそう=0 厳しそう=0 X=39 執筆メモ=0
+6. /columns/koushin-kakuninhodo: あなた=0 道具=0 あなたは◯級=0 ◯級相当=0 通りそう=0 もらえそう=0 難しそう=0 厳しそう=0 X=26 執筆メモ=0
+9. /jukyuugo の <main> 内部リンク 14 種類: 200 でないもの 0。/columns/jukyuugo-tetsuduki=200, /okane/ikura=200, /jukyuugo/hataraku=200, /jukyuugo/sagyousho=200, /jukyuugo/nukedasu=200, /jukyuugo/a-gata-heisa=200, /nayami/koushin=200, /nayami/shikyuu-teishi=200, /columns/gaku-kaitei-seikyuu=200, /joukyou/65sai-ijou=200, /jukyuugo/okane=200, /columns/koushin-kakuninhodo=200, /gokai/hataraitara-make=200, /app=200
+争点: /nayami/koushin → href=/jitsurei?争点=更新 「更新・支給停止が争点になった実例をすべて見る」 status=200
+争点: /nayami/shikyuu-teishi → href=/jitsurei?争点=支給停止 「支給停止が争点になった実例をすべて見る」 status=200
+4. 1400px /jitsurei?case=r06-03_05: 要素あり=true 画面内=true(top 81px)
+4. 390px /jitsurei?case=r06-03_05: 要素あり=true 画面内=true(top 73px)
+4. 1400px /jitsurei?case=r07-03_04: 要素あり=true 画面内=true(top 81px)
+4. 390px /jitsurei?case=r07-03_04: 要素あり=true 画面内=true(top 73px)
+4. 1400px /jitsurei?case=r07-03_02: 要素あり=true 画面内=true(top 81px)
+4. 390px /jitsurei?case=r07-03_02: 要素あり=true 画面内=true(top 73px)
+4. 1400px /jitsurei?case=h28_29-16_01: 要素あり=true 画面内=true(top 81px)
+4. 390px /jitsurei?case=h28_29-16_01: 要素あり=true 画面内=true(top 73px)
+4. 1400px /jitsurei?case=r07-03_09: 要素あり=true 画面内=true(top 81px)
+4. 390px /jitsurei?case=r07-03_09: 要素あり=true 画面内=true(top 73px)
+4. 1400px /jitsurei?case=r07-03_05: 要素あり=true 画面内=true(top 81px)
+4. 390px /jitsurei?case=r07-03_05: 要素あり=true 画面内=true(top 73px)
+4. 1400px /jitsurei?case=r07-03_01: 要素あり=true 画面内=true(top 81px)
+4. 390px /jitsurei?case=r07-03_01: 要素あり=true 画面内=true(top 73px)
+4. 1400px /jitsurei?case=r06-03_01: 要素あり=true 画面内=true(top 81px)
+4. 390px /jitsurei?case=r06-03_01: 要素あり=true 画面内=true(top 73px)
+4. 1400px /jitsurei?case=h30_r01-16_02: 要素あり=true 画面内=true(top 81px)
+4. 390px /jitsurei?case=h30_r01-16_02: 要素あり=true 画面内=true(top 73px)
+8. 1400px /nayami/koushin: 表 5 個(枠に入っている 5)、空欄セル 25(罫線あり 22、高さ16px以上 25)、横はみ出し 0px
+8. 390px /nayami/koushin: 表 5 個(枠に入っている 5)、空欄セル 25(罫線あり 22、高さ16px以上 25)、横はみ出し 0px
+8. 1400px /nayami/shikyuu-teishi: 表 3 個(枠に入っている 3)、空欄セル 0(罫線あり 0、高さ16px以上 0)、横はみ出し 0px
+8. 390px /nayami/shikyuu-teishi: 表 3 個(枠に入っている 3)、空欄セル 0(罫線あり 0、高さ16px以上 0)、横はみ出し 0px
+8. 1400px /joukyou/65sai-ijou: 表 4 個(枠に入っている 4)、空欄セル 0(罫線あり 0、高さ16px以上 0)、横はみ出し 0px
+8. 390px /joukyou/65sai-ijou: 表 4 個(枠に入っている 4)、空欄セル 0(罫線あり 0、高さ16px以上 0)、横はみ出し 0px
+8. 1400px /okane/ikura: 表 2 個(枠に入っている 2)、空欄セル 0(罫線あり 0、高さ16px以上 0)、横はみ出し 0px
+8. 390px /okane/ikura: 表 2 個(枠に入っている 2)、空欄セル 0(罫線あり 0、高さ16px以上 0)、横はみ出し 0px

@@ -17,9 +17,22 @@ export const AMOUNTS_2026 = {
   disabilityAllowanceMinimum: "1,271,000", // 障害手当金の最低保障(3級最低保障×2)
 } as const;
 
+/* 年額を12で割って百円で丸めた「月にならすと」の目安(/okane/ikura の一覧表)。
+   上の年額トークンから計算するので、4月の改定で上の表を差し替えれば月額も一緒に変わる。 */
+const monthlyApprox = (formatted: string): string =>
+  (Math.round(Number(formatted.replaceAll(",", "")) / 12 / 100) * 100).toLocaleString("en-US");
+export const MONTHLY_APPROX_2026 = {
+  basicGrade1Monthly: monthlyApprox(AMOUNTS_2026.basicGrade1),
+  basicGrade2Monthly: monthlyApprox(AMOUNTS_2026.basicGrade2),
+  childFirstSecondMonthly: monthlyApprox(AMOUNTS_2026.childFirstSecond),
+  childThirdMonthly: monthlyApprox(AMOUNTS_2026.childThird),
+  spouseAdditionMonthly: monthlyApprox(AMOUNTS_2026.spouseAddition),
+  employeesGrade3MinimumMonthly: monthlyApprox(AMOUNTS_2026.employeesGrade3Minimum),
+} as const;
+
 const values = Object.values(AMOUNTS_2026);
 export function apply2026Amounts(text: string): string {
-  const tokenized = Object.entries(AMOUNTS_2026).reduce(
+  const tokenized = [...Object.entries(AMOUNTS_2026), ...Object.entries(MONTHLY_APPROX_2026)].reduce(
     (result, [key, amount]) => result.replaceAll(`{{${key}}}`, amount),
     text,
   );
