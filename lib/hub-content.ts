@@ -94,7 +94,8 @@ export const HUB_CONTENT: Record<string, HubContent> = {
 /* 原稿の markdown を描画用に整える。金額トークンを展開し、原稿の書き方「ラベル(/path)」を
    markdown の [ラベル](/path) にする(docs/hub-links-2026-09-07-instructions.md §1)。行ごとに:
    (1) 「→ 」のある行: 既存の規則。1行に2本目が「、」や「/」で続くことがあるので、2本目以降も変換する。
-       ラベルに (…) を含む「→ 目の障害(糖尿病網膜症など)(/byoki/shikaku)」も、最後の (/path) をリンクにする
+       ラベルに (…) を含む「→ 目の障害(糖尿病網膜症など)(/byoki/shikaku)」も、最後の (/path) をリンクにする。
+       すでに markdown の「→ [この事案](/jitsurei?case=…)」(2026-09-08 の第2稿)は二重に包まない
    (2) 箇条書き「- TEXT(/path)」「* TEXT(/path)」と番号つき「N. TEXT(/path)」「N. TEXT(/path)(注記)」:
        行末が (/path) か (/path)(注記) のとき、TEXT 全体をラベルにする(TEXT に (…) や ** があってよい)
    (3) それ以外の文中: 直前の区切り(、 。 「 」 行頭 空白)から ( までをラベルにする
@@ -105,7 +106,7 @@ export function prepareHubSource(source: string): string {
     .split("\n")
     .map((line) => {
       if (line.includes("→ ")) {
-        const first = line.replace(/→ ([^\n]+?)\((\/[^\s)]+)\)/g, "→ [$1]($2)");
+        const first = line.replace(/→ ([^\n]+?)(?<!\])\((\/[^\s)]+)\)/g, "→ [$1]($2)");
         return first.replace(/(^|[、,／/]\s*)([^\n、,／/(\[\]]+)\((\/[^)]+)\)/g, "$1[$2]($3)");
       }
       if (line.includes("](")) return line;
