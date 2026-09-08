@@ -9,6 +9,7 @@ const content = Object.fromEntries(names.map((name) => [`/${name.replace("-", "/
    (docs/jukyuugo-links-2026-09-08/README §A-1・§D-1)。それ以外はアプリ repo の hub-*-2026-09-02.md。 */
 const secondDrafts = {
   "nayami-koushin": "docs/jukyuugo-links-2026-09-08/nayami-koushin.md",
+  "nayami-shikyuu-teishi": "docs/jukyuugo-links-2026-09-08/nayami-shikyuu-teishi.md",
 };
 const expectedSource = (name) => {
   if (secondDrafts[name]) {
