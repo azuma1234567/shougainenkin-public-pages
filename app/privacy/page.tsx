@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AnalyticsConsentSettingsButton } from "@/components/AnalyticsConsent";
+import { AnalyticsOptOutButton } from "@/components/Analytics";
 import { ADSENSE_ENABLED, AFFILIATE_ASPS, SHOW_LISTINGS } from "@/lib/ads";
 import { CONTACT_EMAIL, SITE_LEGAL_UPDATED, SITE_NAME } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -117,7 +117,7 @@ export default function PrivacyPage() {
         選択後も、下のボタンからいつでも変更できます。
       </p>
       <p>
-        <AnalyticsConsentSettingsButton />
+        <AnalyticsOptOutButton />
       </p>
 
       <h2>6. 広告配信(Google AdSense)</h2>

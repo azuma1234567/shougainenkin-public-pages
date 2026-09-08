@@ -648,121 +648,6 @@ strong {
   color: #ffffff;
 }
 
-/* ---- アクセス解析の同意 ---- */
-
-.analytics-consent-banner {
-  position: fixed;
-  z-index: 100;
-  right: 1rem;
-  bottom: 1rem;
-  left: 1rem;
-  color: var(--text);
-}
-
-.analytics-consent-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.25rem;
-  width: min(100%, 58rem);
-  margin: 0 auto;
-  padding: 1rem 1.25rem;
-  background-color: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
-  text-align: left;
-}
-
-.analytics-consent-copy {
-  min-width: 0;
-}
-
-.analytics-consent-title {
-  margin: 0 0 0.25rem;
-  padding: 0;
-  border: 0;
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.analytics-consent-copy p {
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.7;
-}
-
-.analytics-consent-actions {
-  display: flex;
-  align-items: center;
-  flex: 0 0 auto;
-  gap: 0.65rem;
-}
-
-.analytics-consent-actions button,
-.analytics-consent-actions a {
-  min-height: 44px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.85rem;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-.analytics-consent-actions button {
-  padding: 0.65rem 1rem;
-}
-
-.analytics-consent-accept {
-  background-color: var(--green);
-  border: 1px solid var(--green);
-  color: #ffffff;
-}
-
-.analytics-consent-accept:hover {
-  background-color: var(--green-dark);
-}
-
-.analytics-consent-deny {
-  background-color: #ffffff;
-  border: 1px solid var(--green);
-  color: var(--green);
-}
-
-.analytics-consent-actions a {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.65rem 0.25rem;
-  white-space: nowrap;
-}
-
-@media (max-width: 720px) {
-  .analytics-consent-banner {
-    right: 0.5rem;
-    bottom: max(0.5rem, env(safe-area-inset-bottom));
-    left: 0.5rem;
-  }
-
-  .analytics-consent-inner {
-    display: block;
-    max-height: calc(100dvh - 1rem - env(safe-area-inset-bottom));
-    overflow-y: auto;
-    padding: 0.9rem 1rem;
-  }
-
-  .analytics-consent-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-top: 0.75rem;
-  }
-
-  .analytics-consent-actions a {
-    grid-column: 1 / -1;
-    justify-content: center;
-  }
-}
-
 /* ---- 汎用 ---- */
 
 .lead {
@@ -2533,8 +2418,7 @@ main a:not([class]):hover {
   .site-footer,
   .guide-cta-row,
   .guide-inline-cta,
-  .guide-app,
-  .analytics-consent-banner {
+  .guide-app {
     display: none !important;
   }
 
@@ -3214,13 +3098,11 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
 @media print {
   /* 読了バー。@media print では animation-timeline の指定ごと打ち消す */
   body::after { content: none !important; display: none !important; }
-  .analytics-consent-banner,
   .analytics-preference-button,
   .lp-sticky-cta { display: none !important; }
 }
 /* 印刷画面では、画面のうえでも出さない(紙に出る前に見えていると紛らわしい)。
-   同意の取得は他のページでできる。 */
+   アクセス解析の停止は /privacy でできる。 */
 .mt-print-page body::after,
 body:has(.mt-print-page)::after { content: none !important; display: none !important; }
-body:has(.mt-print-page) .analytics-consent-banner,
 body:has(.mt-print-page) .analytics-preference-button { display: none !important; }

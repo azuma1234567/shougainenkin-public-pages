@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AnalyticsConsent from "@/components/AnalyticsConsent";
+import Analytics from "@/components/Analytics";
 import { HAS_ACTIVE_ADS } from "@/lib/ads";
 import { SITE_NAME } from "@/lib/constants";
 
@@ -25,7 +25,7 @@ export default function SiteFooter() {
             広告・PRであるものにはその旨を表示します。
           </p>
         </div>
-        <AnalyticsConsent />
+        <Analytics />
       </div>
     </footer>
   );

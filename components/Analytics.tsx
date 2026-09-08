@@ -1,13 +1,15 @@
 "use client";
 
-import Link from "next/link";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+/* アクセス解析はオプトアウト方式(docs/analytics-optout-2026-09-08-instructions.md)。
+   既定で計測し、/privacy のボタンでいつでも止められる。localStorage に "denied" を
+   保存している人(旧・同意バナーで「拒否する」を押した人を含む)は計測しない。
+   キーと値は同意方式のときのまま。変えると既存の denied を読めなくなる。 */
 const CONSENT_STORAGE_KEY = "analytics-consent-v1";
 const GA_MEASUREMENT_ID = "G-PHHDYX0H53";
-const OPEN_SETTINGS_EVENT = "open-analytics-consent-settings";
 const APP_STORE_HOSTNAME = "apps.apple.com";
 const EVENT_SEND_TIMEOUT_MS = 1000;
 
@@ -17,6 +19,16 @@ declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
+  }
+}
+
+function readConsent(): ConsentChoice | null {
+  try {
+    const saved = window.localStorage.getItem(CONSENT_STORAGE_KEY);
+    return saved === "granted" || saved === "denied" ? saved : null;
+  } catch {
+    // 保存領域を読み取れない場合は未選択(= 計測する)として扱う。
+    return null;
   }
 }
 
@@ -64,6 +76,25 @@ function deleteGoogleAnalyticsCookies() {
   }
 }
 
+/* 計測を止める。denied を保存し、consent を denied に更新して Cookie を消し、読み込み直す。 */
+function optOutOfAnalytics() {
+  saveConsent("denied");
+  window.gtag?.("consent", "update", {
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+  });
+  deleteGoogleAnalyticsCookies();
+  window.location.reload();
+}
+
+/* 計測を再開する。granted を保存して読み込み直す。 */
+function optInToAnalytics() {
+  saveConsent("granted");
+  window.location.reload();
+}
+
 function getAppStoreLink(target: EventTarget | null): HTMLAnchorElement | null {
   if (!(target instanceof Element)) return null;
 
@@ -86,15 +117,13 @@ function getLinkText(link: HTMLAnchorElement): string {
   ).trim();
 }
 
-export default function AnalyticsConsent() {
+export default function Analytics() {
   const pathname = usePathname();
   const [consent, setConsent] = useState<ConsentChoice | null>(null);
   const [analyticsInitialized, setAnalyticsInitialized] = useState(false);
   const [isReady, setIsReady] = useState(false);
-  const [isBannerOpen, setIsBannerOpen] = useState(false);
   const analyticsConfiguredRef = useRef(false);
   const lastTrackedPathnameRef = useRef<string | null>(null);
-  const bannerHeadingRef = useRef<HTMLHeadingElement>(null);
 
   const configureAnalyticsOnce = useCallback(() => {
     if (analyticsConfiguredRef.current) return;
@@ -126,37 +155,14 @@ export default function AnalyticsConsent() {
   }, []);
 
   useEffect(() => {
-    let savedConsent: string | null = null;
+    const savedConsent = readConsent();
 
-    try {
-      savedConsent = window.localStorage.getItem(CONSENT_STORAGE_KEY);
-    } catch {
-      // 保存領域を読み取れない場合は未選択として扱う。
-    }
-
-    if (savedConsent === "granted") {
+    if (savedConsent !== "denied") {
       initializeGoogleTagQueue();
-      setConsent("granted");
-    } else if (savedConsent === "denied") {
-      setConsent("denied");
-    } else {
-      setIsBannerOpen(true);
     }
 
+    setConsent(savedConsent);
     setIsReady(true);
-  }, []);
-
-  useEffect(() => {
-    if (isBannerOpen) {
-      bannerHeadingRef.current?.focus();
-    }
-  }, [isBannerOpen]);
-
-  useEffect(() => {
-    const openSettings = () => setIsBannerOpen(true);
-
-    window.addEventListener(OPEN_SETTINGS_EVENT, openSettings);
-    return () => window.removeEventListener(OPEN_SETTINGS_EVENT, openSettings);
   }, []);
 
   useEffect(() => {
@@ -211,7 +217,8 @@ export default function AnalyticsConsent() {
 
   useEffect(() => {
     if (
-      consent !== "granted" ||
+      !isReady ||
+      consent === "denied" ||
       !analyticsInitialized ||
       !window.gtag
     ) {
@@ -227,107 +234,39 @@ export default function AnalyticsConsent() {
       page_referrer: "",
     });
     lastTrackedPathnameRef.current = pathname;
-  }, [analyticsInitialized, consent, pathname]);
+  }, [analyticsInitialized, consent, isReady, pathname]);
 
-  const grantConsent = () => {
-    saveConsent("granted");
-    initializeGoogleTagQueue();
-    setConsent("granted");
-    setIsBannerOpen(false);
-  };
-
-  const denyConsent = () => {
-    saveConsent("denied");
-
-    if (consent === "granted") {
-      window.gtag?.("consent", "update", {
-        analytics_storage: "denied",
-        ad_storage: "denied",
-        ad_user_data: "denied",
-        ad_personalization: "denied",
-      });
-      deleteGoogleAnalyticsCookies();
-      window.location.reload();
-      return;
-    }
-
-    setConsent("denied");
-    setIsBannerOpen(false);
-  };
+  /* localStorage を読むまでは読み込まない(denied の人に一瞬でも gtag を読ませないため)。 */
+  if (!isReady || consent === "denied") return null;
 
   return (
-    <>
-      {consent === "granted" ? (
-        <Script
-          id="google-analytics-gtag"
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-          strategy="afterInteractive"
-          onLoad={configureAnalyticsOnce}
-          onReady={configureAnalyticsOnce}
-        />
-      ) : null}
-
-      {isReady && isBannerOpen ? (
-        <section
-          className="analytics-consent-banner"
-          role="dialog"
-          aria-labelledby="analytics-consent-title"
-          aria-describedby="analytics-consent-description"
-        >
-          <div className="analytics-consent-inner">
-            <div className="analytics-consent-copy">
-              <h2
-                id="analytics-consent-title"
-                className="analytics-consent-title"
-                tabIndex={-1}
-                ref={bannerHeadingRef}
-              >
-                アクセス解析について
-              </h2>
-              <p id="analytics-consent-description">
-                当サイトでは、利用状況の把握とサービス改善のためGoogle
-                Analyticsを使用します。
-              </p>
-            </div>
-            <div className="analytics-consent-actions">
-              <button
-                type="button"
-                className="analytics-consent-accept"
-                onClick={grantConsent}
-              >
-                同意する
-              </button>
-              <button
-                type="button"
-                className="analytics-consent-deny"
-                onClick={denyConsent}
-              >
-                拒否する
-              </button>
-              <Link href="/privacy" onClick={() => setIsBannerOpen(false)}>
-                プライバシーポリシーを見る
-              </Link>
-            </div>
-          </div>
-        </section>
-      ) : null}
-    </>
+    <Script
+      id="google-analytics-gtag"
+      src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+      strategy="afterInteractive"
+      onLoad={configureAnalyticsOnce}
+      onReady={configureAnalyticsOnce}
+    />
   );
 }
 
-export function AnalyticsConsentSettingsButton() {
-  const openSettings = () => {
-    window.dispatchEvent(new Event(OPEN_SETTINGS_EVENT));
-  };
+/* /privacy に置く、計測を止める/再開するボタン。いまの状態で表示が変わる。 */
+export function AnalyticsOptOutButton() {
+  const [consent, setConsent] = useState<ConsentChoice | null>(null);
+
+  useEffect(() => {
+    setConsent(readConsent());
+  }, []);
+
+  const isTracking = consent !== "denied";
 
   return (
     <button
       type="button"
       className="analytics-preference-button"
-      aria-haspopup="dialog"
-      onClick={openSettings}
+      onClick={isTracking ? optOutOfAnalytics : optInToAnalytics}
     >
-      アクセス解析の選択を変更
+      {isTracking ? "アクセス解析を停止する" : "アクセス解析を再開する"}
     </button>
   );
 }
