@@ -10,6 +10,7 @@ const content = Object.fromEntries(names.map((name) => [`/${name.replace("-", "/
 const secondDrafts = {
   "nayami-koushin": "docs/jukyuugo-links-2026-09-08/nayami-koushin.md",
   "nayami-shikyuu-teishi": "docs/jukyuugo-links-2026-09-08/nayami-shikyuu-teishi.md",
+  "joukyou-65sai-ijou": "docs/jukyuugo-links-2026-09-08/joukyou-65sai-ijou.md",
 };
 const expectedSource = (name) => {
   if (secondDrafts[name]) {
