@@ -55,6 +55,16 @@ const stripMd = (t) => t
 const norm = (t) => t.replace(/\s+/g, "").replace(/→/g, "");
 /* 原稿の金額トークンは data/amounts.ts の値に展開してから比べる(実装と同じ値)。 */
 const TOKENS = Object.fromEntries([...readFileSync("data/amounts.ts", "utf8").matchAll(/(\w+):\s*"([\d,]+)"/g)].map((m) => [m[1], m[2]]));
+/* 誤解カード hataraitara-make の原稿は、公開サイト repo の docs/gokai にある(2026-09-13 に原稿から生成する形へ戻した)。
+   SRC(アプリ repo)の下には無く、書式も =====区切り・frontmatter・裁決ID入りで違うので、この1件だけ
+   parseManuscripts() で節を取り出し、verifyBodyHtml と同じ規則(blockText、裁決IDは「原文(厚労省PDF)」)で文にしてから比べる。 */
+const { parseManuscripts } = await import("./import-gokai-bodies.mjs");
+const { blockText } = await import("./verify-gokai-bodies.mjs");
+const GOKAI_MANUSCRIPT = "../gokai/gokai-body-hataraitara-make-2026-09-13.md";
+const gokaiManuscriptText = (slug) => parseManuscripts()[slug].sections
+  .map((section) => [`## ${section.heading}`, ...section.blocks.map((block) => (block.type === "case" ? blockText(block).replace(block.caseId, "原文(厚労省PDF)") : blockText(block)))].join("\n"))
+  .join("\n");
+const readManuscript = (file) => (file === GOKAI_MANUSCRIPT ? gokaiManuscriptText("hataraitara-make") : readFileSync(`${SRC}/${file}`, "utf8"));
 const MANUSCRIPT = {
   "/jukyuugo": "00-index-jukyuugo.md",
   "/jukyuugo/hataraku": "01-hataraku-to-nenkin.md",
@@ -62,11 +72,11 @@ const MANUSCRIPT = {
   "/jukyuugo/nukedasu": "03-nukedasu.md",
   "/jukyuugo/okane": "04-okane-sekkei.md",
   "/jukyuugo/a-gata-heisa": "06-a-gata-heisa.md",
-  "/gokai/hataraitara-make": "../jukyuugo-2026-09-05/07-gokai-hataraitara-make.md",  /* 誤解カードは第1稿のまま */
+  "/gokai/hataraitara-make": GOKAI_MANUSCRIPT,
 };
 const three = [];
 for (const [url, file] of Object.entries(MANUSCRIPT)) {
-  const raw = stripMd(readFileSync(`${SRC}/${file}`, "utf8"));
+  const raw = stripMd(readManuscript(file));
   const want = splitSentences(raw);
   const got = norm(bodyText[url]);
   const missing = want.filter((s) => !got.includes(s));
@@ -82,7 +92,7 @@ const NUMS = ["304,456", "294,405", "96.7", "4,359", "1.4", "2,451", "0.8", "3,2
 const allBody = Object.values(bodyText).join("\n");
 const missNum = NUMS.filter((n) => !allBody.includes(n));
 /* 実装に出る数字のうち、原稿にも共通部品にも無いもの */
-const manuscriptAll = stripMd(Object.values(MANUSCRIPT).map((f) => readFileSync(`${SRC}/${f}`, "utf8")).join("\n"));
+const manuscriptAll = stripMd(Object.values(MANUSCRIPT).map(readManuscript).join("\n"));
 const shown = [...new Set((Object.entries(bodyText).filter(([u]) => u !== "/jukyuugo").map(([, t]) => t).join("\n").match(/[0-9][0-9,\.]*(?:万|億)?/g) ?? []))];
 const extra = shown.filter((n) => !manuscriptAll.includes(n) && !/^[0-9]{1,2}$/.test(n));
 ok(4, missNum.length === 0 && extra.length === 0, `原稿の数字で実装に出ないもの ${missNum.length}${missNum.length ? " (" + missNum.join(" ") + ")" : ""}、実装に出て原稿に無いもの ${extra.length}${extra.length ? " (" + extra.join(" ") + ")" : ""}`);

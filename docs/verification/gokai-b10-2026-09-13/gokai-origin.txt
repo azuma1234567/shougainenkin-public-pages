@@ -1,0 +1,6 @@
+## VERIFY_ORIGIN=http://localhost:3200 npm run verify:gokai
+誤解カード検証: 49枚、5カテゴリ、配分表23ハブ一致、OGP・ハブ差し込み(実URL) OK
+配分表が触れていない公開ハブ(0枚): /byoki/tougou, /byoki/tenkan, /byoki/shinzou, /byoki/shitai, /byoki/ninchishou, /byoki/koujinou, /byoki/izon, /byoki/kanzou, /byoki/kokyuuki, /byoki/ketsueki, /byoki/shikaku, /byoki/choukaku, /byoki/gengo, /byoki/nanbyou, /joukyou/kazoku-ga-tetsudau, /joukyou/seikatsu-hogo, /nayami/fushikyu, /nayami/shikyuu-teishi, /okane/zeikin, /okane/chousei, /erabu/irai-subeki-case, /erabu/hiyou-souba, /erabu/erabikata, /erabu/fushikyu-no-ato
+本文検証1〜8: 49枚、最短1652文字、裁決ID 54件、原稿完全一致 OK
+amounts.tsで説明できない金額（非致命的・原稿確認対象）:
+exit=0

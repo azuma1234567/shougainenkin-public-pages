@@ -12,16 +12,22 @@ const origin = process.env.VERIFY_ORIGIN;
 const PAGE_BACKGROUND = [0xf7, 0xfb, 0xfe];
 
 // docs/gokai-cards-batch3 / batch4 のハブ別配分表(batch4で更新された後の姿)。
+// 2026-09-13(ユーザー承認): data/gokai.ts に合わせて、49枚目 hataraitara-make(e5c5feb)の配布と、
+// b5b4e90(2026-09-06 被リンクの薄いページへのリンク補強)で足された配布を反映した。
 const DISTRIBUTION = {
   "/hajimete": [1, 13, 14, 15, 21],
   "/nayami/shoshinbi-karute": [8, 9, 28, 29, 30, 37, 38, 39],
   "/nayami/shindansho-komatta": [12, 16],
-  "/nayami/koushin": [10, 21, 33, 44],
-  "/nayami/sokyuu": [11, 40],
-  "/joukyou/hatarakinagara": [2, 24, 36],
+  "/nayami/koushin": [10, 21, 33, 44, 49],
+  "/nayami/sokyuu": [11, 16, 19, 40],
+  "/joukyou/hatarakinagara": [2, 24, 36, 49],
   "/joukyou/hitorigurashi": [3, 48],
   "/joukyou/hatachi-mae": [7, 14],
-  "/joukyou/shoubyou-teatekin-kara": [24],
+  "/joukyou/shoubyou-teatekin-kara": [20, 24],
+  "/joukyou/65sai-ijou": [19],
+  "/joukyou/gakusei": [46],
+  "/joukyou/shufu-mushoku": [18],
+  "/jukyuugo": [49],
   "/byoki/tekiou-fuan": [4, 31],
   "/byoki/hattatsu": [1, 25, 31],
   "/byoki/chiteki": [25, 45],
@@ -34,8 +40,8 @@ const DISTRIBUTION = {
   "/erabu/jibun-ka-irai": [26, 27],
 };
 
-assert.equal(GOKAI.length, 48, "誤解カードは48枚");
-assert.equal(new Set(GOKAI.map(({ slug }) => slug)).size, 48, "slug重複なし");
+assert.equal(GOKAI.length, 49, "誤解カードは49枚");
+assert.equal(new Set(GOKAI.map(({ slug }) => slug)).size, 49, "slug重複なし");
 for (const card of GOKAI) {
   assert.match(card.slug, /^[a-z0-9-]+$/, `${card.slug}: ASCII slug`);
   assert.ok(GOKAI_CATEGORIES.includes(card.category), `${card.slug}: 5カテゴリのいずれか`);
@@ -53,7 +59,9 @@ assert.equal(
 // 3ブロック(check / ask / figure): docs/gokai/gokai-cards-addon-2026-09-02.json 由来
 const ALLOWED_PHONES = new Set(["0570-05-4890", "0570-078374"]); // 年金相談予約・法テラス
 for (const card of GOKAI) {
-  assert.ok(Array.isArray(card.check) && card.check.length === 3, `${card.slug}: 「自分の場合を確かめる」は3項目`);
+  // hataraitara-make は受給後の幹(docs/jukyuugo-2026-09-05)で後から足したカードで、確かめる項目が4つ(2026-09-13 ユーザー承認)。
+  const checkCount = card.slug === "hataraitara-make" ? 4 : 3;
+  assert.ok(Array.isArray(card.check) && card.check.length === checkCount, `${card.slug}: 「自分の場合を確かめる」は${checkCount}項目`);
   assert.ok(typeof card.ask === "string" && card.ask.length > 0, `${card.slug}: 「窓口で聞く一言」が1つ`);
   const extra = [...card.check, card.ask, card.figure ?? ""].join("\n");
   assert.doesNotMatch(extra, /x\.com|twitter|@|ツイート|note\.com|youtube/i, `${card.slug}: 3ブロックに調査元の語を入れない`);
@@ -70,8 +78,14 @@ for (const [hubPath, numbers] of Object.entries(DISTRIBUTION)) {
 }
 const assignedHubs = new Set(GOKAI.flatMap((card) => card.hubs));
 assert.deepEqual([...assignedHubs].sort(), Object.keys(DISTRIBUTION).sort(), "配分表にないハブへ配らない");
+// /jukyuugo は幹10「受給が始まってから」の入口で、lib/hubs.ts にハブとしては定義されていない(配下の /jukyuugo/* がハブ)。
+// 入口は、配下に公開済みハブがあれば公開済みとみなす(2026-09-13 ユーザー承認)。
+const SECTION_ENTRANCES = new Set(["/jukyuugo"]);
 for (const hubPath of assignedHubs) {
-  assert.ok(HUBS.find((hub) => hub.path === hubPath)?.published, `${hubPath}: 公開済みハブ`);
+  const published = SECTION_ENTRANCES.has(hubPath)
+    ? HUBS.some((hub) => hub.path.startsWith(`${hubPath}/`) && hub.published)
+    : HUBS.find((hub) => hub.path === hubPath)?.published;
+  assert.ok(published, `${hubPath}: 公開済みハブ`);
 }
 
 // 配分表が触れていない公開ハブ。0枚のまま公開する場合は検証記録に理由を残す。
@@ -111,7 +125,7 @@ if (origin) {
     .replace(/<[^>]+>/g, " ")
     .replace(/&amp;/g, "&");
   const list = await fetchHtml("/gokai");
-  assert.equal([...list.matchAll(/data-gokai-slug=/g)].length, 48, "一覧に48枚");
+  assert.equal([...list.matchAll(/data-gokai-slug=/g)].length, 49, "一覧に49枚");
   assert.doesNotMatch(visibleText(list), /執筆メモ|実装メモ|x\.com|いいね|@/, "一覧に執筆メモ・参照元を出さない");
   for (const category of GOKAI_CATEGORIES) {
     const page = await fetchHtml(`/gokai?category=${encodeURIComponent(category)}`);
@@ -149,6 +163,13 @@ if (origin) {
   for (const [hubPath, numbers] of Object.entries(DISTRIBUTION)) {
     const page = await fetchHtml(hubPath);
     assert.doesNotMatch(visibleText(page), /執筆メモ|実装メモ|x\.com|いいね/, `${hubPath}: 差し込み後も執筆メモを出さない`);
+    // 幹の入口(SECTION_ENTRANCES)にはハブの誤解カード欄が無い。配られたカードへ本文からリンクしていることを見る。
+    if (SECTION_ENTRANCES.has(hubPath)) {
+      for (const slug of numbers.map((number) => slugByNumber[number - 1])) {
+        assert.match(page, new RegExp(`href="/gokai/${slug}"`), `${hubPath}: ${slug} へリンクする`);
+      }
+      continue;
+    }
     const shown = [...page.matchAll(/data-hub-gokai-slug="([^"]+)"/g)].map((match) => match[1]);
     // 意思決定ページは中立性を保つため、誤解カードの差し込み対象外。
     const expected = hubPath.startsWith("/erabu/") ? [] : numbers.map((number) => slugByNumber[number - 1]).slice(0, 3);
@@ -157,7 +178,7 @@ if (origin) {
   }
 }
 
-console.log(`誤解カード検証: 48枚、5カテゴリ、配分表19ハブ一致、OGP・ハブ差し込み${origin ? "(実URL)" : "(静的)"} OK`);
+console.log(`誤解カード検証: 49枚、5カテゴリ、配分表${Object.keys(DISTRIBUTION).length}ハブ一致、OGP・ハブ差し込み${origin ? "(実URL)" : "(静的)"} OK`);
 if (uncoveredHubs.length > 0) console.log(`配分表が触れていない公開ハブ(0枚): ${uncoveredHubs.join(", ")}`);
 
 await verifyBodies();

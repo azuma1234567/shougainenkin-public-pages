@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { GOKAI } from "../data/gokai.ts";
 
-export const INPUTS = ["gokai-body-sample-techou-ga-nai.md", ...[1, 2, 3, 4].map(n => `gokai-body-batch${n}-2026-09-03.md`)];
+export const INPUTS = ["gokai-body-sample-techou-ga-nai.md", ...[1, 2, 3, 4].map(n => `gokai-body-batch${n}-2026-09-03.md`), "gokai-body-hataraitara-make-2026-09-13.md"];
 export const CASE_ID = /\b[hr]\d\d(?:_\d\d)?(?:_r\d\d)?-\d\d_\d\d\b/g;
 const cases = JSON.parse(readFileSync(new URL("../data/saiketsu-cases-2026-08-26.json", import.meta.url), "utf8")).cases;
 // ユーザー承認済み: この8枚のみ原稿の固有節位置を固定して許可する。
@@ -111,18 +111,18 @@ export function parseManuscripts() {
       bodies[slug] = { slug, title, ...(metaTitle ? { metaTitle } : {}), description, checkedOn, sections };
     }
   }
-  assert.equal(Object.keys(bodies).length, 48);
+  assert.equal(Object.keys(bodies).length, 49);
   assert.deepEqual(Object.keys(bodies).sort(), GOKAI.map(c => c.slug).sort());
   return bodies;
 }
 
 export function generatedSource(bodies) {
-  return `// scripts/import-gokai-bodies.mjs で生成。直接編集しない\nexport type GokaiBlock =\n  | { type: "p"; text: string }\n  | { type: "h3"; text: string }\n  | { type: "ul"; items: string[] }\n  | { type: "case"; lead: string; text: string; caseId: string }\n  | { type: "faq"; q: string; a: string }\n  | { type: "link"; label: string; href: string };\nexport type GokaiSection = { heading: string; blocks: GokaiBlock[] };\nexport type GokaiBody = { slug: string; title: string; metaTitle?: string; description: string; checkedOn: string; sections: GokaiSection[] };\nexport const GOKAI_BODIES: Record<string, GokaiBody> = ${JSON.stringify(bodies, null, 2)};\nexport const GOKAI_BODIES_UPDATED = "2026-09-03";\n`;
+  return `// scripts/import-gokai-bodies.mjs で生成。直接編集しない\nexport type GokaiBlock =\n  | { type: "p"; text: string }\n  | { type: "h3"; text: string }\n  | { type: "ul"; items: string[] }\n  | { type: "case"; lead: string; text: string; caseId: string }\n  | { type: "faq"; q: string; a: string }\n  | { type: "link"; label: string; href: string };\nexport type GokaiSection = { heading: string; blocks: GokaiBlock[] };\nexport type GokaiBody = { slug: string; title: string; metaTitle?: string; description: string; checkedOn: string; sections: GokaiSection[] };\nexport const GOKAI_BODIES: Record<string, GokaiBody> = ${JSON.stringify(bodies, null, 2)};\nexport const GOKAI_BODIES_UPDATED = "2026-09-13";\n`;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const output = generatedSource(parseManuscripts());
   const target = new URL("../data/gokai-bodies.ts", import.meta.url);
   if (process.argv.includes("--check")) assert.equal(readFileSync(target, "utf8"), output, "生成物と原稿が一致");
   else writeFileSync(target, output);
-  console.log("誤解カード本文: 48枚・原稿の整合性 OK");
+  console.log("誤解カード本文: 49枚・原稿の整合性 OK");
 }

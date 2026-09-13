@@ -26,7 +26,7 @@ export function blockText(block) {
 const forbidden = /toip_hokkaido|youtube|note\.com|x\.com\/|twitter/i;
 
 export async function verifyBodies() {
-  assert.equal(Object.keys(GOKAI_BODIES).length, 48);
+  assert.equal(Object.keys(GOKAI_BODIES).length, 49);
   assert.deepEqual(Object.keys(GOKAI_BODIES).sort(), GOKAI.map(card => card.slug).sort());
   assert.deepEqual(GOKAI_BODIES, parseManuscripts(), "原稿との全フィールド一致");
   assert.equal(await readFile(new URL("../data/gokai-bodies.ts", import.meta.url), "utf8"), generatedSource(GOKAI_BODIES), "生成結果の再現性");
@@ -37,7 +37,8 @@ export async function verifyBodies() {
     const card = GOKAI.find(card => card.slug === body.slug);
     assert.ok(body.title.includes(" — "), `${body.slug}: title`);
     assert.ok(body.description.length >= 70 && body.description.length <= 200, `${body.slug}: description`);
-    assert.equal(body.checkedOn, "2026-09-03");
+    // hataraitara-make だけ、2026-09-13 の原稿(docs/gokai/gokai-body-hataraitara-make-2026-09-13.md)で確認日が新しい(2026-09-13 ユーザー承認)。
+    assert.equal(body.checkedOn, body.slug === "hataraitara-make" ? "2026-09-13" : "2026-09-03", `${body.slug}: checkedOn`);
     const blocks = body.sections.flatMap(section => section.blocks);
     const text = body.sections.map(section => `${section.heading}\n${section.blocks.map(blockText).join("\n")}`).join("\n");
     const chars = stripBold(text).replace(/\s/g, "").length;
@@ -75,7 +76,7 @@ export async function verifyBodies() {
       assert.equal(examples.blocks.at(-1).href, "/jitsurei");
     }
   }
-  console.log(`本文検証1〜8: 48枚、最短${minChars}文字、裁決ID ${caseCount}件、原稿完全一致 OK`);
+  console.log(`本文検証1〜8: 49枚、最短${minChars}文字、裁決ID ${caseCount}件、原稿完全一致 OK`);
   console.log("amounts.tsで説明できない金額（非致命的・原稿確認対象）:");
   for (const [amount, slugs] of unknownAmounts) console.log(`- ${amount}: ${[...slugs].join(", ")}`);
   return unknownAmounts;
@@ -134,7 +135,7 @@ export async function verifyBuiltBodies() {
   for (const slug of Object.keys(GOKAI_BODIES)) {
     verifyBodyHtml(await readFile(new URL(`../.next/server/app/gokai/${slug}.html`, import.meta.url), "utf8"), slug);
   }
-  console.log("生成HTML: 全48枚のメタ情報・JSON-LD・原稿本文・見出し順・PDFリンク OK");
+  console.log("生成HTML: 全49枚のメタ情報・JSON-LD・原稿本文・見出し順・PDFリンク OK");
 }
 
 // 2026-09-04仕上げ指示§3: ビルド識別子を含む全文でなく、main要素の生バイトを比較する。
