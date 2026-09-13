@@ -136,6 +136,16 @@
         "htmlTitle",
         "special.links: moushitatesho-a4-insatsu のあわせて読みたいに /columns/shoshinbi-wakaranai が入り、同じクラスタの自動補充だった /columns/fushikyu-85ken が押し出された"
       ]
+    },
+    "2026-09-13-kekkamachi": {
+      "reason": "「決定通知」を含む検索語に表示が無く、表示が付いている「結果待ち」「結果」「審査状況」に metaTitle を寄せた(docs/claude-code-seo-2026-09-13-work4-instructions.md 4-1)。h1 は変えていない",
+      "slugs": [
+        "shinsei-kikan"
+      ],
+      "fields": [
+        "metaTitle",
+        "htmlTitle"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -319,9 +329,9 @@
     {
       "slug": "shinsei-kikan",
       "title": "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
-      "metaTitle": "障害年金の決定通知はいつ届く？審査期間の目安と、結果待ちの過ごし方",
+      "metaTitle": "障害年金の結果待ち｜結果はいつ届く？目安3か月・遅いときの確認先・審査状況はネットで見られるか",
       "h1": "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
-      "htmlTitle": "障害年金の決定通知はいつ届く？審査期間の目安と、結果待ちの過ごし方｜障害年金申請サポート",
+      "htmlTitle": "障害年金の結果待ち｜結果はいつ届く？目安3か月・遅いときの確認先・審査状況はネットで見られるか｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/shinsei-kikan"
     },
     {

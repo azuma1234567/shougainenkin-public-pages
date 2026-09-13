@@ -464,12 +464,13 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
   {
     slug: "shinsei-kikan",
     title: "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
-    /* h1 は変えない約束なので、<title> だけ metaTitle で「決定通知」に寄せる(監査 §4-3) */
-    metaTitle: "障害年金の決定通知はいつ届く？審査期間の目安と、結果待ちの過ごし方",
+    /* h1 は変えない約束なので、<title> だけ metaTitle で変える。「決定通知」を含む検索語は表示が無く、
+       表示が付いている「結果待ち」「結果」「審査状況」に寄せる(docs/claude-code-seo-2026-09-13-work4-instructions.md 4-1) */
+    metaTitle: "障害年金の結果待ち｜結果はいつ届く？目安3か月・遅いときの確認先・審査状況はネットで見られるか",
     description:
-      "障害年金の申請から結果が届くまでの流れを解説します。審査中の連絡、追加書類、結果が遅い場合の確認方法や、結果待ちの間にしておきたい準備も紹介します。",
+      "障害年金の結果が届く目安は提出から約3か月（日本年金機構のサービススタンダード）。3か月を過ぎたら年金事務所かねんきんダイヤルで確認できます。審査中の連絡は不支給のサインではありません。待つ間の家計の手当てと記録も。",
     datePublished: "2026-07-23",
-    dateModified: "2026-09-02",
+    dateModified: "2026-09-13",
     primaryCluster: "application",
     category: "結果を待つ・不支給のとき",
     orderInCategory: 20,
