@@ -8,11 +8,12 @@ import { parse } from "node-html-parser";
 import ts from "typescript";
 import { chromium } from "playwright";
 import { parseColumns, generatedColumn } from "./import-columns.mjs";
-import { explainAmount, paragraphAround } from "./lib/amounts-derive.mjs";
+import { explainAmount, contextAround } from "./lib/amounts-derive.mjs";
 import { ASSUMED_EXAMPLE_AMOUNTS } from "./lib/amounts-assumed.mjs";
 await import("./lib/ts-alias.mjs");
 const { COLUMNS } = await import("../lib/columns.ts");
-const { AMOUNTS_2026 } = await import("../data/amounts.ts");
+const { AMOUNTS_2026, REFERENCE_AMOUNTS, STATISTICS } = await import("../data/amounts.ts");
+const amountSources = { reference: REFERENCE_AMOUNTS, statistics: STATISTICS };
 const { SAIKETSU_CASES } = await import("../lib/saiketsu.ts");
 const { isPublishedInternalPath } = await import("../lib/published-links.ts");
 const { GOKAI } = await import("../data/gokai.ts");
@@ -109,21 +110,25 @@ for (const a of articles) {
   const usedAssumptions = new Set();
   let unexplainedCount = 0;
   for (const a of articles) {
-    const text = a.lead.join("\n") + "\n" + a.content;
-    // 仕上げ指示§1の10万円以上。式中の円が省略された数も拾う。
+    // metaTitle・description・lead・本文を1行ずつ。文脈(月額・約・差)は contextAround で、表のセルなら見出し行も含む(2026-09-13)
+    const column = COLUMNS.find(column => column.slug === a.slug);
+    const text = [column.metaTitle ?? "", column.title, column.description, ...a.lead, a.content].join("\n");
+    // 仕上げ指示§1の10万円以上。式中の円が省略された数も拾う(件数・人数などの単位が続くものは金額ではないので除く)。
     // 万円表記は入力値の宣言利用を検出する（約○万円などの丸め表示は重複検算しない）。
-    const amounts = [...text.matchAll(/\d{1,3}(?:,\d{3})+(?:円)?/g)].map(m => ({ text: m[0], value: Number(m[0].replace(/[,円]/g, "")), index: m.index }));
+    const amounts = [...text.matchAll(/\d{1,3}(?:,\d{3})+(?:円)?/g)]
+      .filter(m => !/^(件|人|回|日|か所|カ所|ヶ所|事業所|票|世帯)/.test(text.slice(m.index + m[0].length, m.index + m[0].length + 3)))
+      .map(m => ({ text: m[0], value: Number(m[0].replace(/[,円]/g, "")), index: m.index }));
     for (const [value, reason] of Object.entries(ASSUMED_EXAMPLE_AMOUNTS)) {
-      if (!reason.startsWith(`${a.slug}:`)) continue;
+      if (!reason.split("。").some(part => part.startsWith(`${a.slug}:`))) continue;
       const inYen = amounts.some(amount => amount.value === Number(value));
       const inMan = text.includes(`${Number(value) / 10000}万円`);
       if (inYen || inMan) usedAssumptions.add(Number(value));
     }
     for (const amount of amounts.filter(amount => amount.value >= 100000)) {
-      const context = paragraphAround(text, amount.index);
+      const context = contextAround(text, amount.index);
       const reason = ASSUMED_EXAMPLE_AMOUNTS[amount.value];
-      const assumption = reason?.startsWith(`${a.slug}:`) ? reason : null;
-      const expression = assumption ? `仮定値: ${assumption}` : explainAmount(amount.value, AMOUNTS_2026, context);
+      const assumption = reason?.split("。").some(part => part.startsWith(`${a.slug}:`)) ? reason : null;
+      const expression = assumption ? `仮定値: ${assumption}` : explainAmount(amount.value, AMOUNTS_2026, context, amountSources);
       if (!expression) unexplainedCount += 1;
       check(Boolean(expression), `${a.slug}: ${amount.text} / ${context}`);
       if (expression) explained.push({ slug: a.slug, amount: amount.text, expression });

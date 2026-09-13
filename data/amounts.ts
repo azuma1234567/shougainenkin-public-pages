@@ -102,9 +102,33 @@ export const KOUGIN_2026 = {
   dependentLimitGeneral: yen(AMOUNTS_2026.dependentGeneralIncomeLimitYen),
 } as const;
 
-/* 目安の表(入力前に見せる)。厚生労働省「令和6年度工賃(賃金)の実績について」。幹10の原稿と同じ数字。 */
+/* 統計値(制度の額ではなく、調査の結果)。年度・出典・確認日を必ず添える。
+   本文の数字の出どころを検証(scripts/lib/amounts-derive.mjs)が確かめるための表で、
+   画面に出す目安は下の KOUGIN_REFERENCE がここから読む(数字を二重に持たない)。 */
+export const STATISTICS = {
+  kouginBTypeMonthly2024: { value: "24,141", label: "就労継続支援B型 平均工賃(月額)", fiscalYear: "令和6年度", source: "厚生労働省「令和6年度 工賃(賃金)の実績について」", checkedOn: "2026-09-13" },
+  kouginATypeMonthly2024: { value: "91,451", label: "就労継続支援A型 平均賃金(月額)", fiscalYear: "令和6年度", source: "厚生労働省「令和6年度 工賃(賃金)の実績について」", checkedOn: "2026-09-13" },
+  kouginBTypeMonthly2023: { value: "22,649", label: "就労継続支援B型 平均工賃(月額)", fiscalYear: "令和5年度", source: "厚生労働省「令和6年度 工賃(賃金)の実績について」(前年度の欄)", checkedOn: "2026-09-13" },
+  kouginATypeMonthly2023: { value: "86,752", label: "就労継続支援A型 平均賃金(月額)", fiscalYear: "令和5年度", source: "厚生労働省「令和6年度 工賃(賃金)の実績について」(前年度の欄)", checkedOn: "2026-09-13" },
+} as const;
+
+/* 目安の表(入力前に見せる)。幹10の原稿と同じ数字。値は STATISTICS から読む。 */
 export const KOUGIN_REFERENCE = {
-  bTypeMonthly: "24,141", bTypeYearlyApprox: "約29万",
-  aTypeMonthly: "91,451", aTypeYearlyApprox: "約110万",
-  source: "厚生労働省「令和6年度工賃(賃金)の実績について」",
+  bTypeMonthly: STATISTICS.kouginBTypeMonthly2024.value, bTypeYearlyApprox: "約29万",
+  aTypeMonthly: STATISTICS.kouginATypeMonthly2024.value, aTypeYearlyApprox: "約110万",
+  source: STATISTICS.kouginBTypeMonthly2024.source,
+} as const;
+
+/* 年金額ではない制度の公式額。本文に出てくる数字の出どころを検証が確かめるためだけに持つ。
+   金額計算機(KINGAKU_2026・KOUGIN_2026)と画面表示からは参照しないこと(2026-09-13 の取り決め)。
+   年度・出典・確認日を必ず添える。年度が変わって額が改定されたら、この表と本文の両方を見直す。 */
+export const REFERENCE_AMOUNTS = {
+  kokuminNenkinPremiumMonthly: { value: "17,920", label: "国民年金保険料(月額)", fiscalYear: "令和8年度", source: "日本年金機構「国民年金保険料」", checkedOn: "2026-09-13" },
+  specialDisabilityAllowanceMonthly: { value: "29,590", label: "特別障害者手当(月額)", fiscalYear: "令和7年度", source: "厚生労働省「特別障害者手当について」", checkedOn: "2026-09-13" },
+  serviceCopayCapLowTaxable: { value: "9,300", label: "障害福祉サービスの利用者負担上限(市町村民税課税世帯・所得割16万円未満、月額)", fiscalYear: "—(法令の額)", source: "厚生労働省「障害者の利用者負担」", checkedOn: "2026-09-13" },
+  serviceCopayCapGeneral: { value: "37,200", label: "障害福祉サービスの利用者負担上限(一般、月額)", fiscalYear: "—(法令の額)", source: "厚生労働省「障害者の利用者負担」", checkedOn: "2026-09-13" },
+  specialDisabilityBenefitGrade1Monthly: { value: "56,850", label: "特別障害給付金 1級相当(月額)", fiscalYear: "令和7年度", source: "日本年金機構「特別障害給付金制度」", checkedOn: "2026-09-13" },
+  specialDisabilityBenefitGrade1Yearly: { value: "682,200", label: "特別障害給付金 1級相当(年額 = 月額×12)", fiscalYear: "令和7年度", source: "日本年金機構「特別障害給付金制度」", checkedOn: "2026-09-13" },
+  specialDisabilityBenefitGrade2Monthly: { value: "45,480", label: "特別障害給付金 2級相当(月額)", fiscalYear: "令和7年度", source: "日本年金機構「特別障害給付金制度」", checkedOn: "2026-09-13" },
+  specialDisabilityBenefitGrade2Yearly: { value: "545,760", label: "特別障害給付金 2級相当(年額 = 月額×12)", fiscalYear: "令和7年度", source: "日本年金機構「特別障害給付金制度」", checkedOn: "2026-09-13" },
 } as const;

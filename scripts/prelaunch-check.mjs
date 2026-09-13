@@ -19,7 +19,7 @@
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { explainAmount, findAmounts, paragraphAround } from "./lib/amounts-derive.mjs";
+import { explainAmount, findAmounts, contextAround, amountTextFromHtml } from "./lib/amounts-derive.mjs";
 import { ASSUMED_EXAMPLE_AMOUNTS } from "./lib/amounts-assumed.mjs";
 
 const toNumber = (text) => Number(String(text).replace(/[,円]/g, ""));
@@ -38,7 +38,8 @@ mkdirSync(outDir, { recursive: true });
 
 const { SITE_URL } = await import("../lib/constants.ts");
 const { HUBS } = await import("../lib/hubs.ts");
-const { AMOUNTS_2026 } = await import("../data/amounts.ts");
+const { AMOUNTS_2026, REFERENCE_AMOUNTS, STATISTICS } = await import("../data/amounts.ts");
+const amountSources = { reference: REFERENCE_AMOUNTS, statistics: STATISTICS };
 const { SITEMAP_EXCLUDED } = await import("../lib/sitemap-excluded.ts");
 
 const results = [];
@@ -84,6 +85,8 @@ for (const p of sitemapPaths) {
     jsonLd: [...text.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => { try { return JSON.parse(m[1]); } catch { return { "@type": "PARSE_ERROR" }; } }),
     chars: charCount(text),
     visible: visible(text),
+    // A-8 用: 段落・箇条書き・表の行ごとに改行し、見出しセルに印を付けた本文(金額の文脈を見るため。2026-09-13)
+    amountText: amountTextFromHtml(text),
     mainLinks: [...new Set([...main.matchAll(/href="([^"]+)"/g)].map((m) => normalizePath(m[1])).filter(Boolean))],
     // 被リンク数の集計用: パンくず(nav[aria-label="パンくずリスト"])と誤解カードの「一覧へ戻る」(.gokai-back)は数えない(2026-09-02)
     countedLinks: [...new Set([...main.replace(/<nav[^>]*aria-label="パンくずリスト"[\s\S]*?<\/nav>/g, " ").replace(/<a[^>]*class="gokai-back"[^>]*>[\s\S]*?<\/a>/g, " ").matchAll(/href="([^"]+)"/g)].map((m) => normalizePath(m[1])).filter(Boolean))],
@@ -165,12 +168,19 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
   const explained = new Map();
   const unexplained = [];
   for (const [p, page] of pages) {
-    for (const found of findAmounts(page.visible, 100000)) {
-      // 式で導けない仮定値・統計値を含む概算は、scripts/lib/amounts-assumed.mjs に宣言したものだけ通す(verify-columns の検査6と共有)
-      const assumed = ASSUMED_EXAMPLE_AMOUNTS[found.value];
-      const expr = explainAmount(found.text, AMOUNTS_2026, paragraphAround(page.visible, found.index)) ?? (assumed ? `仮定値: ${assumed}` : null);
-      if (expr) explained.set(found.text, expr);
-      else unexplained.push(`未説明額: ${p}: ${found.text}`);
+    // 本文に加えて <title> と description も見る。文脈は段落(表のセルなら見出し行も)ごと(2026-09-13)
+    for (const text of [page.amountText, `${page.title}\n${page.description}`]) {
+      for (const found of findAmounts(text, 100000)) {
+        // 式で導けない概算・試算例は scripts/lib/amounts-assumed.mjs に宣言したものだけ通す(verify-columns の検査6と共有)。
+        // 宣言の slug/ページがこのページなら式より先に仮定値として扱う(偶然の式に当てない)。他のページでは式を先に見る
+        const assumed = ASSUMED_EXAMPLE_AMOUNTS[found.value];
+        const assumedHere = assumed && assumed.split("。").some((part) => p.includes(part.split(":")[0]));
+        const expr = (assumedHere ? `仮定値: ${assumed}` : null)
+          ?? explainAmount(found.text, AMOUNTS_2026, contextAround(text, found.index), amountSources)
+          ?? (assumed ? `仮定値: ${assumed}` : null);
+        if (expr) explained.set(found.text, expr);
+        else unexplained.push(`未説明額: ${p}: ${found.text}`);
+      }
     }
   }
   const explainedList = [...explained].sort((a, b) => toNumber(a[0]) - toNumber(b[0])).map(([text, expr]) => `説明済み: ${text} = ${expr}`);

@@ -6,7 +6,8 @@ import { SITE_NAME } from "../lib/constants.ts";
 import { decodePng, colHasInk, rowHasInk } from "./lib/png.mjs";
 import { explainAmount, findAmounts } from "./lib/amounts-derive.mjs";
 import { verifyBodies, verifyBodyHtml, verifyBuiltBodies, verifyIntegration } from "./verify-gokai-bodies.mjs";
-const { AMOUNTS_2026 } = await import("../data/amounts.ts");
+const { AMOUNTS_2026, REFERENCE_AMOUNTS, STATISTICS } = await import("../data/amounts.ts");
+const amountSources = { reference: REFERENCE_AMOUNTS, statistics: STATISTICS };
 
 const origin = process.env.VERIFY_ORIGIN;
 const PAGE_BACKGROUND = [0xf7, 0xfb, 0xfe];
@@ -66,7 +67,7 @@ for (const card of GOKAI) {
   const extra = [...card.check, card.ask, card.figure ?? ""].join("\n");
   assert.doesNotMatch(extra, /x\.com|twitter|@|ツイート|note\.com|youtube/i, `${card.slug}: 3ブロックに調査元の語を入れない`);
   for (const m of extra.matchAll(/0\d{2,4}-\d{2,4}-?\d{3,4}/g)) assert.ok(ALLOWED_PHONES.has(m[0]), `${card.slug}: 許可されていない電話番号 ${m[0]}`);
-  for (const found of findAmounts(card.figure ?? "")) assert.ok(explainAmount(found.text, AMOUNTS_2026, card.figure), `${card.slug}: 「数字で見ると」の ${found.text} が data/amounts.ts から導出できない`);
+  for (const found of findAmounts(card.figure ?? "")) assert.ok(explainAmount(found.text, AMOUNTS_2026, card.figure, amountSources), `${card.slug}: 「数字で見ると」の ${found.text} が data/amounts.ts から導出できない`);
 }
 
 // 配分表と一致するか(カード番号は原稿の並び順 = data/gokai.ts の並び順)。

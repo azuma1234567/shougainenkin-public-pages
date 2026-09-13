@@ -8,7 +8,8 @@ import { GOKAI, GOKAI_UPDATED } from "../data/gokai.ts";
 import { SITE_NAME, SITE_URL } from "../lib/constants.ts";
 import { parseManuscripts, generatedSource, CASE_ID } from "./import-gokai-bodies.mjs";
 import { explainAmount } from "./lib/amounts-derive.mjs";
-import { AMOUNTS_2026 } from "../data/amounts.ts";
+import { AMOUNTS_2026, REFERENCE_AMOUNTS, STATISTICS } from "../data/amounts.ts";
+const amountSources = { reference: REFERENCE_AMOUNTS, statistics: STATISTICS };
 await import("./lib/ts-alias.mjs");
 const { isPublishedInternalPath } = await import("../lib/gokai.ts");
 const { SAIKETSU_CASES } = await import("../lib/saiketsu.ts");
@@ -63,7 +64,7 @@ export async function verifyBodies() {
     for (const block of blocks) {
       const context = blockText(block);
       for (const [amount] of context.matchAll(/\d{1,3}(,\d{3})+円/g)) {
-        if (!explainAmount(amount, AMOUNTS_2026, context)) {
+        if (!explainAmount(amount, AMOUNTS_2026, context, amountSources)) {
           if (!unknownAmounts.has(amount)) unknownAmounts.set(amount, new Set());
           unknownAmounts.get(amount).add(body.slug);
         }
