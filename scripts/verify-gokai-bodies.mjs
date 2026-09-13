@@ -84,11 +84,12 @@ export async function verifyBodies() {
 export function verifyBodyHtml(html, slug) {
   const body = GOKAI_BODIES[slug];
   const dom = parse(html);
+  const fullTitle = `${body.metaTitle ?? body.title}｜${SITE_NAME}`;
   assert.equal(dom.querySelector("h1").textContent, body.title, `${slug}: h1`);
-  assert.equal(dom.querySelector("title").textContent, `${body.title}｜${SITE_NAME}`, `${slug}: title`);
+  assert.equal(dom.querySelector("title").textContent, fullTitle, `${slug}: title`);
   assert.equal(dom.querySelector('meta[name="description"]').getAttribute("content"), body.description);
   for (const selector of ['meta[property="og:description"]', 'meta[name="twitter:description"]']) assert.equal(dom.querySelector(selector).getAttribute("content"), body.description);
-  for (const selector of ['meta[property="og:title"]', 'meta[name="twitter:title"]']) assert.equal(dom.querySelector(selector).getAttribute("content"), `${body.title}｜${SITE_NAME}`);
+  for (const selector of ['meta[property="og:title"]', 'meta[name="twitter:title"]']) assert.equal(dom.querySelector(selector).getAttribute("content"), fullTitle);
   assert.equal(dom.querySelector('link[rel="canonical"]').getAttribute("href"), `${SITE_URL}/gokai/${slug}`);
   const graph = dom.querySelectorAll('script[type="application/ld+json"]').flatMap(script => {
     const node = JSON.parse(script.textContent);

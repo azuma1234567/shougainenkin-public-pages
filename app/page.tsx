@@ -19,8 +19,8 @@ import { YOUGO } from "@/data/yougo";
 import { GOKAI } from "@/data/gokai";
 import { searchableYomi } from "@/lib/yougo";
 
-const TITLE = "障害年金の疑問に、公的根拠と実例で答える｜障害年金申請サポート";
-const DESCRIPTION = "障害年金がはじめての方へ。病気、申請の段階、いまの悩みから、公的資料の根拠と公開裁決例を使って自分に近い情報を探せます。";
+const TITLE = "障害年金申請サポート｜社労士に頼まず自分で申請する人の、初診日・診断書・申立書の進め方";
+const DESCRIPTION = "障害年金を自分で申請する人のための無料サイト。初診日の探し方、診断書で見られる7項目、申立書をスマホで作って印刷する機能、不支給85件の公開裁決例まで、公的資料の根拠つきで案内します。";
 
 const searchItems: SearchItem[] = [
   {

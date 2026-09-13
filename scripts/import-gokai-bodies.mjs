@@ -72,9 +72,10 @@ export function parseManuscripts() {
       chunks.shift();
     }
     for (const chunk of chunks) {
-      const match = chunk.trim().match(/^---\nslug: ([^\n]+)\ntitle: ([^\n]+)\ndescription: ([^\n]+)\ncheckedOn: ([^\n]+)\n---\n+([\s\S]+)$/);
+      // metaTitle は任意。h1(title)は変えずに <title> だけ変えるときに使う(columns の metaTitle と同じ)。
+      const match = chunk.trim().match(/^---\nslug: ([^\n]+)\ntitle: ([^\n]+)\n(?:metaTitle: ([^\n]+)\n)?description: ([^\n]+)\ncheckedOn: ([^\n]+)\n---\n+([\s\S]+)$/);
       assert.ok(match, `${file}: frontmatterの形式`);
-      const [, slug, title, description, checkedOn, source] = match;
+      const [, slug, title, metaTitle, description, checkedOn, source] = match;
       assert.ok(!Object.hasOwn(bodies, slug), `${slug}: 重複`);
       const parts = source.split(/^## /m);
       assert.equal(parts.shift().trim(), "", `${slug}: h2より前に本文がある`);
@@ -107,7 +108,7 @@ export function parseManuscripts() {
       assert.ok(get("次に読む").length >= 2 && get("次に読む").length <= 4 && get("次に読む").every(b => b.type === "link"), `${slug}: 次に読むは2〜4件`);
       assert.ok(get("出典").length === 1 && get("出典")[0].type === "ul" && get("出典")[0].items.length > 0 && get("出典")[0].items.every(s => /確認日 20/.test(s)), `${slug}: 出典と確認日`);
       for (const [id] of source.matchAll(CASE_ID)) assert.ok(cases.some(c => c.id === id && c.verified && !c.excluded), `${slug}: 不明・未検証の裁決ID ${id}`);
-      bodies[slug] = { slug, title, description, checkedOn, sections };
+      bodies[slug] = { slug, title, ...(metaTitle ? { metaTitle } : {}), description, checkedOn, sections };
     }
   }
   assert.equal(Object.keys(bodies).length, 48);
@@ -116,7 +117,7 @@ export function parseManuscripts() {
 }
 
 export function generatedSource(bodies) {
-  return `// scripts/import-gokai-bodies.mjs で生成。直接編集しない\nexport type GokaiBlock =\n  | { type: "p"; text: string }\n  | { type: "h3"; text: string }\n  | { type: "ul"; items: string[] }\n  | { type: "case"; lead: string; text: string; caseId: string }\n  | { type: "faq"; q: string; a: string }\n  | { type: "link"; label: string; href: string };\nexport type GokaiSection = { heading: string; blocks: GokaiBlock[] };\nexport type GokaiBody = { slug: string; title: string; description: string; checkedOn: string; sections: GokaiSection[] };\nexport const GOKAI_BODIES: Record<string, GokaiBody> = ${JSON.stringify(bodies, null, 2)};\nexport const GOKAI_BODIES_UPDATED = "2026-09-03";\n`;
+  return `// scripts/import-gokai-bodies.mjs で生成。直接編集しない\nexport type GokaiBlock =\n  | { type: "p"; text: string }\n  | { type: "h3"; text: string }\n  | { type: "ul"; items: string[] }\n  | { type: "case"; lead: string; text: string; caseId: string }\n  | { type: "faq"; q: string; a: string }\n  | { type: "link"; label: string; href: string };\nexport type GokaiSection = { heading: string; blocks: GokaiBlock[] };\nexport type GokaiBody = { slug: string; title: string; metaTitle?: string; description: string; checkedOn: string; sections: GokaiSection[] };\nexport const GOKAI_BODIES: Record<string, GokaiBody> = ${JSON.stringify(bodies, null, 2)};\nexport const GOKAI_BODIES_UPDATED = "2026-09-03";\n`;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const output = generatedSource(parseManuscripts());

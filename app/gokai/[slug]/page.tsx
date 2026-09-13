@@ -20,9 +20,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const body = GOKAI_BODIES[slug];
   if (!body) throw new Error(`誤解カード本文なし: ${slug}`);
   const path = `/gokai/${slug}`;
-  const fullTitle = `${body.title}｜${SITE_NAME}`;
+  /* h1 と Article の headline は title のまま。<title> と OG だけ metaTitle があればそれ(columns と同じ) */
+  const metaTitle = body.metaTitle ?? body.title;
+  const fullTitle = `${metaTitle}｜${SITE_NAME}`;
   return {
-    title: body.title,
+    title: metaTitle,
     description: body.description,
     alternates: { canonical: `${SITE_URL}${path}` },
     openGraph: { title: fullTitle, description: body.description, type: "article", siteName: SITE_NAME, url: `${SITE_URL}${path}`, locale: "ja_JP" },

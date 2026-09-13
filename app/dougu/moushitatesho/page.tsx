@@ -11,9 +11,11 @@ const UPDATED = "2026-09-04";
 const PATH = "/dougu/moushitatesho";
 const isPublished = isPublishedInternalPath(PATH);
 
-const TITLE = "病歴・就労状況等申立書を、スマホで公式の様式にそのまま入力して印刷する";
+/* h1 は変えない約束なので、<title> だけ検索結果向けの TITLE にする(docs/claude-code-seo-2026-09-13-instructions.md 2-4) */
+const H1 = "病歴・就労状況等申立書を、スマホで公式の様式にそのまま入力して印刷する";
+const TITLE = "病歴・就労状況等申立書をスマホで入力して、公式様式のまま印刷する【無料・送信なし】";
 const DESCRIPTION =
-  "日本年金機構の様式(A3・続紙A4)に、パソコンの文字で記入した紙が出ます。元号は○、年月日は数字。記入していない欄は空欄のまま。入力内容はこの端末の中にだけ残ります。送信しません。";
+  "日本年金機構の様式(A3・続紙A4)に、パソコンの文字で書いた紙がそのまま出ます。手書きで清書し直す必要はありません。元号は○、年月日は数字、未記入欄は空欄のまま。入力内容はこの端末にだけ残り、送信しません。";
 
 /* 本文の Q&A と同じ文字列。構造化データ(FAQPage)にも使う。 */
 const FAQ: { q: string; a: string }[] = [
@@ -65,7 +67,7 @@ export default function Page() {
           currentPath={PATH}
         />
         {/* 道具の上は3行まで。離脱を作らない(設計 §11) */}
-        <h1 className="mt-page-h1">{TITLE}</h1>
+        <h1 className="mt-page-h1">{H1}</h1>
         <p className="mt-page-lead">
           日本年金機構の様式（A3・続紙A4）に、パソコンの文字で記入した紙が出ます。<br />
           元号は○、年月日は数字。記入していない欄は空欄のままです。<br />

@@ -113,6 +113,17 @@
       "fields": [
         "metaTitle"
       ]
+    },
+    "2026-09-13-seo-metatitle": {
+      "reason": "表示が増えてクリックの無いページの <title> を検索結果で押す理由がある形に(docs/claude-code-seo-2026-09-13-instructions.md 2-3 / 2-5)。h1 は変えない",
+      "slugs": [
+        "jukyuugo-tetsuduki",
+        "koushin-kakuninhodo"
+      ],
+      "fields": [
+        "metaTitle",
+        "htmlTitle"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -136,9 +147,9 @@
     {
       "slug": "jukyuugo-tetsuduki",
       "title": "障害年金が決まったあとの手続きリスト — 年金証書が届いた日から動き出すもの",
-      "metaTitle": "障害年金の受給決定後の手続き｜給付金・法定免除・扶養",
+      "metaTitle": "障害年金が決まったら｜年金証書が届いた後にやる手続き（給付金・法定免除・扶養・手帳）",
       "h1": "障害年金が決まったあとの手続きリスト — 年金証書が届いた日から動き出すもの",
-      "htmlTitle": "障害年金の受給決定後の手続き｜給付金・法定免除・扶養｜障害年金申請サポート",
+      "htmlTitle": "障害年金が決まったら｜年金証書が届いた後にやる手続き（給付金・法定免除・扶養・手帳）｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/jukyuugo-tetsuduki"
     },
     {
@@ -352,9 +363,9 @@
     {
       "slug": "koushin-kakuninhodo",
       "title": "障害年金の更新（障害状態確認届）— 何年ごと？落ちたらどうなる？受給してからが本番という話",
-      "metaTitle": "障害年金の更新（障害状態確認届）｜時期・支給停止への備え",
+      "metaTitle": "障害年金の更新は何年ごと？障害状態確認届の期限と、止まる人は1.1%という数字",
       "h1": "障害年金の更新（障害状態確認届）— 何年ごと？落ちたらどうなる？受給してからが本番という話",
-      "htmlTitle": "障害年金の更新（障害状態確認届）｜時期・支給停止への備え｜障害年金申請サポート",
+      "htmlTitle": "障害年金の更新は何年ごと？障害状態確認届の期限と、止まる人は1.1%という数字｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/koushin-kakuninhodo"
     },
     {

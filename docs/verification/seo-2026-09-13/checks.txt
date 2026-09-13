@@ -1,0 +1,62 @@
+## /
+title(43字): 障害年金申請サポート｜社労士に頼まず自分で申請する人の、初診日・診断書・申立書の進め方
+○ title が指示どおり
+○ og:title / twitter:title も同じ
+description(92字): 障害年金を自分で申請する人のための無料サイト。初診日の探し方、診断書で見られる7項目、申立書をスマホで作って印刷する機能、不支給85件の公開裁決例まで、公的資料の根拠つきで案内します。
+○ description が指示どおり
+○ og:description / twitter:description も同じ
+○ JSON-LD の description も同じ
+○ h1 は本番と同じ 「「自分の場合はどうなる？」に、根拠つきで答えます」
+○ <main> の本文(script を除く)は本番と同じ (2478字)
+
+## /gokai/shufu-mushoku
+title(54字): 専業主婦(主夫)・無職でも障害年金は請求できる｜第3号被保険者の期間は「納付済み」扱い｜障害年金申請サポート
+○ title が指示どおり
+○ og:title / twitter:title も同じ
+description(117字): 働いていなくても、収入がなくても、障害基礎年金は請求できます。会社員の配偶者に扶養されていた第3号被保険者の期間は、自分で保険料を払っていなくても納付済期間です。あきらめる前に、年金事務所かねんきんネットで納付記録を確認してください。
+○ description が指示どおり
+○ og:description / twitter:description も同じ
+○ JSON-LD の description も同じ
+○ h1 は本番と同じ 「専業主婦(主夫)や無職だから障害年金は関係ない？—国民年金の被保険者なら、収入の有無は要件にありません」
+○ <main> の本文(script を除く)は本番と同じ (2031字)
+○ Article の headline は h1 のまま
+
+## /columns/jukyuugo-tetsuduki
+title(53字): 障害年金が決まったら｜年金証書が届いた後にやる手続き（給付金・法定免除・扶養・手帳）｜障害年金申請サポート
+○ title が指示どおり
+○ og:title / twitter:title も同じ
+description(153字): 障害年金の受給が決まったあとに必要な手続きを一覧化。請求しないと受け取れない年金生活者支援給付金(令和8年度 1級 月7,025円・2級 月5,620円)、国民年金保険料の法定免除と老齢基礎年金への影響、健康保険の扶養の確認、20歳前傷病の所得制限、年金証書で申請できる障害者手帳、初回振込までの流れまで。
+○ description は本番と同じ(変えない)
+○ h1 は本番と同じ 「障害年金が決まったあとの手続きリスト—年金証書が届いた日から動き出すもの」
+○ <main> の本文(script を除く)は本番と同じ (7094字)
+○ Article の headline は h1 のまま
+
+## /dougu/moushitatesho
+title(52字): 病歴・就労状況等申立書をスマホで入力して、公式様式のまま印刷する【無料・送信なし】｜障害年金申請サポート
+○ title が指示どおり
+○ og:title / twitter:title も同じ
+description(104字): 日本年金機構の様式(A3・続紙A4)に、パソコンの文字で書いた紙がそのまま出ます。手書きで清書し直す必要はありません。元号は○、年月日は数字、未記入欄は空欄のまま。入力内容はこの端末にだけ残り、送信しません。
+○ description が指示どおり
+○ og:description / twitter:description も同じ
+○ JSON-LD の description も同じ
+○ h1 は本番と同じ 「病歴・就労状況等申立書を、スマホで公式の様式にそのまま入力して印刷する」
+○ <main> の本文(script を除く)は本番と同じ (1286字)
+
+## /columns/koushin-kakuninhodo
+title(50字): 障害年金の更新は何年ごと？障害状態確認届の期限と、止まる人は1.1%という数字｜障害年金申請サポート
+○ title が指示どおり
+○ og:title / twitter:title も同じ
+description(117字): 障害年金の更新（障害状態確認届）は1〜5年ごと。提出期限、就労中の注意点、支給停止や級落ちへの備えを解説します。令和6年度の再認定304,456件のうち96.7%はそのまま継続、支給停止は1.1%（日本年金機構「障害年金業務統計」）。
+○ description が指示どおり
+○ og:description / twitter:description も同じ
+○ JSON-LD の description も同じ
+○ h1 は本番と同じ 「障害年金の更新（障害状態確認届）—何年ごと？落ちたらどうなる？受給してからが本番という話」
+○ <main> の本文(script を除く)は本番と同じ (9981字)
+○ Article の headline は h1 のまま
+
+## /columns/koushin-kakuninhodo/opengraph-image
+○ OG 画像は本番と同じバイト列 (image/png, 46312 bytes / 本番 46312 bytes)
+
+## verifyBodyHtml(.next の gokai 49枚)
+○ 48/49 枚が通る。新しい失敗なし (作業前から)hataraitara-make: FAQPageは1つ
+○ shufu-mushoku が通る(metaTitle あり)
