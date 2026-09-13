@@ -18,6 +18,7 @@ export default function Page() {
         "nichijo-seikatsu-7koumoku",
         "shindansho-kakunin",
         "shindansho-jittai-chigau",
+        "shoshinbi-wakaranai",
       ]}
       references={[NENKIN_REFERENCES.diagnosis, MHLW_REFERENCES.seishinGuideline]}
     />

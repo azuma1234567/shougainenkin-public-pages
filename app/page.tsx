@@ -220,6 +220,8 @@ export default function HomePage() {
         <div className="p-container">
           <SectionHeader title="申請の流れ ― 8つのステップ" lead="初診日の確認から結果が届くまで。左から右へ、順番に進みます。" href="/shinsei" linkLabel="申請の流れを詳しく見る" />
           <StepFlow />
+          {/* 最初の一歩(初診日)でつまずく人向けの補助リンク。アンカーテキストは固定(docs/claude-code-seo-2026-09-13-work3-instructions.md 3-3) */}
+          <p><Link className="p-more" href="/columns/shoshinbi-wakaranai">初診日がわからないときの探し方</Link></p>
         </div>
       </section>
 

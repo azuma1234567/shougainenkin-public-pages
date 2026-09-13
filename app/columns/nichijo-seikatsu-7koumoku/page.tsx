@@ -17,7 +17,7 @@ export default function Page() {
         "shindansho-kakunin",
         "tokyu-hantei-guideline",
         "shindansho-ishi-ni-tsutaeru",
-        "shindansho-jittai-chigau",
+        "shoshinbi-wakaranai",
       ]}
       references={[
         {

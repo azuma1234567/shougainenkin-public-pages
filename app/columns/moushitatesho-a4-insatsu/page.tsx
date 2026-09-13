@@ -21,6 +21,7 @@ export default function Page() {
         "moushitatesho-mijushin-kikan",
         "moushitatesho-kakikata",
         "shindansho-kakunin",
+        "shoshinbi-wakaranai",
       ]}
       references={[
         NENKIN_REFERENCES.moushitatesho,

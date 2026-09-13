@@ -124,6 +124,18 @@
         "metaTitle",
         "htmlTitle"
       ]
+    },
+    "2026-09-13-shoshinbi": {
+      "reason": "「初診日 証明」「初診日 証明 依頼」を受ける title が無かったので、metaTitle に「初診日の証明」を入れた(docs/claude-code-seo-2026-09-13-work3-instructions.md 3-1)。「郵送」は残す。h1・本文は変えていない。あわせて読みたい(上限5)の relatedSlugs に shoshinbi-wakaranai を足した(3-2)",
+      "slugs": [
+        "jushinjokyo-shomeisho",
+        "moushitatesho-a4-insatsu"
+      ],
+      "fields": [
+        "metaTitle",
+        "htmlTitle",
+        "special.links: moushitatesho-a4-insatsu のあわせて読みたいに /columns/shoshinbi-wakaranai が入り、同じクラスタの自動補充だった /columns/fushikyu-85ken が押し出された"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -283,9 +295,9 @@
     {
       "slug": "jushinjokyo-shomeisho",
       "title": "受診状況等証明書とは？病院への依頼方法・郵送・確認ポイント",
-      "metaTitle": "受診状況等証明書の郵送での依頼方法｜遠方の病院からの取り寄せ手順",
+      "metaTitle": "初診日の証明（受診状況等証明書）を病院に依頼する方法｜郵送・遠方・文書料",
       "h1": "受診状況等証明書とは？病院への依頼方法・郵送・確認ポイント",
-      "htmlTitle": "受診状況等証明書の郵送での依頼方法｜遠方の病院からの取り寄せ手順｜障害年金申請サポート",
+      "htmlTitle": "初診日の証明（受診状況等証明書）を病院に依頼する方法｜郵送・遠方・文書料｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/jushinjokyo-shomeisho"
     },
     {
@@ -554,7 +566,7 @@
         "/columns/koushin-kakuninhodo",
         "/columns/fushikyuu-shinsa-seikyu",
         "/columns/shinsatsu-mae-memo",
-        "/columns/fushikyu-85ken"
+        "/columns/shoshinbi-wakaranai"
       ],
       "cta": []
     },

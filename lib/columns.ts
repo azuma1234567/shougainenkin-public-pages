@@ -423,7 +423,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
   {
     slug: "jushinjokyo-shomeisho",
     title: "受診状況等証明書とは？病院への依頼方法・郵送・確認ポイント",
-    metaTitle: "受診状況等証明書の郵送での依頼方法｜遠方の病院からの取り寄せ手順",
+    metaTitle: "初診日の証明（受診状況等証明書）を病院に依頼する方法｜郵送・遠方・文書料",
     description:
       "受診状況等証明書を郵送で依頼する手順を解説。遠方や引っ越し先の病院からの取り寄せ、電話での伝え方、同封するもの、返信用封筒と料金の扱い、届くまでの期間、カルテがない・廃院の場合の次の一手まで。",
     datePublished: "2026-07-23",
