@@ -9,12 +9,14 @@ const published = HUBS.filter((hub) => hub.published);
 const reachable = new Set(published.flatMap((hub) => hub.relatedSlugs));
 const isolated = articleSlugs.filter((slug) => !reachable.has(slug));
 
+/* 2026-09-13: 「働く」「作業所」8本を足したハブを更新(/nayami/koushin 4→6、/joukyou/hatarakinagara 3→5、
+   /erabu/jibun-ka-irai →5)。/erabu/jibun-ka-irai は作業前から実数4で、表の3と食い違っていた。 */
 const expectedCounts = new Map(Object.entries({
   "/nayami/shoshinbi-karute": 7, "/nayami/shindansho-komatta": 8, "/nayami/fushikyu": 4,
-  "/nayami/koushin": 4, "/nayami/shikyuu-teishi": 2, "/nayami/sokyuu": 3,
-  "/joukyou/hatarakinagara": 3, "/joukyou/hatachi-mae": 2, "/joukyou/hitorigurashi": 2,
+  "/nayami/koushin": 6, "/nayami/shikyuu-teishi": 2, "/nayami/sokyuu": 3,
+  "/joukyou/hatarakinagara": 5, "/joukyou/hatachi-mae": 2, "/joukyou/hitorigurashi": 2,
   "/joukyou/shoubyou-teatekin-kara": 2, "/byoki/utsu-soukyoku": 7, "/byoki/tekiou-fuan": 3,
-  "/byoki/hattatsu": 2, "/okane/ikura": 6, "/erabu/jibun-ka-irai": 3,
+  "/byoki/hattatsu": 2, "/okane/ikura": 6, "/erabu/jibun-ka-irai": 5,
 }));
 const countMismatches = [...expectedCounts].flatMap(([path, expected]) => {
   const actual = HUBS.find((hub) => hub.path === path)?.relatedSlugs.length ?? -1;
@@ -64,6 +66,7 @@ for (const { from, href } of hrefs) {
 const LINK_HUBS = {
   "/gokai": "誤解カード48本が文末で戻す導線",
   "/jitsurei": "裁決事例集。裁決を引用した記事・誤解カードが文末で戻す導線",
+  "/shinsei": "申請クラスタの柱ページ。記事末尾の「このテーマの全体像」から戻る導線で、記事が増えるほど増える(2026-09-13 ユーザー承認)",
 };
 const overFifty = [...incoming].map(([path, sources]) => [path, sources.size]).filter(([path, count]) => !Object.hasOwn(LINK_HUBS, path) && count > 50).sort((a, b) => b[1] - a[1]);
 const linkHubs = Object.entries(LINK_HUBS).map(([path, reason]) => [path, incoming.get(path)?.size ?? 0, reason]);

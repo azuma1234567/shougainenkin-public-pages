@@ -1,0 +1,38 @@
+{
+  "articles": 57,
+  "assignments": 57,
+  "missingPages": [],
+  "isolated": [],
+  "publishedHubRoutes": 49,
+  "routeFailures": [],
+  "countMismatches": [
+    {
+      "path": "/nayami/fushikyu",
+      "expected": 4,
+      "actual": 5
+    }
+  ],
+  "checkedPages": 185,
+  "pageFailures": [],
+  "checkedInternalTargets": 184,
+  "broken": [],
+  "reservedLinks": 0,
+  "overFifty": [],
+  "linkHubs": [
+    [
+      "/gokai",
+      63,
+      "誤解カード48本が文末で戻す導線"
+    ],
+    [
+      "/jitsurei",
+      112,
+      "裁決事例集。裁決を引用した記事・誤解カードが文末で戻す導線"
+    ],
+    [
+      "/shinsei",
+      57,
+      "申請クラスタの柱ページ。記事末尾の「このテーマの全体像」から戻る導線で、記事が増えるほど増える(2026-09-13 ユーザー承認)"
+    ]
+  ]
+}

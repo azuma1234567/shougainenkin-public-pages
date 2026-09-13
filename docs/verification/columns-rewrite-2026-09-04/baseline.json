@@ -146,6 +146,23 @@
         "metaTitle",
         "htmlTitle"
       ]
+    },
+    "2026-09-13-hataraku-sagyousho": {
+      "reason": "新記事8本の追加(docs/claude-code-hataraku-sagyousho-2026-09-13-instructions.md)。50〜57本目",
+      "slugs": [
+        "shindansho-shurojokyo",
+        "koushin-hatarakinagara",
+        "kousei-3kyu-hataraku",
+        "zaitaku-freelance-nenkin",
+        "kougin-nenkin-tedori",
+        "sagyousho-hajimeru-tsutaeru",
+        "muryou-soudan-psw",
+        "sagyousho-kayoenai"
+      ],
+      "fields": [
+        "(新規) columns に8本の slug・title・metaTitle・h1・htmlTitle・canonical を追加",
+        "special.links: あわせて読みたい(同じクラスタの自動補充)に公開日の新しい新記事が入り、kikan-kugiri の /columns/fushikyu-85ken、teishutsusaki-yuusou の /columns/fushikyu-85ken・/columns/sharoushi-kawaranai-koto が押し出された"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -541,6 +558,70 @@
       "h1": "不支給になった85人が教えること — 精神の障害年金で落ちた理由、4つの型",
       "htmlTitle": "障害年金の不支給、落ちた理由の4つの型|85件の調査から｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/fushikyu-85ken"
+    },
+    {
+      "slug": "shindansho-shurojokyo",
+      "title": "診断書の「就労状況」欄には何が書かれるのか — 働きながら申請・更新する人が主治医に渡すメモ",
+      "metaTitle": "障害年金の診断書「就労状況」欄に書かれること｜働きながら申請・更新する人が主治医に渡すメモ",
+      "h1": "診断書の「就労状況」欄には何が書かれるのか — 働きながら申請・更新する人が主治医に渡すメモ",
+      "htmlTitle": "障害年金の診断書「就労状況」欄に書かれること｜働きながら申請・更新する人が主治医に渡すメモ｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/shindansho-shurojokyo"
+    },
+    {
+      "slug": "koushin-hatarakinagara",
+      "title": "働き始めてから最初の更新で見られること — 障害状態確認届と、1年前から始める準備",
+      "metaTitle": "障害年金の更新、働いていると止まる？｜停止は1.1%・見られるのは配慮と仕事の外の生活",
+      "h1": "働き始めてから最初の更新で見られること — 障害状態確認届と、1年前から始める準備",
+      "htmlTitle": "障害年金の更新、働いていると止まる？｜停止は1.1%・見られるのは配慮と仕事の外の生活｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/koushin-hatarakinagara"
+    },
+    {
+      "slug": "kousei-3kyu-hataraku",
+      "title": "障害厚生年金3級で働く — 3級の意味、最低保障額、更新・額改定・65歳の3つの線",
+      "metaTitle": "障害厚生年金3級で働く｜最低保障 年635,475円・更新で非該当になる線・額改定で2級へ",
+      "h1": "障害厚生年金3級で働く — 3級の意味、最低保障額、更新・額改定・65歳の3つの線",
+      "htmlTitle": "障害厚生年金3級で働く｜最低保障 年635,475円・更新で非該当になる線・額改定で2級へ｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/kousei-3kyu-hataraku"
+    },
+    {
+      "slug": "zaitaku-freelance-nenkin",
+      "title": "在宅・フリーランス・副業と障害年金 — 収入で止まる人は誰か、審査で見られる「実態」の残し方",
+      "metaTitle": "障害年金は副業・フリーランスで止まる？｜所得制限は20歳前傷病だけ(前年所得3,761,000円超で半額)",
+      "h1": "在宅・フリーランス・副業と障害年金 — 収入で止まる人は誰か、審査で見られる「実態」の残し方",
+      "htmlTitle": "障害年金は副業・フリーランスで止まる？｜所得制限は20歳前傷病だけ(前年所得3,761,000円超で半額)｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/zaitaku-freelance-nenkin"
+    },
+    {
+      "slug": "kougin-nenkin-tedori",
+      "title": "B型の工賃と障害年金で、月いくらで暮らせるか — 平均24,141円+70,608円から引かれるもの・足されるもの",
+      "metaTitle": "B型作業所の工賃と障害年金で月いくら？｜平均工賃24,141円+2級70,608円、利用料・給付金・生活保護との併用",
+      "h1": "B型の工賃と障害年金で、月いくらで暮らせるか — 平均24,141円+70,608円から引かれるもの・足されるもの",
+      "htmlTitle": "B型作業所の工賃と障害年金で月いくら？｜平均工賃24,141円+2級70,608円、利用料・給付金・生活保護との併用｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/kougin-nenkin-tedori"
+    },
+    {
+      "slug": "sagyousho-hajimeru-tsutaeru",
+      "title": "作業所に通い始めるとき、主治医と支援員に伝えること — 通所を年金の不利ではなく材料にする",
+      "metaTitle": "作業所(B型・A型・就労移行)に通うと障害年金は不利？｜主治医と支援員に伝えること・通所記録の書き方",
+      "h1": "作業所に通い始めるとき、主治医と支援員に伝えること — 通所を年金の不利ではなく材料にする",
+      "htmlTitle": "作業所(B型・A型・就労移行)に通うと障害年金は不利？｜主治医と支援員に伝えること・通所記録の書き方｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/sagyousho-hajimeru-tsutaeru"
+    },
+    {
+      "slug": "muryou-soudan-psw",
+      "title": "社労士に頼めない人が、無料で頼れる人 — 精神保健福祉士・相談支援専門員・年金事務所・支援員の地図",
+      "metaTitle": "障害年金の申請を無料で手伝ってくれる人｜精神保健福祉士(PSW)・相談支援専門員・年金事務所・作業所の支援員",
+      "h1": "社労士に頼めない人が、無料で頼れる人 — 精神保健福祉士・相談支援専門員・年金事務所・支援員の地図",
+      "htmlTitle": "障害年金の申請を無料で手伝ってくれる人｜精神保健福祉士(PSW)・相談支援専門員・年金事務所・作業所の支援員｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/muryou-soudan-psw"
+    },
+    {
+      "slug": "sagyousho-kayoenai",
+      "title": "作業所に通えない・辞めたとき、障害年金はどうなるか — 記録・伝え方・受給者証と雇用保険・再開の道",
+      "metaTitle": "作業所に通えない・辞めても障害年金は止まらない｜通えなかった記録は状態の証拠、A型なら雇用保険も",
+      "h1": "作業所に通えない・辞めたとき、障害年金はどうなるか — 記録・伝え方・受給者証と雇用保険・再開の道",
+      "htmlTitle": "作業所に通えない・辞めても障害年金は止まらない｜通えなかった記録は状態の証拠、A型なら雇用保険も｜障害年金申請サポート",
+      "canonical": "https://shougainenkin-note.net/columns/sagyousho-kayoenai"
     }
   ],
   "special": {
@@ -619,8 +700,7 @@
         "/columns/hatarakinagara",
         "/columns/koushin-kakuninhodo",
         "/columns/fushikyuu-shinsa-seikyu",
-        "/columns/shinsatsu-mae-memo",
-        "/columns/fushikyu-85ken"
+        "/columns/shinsatsu-mae-memo"
       ],
       "cta": [
         "申請準備を、アプリでひとつずつこの記事の内容を、質問に答えるだけで進められるアプリを作りました。日々の記録が診察で医師に渡せる資料になり、申立書の下書きになります。ログイン不要・記録は端末の中に。すべての機能を無料で使えます。"
@@ -662,9 +742,7 @@
         "/columns/shindansho-kakunin",
         "/columns/shinsei-kikan",
         "/columns/shinsatsu-mae-memo",
-        "/columns/hitsuyou-shorui-seishin",
-        "/columns/fushikyu-85ken",
-        "/columns/sharoushi-kawaranai-koto"
+        "/columns/hitsuyou-shorui-seishin"
       ],
       "cta": []
     }

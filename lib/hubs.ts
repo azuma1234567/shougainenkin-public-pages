@@ -63,7 +63,7 @@ export const HUBS: HubDefinition[] = [
   hub("/byoki/choukaku", "耳の障害・めまい", "耳・めまい", "byoki", true, [], "傷病=聴覚"),
   hub("/byoki/gengo", "話す・食べる機能の障害", "話す・食べる", "byoki", true, [], "傷病=言語"),
   hub("/byoki/nanbyou", "難病・その他の病気", "難病・その他", "byoki", true, [], "傷病=その他"),
-  hub("/joukyou/hatarakinagara", "働きながら申請するとき", "働きながら", "joukyou", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "tokyu-hantei-guideline"], "争点=就労"),
+  hub("/joukyou/hatarakinagara", "働きながら申請するとき", "働きながら", "joukyou", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "tokyu-hantei-guideline", "shindansho-shurojokyo", "koushin-hatarakinagara"], "争点=就労"),
   hub("/joukyou/hatachi-mae", "20歳前に初診日があるとき", "20歳前", "joukyou", true, ["hatachi-mae", "nofu-yoken"], "争点=20歳前"),
   hub("/joukyou/hitorigurashi", "一人暮らしで申請するとき", "一人暮らし", "joukyou", true, ["hitorigurashi-furi", "nichijo-seikatsu-7koumoku"]),
   hub("/joukyou/shoubyou-teatekin-kara", "傷病手当金から障害年金を考えるとき", "傷病手当金から", "joukyou", true, ["shoubyou-teatekin", "kiso-kousei-chigai"]),
@@ -75,13 +75,13 @@ export const HUBS: HubDefinition[] = [
   hub("/nayami/fushikyu", "不支給と言われたとき", "不支給", "nayami", true, ["fushikyu-85ken", "fushikyuu-shinsa-seikyu", "shinsa-shikumi-nintei-i", "shinsei-kikan", "shindansho-jittai-chigau"], "結論=棄却・一部容認"),
   hub("/nayami/shindansho-komatta", "診断書で困ったとき", "診断書で困った", "nayami", true, ["shindansho-irai-timing", "shindansho-tanomikata", "shindansho-kaitekurenai", "shindansho-ishi-ni-tsutaeru", "nichijo-seikatsu-7koumoku", "shinsatsu-mae-memo", "shindansho-kakunin", "shindansho-jittai-chigau"], "争点=診断書"),
   hub("/nayami/shoshinbi-karute", "初診日のカルテがないとき", "初診日・カルテ", "nayami", true, ["shakaiteki-chiyu", "shoshinbi-wakaranai", "shoshinbi-karute-nashi", "shoshinbi-haiin", "daisansha-shomei", "jushinjokyo-shomeisho", "moushitatesho-mijushin-kikan"], "争点=初診日"),
-  hub("/nayami/koushin", "更新や額改定で困ったとき", "更新・額改定", "nayami", true, ["jukyuugo-tetsuduki", "koushin-kakuninhodo", "gaku-kaitei-seikyuu", "shikyuu-teishi-fukkatsu"], "争点=更新・額改定"),
+  hub("/nayami/koushin", "更新や額改定で困ったとき", "更新・額改定", "nayami", true, ["jukyuugo-tetsuduki", "koushin-kakuninhodo", "gaku-kaitei-seikyuu", "shikyuu-teishi-fukkatsu", "koushin-hatarakinagara", "sagyousho-kayoenai"], "争点=更新・額改定"),
   hub("/nayami/shikyuu-teishi", "障害年金が止まったとき", "支給停止", "nayami", true, ["shikyuu-teishi-fukkatsu", "koushin-kakuninhodo"], "争点=支給停止"),
   hub("/nayami/sokyuu", "障害認定日までさかのぼって請求するとき", "遡及請求", "nayami", true, ["ninteibi-jigojusho", "sokyuu-seikyuu", "ikura-moraeru"], "争点=認定日・遡及"),
   hub("/okane/ikura", "障害年金はいくら受け取れるか", "年金額", "okane", true, ["hikazei-shuunyuu", "ikura-moraeru", "sokyuu-seikyuu", "kiso-kousei-chigai", "gaku-kaitei-seikyuu", "jukyuugo-tetsuduki"]),
   hub("/okane/zeikin", "税金と、税金以外の「収入」扱い", "税金", "okane", true),
   hub("/okane/chousei", "他の制度との調整", "制度との調整", "okane", true),
-  hub("/erabu/jibun-ka-irai", "自分で申請するか、依頼するか", "自分で・依頼", "erabu", true, ["jibun-de-shinsei", "sharoushi-kawaranai-koto", "nenkin-jimusho-soudan", "shinsei-shindoi"]),
+  hub("/erabu/jibun-ka-irai", "自分で申請するか、依頼するか", "自分で・依頼", "erabu", true, ["jibun-de-shinsei", "sharoushi-kawaranai-koto", "nenkin-jimusho-soudan", "shinsei-shindoi", "muryou-soudan-psw"]),
   hub("/erabu/irai-subeki-case", "専門家に頼んだほうがいいケース", "頼んだほうがいいケース", "erabu", true, ["sharoushi-kawaranai-koto"]),
   hub("/erabu/hiyou-souba", "障害年金にかかるお金の話", "かかるお金", "erabu", true, ["sharoushi-kawaranai-koto"]),
   hub("/erabu/erabikata", "社労士の選び方", "社労士の選び方", "erabu", true, ["sharoushi-kawaranai-koto"]),
@@ -96,8 +96,8 @@ export const HUBS: HubDefinition[] = [
   ].map((path) => hub(path, path, path, "reserved", false)),
 
   /* 幹10「受給が始まってから」。原稿 docs/jukyuugo-2026-09-05(shougainenkin repo)。 */
-  hub("/jukyuugo/hataraku", "働くと年金はどうなるか", "働くと年金はどうなるか", "jukyuugo", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "koushin-kakuninhodo", "hatachi-mae", "hikazei-shuunyuu"]),
-  hub("/jukyuugo/sagyousho", "B型・A型作業所と障害年金", "B型・A型作業所と障害年金", "jukyuugo", true, ["hatarakinagara", "hatachi-mae", "shougaisha-koyou-nenkin", "koushin-kakuninhodo", "techou-to-nenkin"]),
+  hub("/jukyuugo/hataraku", "働くと年金はどうなるか", "働くと年金はどうなるか", "jukyuugo", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "koushin-kakuninhodo", "hatachi-mae", "hikazei-shuunyuu", "kousei-3kyu-hataraku", "zaitaku-freelance-nenkin", "shindansho-shurojokyo", "koushin-hatarakinagara"]),
+  hub("/jukyuugo/sagyousho", "B型・A型作業所と障害年金", "B型・A型作業所と障害年金", "jukyuugo", true, ["hatarakinagara", "hatachi-mae", "shougaisha-koyou-nenkin", "koushin-kakuninhodo", "techou-to-nenkin", "kougin-nenkin-tedori", "sagyousho-hajimeru-tsutaeru", "sagyousho-kayoenai"]),
   hub("/jukyuugo/nukedasu", "抜け出すロードマップ", "抜け出すロードマップ", "jukyuugo", true, ["hatarakinagara", "shougaisha-koyou-nenkin", "koushin-kakuninhodo", "gaku-kaitei-seikyuu", "shikyuu-teishi-fukkatsu"]),
   hub("/jukyuugo/okane", "受給後のお金の設計", "受給後のお金の設計", "jukyuugo", true, ["hikazei-shuunyuu", "jukyuugo-tetsuduki", "ikura-moraeru", "shoubyou-teatekin", "gaku-kaitei-seikyuu"]),
   hub("/jukyuugo/a-gata-heisa", "A型事業所が閉鎖したとき", "A型事業所が閉鎖したとき", "jukyuugo", true, ["koushin-kakuninhodo", "shoubyou-teatekin", "shougaisha-koyou-nenkin", "jukyuugo-tetsuduki", "shikyuu-teishi-fukkatsu"]),
@@ -157,6 +157,15 @@ export const COLUMN_HUB_ASSIGNMENTS: Record<string, ColumnHubAssignment> = {
   "koushin-kakuninhodo": assignment("/nayami/koushin", "promote", ["/shinsei#step-8", "/jukyuugo/hataraku"]),
   "gaku-kaitei-seikyuu": assignment("/nayami/koushin", "core", ["/okane/ikura", "/jukyuugo/nukedasu"]),
   "shikyuu-teishi-fukkatsu": assignment("/nayami/shikyuu-teishi", "promote", ["/nayami/koushin", "/jukyuugo/nukedasu"]),
+  /* 「働く」4本・「作業所」4本(2026-09-13)。muryou-soudan-psw の主ハブは「自分で申請するか、依頼するか」(/erabu は一覧でハブではない) */
+  "shindansho-shurojokyo": assignment("/joukyou/hatarakinagara", "core", ["/jukyuugo/hataraku", "/nayami/shindansho-komatta"]),
+  "koushin-hatarakinagara": assignment("/nayami/koushin", "core", ["/jukyuugo/hataraku", "/joukyou/hatarakinagara"]),
+  "kousei-3kyu-hataraku": assignment("/jukyuugo/hataraku", "core", ["/okane/ikura", "/joukyou/65sai-ijou"]),
+  "zaitaku-freelance-nenkin": assignment("/jukyuugo/hataraku", "leaf", ["/joukyou/hatachi-mae", "/jukyuugo/okane"]),
+  "kougin-nenkin-tedori": assignment("/jukyuugo/sagyousho", "core", ["/okane/ikura", "/joukyou/seikatsu-hogo"]),
+  "sagyousho-hajimeru-tsutaeru": assignment("/jukyuugo/sagyousho", "core", ["/nayami/shindansho-komatta"]),
+  "muryou-soudan-psw": assignment("/erabu/jibun-ka-irai", "promote", ["/hajimete", "/shinsei#step-3"]),
+  "sagyousho-kayoenai": assignment("/jukyuugo/sagyousho", "leaf", ["/nayami/koushin", "/jukyuugo/a-gata-heisa"]),
 };
 
 export function getHub(path: string): HubDefinition | null {

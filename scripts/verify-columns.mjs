@@ -9,6 +9,7 @@ import ts from "typescript";
 import { chromium } from "playwright";
 import { parseColumns, generatedColumn } from "./import-columns.mjs";
 import { explainAmount, paragraphAround } from "./lib/amounts-derive.mjs";
+import { ASSUMED_EXAMPLE_AMOUNTS } from "./lib/amounts-assumed.mjs";
 await import("./lib/ts-alias.mjs");
 const { COLUMNS } = await import("../lib/columns.ts");
 const { AMOUNTS_2026 } = await import("../data/amounts.ts");
@@ -17,14 +18,14 @@ const { isPublishedInternalPath } = await import("../lib/published-links.ts");
 const { GOKAI } = await import("../data/gokai.ts");
 
 const origin = process.argv[2] ?? process.env.VERIFY_ORIGIN ?? "http://localhost:3107";
-// 計算例の仮定値。制度の額ではなく記事が「〜なら」と置いた入力なので、
-// amounts.ts からは導けない。ここに挙げたものだけを説明済みとして扱い、
-// 一覧には必ず「仮定値」と明示して出す(黙って消さない)。
-const ASSUMED_EXAMPLE_AMOUNTS = {
-  300000: "shoubyou-teatekin: 標準報酬月額の平均(「30万円なら」)",
-  600000: "shoubyou-teatekin: 報酬比例部分(「報酬比例60万円」)",
-  1800000: "shoubyou-teatekin: 年金の合計(「年180万円なら」)",
-  1447300: "shoubyou-teatekin: 600,000 + basicGrade2(847,300)",
+// 計算例の仮定値は scripts/lib/amounts-assumed.mjs(prelaunch-check.mjs の A-8 と共有)。
+// 原稿に道具リンクが無い記事。原稿は変えない(2026-09-13 ユーザー承認)。原稿に道具リンクが入ったら外す。
+const NO_TOOL_LINK = {
+  "shindansho-shurojokyo": "働く・作業所8本(2026-09-13)の原稿に /dougu/ へのリンクが無い",
+  "kousei-3kyu-hataraku": "働く・作業所8本(2026-09-13)の原稿に /dougu/ へのリンクが無い",
+  "zaitaku-freelance-nenkin": "働く・作業所8本(2026-09-13)の原稿に /dougu/ へのリンクが無い",
+  "sagyousho-hajimeru-tsutaeru": "働く・作業所8本(2026-09-13)の原稿に /dougu/ へのリンクが無い",
+  "sagyousho-kayoenai": "働く・作業所8本(2026-09-13)の原稿に /dougu/ へのリンクが無い",
 };
 const assumedAmounts = [];
 const out = "docs/verification/columns-rewrite-2026-09-04";
@@ -47,8 +48,8 @@ for (const a of articles) {
 }
 
 {
-  const { check, finish } = failures(1, "49記事すべてにlead 3〜5項目・原稿との完全一致");
-  check(articles.length === 49, "記事数");
+  const { check, finish } = failures(1, "57記事すべてにlead 3〜5項目・原稿との完全一致");
+  check(articles.length === 57, "記事数");
   for (const a of articles) {
     check(a.lead.length >= 3 && a.lead.length <= 5, a.slug);
     check(readFileSync(`content/columns/${a.slug}.ts`, "utf8") === generatedColumn(a), `${a.slug}: 生成結果に差異`);
@@ -67,8 +68,8 @@ for (const a of articles) {
   finish();
 }
 {
-  const { check, finish } = failures(3, "道具リンク1本以上（指定3記事を除く）");
-  for (const a of articles) if (!baseline.special[a.slug]) check(documents.get(a.slug).querySelectorAll('.column-body a[href^="/dougu/"]').length > 0, a.slug);
+  const { check, finish } = failures(3, "道具リンク1本以上（指定3記事と、原稿に道具リンクが無い5記事を除く）");
+  for (const a of articles) if (!baseline.special[a.slug] && !NO_TOOL_LINK[a.slug]) check(documents.get(a.slug).querySelectorAll('.column-body a[href^="/dougu/"]').length > 0, a.slug);
   finish();
 }
 {

@@ -20,6 +20,7 @@ import { execFileSync } from "node:child_process";
 import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { explainAmount, findAmounts, paragraphAround } from "./lib/amounts-derive.mjs";
+import { ASSUMED_EXAMPLE_AMOUNTS } from "./lib/amounts-assumed.mjs";
 
 const toNumber = (text) => Number(String(text).replace(/[,円]/g, ""));
 
@@ -27,6 +28,7 @@ const toNumber = (text) => Number(String(text).replace(/[,円]/g, ""));
 //      宣言していないページが50本を超えたときだけ×にする。
 const LINK_HUBS = {
   "/jitsurei": "裁決事例集。裁決を引用した記事・誤解カードが文末で戻す導線",
+  "/shinsei": "申請クラスタの柱ページ。記事末尾の「このテーマの全体像」から戻る導線で、記事が増えるほど増える(2026-09-13 ユーザー承認)",
 };
 
 const origin = (process.argv[2] ?? process.env.VERIFY_ORIGIN ?? "http://localhost:3000").replace(/\/$/, "");
@@ -164,7 +166,9 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
   const unexplained = [];
   for (const [p, page] of pages) {
     for (const found of findAmounts(page.visible, 100000)) {
-      const expr = explainAmount(found.text, AMOUNTS_2026, paragraphAround(page.visible, found.index));
+      // 式で導けない仮定値・統計値を含む概算は、scripts/lib/amounts-assumed.mjs に宣言したものだけ通す(verify-columns の検査6と共有)
+      const assumed = ASSUMED_EXAMPLE_AMOUNTS[found.value];
+      const expr = explainAmount(found.text, AMOUNTS_2026, paragraphAround(page.visible, found.index)) ?? (assumed ? `仮定値: ${assumed}` : null);
       if (expr) explained.set(found.text, expr);
       else unexplained.push(`未説明額: ${p}: ${found.text}`);
     }

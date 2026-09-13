@@ -71,6 +71,14 @@ export function explainAmount(raw, AMOUNTS, context = "") {
   const hit = (list) => list.find((c) => Math.round(c.value) === value);
   const found = hit(exact) ?? hit(sums) ?? hit(grade1);
   if (found) return found.expr;
+  // 20歳前傷病の所得制限の線に、扶養親族等の加算を人数分足した額(国民年金法施行令 第5条の4)
+  for (const base of amountEntries(AMOUNTS).filter((e) => /^income(Half|Full)(Before|From)October$/.test(e.key))) {
+    for (const add of amountEntries(AMOUNTS).filter((e) => /^incomeLimit(Dependent|Elderly|Specified)Addition$/.test(e.key))) {
+      for (let n = 1; n <= 5; n++) {
+        if (base.value + add.value * n === value) return `${base.key}(${fmt(base.value)}) + ${add.key}(${fmt(add.value)}) × ${n}(扶養親族等の加算)`;
+      }
+    }
+  }
   const near = monthlyOf.filter((c) => Math.abs(c.value - value) <= c.tolerance).sort((a, b) => Math.abs(a.value - value) - Math.abs(b.value - value) || a.terms - b.terms)[0];
   if (near) return `${near.expr} ≒ ${fmt(value)}`;
   if (/前年度|令和7年度/.test(context)) return "前年度額(本文に明示)";
