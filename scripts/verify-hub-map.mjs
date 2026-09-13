@@ -10,9 +10,10 @@ const reachable = new Set(published.flatMap((hub) => hub.relatedSlugs));
 const isolated = articleSlugs.filter((slug) => !reachable.has(slug));
 
 /* 2026-09-13: 「働く」「作業所」8本を足したハブを更新(/nayami/koushin 4→6、/joukyou/hatarakinagara 3→5、
-   /erabu/jibun-ka-irai →5)。/erabu/jibun-ka-irai は作業前から実数4で、表の3と食い違っていた。 */
+   /erabu/jibun-ka-irai →5)。/erabu/jibun-ka-irai は作業前から実数4で、表の3と食い違っていた。
+   /nayami/fushikyu は 93d8265(2026-09-08、fushikyu-85ken を追加)から実数5で、表の4を 5 に直した。 */
 const expectedCounts = new Map(Object.entries({
-  "/nayami/shoshinbi-karute": 7, "/nayami/shindansho-komatta": 8, "/nayami/fushikyu": 4,
+  "/nayami/shoshinbi-karute": 7, "/nayami/shindansho-komatta": 8, "/nayami/fushikyu": 5,
   "/nayami/koushin": 6, "/nayami/shikyuu-teishi": 2, "/nayami/sokyuu": 3,
   "/joukyou/hatarakinagara": 5, "/joukyou/hatachi-mae": 2, "/joukyou/hitorigurashi": 2,
   "/joukyou/shoubyou-teatekin-kara": 2, "/byoki/utsu-soukyoku": 7, "/byoki/tekiou-fuan": 3,
