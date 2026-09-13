@@ -68,6 +68,14 @@ function candidates(AMOUNTS) {
 export function explainAmount(raw, AMOUNTS, context = "") {
   const value = toNumber(raw);
   const { exact, sums, grade1, monthlyOf } = candidates(AMOUNTS);
+  // 障害厚生年金3級の最低保障額 = 障害基礎年金2級 × 3/4 を百円単位に四捨五入(令和8年度 847,300 → 635,500)。
+  // 丸める前の値(635,475 など)は公式額ではないので、月額の近似などで説明済みにしない。
+  for (const e of amountEntries(AMOUNTS).filter((e) => ["basicGrade2", "basicGrade2Old"].includes(e.key))) {
+    const threeQuarters = (e.value * 3) / 4;
+    const rounded = Math.round(threeQuarters / 100) * 100;
+    if (rounded === value) return `${e.key}(${fmt(e.value)}) × 3/4(百円未満四捨五入)`;
+    if (threeQuarters === value && rounded !== value) return null;
+  }
   const hit = (list) => list.find((c) => Math.round(c.value) === value);
   const found = hit(exact) ?? hit(sums) ?? hit(grade1);
   if (found) return found.expr;
