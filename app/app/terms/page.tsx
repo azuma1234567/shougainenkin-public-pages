@@ -36,7 +36,7 @@ export default function AppTermsPage() {
 
       <h1>利用規約(アプリ)</h1>
 
-      <p className="meta-line">最終改定日: {APP_LEGAL_VERSION}</p>
+      <p className="meta-line">最終更新日: {APP_LEGAL_VERSION}</p>
       <p className="meta-line">運営者: あずまたいすけ(個人)</p>
 
       <p>

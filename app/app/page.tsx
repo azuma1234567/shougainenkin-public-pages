@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import AppStoreBadge from "@/components/AppStoreBadge";
-import { Breadcrumb, Card, CheckIcon, SectionHeader } from "@/components/platform/Platform";
+import { Breadcrumb, Card, CheckIcon, PageDate, SectionHeader } from "@/components/platform/Platform";
 import { APP_STORE_URL, SITE_NAME, SITE_URL } from "@/lib/constants";
+import { SITEMAP_STATIC_DATES } from "@/lib/sitemap-static-dates";
 import { pageMetadata } from "@/lib/seo";
 
 const TITLE = "障害年金申請サポート｜AI相談・申請ガイドアプリ";
@@ -58,6 +59,8 @@ export default function AppPage() {
         <p>記録と相談履歴は端末内に保存されます。AI機能を使うときだけ、対象の文章が処理のために送信されます。受給可否や等級の判定、医療上の診断、申請代行は行いません。</p>
         <p><Link href="/app/privacy">アプリのプライバシーポリシー</Link> ／ <Link href="/app/terms">アプリの利用規約</Link> ／ <Link href="/support">サポート</Link></p>
         <AppStoreBadge href={APP_STORE_URL} />
+        {/* 更新日は sitemap の表と同じ値を出す(ページを変えたら表の日付も直す決まりなので、表示もそれに従う) */}
+        <PageDate updated={SITEMAP_STATIC_DATES["/app"]} />
       </div></section>
     </div>
   );

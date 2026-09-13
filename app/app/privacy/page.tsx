@@ -36,7 +36,7 @@ export default function AppPrivacyPage() {
 
       <h1>プライバシーポリシー(アプリ)</h1>
 
-      <p className="meta-line">制定日: {APP_LEGAL_VERSION}</p>
+      <p className="meta-line">最終更新日: {APP_LEGAL_VERSION}</p>
       <p className="meta-line">運営者: あずまたいすけ(個人)</p>
 
       <p>
