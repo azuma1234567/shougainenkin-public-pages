@@ -126,6 +126,10 @@ export const REFERENCE_AMOUNTS = {
   kokuminNenkinPremiumMonthly: { value: "17,920", label: "国民年金保険料(月額)", fiscalYear: "令和8年度", source: "日本年金機構「国民年金保険料」", checkedOn: "2026-09-13" },
   /* 特別障害者手当は令和8年4月分から 30,450円(令和7年度 29,590円)。previous は前年度の履歴(本文には出さない) */
   specialDisabilityAllowanceMonthly: { value: "30,450", label: "特別障害者手当(月額)", fiscalYear: "令和8年度", source: "厚生労働省「特別障害者手当について」", sourceUrl: "https://www.mhlw.go.jp/bunya/shougaihoken/jidou/tokubetsu.html", checkedOn: "2026-09-13", previous: { value: "29,590", fiscalYear: "令和7年度" } },
+  /* 障害児福祉手当・特別児童扶養手当も令和8年4月分から改定 */
+  childDisabilityWelfareAllowanceMonthly: { value: "16,560", label: "障害児福祉手当(月額)", fiscalYear: "令和8年度", source: "東京都心身障害者福祉センター「手当額の改定について」・奈良市「令和8年度 特別障害者手当等の支給額について」", sourceUrl: "https://www.fukushi.metro.tokyo.lg.jp/shisetsu/jigyosyo/shinsho/teate/gakukaitei", checkedOn: "2026-09-13", previous: { value: "16,100", fiscalYear: "令和7年度" } },
+  specialChildRearingAllowanceGrade1Monthly: { value: "58,450", label: "特別児童扶養手当 1級(月額)", fiscalYear: "令和8年度", source: "厚生労働省「制度変更(令和8年4月)」(令和8年4月からの手当額改定)", sourceUrl: "https://www.mhlw.go.jp/stf/newpage_71570.html", checkedOn: "2026-09-13", previous: { value: "56,800", fiscalYear: "令和7年度" } },
+  specialChildRearingAllowanceGrade2Monthly: { value: "38,930", label: "特別児童扶養手当 2級(月額)", fiscalYear: "令和8年度", source: "厚生労働省「制度変更(令和8年4月)」(令和8年4月からの手当額改定)", sourceUrl: "https://www.mhlw.go.jp/stf/newpage_71570.html", checkedOn: "2026-09-13", previous: { value: "37,830", fiscalYear: "令和7年度" } },
   serviceCopayCapLowTaxable: { value: "9,300", label: "障害福祉サービスの利用者負担上限(市町村民税課税世帯・所得割16万円未満、月額)", fiscalYear: "—(法令の額)", source: "厚生労働省「障害者の利用者負担」", sourceUrl: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/shougaishahukushi/service/hutan1.html", checkedOn: "2026-09-13" },
   serviceCopayCapGeneral: { value: "37,200", label: "障害福祉サービスの利用者負担上限(一般、月額)", fiscalYear: "—(法令の額)", source: "厚生労働省「障害者の利用者負担」", sourceUrl: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/shougaishahukushi/service/hutan1.html", checkedOn: "2026-09-13" },
   /* 特別障害給付金は令和8年度 1級相当 58,650円・2級相当 46,920円(令和7年度 56,850円・45,480円)。年額は月額×12 */
