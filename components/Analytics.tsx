@@ -229,9 +229,12 @@ export default function Analytics() {
       return;
     }
 
+    /* 参照元は初回だけ渡す。2ページ目以降はサイト内遷移なので渡さない。
+       page_location はクエリ(?case= など)を含めるため href を使う。 */
+    const isFirstPageView = lastTrackedPathnameRef.current === null;
     window.gtag("event", "page_view", {
-      page_location: window.location.origin + pathname,
-      page_referrer: "",
+      page_location: window.location.href,
+      ...(isFirstPageView ? { page_referrer: document.referrer } : {}),
     });
     lastTrackedPathnameRef.current = pathname;
   }, [analyticsInitialized, consent, isReady, pathname]);
