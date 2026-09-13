@@ -163,6 +163,16 @@
         "(新規) columns に8本の slug・title・metaTitle・h1・htmlTitle・canonical を追加",
         "special.links: あわせて読みたい(同じクラスタの自動補充)に公開日の新しい新記事が入り、kikan-kugiri の /columns/fushikyu-85ken、teishutsusaki-yuusou の /columns/fushikyu-85ken・/columns/sharoushi-kawaranai-koto が押し出された"
       ]
+    },
+    "2026-09-13-grade3-minimum": {
+      "reason": "3級の最低保障額を公式の635,500円に訂正(日本年金機構「障害厚生年金の受給要件・請求時期・年金額」令和8年度)。原稿は2級×3/4を丸める前の635,475円だった(ユーザー承認)",
+      "slugs": [
+        "kousei-3kyu-hataraku"
+      ],
+      "fields": [
+        "metaTitle",
+        "htmlTitle"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -578,9 +588,9 @@
     {
       "slug": "kousei-3kyu-hataraku",
       "title": "障害厚生年金3級で働く — 3級の意味、最低保障額、更新・額改定・65歳の3つの線",
-      "metaTitle": "障害厚生年金3級で働く｜最低保障 年635,475円・更新で非該当になる線・額改定で2級へ",
+      "metaTitle": "障害厚生年金3級で働く｜最低保障 年635,500円・更新で非該当になる線・額改定で2級へ",
       "h1": "障害厚生年金3級で働く — 3級の意味、最低保障額、更新・額改定・65歳の3つの線",
-      "htmlTitle": "障害厚生年金3級で働く｜最低保障 年635,475円・更新で非該当になる線・額改定で2級へ｜障害年金申請サポート",
+      "htmlTitle": "障害厚生年金3級で働く｜最低保障 年635,500円・更新で非該当になる線・額改定で2級へ｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/kousei-3kyu-hataraku"
     },
     {
