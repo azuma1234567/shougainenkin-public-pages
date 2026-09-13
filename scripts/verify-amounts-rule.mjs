@@ -26,12 +26,19 @@ assert.equal(explain("635,500円", ""), "basicGrade2(847,300) × 3/4(百円未�
 assert.equal(explain("633,700円", ""), "basicGrade2Old(844,900) × 3/4(百円未満四捨五入)");
 
 // 当たってはいけない値(月額の文脈でも)
-for (const value of ["635,475円", "17,920円", "37,200円", "545,760円", "300,000円"]) {
+for (const value of ["635,475円", "17,920円", "37,200円", "563,040円", "300,000円"]) {
   assert.equal(explainAmount(value, AMOUNTS_2026, "月額の文脈。約。差。"), null, `${value} は AMOUNTS_2026 だけでは説明しない`);
+}
+// 令和7年度の額(29,590・45,480・545,760)は、令和8年度に更新した後は通らない(previous は履歴で、説明には使わない)
+for (const value of ["29,590円", "45,480円", "545,760円", "56,850円", "682,200円"]) {
+  assert.equal(explain(value, "月額の文脈。約。"), null, `${value} は令和7年度の額。令和8年度の表では説明しない`);
 }
 // 制度の額・統計値は、表に宣言したもの(REFERENCE_AMOUNTS / STATISTICS)だけ値そのままで通る
 assert.match(explain("17,920円", ""), /^制度の額: kokuminNenkinPremiumMonthly\(国民年金保険料\(月額\)、令和8年度/);
-assert.match(explain("545,760円", ""), /^制度の額: specialDisabilityBenefitGrade2Yearly/);
+assert.match(explain("563,040円", ""), /^制度の額: specialDisabilityBenefitGrade2Yearly\(特別障害給付金 2級相当\(年額 = 月額×12\)、令和8年度/);
+assert.match(explain("30,450円", ""), /^制度の額: specialDisabilityAllowanceMonthly\(特別障害者手当\(月額\)、令和8年度/);
+assert.match(explain("46,920円", ""), /^制度の額: specialDisabilityBenefitGrade2Monthly\(.*令和8年度/);
+assert.match(explain("58,650円", ""), /^制度の額: specialDisabilityBenefitGrade1Monthly\(.*令和8年度/);
 assert.match(explain("91,451円", ""), /^統計値: kouginATypeMonthly2024/);
 assert.equal(explain("300,000円"), null, "試算例は amounts-assumed.mjs の宣言で通す(ここでは通らない)");
 

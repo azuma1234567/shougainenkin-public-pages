@@ -124,11 +124,13 @@ export const KOUGIN_REFERENCE = {
    年度・出典・確認日を必ず添える。年度が変わって額が改定されたら、この表と本文の両方を見直す。 */
 export const REFERENCE_AMOUNTS = {
   kokuminNenkinPremiumMonthly: { value: "17,920", label: "国民年金保険料(月額)", fiscalYear: "令和8年度", source: "日本年金機構「国民年金保険料」", checkedOn: "2026-09-13" },
-  specialDisabilityAllowanceMonthly: { value: "29,590", label: "特別障害者手当(月額)", fiscalYear: "令和7年度", source: "厚生労働省「特別障害者手当について」", checkedOn: "2026-09-13" },
-  serviceCopayCapLowTaxable: { value: "9,300", label: "障害福祉サービスの利用者負担上限(市町村民税課税世帯・所得割16万円未満、月額)", fiscalYear: "—(法令の額)", source: "厚生労働省「障害者の利用者負担」", checkedOn: "2026-09-13" },
-  serviceCopayCapGeneral: { value: "37,200", label: "障害福祉サービスの利用者負担上限(一般、月額)", fiscalYear: "—(法令の額)", source: "厚生労働省「障害者の利用者負担」", checkedOn: "2026-09-13" },
-  specialDisabilityBenefitGrade1Monthly: { value: "56,850", label: "特別障害給付金 1級相当(月額)", fiscalYear: "令和7年度", source: "日本年金機構「特別障害給付金制度」", checkedOn: "2026-09-13" },
-  specialDisabilityBenefitGrade1Yearly: { value: "682,200", label: "特別障害給付金 1級相当(年額 = 月額×12)", fiscalYear: "令和7年度", source: "日本年金機構「特別障害給付金制度」", checkedOn: "2026-09-13" },
-  specialDisabilityBenefitGrade2Monthly: { value: "45,480", label: "特別障害給付金 2級相当(月額)", fiscalYear: "令和7年度", source: "日本年金機構「特別障害給付金制度」", checkedOn: "2026-09-13" },
-  specialDisabilityBenefitGrade2Yearly: { value: "545,760", label: "特別障害給付金 2級相当(年額 = 月額×12)", fiscalYear: "令和7年度", source: "日本年金機構「特別障害給付金制度」", checkedOn: "2026-09-13" },
+  /* 特別障害者手当は令和8年4月分から 30,450円(令和7年度 29,590円)。previous は前年度の履歴(本文には出さない) */
+  specialDisabilityAllowanceMonthly: { value: "30,450", label: "特別障害者手当(月額)", fiscalYear: "令和8年度", source: "厚生労働省「特別障害者手当について」", sourceUrl: "https://www.mhlw.go.jp/bunya/shougaihoken/jidou/tokubetsu.html", checkedOn: "2026-09-13", previous: { value: "29,590", fiscalYear: "令和7年度" } },
+  serviceCopayCapLowTaxable: { value: "9,300", label: "障害福祉サービスの利用者負担上限(市町村民税課税世帯・所得割16万円未満、月額)", fiscalYear: "—(法令の額)", source: "厚生労働省「障害者の利用者負担」", sourceUrl: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/shougaishahukushi/service/hutan1.html", checkedOn: "2026-09-13" },
+  serviceCopayCapGeneral: { value: "37,200", label: "障害福祉サービスの利用者負担上限(一般、月額)", fiscalYear: "—(法令の額)", source: "厚生労働省「障害者の利用者負担」", sourceUrl: "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/hukushi_kaigo/shougaishahukushi/service/hutan1.html", checkedOn: "2026-09-13" },
+  /* 特別障害給付金は令和8年度 1級相当 58,650円・2級相当 46,920円(令和7年度 56,850円・45,480円)。年額は月額×12 */
+  specialDisabilityBenefitGrade1Monthly: { value: "58,650", label: "特別障害給付金 1級相当(月額)", fiscalYear: "令和8年度", source: "日本年金機構「特別障害給付金制度」", sourceUrl: "https://www.nenkin.go.jp/service/jukyu/seido/sonota-kyufu/tokubetsu-kyufu/tokubetsu-kyufu.html", checkedOn: "2026-09-13", previous: { value: "56,850", fiscalYear: "令和7年度" } },
+  specialDisabilityBenefitGrade1Yearly: { value: "703,800", label: "特別障害給付金 1級相当(年額 = 月額×12)", fiscalYear: "令和8年度", source: "日本年金機構「特別障害給付金制度」", sourceUrl: "https://www.nenkin.go.jp/service/jukyu/seido/sonota-kyufu/tokubetsu-kyufu/tokubetsu-kyufu.html", checkedOn: "2026-09-13", previous: { value: "682,200", fiscalYear: "令和7年度" } },
+  specialDisabilityBenefitGrade2Monthly: { value: "46,920", label: "特別障害給付金 2級相当(月額)", fiscalYear: "令和8年度", source: "日本年金機構「特別障害給付金制度」", sourceUrl: "https://www.nenkin.go.jp/service/jukyu/seido/sonota-kyufu/tokubetsu-kyufu/tokubetsu-kyufu.html", checkedOn: "2026-09-13", previous: { value: "45,480", fiscalYear: "令和7年度" } },
+  specialDisabilityBenefitGrade2Yearly: { value: "563,040", label: "特別障害給付金 2級相当(年額 = 月額×12)", fiscalYear: "令和8年度", source: "日本年金機構「特別障害給付金制度」", sourceUrl: "https://www.nenkin.go.jp/service/jukyu/seido/sonota-kyufu/tokubetsu-kyufu/tokubetsu-kyufu.html", checkedOn: "2026-09-13", previous: { value: "545,760", fiscalYear: "令和7年度" } },
 } as const;

@@ -78,7 +78,7 @@ origin: http://localhost:3200 / ページ数: 185 / 基準: git main
 - 説明済み: 380,000円 = incomeLimitDependentAddition(380,000)
 - 説明済み: 480,000円 = incomeLimitElderlyAddition(480,000)
 - 説明済み: 487,600円 = childFirstSecond(243,800) + childFirstSecond(243,800)
-- 説明済み: 545,760円 = 制度の額: specialDisabilityBenefitGrade2Yearly(特別障害給付金 2級相当(年額 = 月額×12)、令和7年度、日本年金機構「特別障害給付金制度」)
+- 説明済み: 563,040円 = 制度の額: specialDisabilityBenefitGrade2Yearly(特別障害給付金 2級相当(年額 = 月額×12)、令和8年度、日本年金機構「特別障害給付金制度」)
 - 説明済み: 630,000円 = incomeLimitSpecifiedAddition(630,000)
 - 説明済み: 633,700円 = basicGrade2Old(844,900) × 3/4(百円未満四捨五入)
 - 説明済み: 635,500円 = basicGrade2(847,300) × 3/4(百円未満四捨五入)
