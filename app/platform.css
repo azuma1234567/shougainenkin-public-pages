@@ -462,6 +462,14 @@
 .p-hero-next h1 { font-size: clamp(28px, 3.4vw, 38px); line-height: 1.45; }
 .p-hero-next .p-hero-copy { max-width: 640px; font-size: 15.5px; line-height: 1.85; }
 .p-hero-start { font-weight: 700; }
+/* ヒーロー上段: 左に文、右に水彩イラスト(列幅 44%・縦は中央ぞろえ)。枠線と影は付けない(docs/top-hero-image-2026-09-15-instructions.md) */
+.p-hero-top { display: grid; grid-template-columns: minmax(0, 56fr) minmax(0, 44fr); gap: 28px; align-items: center; }
+.p-hero-text { display: grid; gap: 14px; }
+.p-hero-image { display: block; width: 100%; max-width: 640px; height: auto; aspect-ratio: 16 / 9; border-radius: 14px; justify-self: end; }
+@media (max-width: 899px) {
+  .p-hero-top { grid-template-columns: 1fr; gap: 18px; }
+  .p-hero-image { max-width: none; justify-self: stretch; }
+}
 /* 6枚は 3列+3列 / 2列×3 / 1列 に固定する(auto-fit だと 1400px で 4列+2列になる。2026-09-15 ユーザー指示) */
 .p-next { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
 @media (max-width: 899px) { .p-next { grid-template-columns: repeat(2, 1fr); } }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import StepFlow from "@/components/platform/StepFlow";
 import { Card, SectionHeader } from "@/components/platform/Platform";
@@ -211,8 +212,22 @@ export default function HomePage() {
       {/* 入口は申請の時間順の作業6枚(docs/top-2026-09-15-instructions.md)。各枚の見出しはページの主構造なので h2 */}
       <section className="p-hero p-hero-next" aria-labelledby="home-title">
         <div className="p-container p-hero-inner">
-          <h1 id="home-title">次にやることは、どれですか。</h1>
-          <p className="p-hero-copy">障害年金の申請は、やることが順番に6つあります。自分で進める人のために、それぞれの「やり方」を公的資料の根拠つきでまとめました。いちばん近いものからどうぞ。<br /><Link className="p-hero-start" href="/hajimete">まだ何も始めていない方は、こちらから →</Link></p>
+          {/* 900px 以上は 左:文 / 右:水彩イラスト(44%)、未満は 文 → 画像 → 6枚 の1列(docs/top-hero-image-2026-09-15-instructions.md)。
+              LCP になるので priority。他の画像には付けない。 */}
+          <div className="p-hero-top">
+            <div className="p-hero-text">
+              <h1 id="home-title">次にやることは、どれですか。</h1>
+              <p className="p-hero-copy">障害年金の申請は、やることが順番に6つあります。自分で進める人のために、それぞれの「やり方」を公的資料の根拠つきでまとめました。いちばん近いものからどうぞ。<br /><Link className="p-hero-start" href="/hajimete">まだ何も始めていない方は、こちらから →</Link></p>
+            </div>
+            <Image
+              className="p-hero-image"
+              src="/img/top/hero-1600.webp"
+              alt="家でベッドにもたれて座り、スマートフォンで障害年金の手続きを調べている人。床には書きかけの書類とペン"
+              width={1600} height={900}
+              priority
+              sizes="(max-width: 899px) 100vw, 44vw"
+            />
+          </div>
           <div className="p-next">
             {nextSteps.map((step, index) => (
               <article className="p-next-card" key={step.title}>
