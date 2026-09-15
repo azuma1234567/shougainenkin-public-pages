@@ -469,6 +469,8 @@
 .p-next-card { position: relative; display: grid; gap: 6px; align-content: start; padding: 16px 40px 16px 18px; border: 1px solid var(--platform-border); border-radius: 14px; background: var(--platform-surface); }
 .p-next-card h2 { font-size: 17.5px; line-height: 1.5; }
 .p-next-n { position: absolute; right: 14px; top: 12px; color: var(--platform-meta); font-size: 11px; letter-spacing: .06em; }
+/* 6枚の線画アイコン(docs/top-icons-2026-09-15-instructions.md)。色はトークンだけ */
+.p-next-icon { width: 34px; height: 34px; color: var(--platform-primary); background: var(--platform-chip); border-radius: 10px; padding: 7px; }
 .p-next-a { color: var(--platform-text); font-size: 14px; line-height: 1.8; }
 .p-next-go { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 2px; font-size: 13.5px; font-weight: 500; }
 .p-next-go a { color: var(--platform-link); }

@@ -3,6 +3,7 @@ import Link from "next/link";
 import StepFlow from "@/components/platform/StepFlow";
 import { Card, SectionHeader } from "@/components/platform/Platform";
 import SiteSearch, { type SearchItem } from "@/components/platform/SiteSearch";
+import { DoctorNoteIcon, FirstVisitIcon, ResultIcon, StatementIcon, SubmitIcon, WaitingIcon } from "@/components/platform/NextStepIcons";
 import AdLabel from "@/components/AdLabel";
 import { SHOW_LISTINGS } from "@/lib/ads";
 import { COLUMNS } from "@/lib/columns";
@@ -103,31 +104,37 @@ const renewalStopRate = formatPercent(renewals["支給停止"].pct ?? 0);
 const nextSteps = [
   {
     title: "初診日を確かめる",
+    Icon: FirstVisitIcon,
     answer: "最初にかかった病院に、受診状況等証明書を郵送で頼めます。記憶があいまいでも、探す方法は5つあります。",
     links: [["初診日の探し方", "/columns/shoshinbi-wakaranai"], ["郵送で頼む手順", "/columns/jushinjokyo-shomeisho"]],
   },
   {
     title: "診断書を医師に頼む",
+    Icon: DoctorNoteIcon,
     answer: "診察の数分で、ふだんの生活を伝えるための紙1枚を用意します。受け取ったら、提出前に見ておく場所は4か所です。",
     links: [["診察前に書いておくメモ", "/columns/shinsatsu-mae-memo"], ["受け取ったら見る4か所", "/nayami/shindansho-komatta#審査で本当に見られているのはこの4つ"]],
   },
   {
     title: "申立書を書く",
+    Icon: StatementIcon,
     answer: "公式の様式に、スマホでそのまま入力して印刷できます。書いた内容はあなたの端末の中だけに残ります。",
     links: [["スマホで入力して印刷する", "/dougu/moushitatesho"], ["期間の区切り方", "/columns/moushitatesho-kikan-kugiri"]],
   },
   {
     title: "書類をそろえて提出する",
+    Icon: SubmitIcon,
     answer: "誰にでも要る書類は決まっています。あとは自分の場合に足すものだけ。年金事務所へ持参しても、郵送でも出せます。",
     links: [["自分に要る書類を確かめる", "/dougu/shorui"], ["提出先と郵送のしかた", "/columns/teishutsusaki-yuusou"]],
   },
   {
     title: "結果を待つあいだにすること",
+    Icon: WaitingIcon,
     answer: "届くまでの目安は約3か月。途中の連絡は基本ありません。長引いても、受け取る額が減ることはありません。",
     links: [["待っている間にできること", "/columns/shinsei-kikan"], ["遅いときの確認先", "/columns/shinsei-kikan#結果が遅いときの確認方法"]],
   },
   {
     title: "結果が届いたあと",
+    Icon: ResultIcon,
     answer: `認められたら、次は更新です。止まる人は${renewalStopRate}。認められなかったら、3か月以内に審査請求ができ、結論が変わった実例があります。`,
     links: [["受け取り始めてからの手続き", "/jukyuugo"], ["不支給のあとにできること", "/nayami/fushikyu"]],
   },
@@ -210,6 +217,7 @@ export default function HomePage() {
             {nextSteps.map((step, index) => (
               <article className="p-next-card" key={step.title}>
                 <span className="p-next-n" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                <step.Icon />
                 <h2>{step.title}</h2>
                 <p className="p-next-a">{step.answer}</p>
                 <p className="p-next-go">
