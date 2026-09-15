@@ -173,6 +173,15 @@
         "metaTitle",
         "htmlTitle"
       ]
+    },
+    "2026-09-15-lead-first-sentence": {
+      "reason": "lead の1行目を、最初の句点までが80字以内の直答にそろえた(docs/seo-2026-09-15-instructions.md §2)。1文目の括弧書き(7項目の名前)を文末の別の文に移しただけで、事実の増減なし",
+      "slugs": [
+        "nichijo-seikatsu-7koumoku"
+      ],
+      "fields": [
+        "lead"
+      ]
     }
   },
   "baseRef": "76deb22",

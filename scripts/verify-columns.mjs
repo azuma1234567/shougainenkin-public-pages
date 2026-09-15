@@ -1,5 +1,5 @@
 // node scripts/verify-columns.mjs http://localhost:3107
-// 10項目をすべて実行し、失敗をまとめて報告する。失敗時は exit 1。
+// 11項目をすべて実行し、失敗をまとめて報告する。失敗時は exit 1。
 // 結論の箱は47本共通のデザイン要素で、記事の厚みではないため、字数の判定対象は本文に限る。
 import assert from "node:assert/strict";
 import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
@@ -7,7 +7,7 @@ import { execFileSync } from "node:child_process";
 import { parse } from "node-html-parser";
 import ts from "typescript";
 import { chromium } from "playwright";
-import { parseColumns, generatedColumn } from "./import-columns.mjs";
+import { parseColumns, generatedColumn, plain } from "./import-columns.mjs";
 import { explainAmount, contextAround } from "./lib/amounts-derive.mjs";
 import { ASSUMED_EXAMPLE_AMOUNTS } from "./lib/amounts-assumed.mjs";
 await import("./lib/ts-alias.mjs");
@@ -220,6 +220,17 @@ for (const a of articles) {
     await page.locator(".gokai-case").first().scrollIntoViewIfNeeded();
     await page.screenshot({ path: `${out}/shoshinbi-wakaranai-case-1280.png` });
   } finally { await browser.close(); }
+  finish();
+}
+
+{
+  // SEO 2026-09-15 §2: AI の回答は冒頭を抜くので、lead の1行目は最初の句点(。を含む)までを80字以内の直答にする
+  const { check, finish } = failures(11, "lead 1行目の最初の句点までが80字以内");
+  for (const a of articles) {
+    const first = plain(a.lead[0]);
+    const sentence = first.includes("。") ? first.slice(0, first.indexOf("。") + 1) : first;
+    check([...sentence].length <= 80, `${a.slug}: ${[...sentence].length}字 ${sentence}`);
+  }
   finish();
 }
 

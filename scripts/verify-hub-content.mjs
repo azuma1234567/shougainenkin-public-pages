@@ -123,3 +123,26 @@ console.log(`OK: 本文21ページ。本文一致、見出し/FAQ一致、非公
   }
   console.log(`○ ハブの metaTitle: ${count} 本。28〜40 字、「道具」0、数字はすべて本文にある`);
 }
+
+/* SEO 2026-09-15 §2: AI の回答は冒頭を抜くので、「リード(直答)」の1段落目は最初の句点(。を含む)までを80字以内にする。
+   コラムの lead 1行目と同じ規則(scripts/verify-columns.mjs の11)。 */
+{
+  const { HUB_CONTENT, prepareHubSource } = await import("../lib/hub-content.ts");
+  const plain = (t) => t.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*\*(.+?)\*\*/g, "$1");
+  const bad = [];
+  let longest = 0;
+  for (const [path, content] of Object.entries(HUB_CONTENT)) {
+    const lead = /^## リード\(直答\)\n+([^\n]+)/m.exec(prepareHubSource(content.source));
+    if (!lead) { bad.push(`${path}: 「## リード(直答)」の1段落目が無い`); continue; }
+    const first = plain(lead[1]);
+    const sentence = first.includes("。") ? first.slice(0, first.indexOf("。") + 1) : first;
+    const length = [...sentence].length;
+    longest = Math.max(longest, length);
+    if (length > 80) bad.push(`${path}: ${length} 字「${sentence}」`);
+  }
+  if (bad.length) {
+    console.error(`リード1文目が80字を超える ${bad.length} 件:\n${bad.join("\n")}`);
+    process.exit(1);
+  }
+  console.log(`○ ハブのリード1文目: ${Object.keys(HUB_CONTENT).length} 本すべて80字以内(最長 ${longest} 字)`);
+}
