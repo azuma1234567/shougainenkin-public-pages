@@ -182,6 +182,15 @@
       "fields": [
         "lead"
       ]
+    },
+    "2026-09-15-koushin-link-label": {
+      "reason": "公開ページの表示テキストから「道具」を無くすため、/dougu/koushin へのリンク文言「更新までのカウントダウンと記録の道具」を、ハブ /nayami/koushin と同じ「次の更新は、いつ?」にそろえた(docs/seo-2026-09-15-instructions.md §3-4、ユーザー承認)。リンク先は変えていない",
+      "slugs": [
+        "koushin-hatarakinagara"
+      ],
+      "fields": [
+        "content"
+      ]
     }
   },
   "baseRef": "76deb22",
