@@ -94,3 +94,32 @@ console.log(`OK: 本文21ページ。本文一致、見出し/FAQ一致、非公
   console.log(`○ ハブの FAQ: ${hubs} 本中 ${hubs - empty.length} 本に計 ${faqs} 件。抽出と画面の質問が全件一致`);
   console.log(`  Q&A の無いハブ ${empty.length} 本は FAQPage を出さない: ${empty.join(", ")}`);
 }
+
+/* SEO 2026-09-15 §1: metaTitle(<title> 用。h1 は title のまま)は 28〜40 字、「道具」を使わない、
+   含まれる数字は本文にも出てくる。数字は後ろの単位までをひとまとまりで照合する(「4か所」が本文の「4か月」で通らないように)。 */
+{
+  const { HUB_CONTENT, prepareHubSource } = await import("../lib/hub-content.ts");
+  const plain = (t) => t.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*\*(.+?)\*\*/g, "$1");
+  const UNIT = /^(?:か所|か月|項目|段階|デシベル|[級つ年歳号件回日割%万円人])/;
+  const escape = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const bad = [];
+  let count = 0;
+  for (const [path, content] of Object.entries(HUB_CONTENT)) {
+    const title = content.metaTitle;
+    if (title === undefined) continue;
+    count += 1;
+    const length = [...title].length;
+    if (length < 28 || length > 40) bad.push(`${path}: metaTitle が ${length} 字(28〜40 字)`);
+    if (title.includes("道具")) bad.push(`${path}: metaTitle に「道具」`);
+    const body = plain(prepareHubSource(content.source));
+    for (const m of title.matchAll(/\d+(?:[,.]\d+)*/g)) {
+      const token = m[0] + (UNIT.exec(title.slice(m.index + m[0].length))?.[0] ?? "");
+      if (!new RegExp(`(?<![\\d,.])${escape(token)}`).test(body)) bad.push(`${path}: metaTitle の「${token}」が本文に無い`);
+    }
+  }
+  if (bad.length) {
+    console.error(`ハブの metaTitle ${bad.length} 件:\n${bad.join("\n")}`);
+    process.exit(1);
+  }
+  console.log(`○ ハブの metaTitle: ${count} 本。28〜40 字、「道具」0、数字はすべて本文にある`);
+}

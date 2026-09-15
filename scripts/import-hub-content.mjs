@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const sourceRoot = process.env.HUB_SOURCE_ROOT ?? resolve(process.cwd(), "../shougainenkin/docs");
@@ -31,8 +31,11 @@ for (const [name, path] of files) {
   const breadcrumbLine = lines.findIndex((line) => line.startsWith("パンくず:"));
   const breadcrumb = lines[breadcrumbLine].replace(/^パンくず:\s*/, "").split(" > ");
   lines.splice(breadcrumbLine, 1);
-  result[path] = { title, breadcrumb, source: lines.join("\n").trim() };
-  writeFileSync(resolve(process.cwd(), `data/hubs/${name}.json`), `${JSON.stringify(result[path], null, 2)}\n`);
+  /* 原稿に無いキー(dateModified・metaTitle)は、いまの JSON から引き継ぐ(SEO 2026-09-15 §1) */
+  const target = resolve(process.cwd(), `data/hubs/${name}.json`);
+  const previous = existsSync(target) ? JSON.parse(readFileSync(target, "utf8")) : {};
+  result[path] = { ...previous, title, breadcrumb, source: lines.join("\n").trim() };
+  writeFileSync(target, `${JSON.stringify(result[path], null, 2)}\n`);
 }
 
 console.log(`Imported ${Object.keys(result).length} hub manuscripts.`);

@@ -58,8 +58,10 @@ const nayamiFushikyuPublished = {
 };
 
 /* dateModified はハブの最終更新日(YYYY-MM-DD)。sitemap の lastModified と
-   画面の「最終更新」に使う(監査 §4-1・§4-2)。data/hubs/*.json が持つ。 */
-export type HubContent = { title: string; dateModified: string; breadcrumb: string[]; source: string };
+   画面の「最終更新」に使う(監査 §4-1・§4-2)。data/hubs/*.json が持つ。
+   metaTitle は任意。<title> だけを「何が分かるか」にするときに使い、h1・パンくず・一覧は title のまま
+   (docs/seo-2026-09-15-instructions.md §1。columns・gokai の metaTitle と同じ)。 */
+export type HubContent = { title: string; metaTitle?: string; dateModified: string; breadcrumb: string[]; source: string };
 import jukyuugoHataraku from "@/data/hubs/jukyuugo-hataraku.json";
 import jukyuugoSagyousho from "@/data/hubs/jukyuugo-sagyousho.json";
 import jukyuugoNukedasu from "@/data/hubs/jukyuugo-nukedasu.json";

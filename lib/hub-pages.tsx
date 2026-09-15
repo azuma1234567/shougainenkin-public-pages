@@ -15,6 +15,7 @@ export function hubStaticParams(kind: HubDefinition["kind"]) {
 }
 export function hubMetadata(hub: HubDefinition): Metadata {
   const content = getHubContent(hub.path);
-  return pageMetadata({ title: content?.title ?? hub.label, description: content?.source.split("\n").find((line) => line && !line.startsWith("#")) ?? hub.label, path: hub.path });
+  /* <title> は metaTitle があればそれを使う。h1・パンくず・一覧カードは title のまま(SEO 2026-09-15 §1) */
+  return pageMetadata({ title: content?.metaTitle ?? content?.title ?? hub.label, description: content?.source.split("\n").find((line) => line && !line.startsWith("#")) ?? hub.label, path: hub.path });
 }
 export function renderHubPage(kind: HubDefinition["kind"], slug: string) { return <HubLanding hub={hubForRoute(kind, slug)} />; }
