@@ -462,7 +462,10 @@
 .p-hero-next h1 { font-size: clamp(28px, 3.4vw, 38px); line-height: 1.45; }
 .p-hero-next .p-hero-copy { max-width: 640px; font-size: 15.5px; line-height: 1.85; }
 .p-hero-start { font-weight: 700; }
-.p-next { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin-top: 12px; }
+/* 6枚は 3列+3列 / 2列×3 / 1列 に固定する(auto-fit だと 1400px で 4列+2列になる。2026-09-15 ユーザー指示) */
+.p-next { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+@media (max-width: 899px) { .p-next { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 599px) { .p-next { grid-template-columns: 1fr; } }
 .p-next-card { position: relative; display: grid; gap: 6px; align-content: start; padding: 16px 40px 16px 18px; border: 1px solid var(--platform-border); border-radius: 14px; background: var(--platform-surface); }
 .p-next-card h2 { font-size: 17.5px; line-height: 1.5; }
 .p-next-n { position: absolute; right: 14px; top: 12px; color: var(--platform-meta); font-size: 11px; letter-spacing: .06em; }
@@ -666,7 +669,6 @@ a.p-proof-card:hover { border-color: var(--platform-primary); text-decoration: n
   .p-answer-title { font-size: 16px; }
 
   .p-grid-2, .p-grid-4, .p-grid-8, .p-sidebar { grid-template-columns: 1fr; }
-  .p-next { grid-template-columns: 1fr; }
   .p-hero-next { padding-block: 36px 30px; }
   .p-hero-next h1 { font-size: 26px; }
   .p-card, .p-card-lg { padding: 20px; }
