@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Zen_Kaku_Gothic_New, Zen_Old_Mincho } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import "./platform.css";
 import SiteHeader from "@/components/SiteHeader";
@@ -12,19 +12,25 @@ import {
 import { OG_IMAGE } from "@/lib/seo";
 import { ADSENSE_CLIENT, ADSENSE_ENABLED } from "@/lib/ads";
 
-// 見出し専用の明朝体。本文は現行のシステムゴシックスタックのまま(パフォーマンス優先)。
-const zenOldMincho = Zen_Old_Mincho({
-  weight: ["600", "700"],
-  subsets: ["latin"],
+/* 見出し用の2書体は、見出しに出る文字だけの自前サブセット(public/fonts/。scripts/build-font-subset.mjs で生成)。
+   next/font/google は subsets: ["latin"] でも日本語の unicode-range 分割を 100 本以上読みに行き、LCP を数十秒に
+   していた(docs/perf-fonts-2026-09-15-instructions.md)。見出しの文字が増えたら npm run build:fonts。
+   charset に無い文字は font-family の後続(システムフォント)に落ちる。scripts/verify-fonts.mjs が見張る。 */
+
+// 見出し専用の明朝体(h1・h2 用。CSS は 700 しか使わないので 700 だけ読み、これだけ preload する)。本文はシステムフォントのまま。
+const zenOldMincho = localFont({
+  src: [{ path: "../public/fonts/zen-old-mincho-700.woff2", weight: "700", style: "normal" }],
   display: "swap",
+  preload: true,
   variable: "--font-display",
 });
 
-// 新しい情報プラットフォームの見出し用。next/font でセルフホストし、
-// Google Fonts への実行時リクエストを発生させない。
-const zenKakuGothic = Zen_Kaku_Gothic_New({
-  weight: ["500", "700"],
-  subsets: ["latin"],
+// 情報プラットフォームの見出し用ゴシック。preload はしない(h1 の明朝より後でよい)。
+const zenKakuGothic = localFont({
+  src: [
+    { path: "../public/fonts/zen-kaku-gothic-new-500.woff2", weight: "500", style: "normal" },
+    { path: "../public/fonts/zen-kaku-gothic-new-700.woff2", weight: "700", style: "normal" },
+  ],
   display: "swap",
   preload: false,
   variable: "--font-platform-heading",

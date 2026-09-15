@@ -44,3 +44,6 @@ _to_delete/
 
 # Search Console の URL 検査ログ。個人の作業記録なので commit しない(指示書 Phase D)
 docs/verification/gsc-request-log.md
+
+# 見出しフォントの元ファイル(Google Fonts の GitHub から scripts/build-font-subset.mjs が取得する。数MBあるので入れない)
+/scripts/fonts-src/
