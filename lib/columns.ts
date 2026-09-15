@@ -109,6 +109,9 @@ export const WORRY_SHORTCUTS: { label: string; slug: string }[] = [
   },
 ];
 
+/* コラム原稿の正本は docs/columns-rewrite-2026-09-03/articles/<slug>.md。scripts/import-columns.mjs がそこだけを読んで
+   content/columns/<slug>.ts(lead・本文・FAQ)を生成する。ここ(COLUMNS)は title・metaTitle・description・棚割りの側。
+   ほかのフォルダにあるコラム原稿(取り込み前の控え)を直しても、サイトには反映されない。 */
 export type Column = {
   lead?: string[];
   slug: string;
@@ -825,7 +828,8 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     category: "診断書 — 主治医に伝える",
     orderInCategory: 60,
   },
-  /* 「働く」4本・「作業所」4本(50〜57本目)。原稿 docs/hataraku-sagyousho-2026-09-13/articles */
+  /* 「働く」4本・「作業所」4本(50〜57本目)。原稿の正本は docs/columns-rewrite-2026-09-03/articles/
+     (docs/hataraku-sagyousho-2026-09-13/articles/ は 9/13 取り込み前の控え。編集しない) */
   {
     slug: "shindansho-shurojokyo",
     title: "診断書の「就労状況」欄には何が書かれるのか — 働きながら申請・更新する人が主治医に渡すメモ",
