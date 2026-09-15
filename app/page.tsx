@@ -225,7 +225,8 @@ export default function HomePage() {
               alt="家でベッドにもたれて座り、スマートフォンで障害年金の手続きを調べている人。床には書きかけの書類とペン"
               width={1600} height={900}
               priority
-              sizes="(max-width: 899px) 100vw, 44vw"
+              quality={60}
+              sizes="(max-width: 899px) calc(100vw - 40px), 44vw"
             />
           </div>
           <div className="p-next">
