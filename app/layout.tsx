@@ -17,22 +17,21 @@ import { ADSENSE_CLIENT, ADSENSE_ENABLED } from "@/lib/ads";
    していた(docs/perf-fonts-2026-09-15-instructions.md)。見出しの文字が増えたら npm run build:fonts。
    charset に無い文字は font-family の後続(システムフォント)に落ちる。scripts/verify-fonts.mjs が見張る。 */
 
-// 見出し専用の明朝体(h1・h2 用。CSS は 700 しか使わないので 700 だけ読み、これだけ preload する)。本文はシステムフォントのまま。
+// 見出し専用の明朝体(.platform でないコラム記事・法務ページの h1・h2 用。CSS は 700 しか使わないので 700 だけ読む)。
+// preload はしない: トップ・ハブなど 120 ページの h1 はゴシックで、明朝を先に落とすと LCP の邪魔になる(2026-09-15 の計測)。
 const zenOldMincho = localFont({
   src: [{ path: "../public/fonts/zen-old-mincho-700.woff2", weight: "700", style: "normal" }],
   display: "swap",
-  preload: true,
+  preload: false,
   variable: "--font-display",
 });
 
-// 情報プラットフォームの見出し用ゴシック。preload はしない(h1 の明朝より後でよい)。
+// 情報プラットフォームの見出し用ゴシック。h1 に使う 700 だけを読み、これを preload する
+// (next/font/local の preload は src 全部に効くので、500 を入れると2本先読みになる。500 は kingaku の表1か所だけなので 700 の面で描く)。
 const zenKakuGothic = localFont({
-  src: [
-    { path: "../public/fonts/zen-kaku-gothic-new-500.woff2", weight: "500", style: "normal" },
-    { path: "../public/fonts/zen-kaku-gothic-new-700.woff2", weight: "700", style: "normal" },
-  ],
+  src: [{ path: "../public/fonts/zen-kaku-gothic-new-700.woff2", weight: "700", style: "normal" }],
   display: "swap",
-  preload: false,
+  preload: true,
   variable: "--font-platform-heading",
 });
 

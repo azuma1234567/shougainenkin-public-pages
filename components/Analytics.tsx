@@ -239,14 +239,15 @@ export default function Analytics() {
     lastTrackedPathnameRef.current = pathname;
   }, [analyticsInitialized, consent, isReady, pathname]);
 
-  /* localStorage を読むまでは読み込まない(denied の人に一瞬でも gtag を読ませないため)。 */
+  /* localStorage を読むまでは読み込まない(denied の人に一瞬でも gtag を読ませないため)。
+     読むときも描画が終わってから(lazyOnload)。未選択の人にも読むが、LCP の前には走らせない(2026-09-15)。 */
   if (!isReady || consent === "denied") return null;
 
   return (
     <Script
       id="google-analytics-gtag"
       src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       onLoad={configureAnalyticsOnce}
       onReady={configureAnalyticsOnce}
     />
