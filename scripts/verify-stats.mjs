@@ -92,6 +92,17 @@ if (!nonApplicableNote.includes("障害の程度以外の理由も含む")) {
 const years = [r02, r03, r04, r05, r06].map((year) => year["年度"]);
 expect("年次推移 年度数", years.length, 5);
 
+/* トップの「次にやること」6枚と「ほかの人はどうだったか」(docs/top-2026-09-15-instructions.md §2-5)。
+   精神の不支給事案 85件は区分の件数の合計(lib/stats.ts の MENTAL_NON_PAYMENT_CASES と同じ計算) */
+const mentalCases = Object.values(nintei["精神障害・不支給事案"]).reduce((sum, row) => sum + (row["件数"]?.value ?? 0), 0);
+expect("精神 不支給事案 件数", mentalCases, 85);
+expect("再認定 支給停止率", renewalTotal["支給停止"].pct, 1.1);
+/* meta description(9/13 に決めた文言。変えない)とコメントは検査から外し、描画に使う部分だけを見る */
+const topSource = readFileSync(join(root, "app/page.tsx"), "utf8").replace(/\/\*[\s\S]*?\*\//g, "").replace(/^const DESCRIPTION = .*$/m, "");
+for (const literal of ["146225", "146,225", "304456", "304,456", "13.0%", "1.1%", "85件"]) {
+  if (topSource.includes(literal)) failures.push({ label: "トップの統計値ハードコード", expected: "data/statsから描画", actual: literal });
+}
+
 const pageSource = readFileSync(join(root, "app/suuji/page.tsx"), "utf8");
 const forbiddenLiterals = [
   "146225", "146,225", "18982", "18,982", "304456", "304,456",
@@ -113,6 +124,13 @@ if (origin) {
     if (!html.includes(text)) failures.push({ label: `本文表示 ${text}`, expected: "rendered from data", actual: "missing" });
   }
   if (html.includes("執筆メモ")) failures.push({ label: "執筆メモ", expected: "not rendered", actual: "rendered" });
+
+  const top = await fetch(`${origin.replace(/\/$/, "")}/`);
+  const topHtml = await top.text();
+  expect("/ status", top.status, 200);
+  for (const text of ["13.0%", "146,225件", "1.1%", "304,456件", "85件"]) {
+    if (!topHtml.includes(text)) failures.push({ label: `トップ表示 ${text}`, expected: "rendered from data", actual: "missing" });
+  }
 }
 
 console.log(JSON.stringify({

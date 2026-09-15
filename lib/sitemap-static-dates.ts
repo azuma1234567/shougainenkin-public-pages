@@ -5,7 +5,7 @@
 
    ハブ(/byoki/utsu-soukyoku など)はここに置かない。data/hubs/*.json の dateModified を使う。 */
 export const SITEMAP_STATIC_DATES: Record<string, string> = {
-  "/": "2026-09-13",
+  "/": "2026-09-15",
   "/hajimete": "2026-09-06",
   "/shinsei": "2026-09-06",
   "/jitsurei": "2026-09-08",

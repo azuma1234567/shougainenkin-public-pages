@@ -51,7 +51,8 @@ function search(items: SearchItem[], query: string) {
     .map(({ item }) => item);
 }
 
-export default function SiteSearch({ items }: { items: SearchItem[] }) {
+/* placeholder は置き場所ごとに変えられる(トップは「次にやること」向けの文言。docs/top-2026-09-15-instructions.md §2-6) */
+export default function SiteSearch({ items, placeholder = "例: うつ病 働きながら / 初診日 カルテがない / 不支給" }: { items: SearchItem[]; placeholder?: string }) {
   const [query, setQuery] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
 
@@ -89,7 +90,7 @@ export default function SiteSearch({ items }: { items: SearchItem[] }) {
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="例: うつ病 働きながら / 初診日 カルテがない / 不支給"
+          placeholder={placeholder}
           autoComplete="off"
         />
         <button className="p-search-action" type="submit">調べる</button>

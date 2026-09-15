@@ -461,6 +461,33 @@
 .p-stat b { color: var(--platform-link); font-size: 26px; }
 .p-stat span { color: var(--platform-meta); font-size: 12.5px; }
 
+/* トップの入口「次にやること」6枚(docs/top-2026-09-15-instructions.md §4)。既存トークンだけを使う。 */
+.p-hero-next { text-align: left; padding-block: 48px 36px; }
+.p-hero-next .p-hero-inner { justify-items: stretch; gap: 14px; }
+.p-hero-next h1 { font-size: clamp(28px, 3.4vw, 38px); line-height: 1.45; }
+.p-hero-next .p-hero-copy { max-width: 640px; font-size: 15.5px; line-height: 1.85; }
+.p-hero-start { font-weight: 700; }
+.p-next { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; margin-top: 12px; }
+.p-next-card { position: relative; display: grid; gap: 6px; align-content: start; padding: 16px 40px 16px 18px; border: 1px solid var(--platform-border); border-radius: 14px; background: var(--platform-surface); }
+.p-next-card h2 { font-size: 17.5px; line-height: 1.5; }
+.p-next-n { position: absolute; right: 14px; top: 12px; color: var(--platform-meta); font-size: 11px; letter-spacing: .06em; }
+.p-next-a { color: var(--platform-text); font-size: 14px; line-height: 1.8; }
+.p-next-go { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 2px; font-size: 13.5px; font-weight: 500; }
+.p-next-go a { color: var(--platform-link); }
+.p-hero-next .p-search-wrap { width: min(560px, 100%); margin-top: 10px; }
+.p-tools3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+.p-tool-card { display: grid; gap: 8px; align-content: start; padding: 18px; border: 1px solid var(--platform-border); border-radius: 14px; background: var(--platform-surface); color: inherit; text-decoration: none; }
+.p-tool-card:hover { border-color: var(--platform-primary); text-decoration: none; }
+.p-tool-card h3 { font-size: 17px; line-height: 1.5; }
+.p-tool-card p { color: var(--platform-muted); font-size: 14px; line-height: 1.8; }
+.p-tool-links { display: grid; gap: 6px; margin-top: auto; }
+.p-find-row { gap: 28px; }
+.p-proof { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.p-proof-card { display: block; padding: 14px 16px; border: 1px solid var(--platform-border); border-radius: 12px; background: var(--platform-surface); color: inherit; font-size: 14px; text-decoration: none; }
+a.p-proof-card:hover { border-color: var(--platform-primary); text-decoration: none; }
+.p-proof-card b { display: block; margin-bottom: 4px; color: var(--platform-heading); font-family: var(--font-platform-heading), "Hiragino Kaku Gothic ProN", sans-serif; font-size: 24px; line-height: 1.2; }
+.p-proof-card span { color: var(--platform-muted); font-size: 13px; line-height: 1.7; }
+
 .p-page-hero { padding-block: 44px 32px; background: linear-gradient(180deg, #e8f4fc 0%, #f7fbfe 100%); }
 .p-page-hero .p-container { display: grid; gap: 14px; }
 .p-breadcrumb { color: var(--platform-faint); font-size: 12.5px; }
@@ -649,6 +676,9 @@
   .p-answer-title { font-size: 16px; }
 
   .p-grid-2, .p-grid-4, .p-grid-8, .p-sidebar { grid-template-columns: 1fr; }
+  .p-next { grid-template-columns: 1fr; }
+  .p-hero-next { padding-block: 36px 30px; }
+  .p-hero-next h1 { font-size: 26px; }
   .p-card, .p-card-lg { padding: 20px; }
   .p-card-primary { padding: 22px; }
   .p-chip-row, .p-filter-row { display: grid; gap: 6px; }
