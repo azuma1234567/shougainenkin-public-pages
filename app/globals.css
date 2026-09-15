@@ -1549,7 +1549,9 @@ strong {
 }
 
 .guide-step-title {
-  font-family: var(--font-display);
+  /* /shinsei は platform 系のページなので、他の見出しと同じゴシックで描く。明朝のままだと、
+     このページだけステップ見出しのために明朝 233KB を読む(2026-09-15 の計測) */
+  font-family: var(--font-platform-heading), "Hiragino Kaku Gothic ProN", sans-serif;
   font-weight: 700;
   margin: 0.1rem 0 0;
   padding: 0;
@@ -2335,6 +2337,12 @@ strong {
   color: var(--green-deep);
   font-family: var(--font-display);
   font-weight: 700;
+}
+/* platform 系のページ(/shinsei の金額表など)では、見出しと同じゴシックで描く。
+   ここだけ明朝だと、そのページが行見出しの数文字のために明朝 233KB を読む(2026-09-15 の計測)。
+   コラム記事(platform でない)の表は明朝のまま。 */
+.platform .article-table-wrap tbody th[scope="row"] {
+  font-family: var(--font-platform-heading), "Hiragino Kaku Gothic ProN", sans-serif;
 }
 
 /* ---- 関連リンクのカード ---- */
