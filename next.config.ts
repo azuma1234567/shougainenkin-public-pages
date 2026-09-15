@@ -5,6 +5,20 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/gokai/[slug]/opengraph-image": ["./lib/fonts/*.ttf"],
   },
+  // AI クローラー方針(2026-09-15): RSL 1.0 のライセンス文書(public/license.xml)を仕様どおりの media type で返し、
+  // 全ページに Link ヘッダでライセンスの場所を示す。HTML の <link rel="license"> は重複になるので入れない。
+  async headers() {
+    return [
+      {
+        source: "/license.xml",
+        headers: [{ key: "Content-Type", value: "application/rsl+xml; charset=utf-8" }],
+      },
+      {
+        source: "/:path*",
+        headers: [{ key: "Link", value: '<https://shougainenkin-note.net/license.xml>; rel="license"; type="application/rsl+xml"' }],
+      },
+    ];
+  },
   async redirects() {
     return [
       {

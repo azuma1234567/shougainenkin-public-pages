@@ -1,0 +1,45 @@
+# shougainenkin-note.net
+# 検索・AI 回答エンジンの取得ボットはすべて許可。利用条件は RSL ライセンスを参照。
+# 将来 Disallow を足すときも、下の取得ボットのグループには足さないこと(引用される側に回るため)。
+
+User-agent: *
+Allow: /
+
+# AI 検索・回答エンジンの取得ボット(引用のために明示的に許可)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# RSL 1.0 ライセンス(グループ外に置き、全クライアントに適用)
+License: https://shougainenkin-note.net/license.xml
+
+Sitemap: https://shougainenkin-note.net/sitemap.xml

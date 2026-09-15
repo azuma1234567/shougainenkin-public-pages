@@ -1,0 +1,29 @@
+# AI クローラー方針と RSL の確認(2026-09-15、next start のローカル)
+
+## /license.xml
+status 200 / Content-Type: application/rsl+xml; charset=utf-8
+Link: <https://shougainenkin-note.net/license.xml>; rel="license"; type="application/rsl+xml"
+中身が public/license.xml と一致: true
+well-formed(xmllint --noout): true
+
+## /
+status 200 / Content-Type: text/html; charset=utf-8
+Link: <https://shougainenkin-note.net/license.xml>; rel="license"; type="application/rsl+xml"
+X-Robots-Tag: (なし)
+
+## /robots.txt
+status 200 / Content-Type: text/plain; charset=UTF-8
+public/robots.txt と一致: true
+License 行 1 / Sitemap 行 1 / User-agent グループ 12 / Allow 行 12 / Disallow 行 0 / Host 行 0
+
+## sitemap の全ページ
+ページ数 185 / 200以外 0 / ライセンスの Link を含む 185(単独 183、既存の Link と連結 2) / 含まない 0 / X-Robots-Tag あり 0
+既存の Link(Next.js が動的ページで出すフォントの preload)とカンマ区切りで連結されたページ:
+- /jitsurei(ライセンスが先頭=true、ほかに rel=preload 55 件と連結)
+- /gokai(ライセンスが先頭=true、ほかに rel=preload 55 件と連結)
+
+## その他のパス
+/sitemap.xml: status 200 / ライセンスの Link を含む true
+/llms.txt: status 200 / ライセンスの Link を含む true
+/opengraph-image: status 200 / ライセンスの Link を含む true
+/no-such-page: status 404 / ライセンスの Link を含む true

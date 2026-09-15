@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rsl xmlns="https://rslstandard.org/rsl">
+  <content url="/">
+    <!-- 検索エンジンと AI のインデックス化: 無料。出典として shougainenkin-note.net を明示すること -->
+    <license>
+      <permits type="usage">search ai-index</permits>
+      <payment type="attribution"/>
+    </license>
+    <!-- AI の回答生成(RAG・グラウンディング)への利用: 出力時課金。条件は要相談 -->
+    <license>
+      <permits type="usage">ai-input</permits>
+      <payment type="use"/>
+    </license>
+    <!-- AI モデルの学習: 学習時課金。条件は要相談 -->
+    <license>
+      <permits type="usage">ai-train</permits>
+      <payment type="training"/>
+    </license>
+  </content>
+</rsl>
