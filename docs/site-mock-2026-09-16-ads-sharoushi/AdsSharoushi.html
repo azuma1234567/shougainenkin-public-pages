@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>社労士事務所の掲載のご案内 — 障害年金申請サポート(モック)</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7fbfe;--bg-deep:#eef6fc;--card:#fff;--green:#0273ad;--green-dark:#015d8c;--green-deep:#14425e;
+--text:#1e3a4d;--muted:#4a6a80;--border:#dcebf5;--card-border:rgba(2,115,173,.2);--note-bg:#eef6fc;--pale:#e3f2fc;
+--radius:10px;--content:42rem;--font-display:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:17px}
+body{background:var(--bg);color:var(--text);font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",system-ui,sans-serif;line-height:1.9}
+a{color:var(--green);text-underline-offset:3px}
+.ribbon{background:var(--green-deep);color:#fff;font-size:12px;padding:6px 20px;text-align:center}
+header.site{background:#fff;border-bottom:1px solid var(--border)}
+.hd{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.brand{font-family:var(--font-display);font-weight:700;color:var(--green-deep);font-size:18px;text-decoration:none}
+.nav{display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px}.nav a{color:var(--muted);text-decoration:none}
+main{max-width:var(--content);margin:0 auto;padding:28px 20px 60px}
+.crumb{font-size:12.5px;color:#6e8ba0;margin-bottom:14px}.crumb a{color:#6e8ba0;text-decoration:none}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;color:var(--green-deep);line-height:1.5}
+h1{font-size:1.75rem;margin:0 0 .4rem}
+h2{font-size:1.3rem;margin:2.4rem 0 .8rem;padding-bottom:.35rem;border-bottom:2px solid var(--border)}
+h3{font-size:1.05rem;margin:1.6rem 0 .5rem}
+p{margin:.7rem 0}
+.meta-line{font-size:.85rem;color:var(--muted);margin:0 0 1.4rem;display:flex;gap:14px;flex-wrap:wrap}
+.meta-line .free{display:inline-block;padding:1px 10px;border:1px solid var(--card-border);border-radius:6px;background:#fff;color:var(--green-dark);font-weight:700}
+ol.features{list-style:none;counter-reset:f;display:grid;gap:12px;margin:.6rem 0}
+ol.features li{counter-increment:f;position:relative;padding:14px 16px 14px 56px;background:#fff;border:1px solid var(--border);border-radius:var(--radius)}
+ol.features li::before{content:counter(f);position:absolute;left:16px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:.9rem;display:grid;place-items:center;font-family:system-ui}
+ol.features strong{display:block;color:var(--green-deep);margin-bottom:2px}
+ol.features span{font-size:.95rem;color:var(--text)}
+ul.plain{padding-left:1.3em;margin:.5rem 0}ul.plain li{margin:.3rem 0}
+ol.steps{padding-left:1.3em;margin:.5rem 0}ol.steps li{margin:.5rem 0}ol.steps strong{color:var(--green-deep)}
+.tablewrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:#fff;margin:.8rem 0}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+th{background:var(--pale);color:var(--green-deep);white-space:nowrap;width:9.5em}
+tr:last-child td,tr:last-child th{border-bottom:0}
+.note{background:var(--note-bg);border-left:4px solid #5ca7cf;padding:12px 16px;border-radius:0 8px 8px 0;margin:1rem 0;font-size:.95rem}
+.small-note{font-size:.85rem;color:var(--muted);margin-top:2rem}
+/* form */
+form{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px 20px;display:grid;gap:22px}
+fieldset{border:0;display:grid;gap:8px}
+legend,.lbl{font-weight:700;color:var(--green-deep);font-size:.98rem}
+.req{font-size:.72rem;color:#b4232c;border:1px solid #e9b8bc;border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:middle;font-weight:700}
+.opt{font-size:.72rem;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:middle}
+.help{font-size:.85rem;color:var(--muted)}
+input[type=text],input[type=email],input[type=url],input[type=tel],select,textarea{width:100%;padding:10px 12px;border:1px solid #9db9ca;border-radius:8px;font:inherit;font-size:16px;color:#163c52;background:#fff}
+textarea{resize:vertical;min-height:96px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks label{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:.93rem;cursor:pointer}
+.checks label:has(:checked){border-color:var(--green);background:var(--pale);font-weight:700}
+.checks input{width:18px;height:18px;accent-color:var(--green)}
+details.pref{border:1px solid var(--border);border-radius:8px;background:#fbfdff}
+details.pref summary{cursor:pointer;padding:9px 12px;font-size:.93rem;color:var(--green-deep);font-weight:700}
+details.pref .checks{padding:4px 12px 12px}
+.count{font-size:.8rem;color:var(--muted);text-align:right}
+.errors{display:none;background:#fff5f5;border:1px solid #e9b8bc;border-radius:8px;padding:10px 14px;color:#8a1c24;font-size:.92rem}
+.errors ul{padding-left:1.2em}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 22px;border:1px solid #8db4c9;border-radius:8px;background:#fff;color:var(--green);font:700 16px/1.4 inherit;cursor:pointer}
+.btn.primary{background:var(--green);color:#fff;border-color:var(--green)}
+.toast{font-size:.9rem;color:#067647}
+#copybox{display:none}
+#copybox textarea{min-height:260px;font-family:ui-monospace,Menlo,monospace;font-size:13px}
+footer.site{background:var(--green-deep);color:#b8d4e6;margin-top:44px;padding:28px 20px;font-size:13px;text-align:center}
+@media(max-width:520px){html{font-size:16px}.grid2{grid-template-columns:1fr}th{width:7.5em;white-space:normal}ol.features li{padding-left:50px}}
+</style>
+</head>
+<body>
+<div class="ribbon">実装用モック — docs/claude-code-ads-sharoushi-2026-09-16-instructions.md の参照HTML(本文・項目・動作の正)</div>
+<header class="site"><div class="hd"><a class="brand" href="#">障害年金申請サポート</a>
+<nav class="nav"><a href="#">はじめて</a><a href="#">病気から</a><a href="#">申請の流れ</a><a href="#">困りごと別</a><a href="#">実例</a><a href="#">数字</a><a href="#">コラム</a><a href="#">お金</a></nav></div></header>
+
+<main>
+<div class="crumb"><a href="#">トップ</a> ／ <a href="#">広告掲載について</a> ／ 社労士事務所の掲載のご案内</div>
+<h1>社労士事務所の掲載のご案内</h1>
+<p class="meta-line"><span>最終更新日: 2026年9月16日</span><span class="free">現在の掲載料: 無料</span></p>
+
+<p>「障害年金申請サポート」は、障害年金の申請を考えている人とその家族が読むサイトです。読者は、申請の流れ、必要書類、診断書の頼み方、自分で申請するか専門家に頼むかを、このサイトで確認してから相談先を探します。</p>
+<p>このページは、障害年金を扱う社会保険労務士・社会保険労務士法人に向けた掲載のご案内です。掲載は現在無料です。営業の電話やメールは行っていません。掲載を希望される事務所が、このページから申し込む形にしています。</p>
+
+<h2>掲載の6つの特徴</h2>
+<ol class="features">
+<li><strong>読者は制度を理解してから相談に来ます。</strong><span>当サイトの読者は、8つのステップ、必要書類、診断書の依頼のしかたを読んだうえで相談先を探します。「障害年金とは何か」から説明する時間が減ります。</span></li>
+<li><strong>原稿は運営者が作ります。</strong><span>事務所の情報を6項目お送りいただければ、当サイトの型に合わせて運営者が下書きを作ります。事務所の作業は、下書きを確認して返信する1通だけです。</span></li>
+<li><strong>年金事務所のページとつながります。</strong><span>都道府県ごとの一覧は、当サイトの「年金事務所を探す」と相互にリンクします。提出先を調べている人が、同じ地域の事務所を見つけます。</span></li>
+<li><strong>順位づけをしません。</strong><span>一覧は更新日の新しい順です。おすすめ・ランキング・口コミ・星は置きません。有料の掲載枠を設けた場合も、一覧の順序は変えません。</span></li>
+<li><strong>毎月、数字をお送りします。</strong><span>事務所ページの閲覧数、電話番号のタップ数、事務所サイトへのクリック数を、毎月1日にメールでお知らせします。数字が小さいうちからお送りします。</span></li>
+<li><strong>紹介料・成果報酬はありません。</strong><span>当サイトは相談者と事務所の仲介・斡旋をしません。相談者は事務所へ直接連絡します。相談件数や受任に連動する費用は、いまも将来も設定しません。</span></li>
+</ol>
+
+<h2>掲載料</h2>
+<p>現在、掲載料は無料です。無料掲載の期間は、掲載開始から最低6か月です。</p>
+<p>無料掲載に含まれるもの: 事務所ページ1枚の作成と公開、都道府県一覧への掲載、原稿の下書き作成、掲載内容の通常の更新、毎月の数字の報告。</p>
+<p>将来、有料の掲載枠を設ける場合は、次の内容を事前にご案内します。金額、開始日、契約期間、支払方法、更新方法、掲載終了の方法。ご案内のうえで、記録が残る方法(メールまたはウェブ上の同意操作)で明示の同意をいただきます。同意なく有料に切り替えて請求することはありません。同意されない場合は、有料期間が始まる前に掲載を終了できます。先に掲載いただいた事務所には、優先してご案内します。</p>
+<p>有料化した場合の対価は、情報掲載・原稿作成・サイト運営の役務です。相談者の紹介、問い合わせ件数、面談件数、受任、報酬額、支給結果に連動する費用は設定しません。</p>
+
+<h2>掲載する内容</h2>
+<div class="tablewrap"><table>
+<tr><th>事務所名・代表者名</th><td>社会保険労務士の氏名。法人の場合は障害年金を担当する社労士の氏名</td></tr>
+<tr><th>社労士登録番号</th><td>運営者が全国社会保険労務士会連合会または都道府県会の公開情報で確認してから掲載します</td></tr>
+<tr><th>所在地</th><td>都道府県・市区町村まで。番地は任意</td></tr>
+<tr><th>対応地域</th><td>都道府県(複数可)と、全国(オンライン・郵送)対応の有無</td></tr>
+<tr><th>相談のしかた</th><td>来所／電話／オンライン／出張、初回相談の無料・有料、土日祝・19時以降・当日の対応</td></tr>
+<tr><th>対応できる相談</th><td>下の9分類から該当するもの</td></tr>
+<tr><th>得意な障害の種類</th><td>精神／知的・発達／内部／外部(肢体・視覚・聴覚)</td></tr>
+<tr><th>料金の型</th><td>着手金の有無、成功報酬の計算方法、不支給のときの費用、審査請求まで含むか。金額は任意</td></tr>
+<tr><th>連絡先</th><td>電話番号、メールアドレス、事務所サイトのURL(最低1つ)</td></tr>
+<tr><th>一言</th><td>200字まで。事務所の言葉のまま載せます。運営者は添削しません</td></tr>
+<tr><th>更新日</th><td>掲載日と、内容を直した日。自動で表示します</td></tr>
+</table></div>
+<p>「対応できる相談」の9分類は、当サイトで読者が困りごとから探す入口と同じ分け方です。読者は困りごとのページから、その相談に対応できる事務所の一覧へ進みます。</p>
+<ul class="plain">
+<li>申請の前の相談(対象になるか、何から始めるか)</li><li>初診日・受診歴の確認</li><li>診断書・申立書の準備</li><li>働きながらの申請</li><li>家族からの相談</li><li>精神の障害・発達障害</li><li>身体の障害・内部の病気</li><li>不支給になったあと(審査請求・再請求)</li><li>更新・支給停止のあと</li>
+</ul>
+
+<h2>載せないもの</h2>
+<p>次の内容は、事務所からの希望があっても掲載しません。読者に誤解を与えないためと、社会保険労務士の広告に関する指針に沿うためです。</p>
+<ul class="plain">
+<li>受給率・受給実績の件数(運営者が検証できないため)</li><li>「必ず」「確実」「100%」など、支給や等級を約束する表現</li><li>「全国No.1」「最安」など、他の事務所との比較</li><li>他の事務所を批判する表現</li><li>相談者の不安をあおる表現</li><li>口コミ・体験談・星の評価</li>
+</ul>
+
+<h2>掲載までの流れ</h2>
+<ol class="steps">
+<li><strong>申込み。</strong>下のフォームから6項目をお送りください。フォームは事務所のメールソフトを開き、入力内容を本文にした状態で運営者宛てのメールを作ります。そのまま送信してください。</li>
+<li><strong>確認。</strong>運営者が社労士登録番号と所属会を公開情報で確認します。確認できない場合は掲載できません。</li>
+<li><strong>下書き。</strong>運営者が事務所ページの下書きを作り、メールでお送りします。申込みから5営業日以内です。</li>
+<li><strong>承認。</strong>下書きを確認し、直す点があれば返信してください。「これでよい」の返信をもって公開します。</li>
+<li><strong>公開と報告。</strong>公開したURLをお知らせします。以後、毎月1日に前月の数字をお送りします。内容の修正はいつでもメールで受け付けます。</li>
+</ol>
+
+<h2>掲載事務所へのお願い</h2>
+<p>掲載後、次の点にご協力ください。</p>
+<ul class="plain">
+<li>掲載内容を正確で最新の状態に保つこと(変更はメールでご連絡ください)</li><li>対応できない相談を「対応できる」と表示しないこと</li><li>相談者に、支援の範囲・費用・契約条件を依頼の前に説明すること</li><li>障害年金の支給や等級を保証する説明をしないこと</li><li>診断書について、医師に事実と異なる記載や特定の等級に合わせた記載を求めないこと</li><li>相談で知った病歴・生活状況などの情報を、事務所の責任で適切に管理すること</li><li>長期間問い合わせに対応できない場合は運営者へ連絡すること</li><li>当サイトの名前を使って営業しないこと</li>
+</ul>
+
+<h2 id="form">申込みフォーム</h2>
+<p class="note">入力内容は当サイトのサーバーには送られません。「メールを作成する」を押すと、事務所のメールソフトが開き、入力内容が本文に入った状態で運営者宛てのメール(shougainenkinsupport@gmail.com)が作られます。メールソフトが開かない場合は、「本文をコピーする」で本文を写し、shougainenkinsupport@gmail.com へお送りください。</p>
+
+<form id="f" novalidate>
+<fieldset><label class="lbl" for="office">事務所名<span class="req">必須</span></label><input type="text" id="office" name="office" maxlength="100" autocomplete="organization"></fieldset>
+<fieldset><label class="lbl" for="person">代表者名(社会保険労務士の氏名)<span class="req">必須</span></label><input type="text" id="person" name="person" maxlength="100" autocomplete="name"></fieldset>
+<fieldset><label class="lbl" for="regno">社労士登録番号<span class="req">必須</span></label><input type="text" id="regno" name="regno" inputmode="numeric" placeholder="例: 12345678"><span class="help">法人の場合は法人番号でも構いません。運営者が公開情報で確認します。</span></fieldset>
+<fieldset><label class="lbl" for="kai">所属する都道府県社労士会<span class="req">必須</span></label><select id="kai" name="kai"><option value="">選んでください</option></select></fieldset>
+<fieldset><span class="lbl">所在地<span class="req">必須</span></span><div class="grid2"><select id="pref" name="pref"><option value="">都道府県</option></select><input type="text" id="city" name="city" placeholder="市区町村(番地は任意)"></div></fieldset>
+
+<fieldset><span class="lbl">対応地域<span class="req">必須</span></span><span class="help">1つ以上。全国(オンライン・郵送)にも対応する場合は先頭にチェック。</span>
+<div class="checks"><label><input type="checkbox" name="areas" value="全国(オンライン・郵送)">全国(オンライン・郵送)</label></div>
+<div id="regions"></div></fieldset>
+
+<fieldset><span class="lbl">相談のしかた<span class="req">必須</span></span><div class="checks" id="ways"></div></fieldset>
+<fieldset><span class="lbl">相談の条件<span class="opt">任意</span></span><div class="checks" id="flags"></div></fieldset>
+<fieldset><span class="lbl">対応できる相談<span class="req">必須</span></span><span class="help">当サイトの困りごとの入口と同じ9分類です。1つ以上。</span><div class="checks" id="topics"></div></fieldset>
+<fieldset><span class="lbl">得意な障害の種類<span class="req">必須</span></span><div class="checks" id="kinds"></div></fieldset>
+
+<fieldset><span class="lbl">料金の型<span class="req">必須</span></span><span class="help">金額は書かなくて構いません。読者が契約前に確認する4点と同じ軸です。</span>
+<div class="grid2">
+<label>着手金<select name="fee_start"><option value="">選んでください</option><option>なし</option><option>あり</option><option>要確認</option></select></label>
+<label>成功報酬の計算方法<select name="fee_success"><option value="">選んでください</option><option>年金額の○か月分</option><option>遡及分の○%</option><option>定額</option><option>要確認</option></select></label>
+<label>不支給のときの費用<select name="fee_fail"><option value="">選んでください</option><option>不要</option><option>実費のみ</option><option>あり</option><option>要確認</option></select></label>
+<label>審査請求まで含むか<select name="fee_appeal"><option value="">選んでください</option><option>含む</option><option>別料金</option><option>対応しない</option><option>要確認</option></select></label>
+</div>
+<input type="text" name="fee_note" maxlength="60" placeholder="成功報酬の補足(任意・60字まで。例: 年金額の2か月分、遡及分は10%)"></fieldset>
+
+<fieldset><span class="lbl">連絡先<span class="req">最低1つ</span></span>
+<div class="grid2"><input type="tel" name="tel" placeholder="電話番号(例: 03-0000-0000)"><input type="email" name="mail" placeholder="メールアドレス"></div>
+<input type="url" name="url" placeholder="事務所サイトのURL(https://から)"></fieldset>
+
+<fieldset><label class="lbl" for="note">一言<span class="opt">任意</span></label><textarea id="note" name="note" maxlength="200" placeholder="事務所の言葉のまま載せます(200字まで)"></textarea><div class="count"><span id="notecount">0</span> / 200</div></fieldset>
+
+<fieldset><span class="lbl">原稿の作り方<span class="req">必須</span></span>
+<div class="checks"><label><input type="radio" name="draft" value="運営者に下書きを作ってほしい(事務所サイトを参照)">運営者に下書きを作ってほしい(事務所サイトを参照)</label><label><input type="radio" name="draft" value="自分で書いた文を送る">自分で書いた文を送る</label></div></fieldset>
+
+<fieldset><label class="lbl" for="source">どこで知ったか<span class="opt">任意</span></label><select id="source" name="source"><option value="">選んでください</option><option>検索</option><option>X</option><option>他の社労士から</option><option>営業メール</option><option>その他</option></select></fieldset>
+
+<fieldset><label class="checks" style="display:flex"><span style="display:inline-flex;gap:8px;align-items:flex-start;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:#fff"><input type="checkbox" name="agree" id="agree" style="width:18px;height:18px;margin-top:4px;accent-color:var(--green)"><span style="font-size:.95rem"><a href="#">広告掲載規約</a>と、このページの「載せないもの」「掲載事務所へのお願い」を読み、同意します<span class="req">必須</span></span></span></label></fieldset>
+
+<div class="errors" id="errors" role="alert"><ul id="errlist"></ul></div>
+<div class="actions"><button type="submit" class="btn primary">メールを作成する</button><button type="button" class="btn" id="copy">本文をコピーする</button><span class="toast" id="toast"></span></div>
+<div id="copybox"><span class="help">この本文を shougainenkinsupport@gmail.com へお送りください。</span><textarea readonly id="copytext"></textarea></div>
+</form>
+
+<p class="small-note">関連: <a href="#">広告掲載規約(/ads)</a> ／ <a href="#">特定商取引法に基づく表記</a> ／ <a href="#">プライバシーポリシー</a></p>
+</main>
+<footer class="site">© 障害年金申請サポート ｜ このページはモックです</footer>
+
+<script>
+const TO="shougainenkinsupport@gmail.com";
+const PREFS={"北海道・東北":["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県"],"関東":["茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県"],"北陸・甲信越":["新潟県","富山県","石川県","福井県","山梨県","長野県"],"東海":["岐阜県","静岡県","愛知県","三重県"],"関西":["滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県"],"中国":["鳥取県","島根県","岡山県","広島県","山口県"],"四国":["徳島県","香川県","愛媛県","高知県"],"九州・沖縄":["福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"]};
+const ALL=Object.values(PREFS).flat();
+const WAYS=["来所","電話","オンライン","出張"];
+const FLAGS=["初回相談無料","土日祝","19時以降","当日"];
+const TOPICS=["申請の前の相談","初診日・受診歴の確認","診断書・申立書の準備","働きながらの申請","家族からの相談","精神の障害・発達障害","身体の障害・内部の病気","不支給になったあと","更新・支給停止のあと"];
+const KINDS=["精神","知的・発達","内部","外部(肢体・視覚・聴覚)"];
+const $=s=>document.querySelector(s);
+for(const id of["kai","pref"]){const s=$("#"+id);ALL.forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=id==="kai"?p+"社会保険労務士会":p;s.appendChild(o);});}
+$("#regions").innerHTML=Object.entries(PREFS).map(([r,ps])=>`<details class="pref"><summary>${r}(<span class="n">0</span>/${ps.length})</summary><div class="checks">${ps.map(p=>`<label><input type="checkbox" name="areas" value="${p}">${p}</label>`).join("")}</div></details>`).join("");
+const chips=(id,arr,name)=>$("#"+id).innerHTML=arr.map(v=>`<label><input type="checkbox" name="${name}" value="${v}">${v}</label>`).join("");
+chips("ways",WAYS,"ways");chips("flags",FLAGS,"flags");chips("topics",TOPICS,"topics");chips("kinds",KINDS,"kinds");
+document.addEventListener("change",e=>{document.querySelectorAll("details.pref").forEach(d=>d.querySelector(".n").textContent=d.querySelectorAll("input:checked").length);});
+$("#note").addEventListener("input",e=>$("#notecount").textContent=e.target.value.length);
+const f=$("#f");
+const v=n=>(f.elements[n]&&f.elements[n].value||"").trim();
+const checked=n=>[...f.querySelectorAll(`input[name="${n}"]:checked`)].map(i=>i.value);
+function validate(){const e=[];
+if(!v("office"))e.push("事務所名を入力してください");if(!v("person"))e.push("代表者名を入力してください");
+if(!/^[0-9-]{4,}$/.test(v("regno")))e.push("社労士登録番号を半角数字で入力してください");
+if(!v("kai"))e.push("所属する社労士会を選んでください");if(!v("pref")||!v("city"))e.push("所在地(都道府県と市区町村)を入力してください");
+if(!checked("areas").length)e.push("対応地域を1つ以上選んでください");if(!checked("ways").length)e.push("相談のしかたを1つ以上選んでください");
+if(!checked("topics").length)e.push("対応できる相談を1つ以上選んでください");if(!checked("kinds").length)e.push("得意な障害の種類を1つ以上選んでください");
+for(const[n,l]of[["fee_start","着手金"],["fee_success","成功報酬の計算方法"],["fee_fail","不支給のときの費用"],["fee_appeal","審査請求まで含むか"]])if(!v(n))e.push(l+"を選んでください");
+if(!v("tel")&&!v("mail")&&!v("url"))e.push("連絡先を1つ以上入力してください");
+if(v("mail")&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v("mail")))e.push("メールアドレスの形式を確認してください");
+if(v("url")&&!/^https:\/\//.test(v("url")))e.push("事務所サイトのURLは https:// から入力してください");
+if(!checked("draft").length)e.push("原稿の作り方を選んでください");if(!$("#agree").checked)e.push("規約への同意にチェックしてください");
+const box=$("#errors"),ul=$("#errlist");ul.innerHTML=e.map(x=>`<li>${x}</li>`).join("");box.style.display=e.length?"block":"none";if(e.length)box.scrollIntoView({block:"center"});return !e.length;}
+function body(){const d=new Date().toISOString().slice(0,10);const j=a=>a.length?a.join("、"):"なし";
+return `障害年金申請サポート 掲載申込み
+
+■事務所名: ${v("office")}
+■代表者名: ${v("person")}
+■社労士登録番号: ${v("regno")}
+■所属会: ${v("kai")}社会保険労務士会
+■所在地: ${v("pref")} ${v("city")}
+■対応地域: ${j(checked("areas"))}
+■相談のしかた: ${j(checked("ways"))}
+■相談の条件: ${j(checked("flags"))}
+■対応できる相談: ${j(checked("topics"))}
+■得意な障害の種類: ${j(checked("kinds"))}
+■料金の型:
+  着手金: ${v("fee_start")}
+  成功報酬: ${v("fee_success")}${v("fee_note")?"("+v("fee_note")+")":""}
+  不支給のとき: ${v("fee_fail")}
+  審査請求: ${v("fee_appeal")}
+■連絡先:
+  電話: ${v("tel")}
+  メール: ${v("mail")}
+  サイト: ${v("url")}
+■一言: ${v("note")}
+■原稿: ${checked("draft")[0]||""}
+■知ったきっかけ: ${v("source")}
+■規約への同意: あり(${d})`;}
+f.addEventListener("submit",e=>{e.preventDefault();if(!validate())return;
+const subject=`【掲載申込み】${v("office")}（${v("pref")}）`;const b=body();
+const href=`mailto:${TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(b).replace(/%0A/g,"%0D%0A")}`;
+if(href.length>1800){showCopy(b);$("#toast").textContent="入力が長いため、本文をコピーしてメールに貼り付けてください";
+location.href=`mailto:${TO}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("フォームの入力内容は、ページの「本文をコピーする」で取得した本文を貼り付けてください。")}`;return;}
+location.href=href;});
+function showCopy(b){$("#copytext").value=b;$("#copybox").style.display="block";}
+$("#copy").addEventListener("click",async()=>{if(!validate())return;const b=body();try{await navigator.clipboard.writeText(b);$("#toast").textContent=`コピーしました。${TO} へ貼り付けて送ってください`;setTimeout(()=>$("#toast").textContent="",4000);}catch{showCopy(b);$("#toast").textContent="下の本文を選択してコピーしてください";}});
+</script>
+</body>
+</html>
