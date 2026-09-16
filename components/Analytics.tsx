@@ -3,6 +3,7 @@
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { recordPathname } from "@/lib/nav-from";
 
 /* アクセス解析はオプトアウト方式(docs/analytics-optout-2026-09-08-instructions.md)。
    既定で計測し、/privacy のボタンでいつでも止められる。localStorage に "denied" を
@@ -153,6 +154,11 @@ export default function Analytics() {
     analyticsConfiguredRef.current = true;
     setAnalyticsInitialized(true);
   }, []);
+
+  /* 直前のサイト内パスの記録(lib/nav-from.ts)。計測の可否と関係なく、パスが変わるたびに更新する。 */
+  useEffect(() => {
+    if (pathname) recordPathname(pathname);
+  }, [pathname]);
 
   useEffect(() => {
     const savedConsent = readConsent();

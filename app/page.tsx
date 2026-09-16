@@ -180,7 +180,7 @@ function Listings() {
     <section className="p-section p-soft-band" aria-labelledby="listings-heading">
       <div className="p-container">
         <SectionHeader title="専門家に相談したいとき" lead="自力での申請が難しいと感じたら、障害年金を扱う社会保険労務士に相談する道もあります。" />
-        <Card><AdLabel kind="掲載(広告)" /><p className="p-card-title">掲載事務所情報</p><p className="p-card-copy">当サイトは特定の事務所を推薦・選定しません。掲載の条件は<Link href="/ads">広告掲載について</Link>をご覧ください。</p></Card>
+        <Card><AdLabel kind="掲載(広告)" /><p className="p-card-title"><Link href="/sharoushi">社労士を探す</Link></p><p className="p-card-copy">都道府県から、障害年金を扱う社労士事務所を探せます。当サイトは特定の事務所を推薦・選定しません。掲載の条件は<Link href="/ads">広告掲載について</Link>をご覧ください。</p></Card>
       </div>
     </section>
   );

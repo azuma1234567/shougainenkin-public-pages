@@ -9,6 +9,14 @@ import { faqJsonLd } from "@/lib/seo";
 import { hubColumnSlugs, type HubDefinition, HUBS } from "@/lib/hubs";
 import { COLUMNS, type Column } from "@/lib/columns";
 import { isPublishedInternalPath } from "@/lib/published-links";
+import { SHOW_LISTINGS } from "@/lib/ads";
+
+/* 「社労士を探す」への導線を末尾に出すハブ(docs/claude-code-sharoushi-list-2026-09-16-instructions.md §4-3)。
+   SHOW_LISTINGS が true のときだけ。本文の途中には入れない。これ以外のハブ・47記事には置かない。 */
+const SHAROUSHI_LINK_HUBS = new Set([
+  "/erabu/jibun-ka-irai", "/erabu/erabikata", "/erabu/hiyou-souba", "/erabu/fushikyu-no-ato", "/erabu/irai-subeki-case",
+  "/nayami/fushikyu",
+]);
 
 const siblingLinks: Record<string, string[]> = {
   "/byoki/utsu-soukyoku": ["/byoki/tougou"],
@@ -97,6 +105,7 @@ export default function HubLanding({ hub }: { hub: HubDefinition }) {
         <h2>このテーマの記事</h2>
         <ul>{themeColumns.map((column) => <li key={column.slug}><Link href={`/columns/${column.slug}`}>{column.title}</Link></li>)}</ul>
       </section> : null}
+      {SHOW_LISTINGS && SHAROUSHI_LINK_HUBS.has(hub.path) ? <p className="sr-find-link">相談先を探す → <Link href="/sharoushi">社労士を探す</Link></p> : null}
     </article>
   </div>;
 }

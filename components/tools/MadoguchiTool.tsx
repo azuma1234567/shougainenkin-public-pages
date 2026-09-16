@@ -11,6 +11,8 @@ import {
   CHECKED_ON, COMMON_TEL, PREFECTURES, jurisdictionOf, kankatsuUrl, machikadoOf, mapUrl,
   municipalitiesOf, telHref, type Office,
 } from "@/lib/madoguchi";
+import { SHOW_LISTINGS } from "@/lib/ads";
+import { prefSlugOf } from "@/data/sharoushi/prefectures";
 import { SHORUI_ASK, SHORUI_MOCHIMONO } from "@/data/shorui";
 
 const STORAGE_KEY = "shougainenkin-note:madoguchi:v1";
@@ -155,6 +157,10 @@ export default function MadoguchiTool() {
           <p className="md-asof">
             住所・電話・管轄は<strong>日本年金機構の公表({CHECKED_ON} 取得)による</strong>ものです。統廃合や移転があるため、行く前に各件の「機構の公式ページ」で確認してください({asOf}時点)。
           </p>
+          {/* 社労士の一覧への導線。SHOW_LISTINGS が true で結果が出たときだけ(sharoushi-list 指示書 §4-3)。 */}
+          {SHOW_LISTINGS && prefSlugOf(pref) && (
+            <p className="md-hint no-print">この都道府県の社労士 → <Link href={`/sharoushi/${prefSlugOf(pref)}`} prefetch={false}>{pref}の一覧</Link></p>
+          )}
         </section>
       )}
 

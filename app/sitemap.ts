@@ -6,6 +6,9 @@ import { GOKAI } from "@/data/gokai";
 import { GOKAI_BODIES_UPDATED } from "@/data/gokai-bodies";
 import { HUB_CONTENT } from "@/lib/hub-content";
 import { SITEMAP_STATIC_DATES } from "@/lib/sitemap-static-dates";
+import { SHOW_LISTINGS } from "@/lib/ads";
+import { PREFECTURES_47 } from "@/data/sharoushi/prefectures";
+import { latestUpdated, OFFICES, officesForPref } from "@/lib/sharoushi";
 
 // 全エントリに lastModified を付ける(監査 §4-1)。changeFrequency と priority は付けない
 // (Google は見ていない。付けるとノイズになる)。
@@ -75,5 +78,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const hubPages: MetadataRoute.Sitemap = PUBLISHED_CONTENT_HUBS
     .filter((hub) => !existing.has(`${SITE_URL}${hub.path}`))
     .map((hub) => ({ url: `${SITE_URL}${hub.path}`, lastModified: new Date(HUB_CONTENT[hub.path].dateModified) }));
-  return [...staticPages, ...hubPages, ...gokaiPages, ...columnPages];
+  /* 社労士を探す(docs/claude-code-sharoushi-list-2026-09-16-instructions.md §4-4)。SHOW_LISTINGS が true のときだけ。
+     lastmod は事務所が updatedAt、都道府県は配下の最大、一覧は全体の最大(0件なら checkedOn)。 */
+  const sharoushiPages: MetadataRoute.Sitemap = SHOW_LISTINGS
+    ? [
+        { url: `${SITE_URL}/sharoushi`, lastModified: new Date(latestUpdated(OFFICES)) },
+        ...PREFECTURES_47.map((p) => ({ url: `${SITE_URL}/sharoushi/${p.pref}`, lastModified: new Date(latestUpdated(officesForPref(p.pref))) })),
+        ...OFFICES.map((o) => ({ url: `${SITE_URL}/sharoushi/${o.pref}/${o.id}`, lastModified: new Date(o.updatedAt) })),
+      ]
+    : [];
+  return [...staticPages, ...hubPages, ...gokaiPages, ...columnPages, ...sharoushiPages];
 }
