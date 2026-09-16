@@ -10,47 +10,33 @@ import {
   formatDate,
   type Column,
 } from "@/lib/columns";
-import { faqJsonLd } from "@/lib/seo";
 import { DouguCards } from "@/components/platform/DouguCard";
 import { PLACEMENTS } from "@/data/dougu";
 import AdLabel from "@/components/AdLabel";
 import "@/app/columns/columns.css";
 
-type Faq = { question: string; answer: string };
-
 export default function ColumnArticle({
   column,
   source,
-  faqs,
   relatedSlugs,
   references = [NENKIN_REFERENCES.seido],
   extraJsonLd = [],
 }: {
   column: Column;
   source: string;
-  faqs: Faq[];
   relatedSlugs: string[];
   references?: Reference[];
-  // 記事固有の構造化データ(ItemList / HowTo など)。FAQPage は faqs から自動で出す。
+  // 記事固有の構造化データ(ItemList / HowTo など)。同じ @graph に入る。
+  // FAQPage は本文の「よくある質問」から columnJsonLd が自動で出す(docs/seo-aio-2026-09-16-instructions.md §2)。
   extraJsonLd?: Record<string, unknown>[];
 }) {
   return (
     <article className="column-article">
+      {/* 構造化データは1ページに script 1つ(Article ＋ BreadcrumbList ＋ FAQPage ＋ 記事固有 ＋ Person) */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column, references)).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(columnJsonLd(column, references, { source, extra: extraJsonLd })).replace(/</g, "\\u003c") }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)).replace(/</g, "\\u003c") }}
-      />
-      {extraJsonLd.map((item, index) => (
-        <script
-          key={`jsonld-${index}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(item).replace(/</g, "\\u003c") }}
-        />
-      ))}
 
       <Breadcrumb
         current={column.title}

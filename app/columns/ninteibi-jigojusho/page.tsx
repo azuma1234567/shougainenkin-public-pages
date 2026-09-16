@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
-import articleSource, { lead, faqs } from "@/content/columns/ninteibi-jigojusho";
+import articleSource, { lead } from "@/content/columns/ninteibi-jigojusho";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
 const column = { ...getColumn("ninteibi-jigojusho"), lead };
@@ -11,7 +11,6 @@ export default function Page() {
     <ColumnArticle
       column={column}
       source={articleSource}
-      faqs={faqs}
       relatedSlugs={["shoshinbi-wakaranai", "moushitatesho-kakikata", "shoubyou-teatekin"]}
       references={[
         { label: "日本年金機構「障害厚生年金の受給要件・請求時期・年金額」", href: "https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/jukyu-yoken/20150401-02.html" },

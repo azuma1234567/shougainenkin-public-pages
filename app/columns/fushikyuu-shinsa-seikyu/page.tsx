@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
-import articleSource, { lead, faqs } from "@/content/columns/fushikyuu-shinsa-seikyu";
+import articleSource, { lead } from "@/content/columns/fushikyuu-shinsa-seikyu";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
 const column = { ...getColumn("fushikyuu-shinsa-seikyu"), lead };
@@ -11,7 +11,6 @@ export default function Page() {
     <ColumnArticle
       column={column}
       source={articleSource}
-      faqs={faqs}
       relatedSlugs={["shindansho-kakunin", "moushitatesho-kakikata", "ninteibi-jigojusho"]}
       references={[
         { label: "近畿厚生局「社会保険審査官への審査請求」", href: "https://kouseikyoku.mhlw.go.jp/kinki/gyomu/bu_ka/shahoken/index.html" },

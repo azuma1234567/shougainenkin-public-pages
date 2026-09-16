@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
-import articleSource, { lead, faqs } from "@/content/columns/shoubyou-teatekin";
+import articleSource, { lead } from "@/content/columns/shoubyou-teatekin";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
 const column = { ...getColumn("shoubyou-teatekin"), lead };
@@ -11,7 +11,6 @@ export default function Page() {
     <ColumnArticle
       column={column}
       source={articleSource}
-      faqs={faqs}
       relatedSlugs={["ninteibi-jigojusho", "hatarakinagara", "shoshinbi-wakaranai"]}
       references={[
         { label: "協会けんぽ「傷病手当金」", href: "https://www.kyoukaikenpo.or.jp/benefit/injury_and_sickness_allowance/index.html" },

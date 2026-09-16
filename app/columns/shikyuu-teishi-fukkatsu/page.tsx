@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
-import articleSource, { lead, faqs } from "@/content/columns/shikyuu-teishi-fukkatsu";
+import articleSource, { lead } from "@/content/columns/shikyuu-teishi-fukkatsu";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
 const column = { ...getColumn("shikyuu-teishi-fukkatsu"), lead };
@@ -11,7 +11,6 @@ export default function Page() {
     <ColumnArticle
       column={column}
       source={articleSource}
-      faqs={faqs}
       relatedSlugs={["koushin-kakuninhodo", "gaku-kaitei-seikyuu", "fushikyuu-shinsa-seikyu"]}
       references={[
       {

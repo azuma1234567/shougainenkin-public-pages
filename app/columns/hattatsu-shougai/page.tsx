@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
-import articleSource, { lead, faqs } from "@/content/columns/hattatsu-shougai";
+import articleSource, { lead } from "@/content/columns/hattatsu-shougai";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
 const column = { ...getColumn("hattatsu-shougai"), lead };
@@ -11,7 +11,6 @@ export default function Page() {
     <ColumnArticle
       column={column}
       source={articleSource}
-      faqs={faqs}
       relatedSlugs={["hatachi-mae", "moushitatesho-kakikata", "hatarakinagara"]}
       references={[
         { label: "日本年金機構「精神の障害に係る等級判定ガイドライン」", href: "https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/ninteikijun/20160715.html" },

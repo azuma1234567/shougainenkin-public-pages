@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ColumnArticle from "@/components/ColumnArticle";
 import { NENKIN_REFERENCES } from "@/components/ColumnFooter";
-import articleSource, { lead, faqs } from "@/content/columns/moushitatesho-kakikata";
+import articleSource, { lead } from "@/content/columns/moushitatesho-kakikata";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
 const column = { ...getColumn("moushitatesho-kakikata"), lead };
@@ -15,7 +15,6 @@ export default function Page() {
     <ColumnArticle
       column={column}
       source={articleSource}
-      faqs={faqs}
       relatedSlugs={[
         "moushitatesho-a4-insatsu",
         "shinsatsu-mae-memo",

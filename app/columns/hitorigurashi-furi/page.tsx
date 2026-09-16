@@ -4,7 +4,7 @@ import {
   MHLW_REFERENCES,
   NENKIN_REFERENCES,
 } from "@/components/ColumnFooter";
-import articleSource, { lead, faqs } from "@/content/columns/hitorigurashi-furi";
+import articleSource, { lead } from "@/content/columns/hitorigurashi-furi";
 import { columnMetadata, getColumn } from "@/lib/columns";
 
 const column = { ...getColumn("hitorigurashi-furi"), lead };
@@ -15,7 +15,6 @@ export default function Page() {
     <ColumnArticle
       column={column}
       source={articleSource}
-      faqs={faqs}
       relatedSlugs={[
         "nichijo-seikatsu-7koumoku",
         "shinsatsu-mae-memo",

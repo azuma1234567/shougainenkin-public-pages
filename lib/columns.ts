@@ -6,8 +6,8 @@ import {
   type Cluster,
   type ClusterId,
 } from "@/lib/clusters";
-import { AUTHOR_NAME, SITE_NAME, SITE_URL } from "@/lib/constants";
-import { ABOUT_PERSON_ID, ABOUT_PUBLISHER_ID } from "@/lib/seo";
+import { SITE_NAME, SITE_URL } from "@/lib/constants";
+import { ABOUT_PERSON_ID, ABOUT_PUBLISHER_ID, authorPersonJsonLd, faqJsonLd } from "@/lib/seo";
 import { COLUMN_HUB_ASSIGNMENTS, HUBS, type HubRole } from "@/lib/hubs";
 
 // コラム記事のメタデータ。一覧・sitemap・JSON-LDで共通利用する。
@@ -1065,10 +1065,43 @@ export function columnParentIsHub(column: Column): boolean {
   return HUBS.some((item) => item.path === column.hubPrimary && item.published);
 }
 
+/* 本文の「よくある質問」を取り出す(docs/seo-aio-2026-09-16-instructions.md §2)。
+   規則は components/MarkdownArticle.tsx の columnStyle 分岐と同じ: `**Q. …**` の行が質問、
+   次の `**Q.` か `## ` までの段落が答え(先頭の「A.」は外す)。リンクは文字だけにし、太字記号は入れない。
+   content/columns/<slug>.ts の faqs 書き出しと同じ内容になることを scripts/verify-aio.mjs が確かめる。 */
+export function extractColumnFaqs(source: string): { question: string; answer: string }[] {
+  const plain = (text: string) => text.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*\*(.+?)\*\*/g, "$1").replace(/\s+/g, " ").trim();
+  const lines = source.split("\n").map((line) => line.trim());
+  const faqs: { question: string; answer: string }[] = [];
+  let index = 0;
+  while (index < lines.length) {
+    const line = lines[index];
+    index += 1;
+    if (!/^\*\*Q[.．]/.test(line)) continue;
+    const question = line.replace(/^\*\*Q[.．]\s*/, "").replace(/\*\*$/, "");
+    const answerLines: string[] = [];
+    while (index < lines.length) {
+      const next = lines[index];
+      if (/^\*\*Q[.．]/.test(next) || next.startsWith("## ") || next === "---") break;
+      if (next) answerLines.push(next);
+      index += 1;
+    }
+    faqs.push({ question: plain(question), answer: plain(answerLines.join(" ").replace(/^A[.．]\s*/, "")) });
+  }
+  return faqs;
+}
+
 export function columnJsonLd(
   column: Column,
   references: readonly { label: string; href: string }[] = [],
+  options: {
+    /* 本文。渡すと FAQ を取り出して FAQPage を @graph に足す。 */
+    source?: string;
+    /* 記事固有の構造化データ(ItemList / HowTo など)。同じ @graph に入れ、script を1つにする。 */
+    extra?: readonly Record<string, unknown>[];
+  } = {},
 ) {
+  const faqs = options.source ? extractColumnFaqs(options.source) : [];
   // BreadcrumbListには実際にアクセスできるURLだけを入れる。柱ページが未公開の間は
   // columnBreadcrumbParents が空になるので、従来どおりトップ>コラム>記事になる。
   const parents = columnBreadcrumbParents(column);
@@ -1093,12 +1126,7 @@ export function columnJsonLd(
         datePublished: column.datePublished,
         dateModified: column.dateModified,
         inLanguage: "ja-JP",
-        author: {
-          "@type": "Person",
-          "@id": ABOUT_PERSON_ID,
-          name: AUTHOR_NAME,
-          url: `${SITE_URL}/about`,
-        },
+        author: { "@id": ABOUT_PERSON_ID },
         publisher: {
           "@type": "Organization",
           "@id": ABOUT_PUBLISHER_ID,
@@ -1124,6 +1152,10 @@ export function columnJsonLd(
           item: `${SITE_URL}${item.path === "/" ? "/" : item.path}`,
         })),
       },
+      /* FAQ が無い記事では出さない。 */
+      ...(faqs.length > 0 ? [(({ "@context": _c, ...rest }) => rest)(faqJsonLd(faqs))] : []),
+      ...(options.extra ?? []),
+      authorPersonJsonLd,
     ],
   };
 }
