@@ -1,0 +1,41 @@
+# main への push のたびに、更新した URL を IndexNow(Bing など)へ知らせる
+# (docs/seo-aio-2026-09-16-instructions.md §3)。
+# Vercel のデプロイ完了を待ってから送る(sitemap の lastmod を読むので、新しい build が
+# 配信されている必要がある)。deployment_status を待つ仕組みは持たず、単純に 3 分待つ。
+# 鍵は public/<32桁>.txt(公開前提の仕組みなので Secrets は使わない)。
+# 送信に失敗しても deploy は止めない(continue-on-error)。
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # 直前のコミットの日付を --since に使うため、1つ前まで取る
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 直前のコミット日を求める
+        id: since
+        run: |
+          before="${{ github.event.before }}"
+          if [ -n "$before" ] && git cat-file -e "$before" 2>/dev/null; then
+            since=$(git log -1 --format=%cs "$before")
+          else
+            since=$(git log -1 --format=%cs HEAD)
+          fi
+          echo "since=$since" >> "$GITHUB_OUTPUT"
+          echo "since=$since"
+      - name: Vercel のデプロイ完了を待つ(3分)
+        run: sleep 180
+      - name: IndexNow へ送る
+        continue-on-error: true
+        run: node scripts/indexnow-submit.mjs --since "${{ steps.since.outputs.since }}"
