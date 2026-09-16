@@ -3163,3 +3163,55 @@ body:has(.mt-print-page) .analytics-preference-button { display: none !important
 .ads-copybox{display:grid;gap:6px}
 .ads-copybox textarea{min-height:260px;font-family:ui-monospace,Menlo,monospace;font-size:13px}
 @media (max-width:520px){.ads-grid2{grid-template-columns:1fr}.ads-form{padding:18px 14px}}
+
+/* ---- /sharoushi: 社労士を探す(一覧・都道府県・事務所ページ) ----
+   docs/claude-code-sharoushi-list-2026-09-16-instructions.md §7。見た目の正は docs/site-mock-2026-09-16-sharoushi/Sharoushi.html。
+   本文幅は法務ページと同じ(--content)。 */
+.sr-lead{color:#4a6a80;font-size:.98rem}
+.sr-disclose{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid #dcebf5;border-radius:10px;padding:12px 14px;font-size:.9rem;margin:14px 0}
+.sr-disclose .ad-label{flex:none;margin-top:3px}
+.sr-disclose ul{padding-left:1.1em;margin:0}.sr-disclose li{margin:0}
+.sr-decide{display:flex;gap:6px 10px;flex-wrap:wrap;align-items:baseline;background:#eef6fc;border-left:4px solid #5ca7cf;padding:12px 14px;border-radius:0 8px 8px 0;margin:16px 0;font-size:.92rem}
+.sr-decide a{white-space:nowrap}
+.sr-regions{display:grid;gap:12px;margin:.6rem 0}
+.sr-region{background:#fff;border:1px solid #dcebf5;border-radius:10px;padding:12px 14px}
+.sr-region h3{margin:0 0 6px;font-size:.95rem;color:#4a6a80;font-family:inherit}
+.sr-prefs{display:flex;flex-wrap:wrap;gap:8px}
+.sr-prefs a{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border:1px solid #dcebf5;border-radius:8px;background:#fff;text-decoration:none;font-size:.93rem;color:#015d8c}
+.sr-prefs a .sr-n{font-size:.78rem;color:#4a6a80}
+.sr-prefs a.sr-zero{color:#4a6a80;border-style:dashed;background:#fbfdff}
+.sr-filters{background:#fff;border:1px solid #dcebf5;border-radius:10px;padding:12px 14px;margin:10px 0 18px;display:grid;gap:10px}
+.sr-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sr-lbl{font-size:.82rem;color:#4a6a80;width:100%;font-weight:700}
+.sr-chip{border:1px solid #dcebf5;background:#fff;border-radius:999px;padding:6px 12px;font-family:inherit;font-size:.88rem;color:#1e3a4d;cursor:pointer;min-height:36px}
+.sr-chip[aria-pressed=true]{border-color:#0273ad;background:#e3f2fc;color:#14425e;font-weight:700}
+.sr-chip:disabled{opacity:.5;cursor:default}
+.sr-chip:focus-visible,.sr-btn:focus-visible,.sr-prefs a:focus-visible{outline:2px solid #0284c7;outline-offset:1px}
+.sr-clear{margin-left:auto}
+.sr-count{font-size:.88rem;color:#4a6a80}
+.sr-office{background:#fff;border:1px solid #dcebf5;border-radius:12px;padding:16px 18px;margin:12px 0}
+.sr-office-title{margin:0 0 2px;padding:0;border:0;font-size:1.08rem;font-family:inherit;line-height:1.5}.sr-office-title a{text-decoration:none;color:#14425e}
+.sr-sub{font-size:.88rem;color:#4a6a80;margin:0}
+.sr-tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.sr-tag{font-size:.78rem;padding:2px 9px;border-radius:999px;background:#e3f2fc;color:#14425e}
+.sr-tag-f{background:#eaf7ef;color:#0b5c33}
+.sr-word{font-size:.95rem;margin:8px 0 4px}
+.sr-upd{font-size:.8rem;color:#4a6a80;margin:0}
+.sr-empty{background:#eef6fc;border-radius:10px;padding:16px;font-size:.95rem;margin:12px 0}
+.sr-prof-head{background:#fff;border:1px solid #dcebf5;border-radius:12px;padding:18px 20px;margin:10px 0}
+.sr-prof-head h1{font-size:1.45rem;margin:6px 0 2px}
+.sr-prof-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0}
+.sr-prof-head .sr-sub{font-size:.92rem}
+.sr-direct{font-size:.82rem}
+.sr-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 4px}
+.sr-btns[data-count="1"]{grid-template-columns:1fr}.sr-btns[data-count="2"]{grid-template-columns:1fr 1fr}
+.sr-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;padding:12px 8px;border:1px solid #8db4c9;border-radius:8px;background:#fff;color:#0273ad;font-weight:700;text-decoration:none;font-size:.95rem;line-height:1.3;text-align:center}
+.sr-btn small{font-weight:400;font-size:.75rem}
+.sr-btn-tel{background:#0273ad;color:#fff;border-color:#0273ad}
+.sr-spec{display:grid;grid-template-columns:9em 1fr;gap:6px 14px;background:#fff;border:1px solid #dcebf5;border-radius:10px;padding:14px 16px;font-size:.95rem;margin:.6rem 0}
+.sr-spec dt{color:#4a6a80;font-weight:700}.sr-spec dd{margin:0}
+.sr-topic-links{display:grid;gap:6px;margin:.4rem 0}
+.sr-topic-links a,.sr-topic-plain{display:flex;justify-content:space-between;gap:8px;padding:9px 12px;border:1px solid #dcebf5;border-radius:8px;background:#fff;text-decoration:none;font-size:.93rem;color:#14425e}
+.sr-topic-links a span{color:#4a6a80;font-size:.82rem;text-align:right}
+.sr-find-link{margin:1.6rem 0 0;font-size:.95rem}
+@media (max-width:520px){.sr-spec{grid-template-columns:1fr;gap:2px 0}.sr-spec dt{margin-top:8px}.sr-btns{grid-template-columns:1fr 1fr}.sr-btns[data-count="3"] .sr-btn:first-child{grid-column:1 / -1}}
