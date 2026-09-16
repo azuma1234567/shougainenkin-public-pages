@@ -4,8 +4,8 @@ import { PLACEMENTS, visiblePlacements } from "@/data/dougu";
 import HubGokai from "@/components/platform/HubGokai";
 import Link from "next/link";
 import { Breadcrumb, PageDate } from "@/components/platform/Platform";
-import { extractHubFaqs, getHubContent } from "@/lib/hub-content";
-import { faqJsonLd } from "@/lib/seo";
+import { getHubContent } from "@/lib/hub-content";
+import { hubJsonLd } from "@/lib/hub-jsonld";
 import { hubColumnSlugs, type HubDefinition, HUBS } from "@/lib/hubs";
 import { COLUMNS, type Column } from "@/lib/columns";
 import { isPublishedInternalPath } from "@/lib/published-links";
@@ -75,18 +75,18 @@ export default function HubLanding({ hub }: { hub: HubDefinition }) {
     label,
     href: index === 0 ? "/" : index === all.length - 1 ? undefined : sectionPath,
   }));
-  /* FAQ の構造化データ(監査 §4-2)。本文から取り出したものだけ。画面に無い Q/A は入れない。
-     パンくずは <Breadcrumb> が BreadcrumbList を出しているので、ここでは出さない(二重になる)。
-     Article も出さない(ハブはまとめページ。無理に付けると列記事と競合する)。 */
-  const faqs = extractHubFaqs(content.source);
+  /* 構造化データは lib/hub-jsonld.ts が1つの @graph にまとめる(Article ＋ BreadcrumbList ＋ FAQPage ＋ Person。
+     docs/seo-aio-2026-09-16-instructions.md §1)。<Breadcrumb> 側の BreadcrumbList は止めて二重にしない。
+     FAQ は本文から取り出したものだけ。画面に無い Q/A は入れない。 */
+  const jsonLd = hubJsonLd(hub, content);
   /* ハブ → 記事 の導線(指示書 2026-09-04 その2 §2 T8)。
      手書きの siblingLinks は増やさず、記事側の棚割りを逆引き(primary → secondary)して出し、
      そのあとに hub の relatedSlugs を足す(2026-09-08)。重複は1枚、存在しない slug と未公開の記事は出さない。
      1ハブの上限は8枚(超える分は relatedSlugs の後ろから落とす)。 */
   const themeColumns = relatedColumnsOfHub(hub);
   return <div className={`platform hub-landing${hub.kind === "erabu" ? " hub-erabu" : ""}`}>
-    {faqs.length > 0 && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd(faqs)).replace(/</g, "\\u003c") }} />}
-    <header className="p-page-hero"><div className="p-container hub-reading-width"><Breadcrumb items={crumbs} currentPath={hub.path} /><h1>{content.title}</h1><PageDate updated={content.dateModified} /></div></header>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+    <header className="p-page-hero"><div className="p-container hub-reading-width"><Breadcrumb items={crumbs} currentPath={hub.path} jsonLd={false} /><h1>{content.title}</h1><PageDate updated={content.dateModified} /></div></header>
     <article className="p-container hub-reading-width hub-content" {...(hub.kind === "erabu" ? { "data-yougo-skip": "" } : {})}>
       <MarkdownArticle
         source={content.source}

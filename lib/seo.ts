@@ -124,16 +124,18 @@ export const organizationJsonLd = {
   sameAs: [X_PROFILE_URL, APP_STORE_URL],
 };
 
+/* 著者の Person の実体。/about・コラム・ハブの @graph に同じものを入れ、
+   Article.author は { "@id": ABOUT_PERSON_ID } で参照する(名前・URL を二重定義しない。
+   docs/seo-aio-2026-09-16-instructions.md §1)。 */
+export const authorPersonJsonLd = {
+  "@type": "Person",
+  "@id": ABOUT_PERSON_ID,
+  name: AUTHOR_NAME,
+  url: `${SITE_URL}/about`,
+};
+
 // /about に出す Person / Organization。
 export const publisherJsonLd = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": ABOUT_PERSON_ID,
-      name: AUTHOR_NAME,
-      url: `${SITE_URL}/about`,
-    },
-    organizationJsonLd,
-  ],
+  "@graph": [authorPersonJsonLd, organizationJsonLd],
 };
