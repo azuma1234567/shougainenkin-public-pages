@@ -52,3 +52,11 @@ export function adSourceList(field: "terms" | "about"): string {
   const shown = active.length > 0 ? active : AD_SOURCES;
   return shown.map((source) => source[field]).join("、");
 }
+
+// 社労士事務所の掲載申込みを受け付けているか。/ads/sharoushi のフォームと
+// 「現在の掲載料: 無料」の表示は、このフラグで出し分ける。
+export const SHAROUSHI_APPLY_OPEN = true;
+// 無料掲載の最低期間(か月)。/ads/sharoushi と規約 第5条の案内文で使う。
+export const SHAROUSHI_FREE_MIN_MONTHS = 6;
+// 下書きをお送りするまでの営業日数。
+export const SHAROUSHI_DRAFT_DAYS = 5;

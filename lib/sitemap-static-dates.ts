@@ -15,6 +15,7 @@ export const SITEMAP_STATIC_DATES: Record<string, string> = {
   "/privacy": "2026-09-08",
   "/terms": "2026-09-05",
   "/ads": "2026-09-16",
+  "/ads/sharoushi": "2026-09-16",
   "/app": "2026-09-13",
   "/app/privacy": "2026-09-13",
   "/app/terms": "2026-09-13",

@@ -3117,3 +3117,49 @@ ul.md-list{margin:8px 0;padding-left:1.25em;font-size:14.5px;line-height:1.9}ul.
 .mt-print-page body::after,
 body:has(.mt-print-page)::after { content: none !important; display: none !important; }
 body:has(.mt-print-page) .analytics-preference-button { display: none !important; }
+
+/* ---- /ads/sharoushi: 社労士事務所の掲載のご案内と申込みフォーム ----
+   docs/claude-code-ads-sharoushi-2026-09-16-instructions.md §7。見た目の正は
+   docs/site-mock-2026-09-16-ads-sharoushi/AdsSharoushi.html。法務ページの本文幅・見出し・表はそのまま使い、
+   フォームの部品は道具(kg-*)と同じ色・角丸・16px の入力欄で組む。6つの特徴は番号付きリストのまま(カード化しない)。 */
+.ads-features{padding-left:1.4em;margin:.6rem 0}
+.ads-features li{margin:.6rem 0}
+.ads-features strong{display:block;color:var(--green-deep, #14425e)}
+.ads-steps{padding-left:1.4em;margin:.5rem 0}
+.ads-steps li{margin:.5rem 0}
+.ads-steps strong{color:var(--green-deep, #14425e)}
+.ads-form{display:grid;gap:22px;padding:22px 20px;margin:1rem 0;border:1px solid #dcebf5;border-radius:12px;background:#fff}
+.ads-field{display:grid;gap:8px;margin:0;padding:0;border:0;min-width:0}
+.ads-field legend{padding:0;margin-bottom:8px}
+.ads-lbl{font-weight:700;color:#14425e;font-size:.98rem;line-height:1.6}
+.ads-sub{display:block;font-size:.85rem;color:#4a6a80;margin-bottom:4px}
+.ads-req{display:inline-block;font-size:.72rem;color:#b4232c;border:1px solid #e9b8bc;border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:middle;font-weight:700;line-height:1.6}
+.ads-opt{display:inline-block;font-size:.72rem;color:#4a6a80;border:1px solid #dcebf5;border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:middle;font-weight:400;line-height:1.6}
+.ads-help{margin:0;font-size:.85rem;color:#4a6a80;line-height:1.7}
+.ads-count{margin:0;font-size:.8rem;color:#4a6a80;text-align:right}
+.ads-form input[type=text],.ads-form input[type=email],.ads-form input[type=url],.ads-form input[type=tel],.ads-form select,.ads-form textarea{width:100%;min-width:0;padding:10px 12px;border:1.5px solid #9db9ca;border-radius:10px;font-family:inherit;font-size:16px;color:#163c52;background:#fff}
+.ads-form textarea{resize:vertical;min-height:96px}
+.ads-form input:focus-visible,.ads-form select:focus-visible,.ads-form textarea:focus-visible,.ads-form summary:focus-visible,.ads-btn:focus-visible{outline:2px solid #0284c7;outline-offset:1px}
+.ads-form [aria-invalid=true]{border-color:#b4232c}
+.ads-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:0}
+.ads-checks{display:flex;flex-wrap:wrap;gap:8px}
+.ads-checks label{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border:1px solid #dcebf5;border-radius:8px;background:#fff;font-size:.93rem;line-height:1.5;cursor:pointer}
+.ads-checks label:has(:checked){border-color:#0273ad;background:#e3f2fc;font-weight:700}
+.ads-checks input{width:18px;height:18px;margin:0;flex:none;accent-color:#0273ad}
+.ads-agree label{align-items:flex-start;font-size:.95rem}
+.ads-agree input{margin-top:4px}
+.ads-regions{display:grid;gap:6px}
+.ads-pref{border:1px solid #dcebf5;border-radius:8px;background:#fbfdff}
+.ads-pref summary{cursor:pointer;padding:9px 12px;font-size:.93rem;color:#14425e;font-weight:700}
+.ads-pref .ads-checks{padding:4px 12px 12px}
+.ads-field-error{margin:0;font-size:.88rem;color:#8a1c24}
+.ads-errors{background:#fff5f5;border:1px solid #e9b8bc;border-radius:8px;padding:10px 14px;color:#8a1c24;font-size:.92rem}
+.ads-errors ul{margin:0;padding-left:1.2em}
+.ads-errors li{margin:.15rem 0}
+.ads-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.ads-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 22px;border:1.5px solid #8db4c9;border-radius:8px;background:#fff;color:#0273ad;font-family:inherit;font-size:16px;font-weight:700;line-height:1.4;cursor:pointer}
+.ads-btn-primary{background:#0273ad;color:#fff;border-color:#0273ad}
+.ads-toast{font-size:.9rem;color:#067647}
+.ads-copybox{display:grid;gap:6px}
+.ads-copybox textarea{min-height:260px;font-family:ui-monospace,Menlo,monospace;font-size:13px}
+@media (max-width:520px){.ads-grid2{grid-template-columns:1fr}.ads-form{padding:18px 14px}}
