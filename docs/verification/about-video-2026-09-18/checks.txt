@@ -1,0 +1,21 @@
+0. <video> タグ: <video id="about-intro" controls="" preload="none" playsInline="" poster="/img/about/intro-poster.webp" width="1280" height="720">
+0. preload="none"=true / controls=true / playsinline=true / width=1280 height=720=true / autoplay・muted・loop=なし / <track>=なし
+0. 書き起こしが閉じた状態で HTML に入っている: details=true / 冒頭の文=true / 最後の文=true / details に open 属性=なし
+2. 初回読み込み: about-intro.mp4 へのリクエスト 0 件
+2. ポスター画像の読み込み: 1 件(転送 68676 bytes)
+2. 再生ボタンを押したあと: リクエスト 1 件 / 応答 [206] / 再生中=true currentTime=1.9 readyState=4
+4. 「0:00 冒頭」: 目標 0s → currentTime 0.1s 再生中=true ○
+4. 「0:45 ① 12歳から大学2年まで、気づかなかった8年」: 目標 45s → currentTime 45.1s 再生中=true ○
+4. 「3:30 ② 気づいてから、病院に行くまでの壁」: 目標 210s → currentTime 210.2s 再生中=true ○
+4. 「5:15 ③ 今すぐ確認する、一つのこと」: 目標 315s → currentTime 315.2s 再生中=true ○
+4. 「6:15 ④ 制度の順路と数字——あとから知って、最初に知りたかったこと」: 目標 375s → currentTime 375.2s 再生中=true ○
+4. 「10:15 ⑤ 遅れた人が、それでもできること」: 目標 615s → currentTime 615.2s 再生中=true ○
+4. 「11:30 ⑥ サイトへ」: 目標 690s → currentTime 690.2s 再生中=true ○
+4. 7 / 7 本が、その時間へ飛んで再生を始めた。コンソールのエラー 0 件
+5. JS なし: 目次 7 行 → 0:00 冒頭 / 0:45 ① 12歳から大学2年まで、気づかなかった8年 / 3:30 ② 気づいてから、病院に行くまでの壁 / 5:15 ③ 今すぐ確認する、一つのこと / 6:15 ④ 制度の順路と数字——あとから知って、最初に知りたかったこと / 10:15 ⑤ 遅れた人が、それでもできること / 11:30 ⑥ サイトへ
+5. JS なし: 書き起こし 閉じた状態で本文が見える=false → summary を押したあと見える=true
+5. JS なし: 再生ボタンを押したあとの mp4 の応答 [206](206 なら再生のために読み込んでいる)
+7. 1400px: 横はみ出し 0px / 動画 672×378(比 1.778)、左 364 右 1036(画面幅 1400) はみ出し=なし
+7. 1400px 印刷: 動画 display=none / 目次 display=none / 書き起こしは閉じたまま(open=false)で 最初の段落 見える=true 最後の段落 見える=true
+7. 390px: 横はみ出し 0px / 動画 350×197(比 1.778)、左 20 右 370(画面幅 390) はみ出し=なし
+7. 390px 印刷: 動画 display=none / 目次 display=none / 書き起こしは閉じたまま(open=false)で 最初の段落 見える=true 最後の段落 見える=true

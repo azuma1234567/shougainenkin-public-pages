@@ -9,9 +9,25 @@ import {
   CONTACT_EMAIL,
   SITE_LEGAL_UPDATED,
   SITE_NAME,
+  SITE_URL,
 } from "@/lib/constants";
-import { breadcrumbJsonLd, pageMetadata, publisherJsonLd } from "@/lib/seo";
-import { ABOUT_INTRO_DURATION_LABEL, ABOUT_INTRO_TRANSCRIPT } from "@/data/about-intro";
+import {
+  ABOUT_PERSON_ID,
+  ABOUT_PUBLISHER_ID,
+  authorPersonJsonLd,
+  breadcrumbJsonLd,
+  organizationJsonLd,
+  pageMetadata,
+} from "@/lib/seo";
+import {
+  ABOUT_INTRO_CHAPTERS,
+  ABOUT_INTRO_DURATION_LABEL,
+  ABOUT_INTRO_DURATION_SECONDS,
+  ABOUT_INTRO_RECORDED_ON,
+  ABOUT_INTRO_TITLE,
+  ABOUT_INTRO_TRANSCRIPT,
+  ABOUT_INTRO_TRANSCRIPT_TEXT,
+} from "@/data/about-intro";
 
 const DESCRIPTION =
   `「${SITE_NAME}」の運営者情報です。サイトの目的、運営者、情報の作り方(監修の有無・訂正の扱い)、広告についての約束、情報の位置づけ、お問い合わせ先をご案内します。`;
@@ -22,21 +38,56 @@ export const metadata: Metadata = pageMetadata({
   path: "/about",
 });
 
-const breadcrumb = breadcrumbJsonLd([
+/* 構造化データは1ページ1つの script にまとめる(docs/seo-aio-2026-09-16-instructions.md の方針)。
+   BreadcrumbList・Person・Organization・VideoObject を1つの @graph に入れる
+   (docs/about-video-2026-09-18-instructions.md §3)。Person と Organization は lib/seo.ts の定義をそのまま使い、
+   VideoObject からは @id で参照する(定義を二重に置かない)。iframe で配っていないので embedUrl は書かない。 */
+const { "@context": _breadcrumbContext, ...breadcrumb } = breadcrumbJsonLd([
   { name: "トップ", path: "/" },
   { name: "運営者情報", path: "/about" },
 ]);
+
+const ABOUT_URL = `${SITE_URL}/about`;
+
+/* 795 秒 → "PT13M15S"。動画を差し替えたら data/about-intro.ts の秒数だけ直せば追随する */
+const isoDuration = (seconds: number) => `PT${Math.floor(seconds / 60)}M${seconds % 60}S`;
+
+const introVideo = {
+  "@type": "VideoObject",
+  "@id": `${ABOUT_URL}#video`,
+  name: ABOUT_INTRO_TITLE,
+  /* ページの導入文と同じ文(食い違わせない) */
+  description:
+    "自分が病気だと気づくまでに8年かかりました。その8年に何があって、なぜ気づけなかったのか、そして「これは最初に知りたかった」と思ったことを話しています。",
+  thumbnailUrl: [`${SITE_URL}/img/about/intro-poster.webp`],
+  uploadDate: ABOUT_INTRO_RECORDED_ON,
+  duration: isoDuration(ABOUT_INTRO_DURATION_SECONDS),
+  contentUrl: `${SITE_URL}/video/about-intro.mp4`,
+  transcript: ABOUT_INTRO_TRANSCRIPT_TEXT,
+  inLanguage: "ja",
+  isFamilyFriendly: true,
+  author: { "@id": ABOUT_PERSON_ID },
+  publisher: { "@id": ABOUT_PUBLISHER_ID },
+  hasPart: ABOUT_INTRO_CHAPTERS.map((chapter, index, all) => ({
+    "@type": "Clip",
+    name: chapter.label,
+    startOffset: chapter.at,
+    endOffset: all[index + 1]?.at ?? ABOUT_INTRO_DURATION_SECONDS,
+    url: `${ABOUT_URL}#t=${chapter.at}`,
+  })),
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [breadcrumb, authorPersonJsonLd, organizationJsonLd, introVideo],
+};
 
 export default function AboutPage() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(publisherJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
 
       <h1>運営者情報</h1>

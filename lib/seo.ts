@@ -133,9 +133,3 @@ export const authorPersonJsonLd = {
   name: AUTHOR_NAME,
   url: `${SITE_URL}/about`,
 };
-
-// /about に出す Person / Organization。
-export const publisherJsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [authorPersonJsonLd, organizationJsonLd],
-};

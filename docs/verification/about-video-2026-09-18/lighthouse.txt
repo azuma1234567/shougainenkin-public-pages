@@ -1,0 +1,30 @@
+# /about の Lighthouse(モバイル、12.8.2、シミュレート、localhost:3200 / 3300)
+
+9/15 の計測と同じ条件。数字は ms。LCP の要素は前後とも本文最初の段落(「障害年金申請サポート」(shougainenkin-note.net)は、…)。
+
+## 変更前(c612979、同じ機械で交互に計測)
+- run 1: LCP 4440 / FCP 2640 / TBT 176 / CLS 0 / score 0.76 / 転送 754KB
+- run 2: LCP 3642 / FCP 2292 / TBT 340 / CLS 0 / score 0.8 / 転送 754KB
+- run 3: LCP 3933 / FCP 2283 / TBT 328 / CLS 0 / score 0.78 / 転送 754KB
+- run 4: LCP 4228 / FCP 2278 / TBT 313 / CLS 0 / score 0.76 / 転送 754KB
+- LCP の中央値 4080 ms / CLS 0
+
+## 変更後(この2コミット、同じ機械で交互に計測)
+- run 1: LCP 4909 / FCP 2434 / TBT 221 / CLS 0 / score 0.75 / 転送 834KB
+- run 2: LCP 4827 / FCP 2427 / TBT 208 / CLS 0 / score 0.76 / 転送 834KB
+- run 3: LCP 4827 / FCP 2427 / TBT 213 / CLS 0 / score 0.76 / 転送 834KB
+- run 4: LCP 4905 / FCP 2430 / TBT 214 / CLS 0 / score 0.75 / 転送 834KB
+- LCP の中央値 4866 ms / CLS 0
+
+## 参考: 変更後からポスターだけ外した試し(採用していない)
+- run 1: LCP 4388 / FCP 2513 / TBT 298 / CLS 0 / score 0.75 / 転送 767KB
+- run 2: LCP 4168 / FCP 2443 / TBT 327 / CLS 0 / score 0.76 / 転送 767KB
+- run 3: LCP 4308 / FCP 2433 / TBT 270 / CLS 0 / score 0.76 / 転送 767KB
+- LCP の中央値 4308 ms / CLS 0
+
+## 参考: 本番(変更前、https://shougainenkin-note.net/about)
+- run 1: LCP 4132 / FCP 2277 / TBT 918 / CLS 0 / score 0.63 / 転送 758KB
+- run 2: LCP 3617 / FCP 2263 / TBT 736 / CLS 0 / score 0.7 / 転送 758KB
+- run 3: LCP 3913 / FCP 2502 / TBT 491 / CLS 0 / score 0.69 / 転送 758KB
+- LCP の中央値 3913 ms / CLS 0
+
