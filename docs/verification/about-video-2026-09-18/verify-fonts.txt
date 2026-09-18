@@ -1,5 +1,3 @@
-フォント: zen-old-mincho-600.woff2 231KB / zen-old-mincho-700.woff2 233KB / zen-kaku-gothic-new-500.woff2 139KB / zen-kaku-gothic-new-700.woff2 140KB、charset 明朝 1047 字 / ゴシック 1202 字
-186 ページ中 186 ページに見出しフォントの要素、文字の延べ 25312。読み込みが最多のページ: 2 本 /about (e71484955df6cffe-s.p.woff2, e52e1aeea882a787-s.woff2)
-×
-書体の charset に無い見出しの文字 1 件:
-  /ads/sharoushi (mincho): 登
+フォント: zen-old-mincho-600.woff2 232KB / zen-old-mincho-700.woff2 234KB / zen-kaku-gothic-new-500.woff2 140KB / zen-kaku-gothic-new-700.woff2 140KB、charset 明朝 1051 字 / ゴシック 1206 字
+186 ページ中 186 ページに見出しフォントの要素、文字の延べ 25312。読み込みが最多のページ: 2 本 /about (34dd5c501fd7ee1a-s.p.woff2, 03f71a8935b6febf-s.woff2)
+○ verify:fonts: 見出しの文字はすべて書体ごとの charset にあり、フォントの読み込みは全ページ 4 本以下
