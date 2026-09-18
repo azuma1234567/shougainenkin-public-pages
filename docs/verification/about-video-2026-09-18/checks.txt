@@ -2,10 +2,10 @@
 0. preload="none"=true / controls=true / playsinline=true / width=1280 height=720=true / autoplay・muted・loop=なし / <track>=なし
 0. 書き起こしが閉じた状態で HTML に入っている: details=true / 冒頭の文=true / 最後の文=true / details に open 属性=なし
 2. 初回読み込み: about-intro.mp4 へのリクエスト 0 件
-2. ポスター画像の読み込み: 1 件(転送 68676 bytes)
+2. ポスター画像の読み込み: 1 件(転送 24736 bytes)
 2. 再生ボタンを押したあと: リクエスト 1 件 / 応答 [206] / 再生中=true currentTime=1.9 readyState=4
 4. 「0:00 冒頭」: 目標 0s → currentTime 0.1s 再生中=true ○
-4. 「0:45 ① 12歳から大学2年まで、気づかなかった8年」: 目標 45s → currentTime 45.1s 再生中=true ○
+4. 「0:45 ① 12歳から大学2年まで、気づかなかった8年」: 目標 45s → currentTime 45.2s 再生中=true ○
 4. 「3:30 ② 気づいてから、病院に行くまでの壁」: 目標 210s → currentTime 210.2s 再生中=true ○
 4. 「5:15 ③ 今すぐ確認する、一つのこと」: 目標 315s → currentTime 315.2s 再生中=true ○
 4. 「6:15 ④ 制度の順路と数字——あとから知って、最初に知りたかったこと」: 目標 375s → currentTime 375.2s 再生中=true ○

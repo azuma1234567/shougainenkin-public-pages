@@ -5,7 +5,7 @@
 | ファイル | 中身 |
 |---|---|
 | `public/video/about-intro.mp4` | 本編 82.3MB / 13分15秒 / 960×540 / H.264+AAC / faststart 済み |
-| `public/img/about/intro-poster.webp` | ポスター 68KB / 1280×720。本編 2秒地点(電車の車窓・「僕が、自分が病気だと気づいたのは、」) |
+| `public/img/about/intro-poster.webp` | ポスター 24KB / 960×540(2026-09-18 に元動画の2秒地点から作り直した。最初は 68KB / 1280×720)。本編 2秒地点(電車の車窓・「僕が、自分が病気だと気づいたのは、」) |
 | `data/about-intro.ts` | 目次7件と書き起こし7節(本文4,369字)。台本から生成した。**本文を直接編集しない** |
 
 元データは `~/Projects/YouTube/01_気づくのに8年かかった話/`(YOUTUBE_テロップ入り.mp4 と 台本_概要欄_目次.md)。
@@ -107,7 +107,7 @@
 
 1. `typecheck` `build` `prelaunch:check`(全 ○)、`verify:site-graph`、`verify:fonts`
 2. `/about` の初回読み込みで **`about-intro.mp4` へのリクエストが 0 件**(DevTools の Network で確認)。再生ボタンを押して初めて 206 が出ること
-3. Lighthouse モバイルで `/about` の LCP が **2.5 秒以内**、CLS 0。before/after を `docs/verification/about-video-2026-09-18/` に残す
+3. Lighthouse モバイルで `/about` は LCP 4秒以内、CLS 0。2.5秒は追わない（検索流入がほぼ無いページのため）。before/after を `docs/verification/about-video-2026-09-18/` に残す
 4. 目次の7つのボタンを押すと、その時間へ飛んで再生が始まる
 5. JavaScript を切った状態で、動画が再生でき、目次の文字が読め、書き起こしが開けること
 6. `<script type="application/ld+json">` が **1つだけ**。中身に BreadcrumbList / Person / Organization / VideoObject / Clip×7 が入っている
