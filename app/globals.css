@@ -853,7 +853,8 @@ strong {
 
 /* ---- 記事の目次 ---- */
 
-.article-toc {
+.article-toc,
+.about-video-transcript {
   background-color: var(--card);
   border: 1px solid var(--card-border);
   border-radius: var(--radius);
@@ -861,7 +862,8 @@ strong {
   margin: 1.5rem 0 2rem;
 }
 
-.article-toc summary {
+.article-toc summary,
+.about-video-transcript summary {
   cursor: pointer;
   font-weight: 700;
   color: var(--green-dark);
@@ -872,17 +874,103 @@ strong {
   min-height: 44px;
 }
 
-.article-toc summary::-webkit-details-marker {
+.article-toc summary::-webkit-details-marker,
+.about-video-transcript summary::-webkit-details-marker {
   display: none;
 }
 
-.article-toc summary::before {
+.article-toc summary::before,
+.about-video-transcript summary::before {
   content: "▸";
   color: var(--green);
 }
 
-.article-toc[open] summary::before {
+.article-toc[open] summary::before,
+.about-video-transcript[open] summary::before {
   content: "▾";
+}
+
+/* ---- /about の自己紹介動画(docs/about-video-2026-09-18-instructions.md §4) ----
+   色は既存のトークンだけ。動画の地の #000 は、読み込み前の枠を黒にするため。 */
+figure.about-video {
+  margin: 20px 0;
+}
+
+.about-video video {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: #000;
+  display: block;
+}
+
+.about-video figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* 目次: 行間を詰め、ボタンは背景なし・左寄せ。時間だけ等幅で桁をそろえる */
+.about-video-chapters {
+  margin: 0 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.about-video-chapters li {
+  margin: 0;
+}
+
+.about-video-chapters button {
+  appearance: none;
+  display: flex;
+  gap: 0.6rem;
+  width: 100%;
+  min-height: 36px;
+  padding: 0.3rem 0;
+  border: 0;
+  background: none;
+  color: var(--green-dark);
+  font: inherit;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+}
+
+.about-video-chapters button:hover {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about-video-time {
+  flex: 0 0 auto;
+  min-width: 3.2em;
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
+}
+
+.about-video-transcript h4 {
+  margin: 1.25rem 0 0.4rem;
+  color: var(--green-dark);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* 印刷: 動画と目次は紙では使えないので消す。書き起こしは閉じていても紙に出す */
+@media print {
+  .about-video,
+  .about-video-chapters {
+    display: none !important;
+  }
+
+  .about-video-transcript::details-content {
+    content-visibility: visible;
+  }
+
+  .about-video-transcript summary::before {
+    content: none;
+  }
 }
 
 .article-toc ol {

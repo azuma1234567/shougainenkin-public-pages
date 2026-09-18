@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Fragment } from "react";
+import AboutIntroChapters from "@/components/AboutIntroChapters";
 import { adSourceList, HAS_ACTIVE_ADS } from "@/lib/ads";
 import {
   APP_STORE_URL,
@@ -9,6 +11,7 @@ import {
   SITE_NAME,
 } from "@/lib/constants";
 import { breadcrumbJsonLd, pageMetadata, publisherJsonLd } from "@/lib/seo";
+import { ABOUT_INTRO_DURATION_LABEL, ABOUT_INTRO_TRANSCRIPT } from "@/data/about-intro";
 
 const DESCRIPTION =
   `「${SITE_NAME}」の運営者情報です。サイトの目的、運営者、情報の作り方(監修の有無・訂正の扱い)、広告についての約束、情報の位置づけ、お問い合わせ先をご案内します。`;
@@ -84,6 +87,36 @@ export default function AboutPage() {
         「{SITE_NAME}」の企画・編集・開発・運営を行っています。医療機関、行政機関、
         社会保険労務士事務所ではなく、特定の事務所や団体に所属していません。
       </p>
+
+      {/* 運営者の自己紹介動画(docs/about-video-2026-09-18-instructions.md)。書き起こしは閉じていても HTML に入れる */}
+      <h3>なぜこのサイトを作ったか(動画 {ABOUT_INTRO_DURATION_LABEL})</h3>
+      <p>
+        自分が病気だと気づくまでに8年かかりました。気づいてから病院に行くまでにも、時間がかかりました。
+        制度を知ったのは、そのあとです。その8年に何があって、なぜ気づけなかったのか、
+        そして「これは最初に知りたかった」と思ったことを話しています。
+      </p>
+
+      <AboutIntroChapters />
+
+      <details className="about-video-transcript">
+        <summary>動画で話している内容(書き起こし)</summary>
+        {ABOUT_INTRO_TRANSCRIPT.map((section) => (
+          <Fragment key={section.start}>
+            <h4>
+              {section.start} {section.heading}
+            </h4>
+            {section.items.map((item, index) =>
+              "sub" in item ? (
+                <p key={index}>
+                  <strong>{item.sub}</strong>
+                </p>
+              ) : (
+                <p key={index}>{item.p}</p>
+              ),
+            )}
+          </Fragment>
+        ))}
+      </details>
 
       <h2>情報の作り方</h2>
 
