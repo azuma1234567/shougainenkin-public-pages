@@ -49,6 +49,20 @@ const { "@context": _breadcrumbContext, ...breadcrumb } = breadcrumbJsonLd([
 
 const ABOUT_URL = `${SITE_URL}/about`;
 
+/* 書き起こしの段落にある [ラベル](/path) を、サイト内リンクにする(data/about-intro.ts の書き方) */
+function withLinks(text: string) {
+  return text.split(/(\[[^\]]+\]\(\/[^)]+\))/g).map((part, index) => {
+    const match = part.match(/^\[([^\]]+)\]\((\/[^)]+)\)$/);
+    return match ? (
+      <Link href={match[2]} key={index}>
+        {match[1]}
+      </Link>
+    ) : (
+      part
+    );
+  });
+}
+
 /* 795 秒 → "PT13M15S"。動画を差し替えたら data/about-intro.ts の秒数だけ直せば追随する */
 const isoDuration = (seconds: number) => `PT${Math.floor(seconds / 60)}M${seconds % 60}S`;
 
@@ -162,7 +176,7 @@ export default function AboutPage() {
                   <strong>{item.sub}</strong>
                 </p>
               ) : (
-                <p key={index}>{item.p}</p>
+                <p key={index}>{withLinks(item.p)}</p>
               ),
             )}
           </Fragment>

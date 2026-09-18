@@ -1,0 +1,19 @@
+A. 1400px /about#t=375: 画面内=true(上端 261px、scrollY 1157) / 開始位置 375s / 停止中=true / mp4 のリクエスト 0 件
+A. 1400px 再生ボタンを押す: currentTime 376.7s 再生中=true / mp4 のリクエスト 2 件
+A. 390px /about#t=375: 画面内=true(上端 351px、scrollY 1406) / 開始位置 375s / 停止中=true / mp4 のリクエスト 0 件
+A. 390px 再生ボタンを押す: currentTime 377.7s 再生中=true / mp4 のリクエスト 2 件
+B. /about#t=9999: 開始位置 0s / 動画が画面内=false / scrollY 0
+B. /about#t=abc: 開始位置 0s / 動画が画面内=false / scrollY 0
+B. /about#t=-5: 開始位置 0s / 動画が画面内=false / scrollY 0
+B. /about#ad-promises: 開始位置 0s / 動画が画面内=false / scrollY 2563
+C. 目次を押す(最初の履歴 2、hash「」): 45s → hash #t=45 / 履歴 2 / currentTime 46.3s 再生中=true | 375s → hash #t=375 / 履歴 2 / currentTime 376.5s 再生中=true | 690s → hash #t=690 / 履歴 2 / currentTime 691.4s 再生中=true
+C. 押したあと再読み込み: hash #t=690 / 開始位置 690s / 動画が画面内=true / 停止中=true
+D. 書き起こし: 「概要欄」0 / 電話番号の文=true / サイトの文=true / 文中リンク 5 本 初診日→/yougo#shoshinbi, 障害基礎年金→/yougo#kiso-nenkin, 障害認定日→/yougo#shougai-ninteibi, はじめての方へ→/hajimete, 金額計算機→/dougu/kingaku
+D. /yougo#shoshinbi: 200
+D. /yougo#kiso-nenkin: 200
+D. /yougo#shougai-ninteibi: 200
+D. /hajimete: 200
+D. /dougu/kingaku: 200
+D. 「あなた」: /about の本文 0(うち書き起こし 1。直していない)
+D. 構造化データの transcript: 「概要欄」0 / 電話番号=true / リンク記法の残り=false
+E. ポスター: 200 / 24436 bytes / VP8  960×540

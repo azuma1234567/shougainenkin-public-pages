@@ -2,7 +2,7 @@
 6. @graph の型: BreadcrumbList, Person, Organization, VideoObject
 6. VideoObject: name=気づくのに8年かかった話 / duration=PT13M15S(PT13M15S と一致=true) / uploadDate=2026-09-10 / inLanguage=ja / isFamilyFriendly=true
 6. VideoObject: contentUrl=https://shougainenkin-note.net/video/about-intro.mp4 / thumbnailUrl=["https://shougainenkin-note.net/img/about/intro-poster.webp"] / embedUrl=なし
-6. VideoObject: author={"@id":"https://shougainenkin-note.net/about#person"} publisher={"@id":"https://shougainenkin-note.net/#organization"} / transcript 4369 字
+6. VideoObject: author={"@id":"https://shougainenkin-note.net/about#person"} publisher={"@id":"https://shougainenkin-note.net/#organization"} / transcript 4397 字
 6. Clip 7 件: 0-45 45-210 210-315 315-375 375-615 615-690 690-795 / 最後の endOffset=795 / url の例 https://shougainenkin-note.net/about#t=45
 6. @id の参照先が @graph にある: author→Person true / publisher→Organization true
 6. description がページの導入文と同じ文: true
