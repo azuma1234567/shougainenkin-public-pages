@@ -1,0 +1,11 @@
+# 検証1(本番、2026-09-23 18:36)
+$ curl -sI https://shougainenkin-public-pages.vercel.app/gokai/kiso-ni-haiguusha
+HTTP/1.1 308 Permanent Redirect
+Location: https://shougainenkin-note.net/gokai/kiso-ni-haiguusha
+$ curl -sI https://shougainenkin-public-pages.vercel.app/
+HTTP/1.1 308 Permanent Redirect
+Location: https://shougainenkin-note.net/
+$ curl -sI https://shougainenkin-note.net/
+HTTP/1.1 200 OK
+$ curl -sI https://shougainenkin-note.net/gokai/kiso-ni-haiguusha
+HTTP/1.1 200 OK
