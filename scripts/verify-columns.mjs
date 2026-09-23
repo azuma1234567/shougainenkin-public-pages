@@ -1,5 +1,5 @@
 // node scripts/verify-columns.mjs http://localhost:3107
-// 11項目をすべて実行し、失敗をまとめて報告する。失敗時は exit 1。
+// 12項目をすべて実行し、失敗をまとめて報告する。失敗時は exit 1。
 // 結論の箱は47本共通のデザイン要素で、記事の厚みではないため、字数の判定対象は本文に限る。
 import assert from "node:assert/strict";
 import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
@@ -231,6 +231,19 @@ for (const a of articles) {
     const sentence = first.includes("。") ? first.slice(0, first.indexOf("。") + 1) : first;
     check([...sentence].length <= 80, `${a.slug}: ${[...sentence].length}字 ${sentence}`);
   }
+  finish();
+}
+{
+  // SEO・AIO 2026-09-23 §3: Bing の「meta description が短すぎる」。57本すべて80字以上(上限は設けない。160字超の7本は削らない約束)
+  const { check, finish } = failures(12, "description が80字以上・「*」なし・「道具」「個人で運営」「紹介料」なし");
+  check(COLUMNS.length === 57, `記事数 ${COLUMNS.length}`);
+  for (const column of COLUMNS) {
+    const length = [...column.description].length;
+    check(length >= 80, `${column.slug}: ${length}字 ${column.description}`);
+    check(!column.description.includes("*"), `${column.slug}: 「*」`);
+    for (const word of ["道具", "個人で運営", "紹介料"]) check(!column.description.includes(word), `${column.slug}: 「${word}」`);
+  }
+  console.log(`description: ${COLUMNS.length}本の最短 ${Math.min(...COLUMNS.map(column => [...column.description].length))}字`);
   finish();
 }
 

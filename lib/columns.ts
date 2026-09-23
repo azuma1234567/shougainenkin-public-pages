@@ -483,7 +483,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     title:
       "障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方",
     description:
-      "障害年金の病歴・就労状況等申立書で期間を区切る考え方を解説します。転院、休職、退職、症状の悪化、未受診期間など、区切りを作る具体例も紹介します。",
+      "病歴・就労状況等申立書の期間は、転院・休職・退職・症状の悪化・受診していない期間で区切ります。区切りが多すぎても少なすぎても伝わりにくいので、実例で区切り方と、それぞれの欄に何を書くかを順に説明します。",
     datePublished: "2026-07-21",
     dateModified: "2026-07-30",
     primaryCluster: "application",
@@ -497,7 +497,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "障害年金の遡及請求 — 最大5年分をさかのぼる条件と、成功を分ける「認定日の診断書」の現実",
     metaTitle: "障害年金の遡及請求｜最大5年分をさかのぼる条件",
     description:
-      "障害年金の遡及請求を解説。認定日請求と事後重症請求の違い、5年の時効、認定日と現在の診断書、当時のカルテがない場合の確認事項を紹介します。",
+      "障害年金の遡及請求は、認定日の時点で基準に該当していたことを当時の診断書で証明できれば、時効の範囲で最大5年分をさかのぼれます。時効は毎月進みます。認定日請求と事後重症請求の違い、当時のカルテがない場合の確かめ方を説明します。",
     datePublished: "2026-07-21",
     dateModified: "2026-07-21",
     primaryCluster: "application",
@@ -511,7 +511,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "適応障害・不安障害・神経症は障害年金の対象外？— 「病名で門前払い」されないための境界線の知識",
     metaTitle: "適応障害・不安障害・神経症は障害年金の対象外？",
     description:
-      "神経症が原則として認定対象外とされる基準と、精神病の病態を示す場合の扱いを解説。併存疾患、診断名の変化、診断書の確認点を整理します。",
+      "神経症(不安障害・パニック障害・強迫性障害など)は原則として障害年金の対象外ですが、精神病の病態を示していれば対象になります。診断名が変わったとき、うつ病などが併存するときの扱いと、診断書で確かめる欄をまとめました。",
     datePublished: "2026-07-21",
     dateModified: "2026-08-27",
     primaryCluster: "conditions",
@@ -525,7 +525,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "障害者雇用で働きながら障害年金はもらえる？— フルタイム6年で受給できた実例と、「働ける＝軽い」と読ませない書類の作り方",
     metaTitle: "障害者雇用で働きながら障害年金はもらえる？",
     description:
-      "障害者雇用と障害年金の関係を解説。就労状況、職場の配慮、欠勤、仕事以外の生活を診断書や申立書へ反映する方法、更新時の注意点を紹介します。",
+      "障害者雇用で働いていても障害年金は請求できます。見られるのは働いているかではなく、どんな配慮で働けているか、仕事の外の生活が回っているか。就労状況・職場の配慮・欠勤を診断書と申立書に反映する方法、更新時の注意を説明します。",
     datePublished: "2026-07-21",
     dateModified: "2026-07-21",
     primaryCluster: "mental",
@@ -553,7 +553,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "精神の等級判定ガイドラインと目安表 — 自分の診断書で「何級相当か」を読む方法と、目安どおりにならない理由",
     metaTitle: "精神の等級判定ガイドライン｜目安表の読み方",
     description:
-      "精神の障害年金で使われる等級判定ガイドラインを解説。日常生活能力7項目の平均と程度から目安表を読む方法、計算例、総合評価で確認される要素を紹介します。",
+      "精神の障害年金は、診断書の日常生活能力7項目の平均と、日常生活能力の程度を目安表に当てはめて等級の目安が決まります。目安表の読み方と計算例、目安どおりにならない総合評価で見られる要素を、自分の診断書で確かめられるように説明します。",
     datePublished: "2026-07-20",
     dateModified: "2026-07-20",
     primaryCluster: "medical-certificate",
@@ -581,7 +581,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "障害年金の診断書を医師が書いてくれない — 断られる理由は5つの型に分かれる。型別の対処と依頼文の完成形",
     metaTitle: "障害年金の診断書を医師が書いてくれないときの対処法",
     description:
-      "障害年金の診断書を主治医に断られた場合の対処法を5つの理由別に解説。口頭での頼み方、依頼文、家族や支援職への相談、転院前の注意点を紹介します。",
+      "主治医に診断書を断られる理由は5つに分かれ、理由ごとに頼み方が変わります。口頭での頼み方、そのまま使える依頼文、家族や支援職に相談する方法、転院する前に確かめることを順に説明します。",
     datePublished: "2026-07-20",
     dateModified: "2026-07-31",
     primaryCluster: "medical-certificate",
@@ -594,7 +594,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     title: "障害認定日請求と事後重症請求の違い｜最大5年さかのぼるための条件",
     metaTitle: "障害認定日請求と事後重症請求の違い｜最大5年遡及の条件",
     description:
-      "障害認定日請求と事後重症請求の違い、最大5年分の遡及、認定日頃の診断書が取れない場合の確認事項、額改定請求までわかりやすく解説します。",
+      "障害認定日請求は認定日にさかのぼって最大5年分、事後重症請求は請求した月の翌月分からです。どちらで出すかで受け取れる期間が変わります。認定日ごろの診断書が取れない場合の確かめ方、悪化したときの額改定請求まで説明します。",
     datePublished: NEW_COLUMN_DATES["ninteibi-jigojusho"],
     dateModified: "2026-08-27",
     primaryCluster: "application",
@@ -608,7 +608,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "障害年金の診断書を受け取ったら確認すべき7つのポイント — 「実際より軽く書かれていた」を提出前に防ぐ",
     metaTitle: "障害年金の診断書を受け取ったら確認すべき7つのポイント",
     description:
-      "障害年金の診断書が実際より軽いと感じる理由と、提出前に確認したい7つのポイントを解説。事実と異なる記載があったときの伝え方、更新時の注意も紹介します。",
+      "障害年金の診断書が実際より軽く書かれるのは、診察室で見える様子と家での様子に隙間があるからです。提出前に確かめたい7つのポイント、事実と異なる記載を見つけたときの伝え方、更新時の注意を順に説明します。",
     datePublished: NEW_COLUMN_DATES["shindansho-kakunin"],
     dateModified: "2026-08-14",
     primaryCluster: "medical-certificate",
@@ -633,7 +633,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     title: "傷病手当金と障害年金は同時にもらえる？併給調整と申請準備の流れ",
     metaTitle: "傷病手当金と障害年金は同時にもらえる？併給調整と申請準備",
     description:
-      "傷病手当金と障害年金の併給調整、同じ傷病で受け取る場合の差額支給、遡及時の返還、休職中から始めたい障害年金の準備を解説します。",
+      "傷病手当金と障害年金は同じ傷病だと両方満額は受け取れず、差額支給の調整が入ります。さかのぼって年金が決まると返還が生じることもあります。休職中に始めておきたい障害年金の準備と、手当金が終わる前後の手続きを説明します。",
     datePublished: NEW_COLUMN_DATES["shoubyou-teatekin"],
     dateModified: "2026-08-14",
     primaryCluster: "application",
@@ -646,7 +646,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "発達障害（ADHD・ASD）で障害年金を申請する方法｜初診日・診断書・申立書",
     metaTitle: "発達障害（ADHD・ASD）の障害年金｜初診日・診断書・申立書",
     description:
-      "発達障害で障害年金を申請する際の初診日の分岐、診断書の確認点、出生から書く申立書、就労中の伝え方、遡及・更新まで具体例付きで解説します。",
+      "発達障害(ADHD・ASD)の障害年金は、初診日をどこにするかで納付要件も基礎・厚生の別も変わります。診断書で確かめる欄、出生から書く申立書、働きながら申請するときの伝え方、遡及と更新まで具体例つきで説明します。",
     datePublished: NEW_COLUMN_DATES["hattatsu-shougai"],
     dateModified: "2026-08-14",
     primaryCluster: "mental",
@@ -660,7 +660,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "20歳前傷病の障害基礎年金 — 納付要件を問われない特例と、10代の記録が大切な理由",
     metaTitle: "20歳前傷病の障害基礎年金 — 納付要件と10代の記録",
     description:
-      "20歳前傷病による障害基礎年金を解説。納付要件が不要となる条件、請求時期、本人の所得による支給制限、10代の通院・学校記録を残す理由を紹介します。",
+      "20歳前に初診日がある障害基礎年金は、保険料の納付要件がいりません。請求できる時期、本人の所得による支給制限、10代の通院や学校の記録を残しておく理由まで、家族が知っておくことを順に説明します。",
     datePublished: NEW_COLUMN_DATES["hatachi-mae"],
     dateModified: "2026-08-27",
     primaryCluster: "conditions",
@@ -686,7 +686,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "障害年金が不支給になったら｜審査請求・再審査請求・再請求の選び方",
     metaTitle: "障害年金が不支給になったときの審査請求・再審査請求・再請求",
     description:
-      "障害年金の不支給後に選べる審査請求、再審査請求、再請求の違いと期限、不支給理由の確認方法、書類を立て直す手順を解説します。",
+      "不支給のあとに選べるのは審査請求・再審査請求・再請求の3つで、期限と向く場面が違います。審査請求は決定を知った翌日から3か月。不支給の理由の確かめ方、どれを選ぶかの判断、書類を立て直す手順を説明します。",
     datePublished: NEW_COLUMN_DATES["fushikyuu-shinsa-seikyu"],
     dateModified: "2026-08-27",
     primaryCluster: "application",
@@ -752,7 +752,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     /* 本文の h2「方法1〜5」に合わせて数を入れる。h1 は変えない(監査 §4-3) */
     metaTitle: "障害年金の初診日がわからないときの探し方5つ｜証明できないときも",
     description:
-      "障害年金を申請したいものの初診日がわからない場合の調べ方を解説します。病院、診察券、お薬手帳、健康保険の記録など、確認の手がかりを順番に紹介します。",
+      "初診日がわからなくても、調べる順番があります。診察券、お薬手帳、健康保険の記録、病院への照会、第三者証明、カルテがない場合の代わりの資料まで、確かめる手がかりを順に紹介します。初診日が動くと何が変わるかも説明します。",
     datePublished: "2026-07-17",
     dateModified: "2026-08-27",
     primaryCluster: "conditions",
@@ -806,7 +806,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     slug: "moushitatesho-a4-insatsu",
     title: "障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説",
     description:
-      "障害年金の病歴・就労状況等申立書をA4用紙へ印刷する方法を解説します。自宅、スマートフォン、コンビニでの印刷手順や、印刷後の確認点も紹介します。",
+      "病歴・就労状況等申立書はA4用紙に印刷して提出できます。自宅のプリンター、スマートフォンからコンビニで印刷する手順、印刷後に確かめる欄と枚数、手書きの用紙と混ぜてよいかまで、迷いやすいところを順に説明します。",
     datePublished: "2026-07-17",
     dateModified: "2026-07-30",
     primaryCluster: "application",
