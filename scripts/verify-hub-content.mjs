@@ -95,13 +95,22 @@ console.log(`OK: 本文21ページ。本文一致、見出し/FAQ一致、非公
   console.log(`  Q&A の無いハブ ${empty.length} 本は FAQPage を出さない: ${empty.join(", ")}`);
 }
 
-/* SEO 2026-09-15 §1: metaTitle(<title> 用。h1 は title のまま)は 28〜40 字、「道具」を使わない、
-   含まれる数字は本文にも出てくる。数字は後ろの単位までをひとまとまりで照合する(「4か所」が本文の「4か月」で通らないように)。 */
-{
-  const { HUB_CONTENT, prepareHubSource } = await import("../lib/hub-content.ts");
+/* metaTitle・metaDescription に含まれる数字のうち、本文に無いもの。数字は後ろの単位までをひとまとまりで照合する
+   (「4か所」が本文の「4か月」で通らないように)。本文は **強調** と [文字](リンク) を外して見る。 */
+const numbersMissingFromBody = (text, source) => {
   const plain = (t) => t.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*\*(.+?)\*\*/g, "$1");
   const UNIT = /^(?:か所|か月|項目|段階|デシベル|[級つ年歳号件回日割%万円人])/;
   const escape = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const body = plain(source);
+  return [...text.matchAll(/\d+(?:[,.]\d+)*/g)]
+    .map((m) => m[0] + (UNIT.exec(text.slice(m.index + m[0].length))?.[0] ?? ""))
+    .filter((token) => !new RegExp(`(?<![\\d,.])${escape(token)}`).test(body));
+};
+
+/* SEO 2026-09-15 §1: metaTitle(<title> 用。h1 は title のまま)は 28〜40 字、「道具」を使わない、
+   含まれる数字は本文にも出てくる。 */
+{
+  const { HUB_CONTENT, prepareHubSource } = await import("../lib/hub-content.ts");
   const bad = [];
   let count = 0;
   for (const [path, content] of Object.entries(HUB_CONTENT)) {
@@ -111,17 +120,46 @@ console.log(`OK: 本文21ページ。本文一致、見出し/FAQ一致、非公
     const length = [...title].length;
     if (length < 28 || length > 40) bad.push(`${path}: metaTitle が ${length} 字(28〜40 字)`);
     if (title.includes("道具")) bad.push(`${path}: metaTitle に「道具」`);
-    const body = plain(prepareHubSource(content.source));
-    for (const m of title.matchAll(/\d+(?:[,.]\d+)*/g)) {
-      const token = m[0] + (UNIT.exec(title.slice(m.index + m[0].length))?.[0] ?? "");
-      if (!new RegExp(`(?<![\\d,.])${escape(token)}`).test(body)) bad.push(`${path}: metaTitle の「${token}」が本文に無い`);
-    }
+    for (const token of numbersMissingFromBody(title, prepareHubSource(content.source))) bad.push(`${path}: metaTitle の「${token}」が本文に無い`);
   }
   if (bad.length) {
     console.error(`ハブの metaTitle ${bad.length} 件:\n${bad.join("\n")}`);
     process.exit(1);
   }
   console.log(`○ ハブの metaTitle: ${count} 本。28〜40 字、「道具」0、数字はすべて本文にある`);
+}
+
+/* SEO・AIO 2026-09-23 §2-4: meta description(og:description・Article.description も同じ文)。
+   実際に使われる文を lib/hub-jsonld.ts の hubDescription で作る(metaDescription があればそれ、なければ本文1行目から
+   インラインの Markdown を外した文)。49 本すべて 80〜160 字、* ` [ ]( を含まない、「道具」「個人で運営」「紹介料」を含まない。
+   metaDescription を持つハブは、その数字が本文にも出てくる(metaTitle と同じ規則)。 */
+{
+  const { HUB_CONTENT, getHubContent, prepareHubSource } = await import("../lib/hub-content.ts");
+  const { HUBS } = await import("../lib/hubs.ts");
+  const { hubDescription } = await import("../lib/hub-jsonld.ts");
+  const bad = [];
+  const lengths = [];
+  let withMeta = 0;
+  for (const [path, raw] of Object.entries(HUB_CONTENT)) {
+    const hub = HUBS.find((item) => item.path === path);
+    if (!hub) { bad.push(`${path}: lib/hubs.ts に無い`); continue; }
+    const description = hubDescription(hub, getHubContent(path));
+    const length = [...description].length;
+    lengths.push(length);
+    if (length < 80 || length > 160) bad.push(`${path}: description が ${length} 字(80〜160 字)「${description}」`);
+    for (const mark of ["*", "`", "[", "]("]) if (description.includes(mark)) bad.push(`${path}: description に「${mark}」`);
+    for (const word of ["道具", "個人で運営", "紹介料"]) if (description.includes(word)) bad.push(`${path}: description に「${word}」`);
+    if (raw.metaDescription === undefined) continue;
+    withMeta += 1;
+    for (const token of numbersMissingFromBody(raw.metaDescription, prepareHubSource(raw.source))) bad.push(`${path}: metaDescription の「${token}」が本文に無い`);
+  }
+  if (lengths.length !== 49) bad.push(`ハブが ${lengths.length} 本(49 本のはず)`);
+  if (bad.length) {
+    console.error(`ハブの description ${bad.length} 件:\n${bad.join("\n")}`);
+    process.exit(1);
+  }
+  console.log(`○ ハブの description: ${lengths.length} 本すべて 80〜160 字(最短 ${Math.min(...lengths)} 字・最長 ${Math.max(...lengths)} 字)、Markdown 記号0、「道具」「個人で運営」「紹介料」0`);
+  console.log(`  metaDescription を持つ ${withMeta} 本は、数字がすべて本文にある`);
 }
 
 /* SEO 2026-09-15 §2: AI の回答は冒頭を抜くので、「リード(直答)」の1段落目は最初の句点(。を含む)までを80字以内にする。

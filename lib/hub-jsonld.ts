@@ -8,9 +8,21 @@ import { extractHubFaqs, getHubContent, type HubContent } from "@/lib/hub-conten
 import type { HubDefinition } from "@/lib/hubs";
 import { ABOUT_PERSON_ID, ABOUT_PUBLISHER_ID, authorPersonJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/lib/seo";
 
-/* meta description。lib/hub-pages.tsx の hubMetadata と同じ文(Article.description にも使う)。 */
+/* meta description。lib/hub-pages.tsx の hubMetadata と同じ文(Article.description にも使う)。
+   metaDescription があればそれ、なければ本文の1行目からインラインの Markdown を外した文(SEO 2026-09-23 §2-2)。 */
 export function hubDescription(hub: HubDefinition, content: HubContent | null = getHubContent(hub.path)): string {
-  return content?.source.split("\n").find((line) => line && !line.startsWith("#")) ?? hub.label;
+  if (content?.metaDescription) return content.metaDescription;
+  const line = content?.source.split("\n").find((l) => l && !l.startsWith("#")) ?? hub.label;
+  return stripInlineMarkdown(line);
+}
+
+/* 外すのは **強調**・*強調*・`code`・[文字](URL) の4つだけ。全角の記号や「」は触らない。 */
+function stripInlineMarkdown(text: string): string {
+  return text
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/\*\*(.+?)\*\*/g, "$1")
+    .replace(/\*(.+?)\*/g, "$1")
+    .replace(/`([^`]+)`/g, "$1");
 }
 
 /* パンくずの経路。表示の <Breadcrumb>(components/platform/Platform.tsx)と同じ規則:

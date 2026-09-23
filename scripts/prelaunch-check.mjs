@@ -318,7 +318,9 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
   /* そのファイルの中身が最後に変わった日。
      「dateModified の行だけを直したコミット」は中身の更新ではないので飛ばす
      (日付欄を足しただけで lastmod を今日にすると、sitemap が嘘をつくことになる)。
-     metaTitle の行も同じ扱い。<title> だけを変え、画面の本文・h1 は変わらない(SEO 2026-09-15 §1)。 */
+     metaTitle の行も同じ扱い。<title> だけを変え、画面の本文・h1 は変わらない(SEO 2026-09-15 §1)。
+     metaDescription の行も同じ。meta description・og:description・Article.description だけで、本文・h1 には出ない
+     (SEO・AIO 2026-09-23 §2)。 */
   const lastContentCommit = (file) => {
     let shas = [];
     try { shas = execFileSync("git", ["log", "--format=%H %cs", "--", file], { encoding: "utf8" }).trim().split("\n").filter(Boolean); }
@@ -330,7 +332,7 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
       catch { return date; }
       const changed = patch.split("\n")
         .filter((l) => (l.startsWith("+") || l.startsWith("-")) && !l.startsWith("+++") && !l.startsWith("---"));
-      if (changed.some((l) => !/"(?:dateModified|metaTitle)"\s*:/.test(l))) return date;
+      if (changed.some((l) => !/"(?:dateModified|metaTitle|metaDescription)"\s*:/.test(l))) return date;
     }
     return "";
   };
