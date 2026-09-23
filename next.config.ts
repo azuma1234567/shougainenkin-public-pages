@@ -21,6 +21,14 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Vercel の既定ドメインは本番ドメインへ恒久リダイレクト(SEO 2026-09-23 §1)。
+      // Googlebot が vercel.app 側を巡回していたため。プレビュー(*-git-*.vercel.app)は host が違うので対象外。
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "shougainenkin-public-pages.vercel.app" }],
+        destination: "https://shougainenkin-note.net/:path*",
+        permanent: true,
+      },
       {
         source: "/dougu",
         destination: "/shinsei",

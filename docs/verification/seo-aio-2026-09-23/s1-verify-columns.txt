@@ -1,0 +1,41 @@
+
+> shougainenkin-public-pages@1.0.0 verify:columns
+> node scripts/verify-columns.mjs http://localhost:3210
+
+(node:12534) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/azumataisuke/Projects/shougainenkin-public-pages/lib/columns.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/azumataisuke/Projects/shougainenkin-public-pages/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+仮定値: 15,000(kougin-nenkin-tedori: 例示(根拠なし)。X の投稿の引用「工賃15,000円+2級70,000円」の工賃)
+仮定値: 22,000(kougin-nenkin-tedori: 例示(根拠なし)。家計の例の工賃(「工賃22,000円+年金70,608円+給付金5,620円」))
+仮定値: 24,000(kougin-nenkin-tedori: X の投稿の引用「時給200円、月約24,000円」(当事者の例示。統計値ではない))
+仮定値: 38,000(kougin-nenkin-tedori: 例示(根拠なし)。家計の例の残額(98,000 − 家賃3万 − 食費光熱費3万))
+仮定値: 65,000(kougin-nenkin-tedori: 例示(根拠なし)。家計の例の残額(98,000 − 交通費3,000 − 家に3万))
+仮定値: 70,000(kougin-nenkin-tedori: 例示(根拠なし)。X の投稿の引用「2級70,000円」(70,608 を丸めた言い方))
+仮定値: 91,000(kougin-nenkin-tedori: 家計の例で A型の平均賃金 91,451 を千円単位に丸めた「賃金91,000円」)
+仮定値: 95,000(kougin-nenkin-tedori: B型の平均工賃 24,141(令和6年度工賃実績) + basicGrade2 の月額 70,608 = 94,749 → 約95,000円)
+仮定値: 98,000(kougin-nenkin-tedori: 例示の工賃 22,000 + basicGrade2 の月額 70,608 + supportGrade2Monthly 5,620 = 98,228 → 約98,000円)
+仮定値: 112,000(kougin-nenkin-tedori: B型の平均工賃 24,141 + basicGrade1 の月額 88,260 = 112,401 → 約112,000円)
+仮定値: 144,000(kougin-nenkin-tedori: A型の平均賃金 91,451 + employeesGrade3Minimum の月額 52,958 = 144,409 → 約144,000円)
+仮定値: 162,000(kougin-nenkin-tedori: A型の平均賃金 91,451(令和6年度工賃実績) + basicGrade2 の月額 70,608 = 162,059 → 約162,000円)
+仮定値: 300,000(shoubyou-teatekin: 標準報酬月額の平均(「30万円なら」)。dougu/kingaku: 試算例の標準報酬月額(「月300,000円・120月」))
+仮定値: 493,290(dougu/kingaku: 試算例の報酬比例部分 = 標準報酬月額 300,000 × 5.481/1000 × 300月(みなし) = 493,290)
+警告: 使われていない宣言 493290 (dougu/kingaku: 試算例の報酬比例部分 = 標準報酬月額 300,000 × 5.481/1000 × 300月(みなし) = 493,290)
+仮定値: 600,000(shoubyou-teatekin: 報酬比例部分(「報酬比例60万円」))
+仮定値: 1,447,300(shoubyou-teatekin: 600,000 + basicGrade2(847,300))
+仮定値: 1,800,000(shoubyou-teatekin: 年金の合計(「年180万円なら」))
+未説明額: 0件
+1. ○ 57記事すべてにlead 3〜5項目・原稿との完全一致
+2. ○ 本文の文中太字0（段落頭・表・Q・裁決リードのみ）
+3. ○ 道具リンク1本以上（指定3記事と、原稿に道具リンクが無い5記事を除く）
+4. ○ 裁決IDはverifiedのみ・PDFリンクとして表示
+5. ○ 本文の内部リンクが公開済み・誤解カードの文言一致
+6. ○ 10万円以上の金額がamounts-deriveまたは宣言済み仮定値で説明できる
+7. ○ 禁止文字列・変更コメントなし
+8. ○ URL・slug・h1・title・metaTitleが作業前と一致
+9. ○ 47記事のFAQPageと画面のQ/Aが本文に一致
+10. ○ 375pxでページ横スクロールなし・目次は閉じた状態
+11. ○ lead 1行目の最初の句点までが80字以内
+★ ○ moushitatesho-a4-insatsu: {"slug":"moushitatesho-a4-insatsu","ok":true,"missingHeadings":[],"missingLinks":[],"ctaOk":true,"oldCharacters":11054,"newCharacters":10816,"ratio":0.9784693323683734,"leadCharacters":295,"withLeadCharacters":11111,"withLeadRatio":1.0051565044327846}
+★ ○ moushitatesho-kikan-kugiri: {"slug":"moushitatesho-kikan-kugiri","ok":true,"missingHeadings":[],"missingLinks":[],"ctaOk":true,"oldCharacters":10979,"newCharacters":11705,"ratio":1.066126241005556,"leadCharacters":357,"withLeadCharacters":12062,"withLeadRatio":1.098642863648784}
+★ ○ teishutsusaki-yuusou: {"slug":"teishutsusaki-yuusou","ok":true,"missingHeadings":[],"missingLinks":[],"ctaOk":true,"oldCharacters":8924,"newCharacters":9536,"ratio":1.0685791125056028,"leadCharacters":393,"withLeadCharacters":9929,"withLeadRatio":1.112617660242044}
