@@ -541,7 +541,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "障害年金(精神)の「日常生活能力の判定」7項目を具体例で解説。食事・清潔保持・金銭管理・通院と服薬・対人関係・危機対応・社会性の7項目それぞれについて、「できる」と評価されやすい言い方と、実態が伝わる言い方を対比。単身生活を想定する評価ルール、本人メモ・家族メモの完成形、よくある質問まで。",
     datePublished: "2026-07-20",
-    dateModified: "2026-08-11",
+    dateModified: "2026-09-27",
     primaryCluster: "medical-certificate",
     secondaryClusters: ["mental", "depression"],
     category: "診断書 — 主治医に伝える",
