@@ -822,7 +822,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "障害年金の診断書のために主治医へ渡す「生活状況メモ」の書き方を具体例つきで解説。何を書くか(7項目・症状の波・家族の援助・就労)、書き方のコツ(頻度と具体例)、A4一枚の完成形、診察での渡し方の台本、渡せなかったときの対処、更新での使い方まで。",
     datePublished: "2026-07-17",
-    dateModified: "2026-08-11",
+    dateModified: "2026-09-27",
     primaryCluster: "medical-certificate",
     secondaryClusters: ["mental"],
     category: "診断書 — 主治医に伝える",
