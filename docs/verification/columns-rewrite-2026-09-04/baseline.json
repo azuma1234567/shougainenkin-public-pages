@@ -193,10 +193,11 @@
       ]
     },
     "2026-09-27": {
-      "reason": "docs/columns-rewrite-2026-09-27/teishutsusaki-yuusou-rewrite.md #1: 表示が郵送の検索から来ているので metaTitle・description を郵送の問いに(title・h1 は変えない) / docs/columns-rewrite-2026-09-27/shinsei-kikan-rewrite.md #1: 令和6年度の実績(95.1%・65.1日)と審査状況確認専用ダイヤルを metaTitle・description に(title・h1 は変えない)",
+      "reason": "docs/columns-rewrite-2026-09-27/teishutsusaki-yuusou-rewrite.md #1: 表示が郵送の検索から来ているので metaTitle・description を郵送の問いに(title・h1 は変えない) / docs/columns-rewrite-2026-09-27/shinsei-kikan-rewrite.md #1: 令和6年度の実績(95.1%・65.1日)と審査状況確認専用ダイヤルを metaTitle・description に(title・h1 は変えない) / docs/columns-rewrite-2026-09-27/tokyu-nichijo-rewrite.md A-1: 表1の全体・表2・審査の裏側を metaTitle・description に(title・h1 は変えない)",
       "slugs": [
         "teishutsusaki-yuusou",
-        "shinsei-kikan"
+        "shinsei-kikan",
+        "tokyu-hantei-guideline"
       ],
       "fields": [
         "metaTitle",
@@ -433,9 +434,9 @@
     {
       "slug": "tokyu-hantei-guideline",
       "title": "精神の等級判定ガイドラインと目安表 — 自分の診断書で「何級相当か」を読む方法と、目安どおりにならない理由",
-      "metaTitle": "精神の等級判定ガイドライン｜目安表の読み方",
+      "metaTitle": "精神の障害年金 等級判定ガイドライン｜目安表(表1)の全体・計算例・目安どおりにならない理由と審査の裏側",
       "h1": "精神の等級判定ガイドラインと目安表 — 自分の診断書で「何級相当か」を読む方法と、目安どおりにならない理由",
-      "htmlTitle": "精神の等級判定ガイドライン｜目安表の読み方｜障害年金申請サポート",
+      "htmlTitle": "精神の障害年金 等級判定ガイドライン｜目安表(表1)の全体・計算例・目安どおりにならない理由と審査の裏側｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/tokyu-hantei-guideline"
     },
     {
