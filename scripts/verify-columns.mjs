@@ -274,10 +274,12 @@ for (const [slug, before] of Object.entries(baseline.special)) {
   const length = text => text.replace(/\s/g, "").length;
   const article = articles.find(article => article.slug === slug);
   const current = article.rawContent;
-  const ratio = length(current) / length(original);
+  // 改稿で基準を置き直した記事は baseline.special[slug].baseChars(その時点の本文の字数)と比べる(baseNote に経緯)
+  const oldCharacters = before.baseChars ?? length(original);
+  const ratio = length(current) / oldCharacters;
   const leadCharacters = length(article.lead.join("\n"));
   const withLeadCharacters = length(current) + leadCharacters;
-  extra.push({ slug, ok: !missingHeadings.length && !missingLinks.length && ctaOk && ratio >= .9 && ratio <= 1.1, missingHeadings, missingLinks, ctaOk, oldCharacters: length(original), newCharacters: length(current), ratio, leadCharacters, withLeadCharacters, withLeadRatio: withLeadCharacters / length(original) });
+  extra.push({ slug, ok: !missingHeadings.length && !missingLinks.length && ctaOk && ratio >= .9 && ratio <= 1.1, missingHeadings, missingLinks, ctaOk, oldCharacters, newCharacters: length(current), ratio, leadCharacters, withLeadCharacters, withLeadRatio: withLeadCharacters / oldCharacters });
 }
 const report = { origin, baseline: baseline.baseRef, results, assumedAmounts, special: extra };
 writeFileSync(`${out}/results.json`, JSON.stringify(report, null, 2) + "\n");

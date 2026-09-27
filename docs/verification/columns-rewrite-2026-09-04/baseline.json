@@ -655,7 +655,7 @@
   "special": {
     "moushitatesho-a4-insatsu": {
       "h2": [
-        "先に結論 — 印刷でつまずかないための3点",
+        "まず手順。3つの刷り方",
         "結論を先に:3つの選択肢と、選び方",
         "様式の入手 — 「最新版を、機構から」",
         "自宅のプリンターで印刷する方法",
@@ -687,7 +687,9 @@
         "/columns/shinsatsu-mae-memo",
         "/columns/shoshinbi-wakaranai"
       ],
-      "cta": []
+      "cta": [],
+      "baseChars": 12983,
+      "baseNote": "2026-09-27 の改稿(docs/columns-rewrite-2026-09-27/moushitatesho-a4-insatsu-rewrite.md)で h2「先に結論」を「まず手順」に吸収し、本文が 11,054→12,983 字。基準をその時点の構造・字数に更新した"
     },
     "moushitatesho-kikan-kugiri": {
       "h2": [

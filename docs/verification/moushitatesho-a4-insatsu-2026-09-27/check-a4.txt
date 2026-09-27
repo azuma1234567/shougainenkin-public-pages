@@ -1,0 +1,24 @@
+## 検証2 数字(描画した本文 <main>)
+○ 10〜20円: 3 回
+○ 20円: 4 回
+○ 2日: 2 回
+○ 30日: 3 回
+○ 5年: 4 回
+○ 3〜5年: 2 回
+○ 304,456件: 2 回
+○ 96.7%: 2 回
+## 検証6 既存リンク(ページ内の <a href>)
+○ /columns/moushitatesho-kakikata
+○ /columns/moushitatesho-kikan-kugiri
+○ /columns/moushitatesho-mijushin-kikan
+○ /columns/shindansho-kakunin
+○ /columns/nichijo-seikatsu-7koumoku
+○ /columns/koushin-kakuninhodo
+○ /columns/fushikyuu-shinsa-seikyu
+○ /columns/shinsatsu-mae-memo
+○ /dougu/moushitatesho
+○ /dougu/shorui
+○ App Store: https://apps.apple.com/jp/app/id6790402509
+## 検証5 375×812 のファーストビュー
+375×812: h3「自宅のプリンターで(5分)」 top=1859px / 画面 812px → 入らない(あと 1047px)。h1=213 結論の箱=418 h2「まず手順」=1624
+390×844: h3「自宅のプリンターで(5分)」 top=1829px / 画面 844px → 入らない(あと 985px)。h1=213 結論の箱=418 h2「まず手順」=1593

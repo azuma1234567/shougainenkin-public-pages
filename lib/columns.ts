@@ -808,7 +808,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "病歴・就労状況等申立書はA4用紙に印刷して提出できます。自宅のプリンター、スマートフォンからコンビニで印刷する手順、印刷後に確かめる欄と枚数、手書きの用紙と混ぜてよいかまで、迷いやすいところを順に説明します。",
     datePublished: "2026-07-17",
-    dateModified: "2026-07-30",
+    dateModified: "2026-09-27",
     primaryCluster: "application",
     category: "申立書",
     orderInCategory: 60,
