@@ -555,7 +555,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "精神の障害年金は、診断書の日常生活能力7項目の平均と、日常生活能力の程度を目安表に当てはめて等級の目安が決まります。目安表の読み方と計算例、目安どおりにならない総合評価で見られる要素を、自分の診断書で確かめられるように説明します。",
     datePublished: "2026-07-20",
-    dateModified: "2026-07-20",
+    dateModified: "2026-09-27",
     primaryCluster: "medical-certificate",
     secondaryClusters: ["mental", "depression"],
     category: "診断書 — 主治医に伝える",
@@ -714,7 +714,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "障害年金の等級を決めるのは医師の診断書で、社労士は診察室にいません。頼んでも変わらない3つと、初診日の証明・書類の整合・審査請求・体力の4つの頼むと変わることを、認定状況調査と裁決事例91件の数字で整理します。",
     datePublished: "2026-09-07",
-    dateModified: "2026-09-07",
+    dateModified: "2026-09-27",
     primaryCluster: "application",
     category: "相談・進め方",
     /* 相談・進め方は読む順: 無理のない進め方 → 年金事務所 → 自分で申請 → この記事(jibun-de-shinsei の直後) */
