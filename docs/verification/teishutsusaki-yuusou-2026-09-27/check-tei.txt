@@ -1,0 +1,27 @@
+## 検証2 description の数字・metaTitle の語(描画した本文 <main>)
+○ 3か月: 5 回
+○ 簡易書留: 9 回
+○ 送付状: 15 回
+○ 年金事務所: 77 回
+○ 市役所: 9 回
+title: 障害年金の書類は郵送で出せる?｜送り先は年金事務所・簡易書留・送付状の見本と、市役所か年金事務所かの決まり｜障害年金申請サポート
+description: 障害年金の請求書類は郵送で提出できます。日本年金機構は、窓口での相談が不要なら年金請求書をお近くの年金事務所あてに郵送できると案内しています。審査で不利にはなりません。送り先、簡易書留かレターパックプラス、折らない封筒、送付状の見本、月末の注意、そして市区町村か年金事務所かの決め方まで。
+## 検証4 冒頭 h2 のページ内リンク
+○ #郵送で出すときの実務-5つの手順 → <h2> 郵送で出すときの実務 — 5つの手順
+## 検証5 既存リンク(ページ内の <a href>)
+○ /columns/shoshinbi-wakaranai
+○ /columns/hatachi-mae
+○ /columns/nenkin-jimusho-soudan
+○ /columns/moushitatesho-a4-insatsu
+○ /columns/koushin-kakuninhodo
+○ /columns/fushikyuu-shinsa-seikyu
+○ /columns/shoubyou-teatekin
+○ /columns/shindansho-kakunin
+○ /columns/shinsei-kikan
+○ /columns/shinsatsu-mae-memo
+○ /columns/hitsuyou-shorui-seishin
+○ /dougu/madoguchi
+○ /dougu/shorui
+## 検証6 375×812 のファーストビュー
+375×812: h2「先に答え: 郵送で出せます」 top=1843px / 画面 812px → 入らない(あと 1031px)。h1=213 結論の箱=455
+390×844: h2「先に答え: 郵送で出せます」 top=1813px / 画面 844px → 入らない(あと 969px)。h1=213 結論の箱=455

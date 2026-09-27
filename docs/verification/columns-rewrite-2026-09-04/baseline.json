@@ -191,6 +191,16 @@
       "fields": [
         "content"
       ]
+    },
+    "2026-09-27": {
+      "reason": "docs/columns-rewrite-2026-09-27/teishutsusaki-yuusou-rewrite.md #1: 表示が郵送の検索から来ているので metaTitle・description を郵送の問いに(title・h1 は変えない)",
+      "slugs": [
+        "teishutsusaki-yuusou"
+      ],
+      "fields": [
+        "metaTitle",
+        "htmlTitle"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -278,9 +288,9 @@
     {
       "slug": "teishutsusaki-yuusou",
       "title": "障害年金の書類はどこに提出する? — 年金事務所・市役所・郵送の違いと、出す前の最終チェック",
-      "metaTitle": "障害年金の書類はどこに提出する?｜年金事務所・市役所・郵送",
+      "metaTitle": "障害年金の書類は郵送で出せる?｜送り先は年金事務所・簡易書留・送付状の見本と、市役所か年金事務所かの決まり",
       "h1": "障害年金の書類はどこに提出する? — 年金事務所・市役所・郵送の違いと、出す前の最終チェック",
-      "htmlTitle": "障害年金の書類はどこに提出する?｜年金事務所・市役所・郵送｜障害年金申請サポート",
+      "htmlTitle": "障害年金の書類は郵送で出せる?｜送り先は年金事務所・簡易書留・送付状の見本と、市役所か年金事務所かの決まり｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/teishutsusaki-yuusou"
     },
     {
@@ -738,6 +748,7 @@
     },
     "teishutsusaki-yuusou": {
       "h2": [
+        "先に答え: 郵送で出せます",
         "結論:提出先は「初診日の年金制度」で決まる",
         "「街角の年金相談センター」という選択肢",
         "窓口 vs 郵送 — どちらを選ぶか",
@@ -774,7 +785,9 @@
         "/columns/shinsatsu-mae-memo",
         "/columns/hitsuyou-shorui-seishin"
       ],
-      "cta": []
+      "cta": [],
+      "baseChars": 11274,
+      "baseNote": "2026-09-27 の改稿(docs/columns-rewrite-2026-09-27/teishutsusaki-yuusou-rewrite.md)で h2「先に答え: 郵送で出せます」を先頭に追加し、本文が 8,924→11274 字。基準をその時点の構造・字数に更新した"
     }
   }
 }
