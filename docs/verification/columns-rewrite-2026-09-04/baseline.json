@@ -193,12 +193,13 @@
       ]
     },
     "2026-09-27": {
-      "reason": "docs/columns-rewrite-2026-09-27/teishutsusaki-yuusou-rewrite.md #1: 表示が郵送の検索から来ているので metaTitle・description を郵送の問いに(title・h1 は変えない) / docs/columns-rewrite-2026-09-27/shinsei-kikan-rewrite.md #1: 令和6年度の実績(95.1%・65.1日)と審査状況確認専用ダイヤルを metaTitle・description に(title・h1 は変えない) / docs/columns-rewrite-2026-09-27/tokyu-nichijo-rewrite.md A-1: 表1の全体・表2・審査の裏側を metaTitle・description に(title・h1 は変えない) / docs/columns-rewrite-2026-09-27/hitorigurashi-hatarakinagara-rewrite.md A-1: 受給者実態調査の数字を metaTitle・description に(title・h1 は変えない)",
+      "reason": "docs/columns-rewrite-2026-09-27/teishutsusaki-yuusou-rewrite.md #1: 表示が郵送の検索から来ているので metaTitle・description を郵送の問いに(title・h1 は変えない) / docs/columns-rewrite-2026-09-27/shinsei-kikan-rewrite.md #1: 令和6年度の実績(95.1%・65.1日)と審査状況確認専用ダイヤルを metaTitle・description に(title・h1 は変えない) / docs/columns-rewrite-2026-09-27/tokyu-nichijo-rewrite.md A-1: 表1の全体・表2・審査の裏側を metaTitle・description に(title・h1 は変えない) / docs/columns-rewrite-2026-09-27/hitorigurashi-hatarakinagara-rewrite.md A-1: 受給者実態調査の数字を metaTitle・description に(title・h1 は変えない) / 同 B-1: 受給者実態調査の数字を metaTitle・description に(title・h1 は変えない)",
       "slugs": [
         "teishutsusaki-yuusou",
         "shinsei-kikan",
         "tokyu-hantei-guideline",
-        "hitorigurashi-furi"
+        "hitorigurashi-furi",
+        "hatarakinagara"
       ],
       "fields": [
         "metaTitle",
@@ -523,9 +524,9 @@
     {
       "slug": "hatarakinagara",
       "title": "働きながら障害年金はもらえる？「働ける＝改善」と誤解されない伝え方",
-      "metaTitle": "働きながら障害年金｜就労中に医師へ伝えること",
+      "metaTitle": "働きながら障害年金はもらえる?｜受給者の34.0%は仕事あり。就労中に医師へ伝える4点と、審査が見る就労の実態",
       "h1": "働きながら障害年金はもらえる？「働ける＝改善」と誤解されない伝え方",
-      "htmlTitle": "働きながら障害年金｜就労中に医師へ伝えること｜障害年金申請サポート",
+      "htmlTitle": "働きながら障害年金はもらえる?｜受給者の34.0%は仕事あり。就労中に医師へ伝える4点と、審査が見る就労の実態｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/hatarakinagara"
     },
     {
