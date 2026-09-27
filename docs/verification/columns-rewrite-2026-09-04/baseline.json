@@ -193,9 +193,10 @@
       ]
     },
     "2026-09-27": {
-      "reason": "docs/columns-rewrite-2026-09-27/teishutsusaki-yuusou-rewrite.md #1: 表示が郵送の検索から来ているので metaTitle・description を郵送の問いに(title・h1 は変えない)",
+      "reason": "docs/columns-rewrite-2026-09-27/teishutsusaki-yuusou-rewrite.md #1: 表示が郵送の検索から来ているので metaTitle・description を郵送の問いに(title・h1 は変えない) / docs/columns-rewrite-2026-09-27/shinsei-kikan-rewrite.md #1: 令和6年度の実績(95.1%・65.1日)と審査状況確認専用ダイヤルを metaTitle・description に(title・h1 は変えない)",
       "slugs": [
-        "teishutsusaki-yuusou"
+        "teishutsusaki-yuusou",
+        "shinsei-kikan"
       ],
       "fields": [
         "metaTitle",
@@ -384,9 +385,9 @@
     {
       "slug": "shinsei-kikan",
       "title": "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
-      "metaTitle": "障害年金の結果待ち｜結果はいつ届く？目安3か月・遅いときの確認先・審査状況はネットで見られるか",
+      "metaTitle": "障害年金の結果はいつ届く?｜3か月以内が95%・平均65日、遅いときの審査状況確認専用ダイヤル",
       "h1": "障害年金の申請結果はいつ届く？審査期間と結果待ちの過ごし方",
-      "htmlTitle": "障害年金の結果待ち｜結果はいつ届く？目安3か月・遅いときの確認先・審査状況はネットで見られるか｜障害年金申請サポート",
+      "htmlTitle": "障害年金の結果はいつ届く?｜3か月以内が95%・平均65日、遅いときの審査状況確認専用ダイヤル｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/shinsei-kikan"
     },
     {
