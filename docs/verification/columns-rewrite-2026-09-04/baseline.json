@@ -206,6 +206,16 @@
         "metaTitle",
         "htmlTitle"
       ]
+    },
+    "2026-09-28": {
+      "reason": "docs/columns-rewrite-2026-09-28/shoshinbi-wakaranai-rewrite.md #1: 一定期間の規定と裁決で認められた証拠を metaTitle・description に(title・h1 は変えない)",
+      "slugs": [
+        "shoshinbi-wakaranai"
+      ],
+      "fields": [
+        "metaTitle",
+        "htmlTitle"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -541,9 +551,9 @@
     {
       "slug": "shoshinbi-wakaranai",
       "title": "障害年金の初診日がわからないときの調べ方｜証明できない場合も解説",
-      "metaTitle": "障害年金の初診日がわからないときの探し方5つ｜証明できないときも",
+      "metaTitle": "障害年金の初診日がわからないときの探し方5つ｜証明できなくても「この期間のどこか」で認められる規則と、裁決で認められた証拠",
       "h1": "障害年金の初診日がわからないときの調べ方｜証明できない場合も解説",
-      "htmlTitle": "障害年金の初診日がわからないときの探し方5つ｜証明できないときも｜障害年金申請サポート",
+      "htmlTitle": "障害年金の初診日がわからないときの探し方5つ｜証明できなくても「この期間のどこか」で認められる規則と、裁決で認められた証拠｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/shoshinbi-wakaranai"
     },
     {
