@@ -217,6 +217,16 @@
         "metaTitle",
         "htmlTitle"
       ]
+    },
+    "2026-09-29": {
+      "reason": "docs/columns-rewrite-2026-09-28/shindansho-jittai-chigau-rewrite.md #1: 訂正を頼める範囲と記載要領の要求を metaTitle・description に(title・h1 は変えない)",
+      "slugs": [
+        "shindansho-jittai-chigau"
+      ],
+      "fields": [
+        "metaTitle",
+        "htmlTitle"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -336,9 +346,9 @@
     {
       "slug": "shindansho-jittai-chigau",
       "title": "障害年金の診断書が実態と違う・軽く書かれた — 訂正はどこまで頼める?ケース別の対処と「出す/出さない」の判断",
-      "metaTitle": "障害年金の診断書が実態と違う・軽く書かれたときの対処",
+      "metaTitle": "障害年金の診断書が実態と違う・軽く書かれた｜訂正を頼める範囲と、記載要領が医師に求めている書き方",
       "h1": "障害年金の診断書が実態と違う・軽く書かれた — 訂正はどこまで頼める?ケース別の対処と「出す/出さない」の判断",
-      "htmlTitle": "障害年金の診断書が実態と違う・軽く書かれたときの対処｜障害年金申請サポート",
+      "htmlTitle": "障害年金の診断書が実態と違う・軽く書かれた｜訂正を頼める範囲と、記載要領が医師に求めている書き方｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/shindansho-jittai-chigau"
     },
     {
