@@ -835,7 +835,7 @@
     },
     {
       "id": "r02_03-05_01",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_01.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/05_01.pdf",
       "seido": "厚生年金",
       "shobyo": "広汎性発達障害・摂食障害",
       "seishin": true,
@@ -851,7 +851,7 @@
     },
     {
       "id": "r02_03-05_02",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_02.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/05_02.pdf",
       "seido": "厚生年金",
       "shobyo": "統合失調症",
       "seishin": true,
@@ -868,7 +868,7 @@
     },
     {
       "id": "r02_03-05_03",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_03.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/05_03.pdf",
       "seido": "厚生年金",
       "shobyo": "両側感音性難聴",
       "seishin": false,
@@ -885,7 +885,7 @@
     },
     {
       "id": "r02_03-05_04",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_04.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/05_04.pdf",
       "seido": "厚生年金",
       "shobyo": "精神障害",
       "seishin": true,
@@ -898,11 +898,11 @@
       "nichijo_quote": false,
       "youshi": "障害等級3級の支給停止処分ではなく、その後の年金額改定通知を対象として申し立てた再審査請求は不適法であるとして却下した。",
       "excluded": true,
-      "verified": false
+      "verified": true
     },
     {
       "id": "r02_03-05_05",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_05.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/05_05.pdf",
       "seido": "厚生年金",
       "shobyo": "反復性うつ病性障害",
       "seishin": true,
@@ -919,7 +919,7 @@
     },
     {
       "id": "r02_03-05_06",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_06.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/05_06.pdf",
       "seido": "厚生年金",
       "shobyo": "慢性腎不全（糖尿病性腎症）",
       "seishin": false,
@@ -937,7 +937,7 @@
     },
     {
       "id": "r02_03-05_07",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/05_07.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/05_07.pdf",
       "seido": "厚生年金",
       "shobyo": "躁うつ病",
       "seishin": true,
@@ -955,7 +955,7 @@
     },
     {
       "id": "r02_03-12_01",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_01.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/12_01.pdf",
       "seido": "国民年金",
       "shobyo": "脳動脈瘤コイル塞栓術後脳梗塞",
       "seishin": false,
@@ -972,7 +972,7 @@
     },
     {
       "id": "r02_03-12_02",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_02.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/12_02.pdf",
       "seido": "国民年金",
       "shobyo": "強迫性障害",
       "seishin": true,
@@ -988,7 +988,7 @@
     },
     {
       "id": "r02_03-12_03",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_03.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/12_03.pdf",
       "seido": "国民年金",
       "shobyo": "統合失調症",
       "seishin": true,
@@ -1004,7 +1004,7 @@
     },
     {
       "id": "r02_03-12_04",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_04.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/12_04.pdf",
       "seido": "国民年金",
       "shobyo": "統合失調症",
       "seishin": true,
@@ -1021,7 +1021,7 @@
     },
     {
       "id": "r02_03-12_05",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_05.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/12_05.pdf",
       "seido": "国民年金",
       "shobyo": "統合失調症",
       "seishin": true,
@@ -1037,7 +1037,7 @@
     },
     {
       "id": "r02_03-12_06",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_06.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/12_06.pdf",
       "seido": "国民年金",
       "shobyo": "糖尿病性腎症",
       "seishin": false,
@@ -1054,7 +1054,7 @@
     },
     {
       "id": "r02_03-12_07",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_07.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/12_07.pdf",
       "seido": "国民年金",
       "shobyo": "広汎性発達障害・双極性障害・病的窃盗",
       "seishin": true,
@@ -1071,7 +1071,7 @@
     },
     {
       "id": "r02_03-12_08",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_08.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/12_08.pdf",
       "seido": "国民年金",
       "shobyo": "うつ病",
       "seishin": true,
@@ -1087,7 +1087,7 @@
     },
     {
       "id": "r02_03-12_09",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_09.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/12_09.pdf",
       "seido": "国民年金",
       "shobyo": "統合失調症",
       "seishin": true,
@@ -1104,7 +1104,7 @@
     },
     {
       "id": "r02_03-12_10",
-      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r2_r3/12_10.pdf",
+      "url": "https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-r02_03/12_10.pdf",
       "seido": "国民年金",
       "shobyo": "両足部熱傷",
       "seishin": false,

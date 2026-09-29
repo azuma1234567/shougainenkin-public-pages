@@ -1,0 +1,3 @@
+PASS: 57記事の識別子・著者・発行元・引用・既存メタデータ
+PASS: 57記事の FAQPage の Question 数が本文と一致
+PASS: ハブ49本の Article・パンくず・FAQPage(FAQ あり 45本)
