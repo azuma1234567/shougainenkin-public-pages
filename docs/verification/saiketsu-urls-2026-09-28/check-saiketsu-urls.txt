@@ -1,0 +1,7 @@
+
+> shougainenkin-public-pages@1.0.0 check:saiketsu-urls
+> node scripts/check-saiketsu-urls.mjs
+
+裁決 94 件の url: 200 が 93 件、それ以外 1 件
+  404  h27-a2_2-10(excluded)(未 verified)  https://www.mhlw.go.jp/topics/bukyoku/shinsa/syakai/dl/05-h27-06-a2_2-10.pdf
+200 でないのは excluded の裁決だけ(公開ページからはリンクされない)

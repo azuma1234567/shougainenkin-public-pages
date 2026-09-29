@@ -35,7 +35,8 @@
     "verify:moushitatesho:overlay": "node --import ./scripts/lib/ts-alias.mjs scripts/verify-moushitatesho/overlay.mjs",
     "indexnow": "node scripts/indexnow-submit.mjs --since $(date -v-7d +%F)",
     "build:fonts": "node scripts/build-font-subset.mjs",
-    "verify:fonts": "node scripts/verify-fonts.mjs"
+    "verify:fonts": "node scripts/verify-fonts.mjs",
+    "check:saiketsu-urls": "node scripts/check-saiketsu-urls.mjs"
   },
   "dependencies": {
     "next": "^15.3.4",
