@@ -229,9 +229,10 @@
       ]
     },
     "2026-09-30": {
-      "reason": "docs/columns-rewrite-2026-09-30/moushitatesho-kikan-kugiri-rewrite.md #1: metaTitle を新設し description を記載要領の3ルールに(title・h1 は変えない)",
+      "reason": "docs/columns-rewrite-2026-09-30/moushitatesho-kikan-kugiri-rewrite.md #1: metaTitle を新設し description を記載要領の3ルールに(title・h1 は変えない) / docs/columns-rewrite-2026-09-30/kougin-nenkin-tedori-rewrite.md #7: description に都道府県の幅を追加(metaTitle・title・h1 は変えない。検査8 の基準は変更なし)",
       "slugs": [
-        "moushitatesho-kikan-kugiri"
+        "moushitatesho-kikan-kugiri",
+        "kougin-nenkin-tedori"
       ],
       "fields": [
         "metaTitle",

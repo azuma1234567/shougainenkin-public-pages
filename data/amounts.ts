@@ -110,6 +110,12 @@ export const STATISTICS = {
   kouginATypeMonthly2024: { value: "91,451", label: "就労継続支援A型 平均賃金(月額)", fiscalYear: "令和6年度", source: "厚生労働省「令和6年度 工賃(賃金)の実績について」", checkedOn: "2026-09-13" },
   kouginBTypeMonthly2023: { value: "22,649", label: "就労継続支援B型 平均工賃(月額)", fiscalYear: "令和5年度", source: "厚生労働省「令和6年度 工賃(賃金)の実績について」(前年度の欄)", checkedOn: "2026-09-13" },
   kouginATypeMonthly2023: { value: "86,752", label: "就労継続支援A型 平均賃金(月額)", fiscalYear: "令和5年度", source: "厚生労働省「令和6年度 工賃(賃金)の実績について」(前年度の欄)", checkedOn: "2026-09-13" },
+  /* 都道府県別(別紙4)。A型は月額10万円前後で、本文の金額検査(10万円以上)にかかるものだけをここに置く。B型の都道府県別は10万円未満なので置かない(2026-09-30) */
+  kouginATypeTokyo2024: { value: "111,818", label: "就労継続支援A型 平均賃金(月額)・東京都", fiscalYear: "令和6年度", source: "厚生労働省「令和6年度 工賃(賃金)の実績について」別紙4", checkedOn: "2026-09-30" },
+  kouginATypeHiroshima2024: { value: "107,968", label: "就労継続支援A型 平均賃金(月額)・広島県", fiscalYear: "令和6年度", source: "厚生労働省「令和6年度 工賃(賃金)の実績について」別紙4", checkedOn: "2026-09-30" },
+  kouginATypeShimane2024: { value: "107,724", label: "就労継続支援A型 平均賃金(月額)・島根県", fiscalYear: "令和6年度", source: "厚生労働省「令和6年度 工賃(賃金)の実績について」別紙4", checkedOn: "2026-09-30" },
+  kouginATypeKochi2024: { value: "102,740", label: "就労継続支援A型 平均賃金(月額)・高知県", fiscalYear: "令和6年度", source: "厚生労働省「令和6年度 工賃(賃金)の実績について」別紙4", checkedOn: "2026-09-30" },
+  kouginATypeWakayama2024: { value: "101,751", label: "就労継続支援A型 平均賃金(月額)・和歌山県", fiscalYear: "令和6年度", source: "厚生労働省「令和6年度 工賃(賃金)の実績について」別紙4", checkedOn: "2026-09-30" },
 } as const;
 
 /* 目安の表(入力前に見せる)。幹10の原稿と同じ数字。値は STATISTICS から読む。 */
