@@ -16,6 +16,8 @@
 //   B-2: パンくず(nav[aria-label="パンくずリスト"])と誤解カードの「一覧へ戻る」(.gokai-back)由来のリンクは被リンク数に数えない。宣言済みハブは上限から除外し、件数と理由は毎回付記する。
 //   B-9: BreadcrumbList が2つ以上あるページも数える(コラム記事は columnJsonLd の分だけ)。
 //   C-2: 分割sitemapは対象外(Google の分割要件は 50,000 URL / 50MB。現状は単一 sitemap.xml で十分)。
+// 2026-09-30 (docs/fix-x-mentions-2026-09-30.md §4):
+//   A-10: X への言及の正規表現を広げた(「Xを読むと」「同じXに」「という投稿」「万回表示」など)。直前が英字の X(FAX・Excel)は除外。
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -196,7 +198,7 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
     if (/執筆メモ|実装メモ/.test(text)) memo.push(`${p}: 執筆メモ`);
     if (/x\.com/.test(text)) memo.push(`${p}: x.com`);
     for (const m of text.matchAll(/@[A-Za-z0-9_.]{4,}/g)) at.push(`${p}: ${m[0]}`);
-    for (const m of text.matchAll(/twitter|youtube|youtu\.be|note\.com|ameblo|呟き人|岸野|nenkin109|coco_ruuchan|ツイート|Xで(発信|見かける|語られる|投稿|最も|本当に)|X上で/g)) sources.push(`${p}: ${m[0]}`);
+    for (const m of text.matchAll(/twitter|youtube|youtu\.be|note\.com|ameblo|呟き人|岸野|nenkin109|coco_ruuchan|ツイート|(?<![A-Za-z])X(を|の|に|で|には|上|では)(見|読|書|言|語|投稿|声|いちばん|よく|たくさん)|(?<![A-Za-z])Xの声|同じXに|という投稿|万回.{0,3}表示|表示回数|(?<![A-Za-z])X上で/g)) sources.push(`${p}: ${m[0]}`);
   }
   const atNonMail = at.filter((a) => !/@gmail\.com/.test(a));
   record("A-9", "「執筆メモ」「x.com」「@」が出力に含まれていない", memo.length === 0 && atNonMail.length === 0, `執筆メモ/x.com ${memo.length}、@ ${atNonMail.length}(連絡先メールの @ ${at.length - atNonMail.length} 件は除外)`, [...memo, ...atNonMail]);
