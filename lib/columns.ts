@@ -482,10 +482,11 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     slug: "moushitatesho-kikan-kugiri",
     title:
       "障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方",
+    metaTitle: "障害年金の申立書の期間の区切り方｜5年を超えたら3〜5年ごと・受診していない期間も1枠(機構の記載要領)",
     description:
-      "病歴・就労状況等申立書の期間は、転院・休職・退職・症状の悪化・受診していない期間で区切ります。区切りが多すぎても少なすぎても伝わりにくいので、実例で区切り方と、それぞれの欄に何を書くかを順に説明します。",
+      "病歴・就労状況等申立書の期間の区切り方。日本年金機構の記載要領は「発病から現在まで期間をあけずに」「1つの期間が5年を超える場合は3〜5年ごとに」「受診していない期間は『受診していない』に○」と定めています。転院・休職・退職・未受診で区切った設計図の完成形、続紙の使い方、裏面の障害認定日頃と現在の2欄、20歳前の簡素化ルールまで。",
     datePublished: "2026-07-21",
-    dateModified: "2026-07-30",
+    dateModified: "2026-09-30",
     primaryCluster: "application",
     secondaryClusters: ["mental", "depression"],
     category: "申立書",

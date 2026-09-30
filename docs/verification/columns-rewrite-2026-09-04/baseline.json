@@ -227,6 +227,16 @@
         "metaTitle",
         "htmlTitle"
       ]
+    },
+    "2026-09-30": {
+      "reason": "docs/columns-rewrite-2026-09-30/moushitatesho-kikan-kugiri-rewrite.md #1: metaTitle を新設し description を記載要領の3ルールに(title・h1 は変えない)",
+      "slugs": [
+        "moushitatesho-kikan-kugiri"
+      ],
+      "fields": [
+        "metaTitle",
+        "htmlTitle"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -418,9 +428,9 @@
     {
       "slug": "moushitatesho-kikan-kugiri",
       "title": "障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方",
-      "metaTitle": null,
+      "metaTitle": "障害年金の申立書の期間の区切り方｜5年を超えたら3〜5年ごと・受診していない期間も1枠(機構の記載要領)",
       "h1": "障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方",
-      "htmlTitle": "障害年金の申立書は期間をどう区切る？通院・就労・症状変化の書き方｜障害年金申請サポート",
+      "htmlTitle": "障害年金の申立書の期間の区切り方｜5年を超えたら3〜5年ごと・受診していない期間も1枠(機構の記載要領)｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/moushitatesho-kikan-kugiri"
     },
     {
@@ -729,6 +739,7 @@
     },
     "moushitatesho-kikan-kugiri": {
       "h2": [
+        "まず現物 — 様式が求めている区切り方と、区切った結果",
         "先に結論 — 「変化があった時点」で区切ります",
         "区切りの3原則 — まずはこれだけ",
         "具体例:時系列で区切りを作ってみる",
@@ -770,7 +781,9 @@
       ],
       "cta": [
         "申請準備を、アプリでひとつずつこの記事の内容を、質問に答えるだけで進められるアプリを作りました。日々の記録が診察で医師に渡せる資料になり、申立書の下書きになります。ログイン不要・記録は端末の中に。すべての機能を無料で使えます。"
-      ]
+      ],
+      "baseNote": "2026-09-30 の改稿(docs/columns-rewrite-2026-09-30/moushitatesho-kikan-kugiri-rewrite.md)で h2「まず現物」を先頭に追加し、字数の基準もその時点の本文に更新した(10,979→13453 字)",
+      "baseChars": 13453
     },
     "teishutsusaki-yuusou": {
       "h2": [
