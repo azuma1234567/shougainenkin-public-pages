@@ -11,7 +11,7 @@ origin: http://localhost:3210 / ページ数: 186 / 基準: git main
 | # | 判定 | 項目 | 件数 |
 |---|---|---|---|
 | A-1 | ○ | 既存記事のURLが1本も変わっていない | 57/57 が同一URLで200 |
-| A-2 | ○ | 既存記事の本文が消えていない(公開前の8割未満・本文なしを×) | 本文が消えた/8割未満 0、方針上の削除で減ったもの 7(いずれも8割以上を維持)、57 記事を比較<br>※main ブランチの本文文字列と比較。減少分は docs/verification/prelaunch-2026-09-02/RESULT.md 末尾に一覧 |
+| A-2 | ○ | 既存記事の本文が消えていない(公開前の8割未満・本文なしを×) | 本文が消えた/8割未満 0、方針上の削除で減ったもの 1(いずれも8割以上を維持)、57 記事を比較<br>※main ブランチの本文文字列と比較。減少分は docs/verification/prelaunch-2026-09-02/RESULT.md 末尾に一覧 |
 | A-3 | ○ | 404が出るリンクがゼロ | リンク先 187 件を検査、破損 0 |
 | A-4 | ○ | 未公開ページへのリンクがゼロ | 予約slug 4 件へのリンク 0 |
 | A-5 | ○ | noindex が残っていない | noindex 0 / 186 |
@@ -113,13 +113,7 @@ origin: http://localhost:3210 / ページ数: 186 / 基準: git main
 
 ## 参考: 公開前より本文が減った既存記事(8割以上は維持)
 
-- /columns/shindansho-shurojokyo (6991 → 6910字, 99%)
-- /columns/koushin-hatarakinagara (6909 → 6869字, 99%)
-- /columns/kousei-3kyu-hataraku (6861 → 6798字, 99%)
-- /columns/zaitaku-freelance-nenkin (6430 → 6365字, 99%)
-- /columns/sagyousho-hajimeru-tsutaeru (7043 → 6974字, 99%)
-- /columns/muryou-soudan-psw (7153 → 7074字, 99%)
-- /columns/sagyousho-kayoenai (6922 → 6859字, 99%)
+- /columns/muryou-soudan-psw (7074 → 7070字, 100%)
 
 
 A はすべて ○
