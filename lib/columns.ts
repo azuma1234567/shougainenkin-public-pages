@@ -838,7 +838,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "精神の障害用の診断書の「現症時の就労状況」欄は、勤務先の種類・雇用体系・頻度・給与・援助の状況を主治医が書きます。国の記載要領は「仕事場の内外を問わず援助や配慮の状況をできるだけ記入」「過去1年の休職」「日常生活能力は単身を想定」と求めています。何を伝えれば実態が載るか、A4一枚のメモの項目と働き方別の例。",
     datePublished: "2026-09-13",
-    dateModified: "2026-09-13",
+    dateModified: "2026-09-30",
     primaryCluster: "medical-certificate",
     category: "診断書 — 主治医に伝える",
     orderInCategory: 110,
@@ -850,7 +850,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "働き始めても障害年金は自動では止まりません。決まるのは更新(障害状態確認届)のときで、令和6年度の更新304,456件のうち支給停止は1.1%・減額0.8%。見られるのは「働いているか」ではなく「どんな援助や配慮で働けているか」「仕事の外の生活が一人で回るか」。次回提出年月の確認、月1回の記録、更新3か月前に主治医へ渡すメモ、チェックリスト。",
     datePublished: "2026-09-13",
-    dateModified: "2026-09-13",
+    dateModified: "2026-09-30",
     primaryCluster: "application",
     category: "受給が始まってから",
     orderInCategory: 60,
@@ -862,7 +862,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "障害厚生年金3級は「労働に著しい制限がある」等級で、働くことと両立します。最低保障額は令和8年度で年635,500円(月約53,000円)。基礎年金に3級はありません。更新で「配慮なしに働けている」と読まれると非該当、悪化したら額改定請求で2級、非該当でも3年・65歳までは受給権が残る。給付金・法定免除の対象外など3級だけの扱いも一覧に。",
     datePublished: "2026-09-13",
-    dateModified: "2026-09-13",
+    dateModified: "2026-09-30",
     primaryCluster: "application",
     category: "受給が始まってから",
     orderInCategory: 70,
@@ -874,7 +874,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "在宅ワーク・フリーランス・副業で収入を得ても障害年金は原則そのまま。収入で減るのは20歳前傷病の障害基礎年金だけで、前年所得3,761,000円超で2分の1停止、4,794,000円超で全額停止(扶養親族で加算、10月〜翌9月)。在宅の人は診断書で「自営」になり実態が見えないので、稼働時間・断った仕事・生活の援助を記録する。開業届・確定申告・失業給付・扶養の線も整理。",
     datePublished: "2026-09-13",
-    dateModified: "2026-09-13",
+    dateModified: "2026-09-30",
     primaryCluster: "application",
     category: "受給が始まってから",
     orderInCategory: 80,
@@ -898,7 +898,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "作業所への通所は、審査で「援助のある活動」として読まれます。ガイドラインはA型・B型での就労を1級または2級の可能性を検討するとしています。不利になるのは、診断書に通所日数と援助の内容が載らなかったとき。主治医に通い始める前と後に伝えること、支援員に頼む文面、月1回の通所記録のテンプレート、種類別の診断書での扱い。",
     datePublished: "2026-09-13",
-    dateModified: "2026-09-13",
+    dateModified: "2026-09-30",
     primaryCluster: "medical-certificate",
     category: "診断書 — 主治医に伝える",
     orderInCategory: 120,
@@ -910,7 +910,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "社労士に数十万円払えなくても、申請を手伝ってくれる人は無料でいます。病院の相談室の精神保健福祉士、相談支援事業所の相談支援専門員、基幹相談支援センター、市の障害福祉課、年金事務所、就労移行やB型の支援員。それぞれ頼めること・頼めないこと、場面別に最初に行く場所、持ち物、そのまま使える最初の一言。社労士が要る4つの場面も。",
     datePublished: "2026-09-13",
-    dateModified: "2026-09-13",
+    dateModified: "2026-09-30",
     primaryCluster: "application",
     category: "相談・進め方",
     orderInCategory: 50,
@@ -922,7 +922,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     description:
       "作業所に通えない日が続いても、辞めても、障害年金は止まりません。通所は要件ではなく、通えなかった記録は審査で状態の証拠になります。休んだ日と理由の記録、支援員と主治医への伝え方、辞める前に使える3つの調整、受給者証の扱い、A型を辞めたときの雇用保険(就職困難者は給付日数が長い)、額改定請求、在宅型B型・地域活動支援センター・デイケアからの再開。",
     datePublished: "2026-09-13",
-    dateModified: "2026-09-13",
+    dateModified: "2026-09-30",
     primaryCluster: "application",
     category: "受給が始まってから",
     orderInCategory: 100,
