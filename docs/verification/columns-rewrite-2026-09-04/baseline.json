@@ -229,15 +229,18 @@
       ]
     },
     "2026-09-30": {
-      "reason": "docs/columns-rewrite-2026-09-30/moushitatesho-kikan-kugiri-rewrite.md #1: metaTitle を新設し description を記載要領の3ルールに(title・h1 は変えない) / docs/columns-rewrite-2026-09-30/kougin-nenkin-tedori-rewrite.md #7: description に都道府県の幅を追加(metaTitle・title・h1 は変えない。検査8 の基準は変更なし) / docs/columns-rewrite-2026-09-30/a4-jushinjokyo-rewrite.md A: moushitatesho-a4-insatsu の metaTitle を新設(title・h1・本文・dateModified は変えない)",
+      "reason": "docs/columns-rewrite-2026-09-30/moushitatesho-kikan-kugiri-rewrite.md #1: metaTitle を新設し description を記載要領の3ルールに(title・h1 は変えない) / docs/columns-rewrite-2026-09-30/kougin-nenkin-tedori-rewrite.md #7: description に都道府県の幅を追加(metaTitle・title・h1 は変えない。検査8 の基準は変更なし) / docs/columns-rewrite-2026-09-30/a4-jushinjokyo-rewrite.md A: moushitatesho-a4-insatsu の metaTitle を新設(title・h1・本文・dateModified は変えない) / 同 B: jushinjokyo-shomeisho の title(h1)・metaTitle・description を同じ向きに揃えた",
       "slugs": [
         "moushitatesho-kikan-kugiri",
         "kougin-nenkin-tedori",
-        "moushitatesho-a4-insatsu"
+        "moushitatesho-a4-insatsu",
+        "jushinjokyo-shomeisho"
       ],
       "fields": [
         "metaTitle",
-        "htmlTitle"
+        "htmlTitle",
+        "title",
+        "h1"
       ]
     }
   },
@@ -397,10 +400,10 @@
     },
     {
       "slug": "jushinjokyo-shomeisho",
-      "title": "受診状況等証明書とは？病院への依頼方法・郵送・確認ポイント",
-      "metaTitle": "初診日の証明（受診状況等証明書）を病院に依頼する方法｜郵送・遠方・文書料",
-      "h1": "受診状況等証明書とは？病院への依頼方法・郵送・確認ポイント",
-      "htmlTitle": "初診日の証明（受診状況等証明書）を病院に依頼する方法｜郵送・遠方・文書料｜障害年金申請サポート",
+      "title": "受診状況等証明書とは？初診の病院への頼み方(電話・郵送)と、カルテがないときの5つのルート",
+      "metaTitle": "受診状況等証明書とは？初診の病院への頼み方(電話・郵送)と、カルテがないときの5つのルート",
+      "h1": "受診状況等証明書とは？初診の病院への頼み方(電話・郵送)と、カルテがないときの5つのルート",
+      "htmlTitle": "受診状況等証明書とは？初診の病院への頼み方(電話・郵送)と、カルテがないときの5つのルート｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/jushinjokyo-shomeisho"
     },
     {
