@@ -806,6 +806,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
   {
     slug: "moushitatesho-a4-insatsu",
     title: "障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説",
+    metaTitle: "病歴・就労状況等申立書はA4で印刷して出せる？｜A4×2枚で受け付けられます。自宅・コンビニ・スマホの刷り方と設定",
     description:
       "病歴・就労状況等申立書はA4用紙に印刷して提出できます。自宅のプリンター、スマートフォンからコンビニで印刷する手順、印刷後に確かめる欄と枚数、手書きの用紙と混ぜてよいかまで、迷いやすいところを順に説明します。",
     datePublished: "2026-07-17",

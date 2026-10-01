@@ -229,10 +229,11 @@
       ]
     },
     "2026-09-30": {
-      "reason": "docs/columns-rewrite-2026-09-30/moushitatesho-kikan-kugiri-rewrite.md #1: metaTitle を新設し description を記載要領の3ルールに(title・h1 は変えない) / docs/columns-rewrite-2026-09-30/kougin-nenkin-tedori-rewrite.md #7: description に都道府県の幅を追加(metaTitle・title・h1 は変えない。検査8 の基準は変更なし)",
+      "reason": "docs/columns-rewrite-2026-09-30/moushitatesho-kikan-kugiri-rewrite.md #1: metaTitle を新設し description を記載要領の3ルールに(title・h1 は変えない) / docs/columns-rewrite-2026-09-30/kougin-nenkin-tedori-rewrite.md #7: description に都道府県の幅を追加(metaTitle・title・h1 は変えない。検査8 の基準は変更なし) / docs/columns-rewrite-2026-09-30/a4-jushinjokyo-rewrite.md A: moushitatesho-a4-insatsu の metaTitle を新設(title・h1・本文・dateModified は変えない)",
       "slugs": [
         "moushitatesho-kikan-kugiri",
-        "kougin-nenkin-tedori"
+        "kougin-nenkin-tedori",
+        "moushitatesho-a4-insatsu"
       ],
       "fields": [
         "metaTitle",
@@ -605,9 +606,9 @@
     {
       "slug": "moushitatesho-a4-insatsu",
       "title": "障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説",
-      "metaTitle": null,
+      "metaTitle": "病歴・就労状況等申立書はA4で印刷して出せる？｜A4×2枚で受け付けられます。自宅・コンビニ・スマホの刷り方と設定",
       "h1": "障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説",
-      "htmlTitle": "障害年金の申立書をA4で印刷する方法｜PDF・コンビニ印刷も解説｜障害年金申請サポート",
+      "htmlTitle": "病歴・就労状況等申立書はA4で印刷して出せる？｜A4×2枚で受け付けられます。自宅・コンビニ・スマホの刷り方と設定｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/moushitatesho-a4-insatsu"
     },
     {
