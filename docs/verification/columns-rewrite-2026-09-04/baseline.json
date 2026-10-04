@@ -246,7 +246,8 @@
     "2026-10-04": {
       "reason": "docs/columns-rewrite-2026-10-04/kakunin-tanomikata-rewrite.md #1: 記載要領・機構の医師向けページの原文で根拠づけ、metaTitle・description を問いと答えの形に(title・h1 は変えない)",
       "slugs": [
-        "shindansho-kakunin"
+        "shindansho-kakunin",
+        "shindansho-tanomikata"
       ],
       "fields": [
         "metaTitle",
@@ -347,9 +348,9 @@
     {
       "slug": "shindansho-tanomikata",
       "title": "障害年金の診断書を主治医にどう頼む? — 切り出し方の台本、渡すメモ、依頼当日の流れ",
-      "metaTitle": "障害年金の診断書を主治医にどう頼む?｜切り出し方と依頼メモ",
+      "metaTitle": "障害年金の診断書を主治医にどう頼む？｜切り出し方の台本3つ、渡すメモ、機構が医師に求めている書き方",
       "h1": "障害年金の診断書を主治医にどう頼む? — 切り出し方の台本、渡すメモ、依頼当日の流れ",
-      "htmlTitle": "障害年金の診断書を主治医にどう頼む?｜切り出し方と依頼メモ｜障害年金申請サポート",
+      "htmlTitle": "障害年金の診断書を主治医にどう頼む？｜切り出し方の台本3つ、渡すメモ、機構が医師に求めている書き方｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/shindansho-tanomikata"
     },
     {
