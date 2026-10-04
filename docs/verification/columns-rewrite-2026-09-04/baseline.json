@@ -242,6 +242,16 @@
         "title",
         "h1"
       ]
+    },
+    "2026-10-04": {
+      "reason": "docs/columns-rewrite-2026-10-04/kakunin-tanomikata-rewrite.md #1: 記載要領・機構の医師向けページの原文で根拠づけ、metaTitle・description を問いと答えの形に(title・h1 は変えない)",
+      "slugs": [
+        "shindansho-kakunin"
+      ],
+      "fields": [
+        "metaTitle",
+        "htmlTitle"
+      ]
     }
   },
   "baseRef": "76deb22",
@@ -505,9 +515,9 @@
     {
       "slug": "shindansho-kakunin",
       "title": "障害年金の診断書を受け取ったら確認すべき7つのポイント — 「実際より軽く書かれていた」を提出前に防ぐ",
-      "metaTitle": "障害年金の診断書を受け取ったら確認すべき7つのポイント",
+      "metaTitle": "障害年金の診断書は開封して確認していい？｜受け取ったら見る7か所と、記載要領が医師に求めている書き方",
       "h1": "障害年金の診断書を受け取ったら確認すべき7つのポイント — 「実際より軽く書かれていた」を提出前に防ぐ",
-      "htmlTitle": "障害年金の診断書を受け取ったら確認すべき7つのポイント｜障害年金申請サポート",
+      "htmlTitle": "障害年金の診断書は開封して確認していい？｜受け取ったら見る7か所と、記載要領が医師に求めている書き方｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/shindansho-kakunin"
     },
     {

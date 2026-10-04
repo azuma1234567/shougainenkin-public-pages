@@ -607,11 +607,11 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
     slug: "shindansho-kakunin",
     title:
       "障害年金の診断書を受け取ったら確認すべき7つのポイント — 「実際より軽く書かれていた」を提出前に防ぐ",
-    metaTitle: "障害年金の診断書を受け取ったら確認すべき7つのポイント",
+    metaTitle: "障害年金の診断書は開封して確認していい？｜受け取ったら見る7か所と、記載要領が医師に求めている書き方",
     description:
-      "障害年金の診断書が実際より軽く書かれるのは、診察室で見える様子と家での様子に隙間があるからです。提出前に確かめたい7つのポイント、事実と異なる記載を見つけたときの伝え方、更新時の注意を順に説明します。",
+      "障害年金の診断書は、開封して確認してから出してよい書類です(個別の指示がなければ)。提出後の修正は原則きかないので、受け取ったら見る7か所を順に。7項目は「単身で生活するとしたら可能か」「診察時の一時的な状態ではなく1年程度の変動」で判断すると機構の記載要領が医師に求めており、同居家族の援助で「できる」になっていないかが最大の確認点。就労欄・現症日・⑪⑫⑬の空欄、更新のときの前回との比較まで。",
     datePublished: NEW_COLUMN_DATES["shindansho-kakunin"],
-    dateModified: "2026-08-14",
+    dateModified: "2026-10-04",
     primaryCluster: "medical-certificate",
     secondaryClusters: ["mental"],
     category: "診断書 — 主治医に伝える",
