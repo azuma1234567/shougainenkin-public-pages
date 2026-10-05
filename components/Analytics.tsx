@@ -118,6 +118,12 @@ function getLinkText(link: HTMLAnchorElement): string {
   ).trim();
 }
 
+/* 自動ブラウザ(Playwright・ヘッドレス Chrome・各種クローラ)は navigator.webdriver が true。
+   検証スクリプトや巡回を GA4 の数字に混ぜない(docs/site-audit-2026-10-05.md §4・§5-3)。 */
+function isAutomatedBrowser(): boolean {
+  return typeof navigator !== "undefined" && navigator.webdriver === true;
+}
+
 export default function Analytics() {
   const pathname = usePathname();
   const [consent, setConsent] = useState<ConsentChoice | null>(null);
@@ -128,6 +134,7 @@ export default function Analytics() {
 
   const configureAnalyticsOnce = useCallback(() => {
     if (analyticsConfiguredRef.current) return;
+    if (isAutomatedBrowser()) return;
 
     initializeGoogleTagQueue();
     if (!window.gtag) return;
@@ -163,7 +170,7 @@ export default function Analytics() {
   useEffect(() => {
     const savedConsent = readConsent();
 
-    if (savedConsent !== "denied") {
+    if (savedConsent !== "denied" && !isAutomatedBrowser()) {
       initializeGoogleTagQueue();
     }
 
