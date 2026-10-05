@@ -14,6 +14,7 @@
  * 8  ヘッダーの aria-current が正しく付く
  * 9  390px で横スクロールが無い
  * 10 内部リンク切れが無い
+ * 11 「次に読む 1 本」が全コラムにあり、実在する別のコラムを指す
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { parse } from "node-html-parser";
@@ -299,6 +300,24 @@ await browser.close();
   }
   for (const item of broken) check(false, item);
   finish(`sitemap 外のリンク ${seen.size} 本を確認、切れ ${broken.length}`);
+}
+
+/* ---------- 11. 「次に読む」の送り先 ---------- */
+{
+  /* docs/site-audit-2026-10-05.md §5-2。コラム 57 本の結論の箱の直後に「次に読む → 記事」が 1 本あり、
+     送り先が sitemap にある別のコラムを指していること。 */
+  const { check, finish } = failures(11, "「次に読む 1 本」が全コラムにあり、実在する別のコラムを指す");
+  let ok = 0, total = 0;
+  for (const [url, page] of pages) {
+    if (!url.startsWith("/columns/")) continue;
+    total += 1;
+    const anchors = page.root.querySelectorAll(".column-next a");
+    const href = anchors[0]?.getAttribute("href")?.split("#")[0] ?? null;
+    const good = anchors.length === 1 && href && href.startsWith("/columns/") && href !== url && known.has(href);
+    if (good) ok += 1;
+    check(good, `${url}: 次に読む=${href ?? "(なし)"}(${anchors.length} 本)`);
+  }
+  finish(`${ok} / ${total}`);
 }
 
 results.sort((a, b) => a.number - b.number);

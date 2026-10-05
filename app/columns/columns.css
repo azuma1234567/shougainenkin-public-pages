@@ -3,6 +3,9 @@
 .column-conclusion { margin: 24px 0; padding: 24px; border-radius: 12px; background: var(--platform-band); }
 .column-conclusion h2 { margin: 0 0 12px; padding: 0; border: 0; font-size: 1rem; }
 .column-conclusion p { margin: .7em 0 0; line-height: 1.9; }
+.column-next { display: flex; flex-wrap: wrap; gap: 0 .35em; margin: -8px 0 24px; padding: 12px 16px; border-left: 4px solid var(--platform-primary); border-radius: 0 8px 8px 0; background: var(--platform-chip); line-height: 1.7; }
+.column-next-label { font-weight: 600; color: var(--platform-heading); }
+.column-next a { color: var(--platform-link); text-decoration: underline; text-underline-offset: .15em; }
 .column-body { min-width: 0; line-height: 1.9; }
 .column-body p { margin: 0 0 1.2em; line-height: 1.9; }
 .column-body h2 { margin: 2.4em 0 1em; padding: 0 0 0 14px; border: 0; border-left: 4px solid var(--platform-primary); }

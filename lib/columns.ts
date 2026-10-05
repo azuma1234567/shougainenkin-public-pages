@@ -144,6 +144,9 @@ export type Column = {
   // 自動で出す。景表法のステマ規制は、記事ごとに・目立つ位置での表示を求めている。
   // リンクを1本でも入れたらここを true にすること(あとから足したときの付け忘れが一番危ない)。
   affiliate?: boolean;
+  // 「次に読む 1 本」(結論の箱の直後に 1 行で出す。docs/site-audit-2026-10-05.md §2・§5-2)。
+  // この記事を読み終えた人の次の動作で手で選ぶ。無ければ page.tsx の relatedSlugs[0] を使う。
+  nextSlug?: string;
 };
 
 // 第3弾の記事は一覧で分散表示できるよう、公開日を1本ずつ管理する。
@@ -308,6 +311,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "障害年金の請求書類は郵送で提出できます。日本年金機構は、窓口での相談が不要なら年金請求書をお近くの年金事務所あてに郵送できると案内しています。審査で不利にはなりません。送り先、簡易書留かレターパックプラス、折らない封筒、送付状の見本、月末の注意、そして市区町村か年金事務所かの決め方まで。",
     datePublished: "2026-07-29",
     dateModified: "2026-09-27",
+    nextSlug: "shinsei-kikan",
     primaryCluster: "application",
     category: "必要書類・提出",
   },
@@ -320,6 +324,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "障害年金の診断書の頼み方。診断書の作成は医師の通常業務で、日本年金機構は医師に「できる限り詳細かつ具体的に」書くよう求めています(医師向けページ・記載要領)。言い出せない人のための台本3パターン、頼むタイミング、渡すA4メモの完成形、依頼当日の流れ、言ってはいけないNGワード、文書料と期間の聞き方、オンライン診療や家族同席のときの頼み方まで。",
     datePublished: "2026-07-29",
     dateModified: "2026-10-04",
+    nextSlug: "shinsatsu-mae-memo",
     primaryCluster: "medical-certificate",
     secondaryClusters: ["application"],
     category: "診断書 — 主治医に伝える",
@@ -363,6 +368,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "障害年金の診断書が実態と違う・軽く書かれたときの対処。訂正を頼めるのは事実の誤り。評価は頼めませんが、日本年金機構の記載要領は「単身で生活するとしたら可能か」「1年程度の変動」「家族の援助を踏まえ過大評価にならないよう」判断すると医師に求めており、そこから外れた評価は事実を足して確認を頼めます。伝え方の完成形、出す/出さないの判断、審査会が診断書を採用しなかった裁決15件の傾向まで。",
     datePublished: "2026-07-31",
     dateModified: "2026-09-29",
+    nextSlug: "fushikyuu-shinsa-seikyu",
     primaryCluster: "medical-certificate",
     category: "診断書 — 主治医に伝える",
     orderInCategory: 100,
@@ -430,6 +436,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "受診状況等証明書は初診日を証明する書類で、初診の医療機関にカルテをもとに書いてもらいます(診断書とは別)。電話・郵送での頼み方の台本、文書料と期間の聞き方、受け取ったら見る様式⑩欄(本人の申し立てのみでは証明にならない)、カルテがないときの5つのルート(2番目の病院の前医記載・紹介状、カルテ以外の記録、手元の参考資料11項目、添付できない申立書、第三者証明)まで。",
     datePublished: "2026-07-23",
     dateModified: "2026-09-30",
+    nextSlug: "shoshinbi-wakaranai",
     primaryCluster: "conditions",
     secondaryClusters: ["application"],
     category: "必要書類・提出",
@@ -486,6 +493,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "病歴・就労状況等申立書の期間の区切り方。日本年金機構の記載要領は「発病から現在まで期間をあけずに」「1つの期間が5年を超える場合は3〜5年ごとに」「受診していない期間は『受診していない』に○」と定めています。転院・休職・退職・未受診で区切った設計図の完成形、続紙の使い方、裏面の障害認定日頃と現在の2欄、20歳前の簡素化ルールまで。",
     datePublished: "2026-07-21",
     dateModified: "2026-09-30",
+    nextSlug: "moushitatesho-mijushin-kikan",
     primaryCluster: "application",
     secondaryClusters: ["mental", "depression"],
     category: "申立書",
@@ -570,6 +578,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "障害年金の更新（障害状態確認届）は1〜5年ごと。誕生月の3か月前の月末に届き、誕生月末が期限。令和6年度の再認定1万件のうち継続96.8%・支給停止1.0%。ガイドラインは、等級を下げる前に前回の診断書を確認し本人・家族・医師へ照会するよう定めています。就労中の伝え方、止まったときの2つの復活ルート、裁決で覆った実例。",
     datePublished: "2026-07-20",
     dateModified: "2026-09-28",
+    nextSlug: "shindansho-kakunin",
     primaryCluster: "application",
     secondaryClusters: ["medical-certificate"],
     category: "受給が始まってから",
@@ -584,6 +593,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "主治医に診断書を断られる理由は5つに分かれ、理由ごとに頼み方が変わります。口頭での頼み方、そのまま使える依頼文、家族や支援職に相談する方法、転院する前に確かめることを順に説明します。",
     datePublished: "2026-07-20",
     dateModified: "2026-07-31",
+    nextSlug: "shindansho-tanomikata",
     primaryCluster: "medical-certificate",
     secondaryClusters: ["mental"],
     category: "診断書 — 主治医に伝える",
@@ -611,6 +621,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "障害年金の診断書は、開封して確認してから出してよい書類です(個別の指示がなければ)。提出後の修正は原則きかないので、受け取ったら見る7か所を順に。7項目は「単身で生活するとしたら可能か」「診察時の一時的な状態ではなく1年程度の変動」で判断すると機構の記載要領が医師に求めており、同居家族の援助で「できる」になっていないかが最大の確認点。就労欄・現症日・⑪⑫⑬の空欄、更新のときの前回との比較まで。",
     datePublished: NEW_COLUMN_DATES["shindansho-kakunin"],
     dateModified: "2026-10-04",
+    nextSlug: "shindansho-jittai-chigau",
     primaryCluster: "medical-certificate",
     secondaryClusters: ["mental"],
     category: "診断書 — 主治医に伝える",
@@ -810,6 +821,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "病歴・就労状況等申立書はA4用紙に印刷して提出できます。自宅のプリンター、スマートフォンからコンビニで印刷する手順、印刷後に確かめる欄と枚数、手書きの用紙と混ぜてよいかまで、迷いやすいところを順に説明します。",
     datePublished: "2026-07-17",
     dateModified: "2026-09-27",
+    nextSlug: "teishutsusaki-yuusou",
     primaryCluster: "application",
     category: "申立書",
     orderInCategory: 60,
@@ -824,6 +836,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "障害年金の診断書のために主治医へ渡す「生活状況メモ」の書き方を具体例つきで解説。何を書くか(7項目・症状の波・家族の援助・就労)、書き方のコツ(頻度と具体例)、A4一枚の完成形、診察での渡し方の台本、渡せなかったときの対処、更新での使い方まで。",
     datePublished: "2026-07-17",
     dateModified: "2026-09-27",
+    nextSlug: "nichijo-seikatsu-7koumoku",
     primaryCluster: "medical-certificate",
     secondaryClusters: ["mental"],
     category: "診断書 — 主治医に伝える",
@@ -887,6 +900,7 @@ const BASE_COLUMNS: Omit<Column, "hubPrimary" | "hubSecondary" | "role" | "merge
       "B型の平均工賃は月24,141円(令和6年度・全国)、都道府県別では徳島30,231円〜大阪19,747円。A型の平均賃金は91,451円。障害基礎年金2級は月70,608円(令和8年度)。B型+2級で約95,000円、A型+2級で約162,000円。引かれる利用料(課税世帯で上限9,300円)・交通費・GHの家賃、足される給付金(2級 月5,620円)・家賃補助・手当、生活保護との併用の仕組み、見学で聞くお金の8項目。",
     datePublished: "2026-09-13",
     dateModified: "2026-09-30",
+    nextSlug: "sagyousho-hajimeru-tsutaeru",
     primaryCluster: "application",
     category: "受給が始まってから",
     orderInCategory: 90,
