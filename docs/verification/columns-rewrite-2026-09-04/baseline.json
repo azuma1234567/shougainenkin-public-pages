@@ -257,7 +257,8 @@
     "2026-10-05": {
       "reason": "docs/site-audit-2026-10-05.md §5-1: metaTitle を 40 字程度に詰める(title・h1・本文・dateModified は変えない)",
       "slugs": [
-        "teishutsusaki-yuusou"
+        "teishutsusaki-yuusou",
+        "hatarakinagara"
       ],
       "fields": [
         "metaTitle",
@@ -582,9 +583,9 @@
     {
       "slug": "hatarakinagara",
       "title": "働きながら障害年金はもらえる？「働ける＝改善」と誤解されない伝え方",
-      "metaTitle": "働きながら障害年金はもらえる?｜受給者の34.0%は仕事あり。就労中に医師へ伝える4点と、審査が見る就労の実態",
+      "metaTitle": "働きながら障害年金はもらえる？｜受給者の34.0%は仕事あり。医師に伝える4点",
       "h1": "働きながら障害年金はもらえる？「働ける＝改善」と誤解されない伝え方",
-      "htmlTitle": "働きながら障害年金はもらえる?｜受給者の34.0%は仕事あり。就労中に医師へ伝える4点と、審査が見る就労の実態｜障害年金申請サポート",
+      "htmlTitle": "働きながら障害年金はもらえる？｜受給者の34.0%は仕事あり。医師に伝える4点｜障害年金申請サポート",
       "canonical": "https://shougainenkin-note.net/columns/hatarakinagara"
     },
     {
