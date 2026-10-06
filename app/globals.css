@@ -423,31 +423,27 @@ strong {
   color: var(--green-dark);
 }
 
-/* ---- ヘッダー ---- */
+/* ---- ヘッダー・フッターの土台 ----
+   色・大きさ・余白は app/platform.css の「共通ヘッダー」「共通フッター」が持つ(2026-09 の情報プラットフォームで白地に変えた)。
+   ここに残すのは platform.css が上書きしていない配置の宣言だけ。2026-10-06 デザインシステム第2段 候補 16 で、
+   後勝ちで消えていた旧・濃紺の色・寸法(background-color/color/font-size/padding/max-width など)を削除した(描画は同じ)。 */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background-color: var(--green-dark);
 }
 
 .site-header-inner {
-  max-width: var(--content);
   margin: 0 auto;
-  padding: 0.35rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  column-gap: 0.75rem;
 }
 
 .site-title {
-  color: #ffffff;
   text-decoration: none;
   font-weight: 700;
-  font-size: 1.02rem;
   letter-spacing: 0.02em;
   display: inline-flex;
   align-items: center;
@@ -457,7 +453,6 @@ strong {
 }
 
 .site-title:hover {
-  color: #ffffff;
   text-decoration: none;
 }
 
@@ -465,83 +460,40 @@ strong {
   position: relative;
 }
 
-.site-title:hover .site-title-text::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: -2px;
-  left: 0;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.7);
-}
-
 /* ロゴマーク: 進行中のステップを表す小さな円 */
 .site-mark {
   flex: none;
-  width: 26px;
-  height: 26px;
 }
 
 .site-nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.15rem;
 }
 
 .site-nav a {
   position: relative;
-  color: rgba(255, 255, 255, 0.88);
   text-decoration: none;
-  font-size: 0.92rem;
-  font-weight: 600;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
   min-width: 44px;
-  padding: 0.2rem 0.7rem;
-  border-radius: var(--radius-sm);
   transition:
     background-color 0.2s var(--ease),
     color 0.2s var(--ease);
-}
-
-.site-nav a:hover {
-  color: #ffffff;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* ---- フッター ---- */
 
 .site-footer {
   position: relative;
-  background-color: var(--green-dark);
-  color: #ffffff;
   margin-top: auto;
 }
 
 .site-footer-inner {
-  max-width: var(--content);
   margin: 0 auto;
-  padding: 2.25rem 1.25rem 2rem;
-  text-align: center;
 }
 
 .footer-site-name {
-  margin: 0 0 0.85rem;
   font-weight: 700;
-  font-size: 1.02rem;
-  letter-spacing: 0.04em;
-}
-
-.site-footer nav {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 2rem;
-  margin-bottom: 0.75rem;
-  text-align: left;
 }
 
 .site-footer nav section {
@@ -559,8 +511,6 @@ strong {
 }
 
 .site-footer a {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.88rem;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -574,11 +524,9 @@ strong {
 
 .site-footer a:hover {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .footer-copyright {
-  margin: 0.5rem 0 0.25rem;
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.85rem;
 }
@@ -586,7 +534,6 @@ strong {
 /* 広告で運営していることの常時開示(景表法のステマ規制)。
    著作権行の直下、フッターの全ページに出す。リンクの色より一段落とす。 */
 .footer-ad-disclosure {
-  margin: 0 0 0.75rem;
   color: rgba(255, 255, 255, 0.75);
   font-size: 0.82rem;
   line-height: 1.7;
