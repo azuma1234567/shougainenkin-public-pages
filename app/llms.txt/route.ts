@@ -11,6 +11,7 @@ import { HUB_CONTENT } from "@/lib/hub-content";
 import { HUB_HINTS, HUB_INDEX } from "@/lib/hub-index";
 import { GOKAI } from "@/data/gokai";
 import { TOOLS } from "@/data/dougu";
+import { MORITA_ARTICLES, moritaPath } from "@/lib/morita";
 
 export const dynamic = "force-static";
 
@@ -34,6 +35,7 @@ const toolByPath = new Map(Object.values(TOOLS).map((tool) => [tool.path, tool])
 const columnBySlug = new Map(COLUMNS.map((column) => [column.slug, column]));
 const gokaiBySlug = new Map(GOKAI.map((card) => [card.slug, card]));
 const hubLabel = new Map(HUBS.map((hub) => [hub.path, hub.label]));
+const moritaByPath = new Map(MORITA_ARTICLES.map((a) => [moritaPath(a), a]));
 const indexKind = (path: string) => path.slice(1) as keyof typeof HUB_INDEX;
 
 /* 1行分の「題名」と「説明」を、既にある文言から引く。見つからなければ説明なし。 */
@@ -48,6 +50,9 @@ function entryFor(path: string): { title: string; description?: string } {
     const column = columnBySlug.get(path.slice("/columns/".length));
     if (column) return { title: column.title, description: column.description };
   }
+  /* 森田療法の区画。題名と説明は lib/morita.ts のもの(STATIC_TITLES には書かない) */
+  const morita = moritaByPath.get(path);
+  if (morita) return { title: morita.title, description: morita.description };
   if (path.startsWith("/gokai/")) {
     const card = gokaiBySlug.get(path.slice("/gokai/".length));
     if (card) return { title: card.misconception, description: card.truth };

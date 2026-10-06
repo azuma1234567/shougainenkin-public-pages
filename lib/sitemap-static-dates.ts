@@ -10,7 +10,7 @@ export const SITEMAP_STATIC_DATES: Record<string, string> = {
   "/shinsei": "2026-09-06",
   "/jitsurei": "2026-09-08",
   "/columns": "2026-09-06",
-  "/about": "2026-09-18",
+  "/about": "2026-10-06",
   "/support": "2026-09-08",
   "/privacy": "2026-09-08",
   "/terms": "2026-09-05",
@@ -36,6 +36,8 @@ export const SITEMAP_STATIC_DATES: Record<string, string> = {
   "/dougu/moushitatesho": "2026-09-13",
   "/dougu/kougin": "2026-09-08",
   "/dougu/koushin": "2026-09-08",
+  /* 森田療法のハブ。sitemap では lib/morita.ts の dateModified を使うが、dateFor の表引きが落ちないように置く */
+  "/morita": "2026-10-06",
 };
 
 /* この表が対応する page.tsx の場所。公開前チェックが git の日付と突き合わせるのに使う。 */

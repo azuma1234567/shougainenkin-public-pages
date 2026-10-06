@@ -1,0 +1,12 @@
+/* 森田療法の区画(/morita/)。columns.css を読み込んだ上での差分だけ(docs/claude-code-morita-2026-10-06-instructions.md §1)。
+   色は app/design-tokens.css のトークン。意味の色(--warn)は左罫線にだけ使う。 */
+.morita-safety { margin: 0 0 24px; padding: 14px 18px; border-left: 4px solid var(--warn); border-radius: 0 8px 8px 0; background: var(--paper-card); font-size: 0.95rem; line-height: 1.8; }
+.morita-safety p { margin: 0.35em 0; }
+.morita-safety-title { font-weight: 700; color: var(--platform-heading); }
+.morita-safety a { color: var(--primary-deep); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.morita-cards { display: grid; gap: 14px; margin: 1.2em 0 1.6em; padding: 0; list-style: none; }
+.morita-cards li { margin: 0; }
+.morita-cards .hub-card { height: 100%; }
+@media (min-width: 640px) { .morita-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.morita-author { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--ink-muted); font-size: 0.9rem; line-height: 1.8; }
+.morita-author p { margin: 0.5em 0; }

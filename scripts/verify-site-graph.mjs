@@ -40,7 +40,8 @@ const HEADER = [
   ["/jitsurei", "実例と数字"], ["/columns", "コラム"],
 ];
 const FOOTER = [
-  ["病気・状況・困りごと別", ["/byoki", "/joukyou", "/nayami", "/dougu/mitate", "/erabu"]],
+  /* /morita は 2026-10-06 の森田療法の区画(docs/claude-code-morita-2026-10-06-instructions.md §7) */
+  ["病気・状況・困りごと別", ["/byoki", "/joukyou", "/nayami", "/dougu/mitate", "/erabu", "/morita"]],
   ["申請の進め方", ["/hajimete", "/shinsei", "/dougu/shorui", "/dougu/madoguchi", "/dougu/moushitatesho", "/gokai", "/columns", "/yougo", "/jukyuugo"]],
   ["お金と数字", ["/dougu/kingaku", "/okane", "/jitsurei", "/suuji"]],
   ["このサイトについて", ["/about", "/quality", "/support", "/privacy", "/terms", "/ads", "/app", "/app/terms"]],

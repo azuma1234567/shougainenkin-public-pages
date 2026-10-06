@@ -1,0 +1,12 @@
+森田療法 6 本: lead・本文・FAQ 生成 OK
+未公開リンクの置換(準備中): 6 path / 13 か所
+  /morita/jissen/nikki ×4
+  /morita/jissen/yarikata ×1
+  /morita/kangaekata/arugamama ×1
+  /morita/kiroku/naze ×1
+  /morita/qa/dokode ×5
+  /morita/shoujou/shintai ×1
+公開 path への読み替え(README の旧 slug): 2 path / 3 か所
+  /morita/qa/ayashii → /morita/qa/morita-ayashii ×1
+  /morita/qa/kouka → /morita/qa/morita-kouka ×2
+箇条書きの中の矢印をリンクにした: 3 か所

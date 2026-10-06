@@ -9,6 +9,7 @@ import { SITEMAP_STATIC_DATES } from "@/lib/sitemap-static-dates";
 import { SHOW_LISTINGS } from "@/lib/ads";
 import { PREFECTURES_47 } from "@/data/sharoushi/prefectures";
 import { latestUpdated, OFFICES, officesForPref } from "@/lib/sharoushi";
+import { MORITA_ARTICLES, moritaPath } from "@/lib/morita";
 
 // 全エントリに lastModified を付ける(監査 §4-1)。changeFrequency と priority は付けない
 // (Google は見ていない。付けるとノイズになる)。
@@ -87,5 +88,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...OFFICES.map((o) => ({ url: `${SITE_URL}/sharoushi/${o.pref}/${o.id}`, lastModified: new Date(o.updatedAt) })),
       ]
     : [];
-  return [...staticPages, ...hubPages, ...gokaiPages, ...columnPages, ...sharoushiPages];
+  /* 森田療法の区画(docs/claude-code-morita-2026-10-06-instructions.md §7)。ハブも記事も lib/morita.ts の dateModified。 */
+  const moritaPages: MetadataRoute.Sitemap = MORITA_ARTICLES.map((a) => ({ url: `${SITE_URL}${moritaPath(a)}`, lastModified: new Date(a.dateModified) }));
+  return [...staticPages, ...hubPages, ...gokaiPages, ...columnPages, ...moritaPages, ...sharoushiPages];
 }

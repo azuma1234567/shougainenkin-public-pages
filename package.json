@@ -36,7 +36,9 @@
     "indexnow": "node scripts/indexnow-submit.mjs --since $(date -v-7d +%F)",
     "build:fonts": "node scripts/build-font-subset.mjs",
     "verify:fonts": "node scripts/verify-fonts.mjs",
-    "check:saiketsu-urls": "node scripts/check-saiketsu-urls.mjs"
+    "check:saiketsu-urls": "node scripts/check-saiketsu-urls.mjs",
+    "import:morita": "node --import ./scripts/lib/ts-alias.mjs scripts/import-morita.mjs",
+    "import:morita:check": "node --import ./scripts/lib/ts-alias.mjs scripts/import-morita.mjs --check"
   },
   "dependencies": {
     "next": "^15.3.4",
