@@ -22,6 +22,8 @@ export const PAGES = [
   ["nayami-fushikyu", "/nayami/fushikyu"],
   ["support", "/support"],
   ["about", "/about"],
+  /* 候補 6(--platform-line を使う一覧の目次)のために 2026-10-06 に追加。13 ページ目 */
+  ["columns", "/columns"],
 ];
 export const WIDTHS = [375, 1280];
 const dir = `docs/verification/design-system-2026-10-06/shots/${label}`;

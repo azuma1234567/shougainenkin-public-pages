@@ -112,7 +112,7 @@
 | 3 | 近似色の統合: #d7e9f5(19)→`--line`、#f4faff/#f4fafe/#eef7fc/#e8f4fc → `--paper-deep` か `--primary-wash`、#fbfdff(`--card-warm`)→ `--paper-card`、#b9dced/#8cc8e8/#9db9ca/#8db4c9 → `--line-strong` | 道具(kingaku・mitate・moushitatesho・shorui・madoguchi)、column-theme-block、hub-sibling-links、gokai-filters | 1〜2px の色差。並べないと分からない |
 | 4 | 見立てツール(.mi-*)の独自グレー #526575/#263746/#71808d/#cbd5df/#bbbbbb → `--ink-muted`/`--ink`/`--ink-faint`/`--line` | /dougu/mitate だけ | 44 か所 |
 | 5 | 警告箱の黄系(#fdf3dd/#8b6a1f/#f0e2bd/#6b5316)を `--warn` 1 色 + 地に統一 | kingaku・mitate・shorui の注意箱、jitsurei の札 | 意味色の限定 |
-| 6 | 未定義トークン(`--platform-navy`・`--platform-blue`・`--platform-blue-soft`・`--platform-line`)の修正 | ハブ本文(.hub-content)の h2/h3 の色、引用の左罫と地、columns 一覧の目次の罫 | いまは継承色で描かれている。直すと色が付く |
+| 6 | ~~未定義トークンの修正~~ **済(2026-10-06)**: `--platform-navy`=見出し色、`--platform-blue`=--primary、`--platform-blue-soft`=--paper-deep、`--platform-line`=--line | ハブ本文(.hub-content)の h2/h3・FAQ の summary が見出し色に、引用に左罫と薄青の地、関連ハブのリンクが青に。49 ハブ(引用があるのは 4 ハブ)。/columns は fallback があったので変わらず | before/after: docs/verification/design-system-2026-10-06/c6-before-after-*.png、diff-c6.md |
 | 7 | font-size 113 種 → 6 段、line-height 20 → 2 | 全ページ | 最も影響が大きい。記事ページ → platform の順で |
 | 8 | 余白を 8px 格子に(1,112 個が格子外)。h2/h3 の上下、箱の内側を 2-3 の値に | 全ページ | 7 と同時に |
 | 9 | border-radius 25 → 3(8/10/12)。999px の丸チップは 8px に(ピル型をやめる方針の徹底) | チップ・札・フィルタ(gokai-filters・p-chip・p-label・column-theme-links) | 2026-08 の方針の積み残し |
