@@ -12,13 +12,6 @@ const { MORITA_ARTICLES, MORITA_PUBLISHED_PATHS } = await import("../lib/morita.
 const directory = new URL("../docs/morita-2026-10-06/articles/", import.meta.url);
 const plain = value => value.replace(/\*\*(.*?)\*\*/g, "$1").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
 
-/* 原稿のリンク先と公開 slug の対応。README(docs/morita-2026-10-06/README.md)は /morita/qa/ayashii・/morita/qa/kouka と
-   書いているが、指示書 §2 の slug は morita-ayashii・morita-kouka。原稿は直さず、ここで公開 path に読み替える。 */
-const PATH_ALIASES = {
-  "/morita/qa/ayashii": "/morita/qa/morita-ayashii",
-  "/morita/qa/kouka": "/morita/qa/morita-kouka",
-};
-
 /* 本文中の /morita/... リンクを検査し、未公開 path を置き換える。
    - `→ ラベル(/morita/…)` の行(段落として独立)         : 公開なら MarkdownArticle がそのまま矢印カードにする。未公開なら `→ ラベル(準備中)`
    - `- 文 → ラベル(/morita/…)` の箇条書き                : 公開なら `- 文 → [ラベル](/path)`(表示文字は同じ。素の path は出さない)。未公開なら `- 文 → ラベル(準備中)`
@@ -27,10 +20,9 @@ const PATH_ALIASES = {
    置換した数を path ごとに数えて返す。 */
 function rewriteLinks(slug, content) {
   const replaced = {};   // path -> 回数(未公開 → 準備中)
-  const aliased = {};    // 旧 path -> 回数(公開 path へ読み替え)
   const linked = {};     // 箇条書きの中で [ラベル](path) にした数
   const count = (bag, key) => { bag[key] = (bag[key] ?? 0) + 1; };
-  const resolve = (href) => { const to = PATH_ALIASES[href]; if (to) { count(aliased, href); return to; } return href; };
+  const resolve = (href) => href;
 
   const lines = content.split("\n").map((line) => {
     // 1) [テキスト](/morita/…)
@@ -64,12 +56,12 @@ function rewriteLinks(slug, content) {
   const out = lines.join("\n");
   // 置換漏れ: 公開済み以外の /morita/ path が残っていないこと
   for (const m of out.matchAll(/\/morita\/[a-z0-9/-]+/g)) assert.ok(MORITA_PUBLISHED_PATHS.has(m[0]), `${slug}: 未公開 path が残っている ${m[0]}`);
-  return { content: out, replaced, aliased, linked };
+  return { content: out, replaced, linked };
 }
 
 export function parseMorita() {
   const articles = {};
-  const totals = { replaced: {}, aliased: {}, linked: {} };
+  const totals = { replaced: {}, linked: {} };
   for (const file of readdirSync(directory).filter(file => file.endsWith(".md")).sort()) {
     const input = readFileSync(new URL(file, directory), "utf8").replace(/\r\n/g, "\n");
     const match = input.match(/^---\nslug: ([^\n]+)\ndateModified: ([^\n]+)\nlead:\n((?:  - [^\n]+\n)+)---\n([\s\S]+)$/);
@@ -86,9 +78,8 @@ export function parseMorita() {
     assert.ok(!rawContent.includes("<!--"), `${slug}: 未対応コメント`);
     assert.ok(!input.includes("【"), `${slug}: 加筆待ちの【 】が残っている`);
     assert.ok(!/^## 出典/m.test(rawContent), `${slug}: 「## 出典」節がある(方針: 出典欄は置かない)`);
-    const { content, replaced, aliased, linked } = rewriteLinks(slug, rawContent);
+    const { content, replaced, linked } = rewriteLinks(slug, rawContent);
     for (const [k, v] of Object.entries(replaced)) totals.replaced[k] = (totals.replaced[k] ?? 0) + v;
-    for (const [k, v] of Object.entries(aliased)) totals.aliased[k] = (totals.aliased[k] ?? 0) + v;
     for (const [k, v] of Object.entries(linked)) totals.linked[k] = (totals.linked[k] ?? 0) + v;
     const section = content.match(/^## [^\n]*よくある質問[^\n]*\n([\s\S]*?)(?=^## |$(?![\s\S]))/m)?.[1];
     assert.ok(section, `${slug}: FAQ節なし`);
@@ -117,7 +108,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   console.log(`森田療法 ${Object.keys(articles).length} 本: lead・本文・FAQ 生成 OK`);
   console.log(`未公開リンクの置換(準備中): ${Object.keys(totals.replaced).length} path / ${sum(totals.replaced)} か所`);
   for (const [k, v] of Object.entries(totals.replaced).sort()) console.log(`  ${k} ×${v}`);
-  console.log(`公開 path への読み替え(README の旧 slug): ${Object.keys(totals.aliased).length} path / ${sum(totals.aliased)} か所`);
-  for (const [k, v] of Object.entries(totals.aliased).sort()) console.log(`  ${k} → ${PATH_ALIASES[k]} ×${v}`);
   console.log(`箇条書きの中の矢印をリンクにした: ${sum(totals.linked)} か所`);
 }

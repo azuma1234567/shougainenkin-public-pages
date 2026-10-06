@@ -8,8 +8,8 @@ type Content = { default: string; lead: string[]; faqs: { question: string; answ
 
 async function loadContent(slug: string): Promise<Content> {
   switch (slug) {
-    case "morita-ayashii": return import("@/content/morita/morita-ayashii");
-    case "morita-kouka": return import("@/content/morita/morita-kouka");
+    case "ayashii": return import("@/content/morita/ayashii");
+    case "kouka": return import("@/content/morita/kouka");
     case "shakou-fuan": return import("@/content/morita/shakou-fuan");
     case "kyouhaku": return import("@/content/morita/kyouhaku");
     case "panic": return import("@/content/morita/panic");

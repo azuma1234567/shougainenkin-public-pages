@@ -39,8 +39,9 @@ export default function MoritaArticle({
     return [lines.slice(0, next).join("\n"), lines.slice(next).join("\n")];
   })();
 
+  /* data-yougo-skip: 年金の用語辞典の自動リンク(YougoAutoLinker)をこの区画では走らせない(2026-10-06 の指示) */
   return (
-    <article className="column-article morita-article">
+    <article className="column-article morita-article" data-yougo-skip>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(moritaJsonLd(article, faqs)).replace(/</g, "\\u003c") }}
