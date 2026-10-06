@@ -1,4 +1,4 @@
-const pages=["/morita","/morita/qa/ayashii","/morita/qa/kouka","/morita/shoujou/shakou-fuan","/morita/shoujou/kyouhaku","/morita/shoujou/panic","/morita/qa/dokode","/morita/jissen/nikki"];
+const pages=["/morita","/morita/qa/ayashii","/morita/qa/kouka","/morita/shoujou/shakou-fuan","/morita/shoujou/kyouhaku","/morita/shoujou/panic","/morita/qa/dokode","/morita/jissen/nikki","/morita/shoujou/shintai","/morita/kangaekata/arugamama","/morita/jissen/yarikata"];
 for (const p of pages) {
   const res=await fetch("http://localhost:3210"+p); const h=await res.text();
   const main=h.match(/<main[^>]*>([\s\S]*?)<\/main>/)[1];

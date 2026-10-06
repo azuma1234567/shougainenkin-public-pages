@@ -18,3 +18,10 @@
   ayashii の FAQ 答えにある「森田療法はどこで受けられる?」(/morita/qa/dokode)は、文中の「ラベル」(/path) 形なので [「ラベル」](/path) にして素の path を本文に出さない
   (FAQ の JSON-LD では plain() でラベルだけになる)
 - prelaunch A/B/C ○、verify:site-graph 11/11、配信 HTML 8 ページで禁止物なし・ld+json 1 本
+
+## 2026-10-06 追加: arugamama・yarikata・shintai の 3 本
+
+- 生成ページ 11: /morita + qa 3(ayashii・kouka・dokode)+ shoujou 4(shakou-fuan・kyouhaku・panic・shintai)+ jissen 2(nikki・yarikata)+ kangaekata 1(arugamama)
+- import:morita --check OK。未公開リンクの置換 0 path / 0 か所(morita.md から E1(naze)の矢印行が外れたので置換対象なし)。「準備中」は 11 ページとも 0
+- ハブの症状別カードは 4 枚(shakou-fuan・kyouhaku・panic・shintai)。640px 以上で 2 列 × 2 段(morita-hub-cards-375.png)
+- prelaunch A/B/C ○、verify:site-graph 11/11、配信 HTML 11 ページで禁止物なし・ld+json 1 本・用語辞典リンク 0

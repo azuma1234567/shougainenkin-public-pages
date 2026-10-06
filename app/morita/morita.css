@@ -7,6 +7,7 @@
 .morita-cards { display: grid; gap: 14px; margin: 1.2em 0 1.6em; padding: 0; list-style: none; }
 .morita-cards li { margin: 0; }
 .morita-cards .hub-card { height: 100%; }
-@media (min-width: 640px) { .morita-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* 症状別 4 枚(2026-10-06 に shintai を追加)。2 列 × 2 段 */
+@media (min-width: 640px) { .morita-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .morita-author { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--ink-muted); font-size: 0.9rem; line-height: 1.8; }
 .morita-author p { margin: 0.5em 0; }

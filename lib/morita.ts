@@ -77,6 +77,14 @@ export const MORITA_ARTICLES: MoritaArticleMeta[] = [
     datePublished: "2026-10-06", dateModified: "2026-10-06",
     related: ["shakou-fuan", "kyouhaku", "morita"],
   },
+  {
+    slug: "shintai", group: "shoujou",
+    title: "身体症状症・病気不安症と森田療法 — 原因探しをやめ、不調のまま生活へ",
+    metaTitle: "身体症状症・病気不安症と森田療法｜検査で異常なしでも治らない不調との付き合い方",
+    description: "頭痛や倦怠感、しびれ、腹の不調が続く。検査では異常がないのに、重い病気ではないかと不安になる。身体症状症・病気不安症に森田療法を当てると、焦点は「症状の原因探し」から「不調に向け続けている注意」に移ります。",
+    datePublished: "2026-10-06", dateModified: "2026-10-06",
+    related: ["panic", "kyouhaku", "dokode"],
+  },
   /* 2026-10-06 追加の 2 本。description は原稿の lead 1 行目そのまま。 */
   {
     slug: "dokode", group: "qa",
@@ -93,6 +101,22 @@ export const MORITA_ARTICLES: MoritaArticleMeta[] = [
     description: "森田療法の日記は、気持ちを吐き出す日記ではありません。外来森田療法では、日記を使って「話題の土台を日々の生活に置く」のが基本で、書くのは症状ではなく、その日の出来事と、やったことです。",
     datePublished: "2026-10-06", dateModified: "2026-10-06",
     related: ["dokode", "shakou-fuan", "morita"],
+  },
+  {
+    slug: "arugamama", group: "kangaekata",
+    title: "「あるがまま」とは — 諦めでも、我慢でも、納得でもない",
+    metaTitle: "森田療法の「あるがまま」とは｜諦めでも我慢でもない、2つの面と一番の落とし穴",
+    description: "「あるがまま」とは、不安を受け入れて納得することではなく、「不安は思い通りにならない事実だ、仕方がない」と受けとめて、そのまま目の前のことに手を出す姿勢です。諦めでも、我慢でも、開き直りでもありません。",
+    datePublished: "2026-10-06", dateModified: "2026-10-06",
+    related: ["yarikata", "nikki", "morita"],
+  },
+  {
+    slug: "yarikata", group: "jissen",
+    title: "森田療法のやり方 — 自分でできる範囲と、できない範囲",
+    metaTitle: "森田療法のやり方｜自分でできる3つと、できない3つ、3段階の進め方",
+    description: "森田療法で自分でできるのは、考え方を学ぶこと、生活と行動を整えること、日記をつけることの3つです。できないのは、診断、薬の判断、そして治療者が返す日記のコメントです。この線を先に引いておくと、安全に始められます。",
+    datePublished: "2026-10-06", dateModified: "2026-10-06",
+    related: ["nikki", "arugamama", "dokode"],
   },
 ];
 

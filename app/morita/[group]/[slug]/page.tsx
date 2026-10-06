@@ -15,6 +15,9 @@ async function loadContent(slug: string): Promise<Content> {
     case "panic": return import("@/content/morita/panic");
     case "dokode": return import("@/content/morita/dokode");
     case "nikki": return import("@/content/morita/nikki");
+    case "shintai": return import("@/content/morita/shintai");
+    case "arugamama": return import("@/content/morita/arugamama");
+    case "yarikata": return import("@/content/morita/yarikata");
     default: notFound();
   }
 }
