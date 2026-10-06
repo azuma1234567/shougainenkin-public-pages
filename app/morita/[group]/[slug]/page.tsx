@@ -13,6 +13,8 @@ async function loadContent(slug: string): Promise<Content> {
     case "shakou-fuan": return import("@/content/morita/shakou-fuan");
     case "kyouhaku": return import("@/content/morita/kyouhaku");
     case "panic": return import("@/content/morita/panic");
+    case "dokode": return import("@/content/morita/dokode");
+    case "nikki": return import("@/content/morita/nikki");
     default: notFound();
   }
 }

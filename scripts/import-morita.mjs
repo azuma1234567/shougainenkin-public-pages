@@ -16,7 +16,8 @@ const plain = value => value.replace(/\*\*(.*?)\*\*/g, "$1").replace(/\[([^\]]+)
    - `→ ラベル(/morita/…)` の行(段落として独立)         : 公開なら MarkdownArticle がそのまま矢印カードにする。未公開なら `→ ラベル(準備中)`
    - `- 文 → ラベル(/morita/…)` の箇条書き                : 公開なら `- 文 → [ラベル](/path)`(表示文字は同じ。素の path は出さない)。未公開なら `- 文 → ラベル(準備中)`
    - `[テキスト](/morita/…)`                               : 未公開ならテキストだけ
-   - 文中の `「…」(/morita/…)` など上記以外               : 未公開なら `(準備中)`
+   - 文中の `「ラベル」(/morita/…)`                         : 公開なら `[「ラベル」](/path)`。未公開なら `「ラベル」(準備中)`
+   - それ以外の文中の `(/morita/…)`                         : 未公開なら `(準備中)`
    置換した数を path ごとに数えて返す。 */
 function rewriteLinks(slug, content) {
   const replaced = {};   // path -> 回数(未公開 → 準備中)
@@ -45,7 +46,13 @@ function rewriteLinks(slug, content) {
       if (MORITA_PUBLISHED_PATHS.has(to)) { count(linked, to); return `${bullet[1]}[${bullet[2]}](${to})`; }
       count(replaced, bullet[3]); return `${bullet[1]}${bullet[2]}(準備中)`;
     }
-    // 4) それ以外の文中の (/morita/…)
+    // 4) 文中の `「ラベル」(/morita/…)`: 公開なら [「ラベル」](/path)(素の path を本文に出さない。FAQ の JSON では plain() でラベルだけになる)
+    line = line.replace(/(「[^「」]+」)\((\/morita[^()\s]*)\)/g, (m, label, href) => {
+      const to = resolve(href);
+      if (MORITA_PUBLISHED_PATHS.has(to)) { count(linked, to); return `[${label}](${to})`; }
+      count(replaced, href); return `${label}(準備中)`;
+    });
+    // 5) それ以外の文中の (/morita/…)
     line = line.replace(/\((\/morita[^()\s]*)\)/g, (m, href) => {
       const to = resolve(href);
       if (MORITA_PUBLISHED_PATHS.has(to)) return `(${to})`;
@@ -108,5 +115,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   console.log(`森田療法 ${Object.keys(articles).length} 本: lead・本文・FAQ 生成 OK`);
   console.log(`未公開リンクの置換(準備中): ${Object.keys(totals.replaced).length} path / ${sum(totals.replaced)} か所`);
   for (const [k, v] of Object.entries(totals.replaced).sort()) console.log(`  ${k} ×${v}`);
-  console.log(`箇条書きの中の矢印をリンクにした: ${sum(totals.linked)} か所`);
+  console.log(`箇条書きの矢印・文中の「ラベル」をリンクにした: ${sum(totals.linked)} か所`);
 }

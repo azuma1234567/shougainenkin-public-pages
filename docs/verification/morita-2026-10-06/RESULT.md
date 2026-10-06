@@ -9,3 +9,12 @@
 - verify:hubs: verify-hub-content OK、verify-hub-map OK(origin を 3210 に指定)
 - 配信 HTML(inspect.mjs): 6 ページとも lead の直後に SafetyNote、著者欄が末尾、広告・アプリCTA・道具カード・年金の参考リンク・出典一覧なし、ld+json は 1 script に Article + BreadcrumbList + FAQPage
 - morita-hub-375.png / kyouhaku-375-top.png: 375px の描画。横スクロールなし、console error なし
+
+## 2026-10-06 追加: dokode・nikki の 2 本
+
+- 生成ページ 8: 上の 6 本 + /morita/qa/dokode、/morita/jissen/nikki
+- import:morita --check OK。未公開リンクの置換は 6 path / 13 か所 → 4 path / 4 か所(yarikata・arugamama・naze・shintai 各 1)
+- 既存 6 本の中の /morita/qa/dokode・/morita/jissen/nikki へのリンクは 9 か所すべて実リンク(morita 2、shakou-fuan 2、kyouhaku 2、panic 2、ayashii 1)。
+  ayashii の FAQ 答えにある「森田療法はどこで受けられる?」(/morita/qa/dokode)は、文中の「ラベル」(/path) 形なので [「ラベル」](/path) にして素の path を本文に出さない
+  (FAQ の JSON-LD では plain() でラベルだけになる)
+- prelaunch A/B/C ○、verify:site-graph 11/11、配信 HTML 8 ページで禁止物なし・ld+json 1 本

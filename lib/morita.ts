@@ -77,6 +77,23 @@ export const MORITA_ARTICLES: MoritaArticleMeta[] = [
     datePublished: "2026-10-06", dateModified: "2026-10-06",
     related: ["shakou-fuan", "kyouhaku", "morita"],
   },
+  /* 2026-10-06 追加の 2 本。description は原稿の lead 1 行目そのまま。 */
+  {
+    slug: "dokode", group: "qa",
+    title: "森田療法はどこで受けられる? — 医療機関・慈恵医大・自助グループ・無料相談の4つの入口",
+    metaTitle: "森田療法はどこで受けられる？｜医療機関44施設・慈恵医大・生活の発見会・無料相談",
+    description: "森田療法を受けられる場所は4種類あります。医療機関の外来(健康保険が使える)、発祥の地である東京慈恵会医科大学森田療法センター、自助グループの生活の発見会(全国約130か所、月1回)、公益財団の無料相談(電話・面談・月1回のオンライン)。",
+    datePublished: "2026-10-06", dateModified: "2026-10-06",
+    related: ["ayashii", "nikki", "morita"],
+  },
+  {
+    slug: "nikki", group: "jissen",
+    title: "森田療法の日記の書き方 — 症状ではなく、出来事と「やったこと」を書く",
+    metaTitle: "森田療法の日記の書き方｜3行の型と、週に一度の問いの当て方",
+    description: "森田療法の日記は、気持ちを吐き出す日記ではありません。外来森田療法では、日記を使って「話題の土台を日々の生活に置く」のが基本で、書くのは症状ではなく、その日の出来事と、やったことです。",
+    datePublished: "2026-10-06", dateModified: "2026-10-06",
+    related: ["dokode", "shakou-fuan", "morita"],
+  },
 ];
 
 export function getMoritaArticle(slug: string): MoritaArticleMeta {
