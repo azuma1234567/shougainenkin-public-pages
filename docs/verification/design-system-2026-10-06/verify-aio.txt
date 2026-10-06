@@ -1,0 +1,7 @@
+PASS: 57記事の識別子・著者・発行元・引用・既存メタデータ
+PASS: 57記事の FAQPage の Question 数が本文と一致
+PASS: ハブ49本の Article・パンくず・FAQPage(FAQ あり 45本)
+(node:14253) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///Users/azumataisuke/Projects/shougainenkin-public-pages/lib/columns.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /Users/azumataisuke/Projects/shougainenkin-public-pages/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)

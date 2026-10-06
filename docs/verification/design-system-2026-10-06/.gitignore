@@ -1,0 +1,2 @@
+# before/after の全ページ PNG(約 94MB)はリポジトリに入れない。diff.md が結果、再現は snapshot.mjs → diff.mjs。
+shots/

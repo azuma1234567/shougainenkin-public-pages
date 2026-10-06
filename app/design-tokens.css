@@ -1,0 +1,80 @@
+/*
+ * デザイントークン(docs/design-system.md)。意味で命名し、実体名(--green など)は使わない。
+ * 第1段(2026-10-06)では定義だけで、公開ページの描画は変えない。旧名は globals.css / platform.css の :root で
+ * このトークンのエイリアスとして残している(--green: var(--primary) など)。値を変えるのは第2段。
+ *
+ * 色数の上限(docs/design-system.md §2-1): 無彩色 + primary 3 段 + 意味色 3 + mark 1。これ以外の hex を増やさない
+ * (scripts/prelaunch-check.mjs B-11 が globals.css の hex 直書きの数を見張る)。
+ */
+:root {
+  color-scheme: light;
+
+  /* ---- 無彩色(文字・地・罫線) ---- */
+  --ink: #1e3a4d;          /* 本文文字 */
+  --ink-muted: #4a6a80;    /* 補足・メタ情報 */
+  --ink-faint: #6e8ba0;    /* 日付・件数などのさらに薄い文字 */
+  --paper: #f7fbfe;        /* ページの地 */
+  --paper-deep: #eef6fc;   /* 帯・箱の地(結論の箱・表の見出し行・引用) */
+  --paper-card: #ffffff;   /* カードの地 */
+  --line: #dcebf5;         /* 罫線 */
+  --line-strong: #cfe6f5;  /* 強い罫線(表の区切り・h2 の下線) */
+
+  /* ---- サイトの 1 色 ---- */
+  --primary: #0273ad;      /* リンク・左罫。白地とのコントラスト 5.17:1、--paper と 4.97:1、--paper-deep と 4.74:1(いずれも 4.5:1 以上) */
+  --primary-deep: #015d8c; /* hover・FAQ の Q・見出し寄りの濃い青 */
+  --primary-wash: #e3f2fc; /* 薄い地(チップ・表の見出し行・次に読む) */
+
+  /* ---- 強調の地(マーカー) ---- */
+  --mark: rgba(2, 132, 199, 0.13);
+
+  /* ---- 意味色(装飾には使わない。裁決の容認/棄却の札・期限の警告・エラーだけ) ---- */
+  --ok: #067647;
+  --warn: #8b6a1f;
+  --danger: #b3261e;
+
+  /* ---- 書体(値は現行どおり。本文はシステムゴシック) ---- */
+  --font-body: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+  /* --font-display(見出しの明朝)は app/layout.tsx の next/font が html に注入する。globals.css の :root に代替値がある。 */
+
+  /* ---- 型スケール 6 段(第2段で globals.css の font-size をこれに寄せる。今はまだ参照されていない) ---- */
+  --text-body: 17px;
+  --text-sm: 15px;
+  --text-note: 13px;
+  --text-h3: 19px;
+  --text-h2: 24px;
+  --text-h1: 30px;         /* モバイル。PC は --text-h1-wide */
+  --text-h1-wide: 34px;
+  --leading-body: 1.85;
+  --leading-heading: 1.4;
+  --tracking-body: 0.01em;
+  --tracking-heading: 0.02em;
+
+  /* ---- 余白(基本単位 8px。第2段で参照させる) ---- */
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+
+  /* ---- 角丸・影(現行の値をそのまま) ---- */
+  --radius-sm: 8px;
+  --radius: 10px;
+  --radius-lg: 12px;
+  --shadow-xs: 0 1px 1px rgba(20, 66, 94, 0.04);
+  --shadow-sm: 0 1px 3px rgba(20, 66, 94, 0.06);
+  --shadow-md: 0 2px 6px rgba(20, 66, 94, 0.07);
+  --shadow-lg: 0 4px 14px -4px rgba(20, 66, 94, 0.12);
+
+  /* ---- 行長・横の余白(現行どおり) ---- */
+  --content: 42rem;
+  --gutter: 1.25rem;
+
+  /* ---- 動き(時間は 3 つだけ。イージングは 1 つ) ---- */
+  --ease: cubic-bezier(0.22, 0.72, 0.3, 1);
+  --duration-fast: 120ms;  /* hover の色 */
+  --duration: 200ms;       /* 浮く・矢印 */
+  --duration-slow: 320ms;  /* 開閉・出現 */
+}

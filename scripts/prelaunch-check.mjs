@@ -18,6 +18,8 @@
 //   C-2: 分割sitemapは対象外(Google の分割要件は 50,000 URL / 50MB。現状は単一 sitemap.xml で十分)。
 // 2026-09-30 (docs/fix-x-mentions-2026-09-30.md §4):
 //   A-10: X への言及の正規表現を広げた(「Xを読むと」「同じXに」「という投稿」「万回表示」など)。直前が英字の X(FAX・Excel)は除外。
+// 2026-10-06 (docs/design-system-2026-10-06-instructions.md §3-5):
+//   B-11: app/globals.css の hex 直書きが第1段の切り出し直後(292)より増えていないこと。
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -255,6 +257,19 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
   record("B-9", "パンくずが全ページにある(BreadcrumbList を含む・二重なし)", noCrumb.length === 0 && noCrumbLd.length === 0 && dupCrumbLd.length === 0, `表示なし ${noCrumb.length}、BreadcrumbList(構造化データ)なし ${noCrumbLd.length}、2つ以上 ${dupCrumbLd.length}`, [...noCrumb, ...noCrumbLd.map((p) => `BreadcrumbListなし: ${p}`), ...dupCrumbLd], "表示のパンくずはあるが構造化データが無いページと、二重に出ているページを別に数える");
   const noDate = [...pages].filter(([p, page]) => p !== "/" && !page.hasDate).map(([p]) => p);
   record("B-10", "更新日が全ページに表示されている", noDate.length === 0, `更新日/確認日の表示なし ${noDate.length}`, noDate);
+
+  // B-11 デザインシステム(docs/design-system.md): globals.css に hex の直書きが増えていない。
+  //      上限は第1段(2026-10-06)のトークン切り出し直後の数。新しい色は app/design-tokens.css に足して var() で使う。
+  //      コメントの中と url() の中は数えない(SVG のデータ URL は hex を持つ)。
+  {
+    const GLOBALS_HEX_LIMIT = 292;
+    const css = readFileSync(path.join(root, "app/globals.css"), "utf8").replace(/\/\*[\s\S]*?\*\//g, "").replace(/url\([^)]*\)/g, "");
+    const hexes = css.match(/#[0-9a-fA-F]{3,8}\b/g) ?? [];
+    const top = [...hexes.reduce((m, h) => m.set(h.toLowerCase(), (m.get(h.toLowerCase()) ?? 0) + 1), new Map())].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([h, n]) => `${h} ×${n}`);
+    record("B-11", "globals.css の hex 直書きが増えていない(デザイントークンを使う)", hexes.length <= GLOBALS_HEX_LIMIT,
+      `${hexes.length} / 上限 ${GLOBALS_HEX_LIMIT}`, hexes.length > GLOBALS_HEX_LIMIT ? top : [],
+      "2026-10-06 第1段の切り出し直後の数が上限。色は app/design-tokens.css に足して var() で参照する(docs/design-system.md §2-1)");
+  }
 }
 
 // ---------- C. サイトマップ ----------

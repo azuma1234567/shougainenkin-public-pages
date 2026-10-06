@@ -18,6 +18,10 @@ export const SITEMAP_EXCLUDED: SitemapExclusion[] = [
     reason: "有料掲載を受け付けるまで未確定の項目が残るため noindex。app/tokushoho/page.tsx の DRAFT を false にするとき、ここと app/sitemap.ts から外す",
     until: "有料掲載の受付を始めるとき",
   },
+  {
+    path: "/dev/design",
+    reason: "デザインシステムの部品の見本(docs/design-system.md)。運営者が見た目を確かめる用で、読者向けの内容ではないので noindex",
+  },
 ];
 
 export const SITEMAP_EXCLUDED_PATHS = SITEMAP_EXCLUDED.map((e) => e.path);
