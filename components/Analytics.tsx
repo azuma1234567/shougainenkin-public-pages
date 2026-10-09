@@ -118,6 +118,27 @@ function getLinkText(link: HTMLAnchorElement): string {
   ).trim();
 }
 
+/* 「次に読む」の箱(components/ColumnArticle.tsx の .column-next)のクリック(docs/site-audit-2026-10-09.md §5-1)。
+   送るのは送り元と送り先のコラムの slug だけ。/columns/<slug> の記事ページで、送り先も /columns/<slug> のときに限る
+   (同じクラスを使う見本ページ /dev/design などでは送らない)。 */
+const COLUMN_PATH = /^\/columns\/([^/?#]+)\/?$/;
+
+function getNextReadClick(target: EventTarget | null): { from_slug: string; to_slug: string } | null {
+  if (!(target instanceof Element)) return null;
+
+  const link = target.closest<HTMLAnchorElement>(".column-next a[href]");
+  if (!link) return null;
+
+  const fromSlug = COLUMN_PATH.exec(window.location.pathname)?.[1];
+  let toSlug: string | undefined;
+  try {
+    toSlug = COLUMN_PATH.exec(new URL(link.href).pathname)?.[1];
+  } catch {
+    return null;
+  }
+  return fromSlug && toSlug ? { from_slug: fromSlug, to_slug: toSlug } : null;
+}
+
 /* 自動ブラウザ(Playwright・ヘッドレス Chrome・各種クローラ)は navigator.webdriver が true。
    検証スクリプトや巡回を GA4 の数字に混ぜない(docs/site-audit-2026-10-05.md §4・§5-3)。 */
 function isAutomatedBrowser(): boolean {
@@ -131,6 +152,10 @@ export default function Analytics() {
   const [isReady, setIsReady] = useState(false);
   const analyticsConfiguredRef = useRef(false);
   const lastTrackedPathnameRef = useRef<string | null>(null);
+  /* 最初の page_view より前に起きたイベント。gtag.js の設定(config)前に dataLayer へ積むと gtag.js は送り先が無いまま捨て、
+     config 後でも page_view より先に送るとそのイベントがセッションの開始になるので、ここに貯めて最初の page_view の直後に送る
+     (lazyOnload のため、表示から 0.5〜5 秒ほどこの状態がある)。 */
+  const pendingEventsRef = useRef<[string, Record<string, string>][]>([]);
 
   const configureAnalyticsOnce = useCallback(() => {
     if (analyticsConfiguredRef.current) return;
@@ -222,9 +247,35 @@ export default function Analytics() {
       });
     };
 
+    /* 「次に読む」は <Link> のクライアント遷移でページが残るので、遷移を止めずにそのまま送る
+       (transport_type は付けない。GA4 では送信方法の指定ではなく、ただのイベントパラメータとして記録される)。
+       webdriver ガードの内側: 自動ブラウザでは送らない(window.gtag も作られないが、明示的に見る)。
+       計測を止めている人は window.gtag が無いので送らない。
+       - ダブルクリックの 2 回目(detail > 1)は数えない
+       - 中ボタンで新しいタブに開いたとき(auxclick, button 1)も、Cmd/Shift クリックと同じく 1 回数える
+       - 最初の page_view を送る前のクリックは pendingEventsRef に貯めて、page_view の直後に送る */
+    const trackNextReadClick = (event: MouseEvent) => {
+      if (isAutomatedBrowser() || !window.gtag) return;
+      if (event.type === "auxclick" && event.button !== 1) return;
+      if (event.detail > 1) return;
+
+      const params = getNextReadClick(event.target);
+      if (!params) return;
+
+      if (lastTrackedPathnameRef.current === null) {
+        pendingEventsRef.current.push(["next_read_click", params]);
+        return;
+      }
+      window.gtag("event", "next_read_click", params);
+    };
+
     document.addEventListener("click", trackAppStoreClick, true);
+    document.addEventListener("click", trackNextReadClick, true);
+    document.addEventListener("auxclick", trackNextReadClick, true);
     return () => {
       document.removeEventListener("click", trackAppStoreClick, true);
+      document.removeEventListener("click", trackNextReadClick, true);
+      document.removeEventListener("auxclick", trackNextReadClick, true);
     };
   }, []);
 
@@ -250,6 +301,11 @@ export default function Analytics() {
       ...(isFirstPageView ? { page_referrer: document.referrer } : {}),
     });
     lastTrackedPathnameRef.current = pathname;
+
+    /* 設定前に貯めたイベント(「次に読む」のクリック)を、page_view の後ろに送る。 */
+    for (const [name, params] of pendingEventsRef.current.splice(0)) {
+      window.gtag("event", name, params);
+    }
   }, [analyticsInitialized, consent, isReady, pathname]);
 
   /* localStorage を読むまでは読み込まない(denied の人に一瞬でも gtag を読ませないため)。
