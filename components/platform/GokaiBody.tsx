@@ -15,7 +15,7 @@ function Block({ block, arrow }: { block: GokaiBlock; arrow: boolean }) {
     case "p": return <p><Inline text={block.text} /></p>;
     case "h3": return <h3><Inline text={block.text} /></h3>;
     case "ul": return <ul>{block.items.map((text, i) => <li key={i}><Inline text={text} /></li>)}</ul>;
-    case "faq": return <div className="gokai-faq"><h3 data-yougo-skip>Q. <Inline text={block.q} /></h3><p>A. <Inline text={block.a} /></p></div>;
+    case "faq": return <div className="gokai-faq"><h3 className="faq-question" data-yougo-skip>Q. <Inline text={block.q} /></h3><p>A. <Inline text={block.a} /></p></div>;
     case "link": return isPublishedInternalPath(block.href) ? <Link href={block.href}>{arrow ? "→ " : ""}{block.label}</Link> : null;
     case "case": {
       return <div className="gokai-case"><p><CaseLead lead={block.lead} caseId={block.caseId} /> — <Inline text={block.text} /></p></div>;

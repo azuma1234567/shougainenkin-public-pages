@@ -1128,10 +1128,10 @@ export default function HomePage() {
         </p>
         <div className="guide-faq">
           {FAQ_ITEMS.map((item) => (
-            <details key={item.q} className="guide-faq-item">
-              <summary>{item.q}</summary>
+            <div key={item.q} className="guide-faq-item">
+              <h3 className="faq-question" data-yougo-skip>{item.q}</h3>
               <p className="guide-faq-a">{item.a}</p>
-            </details>
+            </div>
           ))}
         </div>
       </section>

@@ -183,7 +183,7 @@ export default function MarkdownArticle({
 
     if (columnStyle && /^\*\*Q[.．]/.test(line)) {
       const question = line.replace(/^\*\*/, "").replace(/\*\*$/, "");
-      blocks.push(<h3 className="column-faq-question" data-yougo-skip key={`faq-${index}`} id={uniqueHeadingId(question, `faq-${index}`)}>{inlineContent(question)}</h3>);
+      blocks.push(<h3 className="faq-question" data-yougo-skip key={`faq-${index}`} id={uniqueHeadingId(question, `faq-${index}`)}>{inlineContent(question)}</h3>);
       index += 1;
       continue;
     }
@@ -250,7 +250,8 @@ export default function MarkdownArticle({
         answerLines.push(next);
         index += 1;
       }
-      blocks.push(<details className="hub-faq-item" key={`faq-${index}`}><summary>{inlineContent(question)}</summary><p>{inlineContent(answerLines.join(" "))}</p></details>);
+      /* 2026-10-13 デザイン第2段 候補 12: 開閉(details)をやめ、コラム・誤解カードと同じ h3.faq-question + p で全文を出す(AIO のため)。 */
+      blocks.push(<div className="hub-faq-item" key={`faq-${index}`}><h3 className="faq-question" data-yougo-skip id={uniqueHeadingId(question, `faq-${index}`)}>{inlineContent(question)}</h3><p>{inlineContent(answerLines.join(" "))}</p></div>);
       continue;
     }
 

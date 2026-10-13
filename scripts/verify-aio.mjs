@@ -118,7 +118,7 @@ if (process.argv[2]) {
     assert.equal(scripts.length, 1, `${hub.path}: ld+json が ${scripts.length} 個`);
     const graph = JSON.parse(scripts[0].textContent)["@graph"];
     assert.ok(graph.some((n) => n["@type"] === "Article") && graph.some((n) => n["@type"] === "BreadcrumbList"), hub.path);
-    const visibleFaq = html.querySelectorAll("details.hub-faq-item").length;
+    const visibleFaq = html.querySelectorAll(".hub-faq-item .faq-question").length;
     const faq = graph.find((n) => n["@type"] === "FAQPage");
     assert.equal(faq ? faq.mainEntity.length : 0, visibleFaq, `${hub.path}: 画面の FAQ ${visibleFaq} と JSON-LD`);
     hubCount += 1;

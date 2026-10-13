@@ -2263,90 +2263,37 @@ figure.about-video {
  * 2026-08 リニューアルで追加したパーツ
  * ============================================================ */
 
-/* ---- トップページのよくある質問(FAQPage構造化データと対) ---- */
+/* ---- よくある質問(FAQPage 構造化データと対) ----
+   2026-10-13 デザイン第2段 候補 12: コラム・ハブ・誤解カード・申請の流れの 4 系統を、開閉なしの h3.faq-question + p の 1 系統に
+   (docs/design-system.md §2-4)。Q は --primary-deep の太字、A は通常。ハブの details(開閉)と申請の流れの details をやめた。 */
+
+.faq-question {
+  margin: 32px 0 8px;
+  padding: 0;
+  border: 0;
+  color: var(--primary-deep);
+  font-family: inherit;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.faq-question + p {
+  margin: 0 0 1.2em;
+  line-height: 1.85;
+}
 
 .guide-faq {
   margin: 1.25rem 0 0;
 }
 
 .guide-faq-item {
-  background-color: var(--card);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-lg);
-  padding: 0;
-  margin: 0.75rem 0;
-  box-shadow: var(--shadow-xs);
-  overflow: hidden;
-  transition:
-    border-color 0.2s var(--ease),
-    box-shadow 0.2s var(--ease);
-}
-
-.guide-faq-item:hover {
-  border-color: var(--card-border-strong);
-  box-shadow: var(--shadow-sm);
-}
-
-.guide-faq-item summary {
-  cursor: pointer;
-  list-style: none;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  padding: 1.15rem 1.35rem 1.2rem;
-  font-weight: 700;
-  font-size: 17px;
-  line-height: 1.85;
-  color: var(--green-deep);
-}
-
-.guide-faq-item summary::-webkit-details-marker {
-  display: none;
-}
-
-.guide-faq-item summary::before {
-  content: "Q";
-  flex: none;
-  width: 1.5rem;
-  height: 1.5rem;
-  margin-top: 0.28rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  background-color: var(--green);
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-.guide-faq-item summary::after {
-  content: "+";
-  margin-left: auto;
-  flex: none;
-  color: var(--green);
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 1.4;
-  transition: transform 0.2s var(--ease);
-}
-
-.guide-faq-item[open] summary::after {
-  transform: rotate(45deg);
-}
-
-.guide-faq-item summary:focus-visible {
-  outline: 3px solid var(--green);
-  outline-offset: -3px;
-  border-radius: var(--radius-lg);
+  margin: 0;
 }
 
 .guide-faq-a {
-  margin: 0 0 1.2rem;
-  padding: 0 1.35rem 0 2.1rem;
-  font-size: 17px;
-  color: #45494b;
+  margin: 0 0 1.2em;
+  color: var(--ink);
 }
 
 /* ---- 表(年金額など)の仕上げ ---- */

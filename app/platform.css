@@ -64,9 +64,8 @@
 .hub-content ul, .hub-content ol { margin: 16px 0 20px; padding-left: 1.5em; }
 .hub-content blockquote { margin: 24px 0; padding: 18px 20px; border-left: 4px solid var(--platform-blue); background: var(--platform-blue-soft); }
 .hub-content .article-table-figure { margin: 24px 0; }
-.hub-faq-item { margin: 12px 0; border: 1px solid var(--platform-border); border-radius: 12px; background: #fff; }
-.hub-faq-item summary { padding: 16px 18px; color: var(--platform-navy); font-weight: 700; cursor: pointer; }
-.hub-faq-item p { padding: 0 18px 18px; }
+/* 2026-10-13 候補 12: 開閉(details)をやめた。見た目は globals.css の .faq-question(1 系統)に任せる */
+.hub-faq-item { margin: 0; }
 .hub-sibling-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 44px; padding-top: 24px; border-top: 1px solid var(--platform-border); }
 .hub-sibling-links a { display: inline-flex; align-items: center; padding: 10px 14px; border: 1px solid #b9dced; border-radius: 10px; background: #fff; color: var(--platform-blue); font-weight: 700; text-decoration: none; }
 

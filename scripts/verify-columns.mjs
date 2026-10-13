@@ -173,7 +173,7 @@ for (const a of articles) {
     const faqs = schemas.filter(item => item["@type"] === "FAQPage");
     check(faqs.length === 1, `${a.slug}: FAQPage数`);
     check(JSON.stringify(faqs[0]?.mainEntity.map(q => ({ question: q.name, answer: q.acceptedAnswer.text }))) === JSON.stringify(a.faqs), `${a.slug}: FAQPageと本文`);
-    const qs = dom.querySelectorAll(".column-faq-question");
+    const qs = dom.querySelectorAll(".faq-question");
     check(qs.length === a.faqs.length, `${a.slug}: Q数`);
     for (const [i, q] of qs.entries()) {
       check(compact(q.textContent.replace(/^Q[.．]\s*/, "")) === compact(a.faqs[i]?.question ?? ""), `${a.slug}: Q${i + 1}`);
