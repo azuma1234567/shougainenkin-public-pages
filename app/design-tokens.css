@@ -42,7 +42,7 @@
   --text-note: 13px;
   --text-h3: 19px;
   --text-h2: 24px;
-  --text-h1: 30px;         /* モバイル。PC は --text-h1-wide */
+  --text-h1: 30px;         /* モバイル。761px 以上は下の @media で 34px */
   --text-h1-wide: 34px;
   --leading-body: 1.85;
   --leading-heading: 1.4;
@@ -77,4 +77,11 @@
   --duration-fast: 120ms;  /* hover の色 */
   --duration: 200ms;       /* 浮く・矢印 */
   --duration-slow: 320ms;  /* 開閉・出現 */
+}
+
+/* h1 は PC で 34px(docs/design-system.md §2-2)。第2段 候補 7(2026-10-13)で font-size をこの 6 段に寄せた */
+@media (min-width: 761px) {
+  :root {
+    --text-h1: var(--text-h1-wide);
+  }
 }
