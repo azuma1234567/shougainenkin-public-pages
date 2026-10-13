@@ -139,6 +139,27 @@ function getNextReadClick(target: EventTarget | null): { from_slug: string; to_s
   return fromSlug && toSlug ? { from_slug: fromSlug, to_slug: toSlug } : null;
 }
 
+/* スクロール深度(docs/site-audit-2026-10-13.md §7-1)。記事本文(main の article、無ければ main)の高さを基準に、
+   25/50/75/100% を 1 ページ各 1 回 scroll_depth {percent, slug} で送る。slug はコラムなら slug、それ以外はパス。
+   読んでいる間に送信が無いと 30 分でセッションが切れる(10/9 の調査)ので、その対策も兼ねる。 */
+const SCROLL_DEPTH_STEPS = [25, 50, 75, 100] as const;
+
+function scrollDepthSlug(pathname: string): string {
+  return COLUMN_PATH.exec(pathname)?.[1] ?? pathname;
+}
+
+/* いま見えている下端が、記事本文の何%の位置か(0〜100)。本文が無いページは null。 */
+function scrolledPercent(): number | null {
+  const target = document.querySelector<HTMLElement>("main article") ?? document.querySelector<HTMLElement>("main");
+  if (!target) return null;
+  const rect = target.getBoundingClientRect();
+  const top = rect.top + window.scrollY;
+  const height = rect.height;
+  if (height <= 0) return null;
+  const seen = window.scrollY + window.innerHeight - top;
+  return Math.max(0, Math.min(100, (seen / height) * 100));
+}
+
 /* 自動ブラウザ(Playwright・ヘッドレス Chrome・各種クローラ)は navigator.webdriver が true。
    検証スクリプトや巡回を GA4 の数字に混ぜない(docs/site-audit-2026-10-05.md §4・§5-3)。 */
 function isAutomatedBrowser(): boolean {
@@ -155,7 +176,12 @@ export default function Analytics() {
   /* 最初の page_view より前に起きたイベント。gtag.js の設定(config)前に dataLayer へ積むと gtag.js は送り先が無いまま捨て、
      config 後でも page_view より先に送るとそのイベントがセッションの開始になるので、ここに貯めて最初の page_view の直後に送る
      (lazyOnload のため、表示から 0.5〜5 秒ほどこの状態がある)。 */
-  const pendingEventsRef = useRef<[string, Record<string, string>][]>([]);
+  const pendingEventsRef = useRef<[string, Record<string, string | number>][]>([]);
+  /* gtag.js の設定が済む前に表示したページ。lazyOnload の間にサイト内リンクで移ると、着地ページの page_view が出ないまま
+     遷移先が着地として記録されていた(10/9 の調査)。ここに順番に貯めて、設定が済んだら古い順に page_view を送る。 */
+  const pendingPageViewsRef = useRef<{ pathname: string; href: string; referrer: string }[]>([]);
+  /* scroll_depth を送った % (ページごとに空にする) */
+  const scrollDepthSentRef = useRef<{ pathname: string | null; sent: Set<number> }>({ pathname: null, sent: new Set() });
 
   const configureAnalyticsOnce = useCallback(() => {
     if (analyticsConfiguredRef.current) return;
@@ -202,6 +228,54 @@ export default function Analytics() {
     setConsent(savedConsent);
     setIsReady(true);
   }, []);
+
+  /* 最初の page_view を送るまではイベントを貯める(config 前に積むと gtag.js が捨て、page_view より先に送るとそれがセッション開始になる)。 */
+  const sendOrBuffer = useCallback((name: string, params: Record<string, string | number>) => {
+    if (!window.gtag) return;
+    if (lastTrackedPathnameRef.current === null) {
+      pendingEventsRef.current.push([name, params]);
+      return;
+    }
+    window.gtag("event", name, params);
+  }, []);
+
+  /* scroll_depth: パスが変わるたびに送った % を空にし、スクロール・リサイズ・表示直後に測る。 */
+  useEffect(() => {
+    if (!pathname || isAutomatedBrowser()) return;
+    if (scrollDepthSentRef.current.pathname !== pathname) {
+      scrollDepthSentRef.current = { pathname, sent: new Set() };
+    }
+    const slug = scrollDepthSlug(pathname);
+    let frame: number | undefined;
+
+    const measure = () => {
+      frame = undefined;
+      if (readConsent() === "denied") return;
+      const percent = scrolledPercent();
+      if (percent === null) return;
+      const { sent } = scrollDepthSentRef.current;
+      for (const step of SCROLL_DEPTH_STEPS) {
+        if (percent >= step && !sent.has(step)) {
+          sent.add(step);
+          sendOrBuffer("scroll_depth", { percent: step, slug });
+        }
+      }
+    };
+    const schedule = () => {
+      if (frame === undefined) frame = window.requestAnimationFrame(measure);
+    };
+
+    /* 表示直後は描画が落ち着いてから 1 回測る(短いページは最初から 100% のことがある) */
+    const initial = window.setTimeout(schedule, 500);
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      window.clearTimeout(initial);
+      if (frame !== undefined) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [pathname, sendOrBuffer]);
 
   useEffect(() => {
     const trackAppStoreClick = (event: MouseEvent) => {
@@ -262,11 +336,7 @@ export default function Analytics() {
       const params = getNextReadClick(event.target);
       if (!params) return;
 
-      if (lastTrackedPathnameRef.current === null) {
-        pendingEventsRef.current.push(["next_read_click", params]);
-        return;
-      }
-      window.gtag("event", "next_read_click", params);
+      sendOrBuffer("next_read_click", params);
     };
 
     document.addEventListener("click", trackAppStoreClick, true);
@@ -277,32 +347,36 @@ export default function Analytics() {
       document.removeEventListener("click", trackNextReadClick, true);
       document.removeEventListener("auxclick", trackNextReadClick, true);
     };
-  }, []);
+  }, [sendOrBuffer]);
 
   useEffect(() => {
-    if (
-      !isReady ||
-      consent === "denied" ||
-      !analyticsInitialized ||
-      !window.gtag
-    ) {
+    if (!pathname || consent === "denied") return;
+    if (lastTrackedPathnameRef.current === pathname) return;
+
+    /* まだ gtag.js の設定が済んでいない: このページを覚えておき、設定が済んだら順番に送る */
+    if (!isReady || !analyticsInitialized || !window.gtag) {
+      const queue = pendingPageViewsRef.current;
+      if (queue[queue.length - 1]?.pathname !== pathname) {
+        queue.push({ pathname, href: window.location.href, referrer: document.referrer });
+      }
       return;
     }
 
-    if (lastTrackedPathnameRef.current === pathname) {
-      return;
-    }
-
-    /* 参照元は初回だけ渡す。2ページ目以降はサイト内遷移なので渡さない。
+    /* 設定前に見たページ(着地ページを含む)を古い順に、最後にいまのページを送る。
+       参照元は初回だけ渡す。2ページ目以降はサイト内遷移なので渡さない。
        page_location はクエリ(?case= など)を含めるため href を使う。 */
-    const isFirstPageView = lastTrackedPathnameRef.current === null;
-    window.gtag("event", "page_view", {
-      page_location: window.location.href,
-      ...(isFirstPageView ? { page_referrer: document.referrer } : {}),
-    });
-    lastTrackedPathnameRef.current = pathname;
+    const queue = pendingPageViewsRef.current.splice(0).filter((item) => item.pathname !== pathname);
+    queue.push({ pathname, href: window.location.href, referrer: document.referrer });
+    for (const item of queue) {
+      const isFirstPageView = lastTrackedPathnameRef.current === null;
+      window.gtag("event", "page_view", {
+        page_location: item.href,
+        ...(isFirstPageView ? { page_referrer: item.referrer } : {}),
+      });
+      lastTrackedPathnameRef.current = item.pathname;
+    }
 
-    /* 設定前に貯めたイベント(「次に読む」のクリック)を、page_view の後ろに送る。 */
+    /* 最初の page_view より前に貯めたイベント(「次に読む」のクリック・scroll_depth)を、page_view の後ろに送る。 */
     for (const [name, params] of pendingEventsRef.current.splice(0)) {
       window.gtag("event", name, params);
     }

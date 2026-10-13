@@ -1,10 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type Heading = { id: string; text: string };
 
 // 記事本文のh2から目次を自動生成する(「あわせて読みたい」は除外)。
+// 見出しへのリンクは next/link で出す。素の <a href="#id"> は history.state が null の履歴を作り、
+// そこへ「戻る」で戻ったとき App Router が popstate を無視して画面が前の記事のまま・page_view も出なかった(10/9 の調査)。
 // markdownの記事はMarkdownArticleが見出しにidを振っているのでそれを使う。
 // idが無い手書きの記事(jibun-de-shinseiなど)だけ、ここで採番する。
 export default function ArticleToc({ bodyOnly = false }: { bodyOnly?: boolean }) {
@@ -38,7 +41,7 @@ export default function ArticleToc({ bodyOnly = false }: { bodyOnly?: boolean })
       <ol>
         {headings.map((h) => (
           <li key={h.id}>
-            <a href={`#${h.id}`}>{h.text}</a>
+            <Link href={`#${h.id}`}>{h.text}</Link>
           </li>
         ))}
       </ol>

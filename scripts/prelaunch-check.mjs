@@ -20,6 +20,8 @@
 //   A-10: X への言及の正規表現を広げた(「Xを読むと」「同じXに」「という投稿」「万回表示」など)。直前が英字の X(FAX・Excel)は除外。
 // 2026-10-06 (docs/design-system-2026-10-06-instructions.md §3-5):
 //   B-11: app/globals.css の hex 直書きが第1段の切り出し直後(292)より増えていないこと。
+// 2026-10-13 (docs/site-audit-2026-10-13.md §7-1):
+//   B-12: scroll_depth が 1 ページ最大 4 回(25/50/75/100 を各 1 回)。GA4 への送信はブラウザ内で止める。
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -269,6 +271,69 @@ const reservedPaths = HUBS.filter((hub) => !hub.published).map((hub) => hub.path
     record("B-11", "globals.css の hex 直書きが増えていない(デザイントークンを使う)", hexes.length <= GLOBALS_HEX_LIMIT,
       `${hexes.length} / 上限 ${GLOBALS_HEX_LIMIT}`, hexes.length > GLOBALS_HEX_LIMIT ? top : [],
       "2026-10-06 第1段の切り出し直後の数が上限。色は app/design-tokens.css に足して var() で参照する(docs/design-system.md §2-1)");
+  }
+
+  // B-12 scroll_depth(docs/site-audit-2026-10-13.md §7-1)は 1 ページ最大 4 回(25/50/75/100 を各 1 回)。
+  //      サイトの webdriver ガードを外して計測コードを実際に動かすので、GA4 への送信は Playwright で横取りして 204 を返し、
+  //      さらに収集ホストを 127.0.0.1 に向けて(unload 時の beacon が route を素通りしても)Google に届かないようにする。
+  {
+    const { chromium } = await import("playwright");
+    const pagesToScroll = ["/columns/shinsatsu-mae-memo", "/gokai/chokin-ga-aru", "/byoki/utsu-soukyoku", "/morita"];
+    const browser = await chromium.launch({
+      executablePath: process.env.CHROME_PATH,
+      args: ["--host-resolver-rules=MAP *.google-analytics.com 127.0.0.1, MAP google-analytics.com 127.0.0.1, MAP *.analytics.google.com 127.0.0.1, MAP analytics.google.com 127.0.0.1"],
+    });
+    const context = await browser.newContext({ viewport: { width: 375, height: 700 } });
+    await context.addInitScript(() => { try { Object.defineProperty(Navigator.prototype, "webdriver", { get: () => false, configurable: true }); } catch {} });
+    await context.route(/(google-analytics\.com|analytics\.google\.com)\/|\/g\/collect/, (route) => route.fulfill({ status: 204, body: "" }));
+    const page = await context.newPage();
+    const problems = [];
+    const summary = [];
+    const countsOf = () => page.evaluate(() => {
+      const out = {};
+      for (const entry of window.dataLayer ?? []) {
+        if (entry?.[0] === "event" && entry[1] === "scroll_depth") {
+          const slug = entry[2]?.slug ?? "?";
+          (out[slug] ??= []).push(entry[2]?.percent);
+        }
+      }
+      return out;
+    });
+    const scrollThrough = async () => {
+      for (let i = 0; i < 60; i += 1) {
+        /* html { scroll-behavior: smooth } のため、既定の scrollBy はアニメーションになって連続呼び出しが届かない。instant で送る */
+        const done = await page.evaluate(() => { window.scrollBy({ top: window.innerHeight * 0.8, behavior: "instant" }); return window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2; });
+        await page.waitForTimeout(120);
+        if (done) break;
+      }
+      await page.waitForTimeout(600);
+    };
+    const check = (slug, percents) => {
+      if (percents.length > 4) problems.push(`${slug}: ${percents.length} 回(${percents.join(",")})`);
+      if (new Set(percents).size !== percents.length) problems.push(`${slug}: 同じ % を 2 回(${percents.join(",")})`);
+      if (percents.some((p) => ![25, 50, 75, 100].includes(p))) problems.push(`${slug}: 25/50/75/100 以外(${percents.join(",")})`);
+      summary.push(`${slug} ${percents.join("/")}`);
+    };
+    for (const target of pagesToScroll) {
+      await page.goto(`${origin}${target}`, { waitUntil: "networkidle" });
+      await page.waitForFunction(() => (window.dataLayer ?? []).some((e) => e?.[0] === "config"), null, { timeout: 15000 }).catch(() => problems.push(`${target}: gtag の config が 15 秒以内に来ない`));
+      await scrollThrough();
+      const before = await countsOf();
+      /* コラム記事は「次に読む」でクライアント遷移し、遷移先でも最大 4 回に収まること(パスごとに空にしている) */
+      if (target.startsWith("/columns/")) {
+        await page.click(".column-next a");
+        await page.waitForURL((u) => u.pathname !== target);
+        await page.waitForTimeout(800);
+        await scrollThrough();
+      }
+      const counts = await countsOf();
+      for (const [slug, percents] of Object.entries(counts)) check(slug, percents);
+      if (!Object.keys(before).length) problems.push(`${target}: scroll_depth が 1 回も無い`);
+    }
+    await browser.close();
+    record("B-12", "scroll_depth は 1 ページ最大 4 回(25/50/75/100 を各 1 回)", problems.length === 0,
+      `${pagesToScroll.length} ページ(+遷移先 1)を最下部まで送って ${summary.length} ページ分: ${summary.join(" / ")}`, problems,
+      "GA4 への送信はブラウザ内で止めている(route 204 + 収集ホストを 127.0.0.1 へ)。webdriver=false にして計測コードを動かす");
   }
 }
 
